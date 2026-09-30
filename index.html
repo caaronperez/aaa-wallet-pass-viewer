@@ -65,7 +65,7 @@ button,select{font:inherit;color:inherit}
 .fld{min-width:0}
 .fld .l{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--label);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fld .v{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.fld.r{text-align:right}
+.fld.r{text-align:right}.fld.c{text-align:center}
 .poster .foot{font:9px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--fg);margin-top:12px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bc{display:block;margin:0 auto}
 .bc-alt{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#111;text-align:center;margin-top:3px}
@@ -387,7 +387,7 @@ function renderPoster(p, dict){
     ${head[0] ? `<div class="phead" data-f="headerFields:0"><small>${esc(head[0].label)}</small>${esc(head[0].value)}</div>` : ''}
     <div class="body">
       ${bc ? barcodeSVG(bc, 150, 38) + `<div class="bc-alt">${esc(bc.altText||'')}</div>` : ''}
-      ${prim.length ? `<div class="row" style="grid-template-columns:repeat(${prim.length},minmax(0,1fr))">${prim.map((f,i)=>fld(f,'primaryFields',i,'',true)).join('')}</div>` : ''}
+      ${prim.length ? `<div class="row" style="grid-template-columns:repeat(${prim.length},minmax(0,1fr))">${prim.map((f,i)=>fld(f,'primaryFields',i, prim.length>1 && i===prim.length-1 ? 'r' : i>0 ? 'c' : '', true)).join('')}</div>` : ''}
       ${foot[0] ? `<div class="foot" data-f="footerFields:0">${esc(foot[0].value)}</div>` : ''}
     </div></div>`;
 }

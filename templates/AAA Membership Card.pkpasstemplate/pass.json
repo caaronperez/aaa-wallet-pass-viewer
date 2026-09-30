@@ -122,9 +122,7 @@
   "organizationName" : "AAA",
   "passTypeIdentifier" : "pass.com.example.aaa.membership",
   "posterGeneric" : {
-    "auxiliaryFields" : [
-
-    ],
+    "auxiliaryFields" : [],
     "backFields" : [
       {
         "_id" : "16FC7DAB-10AF-4930-B9D8-1AF7B13A5896",
@@ -173,35 +171,29 @@
         "value" : "620 004 123456789 2"
       }
     ],
-    "footerFields" : [
-      {
-        "_id" : "8E7DFE0E-8F4E-48CB-B505-CD3E08ED2099",
-        "key" : "memberName",
-        "label" : "MEMBER NAME",
-        "value" : "ELIJAH LOPEZ"
-      }
-    ],
-    "headerFields" : [
-
-    ],
+    "footerFields" : [],
+    "headerFields" : [],
     "primaryFields" : [
       {
-        "_id" : "43C73B8C-4D17-41C7-9B20-03C2250B4975",
+        "_id" : "8DFC8A34-96A7-46FE-B2C5-7363792A4869",
         "key" : "loyalMember",
         "label" : "LOYAL MEMBER",
         "value" : "32 YEARS"
       },
       {
-        "_id" : "31220DD2-7A0E-4C27-BDE4-57B2E47EA02B",
+        "_id" : "A6F0452F-0AB9-4B56-A18D-BF7B76DE9127",
+        "key" : "memberName",
+        "label" : "MEMBER NAME",
+        "value" : "ELIJAH LOPEZ"
+      },
+      {
+        "_id" : "D5607AA2-2AC0-4C8F-940D-17E125D9883B",
         "key" : "plan",
         "label" : "PLAN",
-        "textAlignment" : "PKTextAlignmentRight",
         "value" : "PREMIER"
       }
     ],
-    "secondaryFields" : [
-
-    ]
+    "secondaryFields" : []
   },
   "serialNumber" : "6200041234567892",
   "suppressHeaderDarkening" : true,
