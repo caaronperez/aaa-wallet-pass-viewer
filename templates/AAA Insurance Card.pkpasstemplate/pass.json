@@ -1,12 +1,21 @@
 {
   "authenticationToken" : "",
   "backgroundColor" : "rgb(247,245,241)",
-  "barcodes" : [
-
-  ],
+  "barcodes" : [],
   "description" : "AAA Insurance Card",
   "featuredActions" : [
-
+    {
+      "_id" : "79213410-D498-4EB7-B9B3-E55698BCCD53",
+      "identifier" : "roadsideAssistance",
+      "type" : "call",
+      "url" : "tel:\/\/18004004222"
+    },
+    {
+      "_id" : "1622C5A8-081B-4BBF-AD96-E5D97291D2C0",
+      "identifier" : "nearestBranch",
+      "placeIdentifier" : "IX0000XXXX0X0XX00",
+      "type" : "place"
+    }
   ],
   "footerBackgroundColor" : "rgb(255,255,255)",
   "foregroundColor" : "rgb(0,0,0)",
@@ -111,9 +120,7 @@
   "organizationName" : "AAA",
   "passTypeIdentifier" : "pass.com.example.aaa.insurance",
   "posterGeneric" : {
-    "auxiliaryFields" : [
-
-    ],
+    "auxiliaryFields" : [],
     "backFields" : [
       {
         "_id" : "8FA15D29-3CFC-4585-960B-8B5E9A6E7AC1",
@@ -170,33 +177,29 @@
     ],
     "footerFields" : [
       {
-        "_id" : "461460B4-94E9-4C6F-9657-35C9E58BE414",
+        "_id" : "F38F559D-A9F9-498A-9A0C-8F8779DF0C5B",
         "key" : "holderSummary",
-        "label" : "NAME ENSURED · INSURANCE COMPANY",
-        "value" : "ELIJAH LOPEZ · INTERINSURANCE EXCHANGE"
+        "label" : "NAME ENSURED · EFFECTIVE DATE",
+        "value" : "ELIJAH LOPEZ · EFFECTIVE 9\/14\/26 - 9\/14\/27"
       }
     ],
-    "headerFields" : [
-
-    ],
+    "headerFields" : [],
     "primaryFields" : [
       {
-        "_id" : "E2AE10E3-CD49-4C7D-8555-98A298EF0660",
-        "key" : "effectiveDate",
-        "label" : "EFFECTIVE DATE",
-        "value" : "9\/14\/26 - 9\/14\/27"
-      },
-      {
-        "_id" : "66B5DE2F-3F48-4AE0-A2AC-669576519568",
+        "_id" : "7F61CA03-BB8E-4026-B548-6F715EAB555D",
         "key" : "policyNumber",
         "label" : "POLICY NUMBER",
-        "textAlignment" : "PKTextAlignmentRight",
         "value" : "CAA 23985827459235"
+      },
+      {
+        "_id" : "03DBAB50-D077-4938-807A-A7913B52692E",
+        "key" : "insuranceCompany",
+        "label" : "INSURANCE COMPANY",
+        "textAlignment" : "PKTextAlignmentRight",
+        "value" : "INTERINSURANCE EXCHANGE"
       }
     ],
-    "secondaryFields" : [
-
-    ]
+    "secondaryFields" : []
   },
   "serialNumber" : "CAA23985827459235",
   "suppressHeaderDarkening" : false,
