@@ -1,27 +1,716 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AAA Wallet Pass Inspector</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AAA Pass Template Viewer</title>
 <style>
-:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172033;background:#eef1f5}*{box-sizing:border-box}body{margin:0}.top{background:#17365d;color:#fff;padding:22px max(20px,calc((100vw - 1160px)/2))}.top h1{font-size:24px;margin:0 0 5px}.top p{margin:0;color:#d9e7f7}.wrap{max-width:1160px;margin:20px auto;padding:0 18px}.toolbar,.panel{background:white;border:1px solid #d8e1eb;border-radius:10px;padding:14px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.toolbar button,.toolbar label{font:inherit;font-size:14px;border:1px solid #cbd5e1;background:#fff;border-radius:7px;padding:9px 12px;cursor:pointer}.toolbar button.active{background:#0c72df;color:#fff;border-color:#0c72df}.toolbar input{display:none}.grid{display:grid;grid-template-columns:minmax(350px,430px) minmax(0,1fr);gap:22px;margin-top:20px}.device{perspective:1100px;touch-action:pan-y}.card{min-height:660px;position:relative;transform-style:preserve-3d;transition:transform .55s}.card.flip{transform:rotateY(180deg)}.face{position:absolute;inset:0;backface-visibility:hidden}.back{transform:rotateY(180deg)}.phone{background:#111827;border:9px solid #111827;border-radius:40px;padding:10px;min-height:640px;box-shadow:0 14px 36px #0003}.screen{background:#f7f5f1;border-radius:28px;overflow:hidden;min-height:620px}.hero{height:290px;background:#cbd5e1 center/cover no-repeat;position:relative}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(#0005,transparent 45%,#0001)}.brand,.heroTitle{position:absolute;top:17px;z-index:1;color:white;font-weight:700}.brand{left:18px}.heroTitle{right:18px;text-align:right;font-size:14px}.heroTitle small{display:block;font-size:11px;font-weight:400;margin-top:3px}.fields{position:relative;background:white;border-radius:14px;margin:-2px 12px 12px;padding:14px}.field{display:flex;justify-content:space-between;gap:10px;margin:8px 0}.field label{font-size:9px;color:#707070;text-transform:uppercase}.field strong{font-size:12px;text-align:right}.barcode{height:54px;max-width:230px;margin:16px auto 3px;background:repeating-linear-gradient(90deg,#111 0 2px,#fff 2px 5px,#111 5px 7px,#fff 7px 10px)}.actions{display:flex;gap:9px;padding:0 12px 14px}.action{flex:1;text-align:center;border-radius:12px;background:white;padding:12px 6px;font-size:12px}.action b{display:block;color:#0c72df;font-size:19px;margin-bottom:4px}.backScreen{padding:24px 18px;background:#f7f5f1;min-height:620px}.backScreen h3{text-align:center;margin:4px 0 17px}.backField{border-top:1px solid #d9dce0;padding:10px 0;font-size:12px;white-space:pre-line}.backField b{display:block;font-size:10px;margin-bottom:4px}.panel h2{font-size:18px;margin:0 0 6px}.muted{font-size:13px;color:#64748b}.section{border-top:1px solid #e2e8f0;margin-top:14px;padding-top:12px}.section h3{font-size:14px;margin:0 0 8px}.actionRow{border:1px solid #d8e1eb;border-radius:7px;padding:9px;margin:6px 0}.actionRow strong{color:#0c72df}.actionRow code{display:block;font-size:11px;color:#64748b;word-break:break-all;margin-top:4px}.json{background:#101827;color:#c7f9d4;padding:14px;border-radius:7px;max-height:390px;overflow:auto;font:11px ui-monospace,monospace;white-space:pre-wrap}.toolbar .grow{flex:1}@media(max-width:820px){.grid{grid-template-columns:1fr}.device{max-width:430px;margin:auto}.card{min-height:660px}}
-</style></head>
-<body><header class="top"><h1>AAA Wallet Pass Inspector</h1><p>Read-only pass preview, actions, and complete metadata</p></header>
-<main class="wrap"><nav class="toolbar"><button class="active" data-pass="membership">Membership</button><button data-pass="insurance">Insurance</button><label>Import pass.json<input id="jsonFile" type="file" accept=".json,application/json"></label><label>Import template folder<input id="folder" type="file" webkitdirectory multiple></label><span class="grow"></span><button id="front" class="active">Front</button><button id="details">Details</button><button id="ios27" class="active">iOS 27</button><button id="ios26">iOS 26</button></nav>
-<section class="grid"><div class="device" id="device"><div id="card" class="card"><div class="face"><div class="phone"><div class="screen"><div id="hero" class="hero"><span class="brand">AAA</span><span id="heroTitle" class="heroTitle"></span></div><div id="fields" class="fields"></div><div id="actions" class="actions"></div></div></div></div><div class="face back"><div class="phone"><div id="back" class="backScreen"></div></div></div></div></div>
-<aside class="panel"><h2 id="passName">Loading pass…</h2><div id="summary" class="muted"></div><section class="section"><h3>Featured Actions</h3><div id="actionList"></div><p class="muted">Wallet provides each action’s icon and display label according to its supported type.</p></section><section class="section"><h3>Complete pass.json metadata</h3><pre id="json" class="json">Loading…</pre></section></aside></section></main>
+:root{
+  --win:#1e1f22;--side:#27282b;--side-sel:#0a5fd6;--panel:#2e2f33;--panel-2:#38393e;--line:#3d3e43;
+  --text:#ececf0;--muted:#9a9ba3;--dim:#6c6d74;--accent:#3b8cff;--warn:#f5b43c;--bad:#ff5f57;--ok:#34c759;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;color:var(--text);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--win)}
+button,select{font:inherit;color:inherit}
+.titlebar{height:52px;display:flex;align-items:center;gap:12px;padding:0 14px;border-bottom:1px solid #111;background:#232427;position:sticky;top:0;z-index:20}
+.dots{display:flex;gap:8px;margin-right:6px}.dots i{width:12px;height:12px;border-radius:50%;background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
+.doc b{display:block;font-size:13px}.doc small{font-size:11px;color:var(--muted)}
+.grow{flex:1}
+.seg{display:flex;background:#1a1b1d;border:1px solid var(--line);border-radius:8px;padding:2px}
+.seg button{border:0;background:transparent;padding:5px 11px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--muted)}
+.seg button.on{background:#4a4b51;color:#fff}
+.tb-btn{border:1px solid var(--line);background:#2d2e32;border-radius:7px;padding:5px 10px;font-size:12px;cursor:pointer}
+.tb-btn input{display:none}
+.ro{font-size:11px;color:#111;background:var(--warn);border-radius:5px;padding:2px 7px;font-weight:600}
+.app{display:grid;grid-template-columns:290px 1fr;min-height:calc(100vh - 52px)}
+.sidebar{background:var(--side);border-right:1px solid #111;padding:10px 8px 40px;overflow:auto;max-height:calc(100vh - 52px);position:sticky;top:52px}
+.lim-pick{margin:2px 6px 12px;padding:9px;border:1px solid var(--line);border-radius:9px;background:#222326}
+.lim-pick label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}
+.lim-pick select{width:100%;background:#2d2e32;border:1px solid var(--line);border-radius:6px;padding:5px}
+.lim-pick p{margin:6px 0 0;font-size:11px;color:var(--muted);line-height:1.35}
+.nav{list-style:none;margin:0;padding:0}
+.nav li{margin:1px 0}
+.item{display:flex;align-items:center;gap:8px;width:100%;border:0;background:transparent;text-align:left;padding:6px 8px;border-radius:7px;cursor:pointer;font-size:13px}
+.item:hover{background:#323338}.item.sel{background:var(--side-sel)}
+.item .ic{width:18px;height:18px;flex:none;color:var(--accent)}.item.sel .ic{color:#fff}
+.item .lbl{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item.child{padding-left:30px}.item.leaf{padding-left:52px;font-size:12px;color:#d4d4da}
+.item.leaf .ic{width:14px;height:14px}
+.badge{font-size:10px;font-weight:600;border-radius:9px;padding:1px 7px;background:#3a3b40;color:#cfd0d6;white-space:nowrap}
+.badge.full{background:#2f4f7a;color:#cfe2ff}.badge.over{background:#6b2723;color:#ffd4d1}.badge.na{background:#3a3b40;color:var(--dim)}
+.section-h{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin:14px 8px 4px}
+.canvas{position:relative;overflow:auto;padding:26px 24px 60px}
+.previews{display:flex;gap:56px;justify-content:center;flex-wrap:wrap;align-items:flex-start}
+.col{width:300px}
+.pill{display:inline-block;font:600 11px ui-monospace,SFMono-Regular,Menlo,monospace;background:#3a3b40;border-radius:14px;padding:5px 10px;margin-bottom:12px}
+.col-note{font-size:11px;color:var(--muted);margin:-4px 0 10px;min-height:14px}
+.col-note.warn{color:var(--warn)}
+.flipper{perspective:1400px;touch-action:pan-y;cursor:grab;user-select:none}
+.flipper:active{cursor:grabbing}
+.card3d{position:relative;width:300px;height:422px;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.card3d.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px #0006}
+.face.back{transform:rotateY(180deg)}
+/* Poster generic */
+.poster{background:var(--bg);color:var(--fg)}
+.poster .art{position:absolute;inset:0;background-repeat:no-repeat;background-position:center top;background-size:cover}
+.poster .plogo{position:absolute;left:14px;top:12px;height:25px;max-width:105px;object-fit:contain;object-position:left}
+.poster .phead{position:absolute;right:14px;top:12px;text-align:right;color:#fff;text-shadow:0 1px 3px #0008;font-size:12px}
+.poster .phead small{display:block;font-size:9px;opacity:.85;text-transform:uppercase}
+.poster .body{position:absolute;left:0;right:0;bottom:0;background:var(--footer,#fff);padding:10px 12px 9px;min-height:24%}
+.poster .row{display:grid;gap:8px;margin-top:8px}
+.fld{min-width:0}
+.fld .l{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--label);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fld .v{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fld.r{text-align:right}
+.poster .foot{font:9px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--fg);margin-top:12px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bc{display:block;margin:0 auto}
+.bc-alt{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#111;text-align:center;margin-top:3px}
+/* Generic (legacy) */
+.generic{background:var(--bg);color:var(--fg);padding:14px 16px;display:flex;flex-direction:column}
+.g-top{display:flex;align-items:center;gap:8px;min-height:44px}
+.g-top img{height:40px;max-width:128px;object-fit:contain;object-position:left}
+.g-top .lt{font-weight:600;font-size:16px;color:var(--fg);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-head{margin-left:auto;display:flex;gap:10px;text-align:right}
+.g-head .l,.g-sec .l{font-size:10px;font-weight:700;color:var(--label);text-transform:uppercase;white-space:nowrap}
+.g-head .v{font-size:16px;color:var(--fg);white-space:nowrap;font-family:inherit}
+.g-prim{display:flex;gap:10px;margin-top:14px;align-items:flex-start}
+.g-prim .fld{flex:1}
+.g-prim .l{font-size:10px;font-weight:700;color:var(--label);text-transform:uppercase}
+.g-prim .v{font-size:22px;font-weight:600;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:inherit}
+.g-prim img{width:66px;height:66px;object-fit:cover;flex:none}
+.g-sec{display:flex;justify-content:space-between;gap:10px;margin-top:10px}
+.g-sec .fld{min-width:0}
+.g-sec .v{font-size:15px;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:inherit}
+.g-sec .fld.wide .v{font-size:12px;white-space:normal}
+.g-bottom{margin-top:auto;text-align:center;padding-top:10px}
+/* Back */
+.details{background:#f2f2f7;color:#111;overflow:auto;padding:16px 14px;font-size:12px}
+.details h4{margin:2px 0 12px;text-align:center;font-size:14px}
+.details .grp{background:#fff;border-radius:11px;padding:2px 12px}
+.details .bf{border-bottom:1px solid #e3e3e8;padding:9px 0;white-space:pre-line}
+.details .bf:last-child{border-bottom:0}
+.details .bf b{display:block;font-weight:500;margin-bottom:3px;color:#3c3c43}
+.details a{color:#0a64d6;text-decoration:none}
+/* Actions under card */
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.act{background:#2c2c2e;border-radius:12px;padding:10px 11px;min-height:88px;display:flex;flex-direction:column}
+.act .dot{width:24px;height:24px;border-radius:50%;display:grid;place-items:center}
+.act .dot svg{width:14px;height:14px}
+.act b{font-size:13px;margin-top:7px}.act small{margin-top:auto;color:var(--muted);font-size:11px}
+.act.empty{border:1px dashed #4a4b50;background:transparent;color:var(--dim);font-size:11px;align-items:center;justify-content:center;text-align:center}
+.hl{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+/* Inspector */
+.inspector{position:absolute;left:18px;top:14px;width:380px;max-height:calc(100vh - 100px);overflow:auto;background:rgba(46,47,51,.97);backdrop-filter:blur(20px);border:1px solid #45464c;border-radius:14px;box-shadow:0 18px 50px #000a;z-index:10;padding:0 0 14px}
+.inspector[hidden]{display:none}
+.ins-h{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:inherit;z-index:1}
+.ins-h h2{font-size:15px;margin:0}
+.x{width:24px;height:24px;border-radius:50%;border:0;background:#45464c;cursor:pointer}
+.ins-sec{padding:10px 14px 0}
+.ins-sec h3{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin:6px 0 7px}
+.kv{display:grid;grid-template-columns:118px 1fr;gap:6px 10px;align-items:start;font-size:12px}
+.kv .k{color:var(--muted);padding-top:4px}
+.kv .val{background:#232427;border:1px solid var(--line);border-radius:6px;padding:4px 7px;min-height:24px;white-space:pre-wrap;word-break:break-word;color:#d9d9de;cursor:not-allowed}
+.kv .val code{font-size:11px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid #fff4;vertical-align:-2px;margin-right:6px}
+.note{font-size:12px;line-height:1.45;color:#cfd0d6;background:#26272a;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:7px;padding:8px 10px;margin:8px 0}
+.note.warn{border-left-color:var(--warn)}.note.bad{border-left-color:var(--bad)}.note.ok{border-left-color:var(--ok)}
+.lim{width:100%;border-collapse:collapse;font-size:11.5px}
+.lim th,.lim td{border-bottom:1px solid var(--line);padding:5px 4px;text-align:left;vertical-align:top}
+.lim th{color:var(--muted);font-weight:500}
+.lim tr.cur td{color:#fff;background:#2f3a4c}
+.fieldcard{border:1px solid var(--line);border-radius:9px;padding:8px;margin:8px 0;background:#28292c}
+.fieldcard.over{border-color:#7a302b}
+.fieldcard h4{margin:0 0 6px;font-size:12px;display:flex;justify-content:space-between;gap:8px}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.atile{border:1px solid transparent;background:#26272a;border-radius:10px;padding:8px;text-align:left;cursor:pointer;opacity:.55;position:relative}
+.atile.in{opacity:1;border-color:var(--accent);background:#1f2d44}
+.atile.pick{outline:2px solid #fff6}
+.atile b{display:block;font-size:12px;margin-top:5px}
+.atile small{font-size:10px;color:var(--muted)}
+.atile .tag{position:absolute;right:6px;top:6px;font-size:9px;background:var(--accent);color:#fff;border-radius:5px;padding:1px 5px}
+.atile .dot{width:22px;height:22px;border-radius:50%;display:grid;place-items:center}.atile .dot svg{width:12px;height:12px}
+.fieldcard h4 .dot{width:20px;height:20px;border-radius:50%;display:inline-grid;place-items:center;vertical-align:middle;margin-right:6px}.fieldcard h4 .dot svg{width:12px;height:12px}.fieldcard h4 .badge{align-self:flex-start}
+.dd{width:100%;background:#232427;border:1px solid var(--line);border-radius:7px;padding:6px;margin-bottom:8px}
+.json{background:#151618;color:#bfe9c8;border:1px solid var(--line);border-radius:8px;padding:10px;font:11px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;word-break:break-word;max-height:none;margin:0}
+.thumbs{display:flex;gap:6px;align-items:center}
+.thumbs img{max-height:34px;max-width:90px;background:repeating-conic-gradient(#3a3b40 0 25%,#2a2b2e 0 50%) 0/10px 10px;border-radius:4px}
+.miss{color:var(--dim);font-size:11px}
+.legend{max-width:720px;margin:26px auto 0;font-size:12px;color:var(--muted);text-align:center;line-height:1.5}
+.err{background:#4a1f1d;border:1px solid #7a302b;color:#ffd4d1;border-radius:8px;padding:10px 12px;margin:0 auto 16px;max-width:640px;font-size:13px}
+@media (max-width:860px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:static;max-height:none;border-right:0;border-bottom:1px solid #111}
+  .titlebar{flex-wrap:wrap;height:auto;padding:8px 12px;position:static}
+  .dots{display:none}
+  .canvas{padding:18px 16px 50px}
+  .inspector{position:fixed;left:16px;right:16px;top:16px;width:auto;max-height:calc(100vh - 32px)}
+  .col,.card3d{width:min(300px,calc(100vw - 32px))}
+}
+</style>
+</head>
+<body>
+<header class="titlebar">
+  <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="doc"><b id="docName">Loading…</b><small id="docSub">Pass template</small></div>
+  <span class="ro" title="This viewer never modifies the template">READ-ONLY</span>
+  <span class="grow"></span>
+  <div class="seg" role="group" aria-label="Template">
+    <button data-pass="membership" class="on">Membership</button>
+    <button data-pass="insurance">Insurance</button>
+  </div>
+  <label class="tb-btn">Open pass.json<input id="jsonFile" type="file" accept=".json,application/json"></label>
+  <label class="tb-btn">Open .pkpasstemplate<input id="folder" type="file" webkitdirectory multiple></label>
+  <div class="seg" role="group" aria-label="Side">
+    <button id="showFront" class="on">Front</button>
+    <button id="showBack">Details</button>
+  </div>
+</header>
+<div class="app">
+  <aside class="sidebar" id="sidebar" aria-label="Template components"></aside>
+  <main class="canvas" id="canvas">
+    <section class="inspector" id="inspector" hidden aria-live="polite"></section>
+    <div id="error"></div>
+    <div class="previews">
+      <div class="col"><span class="pill">iOS 27</span><div class="col-note" id="note27"></div>
+        <div class="flipper" data-flip="27"><div class="card3d" id="card27"><div class="face front" id="front27"></div><div class="face back details" id="back27"></div></div></div>
+        <div class="acts" id="acts27"></div>
+      </div>
+      <div class="col"><span class="pill">iOS 26</span><div class="col-note" id="note26"></div>
+        <div class="flipper" data-flip="26"><div class="card3d" id="card26"><div class="face front" id="front26"></div><div class="face back details" id="back26"></div></div></div>
+      </div>
+    </div>
+    <p class="legend">Browser recreation of the Pass Designer canvas for review. Wallet renders the real pass: fonts, truncation, barcode artwork, and Featured Action labels and symbols come from the system. Drag a card sideways to turn it over. Select any component on the left to inspect its values and Apple's limits.</p>
+  </main>
+</div>
 <script>
-const defaults={membership:{json:'templates/AAA Membership Card.pkpasstemplate/pass.json',art:'templates/AAA Membership Card.pkpasstemplate/artwork@3x.png'},insurance:{json:'templates/AAA Insurance Card.pkpasstemplate/pass.json',art:'templates/AAA Insurance Card.pkpasstemplate/artwork@3x.png'}};
-const $=id=>document.getElementById(id), esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const actionTypes={call:['☎','Call'],place:['⌖','Go to Location'],membershipBenefits:['★','View Membership Benefits'],shop:['▣','Shop Online or In-App'],order:['▰','Order Delivery or Pickup'],bookAppointment:['◷','Book an Appointment'],viewOffersRewards:['★','View Offers & Rewards'],bookCar:['▣','Book a Car'],bookFlight:['✈','Book a Flight'],bookStay:['⌂','Book a Stay'],viewSchedule:['◷','View Schedule'],watchTrailer:['▶','Watch Trailer'],listenToMusic:['♫','Listen to Music'],addToBalance:['＋','Add to Balance']};
-let selected='membership',passData=null,artworkURL='';
-function actionDestination(action){return action.url||action.placeIdentifier||''}
-function showError(message){$('passName').textContent='Could not load pass';$('summary').textContent=message;$('json').textContent=message}
-function render(){const style=passData.posterGeneric||passData.generic||{},actions=passData.featuredActions||[];$('passName').textContent=passData.description||'Wallet Pass';$('summary').textContent=(passData.posterGeneric?'Poster Generic':'Generic')+' · format '+(passData.formatVersion??'unknown')+' · '+actions.length+' Featured Actions';$('hero').style.backgroundImage=`url("${artworkURL||defaults[selected].art}")`;$('heroTitle').innerHTML=(style.headerFields||[]).map(field=>esc(field.value)+(field.label?'<small>'+esc(field.label)+'</small>':'')).join('');$('fields').innerHTML=(style.primaryFields||[]).map(field=>'<div class="field"><label>'+esc(field.label)+'</label><strong>'+esc(field.value)+'</strong></div>').join('')+(passData.barcodes?.length?'<div class="barcode" aria-label="Barcode"></div>':'');$('actions').innerHTML=actions.map(action=>{const display=actionTypes[action.type]||['●',action.type||'Action'];return '<div class="action"><b>'+display[0]+'</b>'+esc(display[1])+'</div>'}).join('');$('actionList').innerHTML=actions.map(action=>{const display=actionTypes[action.type]||['●',action.type||'Action'];return '<div class="actionRow"><strong>'+display[0]+' '+esc(display[1])+'</strong><br><small>Type: '+esc(action.type)+' · Identifier: '+esc(action.identifier)+'</small><code>'+esc(actionDestination(action))+'</code></div>'}).join('')||'<span class="muted">No Featured Actions in this pass.</span>';$('back').innerHTML='<h3>Pass Details</h3>'+(style.backFields||[]).map(field=>'<div class="backField"><b>'+esc(field.label)+'</b>'+esc(field.value)+'</div>').join('');$('json').textContent=JSON.stringify(passData,null,2)}
-const posterLayout=document.createElement('style');posterLayout.textContent='.screen{position:relative}.hero{height:auto;aspect-ratio:358/448;background-size:100% 100%;border-radius:18px}.hero:after{display:none}.heroTitle{display:none}.fields{position:absolute;z-index:2;left:12px;right:12px;top:64%;margin:0;padding:5px 10px;background:#fff;border-radius:0}.barcode{height:42px;margin:0 auto 7px}.fields:after{content:attr(data-footer);display:block;margin-top:5px;font-size:9px;color:#404040}.device{cursor:grab}.device:active{cursor:grabbing}';document.head.append(posterLayout);const actionLayout=document.createElement('style');actionLayout.textContent='.screen{min-height:0;overflow:visible;background:transparent}.actions{position:absolute;top:calc(100% + 10px);left:0;right:0;padding:0 12px}';document.head.append(actionLayout);const originalRender=render;render=function(){originalRender();const fields=$('fields'),barcode=fields.querySelector('.barcode');if(barcode)fields.insertBefore(barcode,fields.firstChild);const footer=(passData.posterGeneric||passData.generic||{}).footerFields||[];fields.dataset.footer=footer.map(field=>field.value).filter(Boolean).join(' · ')};
-async function loadDefault(){try{const response=await fetch(defaults[selected].json);if(!response.ok)throw new Error('Template data request failed ('+response.status+').');passData=await response.json();artworkURL='';render()}catch(error){showError(error.message+' Try reloading the page.')}}
-document.querySelectorAll('[data-pass]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-pass]').forEach(item=>item.classList.remove('active'));button.classList.add('active');selected=button.dataset.pass;loadDefault()}));
-function flip(toBack){$('card').classList.toggle('flip',toBack);$('front').classList.toggle('active',!toBack);$('details').classList.toggle('active',toBack)}$('front').addEventListener('click',()=>flip(false));$('details').addEventListener('click',()=>flip(true));$('ios27').addEventListener('click',()=>{$('ios27').classList.add('active');$('ios26').classList.remove('active')});$('ios26').addEventListener('click',()=>{$('ios26').classList.add('active');$('ios27').classList.remove('active')});
-let pointerStart=null;const device=$('device'),card=$('card');device.addEventListener('pointerdown',event=>{pointerStart={x:event.clientX,y:event.clientY};card.style.transition='none';device.setPointerCapture(event.pointerId)});device.addEventListener('pointermove',event=>{if(!pointerStart)return;const dx=event.clientX-pointerStart.x,dy=event.clientY-pointerStart.y,base=card.classList.contains('flip')?180:0;card.style.transform='rotateY('+(base+dx*.55)+'deg) rotateX('+(-dy*.12)+'deg)'});device.addEventListener('pointerup',event=>{if(!pointerStart)return;const dx=event.clientX-pointerStart.x,dy=event.clientY-pointerStart.y;pointerStart=null;card.style.transition='transform .55s';if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))flip(dx<0);else card.style.transform=''});device.addEventListener('pointercancel',()=>{pointerStart=null;card.style.transition='transform .55s';card.style.transform=''});
-$('jsonFile').addEventListener('change',async event=>{const file=event.target.files[0];if(!file)return;try{passData=JSON.parse(await file.text());selected='membership';artworkURL='';render()}catch{showError('The selected file is not valid pass.json.')}});$('folder').addEventListener('change',async event=>{const files=[...event.target.files],jsonFile=files.find(file=>file.name==='pass.json');if(!jsonFile){showError('Select the complete .pkpasstemplate folder. It must include pass.json.');return}try{passData=JSON.parse(await jsonFile.text());const image=files.find(file=>/artwork@3x\.png$/i.test(file.name));artworkURL=image?URL.createObjectURL(image):'';selected='membership';render()}catch{showError('The selected template contains invalid JSON.')}});
-loadDefault();
-</script></body></html>
+"use strict";
+const $ = id => document.getElementById(id);
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const INF = Infinity;
+
+const DEFAULTS = {
+  membership: 'AAA Membership Card.pkpasstemplate',
+  insurance: 'AAA Insurance Card.pkpasstemplate'
+};
+
+/* ---------- Apple limits (Wallet docs, Pass Designer, HIG) ---------- */
+const SRC = {
+  poster: 'developer.apple.com/documentation/walletpasses/creating-a-poster-generic-pass',
+  meta: 'developer.apple.com/documentation/walletpasses/defining-the-metadata-of-your-wallet-pass',
+  designer: 'developer.apple.com/documentation/walletpasses/creating-a-pass-with-pass-designer',
+  hig: 'Human Interface Guidelines › Wallet (legacy pass field guidance)'
+};
+const FIELD_GROUPS = ['headerFields','primaryFields','secondaryFields','auxiliaryFields','footerFields','backFields'];
+const GROUP_NAMES = {headerFields:'Header Fields',primaryFields:'Primary Fields',secondaryFields:'Secondary Fields',auxiliaryFields:'Auxiliary Fields',footerFields:'Footer Fields',backFields:'Back Fields'};
+const STYLES = {
+  posterGeneric: {
+    name: 'Poster Generic', os: 'iOS & watchOS 27+',
+    max: {headerFields:1, primaryFields:4, secondaryFields:0, auxiliaryFields:0, footerFields:2, backFields:INF},
+    images: ['icon','logo','primaryLogo','artwork'],
+    barcode: 'Square QR shown in the layout; any supported format allowed', actions: 'Up to 2',
+    notes: {
+      headerFields: 'One header field (top-right, over the artwork). Poster artwork titles are often baked into the image instead.',
+      primaryFields: 'Apple allows up to four primary fields. Pass Designer lays every primary field out in a single row, so more than two truncate (e.g. "Membership Nu…"). Two fields stay readable.',
+      footerFields: 'Apple allows two footer fields. Pass Designer\'s preview shows only the first footer value, without its label, so combine values when both must be seen.',
+      secondaryFields: 'Not part of the poster layout. Designer keeps the key empty; use backFields or the generic fallback instead.',
+      auxiliaryFields: 'Not part of the poster layout. Designer keeps the key empty; use backFields or the generic fallback instead.',
+      backFields: 'Unlimited and can be long. Shown only in Pass Details, never on Apple Watch. Include contact info for the signing organization. attributedValue may contain <a href> links.'
+    },
+    src: SRC.poster
+  },
+  generic: {
+    name: 'Generic', os: 'All versions (fallback for iOS 26 and earlier)',
+    max: {headerFields:3, primaryFields:1, secondaryFields:4, auxiliaryFields:4, footerFields:0, backFields:INF},
+    images: ['icon','logo','thumbnail'],
+    barcode: 'Rectangular barcode area (PDF417, Code 128, …) or QR', actions: 'Not shown (Featured Actions need iOS 27)',
+    notes: {
+      headerFields: 'Up to three, top-right. They stay visible when the pass is stacked, so keep them short.',
+      primaryFields: 'One primary field. It shares the row with the thumbnail image.',
+      secondaryFields: 'Up to four. Generic keeps secondary and auxiliary rows separate (8 fields total).',
+      auxiliaryFields: 'Up to four, on their own row below the secondary fields.',
+      footerFields: 'Not supported by the generic style.',
+      backFields: 'Unlimited. Shown in Pass Details.'
+    },
+    src: SRC.meta
+  },
+  storeCard: {
+    name: 'Store Card', os: 'All versions',
+    max: {headerFields:3, primaryFields:1, secondaryFields:4, auxiliaryFields:4, footerFields:0, backFields:INF},
+    combined: 'secondary + auxiliary: 4 total, one row',
+    images: ['icon','logo','strip'],
+    barcode: 'Below the fields', actions: 'Not in the poster sense (use a poster style)',
+    notes: {secondaryFields:'Secondary and auxiliary fields share ONE row: up to 4 total.', auxiliaryFields:'Shares the single row with secondary fields (4 total).', primaryFields:'One primary field, drawn over the strip image.'},
+    src: SRC.meta
+  },
+  coupon: {
+    name: 'Coupon', os: 'All versions',
+    max: {headerFields:3, primaryFields:1, secondaryFields:4, auxiliaryFields:4, footerFields:0, backFields:INF},
+    combined: 'secondary + auxiliary: 4 total, one row',
+    images: ['icon','logo','strip'],
+    barcode: 'Below the fields', actions: 'Not supported',
+    notes: {secondaryFields:'Secondary and auxiliary fields share ONE row: up to 4 total.', auxiliaryFields:'Shares the single row with secondary fields (4 total).', primaryFields:'One primary field, drawn over the strip image.'},
+    src: SRC.meta
+  },
+  eventTicket: {
+    name: 'Event Ticket', os: 'Poster (semantic) iOS 18+; artwork iOS 27+',
+    max: {headerFields:3, primaryFields:1, secondaryFields:4, auxiliaryFields:4, footerFields:0, backFields:INF},
+    images: ['icon','logo','primaryLogo','secondaryLogo','thumbnail','background','artwork'],
+    barcode: 'Below the fields', actions: 'Pass actions from semantic tags; Featured Actions up to 2 (iOS 27)',
+    notes: {primaryFields:'Nonposter tickets use pass fields. Poster tickets (sports / live performance) require specific semantic tags; without them Wallet falls back to a nonposter ticket.'},
+    src: SRC.meta + ' · ' + SRC.hig
+  },
+  boardingPass: {
+    name: 'Boarding Pass', os: 'Semantic airline layout iOS 26+',
+    max: {headerFields:3, primaryFields:2, secondaryFields:5, auxiliaryFields:5, footerFields:0, backFields:INF},
+    images: ['icon','logo','primaryLogo','footer'],
+    barcode: 'Required for most carriers', actions: 'Semantic pass actions',
+    notes: {primaryFields:'Two primary fields (origin and destination). Requires transitType.', auxiliaryFields:'On boarding passes, auxiliary fields appear ABOVE secondary fields.'},
+    src: SRC.meta + ' · ' + SRC.hig
+  }
+};
+const IMAGES = {
+  icon:{name:'Icon',size:'38 × 38 pt',rule:'Square. Required on every pass; also used on the Lock Screen and in Mail.',file:'icon'},
+  logo:{name:'Logo',size:'160 × 50 pt',rule:'50 pt tall, 50–160 pt wide. Generic, coupon and store card (all versions); Poster Generic iOS 27+.',file:'logo'},
+  primaryLogo:{name:'Primary Logo',size:'126 × 30 pt',rule:'30 pt tall, 30–126 pt wide. Top-left of poster styles (iOS 27+).',file:'primaryLogo'},
+  secondaryLogo:{name:'Secondary Logo',size:'12 × 12–135 pt',rule:'Event tickets only (iOS 18+), bottom-right.',file:'secondaryLogo'},
+  strip:{name:'Strip',size:'375 × 144 pt',rule:'Coupon and store card. Primary field text draws over it.',file:'strip'},
+  thumbnail:{name:'Thumbnail',size:'90 × 90 pt',rule:'90 pt tall, 60–90 pt wide. Generic and nonposter event tickets. Pass Designer flags it on Poster Generic because the poster ignores it — here it is used only by the iOS 26 generic fallback.',file:'thumbnail'},
+  background:{name:'Background',size:'345 × 505 pt',rule:'Event tickets; blurred on nonposter tickets.',file:'background'},
+  artwork:{name:'Background Artwork',size:'358 × 448 pt',rule:'Poster Generic and poster event tickets (iOS 27+). Shown unblurred; keep important content clear of the field and logo overlays.',file:'artwork'},
+  footer:{name:'Footer',size:'thin strip',rule:'Airline boarding passes, iOS 26+.',file:'footer'}
+};
+const BARCODE_FORMATS = ['PKBarcodeFormatQR','PKBarcodeFormatPDF417','PKBarcodeFormatAztec','PKBarcodeFormatCode128','Code 39','Codabar','EAN-13','Interleaved 2 of 5 (ITF)'];
+
+/* Featured Actions: all types Apple documents. Title/subtitle as Pass Designer shows them. */
+const G = {
+  cal:'<rect x="4" y="6" width="16" height="14" rx="2" fill="none" stroke="#fff" stroke-width="2"/><path d="M4 10h16M8 3v4M16 3v4" stroke="#fff" stroke-width="2"/>',
+  film:'<rect x="4" y="5" width="16" height="14" rx="2" fill="none" stroke="#fff" stroke-width="2"/><path d="M8 5v14M16 5v14M4 12h16" stroke="#fff" stroke-width="2"/>',
+  wave:'<path d="M5 12v0M8 8v8M11 5v14M14 9v6M17 7v10M20 11v2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>',
+  phone:'<path d="M7 3l3 4-2 2c1 3 3 5 6 6l2-2 4 3-2 4C10 20 4 14 3 5z" fill="#fff"/>',
+  card:'<rect x="3" y="6" width="18" height="12" rx="2" fill="#fff"/><path d="M3 10h18" stroke="#000" stroke-opacity=".35" stroke-width="2"/>',
+  cart:'<path d="M3 4h3l2 10h10l2-7H7" fill="none" stroke="#fff" stroke-width="2"/><circle cx="9" cy="19" r="1.7" fill="#fff"/><circle cx="17" cy="19" r="1.7" fill="#fff"/>',
+  star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z" fill="#fff"/>',
+  car:'<path d="M5 11l2-5h10l2 5v6H5z" fill="#fff"/><circle cx="8" cy="15" r="1.4"/><circle cx="16" cy="15" r="1.4"/>',
+  plane:'<path d="M21 12l-8-2-3-7H8l1 7-5 1-1-2H1l1 3-1 3h2l1-2 5 1-1 7h2l3-7z" fill="#fff" transform="translate(1 0)"/>',
+  bed:'<path d="M3 18V7M3 13h18v5M21 13a3 3 0 00-3-3h-7v3" fill="none" stroke="#fff" stroke-width="2"/><circle cx="7" cy="10" r="2" fill="#fff"/>',
+  loc:'<path d="M20 4L4 11l7 2 2 7z" fill="#fff"/>'
+};
+const ACTIONS = [
+  {type:'viewSchedule',doc:'View Schedule',title:'View Schedule',sub:'Open Link',purpose:'Opens link to view event schedule',cat:'Events',key:'url',scheme:'https',color:'#e5484d',g:'cal'},
+  {type:'watchTrailer',doc:'Watch Trailer',title:'Watch Trailer',sub:'Open Link',purpose:'Opens link to watch a trailer for an upcoming event',cat:'Events',key:'url',scheme:'https',color:'#8e8e93',g:'film'},
+  {type:'listenToMusic',doc:'Listen to Music',title:'Listen to Music',sub:'Open Link',purpose:'Opens link to a playlist for the musical artist(s)',cat:'Events',key:'url',scheme:'https',color:'#e5484d',g:'wave'},
+  {type:'call',doc:'Call',title:'Call',sub:'Open Link',purpose:'Opens the Phone app to call support',cat:'Generic',key:'url',scheme:'tel',color:'#30b650',g:'phone'},
+  {type:'place',doc:'Go to Location',title:'Get Directions',sub:'Open in Maps',purpose:'Opens Maps to a single location',cat:'Generic',key:'placeIdentifier',scheme:'Apple Maps Place ID',color:'#0a84ff',g:'loc'},
+  {type:'addToBalance',doc:'Add to Balance',title:'Add to Balance',sub:'Open Link',purpose:'Opens link to load balance',cat:'Membership',key:'url',scheme:'https',color:'#30b650',g:'card'},
+  {type:'order',doc:'Order Delivery or Pickup',title:'Order Delivery or Pickup',sub:'Open Link',purpose:'Opens link for pickup or delivery service',cat:'Membership',key:'url',scheme:'https',color:'#f08a24',g:'cart'},
+  {type:'shop',doc:'Shop Online or In-App',title:'Shop',sub:'Open Link',purpose:'Opens an online or in-app store',cat:'Membership',key:'url',scheme:'https',color:'#f08a24',g:'cart'},
+  {type:'membershipBenefits',doc:'View Membership Benefits',title:'View Membership Benefits',sub:'Open Link',purpose:'Opens membership benefits, points and tiers in your app or website',cat:'Membership',key:'url',scheme:'https',color:'#b03fd1',g:'star'},
+  {type:'bookAppointment',doc:'Book an Appointment',title:'Book an Appointment',sub:'Open Link',purpose:'Opens a schedule to reserve a time slot for a service',cat:'Membership',key:'url',scheme:'https',color:'#e5484d',g:'cal'},
+  {type:'bookCar',doc:'Book a Car',title:'Rent a Car',sub:'Open Link',purpose:'Leads to your app or website to book a rental car',cat:'Membership',key:'url',scheme:'https',color:'#0a84ff',g:'car'},
+  {type:'bookFlight',doc:'Book a Flight',title:'Book a Flight',sub:'Open Link',purpose:'Leads to your app or website to book a flight',cat:'Membership',key:'url',scheme:'https',color:'#30b650',g:'plane'},
+  {type:'bookStay',doc:'Book a Stay',title:'Book a Stay',sub:'Open Link',purpose:'Leads to your app or website to book a hotel or stay',cat:'Membership',key:'url',scheme:'https',color:'#b03fd1',g:'bed'},
+  {type:'viewOffersRewards',doc:'View Offers and Rewards',title:'View Offers and Rewards',sub:'Open Link',purpose:'Leads to membership offers or rewards in your app or website',cat:'Membership, Generic, Event',key:'url',scheme:'https',color:'#b03fd1',g:'star'}
+];
+const ACTION_BY_TYPE = Object.fromEntries(ACTIONS.map(a => [a.type, a]));
+const MAX_ACTIONS = 2;
+const icon = (a, cls='dot') => `<span class="${cls}" style="background:${a.color}"><svg viewBox="0 0 24 24">${G[a.g]}</svg></span>`;
+
+/* ---------- State ---------- */
+let state = {key:'membership', pass:null, tooling:null, files:[], assets:{}, name:'', limitStyle:null, sel:null, actionPick:null};
+
+function styleKey(p){ return ['posterGeneric','boardingPass','coupon','eventTicket','storeCard','generic'].find(k => p && p[k]) || 'generic'; }
+function safeColor(c, fb){ return /^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(,\s*[\d.]+\s*)?\)$/.test(String(c||'').trim()) ? String(c).trim() : fb; }
+function asset(base){ return state.assets[base+'@3x.png'] || state.assets[base+'@2x.png'] || state.assets[base+'.png'] || ''; }
+function hasFile(base){ return ['@2x.png','@3x.png','.png'].filter(s => state.files.includes(base+s)); }
+
+/* ---------- Loading ---------- */
+async function loadDefault(key){
+  const dir = DEFAULTS[key];
+  const base = 'templates/' + encodeURIComponent(dir) + '/';
+  try{
+    const [pr, tr, mr] = await Promise.all([fetch(base+'pass.json'), fetch(base+'tooling.json'), fetch('templates/manifest.json')]);
+    if(!pr.ok) throw new Error('pass.json request failed ('+pr.status+')');
+    const manifest = mr.ok ? await mr.json() : {};
+    state = {...state, key, pass: await pr.json(), tooling: tr.ok ? await tr.json() : null, name: dir,
+      files: manifest[dir] || [], assets: {}, limitStyle: null, sel: state.sel, actionPick: null};
+    state.files.filter(f => f.endsWith('.png')).forEach(f => state.assets[f] = base + encodeURIComponent(f));
+    showError(''); render();
+  }catch(e){ showError('Could not load the bundled template: '+e.message+'. Try reloading the page.'); }
+}
+function showError(m){ $('error').innerHTML = m ? '<div class="err">'+esc(m)+'</div>' : ''; }
+
+/* ---------- Barcode (visual approximation only) ---------- */
+function hash(s){ let h = 2166136261; for(const c of String(s)){ h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+function rng(seed){ return () => (seed = (Math.imul(seed ^ (seed >>> 15), 2246822507) + 0x6D2B79F5) >>> 0) / 4294967296; }
+function barcodeSVG(bc, w=150, h=44){
+  const r = rng(hash(bc.message)); let out = '';
+  if(/QR|Aztec/.test(bc.format)){
+    const n = 25, s = 84/n; w = h = 84;
+    for(let y=0;y<n;y++) for(let x=0;x<n;x++){
+      const finder = (x<7&&y<7)||(x>n-8&&y<7)||(x<7&&y>n-8);
+      const on = finder ? !(x%6&&y%6) && !((x>1&&x<5||x>n-6&&x<n-2)&&(y>1&&y<5||y>n-6&&y<n-2)) || ((x>1&&x<5||x>n-6&&x<n-2)&&(y>1&&y<5||y>n-6&&y<n-2)) : r()>.5;
+      if(on) out += `<rect x="${(x*s).toFixed(2)}" y="${(y*s).toFixed(2)}" width="${s.toFixed(2)}" height="${s.toFixed(2)}"/>`;
+    }
+  }else if(/PDF417/.test(bc.format)){
+    let x = 0; const bar = (bw, on=true) => { if(on) out += `<rect x="${x}" y="0" width="${bw}" height="${h}"/>`; x += bw; };
+    [8,1,1,1,1,1,1,3].forEach((bw,i)=>bar(bw*1.2, i%2===0));
+    const body = w - 2*16 - 4; const rows = 7, cols = Math.floor(body/2.4);
+    for(let row=0; row<rows; row++) for(let c=0;c<cols;c++) if(r()>.48) out += `<rect x="${(x+c*2.4).toFixed(1)}" y="${(row*h/rows).toFixed(1)}" width="2.4" height="${(h/rows+.3).toFixed(1)}"/>`;
+    x += cols*2.4 + 2; [7,1,1,3,1,1,1,2,1].forEach((bw,i)=>bar(bw*1.2, i%2===0));
+    w = x;
+  }else{
+    let x = 0; while(x < w){ const bw = 1 + Math.floor(r()*3); if(r()>.45) out += `<rect x="${x}" y="0" width="${bw}" height="${h}"/>`; x += bw + 1; }
+  }
+  return `<svg class="bc" viewBox="0 0 ${w.toFixed(1)} ${h}" width="${w.toFixed(0)}" height="${h}" fill="#000" role="img" aria-label="${esc(bc.format)} barcode preview">${out}</svg>`;
+}
+
+/* ---------- Pass renderers ---------- */
+function cssVars(p){
+  return `--bg:${safeColor(p.backgroundColor,'#fff')};--fg:${safeColor(p.foregroundColor,'#111')};--label:${safeColor(p.labelColor,'#707070')};--footer:${safeColor(p.footerBackgroundColor,'#fff')}`;
+}
+const titleCase = s => String(s ?? '').toLowerCase().replace(/(^|[\s(\/-])(\S)/g, (m, a, b) => a + b.toUpperCase());
+function fld(f, g, i, extra='', poster=false){
+  const right = f.textAlignment === 'PKTextAlignmentRight';
+  return `<div class="fld ${right?'r':''} ${extra}" data-f="${esc(g)}:${i}"><div class="l">${esc(poster ? titleCase(f.label) : f.label)}</div><div class="v">${esc(f.value)}</div></div>`;
+}
+function renderPoster(p, dict){
+  const bc = (p.barcodes||[])[0];
+  const prim = dict.primaryFields||[], foot = dict.footerFields||[], head = dict.headerFields||[];
+  const art = asset('artwork'), logo = asset('primaryLogo') || asset('logo');
+  return `<div class="face-in poster" style="${cssVars(p)};position:absolute;inset:0">
+    ${art ? `<div class="art" style="background-image:url('${esc(art)}')"></div>` : '<div class="art" style="background:#5b6b82"></div>'}
+    ${logo ? `<img class="plogo" src="${esc(logo)}" alt="Primary logo">` : ''}
+    ${head[0] ? `<div class="phead" data-f="headerFields:0"><small>${esc(head[0].label)}</small>${esc(head[0].value)}</div>` : ''}
+    <div class="body">
+      ${bc ? barcodeSVG(bc, 150, 38) + `<div class="bc-alt">${esc(bc.altText||'')}</div>` : ''}
+      ${prim.length ? `<div class="row" style="grid-template-columns:repeat(${prim.length},minmax(0,1fr))">${prim.map((f,i)=>fld(f,'primaryFields',i,'',true)).join('')}</div>` : ''}
+      ${foot[0] ? `<div class="foot" data-f="footerFields:0">${esc(foot[0].value)}</div>` : ''}
+    </div></div>`;
+}
+function renderGeneric(p, dict){
+  const bc = (p.barcodes||[])[0];
+  const head = dict.headerFields||[], prim = dict.primaryFields||[], sec = dict.secondaryFields||[], aux = dict.auxiliaryFields||[];
+  const logo = asset('logo'), thumb = asset('thumbnail');
+  const row = (arr, g) => arr.length ? `<div class="g-sec">${arr.map((f,i)=>fld(f,g,i, arr.length===1?'wide':'')).join('')}</div>` : '';
+  return `<div class="face-in generic" style="${cssVars(p)};position:absolute;inset:0">
+    <div class="g-top">${logo ? `<img src="${esc(logo)}" alt="Logo">` : ''}${p.logoText ? `<span class="lt">${esc(p.logoText)}</span>` : ''}
+      <div class="g-head">${head.slice(0,3).map((f,i)=>fld(f,'headerFields',i,'r')).join('')}</div></div>
+    <div class="g-prim">${prim.slice(0,1).map((f,i)=>fld(f,'primaryFields',i)).join('')}${thumb ? `<img src="${esc(thumb)}" alt="Thumbnail">` : ''}</div>
+    ${row(sec.slice(0,4),'secondaryFields')}${row(aux.slice(0,4),'auxiliaryFields')}
+    <div class="g-bottom">${bc ? barcodeSVG(bc, 190, 52) + `<div class="bc-alt">${esc(bc.altText||'')}</div>` : ''}</div></div>`;
+}
+function linkify(f){
+  if(!f.attributedValue) return esc(f.value);
+  const doc = new DOMParser().parseFromString('<div>'+f.attributedValue+'</div>', 'text/html');
+  const walk = n => [...n.childNodes].map(c => {
+    if(c.nodeType === 3) return esc(c.textContent);
+    if(c.nodeName === 'A'){
+      const href = (c.getAttribute('href')||'').trim();
+      const ok = /^(tel:|https:|mailto:)/i.test(href);
+      return ok ? `<a href="${esc(href)}" target="_blank" rel="noopener">${esc(c.textContent)}</a>` : esc(c.textContent);
+    }
+    return walk(c);
+  }).join('');
+  return walk(doc.body.firstChild);
+}
+function renderBack(p, dict){
+  const rows = (dict.backFields||[]).map((f,i)=>`<div class="bf" data-f="backFields:${i}"><b>${esc(f.label)}</b>${linkify(f)}</div>`).join('');
+  return `<h4>${esc(p.description||'Pass Details')}</h4><div class="grp">${rows || '<div class="bf">No back fields.</div>'}</div>`;
+}
+function fallbackFor(p){
+  if(p.generic) return {dict:p.generic, mode:'explicit'};
+  if(state.tooling && state.tooling.automaticallyGenerateCompatiblePass && p.posterGeneric){
+    const g = p.posterGeneric, prim = g.primaryFields||[];
+    return {dict:{headerFields:g.headerFields||[], primaryFields:prim.slice(0,1), secondaryFields:prim.slice(1), auxiliaryFields:g.footerFields||[], backFields:g.backFields||[]}, mode:'auto'};
+  }
+  return null;
+}
+
+function render(){
+  const p = state.pass, sk = styleKey(p), dict = p[sk] || {};
+  if(!state.limitStyle) state.limitStyle = sk;
+  $('docName').textContent = state.name || 'pass.json';
+  $('docSub').textContent = (STYLES[sk]?.name || sk) + ' · ' + (p.description || '') ;
+  document.querySelectorAll('[data-pass]').forEach(b => b.classList.toggle('on', b.dataset.pass === state.key));
+
+  // iOS 27
+  $('front27').innerHTML = sk === 'posterGeneric' ? renderPoster(p, dict) : renderGeneric(p, dict);
+  $('back27').innerHTML = renderBack(p, dict);
+  $('note27').textContent = sk === 'posterGeneric' ? 'posterGeneric' : (STYLES[sk]?.name || sk) + ' (rendered with the generic layout)';
+  const acts = p.featuredActions || [];
+  $('acts27').innerHTML = acts.slice(0, MAX_ACTIONS).map((a,i) => {
+    const d = ACTION_BY_TYPE[a.type] || {title:a.type||'Unknown action',sub:'Unsupported type',color:'#636366',g:'star'};
+    return `<div class="act" data-f="featuredActions:${i}">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)}</small></div>`;
+  }).join('') + (acts.length < MAX_ACTIONS ? '<div class="act empty">Empty action slot</div>'.repeat(MAX_ACTIONS - acts.length) : '');
+
+  // iOS 26
+  const fb = sk === 'posterGeneric' ? fallbackFor(p) : {dict, mode:'same'};
+  const n26 = $('note26');
+  if(fb){
+    $('front26').innerHTML = renderGeneric(p, fb.dict);
+    $('back26').innerHTML = renderBack(p, fb.dict);
+    n26.className = 'col-note';
+    n26.textContent = fb.mode === 'explicit' ? 'generic fallback (hand-authored in pass.json)' : fb.mode === 'auto' ? 'generic fallback (auto-generated by Pass Designer)' : '';
+  }else{
+    $('front26').innerHTML = renderPoster(p, dict);
+    $('back26').innerHTML = renderBack(p, dict);
+    n26.className = 'col-note warn';
+    n26.textContent = 'No fallback style: iOS 26 and earlier cannot display posterGeneric';
+  }
+  renderSidebar();
+  if(state.sel) openInspector(state.sel, false);
+  highlight();
+}
+
+/* ---------- Sidebar ---------- */
+const IC = {
+  id:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M12 12v9M9 18h6"/></svg>',
+  style:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20l6-6M14 4l6 6-8 8-6-6z"/></svg>',
+  img:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 16l5-5 5 5 3-3 5 5"/></svg>',
+  bc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM18 18h3v3"/></svg>',
+  act:'<svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="4" opacity=".25"/><path d="M12 6l1.8 3.8 4.2.6-3 2.9.7 4.1L12 15.5 8.3 17.4l.7-4.1-3-2.9 4.2-.6z"/></svg>',
+  grp:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>',
+  a:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 17l4-10 4 10M9.5 13h5"/></svg>',
+  json:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 4c-3 0-2 4-2 6s-2 2-2 2 2 0 2 2-1 6 2 6M16 4c3 0 2 4 2 6s2 2 2 2-2 0-2 2 1 6-2 6"/></svg>'
+};
+function maxText(m){ return m === INF ? 'unlimited' : m === 0 ? 'not supported' : 'max ' + m; }
+function badge(count, max){
+  if(max === INF) return `<span class="badge">${count}</span>`;
+  if(max === 0) return count ? `<span class="badge over" title="Not supported by this style">${count} · n/a</span>` : '<span class="badge na">n/a</span>';
+  const cls = count > max ? 'over' : count === max ? 'full' : '';
+  return `<span class="badge ${cls}" title="${count} of ${max} allowed">${count}/${max}</span>`;
+}
+function navItem(id, ic, label, extra='', cls=''){
+  return `<li><button class="item ${cls} ${state.sel===id?'sel':''}" data-sel="${esc(id)}"><span class="ic">${ic}</span><span class="lbl">${esc(label)}</span>${extra}</button></li>`;
+}
+function renderSidebar(){
+  const p = state.pass, sk = styleKey(p), dict = p[sk] || {}, L = STYLES[state.limitStyle] || STYLES.generic;
+  const acts = p.featuredActions || [];
+  let h = `<div class="lim-pick"><label for="limitStyle">Show limits for pass style</label>
+    <select id="limitStyle">${Object.entries(STYLES).map(([k,s])=>`<option value="${k}" ${k===state.limitStyle?'selected':''}>${esc(s.name)}${k===sk?' (this template)':''}</option>`).join('')}</select>
+    <p>${state.limitStyle===sk ? 'Counts are checked against this template\'s own style.' : 'Preview: how this template\'s fields would fit if it were converted to '+esc(L.name)+'. Red badges mean fields Wallet would not show.'}</p></div>`;
+  h += '<ul class="nav">';
+  h += navItem('identity', IC.id, 'Identity & Signing');
+  h += navItem('style', IC.style, 'Style', `<span class="badge">${esc(STYLES[sk]?.name||sk)}</span>`);
+  h += navItem('images', IC.img, 'Images', `<span class="badge">${state.files.filter(f=>f.endsWith('@2x.png')).length}</span>`);
+  h += navItem('barcode', IC.bc, 'Barcode & NFC', `<span class="badge">${(p.barcodes||[]).length}</span>`);
+  h += navItem('actions', IC.act, 'Featured Actions', badge(acts.length, MAX_ACTIONS));
+  h += navItem('fields', IC.grp, 'Fields');
+  FIELD_GROUPS.forEach(g => {
+    const arr = dict[g] || [], mx = L.max[g];
+    if(!arr.length && (STYLES[sk].max[g] === 0) && mx === 0) return;
+    h += navItem('group:'+g, IC.grp, `${GROUP_NAMES[g]} (${maxText(mx)})`, badge(arr.length, mx), 'child');
+    arr.forEach((f,i) => { h += navItem(`field:${g}:${i}`, IC.a, f.label || f.key, '', 'leaf'); });
+  });
+  const fb = sk === 'posterGeneric' ? fallbackFor(p) : null;
+  if(fb){
+    const GM = STYLES.generic.max;
+    h += `</ul><div class="section-h">iOS 26 fallback · generic ${fb.mode==='auto'?'(auto)':''}</div><ul class="nav">`;
+    ['headerFields','primaryFields','secondaryFields','auxiliaryFields','backFields'].forEach(g => {
+      const arr = fb.dict[g] || [];
+      h += navItem('fgroup:'+g, IC.grp, `${GROUP_NAMES[g]} (${maxText(GM[g])})`, badge(arr.length, GM[g]), 'child');
+      if(g !== 'backFields') arr.forEach((f,i) => { h += navItem(`ffield:${g}:${i}`, IC.a, f.label || f.key, '', 'leaf'); });
+    });
+  }
+  h += '</ul><div class="section-h">Source</div><ul class="nav">' + navItem('json', IC.json, 'pass.json (complete)') + '</ul>';
+  $('sidebar').innerHTML = h;
+  $('limitStyle').addEventListener('change', e => { state.limitStyle = e.target.value; renderSidebar(); if(state.sel) openInspector(state.sel, false); });
+}
+$('sidebar').addEventListener('click', e => {
+  const b = e.target.closest('[data-sel]'); if(!b) return;
+  state.sel = state.sel === b.dataset.sel ? null : b.dataset.sel;
+  renderSidebar();
+  state.sel ? openInspector(state.sel, true) : closeInspector();
+  highlight();
+});
+
+/* ---------- Inspector (read-only) ---------- */
+const kv = rows => '<div class="kv">' + rows.filter(Boolean).map(([k,v,raw]) => `<div class="k">${esc(k)}</div><div class="val" aria-readonly="true">${raw ? v : esc(v === undefined || v === '' ? '—' : v)}</div>`).join('') + '</div>';
+const note = (t, cls='') => `<div class="note ${cls}">${t}</div>`;
+const sec = (title, body) => `<div class="ins-sec"><h3>${esc(title)}</h3>${body}</div>`;
+function colorVal(c){ return c ? `<span class="sw" style="background:${esc(safeColor(c,'transparent'))}"></span>${esc(c)}` : '—'; }
+
+function openInspector(id, scroll){
+  const p = state.pass, sk = styleKey(p), dict = p[sk] || {}, S = STYLES[sk] || STYLES.generic, L = STYLES[state.limitStyle] || S;
+  let title = '', body = '';
+  if(id === 'identity'){
+    title = 'Identity & Signing';
+    const warn = [];
+    if(!/^pass\.[A-Za-z0-9.-]+$/.test(p.passTypeIdentifier||'')) warn.push('passTypeIdentifier must start with "pass." in reverse-DNS form.');
+    if(/example/.test(p.passTypeIdentifier||'')) warn.push('passTypeIdentifier is a placeholder. It must match the Pass Type ID certificate used to sign.');
+    if(!p.teamIdentifier) warn.push('teamIdentifier is empty. It is required to sign the pass.');
+    if(p.formatVersion !== 1) warn.push('formatVersion must be 1.');
+    body = sec('Values', kv([['Organization',p.organizationName],['Description',p.description],['Pass Type ID',p.passTypeIdentifier],['Team ID',p.teamIdentifier],['Serial Number',p.serialNumber],['Format Version',p.formatVersion],['Web Service URL',p.webServiceURL],['Auth Token',p.authenticationToken ? '•••• (set)' : ''],['Expiration',p.expirationDate],['Sharing Prohibited',p.sharingProhibited],['Voided',p.voided]]))
+      + sec('Limitations', note('Pass type identifier + serial number uniquely identify a pass; a pass with the same pair replaces the old one on update.')
+        + note('Generic passes don\'t auto-expire from the signing date. Set <code>expirationDate</code> explicitly.')
+        + note('The description is required: VoiceOver reads it.')
+        + (warn.length ? warn.map(w => note(esc(w),'warn')).join('') : note('Identity fields look complete.','ok')));
+  }
+  else if(id === 'style'){
+    title = 'Style';
+    body = sec('Values', kv([['Style',S.name + '  (' + sk + ')'],['Available on',S.os],['Generate Compatible Pass', state.tooling ? String(!!state.tooling.automaticallyGenerateCompatiblePass) : 'unknown (no tooling.json)'],['Fallback style', p.generic && sk!=='generic' ? 'generic (hand-authored)' : state.tooling?.automaticallyGenerateCompatiblePass ? 'Generic (auto)' : 'none'],['Logo Text',p.logoText],['Foreground',colorVal(p.foregroundColor),true],['Background',colorVal(p.backgroundColor),true],['Label',colorVal(p.labelColor),true],['Footer Background',colorVal(p.footerBackgroundColor),true],['Automatic Colors',p.useAutomaticColors],['Suppress Header Darkening',p.suppressHeaderDarkening]]))
+      + sec('Limitations', note('Colors apply to both the new pass style and its fallback style, so they must read well on the poster footer and on the legacy card.')
+        + note('<code>useAutomaticColors</code> ignores foregroundColor and labelColor. Apple documents <code>footerBackgroundColor</code>, <code>suppressHeaderDarkening</code> and <code>useAutomaticColors</code> for poster event tickets; Pass Designer also exposes them for Poster Generic.')
+        + note('<code>logoText</code> is shared: on Poster Generic it also draws beside the primary logo over the artwork, so these templates keep the title in the artwork and put it in a generic header field instead.','warn')
+        + note('Wallet resolves <code>posterGeneric</code> first. Older devices use the other style dictionary in the same pass.json (generic, storeCard, eventTicket or coupon).'))
+      + sec('Compare pass styles', `<table class="lim"><tr><th>Style</th><th>Hdr</th><th>Prim</th><th>Sec</th><th>Aux</th><th>Foot</th><th>Images</th></tr>${Object.entries(STYLES).map(([k,s])=>`<tr class="${k===state.limitStyle?'cur':''}"><td>${esc(s.name)}${k===sk?' ★':''}<br><small style="color:var(--muted)">${esc(s.os)}</small></td>${['headerFields','primaryFields','secondaryFields','auxiliaryFields','footerFields'].map(g=>`<td>${s.max[g]===0?'—':s.max[g]}</td>`).join('')}<td>${s.images.map(i=>esc(IMAGES[i].name)).join(', ')}</td></tr>`).join('')}</table>`
+        + note('Store cards and coupons put secondary and auxiliary fields on one row: 4 total. Generic keeps them separate: 4 + 4. Boarding passes need two primary fields and a transitType. ★ = this template.')
+        + note('Pick a style in the sidebar menu to see how this template\'s fields would fit after a conversion.'));
+  }
+  else if(id === 'images'){
+    title = 'Images';
+    const rows = Object.entries(IMAGES).map(([k,im]) => {
+      const inStyle = S.images.includes(k), inLimit = L.images.includes(k), have = hasFile(im.file);
+      if(!inStyle && !inLimit && !have.length) return '';
+      const src = asset(im.file);
+      const status = have.length ? (inStyle || (k==='thumbnail' && p.generic) || (k==='logo') ? '' : '<div class="note warn">Present but not used by '+esc(S.name)+'.</div>') : (inStyle ? '<div class="note bad">Missing — required/used by '+esc(S.name)+'.</div>' : '');
+      return `<div class="fieldcard"><h4><span>${esc(im.name)} · ${esc(im.size)}</span><span class="badge">${have.length ? esc(have.map(s=>s.replace('.png','')).join(' ')) : 'none'}</span></h4>
+        <div class="thumbs">${src ? `<img src="${esc(src)}" alt="${esc(im.name)}">` : '<span class="miss">No file</span>'}</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:6px">${esc(im.rule)}</div>${status}</div>`;
+    }).join('');
+    body = sec('Images in this template', rows) + sec('Limitations', note('Provide PNGs at @2x and @3x. Never put barcodes inside images.') + note('Apple Watch does not show strip, thumbnail, or back-of-pass content.'));
+  }
+  else if(id === 'barcode'){
+    title = 'Barcode & NFC';
+    const bcs = p.barcodes || [];
+    body = sec('Values', bcs.length ? bcs.map(b => kv([['Format',b.format],['Message',b.message],['Alt Text',b.altText],['Encoding',b.messageEncoding]])).join('<br>') : note('No barcode in this pass.'))
+      + sec('NFC', kv([['NFC',p.nfc ? 'configured' : 'not configured']]))
+      + sec('Limitations', note('Supported formats: ' + BARCODE_FORMATS.map(esc).join(', ') + '.') + note('Pass Designer generates the barcode; it is never an image. The poster layout shows a square QR code and places the barcode above the fields.') + note('With NFC a pass doesn\'t need a barcode. NFC passes require an Apple NFC certificate.'));
+  }
+  else if(id === 'actions'){
+    title = 'Featured Actions';
+    const acts = p.featuredActions || [], used = new Set(acts.map(a=>a.type));
+    const pick = state.actionPick || acts[0]?.type || 'call';
+    const a = ACTION_BY_TYPE[pick], inst = acts.find(x => x.type === pick);
+    const issues = acts.map(x => {
+      const d = ACTION_BY_TYPE[x.type];
+      if(!d) return `“${esc(x.type)}” is not a documented action type.`;
+      if(!x.identifier) return `${esc(d.doc)}: missing identifier.`;
+      if(d.key === 'placeIdentifier' && (!x.placeIdentifier || /X{3,}|^\d{1,6}$/.test(x.placeIdentifier))) return `${esc(d.doc)}: placeIdentifier “${esc(x.placeIdentifier||'')}” is a placeholder — Maps needs a real Apple Maps Place ID.`;
+      if(d.key === 'url' && d.scheme === 'tel' && !/^tel:\/*\+?\d{6,}/.test(x.url||'')) return `${esc(d.doc)}: url must be a tel: link with a number.`;
+      if(d.key === 'url' && d.scheme === 'https' && !/^https:\/\/[^/]+\.[^/]+/.test(x.url||'')) return `${esc(d.doc)}: url “${esc(x.url||'')}” is not a complete https link.`;
+      return '';
+    }).filter(Boolean);
+    const dupIds = acts.map(x=>x.identifier).filter((v,i,arr)=>v && arr.indexOf(v)!==i);
+    if(dupIds.length) issues.push('Identifiers must be unique: ' + esc(dupIds.join(', ')));
+    if(acts.length > MAX_ACTIONS) issues.push(`${acts.length} actions — passes support a maximum of ${MAX_ACTIONS}.`);
+    body = sec(`In this template · ${acts.length} of ${MAX_ACTIONS}`, acts.map(x => { const d = ACTION_BY_TYPE[x.type]||{doc:x.type}; return `<div class="fieldcard"><h4><span>${esc(d.doc)}</span><span class="badge full">${esc(x.type)}</span></h4>${kv([['Identifier',x.identifier],['Type',x.type],[d.key==='placeIdentifier'?'Maps Place ID':'URL',x.placeIdentifier ?? x.url]])}</div>`; }).join('') || note('No Featured Actions.'))
+      + sec('All available actions', `<label class="k" for="actPick" style="font-size:11px;color:var(--muted)">Action type (✓ = in this template)</label>
+        <select id="actPick" class="dd">${ACTIONS.map(x=>`<option value="${x.type}" ${x.type===pick?'selected':''}>${used.has(x.type)?'✓ ':'   '}${esc(x.doc)} — ${esc(x.cat)}</option>`).join('')}</select>
+        <div class="fieldcard ${used.has(pick)?'':''}"><h4><span>${icon(a)} ${esc(a.doc)}</span><span class="badge ${used.has(pick)?'full':'na'}">${used.has(pick)?'in template':'available'}</span></h4>
+        ${kv([['API type',a.type],['Designer label',a.title + ' · ' + a.sub],['Purpose',a.purpose],['Category',a.cat],['Required keys','identifier, type, ' + a.key],['Value format', a.key==='placeIdentifier' ? 'Apple Maps Place ID (e.g. IX0000XXXX0X0XX00 placeholder in Designer)' : a.scheme === 'tel' ? 'tel:// phone link' : 'https:// link to your app or website'], inst ? ['Template value', inst.placeIdentifier ?? inst.url] : null])}</div>
+        <div class="agrid">${ACTIONS.map(x=>`<button class="atile ${used.has(x.type)?'in':''} ${x.type===pick?'pick':''}" data-act="${x.type}">${used.has(x.type)?'<span class="tag">IN TEMPLATE</span>':''}${icon(x)}<b>${esc(x.title)}</b><small>${esc(x.cat)}</small></button>`).join('')}</div>`)
+      + sec('Limitations', note(`A pass supports at most <b>${MAX_ACTIONS}</b> Featured Actions (Pass Designer: “To add another action, remove an existing one.”).`)
+        + note('Requires iOS and watchOS 27 or later; they appear as cards under the pass. Earlier systems (the iOS 26 column) ignore them.')
+        + note('Wallet supplies each card\'s label and SF Symbol from the action <code>type</code>. There is no custom title, subtitle, or icon key — AAA wording such as “Roadside Assistance” lives in the back fields.')
+        + note('Categories are recommendations: Events (schedule, trailer, music), Generic (call, place), Membership (balance, order, shop, benefits, appointment, car, flight, stay). View Offers and Rewards fits Membership, Generic and Event passes. Pass Designer lists every type for every pass.')
+        + note('<code>place</code> needs an Apple Maps Place ID, not a URL. <code>call</code> takes a tel: URL. Every other type takes an https URL.')
+        + (issues.length ? issues.map(i => note(i,'bad')).join('') : note('All actions are valid.','ok')));
+  }
+  else if(id === 'fields'){
+    title = 'Fields';
+    body = sec('Counts vs ' + L.name, `<table class="lim"><tr><th>Group</th><th>In template</th><th>${esc(L.name)} limit</th></tr>${FIELD_GROUPS.map(g=>`<tr><td>${GROUP_NAMES[g]}</td><td>${(dict[g]||[]).length}</td><td>${maxText(L.max[g])}</td></tr>`).join('')}</table>`)
+      + sec('Limitations', note('Text length decides how many fields actually fit; if text is too long Wallet truncates or drops it.') + note('Field <code>key</code> values must be unique within the pass.') + note('If a pass has more fields than the layout shows, the extras still appear in Pass Details.'));
+  }
+  else if(id.startsWith('group:') || id.startsWith('fgroup:')){
+    const fbk = id.startsWith('fgroup:'), g = id.split(':')[1];
+    const d = fbk ? (fallbackFor(p)?.dict || {}) : dict, St = fbk ? STYLES.generic : L;
+    const arr = d[g] || [], mx = St.max[g];
+    title = (fbk ? 'iOS 26 fallback · ' : '') + GROUP_NAMES[g];
+    body = sec(`${arr.length} field${arr.length===1?'':'s'} · ${maxText(mx)} (${St.name})`, arr.map((f,i)=>fieldCard(f, i, mx)).join('') || note('Empty.'))
+      + sec('Limitations', note(esc(St.notes?.[g] || 'See the style comparison under Style.')) + (St.combined ? note(esc(St.combined),'warn') : '') + (mx !== INF && arr.length > mx ? note(`${arr.length - mx} field(s) exceed the ${St.name} limit and won't appear on the pass face.`,'bad') : ''));
+  }
+  else if(id.startsWith('field:') || id.startsWith('ffield:')){
+    const fbk = id.startsWith('ffield:'), [, g, i] = id.split(':');
+    const d = fbk ? (fallbackFor(p)?.dict || {}) : dict, f = (d[g]||[])[+i];
+    title = (fbk ? 'iOS 26 · ' : '') + (f?.label || f?.key || 'Field');
+    body = f ? sec(GROUP_NAMES[g], fieldCard(f, +i, (fbk ? STYLES.generic : L).max[g])) + sec('Limitations', note('Keep labels short; primary values truncate first. <code>textAlignment</code> accepts PKTextAlignmentLeft, Center, Right or Natural. <code>attributedValue</code> supports only <code>&lt;a href&gt;</code> and only in back fields.')) : note('Field not found.');
+  }
+  else if(id === 'json'){
+    title = 'pass.json';
+    body = sec('Complete source (read-only)', `<pre class="json">${esc(JSON.stringify(p, null, 2))}</pre>`) + (state.tooling ? sec('tooling.json', `<pre class="json">${esc(JSON.stringify(state.tooling, null, 2))}</pre>`) : '');
+  }
+  const ins = $('inspector');
+  ins.innerHTML = `<div class="ins-h"><h2>${esc(title)}</h2><button class="x" aria-label="Close">✕</button></div>${body}`;
+  ins.hidden = false;
+  if(scroll) ins.scrollTop = 0;
+  ins.querySelector('.x').onclick = () => { state.sel = null; closeInspector(); renderSidebar(); highlight(); };
+  const ap = ins.querySelector('#actPick');
+  if(ap) ap.onchange = e => { state.actionPick = e.target.value; openInspector('actions', false); };
+  ins.querySelectorAll('[data-act]').forEach(b => b.onclick = () => { state.actionPick = b.dataset.act; openInspector('actions', false); });
+}
+function fieldCard(f, i, mx){
+  const over = mx !== INF && i >= mx;
+  return `<div class="fieldcard ${over?'over':''}"><h4><span>${esc(f.label||'(no label)')}</span>${over?'<span class="badge over">not displayed</span>':''}</h4>${kv([['Key',f.key],['Label',f.label],['Value',f.value],['Alignment',f.textAlignment],['Attributed',f.attributedValue],['Date style',f.dateStyle],['Change message',f.changeMessage]].filter(r=>r[1]!==undefined || ['Key','Label','Value'].includes(r[0])))}</div>`;
+}
+function closeInspector(){ $('inspector').hidden = true; }
+function highlight(){
+  document.querySelectorAll('.hl').forEach(n => n.classList.remove('hl'));
+  const s = state.sel || '';
+  let sel = null;
+  if(s.startsWith('field:')){ const [, g, i] = s.split(':'); sel = `#card27 [data-f="${g}:${i}"]`; }
+  else if(s.startsWith('ffield:')){ const [, g, i] = s.split(':'); sel = `#card26 [data-f="${g}:${i}"]`; }
+  else if(s === 'actions') sel = '#acts27 .act';
+  if(sel) document.querySelectorAll(sel).forEach(n => n.classList.add('hl'));
+}
+
+/* ---------- Front / back + drag rotation ---------- */
+function flip(which, toBack){
+  const cards = which ? [$('card'+which)] : [$('card27'), $('card26')];
+  cards.forEach(c => { c.style.transition = ''; c.style.transform = ''; c.classList.toggle('flip', toBack); });
+  if(!which){ $('showFront').classList.toggle('on', !toBack); $('showBack').classList.toggle('on', toBack); }
+}
+$('showFront').onclick = () => flip(null, false);
+$('showBack').onclick = () => flip(null, true);
+document.querySelectorAll('.flipper').forEach(fl => {
+  const card = fl.querySelector('.card3d'); let start = null;
+  fl.addEventListener('pointerdown', e => { if(e.target.closest('a')) return; start = {x:e.clientX, y:e.clientY}; card.style.transition = 'none'; fl.setPointerCapture(e.pointerId); });
+  fl.addEventListener('pointermove', e => {
+    if(!start) return;
+    const dx = e.clientX - start.x, dy = e.clientY - start.y, base = card.classList.contains('flip') ? 180 : 0;
+    card.style.transform = `rotateY(${base + dx * .6}deg) rotateX(${-dy * .1}deg)`;
+  });
+  const end = e => {
+    if(!start) return;
+    const dx = e.clientX - start.x, dy = e.clientY - start.y; start = null;
+    card.style.transition = 'transform .55s cubic-bezier(.2,.8,.2,1)';
+    const isBack = card.classList.contains('flip');
+    const turned = Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy);
+    card.style.transform = '';
+    if(turned) card.classList.toggle('flip', !isBack);
+  };
+  fl.addEventListener('pointerup', end);
+  fl.addEventListener('pointercancel', () => { start = null; card.style.transition = ''; card.style.transform = ''; });
+});
+
+/* ---------- Template switching & import ---------- */
+document.querySelectorAll('[data-pass]').forEach(b => b.onclick = () => loadDefault(b.dataset.pass));
+$('jsonFile').addEventListener('change', async e => {
+  const file = e.target.files[0]; if(!file) return;
+  try{
+    const pass = JSON.parse(await file.text());
+    state = {...state, key:'', pass, tooling:null, files:[], assets:{}, name:file.name, limitStyle:null, actionPick:null};
+    showError(''); render();
+  }catch{ showError('The selected file is not valid JSON.'); }
+  e.target.value = '';
+});
+$('folder').addEventListener('change', async e => {
+  const files = [...e.target.files];
+  const pj = files.find(f => f.name === 'pass.json');
+  if(!pj){ showError('Select a complete .pkpasstemplate folder — it must contain pass.json.'); return; }
+  try{
+    const pass = JSON.parse(await pj.text());
+    const tj = files.find(f => f.name === 'tooling.json');
+    const assets = {}; files.filter(f => /\.png$/i.test(f.name)).forEach(f => assets[f.name] = URL.createObjectURL(f));
+    const dir = (pj.webkitRelativePath || '').split('/')[0] || 'Imported template';
+    state = {...state, key:'', pass, tooling: tj ? JSON.parse(await tj.text()) : null, files: files.map(f=>f.name), assets, name:dir, limitStyle:null, actionPick:null};
+    showError(''); render();
+  }catch{ showError('The selected template contains invalid JSON.'); }
+  e.target.value = '';
+});
+loadDefault('membership');
+</script>
+</body>
+</html>

@@ -7,39 +7,41 @@
   "description" : "AAA Insurance Card",
   "featuredActions" : [
     {
-      "_id" : "E9CFBEFC-FA0E-4CEE-89C8-68BFA28D40D5",
-      "identifier" : "nearestBranch",
-      "type" : "place",
-      "url" : "https:\/\/www.ace.aaa.com\/locations.html"
+      "_id" : "79213410-D498-4EB7-B9B3-E55698BCCD53",
+      "identifier" : "roadsideAssistance",
+      "type" : "call",
+      "url" : "tel:\/\/18004004222"
     },
     {
-      "_id" : "AA220B84-3C7B-4D2A-9223-5A30ED6EB0B0",
-      "identifier" : "call",
-      "type" : "viewOffersRewards",
-      "url" : "https:\/\/"
+      "_id" : "1622C5A8-081B-4BBF-AD96-E5D97291D2C0",
+      "identifier" : "nearestBranch",
+      "placeIdentifier" : "IX0000XXXX0X0XX00",
+      "type" : "place"
     }
   ],
   "footerBackgroundColor" : "rgb(255,255,255)",
-  "foregroundColor" : "rgb(64,64,64)",
+  "foregroundColor" : "rgb(0,0,0)",
   "formatVersion" : 1,
-  "labelColor" : "rgb(112,112,112)",
-  "logoText" : "",
-  "organizationName" : "AAA",
-  "passTypeIdentifier" : "pass.com.example.aaa.insurance",
-  "posterGeneric" : {
+  "generic" : {
     "auxiliaryFields" : [
-
+      {
+        "_id" : "B89A9DBF-5BA7-432B-99C0-6FB95A5BA061",
+        "key" : "insuranceCompany",
+        "label" : "INSURANCE COMPANY",
+        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 233598"
+      }
     ],
     "backFields" : [
       {
         "_id" : "1ECDC7CB-1A62-454F-A042-D42DF910A602",
-        "attributedValue" : "<a href='tel:\/\/18006725246'>1-800-67-CLAIM (1-800-672-5246)<\/a>",
+        "attributedValue" : "1-800-67-CLAIM (<a href='tel:18006725246'>1-800-672-5246<\/a>)",
         "key" : "hotline",
         "label" : "24\/7 AAA Accident Assist Hotline",
         "value" : "1-800-67-CLAIM (1-800-672-5246)"
       },
       {
         "_id" : "C044BFB3-E01F-43E8-9FD4-2214EE1B7559",
+        "attributedValue" : "<a href='tel:18009426141'>1-800-942-6141<\/a>",
         "key" : "policyQuestions",
         "label" : "Policy questions or changes",
         "value" : "1-800-942-6141"
@@ -67,38 +69,94 @@
         "key" : "disclaimer",
         "label" : "Disclaimer",
         "value" : "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle. Insurance information has already been submitted directly to the DMV electronically; submit this document to DMV only if specifically requested by DMV. The digital card may not be recognized in all states."
-      },
+      }
+    ],
+    "headerFields" : [
       {
-        "_id" : "10A9E221-A815-4F19-B674-FD202F7F101C",
-        "key" : "effectiveDate",
-        "label" : "EFFECTIVE DATE",
-        "value" : "9\/14\/26 - 9\/14\/27"
-      },
+        "_id" : "D00B6510-A9F4-48A8-989D-99A05EC0CC79",
+        "key" : "cardTitle",
+        "label" : "CALIFORNIA EVIDENCE OF",
+        "textAlignment" : "PKTextAlignmentRight",
+        "value" : "Liability Insurance"
+      }
+    ],
+    "primaryFields" : [
       {
-        "_id" : "DCB6C880-60EC-44CA-8BF4-455A2ED749A5",
+        "_id" : "296C61EC-F414-46B4-9002-755E2041F3CA",
         "key" : "policyNumber",
         "label" : "POLICY NUMBER",
-        "value" : "CAA 23985827459235"
+        "value" : "CAA23985827459235"
+      }
+    ],
+    "secondaryFields" : [
+      {
+        "_id" : "21FC0689-483F-4FF3-B68B-CE84BFCA7C67",
+        "key" : "namedInsured",
+        "label" : "NAMED INSURED",
+        "value" : "Elijah Lopez"
       },
       {
-        "_id" : "7813BE21-9698-4D1F-966A-4CF96B679362",
-        "key" : "nameEnsured",
-        "label" : "NAME ENSURED",
-        "value" : "ELIJAH LOPEZ"
+        "_id" : "53496B8B-E42A-49B9-9522-DA5E220FCE20",
+        "key" : "effectiveDate",
+        "label" : "EFFECTIVE DATE",
+        "textAlignment" : "PKTextAlignmentRight",
+        "value" : "9\/14\/2026 - 9\/14\/2027"
+      }
+    ]
+  },
+  "labelColor" : "rgb(36,64,130)",
+  "organizationName" : "AAA",
+  "passTypeIdentifier" : "pass.com.example.aaa.insurance",
+  "posterGeneric" : {
+    "auxiliaryFields" : [
+
+    ],
+    "backFields" : [
+      {
+        "_id" : "1ECDC7CB-1A62-454F-A042-D42DF910A602",
+        "attributedValue" : "1-800-67-CLAIM (<a href='tel:18006725246'>1-800-672-5246<\/a>)",
+        "key" : "hotline",
+        "label" : "24\/7 AAA Accident Assist Hotline",
+        "value" : "1-800-67-CLAIM (1-800-672-5246)"
       },
       {
-        "_id" : "2A20DB8D-D175-4387-8A2E-EE92F8B1476D",
-        "key" : "insuranceCompany",
-        "label" : "INSURANCE COMPANY",
-        "value" : "INTERINSURANCE EXCHANGE"
+        "_id" : "C044BFB3-E01F-43E8-9FD4-2214EE1B7559",
+        "attributedValue" : "<a href='tel:18009426141'>1-800-942-6141<\/a>",
+        "key" : "policyQuestions",
+        "label" : "Policy questions or changes",
+        "value" : "1-800-942-6141"
+      },
+      {
+        "_id" : "A7BE29BC-ED9E-410A-BFE5-81C1BF5DD1C1",
+        "key" : "vehicles",
+        "label" : "Vehicles",
+        "value" : "2026 BMW X1 SDRIVE 286 SUV\nWDXCH9C04L5S339288"
+      },
+      {
+        "_id" : "22E17A51-1446-402E-9451-870DB19006B2",
+        "key" : "insuredDrivers",
+        "label" : "Insured Drivers",
+        "value" : "Elijah Lopez"
+      },
+      {
+        "_id" : "4AE5F33F-1209-42B2-B622-1F6750D51541",
+        "key" : "company",
+        "label" : "Company Name",
+        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 233598\nP.O. Box 10006, Santa Ana, CA 92799-5006"
+      },
+      {
+        "_id" : "05538C9F-C1D9-44E2-9A61-E1F9817D3571",
+        "key" : "disclaimer",
+        "label" : "Disclaimer",
+        "value" : "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle. Insurance information has already been submitted directly to the DMV electronically; submit this document to DMV only if specifically requested by DMV. The digital card may not be recognized in all states."
       }
     ],
     "footerFields" : [
       {
-        "_id" : "F00DE268-1873-481D-B518-7946ECF627C8",
+        "_id" : "461460B4-94E9-4C6F-9657-35C9E58BE414",
         "key" : "holderSummary",
-        "label" : "",
-        "value" : "ELIJAH LOPEZ | INTERINSURANCE EXCHANGE"
+        "label" : "NAME ENSURED · INSURANCE COMPANY",
+        "value" : "ELIJAH LOPEZ · INTERINSURANCE EXCHANGE"
       }
     ],
     "headerFields" : [
@@ -106,15 +164,16 @@
     ],
     "primaryFields" : [
       {
-        "_id" : "10A9E221-A815-4F19-B674-FD202F7F101C",
+        "_id" : "E2AE10E3-CD49-4C7D-8555-98A298EF0660",
         "key" : "effectiveDate",
         "label" : "EFFECTIVE DATE",
         "value" : "9\/14\/26 - 9\/14\/27"
       },
       {
-        "_id" : "DCB6C880-60EC-44CA-8BF4-455A2ED749A5",
+        "_id" : "66B5DE2F-3F48-4AE0-A2AC-669576519568",
         "key" : "policyNumber",
         "label" : "POLICY NUMBER",
+        "textAlignment" : "PKTextAlignmentRight",
         "value" : "CAA 23985827459235"
       }
     ],
@@ -123,7 +182,7 @@
     ]
   },
   "serialNumber" : "CAA23985827459235",
-  "suppressHeaderDarkening" : true,
+  "suppressHeaderDarkening" : false,
   "teamIdentifier" : "",
   "useAutomaticColors" : false
 }
