@@ -1,9 +1,13 @@
 {
   "authenticationToken" : "",
   "backgroundColor" : "rgb(247,245,241)",
-  "barcodes" : [],
+  "barcodes" : [
+
+  ],
   "description" : "AAA Insurance Card",
-  "featuredActions" : [],
+  "featuredActions" : [
+
+  ],
   "footerBackgroundColor" : "rgb(255,255,255)",
   "foregroundColor" : "rgb(0,0,0)",
   "formatVersion" : 1,
@@ -107,7 +111,9 @@
   "organizationName" : "AAA",
   "passTypeIdentifier" : "pass.com.example.aaa.insurance",
   "posterGeneric" : {
-    "auxiliaryFields" : [],
+    "auxiliaryFields" : [
+
+    ],
     "backFields" : [
       {
         "_id" : "8FA15D29-3CFC-4585-960B-8B5E9A6E7AC1",
@@ -170,7 +176,9 @@
         "value" : "ELIJAH LOPEZ · INTERINSURANCE EXCHANGE"
       }
     ],
-    "headerFields" : [],
+    "headerFields" : [
+
+    ],
     "primaryFields" : [
       {
         "_id" : "E2AE10E3-CD49-4C7D-8555-98A298EF0660",
@@ -186,7 +194,9 @@
         "value" : "CAA 23985827459235"
       }
     ],
-    "secondaryFields" : []
+    "secondaryFields" : [
+
+    ]
   },
   "serialNumber" : "CAA23985827459235",
   "suppressHeaderDarkening" : false,

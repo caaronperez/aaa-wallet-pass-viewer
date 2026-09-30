@@ -44,6 +44,8 @@ button,select{font:inherit;color:inherit}
 .previews{display:flex;gap:56px;justify-content:center;flex-wrap:wrap;align-items:flex-start}
 .col{width:300px}
 .pill{display:inline-block;font:600 11px ui-monospace,SFMono-Regular,Menlo,monospace;background:#3a3b40;border-radius:14px;padding:5px 10px;margin-bottom:12px}
+.col-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.col-head .pill{margin-bottom:12px}
+.seg.mini{margin-bottom:12px}.seg.mini button{padding:4px 9px;font-size:11px}.seg.mini button:disabled{opacity:.35;cursor:not-allowed}.seg.mini[hidden]{display:none}
 .col-note{font-size:11px;color:var(--muted);margin:-4px 0 10px;min-height:14px}
 .col-note.warn{color:var(--warn)}
 .flipper{perspective:1400px;touch-action:pan-y;cursor:grab;user-select:none}
@@ -75,12 +77,12 @@ button,select{font:inherit;color:inherit}
 .g-head{margin-left:auto;display:flex;gap:10px;text-align:right}
 .g-head .l,.g-sec .l{font-size:10px;font-weight:700;color:var(--label);text-transform:uppercase;white-space:nowrap}
 .g-head .v{font-size:16px;color:var(--fg);white-space:nowrap;font-family:inherit}
-.g-prim{display:flex;gap:10px;margin-top:14px;align-items:flex-start}
+.g-prim{display:flex;gap:10px;margin-top:22px;align-items:flex-start}
 .g-prim .fld{flex:1}
 .g-prim .l{font-size:10px;font-weight:700;color:var(--label);text-transform:uppercase}
 .g-prim .v{font-size:22px;font-weight:600;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:inherit}
 .g-prim img{width:66px;height:66px;object-fit:cover;flex:none}
-.g-sec{display:flex;justify-content:space-between;gap:10px;margin-top:10px}
+.g-sec{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
 .g-sec .fld{min-width:0}
 .g-sec .v{font-size:15px;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:inherit}
 .g-sec .fld.wide .v{font-size:12px;white-space:normal}
@@ -177,7 +179,7 @@ button,select{font:inherit;color:inherit}
         <div class="flipper" data-flip="27"><div class="card3d" id="card27"><div class="face front" id="front27"></div><div class="face back details" id="back27"></div></div></div>
         <div class="acts" id="acts27"></div>
       </div>
-      <div class="col"><span class="pill">iOS 26</span><div class="col-note" id="note26"></div>
+      <div class="col"><div class="col-head"><span class="pill">iOS 26</span><div class="seg mini" id="fbSwitch" role="group" aria-label="iOS 26 fallback"><button data-fb="custom">Custom</button><button data-fb="auto">Auto (Designer)</button></div></div><div class="col-note" id="note26"></div>
         <div class="flipper" data-flip="26"><div class="card3d" id="card26"><div class="face front" id="front26"></div><div class="face back details" id="back26"></div></div></div>
       </div>
     </div>
@@ -318,7 +320,7 @@ const MAX_ACTIONS = 2;
 const icon = (a, cls='dot') => `<span class="${cls}" style="background:${a.color}"><svg viewBox="0 0 24 24">${G[a.g]}</svg></span>`;
 
 /* ---------- State ---------- */
-let state = {key:'membership', pass:null, tooling:null, files:[], assets:{}, name:'', limitStyle:null, sel:null, actionPick:null};
+let state = {key:'membership', pass:null, tooling:null, files:[], assets:{}, name:'', limitStyle:null, sel:null, actionPick:null, fallbackMode:null};
 
 function styleKey(p){ return ['posterGeneric','boardingPass','coupon','eventTicket','storeCard','generic'].find(k => p && p[k]) || 'generic'; }
 function safeColor(c, fb){ return /^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(,\s*[\d.]+\s*)?\)$/.test(String(c||'').trim()) ? String(c).trim() : fb; }
@@ -334,7 +336,7 @@ async function loadDefault(key){
     if(!pr.ok) throw new Error('pass.json request failed ('+pr.status+')');
     const manifest = mr.ok ? await mr.json() : {};
     state = {...state, key, pass: await pr.json(), tooling: tr.ok ? await tr.json() : null, name: dir,
-      files: manifest[dir] || [], assets: {}, limitStyle: null, sel: state.sel, actionPick: null};
+      files: manifest[dir] || [], assets: {}, limitStyle: null, sel: state.sel, actionPick: null, fallbackMode: null};
     state.files.filter(f => f.endsWith('.png')).forEach(f => state.assets[f] = base + encodeURIComponent(f));
     showError(''); render();
   }catch(e){ showError('Could not load the bundled template: '+e.message+'. Try reloading the page.'); }
@@ -419,12 +421,17 @@ function renderBack(p, dict){
   const rows = (dict.backFields||[]).map((f,i)=>`<div class="bf" data-f="backFields:${i}"><b>${esc(f.label)}</b>${linkify(f)}</div>`).join('');
   return `<h4>${esc(p.description||'Pass Details')}</h4><div class="grp">${rows || '<div class="bf">No back fields.</div>'}</div>`;
 }
+function autoFallback(p){
+  const g = p.posterGeneric, prim = g.primaryFields || [];
+  return {headerFields:g.headerFields||[], primaryFields:prim.slice(0,1), secondaryFields:prim.slice(1), auxiliaryFields:g.footerFields||[], backFields:g.backFields||[]};
+}
+function autoOn(){ return !!(state.tooling && state.tooling.automaticallyGenerateCompatiblePass); }
+function customAvailable(p){ return !!p.generic && !autoOn(); }
 function fallbackFor(p){
-  if(p.generic) return {dict:p.generic, mode:'explicit'};
-  if(state.tooling && state.tooling.automaticallyGenerateCompatiblePass && p.posterGeneric){
-    const g = p.posterGeneric, prim = g.primaryFields||[];
-    return {dict:{headerFields:g.headerFields||[], primaryFields:prim.slice(0,1), secondaryFields:prim.slice(1), auxiliaryFields:g.footerFields||[], backFields:g.backFields||[]}, mode:'auto'};
-  }
+  if(!p.posterGeneric) return null;
+  const mode = state.fallbackMode || (autoOn() || !p.generic ? 'auto' : 'custom');
+  if(mode === 'custom' && customAvailable(p)) return {dict:p.generic, mode:'explicit'};
+  if(mode === 'auto') return {dict:autoFallback(p), mode:'auto'};
   return null;
 }
 
@@ -452,17 +459,31 @@ function render(){
     $('front26').innerHTML = renderGeneric(p, fb.dict);
     $('back26').innerHTML = renderBack(p, fb.dict);
     n26.className = 'col-note';
-    n26.textContent = fb.mode === 'explicit' ? 'generic fallback (hand-authored in pass.json)' : fb.mode === 'auto' ? 'generic fallback (auto-generated by Pass Designer)' : '';
+    n26.textContent = fb.mode === 'explicit' ? 'Custom generic fallback — shipped in pass.json (Generate Compatible Pass: off)'
+      : fb.mode === 'auto' ? (autoOn() ? 'Auto-generated by Pass Designer — shipped (Generate Compatible Pass: on)' : 'Preview only: what Designer generates if Generate Compatible Pass is turned on')
+      : '';
+    if(fb.mode === 'auto' && !autoOn()) n26.className = 'col-note warn';
   }else{
     $('front26').innerHTML = renderPoster(p, dict);
     $('back26').innerHTML = renderBack(p, dict);
     n26.className = 'col-note warn';
     n26.textContent = 'No fallback style: iOS 26 and earlier cannot display posterGeneric';
   }
+  const sw = $('fbSwitch'), cur = fb ? (fb.mode === 'explicit' ? 'custom' : fb.mode) : '';
+  sw.hidden = sk !== 'posterGeneric';
+  sw.querySelectorAll('button').forEach(b => {
+    b.classList.toggle('on', b.dataset.fb === cur);
+    b.disabled = b.dataset.fb === 'custom' && !customAvailable(p);
+    b.title = b.disabled ? 'Generate Compatible Pass is on, so Pass Designer overwrites any custom generic layout when it saves.' : '';
+  });
   renderSidebar();
   if(state.sel) openInspector(state.sel, false);
   highlight();
 }
+$('fbSwitch').addEventListener('click', e => {
+  const b = e.target.closest('[data-fb]'); if(!b || b.disabled) return;
+  state.fallbackMode = b.dataset.fb; render();
+});
 
 /* ---------- Sidebar ---------- */
 const IC = {
@@ -507,7 +528,7 @@ function renderSidebar(){
   const fb = sk === 'posterGeneric' ? fallbackFor(p) : null;
   if(fb){
     const GM = STYLES.generic.max;
-    h += `</ul><div class="section-h">iOS 26 fallback · generic ${fb.mode==='auto'?'(auto)':''}</div><ul class="nav">`;
+    h += `</ul><div class="section-h">iOS 26 fallback · generic ${fb.mode==='auto'?'(auto)':'(custom)'}</div><ul class="nav">`;
     ['headerFields','primaryFields','secondaryFields','auxiliaryFields','backFields'].forEach(g => {
       const arr = fb.dict[g] || [];
       h += navItem('fgroup:'+g, IC.grp, `${GROUP_NAMES[g]} (${maxText(GM[g])})`, badge(arr.length, GM[g]), 'child');
@@ -550,10 +571,11 @@ function openInspector(id, scroll){
   }
   else if(id === 'style'){
     title = 'Style';
-    body = sec('Values', kv([['Style',S.name + '  (' + sk + ')'],['Available on',S.os],['Generate Compatible Pass', state.tooling ? String(!!state.tooling.automaticallyGenerateCompatiblePass) : 'unknown (no tooling.json)'],['Fallback style', p.generic && sk!=='generic' ? 'generic (hand-authored)' : state.tooling?.automaticallyGenerateCompatiblePass ? 'Generic (auto)' : 'none'],['Logo Text',p.logoText],['Foreground',colorVal(p.foregroundColor),true],['Background',colorVal(p.backgroundColor),true],['Label',colorVal(p.labelColor),true],['Footer Background',colorVal(p.footerBackgroundColor),true],['Automatic Colors',p.useAutomaticColors],['Suppress Header Darkening',p.suppressHeaderDarkening]]))
+    body = sec('Values', kv([['Style',S.name + '  (' + sk + ')'],['Available on',S.os],['Generate Compatible Pass', state.tooling ? String(!!state.tooling.automaticallyGenerateCompatiblePass) : 'unknown (no tooling.json)'],['Fallback style', autoOn() ? 'Generic (auto-generated by Designer)' : p.generic && sk!=='generic' ? 'generic (custom, hand-authored)' : 'none'],['Logo Text',p.logoText],['Foreground',colorVal(p.foregroundColor),true],['Background',colorVal(p.backgroundColor),true],['Label',colorVal(p.labelColor),true],['Footer Background',colorVal(p.footerBackgroundColor),true],['Automatic Colors',p.useAutomaticColors],['Suppress Header Darkening',p.suppressHeaderDarkening]]))
       + sec('Limitations', note('Colors apply to both the new pass style and its fallback style, so they must read well on the poster footer and on the legacy card.')
         + note('<code>useAutomaticColors</code> ignores foregroundColor and labelColor. Apple documents <code>footerBackgroundColor</code>, <code>suppressHeaderDarkening</code> and <code>useAutomaticColors</code> for poster event tickets; Pass Designer also exposes them for Poster Generic.')
         + note('<code>logoText</code> is shared: on Poster Generic it also draws beside the primary logo over the artwork, so these templates keep the title in the artwork and put it in a generic header field instead.','warn')
+        + note('Generate Compatible Pass ON: Designer rebuilds <code>generic</code> from the poster fields on every save (header → header, first primary → primary, other primaries → secondary, footer → auxiliary) and overwrites any custom layout. OFF: the custom <code>generic</code> in pass.json ships, but Designer\'s iOS 26 column previews the poster instead — use this viewer\'s Custom/Auto switch to compare.','warn')
         + note('Wallet resolves <code>posterGeneric</code> first. Older devices use the other style dictionary in the same pass.json (generic, storeCard, eventTicket or coupon).'))
       + sec('Compare pass styles', `<table class="lim"><tr><th>Style</th><th>Hdr</th><th>Prim</th><th>Sec</th><th>Aux</th><th>Foot</th><th>Images</th></tr>${Object.entries(STYLES).map(([k,s])=>`<tr class="${k===state.limitStyle?'cur':''}"><td>${esc(s.name)}${k===sk?' ★':''}<br><small style="color:var(--muted)">${esc(s.os)}</small></td>${['headerFields','primaryFields','secondaryFields','auxiliaryFields','footerFields'].map(g=>`<td>${s.max[g]===0?'—':s.max[g]}</td>`).join('')}<td>${s.images.map(i=>esc(IMAGES[i].name)).join(', ')}</td></tr>`).join('')}</table>`
         + note('Store cards and coupons put secondary and auxiliary fields on one row: 4 total. Generic keeps them separate: 4 + 4. Boarding passes need two primary fields and a transitType. ★ = this template.')
@@ -696,7 +718,7 @@ $('jsonFile').addEventListener('change', async e => {
   const file = e.target.files[0]; if(!file) return;
   try{
     const pass = JSON.parse(await file.text());
-    state = {...state, key:'', pass, tooling:null, files:[], assets:{}, name:file.name, limitStyle:null, actionPick:null};
+    state = {...state, key:'', pass, tooling:null, files:[], assets:{}, name:file.name, limitStyle:null, actionPick:null, fallbackMode:null};
     showError(''); render();
   }catch{ showError('The selected file is not valid JSON.'); }
   e.target.value = '';
@@ -710,7 +732,7 @@ $('folder').addEventListener('change', async e => {
     const tj = files.find(f => f.name === 'tooling.json');
     const assets = {}; files.filter(f => /\.png$/i.test(f.name)).forEach(f => assets[f.name] = URL.createObjectURL(f));
     const dir = (pj.webkitRelativePath || '').split('/')[0] || 'Imported template';
-    state = {...state, key:'', pass, tooling: tj ? JSON.parse(await tj.text()) : null, files: files.map(f=>f.name), assets, name:dir, limitStyle:null, actionPick:null};
+    state = {...state, key:'', pass, tooling: tj ? JSON.parse(await tj.text()) : null, files: files.map(f=>f.name), assets, name:dir, limitStyle:null, actionPick:null, fallbackMode:null};
     showError(''); render();
   }catch{ showError('The selected template contains invalid JSON.'); }
   e.target.value = '';

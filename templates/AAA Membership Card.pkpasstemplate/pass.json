@@ -31,29 +31,29 @@
   "generic" : {
     "auxiliaryFields" : [
       {
-        "_id" : "25CAA790-115E-45D1-B584-706390683EDB",
+        "_id" : "BB415A74-E828-4B31-A254-B8D923AE48BA",
         "key" : "roadside",
         "label" : "ROADSIDE ASSISTANCE",
-        "value" : "1.800.400.4222"
+        "value" : "1-800-400-4222"
       },
       {
-        "_id" : "66CD7992-D97A-4659-B4BA-6C9290E36C69",
+        "_id" : "72BC0672-B3A3-4D5D-B6A0-901F55583D6F",
         "key" : "roadsideOutsideCA",
-        "label" : "(OUTSIDE CA)",
+        "label" : "OUTSIDE CA",
         "textAlignment" : "PKTextAlignmentRight",
-        "value" : "1.800.222.4357"
+        "value" : "1-800-222-4357"
       }
     ],
     "backFields" : [
       {
-        "_id" : "6B8E7F57-F6DD-4D83-9566-811419E7CE2D",
+        "_id" : "16FC7DAB-10AF-4930-B9D8-1AF7B13A5896",
         "attributedValue" : "Roadside Assistance\n<a href='tel:18004004222'>1-800-400-4222<\/a>",
         "key" : "roadsideAssistance",
         "label" : "Open Roadside",
         "value" : "Roadside Assistance\n1-800-400-4222"
       },
       {
-        "_id" : "1A630623-3B71-4527-819D-095A5BFCE1B4",
+        "_id" : "D785F2A7-BE99-43A2-9DBD-EA492AA885B0",
         "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/locations.html'>Nearest branch<\/a>",
         "key" : "nearestBranch",
         "label" : "Get Direction",
@@ -94,27 +94,34 @@
     ],
     "headerFields" : [
       {
-        "_id" : "1DD78B47-F978-4478-9C17-9B5960AB5279",
-        "key" : "validThru",
-        "label" : "VALID THRU",
+        "_id" : "7829929C-FC11-4301-A629-A47C45D8A007",
+        "key" : "loyalMember",
+        "label" : "LOYAL MEMBER",
         "textAlignment" : "PKTextAlignmentRight",
-        "value" : "Mar 22, 2027"
+        "value" : "32 YEARS"
       }
     ],
     "primaryFields" : [
       {
-        "_id" : "0AD6156F-F0BB-4EB5-876E-C71AB64917AF",
-        "key" : "name",
+        "_id" : "49DB100D-FD81-4C7E-9836-E45F74D7A9E1",
+        "key" : "memberName",
         "label" : "NAME",
         "value" : "ELIJAH LOPEZ"
       }
     ],
     "secondaryFields" : [
       {
-        "_id" : "8D592FD8-C38A-491C-9A03-B9DC42F98B7A",
+        "_id" : "F3ED077B-7E73-4561-B3B5-129BA680C4E5",
         "key" : "membershipNumber",
         "label" : "MEMBERSHIP NUMBER",
         "value" : "620 004 123456789 2"
+      },
+      {
+        "_id" : "87FBC395-BCC0-4298-A6A2-00005446CE03",
+        "key" : "plan",
+        "label" : "PLAN",
+        "textAlignment" : "PKTextAlignmentRight",
+        "value" : "Premier"
       }
     ]
   },
