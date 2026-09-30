@@ -1,0 +1,123 @@
+{
+  "authenticationToken" : "",
+  "backgroundColor" : "rgb(247,245,241)",
+  "barcodes" : [
+    {
+      "_id" : "E4FD1E6E-100F-4455-90D5-FEAA43177955",
+      "altText" : "620 004 123456789 2",
+      "format" : "PKBarcodeFormatPDF417",
+      "message" : "620 004 123456789 2",
+      "messageEncoding" : "iso-8859-1"
+    }
+  ],
+  "description" : "AAA Membership Card",
+  "featuredActions" : [
+    {
+      "_id" : "3EE36B4D-335A-41E9-A9D0-62EC7FA297D9",
+      "identifier" : "action",
+      "placeIdentifier" : "1234567890",
+      "type" : "place"
+    },
+    {
+      "_id" : "A127A886-7EF0-4C06-ABF4-B80528EA71C5",
+      "identifier" : "action",
+      "type" : "membershipBenefits",
+      "url" : "https:\/\/"
+    }
+  ],
+  "footerBackgroundColor" : "rgb(255,255,255)",
+  "foregroundColor" : "rgb(64,64,64)",
+  "formatVersion" : 1,
+  "labelColor" : "rgb(112,112,112)",
+  "organizationName" : "AAA",
+  "passTypeIdentifier" : "pass.com.example.aaa.membership",
+  "posterGeneric" : {
+    "auxiliaryFields" : [
+
+    ],
+    "backFields" : [
+      {
+        "_id" : "867D4C2C-9D19-455D-B4F6-07269EB98407",
+        "key" : "services",
+        "label" : "Services",
+        "value" : "Insurance Sales & Service\nInsurance Claims\nMembership, Travel, Other Services\nHertz Rental Discounts"
+      },
+      {
+        "_id" : "B9C6FDB5-3975-4FF1-9065-E1888D04F947",
+        "attributedValue" : "<a href='tel:\/\/18004004222'>Call Roadside Assistance\nPhone: 1-800-400-4222\nPhone (Outside of CA): 1-800-222-4357<\/a>",
+        "key" : "roadside",
+        "label" : "Roadside Assistance",
+        "value" : "Call Roadside Assistance\nPhone: 1-800-400-4222\nPhone (Outside of CA): 1-800-222-4357"
+      },
+      {
+        "_id" : "37611BEA-CFEF-46AB-B51D-22E981A6DDF0",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/locations.html'>Find the nearest AAA branch\nGlendale Branch\n1233 E Broadway\nGlendale, CA 91205\nPhone: 818-240-2200\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday<\/a>",
+        "key" : "branch",
+        "label" : "Your Local AAA Branch",
+        "value" : "Find the nearest AAA branch\nGlendale Branch\n1233 E Broadway\nGlendale, CA 91205\nPhone: 818-240-2200\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday"
+      },
+      {
+        "_id" : "4025175E-C99D-4AB3-B183-5C8CDE823479",
+        "key" : "rentalCodes",
+        "label" : "Car Rental Discounts Codes",
+        "value" : "Herz CDP: 0004\nDollar CD: TB7104\nThrifty CD: 0010230726"
+      },
+      {
+        "_id" : "551A9DC6-F5A2-4801-B6F6-58EF77578A0C",
+        "key" : "loyalMember",
+        "label" : "LOYAL MEMBER",
+        "value" : "32 YEARS"
+      },
+      {
+        "_id" : "CA9D8627-889B-4CBE-8ED8-49695423948C",
+        "key" : "membershipNumber",
+        "label" : "MEMBERSHIP NUMBER",
+        "value" : "620 004 123456789 2"
+      },
+      {
+        "_id" : "071DCAAD-CD29-4227-8B6E-C0D4BF4A19A1",
+        "key" : "memberName",
+        "label" : "MEMBER NAME",
+        "value" : "ELIJAH LOPEZ"
+      },
+      {
+        "_id" : "409E2EC6-EBDA-4923-A11F-012104D2C143",
+        "key" : "plan",
+        "label" : "PLAN",
+        "value" : "PREMIER"
+      }
+    ],
+    "footerFields" : [
+      {
+        "_id" : "0D0BE1E1-AB6A-419C-9E4B-D76EB4FB8D13",
+        "key" : "holderSummary",
+        "label" : "",
+        "value" : "ELIJAH LOPEZ | PREMIER"
+      }
+    ],
+    "headerFields" : [
+
+    ],
+    "primaryFields" : [
+      {
+        "_id" : "551A9DC6-F5A2-4801-B6F6-58EF77578A0C",
+        "key" : "loyalMember",
+        "label" : "LOYAL MEMBER",
+        "value" : "32 YEARS"
+      },
+      {
+        "_id" : "CA9D8627-889B-4CBE-8ED8-49695423948C",
+        "key" : "membershipNumber",
+        "label" : "MEMBERSHIP NUMBER",
+        "value" : "620 004 123456789 2"
+      }
+    ],
+    "secondaryFields" : [
+
+    ]
+  },
+  "serialNumber" : "6200041234567892",
+  "suppressHeaderDarkening" : true,
+  "teamIdentifier" : "",
+  "useAutomaticColors" : false
+}

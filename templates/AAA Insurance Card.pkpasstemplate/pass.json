@@ -1,0 +1,129 @@
+{
+  "authenticationToken" : "",
+  "backgroundColor" : "rgb(247,245,241)",
+  "barcodes" : [
+
+  ],
+  "description" : "AAA Insurance Card",
+  "featuredActions" : [
+    {
+      "_id" : "E9CFBEFC-FA0E-4CEE-89C8-68BFA28D40D5",
+      "identifier" : "nearestBranch",
+      "type" : "place",
+      "url" : "https:\/\/www.ace.aaa.com\/locations.html"
+    },
+    {
+      "_id" : "AA220B84-3C7B-4D2A-9223-5A30ED6EB0B0",
+      "identifier" : "call",
+      "type" : "viewOffersRewards",
+      "url" : "https:\/\/"
+    }
+  ],
+  "footerBackgroundColor" : "rgb(255,255,255)",
+  "foregroundColor" : "rgb(64,64,64)",
+  "formatVersion" : 1,
+  "labelColor" : "rgb(112,112,112)",
+  "logoText" : "",
+  "organizationName" : "AAA",
+  "passTypeIdentifier" : "pass.com.example.aaa.insurance",
+  "posterGeneric" : {
+    "auxiliaryFields" : [
+
+    ],
+    "backFields" : [
+      {
+        "_id" : "1ECDC7CB-1A62-454F-A042-D42DF910A602",
+        "attributedValue" : "<a href='tel:\/\/18006725246'>1-800-67-CLAIM (1-800-672-5246)<\/a>",
+        "key" : "hotline",
+        "label" : "24\/7 AAA Accident Assist Hotline",
+        "value" : "1-800-67-CLAIM (1-800-672-5246)"
+      },
+      {
+        "_id" : "C044BFB3-E01F-43E8-9FD4-2214EE1B7559",
+        "key" : "policyQuestions",
+        "label" : "Policy questions or changes",
+        "value" : "1-800-942-6141"
+      },
+      {
+        "_id" : "A7BE29BC-ED9E-410A-BFE5-81C1BF5DD1C1",
+        "key" : "vehicles",
+        "label" : "Vehicles",
+        "value" : "2026 BMW X1 SDRIVE 286 SUV\nWDXCH9C04L5S339288"
+      },
+      {
+        "_id" : "22E17A51-1446-402E-9451-870DB19006B2",
+        "key" : "insuredDrivers",
+        "label" : "Insured Drivers",
+        "value" : "Elijah Lopez"
+      },
+      {
+        "_id" : "4AE5F33F-1209-42B2-B622-1F6750D51541",
+        "key" : "company",
+        "label" : "Company Name",
+        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 233598\nP.O. Box 10006, Santa Ana, CA 92799-5006"
+      },
+      {
+        "_id" : "05538C9F-C1D9-44E2-9A61-E1F9817D3571",
+        "key" : "disclaimer",
+        "label" : "Disclaimer",
+        "value" : "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle. Insurance information has already been submitted directly to the DMV electronically; submit this document to DMV only if specifically requested by DMV. The digital card may not be recognized in all states."
+      },
+      {
+        "_id" : "10A9E221-A815-4F19-B674-FD202F7F101C",
+        "key" : "effectiveDate",
+        "label" : "EFFECTIVE DATE",
+        "value" : "9\/14\/26 - 9\/14\/27"
+      },
+      {
+        "_id" : "DCB6C880-60EC-44CA-8BF4-455A2ED749A5",
+        "key" : "policyNumber",
+        "label" : "POLICY NUMBER",
+        "value" : "CAA 23985827459235"
+      },
+      {
+        "_id" : "7813BE21-9698-4D1F-966A-4CF96B679362",
+        "key" : "nameEnsured",
+        "label" : "NAME ENSURED",
+        "value" : "ELIJAH LOPEZ"
+      },
+      {
+        "_id" : "2A20DB8D-D175-4387-8A2E-EE92F8B1476D",
+        "key" : "insuranceCompany",
+        "label" : "INSURANCE COMPANY",
+        "value" : "INTERINSURANCE EXCHANGE"
+      }
+    ],
+    "footerFields" : [
+      {
+        "_id" : "F00DE268-1873-481D-B518-7946ECF627C8",
+        "key" : "holderSummary",
+        "label" : "",
+        "value" : "ELIJAH LOPEZ | INTERINSURANCE EXCHANGE"
+      }
+    ],
+    "headerFields" : [
+
+    ],
+    "primaryFields" : [
+      {
+        "_id" : "10A9E221-A815-4F19-B674-FD202F7F101C",
+        "key" : "effectiveDate",
+        "label" : "EFFECTIVE DATE",
+        "value" : "9\/14\/26 - 9\/14\/27"
+      },
+      {
+        "_id" : "DCB6C880-60EC-44CA-8BF4-455A2ED749A5",
+        "key" : "policyNumber",
+        "label" : "POLICY NUMBER",
+        "value" : "CAA 23985827459235"
+      }
+    ],
+    "secondaryFields" : [
+
+    ]
+  },
+  "serialNumber" : "CAA23985827459235",
+  "suppressHeaderDarkening" : true,
+  "teamIdentifier" : "",
+  "useAutomaticColors" : false
+}
