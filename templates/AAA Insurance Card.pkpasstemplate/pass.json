@@ -1,24 +1,9 @@
 {
   "authenticationToken" : "",
   "backgroundColor" : "rgb(247,245,241)",
-  "barcodes" : [
-
-  ],
+  "barcodes" : [],
   "description" : "AAA Insurance Card",
-  "featuredActions" : [
-    {
-      "_id" : "79213410-D498-4EB7-B9B3-E55698BCCD53",
-      "identifier" : "roadsideAssistance",
-      "type" : "call",
-      "url" : "tel:\/\/18004004222"
-    },
-    {
-      "_id" : "1622C5A8-081B-4BBF-AD96-E5D97291D2C0",
-      "identifier" : "nearestBranch",
-      "placeIdentifier" : "IX0000XXXX0X0XX00",
-      "type" : "place"
-    }
-  ],
+  "featuredActions" : [],
   "footerBackgroundColor" : "rgb(255,255,255)",
   "foregroundColor" : "rgb(0,0,0)",
   "formatVersion" : 1,
@@ -32,6 +17,20 @@
       }
     ],
     "backFields" : [
+      {
+        "_id" : "04A4952A-5112-4749-B8C4-66F8B2751202",
+        "attributedValue" : "Roadside Assistance\n<a href='tel:18004004222'>1-800-400-4222<\/a>",
+        "key" : "roadsideAssistance",
+        "label" : "Open Roadside",
+        "value" : "Roadside Assistance\n1-800-400-4222"
+      },
+      {
+        "_id" : "D0784D94-D829-4E98-8C62-586901AE5D43",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/locations.html'>Nearest branch<\/a>",
+        "key" : "nearestBranch",
+        "label" : "Get Direction",
+        "value" : "Nearest branch"
+      },
       {
         "_id" : "1ECDC7CB-1A62-454F-A042-D42DF910A602",
         "attributedValue" : "1-800-67-CLAIM (<a href='tel:18006725246'>1-800-672-5246<\/a>)",
@@ -108,10 +107,22 @@
   "organizationName" : "AAA",
   "passTypeIdentifier" : "pass.com.example.aaa.insurance",
   "posterGeneric" : {
-    "auxiliaryFields" : [
-
-    ],
+    "auxiliaryFields" : [],
     "backFields" : [
+      {
+        "_id" : "8FA15D29-3CFC-4585-960B-8B5E9A6E7AC1",
+        "attributedValue" : "Roadside Assistance\n<a href='tel:18004004222'>1-800-400-4222<\/a>",
+        "key" : "roadsideAssistance",
+        "label" : "Open Roadside",
+        "value" : "Roadside Assistance\n1-800-400-4222"
+      },
+      {
+        "_id" : "3DC8547B-7CD2-4AA8-9D7F-2662511AF5A1",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/locations.html'>Nearest branch<\/a>",
+        "key" : "nearestBranch",
+        "label" : "Get Direction",
+        "value" : "Nearest branch"
+      },
       {
         "_id" : "1ECDC7CB-1A62-454F-A042-D42DF910A602",
         "attributedValue" : "1-800-67-CLAIM (<a href='tel:18006725246'>1-800-672-5246<\/a>)",
@@ -159,9 +170,7 @@
         "value" : "ELIJAH LOPEZ · INTERINSURANCE EXCHANGE"
       }
     ],
-    "headerFields" : [
-
-    ],
+    "headerFields" : [],
     "primaryFields" : [
       {
         "_id" : "E2AE10E3-CD49-4C7D-8555-98A298EF0660",
@@ -177,9 +186,7 @@
         "value" : "CAA 23985827459235"
       }
     ],
-    "secondaryFields" : [
-
-    ]
+    "secondaryFields" : []
   },
   "serialNumber" : "CAA23985827459235",
   "suppressHeaderDarkening" : false,

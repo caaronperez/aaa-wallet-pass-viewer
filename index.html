@@ -596,7 +596,7 @@ function openInspector(id, scroll){
     const dupIds = acts.map(x=>x.identifier).filter((v,i,arr)=>v && arr.indexOf(v)!==i);
     if(dupIds.length) issues.push('Identifiers must be unique: ' + esc(dupIds.join(', ')));
     if(acts.length > MAX_ACTIONS) issues.push(`${acts.length} actions — passes support a maximum of ${MAX_ACTIONS}.`);
-    body = sec(`In this template · ${acts.length} of ${MAX_ACTIONS}`, acts.map(x => { const d = ACTION_BY_TYPE[x.type]||{doc:x.type}; return `<div class="fieldcard"><h4><span>${esc(d.doc)}</span><span class="badge full">${esc(x.type)}</span></h4>${kv([['Identifier',x.identifier],['Type',x.type],[d.key==='placeIdentifier'?'Maps Place ID':'URL',x.placeIdentifier ?? x.url]])}</div>`; }).join('') || note('No Featured Actions.'))
+    body = sec(`In this template · ${acts.length} of ${MAX_ACTIONS}`, acts.map(x => { const d = ACTION_BY_TYPE[x.type]||{doc:x.type}; return `<div class="fieldcard"><h4><span>${esc(d.doc)}</span><span class="badge full">${esc(x.type)}</span></h4>${kv([['Identifier',x.identifier],['Type',x.type],[d.key==='placeIdentifier'?'Maps Place ID':'URL',x.placeIdentifier ?? x.url],['Card shows (Wallet)',(d.title||x.type)+' · '+(d.sub||'')]])}${wordingFor(x)}</div>`; }).join('') || note('No Featured Actions.'))
       + sec('All available actions', `<label class="k" for="actPick" style="font-size:11px;color:var(--muted)">Action type (✓ = in this template)</label>
         <select id="actPick" class="dd">${ACTIONS.map(x=>`<option value="${x.type}" ${x.type===pick?'selected':''}>${used.has(x.type)?'✓ ':'   '}${esc(x.doc)} — ${esc(x.cat)}</option>`).join('')}</select>
         <div class="fieldcard ${used.has(pick)?'':''}"><h4><span>${icon(a)} ${esc(a.doc)}</span><span class="badge ${used.has(pick)?'full':'na'}">${used.has(pick)?'in template':'available'}</span></h4>
@@ -604,7 +604,7 @@ function openInspector(id, scroll){
         <div class="agrid">${ACTIONS.map(x=>`<button class="atile ${used.has(x.type)?'in':''} ${x.type===pick?'pick':''}" data-act="${x.type}">${used.has(x.type)?'<span class="tag">IN TEMPLATE</span>':''}${icon(x)}<b>${esc(x.title)}</b><small>${esc(x.cat)}</small></button>`).join('')}</div>`)
       + sec('Limitations', note(`A pass supports at most <b>${MAX_ACTIONS}</b> Featured Actions (Pass Designer: “To add another action, remove an existing one.”).`)
         + note('Requires iOS and watchOS 27 or later; they appear as cards under the pass. Earlier systems (the iOS 26 column) ignore them.')
-        + note('Wallet supplies each card\'s label and SF Symbol from the action <code>type</code>. There is no custom title, subtitle, or icon key — AAA wording such as “Roadside Assistance” lives in the back fields.')
+        + note('Wallet supplies each card\'s label and SF Symbol from the action <code>type</code>. There is no custom title, subtitle, or icon key (tested: <code>label</code>, <code>title</code>, <code>subtitle</code>, <code>symbol</code> are ignored by Pass Designer). Custom wording goes in a back field whose <code>key</code> matches the action <code>identifier</code>.')
         + note('Categories are recommendations: Events (schedule, trailer, music), Generic (call, place), Membership (balance, order, shop, benefits, appointment, car, flight, stay). View Offers and Rewards fits Membership, Generic and Event passes. Pass Designer lists every type for every pass.')
         + note('<code>place</code> needs an Apple Maps Place ID, not a URL. <code>call</code> takes a tel: URL. Every other type takes an https URL.')
         + (issues.length ? issues.map(i => note(i,'bad')).join('') : note('All actions are valid.','ok')));
@@ -640,6 +640,11 @@ function openInspector(id, scroll){
   const ap = ins.querySelector('#actPick');
   if(ap) ap.onchange = e => { state.actionPick = e.target.value; openInspector('actions', false); };
   ins.querySelectorAll('[data-act]').forEach(b => b.onclick = () => { state.actionPick = b.dataset.act; openInspector('actions', false); });
+}
+function wordingFor(x){
+  const bf = ((state.pass[styleKey(state.pass)] || {}).backFields || []).find(f => f.key === x.identifier);
+  return bf ? `<div class="note ok">Custom wording in Pass Details (back field <code>${esc(bf.key)}</code>):<br><b>${esc(bf.label)}</b> — ${esc(bf.value).replace(/\n/g,' · ')}</div>`
+            : `<div class="note warn">No back field with key <code>${esc(x.identifier)}</code>. Add one to give this action custom wording in Pass Details.</div>`;
 }
 function fieldCard(f, i, mx){
   const over = mx !== INF && i >= mx;
