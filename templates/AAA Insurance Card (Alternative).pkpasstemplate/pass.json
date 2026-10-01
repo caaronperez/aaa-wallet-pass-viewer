@@ -127,7 +127,7 @@
         "key" : "cardTitle",
         "label" : "CA Evidence of Liability",
         "textAlignment" : "PKTextAlignmentRight",
-        "value" : "Insurance Card"
+        "value" : "Auto Insurance Card"
       }
     ],
     "primaryFields" : [
@@ -263,7 +263,7 @@
         "_id" : "8E039297-8219-45D4-BBCD-BE820B40686A",
         "key" : "cardTitle",
         "label" : "CA EVIDENCE OF LIABILITY",
-        "value" : "Insurance Card"
+        "value" : "Auto Insurance Card"
       }
     ],
     "primaryFields" : [
