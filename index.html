@@ -155,6 +155,8 @@ button,select{font:inherit;color:inherit}
 .thumbs img{max-height:34px;max-width:90px;background:repeating-conic-gradient(#3a3b40 0 25%,#2a2b2e 0 50%) 0/10px 10px;border-radius:4px}
 .miss{color:var(--dim);font-size:11px}
 .legend{max-width:720px;margin:26px auto 0;font-size:12px;color:var(--muted);text-align:center;line-height:1.5}
+.dropzone{position:fixed;inset:12px;border:3px dashed var(--accent);border-radius:20px;background:#0a1830cc;z-index:50;display:grid;place-items:center;font-size:20px;color:#fff;pointer-events:none}.dropzone[hidden]{display:none}
+.chooser{max-width:640px;margin:0 auto 16px;background:#22314a;border:1px solid #3b5f96;border-radius:12px;padding:12px 14px;font-size:13px}.chooser b{display:block;margin-bottom:8px}.chooser button{margin:4px 6px 0 0;border:1px solid #4f78b8;background:#2b4166;color:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
 .err{background:#4a1f1d;border:1px solid #7a302b;color:#ffd4d1;border-radius:8px;padding:10px 12px;margin:0 auto 16px;max-width:640px;font-size:13px}
 @media (max-width:860px){
   .app{grid-template-columns:1fr}
@@ -175,8 +177,8 @@ button,select{font:inherit;color:inherit}
   <div class="doc"><b id="docName">Loading…</b><small id="docSub">Pass template</small></div>
   <span class="ro" title="This viewer never modifies the template">READ-ONLY</span>
   <span class="grow"></span>
-  <label class="tb-btn">Open pass.json<input id="jsonFile" type="file" accept=".json,application/json"></label>
-  <label class="tb-btn">Open .pkpasstemplate<input id="folder" type="file" webkitdirectory multiple></label>
+  <label class="tb-btn" title="A .zip of a .pkpasstemplate (e.g. from Download template) or a pass.json">Open .zip / pass.json<input id="jsonFile" type="file" accept=".zip,application/zip,.json,application/json"></label>
+  <label class="tb-btn" title="macOS shows .pkpasstemplate as a single file, so pick the folder that contains it (e.g. outputs)">Open folder<input id="folder" type="file" webkitdirectory multiple></label>
   <div class="seg" role="group" aria-label="Side">
     <button id="showFront" class="on">Front</button>
     <button id="showBack">Details</button>
@@ -186,6 +188,8 @@ button,select{font:inherit;color:inherit}
   <aside class="sidebar" id="sidebar" aria-label="Template components"></aside>
   <main class="canvas" id="canvas">
     <section class="inspector" id="inspector" hidden aria-live="polite"></section>
+    <div class="dropzone" id="dropzone" hidden><div>Drop a <b>.pkpasstemplate</b>, a <b>.zip</b> of one, or a <b>pass.json</b></div></div>
+    <div id="chooser"></div>
     <div class="hero">
       <div class="picker" role="tablist" aria-label="Template">
         <button role="tab" data-pass="membership" class="on" aria-selected="true">
@@ -792,29 +796,79 @@ document.querySelectorAll('.flipper').forEach(fl => {
 
 /* ---------- Template switching & import ---------- */
 document.querySelectorAll('[data-pass]').forEach(b => b.onclick = () => loadDefault(b.dataset.pass));
-$('jsonFile').addEventListener('change', async e => {
-  const file = e.target.files[0]; if(!file) return;
-  try{
-    const pass = JSON.parse(await file.text());
-    state = {...state, key:'', pass, tooling:null, files:[], assets:{}, raw:{'pass.json': await file.text()}, name:file.name, limitStyle:null, actionPick:null, fallbackMode:null};
-    showError(''); render();
-  }catch{ showError('The selected file is not valid JSON.'); }
-  e.target.value = '';
-});
-$('folder').addEventListener('change', async e => {
-  const files = [...e.target.files];
-  const pj = files.find(f => f.name === 'pass.json');
-  if(!pj){ showError('Select a complete .pkpasstemplate folder — it must contain pass.json.'); return; }
+/* .pkpasstemplate is a macOS package (a folder Finder shows as a file), so the folder picker
+   can't select it directly. Accept a zip, the folder that contains templates, or drag and drop. */
+const isJunk = path => /(^|\/)(__MACOSX|\.DS_Store)/.test(path);
+async function filesFromZip(file){
+  if(!window.JSZip) throw new Error('The zip library did not load.');
+  const zip = await JSZip.loadAsync(file), out = [];
+  for(const [path, entry] of Object.entries(zip.files)){
+    if(entry.dir || isJunk(path)) continue;
+    out.push({path, file: new File([await entry.async('blob')], path.split('/').pop())});
+  }
+  return out;
+}
+function groupTemplates(list){
+  return list.filter(x => x.path.split('/').pop() === 'pass.json').map(pj => {
+    const dir = pj.path.slice(0, -'pass.json'.length);
+    const files = list.filter(x => x.path.startsWith(dir) && !x.path.slice(dir.length).includes('/')).map(x => x.file);
+    return {name: dir.replace(/\/$/, '').split('/').pop() || 'pass.json', files};
+  });
+}
+async function openTemplate(t){
+  const files = t.files, pj = files.find(f => f.name === 'pass.json');
   try{
     const pass = JSON.parse(await pj.text());
     const tj = files.find(f => f.name === 'tooling.json');
     const assets = {}; files.filter(f => /\.png$/i.test(f.name)).forEach(f => assets[f.name] = URL.createObjectURL(f));
-    const dir = (pj.webkitRelativePath || '').split('/')[0] || 'Imported template';
     const raw = {}; for(const f of files) raw[f.name] = f;
-    state = {...state, key:'', pass, tooling: tj ? JSON.parse(await tj.text()) : null, files: files.map(f=>f.name), assets, raw, name:dir, limitStyle:null, actionPick:null, fallbackMode:null};
-    showError(''); render();
-  }catch{ showError('The selected template contains invalid JSON.'); }
+    const name = files.length === 1 ? 'pass.json' : t.name;
+    state = {...state, key:'', pass, tooling: tj ? JSON.parse(await tj.text()) : null, files: files.map(f => f.name), assets,
+      raw: name === 'pass.json' ? {'pass.json': await pj.text()} : raw, name, limitStyle:null, actionPick:null, fallbackMode:null};
+    $('chooser').innerHTML = ''; showError(''); render();
+  }catch{ showError('“' + t.name + '” contains invalid JSON.'); }
+}
+async function importList(list){
+  list = list.filter(x => !isJunk(x.path));
+  const zips = list.filter(x => /\.zip$/i.test(x.path));
+  for(const z of zips) list = list.concat((await filesFromZip(z.file)).map(x => ({...x, path: z.path.replace(/[^/]*$/, '') + x.path})));
+  const templates = groupTemplates(list);
+  if(!templates.length){ showError('No pass.json found. Choose a .pkpasstemplate (drag it in, or its .zip), the folder that contains it, or a pass.json.'); return; }
+  if(templates.length === 1) return openTemplate(templates[0]);
+  $('chooser').innerHTML = `<div class="chooser"><b>${templates.length} templates found — choose one:</b>${templates.map((t,i) => `<button type="button" data-tpl="${i}">${esc(t.name)}</button>`).join('')}</div>`;
+  $('chooser').querySelectorAll('[data-tpl]').forEach(b => b.onclick = () => openTemplate(templates[+b.dataset.tpl]));
+}
+$('jsonFile').addEventListener('change', async e => {
+  const file = e.target.files[0]; if(!file) return;
+  try{ await importList([{path: file.name, file}]); }
+  catch(err){ showError('Could not open “' + file.name + '”: ' + err.message); }
   e.target.value = '';
+});
+$('folder').addEventListener('change', async e => {
+  try{ await importList([...e.target.files].map(f => ({path: f.webkitRelativePath || f.name, file: f}))); }
+  catch(err){ showError('Could not open the folder: ' + err.message); }
+  e.target.value = '';
+});
+async function readEntry(entry, prefix = ''){
+  if(entry.isFile) return [{path: prefix + entry.name, file: await new Promise((res, rej) => entry.file(res, rej))}];
+  const reader = entry.createReader(); let all = [], batch;
+  do { batch = await new Promise((res, rej) => reader.readEntries(res, rej)); all = all.concat(batch); } while(batch.length);
+  return (await Promise.all(all.map(c => readEntry(c, prefix + entry.name + '/')))).flat();
+}
+let dragDepth = 0;
+const hasFiles = e => [...(e.dataTransfer?.types || [])].includes('Files');
+window.addEventListener('dragenter', e => { if(!hasFiles(e)) return; e.preventDefault(); dragDepth++; $('dropzone').hidden = false; });
+window.addEventListener('dragover', e => { if(hasFiles(e)) e.preventDefault(); });
+window.addEventListener('dragleave', e => { if(!hasFiles(e)) return; if(--dragDepth <= 0){ dragDepth = 0; $('dropzone').hidden = true; } });
+window.addEventListener('drop', async e => {
+  if(!hasFiles(e)) return;
+  e.preventDefault(); dragDepth = 0; $('dropzone').hidden = true;
+  try{
+    const entries = [...e.dataTransfer.items].map(i => i.webkitGetAsEntry && i.webkitGetAsEntry()).filter(Boolean);
+    const list = entries.length ? (await Promise.all(entries.map(en => readEntry(en)))).flat()
+                                : [...e.dataTransfer.files].map(f => ({path: f.name, file: f}));
+    await importList(list);
+  }catch(err){ showError('Could not read the dropped item: ' + err.message); }
 });
 /* ---------- Download (read-only copy of the template) ---------- */
 function saveBlob(blob, filename){
@@ -823,7 +877,7 @@ function saveBlob(blob, filename){
 }
 $('download').addEventListener('click', async () => {
   const btn = $('download'), label = btn.querySelector('b'), was = label.textContent;
-  if(state.name && state.name.endsWith('.json') && state.raw){
+  if(state.name === 'pass.json' && state.raw){
     saveBlob(new Blob([state.raw['pass.json']], {type:'application/json'}), state.name); return;
   }
   btn.disabled = true; label.textContent = 'Preparing…';
