@@ -179,7 +179,7 @@ button,select{font:inherit;color:inherit}
 #rotateBtn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#2d2e32;color:#fff;border-radius:999px;padding:8px 16px;font:600 14px inherit;cursor:pointer}
 #rotateBtn:hover{background:#38393e}#rotateBtn svg{width:18px;height:18px;transition:transform .55s}
 #rotateBtn[aria-pressed="true"] svg{transform:rotate(-180deg)}
-.rotate-hint{font-size:13px;color:var(--muted)}
+.rotate-hint{font-size:13px;color:var(--muted);text-align:center}
 .dropzone{position:fixed;inset:12px;border:3px dashed var(--accent);border-radius:20px;background:#0a1830cc;z-index:50;display:grid;place-items:center;font-size:20px;color:#fff;pointer-events:none}.dropzone[hidden]{display:none}
 .chooser{max-width:640px;margin:0 auto 16px;background:#22314a;border:1px solid #3b5f96;border-radius:12px;padding:12px 14px;font-size:13px}.chooser b{display:block;margin-bottom:8px}.chooser button{margin:4px 6px 0 0;border:1px solid #4f78b8;background:#2b4166;color:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
 .err{background:#4a1f1d;border:1px solid #7a302b;color:#ffd4d1;border-radius:8px;padding:10px 12px;margin:0 auto 16px;max-width:640px;font-size:13px}
@@ -234,9 +234,9 @@ button,select{font:inherit;color:inherit}
     <div class="rotate-bar">
       <button type="button" id="rotateBtn" aria-pressed="false">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span>Rotate</span>
+        <span>Rotate to see the back info</span>
       </button>
-      <span class="rotate-hint">👆 or just swipe a card sideways with your finger</span>
+      <span class="rotate-hint">👆 or just swipe a card (I was too tired and bored to write the rest 😴)</span>
     </div>
     <div class="previews">
       <div class="col"><span class="pill">iOS 27</span><div class="col-note" id="note27"></div>
