@@ -61,6 +61,12 @@
         "value" : "1-800-942-6141"
       },
       {
+        "_id" : "8B3952AC-7D57-4032-AFAF-CD6A77BF6DD9",
+        "key" : "policyPeriod",
+        "label" : "Policy Period",
+        "value" : "9\/14\/26 - 9\/14\/27"
+      },
+      {
         "_id" : "A7BE29BC-ED9E-410A-BFE5-81C1BF5DD1C1",
         "key" : "vehicles",
         "label" : "Vehicles",
@@ -155,6 +161,12 @@
         "value" : "1-800-942-6141"
       },
       {
+        "_id" : "8B3952AC-7D57-4032-AFAF-CD6A77BF6DD9",
+        "key" : "policyPeriod",
+        "label" : "Policy Period",
+        "value" : "9\/14\/26 - 9\/14\/27"
+      },
+      {
         "_id" : "A7BE29BC-ED9E-410A-BFE5-81C1BF5DD1C1",
         "key" : "vehicles",
         "label" : "Vehicles",
@@ -192,22 +204,25 @@
     ],
     "primaryFields" : [
       {
-        "_id" : "91FD09CC-8F64-4486-9D2B-90CA4C7A5D5A",
-        "key" : "effectiveDate",
-        "label" : "EFFECTIVE DATE",
-        "value" : "9\/14\/26 - 9\/14\/27"
+        "_id" : "00E927DF-D3A4-4C96-83EF-1E8831A28CDF",
+        "key" : "nameEnsured",
+        "label" : "NAME ENSURED",
+        "value" : "ELIJAH LOPEZ"
       },
       {
-        "_id" : "3C383DAF-1064-4601-9126-31839A25706B",
+        "_id" : "11524A02-3158-4073-924E-85EE2EAEA107",
         "key" : "policyNumber",
         "label" : "POLICY NUMBER",
         "value" : "CAA 23985827459235"
       },
       {
-        "_id" : "E0482D9E-E551-4C41-BB20-81E14D50A32C",
-        "key" : "nameEnsured",
-        "label" : "NAME ENSURED",
-        "value" : "ELIJAH LOPEZ"
+        "_id" : "7A0CBC99-9C15-4356-923C-0FE48A63300C",
+        "dateStyle" : "PKDateStyleShort",
+        "ignoresTimeZone" : true,
+        "key" : "effectiveDate",
+        "label" : "EFFECTIVE DATE",
+        "textAlignment" : "PKTextAlignmentRight",
+        "value" : "2026-09-14T07:00:00Z"
       }
     ],
     "secondaryFields" : [

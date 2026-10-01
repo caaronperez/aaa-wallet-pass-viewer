@@ -372,10 +372,24 @@ function barcodeSVG(bc, w=150, h=44){
 function cssVars(p){
   return `--bg:${safeColor(p.backgroundColor,'#fff')};--fg:${safeColor(p.foregroundColor,'#111')};--label:${safeColor(p.labelColor,'#707070')};--footer:${safeColor(p.footerBackgroundColor,'#fff')}`;
 }
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+function displayValue(f){
+  const style = f.dateStyle || f.timeStyle;
+  const m = /^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2}))?/.exec(String(f.value ?? ''));
+  if(!style || style === 'PKDateStyleNone' || !m) return f.value;
+  const [, y, mo, d] = m, mon = MONTHS[+mo - 1];
+  switch(f.dateStyle){
+    case 'PKDateStyleShort': return `${+mo}/${+d}/${y.slice(2)}`;
+    case 'PKDateStyleMedium': return `${mon.slice(0,3)} ${+d}, ${y}`;
+    case 'PKDateStyleLong': return `${mon} ${+d}, ${y}`;
+    case 'PKDateStyleFull': return new Date(+y, +mo - 1, +d).toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric', year:'numeric'});
+    default: return f.value;
+  }
+}
 const titleCase = s => String(s ?? '').toLowerCase().replace(/(^|[\s(\/-])(\S)/g, (m, a, b) => a + b.toUpperCase());
 function fld(f, g, i, extra='', poster=false){
   const right = f.textAlignment === 'PKTextAlignmentRight';
-  return `<div class="fld ${right?'r':''} ${extra}" data-f="${esc(g)}:${i}"><div class="l">${esc(poster ? titleCase(f.label) : f.label)}</div><div class="v">${esc(f.value)}</div></div>`;
+  return `<div class="fld ${right?'r':''} ${extra}" data-f="${esc(g)}:${i}"><div class="l">${esc(poster ? titleCase(f.label) : f.label)}</div><div class="v">${esc(displayValue(f))}</div></div>`;
 }
 function renderPoster(p, dict){
   const bc = (p.barcodes||[])[0];
@@ -649,7 +663,7 @@ function openInspector(id, scroll){
     const fbk = id.startsWith('ffield:'), [, g, i] = id.split(':');
     const d = fbk ? (fallbackFor(p)?.dict || {}) : dict, f = (d[g]||[])[+i];
     title = (fbk ? 'iOS 26 · ' : '') + (f?.label || f?.key || 'Field');
-    body = f ? sec(GROUP_NAMES[g], fieldCard(f, +i, (fbk ? STYLES.generic : L).max[g])) + sec('Limitations', note('Keep labels short; primary values truncate first. <code>textAlignment</code> accepts PKTextAlignmentLeft, Center, Right or Natural. <code>attributedValue</code> supports only <code>&lt;a href&gt;</code> and only in back fields.')) : note('Field not found.');
+    body = f ? sec(GROUP_NAMES[g], fieldCard(f, +i, (fbk ? STYLES.generic : L).max[g])) + sec('Limitations', note('Date fields: <code>value</code> is an ISO 8601 date-time and <code>dateStyle</code> (Short, Medium, Long, Full) tells Wallet how to format it in the viewer\'s locale. One field holds one date, so a range needs two fields or plain text.') + note('Keep labels short; primary values truncate first. <code>textAlignment</code> accepts PKTextAlignmentLeft, Center, Right or Natural. <code>attributedValue</code> supports only <code>&lt;a href&gt;</code> and only in back fields.')) : note('Field not found.');
   }
   else if(id === 'json'){
     title = 'pass.json';
@@ -671,7 +685,7 @@ function wordingFor(x){
 }
 function fieldCard(f, i, mx){
   const over = mx !== INF && i >= mx;
-  return `<div class="fieldcard ${over?'over':''}"><h4><span>${esc(f.label||'(no label)')}</span>${over?'<span class="badge over">not displayed</span>':''}</h4>${kv([['Key',f.key],['Label',f.label],['Value',f.value],['Alignment',f.textAlignment],['Attributed',f.attributedValue],['Date style',f.dateStyle],['Change message',f.changeMessage]].filter(r=>r[1]!==undefined || ['Key','Label','Value'].includes(r[0])))}</div>`;
+  return `<div class="fieldcard ${over?'over':''}"><h4><span>${esc(f.label||'(no label)')}</span>${over?'<span class="badge over">not displayed</span>':''}</h4>${kv([['Key',f.key],['Label',f.label],['Value',f.value],['Alignment',f.textAlignment],['Displays as', f.dateStyle ? displayValue(f) + '  (Wallet formats per the viewer\'s locale)' : undefined],['Ignores time zone',f.ignoresTimeZone],['Attributed',f.attributedValue],['Date style',f.dateStyle],['Change message',f.changeMessage]].filter(r=>r[1]!==undefined || ['Key','Label','Value'].includes(r[0])))}</div>`;
 }
 function closeInspector(){ $('inspector').hidden = true; }
 function highlight(){
