@@ -20,7 +20,7 @@ Open another template with **Open .pkpasstemplate** (select the folder) or **Ope
 ## Notes
 
 - This is a recreation for design review. Wallet and Pass Designer render the real pass, including fonts, truncation, barcode artwork, and Featured Action labels and symbols.
-- `place` Featured Actions need a real Apple Maps Place ID. The templates keep Pass Designer's placeholder until the branch is resolved at pass-generation time.
+- `place` Featured Actions need a real Apple Maps Place ID; with an invalid one the card does not render on a device. The templates use `I71B28B9C6AC9C7EF` (AAA Glendale, 1233 E Broadway), found with MapKit's `MKLocalSearch` and verified with `MKMapItemRequest`. Wallet still labels the card "Get Directions / Open in Maps"; the place name is not shown. Production passes should resolve each member's branch at pass-generation time.
 - The bundled files are design samples with personal-looking test values. Replace them before production use or broad distribution.
 
 Sources: [Creating a Poster Generic pass](https://developer.apple.com/documentation/walletpasses/creating-a-poster-generic-pass) · [Defining the metadata of your Wallet pass](https://developer.apple.com/documentation/walletpasses/defining-the-metadata-of-your-wallet-pass#Add-Featured-Actions) · [Creating a pass with Pass Designer](https://developer.apple.com/documentation/walletpasses/creating-a-pass-with-pass-designer)
