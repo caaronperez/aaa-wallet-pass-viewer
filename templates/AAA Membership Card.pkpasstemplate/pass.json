@@ -171,7 +171,14 @@
         "value" : "620 004 123456789 2"
       }
     ],
-    "footerFields" : [],
+    "footerFields" : [
+      {
+        "_id" : "7DB5F491-84FF-469E-BF0F-99390D13D763",
+        "key" : "membershipNumber",
+        "label" : "MEMBERSHIP NUMBER",
+        "value" : "MEMBERSHIP NUMBER: 620 004 123456789 2"
+      }
+    ],
     "headerFields" : [],
     "primaryFields" : [
       {
