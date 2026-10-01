@@ -369,6 +369,8 @@ button,select{font:inherit;color:inherit}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 "use strict";
+/* Always revalidate template files so updated passes show up right away (Pages caches for 10 min). */
+const fetchFresh = (url, opts = {}) => fetch(url, {cache: "no-cache", ...opts});
 const $ = id => document.getElementById(id);
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const INF = Infinity;
@@ -529,7 +531,7 @@ async function loadDefault(key){
   const dir = DEFAULTS[key];
   const base = 'templates/' + encodeURIComponent(dir) + '/';
   try{
-    const [pr, tr, mr] = await Promise.all([fetch(base+'pass.json'), fetch(base+'tooling.json'), fetch('templates/manifest.json')]);
+    const [pr, tr, mr] = await Promise.all([fetchFresh(base+'pass.json'), fetchFresh(base+'tooling.json'), fetchFresh('templates/manifest.json')]);
     if(!pr.ok) throw new Error('pass.json request failed ('+pr.status+')');
     const manifest = mr.ok ? await mr.json() : {};
     state = {...state, key, pass: await pr.json(), tooling: tr.ok ? await tr.json() : null, name: dir,
@@ -1077,7 +1079,7 @@ async function simEntry(key){
   if(key === 'imported') return imported;
   if(simCache[key]) return simCache[key];
   const dir = DEFAULTS[key], base = 'templates/' + encodeURIComponent(dir) + '/';
-  const [pass, manifest] = await Promise.all([fetch(base + 'pass.json').then(r => r.json()), fetch('templates/manifest.json').then(r => r.json())]);
+  const [pass, manifest] = await Promise.all([fetchFresh(base + 'pass.json').then(r => r.json()), fetchFresh('templates/manifest.json').then(r => r.json())]);
   const files = manifest[dir] || [], assets = {};
   files.filter(f => f.endsWith('.png')).forEach(f => assets[f] = base + encodeURIComponent(f));
   return simCache[key] = {pass, assets, files, name: dir};
@@ -1193,10 +1195,10 @@ function saveBlob(blob, filename){
   document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
 }
 async function bundledFiles(dir){
-  const manifest = await (await fetch('templates/manifest.json')).json();
+  const manifest = await (await fetchFresh('templates/manifest.json')).json();
   const base = 'templates/' + encodeURIComponent(dir) + '/';
   return Promise.all((manifest[dir] || []).map(async f => {
-    const r = await fetch(base + encodeURIComponent(f)); if(!r.ok) throw new Error(f + ' (' + r.status + ')');
+    const r = await fetchFresh(base + encodeURIComponent(f)); if(!r.ok) throw new Error(f + ' (' + r.status + ')');
     return {path: dir + '/' + f, file: new File([await r.blob()], f)};
   }));
 }
@@ -1227,7 +1229,7 @@ $('download').addEventListener('click', async () => {
     if(DEFAULTS[state.key]){
       const base = 'templates/' + encodeURIComponent(DEFAULTS[state.key]) + '/';
       await Promise.all(state.files.map(async f => {
-        const r = await fetch(base + encodeURIComponent(f)); if(!r.ok) throw new Error(f + ' (' + r.status + ')');
+        const r = await fetchFresh(base + encodeURIComponent(f)); if(!r.ok) throw new Error(f + ' (' + r.status + ')');
         dir.file(f, await r.blob());
       }));
     }else if(state.raw){
