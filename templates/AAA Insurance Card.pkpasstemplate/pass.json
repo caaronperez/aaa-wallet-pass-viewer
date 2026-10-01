@@ -5,6 +5,7 @@
 
   ],
   "description" : "AAA Insurance Card",
+  "expirationDate" : "2027-09-15T06:59:00Z",
   "featuredActions" : [
     {
       "_id" : "79213410-D498-4EB7-B9B3-E55698BCCD53",
@@ -217,12 +218,10 @@
       },
       {
         "_id" : "7A0CBC99-9C15-4356-923C-0FE48A63300C",
-        "dateStyle" : "PKDateStyleShort",
-        "ignoresTimeZone" : true,
         "key" : "effectiveDate",
         "label" : "EFFECTIVE DATE",
         "textAlignment" : "PKTextAlignmentRight",
-        "value" : "2026-09-14T07:00:00Z"
+        "value" : "9\/14\/26 – 9\/14\/27"
       }
     ],
     "secondaryFields" : [
