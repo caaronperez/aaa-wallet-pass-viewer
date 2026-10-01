@@ -94,9 +94,9 @@
       {
         "_id" : "F98FBA67-22C9-4C4A-AE7D-8291878657AB",
         "key" : "cardTitle",
-        "label" : "CALIFORNIA EVIDENCE OF",
+        "label" : "California Evidence of Liability",
         "textAlignment" : "PKTextAlignmentRight",
-        "value" : "Liability Insurance"
+        "value" : "Insurance"
       }
     ],
     "primaryFields" : [
