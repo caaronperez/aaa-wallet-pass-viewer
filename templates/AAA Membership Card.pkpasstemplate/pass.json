@@ -31,13 +31,13 @@
   "generic" : {
     "auxiliaryFields" : [
       {
-        "_id" : "BB415A74-E828-4B31-A254-B8D923AE48BA",
+        "_id" : "3F3FEBCE-AACD-4D98-BA17-B2BF225A73A3",
         "key" : "roadside",
         "label" : "ROADSIDE ASSISTANCE",
         "value" : "1-800-400-4222"
       },
       {
-        "_id" : "72BC0672-B3A3-4D5D-B6A0-901F55583D6F",
+        "_id" : "69F65CD7-FCAA-42B3-9080-9C79E3D0DBBD",
         "key" : "roadsideOutsideCA",
         "label" : "OUTSIDE CA",
         "textAlignment" : "PKTextAlignmentRight",
@@ -94,7 +94,7 @@
     ],
     "headerFields" : [
       {
-        "_id" : "7829929C-FC11-4301-A629-A47C45D8A007",
+        "_id" : "71E43CE2-B816-4ED2-B3F2-E1778B7B9531",
         "key" : "loyalMember",
         "label" : "LOYAL MEMBER",
         "textAlignment" : "PKTextAlignmentRight",
@@ -103,18 +103,25 @@
     ],
     "primaryFields" : [
       {
-        "_id" : "49DB100D-FD81-4C7E-9836-E45F74D7A9E1",
+        "_id" : "7A3B6A15-F0C5-49FB-AB83-4E133949047F",
         "key" : "memberName",
-        "label" : "NAME",
+        "label" : "MEMBER NAME",
         "value" : "ELIJAH LOPEZ"
       }
     ],
     "secondaryFields" : [
       {
-        "_id" : "1F09F1E9-0CDF-4757-975D-2A602BF25EB8",
+        "_id" : "E95BBABE-BC18-4893-833A-2E387565A8C9",
+        "key" : "membershipNumber",
+        "label" : "MEMBERSHIP NUMBER",
+        "value" : "620 004 123456789 2"
+      },
+      {
+        "_id" : "198BDC72-9896-4667-80EF-F094347A49F0",
         "key" : "plan",
         "label" : "PLAN",
-        "value" : "Premier"
+        "textAlignment" : "PKTextAlignmentRight",
+        "value" : "PREMIER"
       }
     ]
   },
@@ -122,9 +129,7 @@
   "organizationName" : "AAA",
   "passTypeIdentifier" : "pass.com.example.aaa.membership",
   "posterGeneric" : {
-    "auxiliaryFields" : [
-
-    ],
+    "auxiliaryFields" : [],
     "backFields" : [
       {
         "_id" : "16FC7DAB-10AF-4930-B9D8-1AF7B13A5896",
@@ -209,9 +214,7 @@
         "value" : "PREMIER"
       }
     ],
-    "secondaryFields" : [
-
-    ]
+    "secondaryFields" : []
   },
   "serialNumber" : "6200041234567892",
   "suppressHeaderDarkening" : true,
