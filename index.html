@@ -175,6 +175,11 @@ button,select{font:inherit;color:inherit}
 .proposal figcaption button:disabled{opacity:.6;cursor:progress}
 .legend{max-width:720px;margin:26px auto 0;font-size:12px;color:var(--muted);text-align:center;line-height:1.5}
 .legend.tip{margin-top:10px;background:#1f2a3a;border:1px dashed #3b5f96;border-radius:10px;padding:10px 14px;color:#cdd9ea}.legend code{font-size:11.5px;color:#9fc6ff}
+.rotate-bar{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:-10px auto 22px}
+#rotateBtn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#2d2e32;color:#fff;border-radius:999px;padding:8px 16px;font:600 14px inherit;cursor:pointer}
+#rotateBtn:hover{background:#38393e}#rotateBtn svg{width:18px;height:18px;transition:transform .55s}
+#rotateBtn[aria-pressed="true"] svg{transform:rotate(-180deg)}
+.rotate-hint{font-size:13px;color:var(--muted)}
 .dropzone{position:fixed;inset:12px;border:3px dashed var(--accent);border-radius:20px;background:#0a1830cc;z-index:50;display:grid;place-items:center;font-size:20px;color:#fff;pointer-events:none}.dropzone[hidden]{display:none}
 .chooser{max-width:640px;margin:0 auto 16px;background:#22314a;border:1px solid #3b5f96;border-radius:12px;padding:12px 14px;font-size:13px}.chooser b{display:block;margin-bottom:8px}.chooser button{margin:4px 6px 0 0;border:1px solid #4f78b8;background:#2b4166;color:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
 .err{background:#4a1f1d;border:1px solid #7a302b;color:#ffd4d1;border-radius:8px;padding:10px 12px;margin:0 auto 16px;max-width:640px;font-size:13px}
@@ -226,6 +231,13 @@ button,select{font:inherit;color:inherit}
       </button>
     </div>
     <div id="error"></div>
+    <div class="rotate-bar">
+      <button type="button" id="rotateBtn" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Rotate</span>
+      </button>
+      <span class="rotate-hint">👆 or just swipe a card sideways with your finger</span>
+    </div>
     <div class="previews">
       <div class="col"><span class="pill">iOS 27</span><div class="col-note" id="note27"></div>
         <div class="flipper" data-flip="27"><div class="card3d" id="card27"><div class="face front" id="front27"></div><div class="face back details" id="back27"></div></div></div>
@@ -823,8 +835,9 @@ function highlight(){
 function flip(which, toBack){
   const cards = which ? [$('card'+which)] : [$('card27'), $('card26')];
   cards.forEach(c => { c.style.transition = ''; c.style.transform = ''; c.classList.toggle('flip', toBack); });
-  if(!which){ $('showFront').classList.toggle('on', !toBack); $('showBack').classList.toggle('on', toBack); }
+  if(!which){ $('showFront').classList.toggle('on', !toBack); $('showBack').classList.toggle('on', toBack); $('rotateBtn').setAttribute('aria-pressed', String(toBack)); }
 }
+$('rotateBtn').onclick = () => flip(null, !$('card27').classList.contains('flip'));
 $('showFront').onclick = () => flip(null, false);
 $('showBack').onclick = () => flip(null, true);
 document.querySelectorAll('.flipper').forEach(fl => {
