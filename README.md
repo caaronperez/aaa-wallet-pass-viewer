@@ -13,6 +13,8 @@ Live: https://caaronperez.github.io/aaa-wallet-pass-viewer/
 - **Apple's limits beside each component**, e.g. Header Fields (max 1), Primary Fields (max 4), and Featured Actions 2/2. The "Show limits for pass style" menu checks the same fields against another style (Generic, Store Card, Coupon, Event Ticket, Boarding Pass) and shows in red what would no longer fit.
 - **Featured Actions** lists all 14 documented action types. The ones in the template are highlighted, and each type shows its required keys, value format, category and validation.
 
+**Download template** saves the selected template as a `.zip` of its `.pkpasstemplate` folder; unzip it and open the folder in Pass Designer. It is an unsigned design template, not an installable `.pkpass`.
+
 Open another template with **Open .pkpasstemplate** (select the folder) or **Open pass.json**. Files stay in the browser.
 
 ## Notes

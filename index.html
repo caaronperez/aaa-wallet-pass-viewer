@@ -40,7 +40,19 @@ button,select{font:inherit;color:inherit}
 .badge{font-size:10px;font-weight:600;border-radius:9px;padding:1px 7px;background:#3a3b40;color:#cfd0d6;white-space:nowrap}
 .badge.full{background:#2f4f7a;color:#cfe2ff}.badge.over{background:#6b2723;color:#ffd4d1}.badge.na{background:#3a3b40;color:var(--dim)}
 .section-h{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin:14px 8px 4px}
-.canvas{position:relative;overflow:auto;padding:26px 24px 60px}
+.canvas{position:relative;overflow:auto;padding:22px 24px 60px}
+.hero{display:flex;gap:14px;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:0 auto 26px;max-width:740px}
+.picker{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#17181a;border:1px solid var(--line);border-radius:16px;padding:6px;flex:1 1 420px}
+.picker button{display:flex;align-items:center;gap:12px;border:2px solid transparent;background:transparent;border-radius:12px;padding:8px 12px 8px 8px;cursor:pointer;text-align:left;color:var(--muted);transition:background .15s,border-color .15s}
+.picker button:hover{background:#26272b}
+.picker button.on{background:#2b3b55;border-color:var(--accent);color:#fff}
+.picker .thumb{width:46px;height:58px;border-radius:8px;background:#444 center top/cover;flex:none;box-shadow:0 2px 6px #0006}
+.picker .pt b{display:block;font-size:18px;letter-spacing:-.01em}
+.picker .pt small{font-size:11.5px;opacity:.8;white-space:nowrap}
+.dl{display:flex;align-items:center;gap:10px;border:0;border-radius:16px;padding:12px 18px;background:var(--accent);color:#fff;cursor:pointer;font:inherit;text-align:left;box-shadow:0 6px 18px #3b8cff55;flex:0 0 250px;min-width:0}.dl span{min-width:0}
+.dl:hover{background:#2f7cf0}.dl:disabled{opacity:.6;cursor:progress}
+.dl svg{width:26px;height:26px;flex:none}
+.dl b{display:block;font-size:16px}.dl small{display:block;font-size:11px;opacity:.9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .previews{display:flex;gap:56px;justify-content:center;flex-wrap:wrap;align-items:flex-start}
 .col{width:300px}
 .pill{display:inline-block;font:600 11px ui-monospace,SFMono-Regular,Menlo,monospace;background:#3a3b40;border-radius:14px;padding:5px 10px;margin-bottom:12px}
@@ -143,10 +155,12 @@ button,select{font:inherit;color:inherit}
 .err{background:#4a1f1d;border:1px solid #7a302b;color:#ffd4d1;border-radius:8px;padding:10px 12px;margin:0 auto 16px;max-width:640px;font-size:13px}
 @media (max-width:860px){
   .app{grid-template-columns:1fr}
-  .sidebar{position:static;max-height:none;border-right:0;border-bottom:1px solid #111}
+  .sidebar{position:static;max-height:none;border-right:0;border-top:1px solid #111;order:2}
   .titlebar{flex-wrap:wrap;height:auto;padding:8px 12px;position:static}
   .dots{display:none}
   .canvas{padding:18px 16px 50px}
+  .picker{flex:1 1 100%;min-width:0}.picker button{min-width:0;padding:6px 8px 6px 6px;gap:8px}.picker .pt{min-width:0}.picker .pt small{white-space:normal;display:block;line-height:1.2}.dl{flex:1 1 100%;justify-content:center}
+  .picker .pt b{font-size:16px}.picker .thumb{width:38px;height:48px}
   .inspector{position:fixed;left:16px;right:16px;top:16px;width:auto;max-height:calc(100vh - 32px)}
   .col,.card3d{width:min(300px,calc(100vw - 32px))}
 }
@@ -158,10 +172,6 @@ button,select{font:inherit;color:inherit}
   <div class="doc"><b id="docName">Loading…</b><small id="docSub">Pass template</small></div>
   <span class="ro" title="This viewer never modifies the template">READ-ONLY</span>
   <span class="grow"></span>
-  <div class="seg" role="group" aria-label="Template">
-    <button data-pass="membership" class="on">Membership</button>
-    <button data-pass="insurance">Insurance</button>
-  </div>
   <label class="tb-btn">Open pass.json<input id="jsonFile" type="file" accept=".json,application/json"></label>
   <label class="tb-btn">Open .pkpasstemplate<input id="folder" type="file" webkitdirectory multiple></label>
   <div class="seg" role="group" aria-label="Side">
@@ -173,6 +183,22 @@ button,select{font:inherit;color:inherit}
   <aside class="sidebar" id="sidebar" aria-label="Template components"></aside>
   <main class="canvas" id="canvas">
     <section class="inspector" id="inspector" hidden aria-live="polite"></section>
+    <div class="hero">
+      <div class="picker" role="tablist" aria-label="Template">
+        <button role="tab" data-pass="membership" class="on" aria-selected="true">
+          <span class="thumb" style="background-image:url('templates/AAA%20Membership%20Card.pkpasstemplate/artwork@2x.png')"></span>
+          <span class="pt"><b>Membership</b><small>AAA Membership Card</small></span>
+        </button>
+        <button role="tab" data-pass="insurance" aria-selected="false">
+          <span class="thumb" style="background-image:url('templates/AAA%20Insurance%20Card.pkpasstemplate/artwork@2x.png')"></span>
+          <span class="pt"><b>Insurance</b><small>AAA Insurance Card</small></span>
+        </button>
+      </div>
+      <button id="download" class="dl" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><b>Download template</b><small id="dlName">.pkpasstemplate (zip)</small></span>
+      </button>
+    </div>
     <div id="error"></div>
     <div class="previews">
       <div class="col"><span class="pill">iOS 27</span><div class="col-note" id="note27"></div>
@@ -186,6 +212,7 @@ button,select{font:inherit;color:inherit}
     <p class="legend">Browser recreation of the Pass Designer canvas for review. Wallet renders the real pass: fonts, truncation, barcode artwork, and Featured Action labels and symbols come from the system. Drag a card sideways to turn it over. Select any component on the left to inspect its values and Apple's limits.</p>
   </main>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 "use strict";
 const $ = id => document.getElementById(id);
@@ -336,7 +363,7 @@ async function loadDefault(key){
     if(!pr.ok) throw new Error('pass.json request failed ('+pr.status+')');
     const manifest = mr.ok ? await mr.json() : {};
     state = {...state, key, pass: await pr.json(), tooling: tr.ok ? await tr.json() : null, name: dir,
-      files: manifest[dir] || [], assets: {}, limitStyle: null, sel: state.sel, actionPick: null, fallbackMode: null};
+      files: manifest[dir] || [], assets: {}, raw: null, limitStyle: null, sel: state.sel, actionPick: null, fallbackMode: null};
     state.files.filter(f => f.endsWith('.png')).forEach(f => state.assets[f] = base + encodeURIComponent(f));
     showError(''); render();
   }catch(e){ showError('Could not load the bundled template: '+e.message+'. Try reloading the page.'); }
@@ -455,7 +482,8 @@ function render(){
   if(!state.limitStyle) state.limitStyle = sk;
   $('docName').textContent = state.name || 'pass.json';
   $('docSub').textContent = (STYLES[sk]?.name || sk) + ' · ' + (p.description || '') ;
-  document.querySelectorAll('[data-pass]').forEach(b => b.classList.toggle('on', b.dataset.pass === state.key));
+  document.querySelectorAll('[data-pass]').forEach(b => { b.classList.toggle('on', b.dataset.pass === state.key); b.setAttribute('aria-selected', String(b.dataset.pass === state.key)); });
+  $('dlName').textContent = (state.name || 'pass.json').replace(/\.json$/,'') + (state.name && state.name.endsWith('.pkpasstemplate') ? ' (zip)' : state.name && state.name.endsWith('.json') ? ' (json)' : ' (zip)');
 
   // iOS 27
   $('front27').innerHTML = sk === 'posterGeneric' ? renderPoster(p, dict) : renderGeneric(p, dict);
@@ -733,7 +761,7 @@ $('jsonFile').addEventListener('change', async e => {
   const file = e.target.files[0]; if(!file) return;
   try{
     const pass = JSON.parse(await file.text());
-    state = {...state, key:'', pass, tooling:null, files:[], assets:{}, name:file.name, limitStyle:null, actionPick:null, fallbackMode:null};
+    state = {...state, key:'', pass, tooling:null, files:[], assets:{}, raw:{'pass.json': await file.text()}, name:file.name, limitStyle:null, actionPick:null, fallbackMode:null};
     showError(''); render();
   }catch{ showError('The selected file is not valid JSON.'); }
   e.target.value = '';
@@ -747,10 +775,40 @@ $('folder').addEventListener('change', async e => {
     const tj = files.find(f => f.name === 'tooling.json');
     const assets = {}; files.filter(f => /\.png$/i.test(f.name)).forEach(f => assets[f.name] = URL.createObjectURL(f));
     const dir = (pj.webkitRelativePath || '').split('/')[0] || 'Imported template';
-    state = {...state, key:'', pass, tooling: tj ? JSON.parse(await tj.text()) : null, files: files.map(f=>f.name), assets, name:dir, limitStyle:null, actionPick:null, fallbackMode:null};
+    const raw = {}; for(const f of files) raw[f.name] = f;
+    state = {...state, key:'', pass, tooling: tj ? JSON.parse(await tj.text()) : null, files: files.map(f=>f.name), assets, raw, name:dir, limitStyle:null, actionPick:null, fallbackMode:null};
     showError(''); render();
   }catch{ showError('The selected template contains invalid JSON.'); }
   e.target.value = '';
+});
+/* ---------- Download (read-only copy of the template) ---------- */
+function saveBlob(blob, filename){
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename;
+  document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+$('download').addEventListener('click', async () => {
+  const btn = $('download'), label = btn.querySelector('b'), was = label.textContent;
+  if(state.name && state.name.endsWith('.json') && state.raw){
+    saveBlob(new Blob([state.raw['pass.json']], {type:'application/json'}), state.name); return;
+  }
+  btn.disabled = true; label.textContent = 'Preparing…';
+  try{
+    if(!window.JSZip) throw new Error('The zip library did not load.');
+    const zip = new JSZip(), dir = zip.folder(state.name || 'template.pkpasstemplate');
+    if(state.key){
+      const base = 'templates/' + encodeURIComponent(DEFAULTS[state.key]) + '/';
+      await Promise.all(state.files.map(async f => {
+        const r = await fetch(base + encodeURIComponent(f)); if(!r.ok) throw new Error(f + ' (' + r.status + ')');
+        dir.file(f, await r.blob());
+      }));
+    }else if(state.raw){
+      Object.entries(state.raw).forEach(([n, f]) => dir.file(n, f));
+    }else{
+      dir.file('pass.json', JSON.stringify(state.pass, null, 2));
+    }
+    saveBlob(await zip.generateAsync({type:'blob'}), (state.name || 'template.pkpasstemplate') + '.zip');
+  }catch(e){ showError('Download failed: ' + e.message); }
+  finally{ btn.disabled = false; label.textContent = was; }
 });
 loadDefault('membership');
 </script>
