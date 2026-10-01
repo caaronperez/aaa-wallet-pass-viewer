@@ -113,6 +113,9 @@ button,select{font:inherit;color:inherit}
 .act .dot{width:24px;height:24px;border-radius:50%;display:grid;place-items:center}
 .act .dot svg{width:14px;height:14px}
 .act b{font-size:13px;margin-top:7px}.act small{margin-top:auto;color:var(--muted);font-size:11px}
+.act.link{color:inherit;text-decoration:none;cursor:pointer;transition:background .15s,transform .15s}.act.link:hover{background:#3a3a3d;transform:translateY(-1px)}.act.link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.xl{color:#6cb2ff;text-decoration:none;word-break:break-all}.xl:hover{text-decoration:underline}
+.jl{border:0;background:none;padding:0;color:#6cb2ff;cursor:pointer;font:inherit;text-align:left}.jl:hover{text-decoration:underline}
 .act.empty{border:1px dashed #4a4b50;background:transparent;color:var(--dim);font-size:11px;align-items:center;justify-content:center;text-align:center}
 .hl{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
 /* Inspector */
@@ -344,6 +347,15 @@ const ACTIONS = [
 ];
 const ACTION_BY_TYPE = Object.fromEntries(ACTIONS.map(a => [a.type, a]));
 const MAX_ACTIONS = 2;
+function actionHref(a){
+  if(!a) return '';
+  if(a.type === 'place') return a.placeIdentifier && !/X{3,}/.test(a.placeIdentifier) ? 'https://maps.apple.com/place?place-id=' + encodeURIComponent(a.placeIdentifier) : '';
+  const u = String(a.url || '');
+  if(a.type === 'call'){ const n = u.replace(/^tel:\/*/i, '').replace(/[^\d+]/g, ''); return n.length >= 6 ? 'tel:' + n : ''; }
+  return /^https:\/\/[^/]+\.[^/]+/.test(u) ? u : '';
+}
+const extLink = (href, text) => href ? `<a class="xl" href="${esc(href)}" target="_blank" rel="noopener">${esc(text)} <span aria-hidden="true">↗</span></a>` : esc(text);
+const jump = (sel, text, title) => `<button type="button" class="jl" data-jump="${esc(sel)}" title="${esc(title)}">${esc(text)} <span aria-hidden="true">→</span></button>`;
 const icon = (a, cls='dot') => `<span class="${cls}" style="background:${a.color}"><svg viewBox="0 0 24 24">${G[a.g]}</svg></span>`;
 
 /* ---------- State ---------- */
@@ -492,7 +504,9 @@ function render(){
   const acts = p.featuredActions || [];
   $('acts27').innerHTML = acts.slice(0, MAX_ACTIONS).map((a,i) => {
     const d = ACTION_BY_TYPE[a.type] || {title:a.type||'Unknown action',sub:'Unsupported type',color:'#636366',g:'star'};
-    return `<div class="act" data-f="featuredActions:${i}">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)}</small></div>`;
+    const href = actionHref(a), tip = a.type === 'place' ? 'Opens this place in Apple Maps' : a.type === 'call' ? 'Calls ' + href.slice(4) : 'Opens ' + href;
+    return href ? `<a class="act link" data-f="featuredActions:${i}" href="${esc(href)}" target="_blank" rel="noopener" title="${esc(tip)}">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)} <span aria-hidden="true">↗</span></small></a>`
+                : `<div class="act" data-f="featuredActions:${i}" title="No valid destination">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)}</small></div>`;
   }).join('') + (acts.length < MAX_ACTIONS ? '<div class="act empty">Empty action slot</div>'.repeat(MAX_ACTIONS - acts.length) : '');
 
   // iOS 26
@@ -661,11 +675,11 @@ function openInspector(id, scroll){
     const dupIds = acts.map(x=>x.identifier).filter((v,i,arr)=>v && arr.indexOf(v)!==i);
     if(dupIds.length) issues.push('Identifiers must be unique: ' + esc(dupIds.join(', ')));
     if(acts.length > MAX_ACTIONS) issues.push(`${acts.length} actions — passes support a maximum of ${MAX_ACTIONS}.`);
-    body = sec(`In this template · ${acts.length} of ${MAX_ACTIONS}`, acts.map(x => { const d = ACTION_BY_TYPE[x.type]||{doc:x.type}; return `<div class="fieldcard"><h4><span>${esc(d.doc)}</span><span class="badge full">${esc(x.type)}</span></h4>${kv([['Identifier',x.identifier],['Type',x.type],[d.key==='placeIdentifier'?'Maps Place ID':'URL',x.placeIdentifier ?? x.url],['Card shows (Wallet)',(d.title||x.type)+' · '+(d.sub||'')]])}${wordingFor(x)}</div>`; }).join('') || note('No Featured Actions.'))
+    body = sec(`In this template · ${acts.length} of ${MAX_ACTIONS}`, acts.map(x => { const d = ACTION_BY_TYPE[x.type]||{doc:x.type}; return `<div class="fieldcard"><h4><span>${esc(d.doc)}</span><span class="badge full">${esc(x.type)}</span></h4>${actionAttrs(x, d)}${wordingFor(x)}</div>`; }).join('') || note('No Featured Actions.'))
       + sec('All available actions', `<label class="k" for="actPick" style="font-size:11px;color:var(--muted)">Action type (✓ = in this template)</label>
         <select id="actPick" class="dd">${ACTIONS.map(x=>`<option value="${x.type}" ${x.type===pick?'selected':''}>${used.has(x.type)?'✓ ':'   '}${esc(x.doc)} — ${esc(x.cat)}</option>`).join('')}</select>
         <div class="fieldcard ${used.has(pick)?'':''}"><h4><span>${icon(a)} ${esc(a.doc)}</span><span class="badge ${used.has(pick)?'full':'na'}">${used.has(pick)?'in template':'available'}</span></h4>
-        ${kv([['API type',a.type],['Designer label',a.title + ' · ' + a.sub],['Purpose',a.purpose],['Category',a.cat],['Required keys','identifier, type, ' + a.key],['Value format', a.key==='placeIdentifier' ? 'Apple Maps Place ID, e.g. I71B28B9C6AC9C7EF (look it up with MapKit: MKLocalSearch → MKMapItem.identifier)' : a.scheme === 'tel' ? 'tel:// phone link' : 'https:// link to your app or website'], inst ? ['Template value', inst.placeIdentifier ?? inst.url] : null])}</div>
+        ${kv([['API type',a.type],['Designer label',a.title + ' · ' + a.sub],['Purpose',a.purpose],['Category',a.cat],['Required keys','identifier, type, ' + a.key],['Value format', a.key==='placeIdentifier' ? 'Apple Maps Place ID, e.g. I71B28B9C6AC9C7EF (look it up with MapKit: MKLocalSearch → MKMapItem.identifier)' : a.scheme === 'tel' ? 'tel:// phone link' : 'https:// link to your app or website'], inst ? ['Template value', actionHref(inst) ? extLink(actionHref(inst), inst.placeIdentifier ?? inst.url) : esc(inst.placeIdentifier ?? inst.url), true] : null])}</div>
         <div class="agrid">${ACTIONS.map(x=>`<button class="atile ${used.has(x.type)?'in':''} ${x.type===pick?'pick':''}" data-act="${x.type}">${used.has(x.type)?'<span class="tag">IN TEMPLATE</span>':''}${icon(x)}<b>${esc(x.title)}</b><small>${esc(x.cat)}</small></button>`).join('')}</div>`)
       + sec('Limitations', note(`A pass supports at most <b>${MAX_ACTIONS}</b> Featured Actions (Pass Designer: “To add another action, remove an existing one.”).`)
         + note('Requires iOS and watchOS 27 or later; they appear as cards under the pass. Earlier systems (the iOS 26 column) ignore them.')
@@ -705,6 +719,27 @@ function openInspector(id, scroll){
   const ap = ins.querySelector('#actPick');
   if(ap) ap.onchange = e => { state.actionPick = e.target.value; openInspector('actions', false); };
   ins.querySelectorAll('[data-act]').forEach(b => b.onclick = () => { state.actionPick = b.dataset.act; openInspector('actions', false); });
+  ins.querySelectorAll('[data-jump]').forEach(b => b.onclick = () => {
+    const j = b.dataset.jump;
+    if(j.startsWith('act:')){
+      state.actionPick = j.slice(4); openInspector('actions', false);
+      const t = $('inspector').querySelector('#actPick'); if(t) t.scrollIntoView({block:'center', behavior:'smooth'});
+      return;
+    }
+    state.sel = j; renderSidebar(); openInspector(j, true); highlight();
+    if(j.startsWith('field:backFields')) flip(null, true);
+  });
+}
+function actionAttrs(x, d){
+  const back = (state.pass[styleKey(state.pass)] || {}).backFields || [];
+  const bi = back.findIndex(f => f.key === x.identifier);
+  const href = actionHref(x), dest = x.placeIdentifier ?? x.url;
+  return kv([
+    ['Identifier', bi >= 0 ? jump('field:backFields:' + bi, x.identifier, 'Show the paired back field') : esc(x.identifier), true],
+    ['Type', ACTION_BY_TYPE[x.type] ? jump('act:' + x.type, x.type, 'Show this action type') : esc(x.type), true],
+    [d.key === 'placeIdentifier' ? 'Maps Place ID' : 'URL', href ? extLink(href, dest) : esc(dest) + ' <span class="miss">(not openable)</span>', true],
+    ['Card shows (Wallet)', (d.title || x.type) + ' · ' + (d.sub || '')]
+  ]);
 }
 function wordingFor(x){
   const bf = ((state.pass[styleKey(state.pass)] || {}).backFields || []).find(f => f.key === x.identifier);
