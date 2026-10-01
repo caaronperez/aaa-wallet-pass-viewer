@@ -1,7 +1,9 @@
 {
   "authenticationToken" : "",
   "backgroundColor" : "rgb(247,245,241)",
-  "barcodes" : [],
+  "barcodes" : [
+
+  ],
   "description" : "AAA Insurance Card",
   "featuredActions" : [
     {
@@ -120,7 +122,9 @@
   "organizationName" : "AAA",
   "passTypeIdentifier" : "pass.com.example.aaa.insurance",
   "posterGeneric" : {
-    "auxiliaryFields" : [],
+    "auxiliaryFields" : [
+
+    ],
     "backFields" : [
       {
         "_id" : "8FA15D29-3CFC-4585-960B-8B5E9A6E7AC1",
@@ -183,7 +187,9 @@
         "value" : "POLICY NUMBER: CAA 23985827459235"
       }
     ],
-    "headerFields" : [],
+    "headerFields" : [
+
+    ],
     "primaryFields" : [
       {
         "_id" : "CEF11B93-54DC-4728-B361-109803D0333D",
@@ -204,7 +210,9 @@
         "value" : "INTERINSURANCE EXCHANGE"
       }
     ],
-    "secondaryFields" : []
+    "secondaryFields" : [
+
+    ]
   },
   "serialNumber" : "CAA23985827459235",
   "suppressHeaderDarkening" : false,

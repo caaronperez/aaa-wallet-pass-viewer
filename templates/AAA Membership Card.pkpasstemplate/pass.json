@@ -122,7 +122,9 @@
   "organizationName" : "AAA",
   "passTypeIdentifier" : "pass.com.example.aaa.membership",
   "posterGeneric" : {
-    "auxiliaryFields" : [],
+    "auxiliaryFields" : [
+
+    ],
     "backFields" : [
       {
         "_id" : "16FC7DAB-10AF-4930-B9D8-1AF7B13A5896",
@@ -179,7 +181,14 @@
         "value" : "MEMBERSHIP NUMBER: 620 004 123456789 2"
       }
     ],
-    "headerFields" : [],
+    "headerFields" : [
+      {
+        "_id" : "5496F918-6491-4104-98DD-E3888E16FD76",
+        "key" : "cardTitle",
+        "label" : "MEMBERSHIP CARD",
+        "value" : "Premier"
+      }
+    ],
     "primaryFields" : [
       {
         "_id" : "8DFC8A34-96A7-46FE-B2C5-7363792A4869",
@@ -200,10 +209,12 @@
         "value" : "PREMIER"
       }
     ],
-    "secondaryFields" : []
+    "secondaryFields" : [
+
+    ]
   },
   "serialNumber" : "6200041234567892",
   "suppressHeaderDarkening" : true,
   "teamIdentifier" : "",
-  "useAutomaticColors" : false
+  "useAutomaticColors" : true
 }

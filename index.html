@@ -58,8 +58,8 @@ button,select{font:inherit;color:inherit}
 .poster{background:var(--bg);color:var(--fg)}
 .poster .art{position:absolute;inset:0;background-repeat:no-repeat;background-position:center top;background-size:cover}
 .poster .plogo{position:absolute;left:14px;top:12px;height:25px;max-width:105px;object-fit:contain;object-position:left}
-.poster .phead{position:absolute;right:14px;top:12px;text-align:right;color:#fff;text-shadow:0 1px 3px #0008;font-size:12px}
-.poster .phead small{display:block;font-size:9px;opacity:.85;text-transform:uppercase}
+.poster .phead{position:absolute;right:14px;top:12px;text-align:right;color:#fff;text-shadow:0 1px 3px #0008;font:12px ui-monospace,SFMono-Regular,Menlo,monospace}
+.poster .phead small{display:block;font-size:10px;font-weight:700;text-transform:uppercase}
 .poster .body{position:absolute;left:0;right:0;bottom:0;background:var(--footer,#fff);padding:10px 12px 9px;min-height:24%}
 .poster .row{display:grid;gap:8px;margin-top:8px}
 .fld{min-width:0}
@@ -381,7 +381,8 @@ function renderPoster(p, dict){
   const bc = (p.barcodes||[])[0];
   const prim = dict.primaryFields||[], foot = dict.footerFields||[], head = dict.headerFields||[];
   const art = asset('artwork'), logo = asset('primaryLogo') || asset('logo');
-  return `<div class="face-in poster" style="${cssVars(p)};position:absolute;inset:0">
+  const auto = p.useAutomaticColors ? ';--fg:#1c1c1e;--label:#6e6e73' : '';
+  return `<div class="face-in poster" style="${cssVars(p)}${auto};position:absolute;inset:0">
     ${art ? `<div class="art" style="background-image:url('${esc(art)}')"></div>` : '<div class="art" style="background:#5b6b82"></div>'}
     ${logo ? `<img class="plogo" src="${esc(logo)}" alt="Primary logo">` : ''}
     ${head[0] ? `<div class="phead" data-f="headerFields:0"><small>${esc(head[0].label)}</small>${esc(head[0].value)}</div>` : ''}
