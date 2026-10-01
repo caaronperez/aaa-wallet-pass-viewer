@@ -181,7 +181,13 @@ button,select{font:inherit;color:inherit}
 #rotateBtn[aria-pressed="true"] svg{transform:rotate(-180deg)}
 .ios-hint{text-align:center;font-size:13px;color:var(--muted);margin:-14px auto 18px}
 .rotate-hint{font-size:13px;color:var(--muted);text-align:center}
-.sim-bar{display:flex;flex-direction:column;align-items:center;gap:6px;margin:-8px auto 22px}
+.sim-bar{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;column-gap:14px;row-gap:6px;margin:-8px auto 22px}.sim-bar .sim-hint{flex-basis:100%;text-align:center}
+.exp-sw{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:#fff;cursor:pointer}
+.exp-sw input{position:absolute;opacity:0;width:1px;height:1px}
+.exp-sw .track{width:42px;height:25px;border-radius:13px;background:#3a3b40;position:relative;transition:background .2s}
+.exp-sw .track::after{content:"";position:absolute;left:2px;top:2px;width:21px;height:21px;border-radius:50%;background:#fff;transition:transform .2s}
+.exp-sw input:checked+.track{background:#30d158}.exp-sw input:checked+.track::after{transform:translateX(17px)}
+.exp-sw input:focus-visible+.track{outline:2px solid var(--accent);outline-offset:2px}
 .sim-hint{font-size:13px;color:var(--muted)}
 #simOpen{display:inline-flex;align-items:center;gap:8px;border:0;background:var(--accent);color:#fff;border-radius:999px;padding:9px 18px;font:600 14px inherit;cursor:pointer;box-shadow:0 6px 16px #3b8cff44}
 #simOpen svg{width:18px;height:18px}
@@ -195,8 +201,8 @@ button,select{font:inherit;color:inherit}
 @keyframes scrIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .sim-exit{border:0;background:#2c2c2e;color:#fff;border-radius:999px;padding:7px 14px;font:600 14px inherit;cursor:pointer}
 .wl-actions{display:flex;gap:10px;align-items:center}
-.wl-stack [data-card]{transition:transform .45s cubic-bezier(.2,.85,.25,1),opacity .35s ease}
-.wl-stack.opening [data-card]:not(.picked){transform:translateY(115vh);opacity:.6}
+.wl-stack [data-i]{transition:transform .45s cubic-bezier(.2,.85,.25,1),opacity .35s ease}
+.wl-stack.opening [data-i]:not(.picked){transform:translateY(115vh);opacity:.6}
 .wl-stack.opening .picked{transform:translateY(var(--lift,0px));z-index:5}
 .scr-stack .wl-head,.scr-stack .wl-note{transition:opacity .3s}
 .scr-stack.opening .wl-head,.scr-stack.opening .wl-note{opacity:0}
@@ -207,13 +213,19 @@ button,select{font:inherit;color:inherit}
 .wl-head{display:flex;justify-content:space-between;align-items:center;padding:8px 18px 10px}
 .wl-head h3{margin:0;font-size:32px;font-weight:700;letter-spacing:-.02em}
 .wl-plus{width:34px;height:34px;border-radius:50%;background:#2c2c2e;display:grid;place-items:center;font-size:22px;color:#fff}
-.wl-stack{position:relative;margin:0 16px;height:calc(180px + 422px * var(--k) + 30px)}
+.wl-stack{position:relative;margin:0 16px;height:calc(var(--n,3) * 60px + 422px * var(--k) + 30px)}
+.wl-pass{box-shadow:0 -4px 14px rgba(0,0,0,.4)}
+.wl-explink{display:block;margin:0 auto 40px;border:0;background:none;color:#0a84ff;font:600 16px -apple-system,sans-serif;cursor:pointer}
+.wl-explink[hidden]{display:none}
+.exp-list{position:relative;margin:4px 16px 40px}
+.exp-list .wl-pass{position:relative}
+.bcexp{background:#fff;border-radius:7px;padding:16px 10px;text-align:center;color:#6e6e73;font:600 13px -apple-system,sans-serif}
+.exp-note{margin:0 0 12px;text-align:center;color:#8e8e93;font-size:13px}
 .mock{position:absolute;left:0;right:0;height:215px;border:0;border-radius:14px;text-align:left;padding:14px 16px;color:#fff;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;font:inherit}
 .mock b{font-size:16px}.mock span{font-size:13px;opacity:.85}
 .mock-credit{background:linear-gradient(135deg,#3a3a3c,#1c1c1e);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
-.mock-front{top:180px;height:calc(422px * var(--k));box-shadow:0 -6px 20px rgba(0,0,0,.45)}
 .mockface{position:absolute;inset:0;border-radius:14px;padding:16px;color:#fff;font:700 18px -apple-system,sans-serif}
-.wl-pass{position:absolute;left:0;top:120px;text-align:left;width:calc(300px * var(--k));height:calc(422px * var(--k));border:0;padding:0;background:none;cursor:pointer;border-radius:14px;box-shadow:0 -6px 20px rgba(0,0,0,.45)}
+.wl-pass{position:absolute;left:0;text-align:left;width:calc(300px * var(--k));height:calc(422px * var(--k));border:0;padding:0;background:none;cursor:pointer;border-radius:14px;box-shadow:0 -6px 20px rgba(0,0,0,.45)}
 .wl-pass .sim-pass{position:absolute;left:0;top:0}
 .wl-pass:focus:not(:focus-visible){outline:none}
 .sim-pass{position:relative;width:300px;height:422px;transform:scale(var(--k));transform-origin:top left;border-radius:14px;overflow:hidden}
@@ -296,7 +308,7 @@ button,select{font:inherit;color:inherit}
     <p class="ios-hint">open in safari on iphone to simulate fullscreen wallet behavior</p>
     <div class="sim-bar"><button type="button" id="simOpen">
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      Simulate fullscreen wallet mock</button><span class="sim-hint">(i was also too tired to complete this)</span></div>
+      Simulate fullscreen wallet mock</button><label class="exp-sw"><input type="checkbox" id="simExpiredSw"><span class="track" aria-hidden="true"></span>expired?</label><span class="sim-hint">(i was also too tired to complete this)</span></div>
     <div class="previews">
       <div class="col"><span class="pill">iOS 27</span><div class="col-note" id="note27"></div>
         <div class="flipper" data-flip="27"><div class="card3d" id="card27"><div class="face front" id="front27"></div><div class="face back details" id="back27"></div></div></div>
@@ -333,19 +345,19 @@ button,select{font:inherit;color:inherit}
     <div class="phone" id="phone">
       <section class="scr scr-stack" id="scrStack">
         <div class="wl-head"><h3>Wallet</h3><span class="wl-actions"><button type="button" class="sim-exit" id="simExit">Exit</button><span class="wl-plus" aria-hidden="true">+</span></span></div>
-        <p class="wl-note">Tap the AAA card in the stack. Swipe the open card to flip it, or use the ••• button for the extra info.</p>
-        <div class="wl-stack">
-          <button type="button" class="mock mock-credit" data-card="mock" data-name="Credit Card" data-color="linear-gradient(135deg,#3a3a3c,#1c1c1e)" style="top:0"><b>Credit Card</b><span>•••• 4021</span></button>
-          <button type="button" class="mock" data-card="mock" data-name="Rewards Card" data-color="#30b650" style="top:60px;background:#30b650"><b>Rewards Card</b><span>1,250 pts</span></button>
-          <button type="button" class="wl-pass" id="wlPass" data-card="aaa" aria-label="Open the AAA pass"><div class="sim-pass" id="simStackPass"></div></button>
-          <button type="button" class="mock mock-front" data-card="mock" data-name="Gym Membership" data-color="#5e5ce6" style="background:#5e5ce6"><b>Gym Membership</b><span>Member</span></button>
-        </div>
+        <p class="wl-note">The card you picked is in front. Tap any card to open it, swipe the open card to flip it, or use ••• for the extra info.</p>
+        <div class="wl-stack" id="wlStack"></div>
+        <button type="button" class="wl-explink" id="wlExpLink" hidden>View Expired Passes</button>
+      </section>
+      <section class="scr scr-exp" id="scrExp" hidden>
+        <div class="dt-bar"><span></span><b>Expired Passes</b><button type="button" id="expDone">Done</button></div>
+        <div class="exp-list" id="expList"></div>
       </section>
       <section class="scr scr-pass" id="scrPass" hidden>
         <div class="pv-bar"><button type="button" class="glass" id="pvClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
           <span class="glass-pair"><span class="glass" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v12M7.5 7.5L12 3l4.5 4.5M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><button type="button" class="glass" id="pvMore" aria-label="More" aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg></button></span></div>
         <div class="pv-menu" id="pvMenu" hidden><button type="button" id="pvDetails">Pass Details</button><button type="button" disabled>Share Pass</button><button type="button" disabled>Remove Pass</button></div>
-        <div class="pv-body"><div class="pv-cardwrap"><div class="flipper pv-flip"><div class="card3d" id="simCard"><div class="face front" id="simBigPass"></div><div class="face back details" id="simBack"></div></div></div></div><div class="acts sim-acts" id="simActs"></div></div>
+        <div class="pv-body"><div class="pv-cardwrap"><div class="flipper pv-flip"><div class="card3d" id="simCard"><div class="face front" id="simBigPass"></div><div class="face back details" id="simBack"></div></div></div></div><p class="exp-note" id="simExpNote" hidden></p><div class="acts sim-acts" id="simActs"></div></div>
       </section>
       <section class="scr scr-details" id="scrDetails" hidden>
         <div class="dt-bar"><span></span><b>Pass Details</b><button type="button" id="dtDone">Done</button></div>
@@ -610,6 +622,15 @@ function fitRows(root){
     }
   });
 }
+function actsHTML(p){
+  const acts = p.featuredActions || [];
+  return acts.slice(0, MAX_ACTIONS).map((a,i) => {
+    const d = ACTION_BY_TYPE[a.type] || {title:a.type||'Unknown action',sub:'Unsupported type',color:'#636366',g:'star'};
+    const href = actionHref(a), tip = a.type === 'place' ? 'Opens this place in Apple Maps' : a.type === 'call' ? 'Calls ' + href.slice(4) : 'Opens ' + href;
+    return href ? `<a class="act link" data-f="featuredActions:${i}" href="${esc(href)}" target="_blank" rel="noopener" title="${esc(tip)}">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)} <span aria-hidden="true">↗</span></small></a>`
+                : `<div class="act" data-f="featuredActions:${i}" title="No valid destination">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)}</small></div>`;
+  }).join('') + (acts.length < MAX_ACTIONS ? '<div class="act empty">Empty action slot</div>'.repeat(MAX_ACTIONS - acts.length) : '');
+}
 function renderGeneric(p, dict){
   const bc = (p.barcodes||[])[0];
   const head = dict.headerFields||[], prim = dict.primaryFields||[], sec = dict.secondaryFields||[], aux = dict.auxiliaryFields||[];
@@ -667,12 +688,7 @@ function render(){
   $('back27').innerHTML = renderBack(p, dict);
   $('note27').textContent = sk === 'posterGeneric' ? 'How it looks on iOS 27' : (STYLES[sk]?.name || sk) + ' card (shown with the basic layout)';
   const acts = p.featuredActions || [];
-  $('acts27').innerHTML = acts.slice(0, MAX_ACTIONS).map((a,i) => {
-    const d = ACTION_BY_TYPE[a.type] || {title:a.type||'Unknown action',sub:'Unsupported type',color:'#636366',g:'star'};
-    const href = actionHref(a), tip = a.type === 'place' ? 'Opens this place in Apple Maps' : a.type === 'call' ? 'Calls ' + href.slice(4) : 'Opens ' + href;
-    return href ? `<a class="act link" data-f="featuredActions:${i}" href="${esc(href)}" target="_blank" rel="noopener" title="${esc(tip)}">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)} <span aria-hidden="true">↗</span></small></a>`
-                : `<div class="act" data-f="featuredActions:${i}" title="No valid destination">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)}</small></div>`;
-  }).join('') + (acts.length < MAX_ACTIONS ? '<div class="act empty">Empty action slot</div>'.repeat(MAX_ACTIONS - acts.length) : '');
+  $('acts27').innerHTML = actsHTML(p);
 
   // iOS 26
   const fb = sk === 'posterGeneric' ? fallbackFor(p) : {dict, mode:'same'};
@@ -1054,33 +1070,82 @@ function simFit(){
   const ph = $('phone');
   ph.style.setProperty('--k', ((ph.clientWidth - 32) / 300).toFixed(4));
 }
-function simShow(id){ ['scrStack','scrPass','scrDetails'].forEach(x => $(x).hidden = x !== id); $('pvMenu').hidden = true; $('pvMore').setAttribute('aria-expanded','false'); }
-function simOpen(){
-  $('simStackPass').innerHTML = $('front27').innerHTML;
-  $('sim').hidden = false; document.body.style.overflow = 'hidden';
-  document.querySelector('.wl-stack').classList.remove('opening'); $('scrStack').classList.remove('opening', 'noanim');
-  document.querySelectorAll('.wl-stack .picked').forEach(b => b.classList.remove('picked'));
-  simShow('scrStack'); simFit();
+function simShow(id){ ['scrStack','scrExp','scrPass','scrDetails'].forEach(x => $(x).hidden = x !== id); $('pvMenu').hidden = true; $('pvMore').setAttribute('aria-expanded','false'); }
+/* Cards for the wallet mock: Membership, Insurance and any imported template, each rendered on its own. */
+const simCache = {};
+async function simEntry(key){
+  if(key === 'imported') return imported;
+  if(simCache[key]) return simCache[key];
+  const dir = DEFAULTS[key], base = 'templates/' + encodeURIComponent(dir) + '/';
+  const [pass, manifest] = await Promise.all([fetch(base + 'pass.json').then(r => r.json()), fetch('templates/manifest.json').then(r => r.json())]);
+  const files = manifest[dir] || [], assets = {};
+  files.filter(f => f.endsWith('.png')).forEach(f => assets[f] = base + encodeURIComponent(f));
+  return simCache[key] = {pass, assets, files, name: dir};
 }
+function simRender(entry){
+  const saved = {assets: state.assets, files: state.files};
+  state.assets = entry.assets || {}; state.files = entry.files || [];
+  const p = entry.pass, sk = styleKey(p), dict = p[sk] || {};
+  const out = {front: sk === 'posterGeneric' ? renderPoster(p, dict) : renderGeneric(p, dict), back: renderBack(p, dict), acts: actsHTML(p)};
+  state.assets = saved.assets; state.files = saved.files;
+  return out;
+}
+let simCards = [], simExpired = false, simFromExpired = false;
+async function simBuildStack(){
+  const keys = ['membership', 'insurance'].concat(imported ? ['imported'] : []);
+  const sel = keys.includes(state.key) ? state.key : 'membership';
+  const order = keys.filter(k => k !== sel).concat(sel);
+  const aaa = await Promise.all(order.map(async k => ({key: k, ...simRender(await simEntry(k)), label: k === 'imported' ? imported.name.replace(/\.pkpasstemplate$/i, '') : k === 'membership' ? 'Membership' : 'Insurance'})));
+  simCards = [{mock: true, name: 'Credit Card', color: 'linear-gradient(135deg,#3a3a3c,#1c1c1e)', meta: '•••• 4021'},
+              {mock: true, name: 'Rewards Card', color: '#30b650', meta: '1,250 pts'}].concat(aaa);
+  const front = simCards.length - 1;                  // selected template is last (front)
+  const visible = simCards.map((c, i) => i).filter(i => !(simExpired && i === front));
+  const st = $('wlStack'); st.style.setProperty('--n', visible.length - 1);
+  const passBtn = (c, i, style) => `<button type="button" class="wl-pass" data-i="${i}" style="${style}" aria-label="Open the ${esc(c.label)} pass"><div class="sim-pass">${c.front}</div></button>`;
+  st.innerHTML = visible.map((i, pos) => {
+    const c = simCards[i], top = `top:${pos * 60}px`;
+    return c.mock ? `<button type="button" class="mock" data-i="${i}" style="${top};background:${c.color}"><b>${esc(c.name)}</b><span>${esc(c.meta)}</span></button>` : passBtn(c, i, top);
+  }).join('');
+  // Expired passes leave the main stack and live under "View Expired Passes", like Wallet.
+  $('wlExpLink').hidden = !simExpired;
+  $('expList').innerHTML = simExpired ? passBtn(simCards[front], front, `height:calc(422px * var(--k))`) : '';
+  $('expList').style.height = simExpired ? 'calc(422px * var(--k))' : '';
+  document.querySelectorAll('#wlStack [data-i], #expList [data-i]').forEach(b => b.onclick = () => simOpenCard(b));
+  requestAnimationFrame(() => { fitRows(st); fitRows($('expList')); });
+}
+async function simOpen(){
+  simExpired = $('simExpiredSw').checked;
+  $('sim').hidden = false; document.body.style.overflow = 'hidden';
+  $('wlStack').classList.remove('opening'); $('scrStack').classList.remove('opening', 'noanim');
+  simShow('scrStack'); simFit();
+  await simBuildStack();
+}
+$('wlExpLink').onclick = () => { simShow('scrExp'); $('scrExp').scrollTop = 0; };
+$('expDone').onclick = () => simShow('scrStack');
 function simFill(btn){
-  const card = $('simCard'); card.classList.remove('flip'); card.style.transform = '';
-  if(btn.dataset.card === 'aaa'){
-    $('simBigPass').innerHTML = $('front27').innerHTML;
-    $('simBack').innerHTML = $('back27').innerHTML;
-    $('simActs').innerHTML = $('acts27').innerHTML;
+  const c = simCards[+btn.dataset.i], card = $('simCard');
+  card.classList.remove('flip'); card.style.transform = '';
+  const exp = !c.mock && simExpired && +btn.dataset.i === simCards.length - 1;
+  simFromExpired = exp;
+  if(!c.mock){
+    $('simBigPass').innerHTML = c.front;
+    $('simBack').innerHTML = c.back; $('simActs').innerHTML = c.acts;
+    // Expired: the code can't be scanned anymore, so it's swapped for a note.
+    if(exp){ const bc = $('simBigPass').querySelector('.bcwrap .bcpanel'); if(bc) bc.outerHTML = '<div class="bcexp">This pass has expired</div>'; }
   }else{
-    $('simBigPass').innerHTML = `<div class="mockface" style="background:${esc(btn.dataset.color)}">${esc(btn.dataset.name)}</div>`;
-    $('simBack').innerHTML = `<h4>${esc(btn.dataset.name)}</h4>`;
-    $('simActs').innerHTML = '';
+    $('simBigPass').innerHTML = `<div class="mockface" style="background:${c.color}">${esc(c.name)}</div>`;
+    $('simBack').innerHTML = `<h4>${esc(c.name)}</h4>`; $('simActs').innerHTML = '';
   }
+  $('simExpNote').hidden = !exp; $('simExpNote').textContent = exp ? 'Expired' : '';
   $('scrPass').querySelectorAll('.hl').forEach(n => n.classList.remove('hl'));
+  requestAnimationFrame(() => fitRows($('scrPass')));
 }
 const SIM_MS = 450, reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let simPicked = null;
 /* Wallet-style open: the tapped card rises to the top, the rest slide away. */
 function simOpenCard(btn){
   simFill(btn); simPicked = btn;
-  const stack = document.querySelector('.wl-stack'), pass = $('scrPass');
+  const stack = $('wlStack'), pass = $('scrPass');
   pass.hidden = false; pass.style.visibility = 'hidden'; pass.scrollTop = 0;
   const target = pass.querySelector('.pv-cardwrap').getBoundingClientRect().top;
   pass.hidden = true; pass.style.visibility = '';
@@ -1095,7 +1160,8 @@ function simOpenCard(btn){
 }
 /* Close: cards slide back into the stack. */
 function simBackToStack(){
-  const stack = document.querySelector('.wl-stack');
+  if(simFromExpired){ $('scrPass').classList.remove('noanim'); simShow('scrExp'); return; }
+  const stack = $('wlStack');
   $('scrPass').classList.remove('noanim');
   simShow('scrStack'); $('scrStack').classList.add('noanim');
   if(simPicked && !reduceMotion.matches){
@@ -1111,7 +1177,6 @@ function simBackToStack(){
 function simClose(){ $('sim').hidden = true; document.body.style.overflow = ''; $('simOpen').focus(); }
 $('simOpen').onclick = simOpen;
 $('simExit').onclick = simClose;
-document.querySelectorAll('.wl-stack [data-card]').forEach(b => b.onclick = () => simOpenCard(b));
 $('pvClose').onclick = simBackToStack;
 $('pvMore').onclick = () => { const m = $('pvMenu'); m.hidden = !m.hidden; $('pvMore').setAttribute('aria-expanded', String(!m.hidden)); };
 $('pvDetails').onclick = () => { $('simDetails').innerHTML = $('simBack').innerHTML; simShow('scrDetails'); $('scrDetails').scrollTop = 0; };
@@ -1119,7 +1184,7 @@ $('dtDone').onclick = () => simShow('scrPass');
 window.addEventListener('resize', () => { if(!$('sim').hidden) simFit(); });
 document.addEventListener('keydown', e => {
   if($('sim').hidden || e.key !== 'Escape') return;
-  if(!$('scrDetails').hidden) simShow('scrPass'); else if(!$('scrPass').hidden) simBackToStack(); else simClose();
+  if(!$('scrDetails').hidden) simShow('scrPass'); else if(!$('scrPass').hidden) simBackToStack(); else if(!$('scrExp').hidden) simShow('scrStack'); else simClose();
 });
 
 /* ---------- Download (read-only copy of the template) ---------- */
