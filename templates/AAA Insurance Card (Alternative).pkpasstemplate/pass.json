@@ -57,14 +57,14 @@
         "dataDetectorTypes" : [],
         "key" : "policyNumber",
         "label" : "Policy number",
-        "value" : "CAA 23985827459235"
+        "value" : "CAA2398582"
       },
       {
         "_id" : "22DA21C8-C97F-470B-B52E-C52FE9DC6954",
         "dataDetectorTypes" : [],
         "key" : "policyPeriod",
         "label" : "Policy period",
-        "value" : "9\/14\/26 – 9\/14\/27"
+        "value" : "9\/14\/26–9\/14\/27"
       },
       {
         "_id" : "7A06B1A5-6EC4-4CBF-8389-C5CE2E2E90C7",
@@ -127,7 +127,7 @@
         "_id" : "1DB63B50-7CD4-4B28-80D1-87F633BF4E36",
         "key" : "policyNumber",
         "label" : "POLICY NUMBER",
-        "value" : "CAA 23985827459235"
+        "value" : "CAA2398582"
       }
     ],
     "secondaryFields" : [
@@ -142,7 +142,7 @@
         "key" : "effectiveDate",
         "label" : "EFFECTIVE",
         "textAlignment" : "PKTextAlignmentRight",
-        "value" : "9\/14\/26 – 9\/14\/27"
+        "value" : "9\/14\/26–9\/14\/27"
       }
     ]
   },
@@ -178,14 +178,14 @@
         "dataDetectorTypes" : [],
         "key" : "policyNumber",
         "label" : "Policy number",
-        "value" : "CAA 23985827459235"
+        "value" : "CAA2398582"
       },
       {
         "_id" : "22DA21C8-C97F-470B-B52E-C52FE9DC6954",
         "dataDetectorTypes" : [],
         "key" : "policyPeriod",
         "label" : "Policy period",
-        "value" : "9\/14\/26 – 9\/14\/27"
+        "value" : "9\/14\/26–9\/14\/27"
       },
       {
         "_id" : "7A06B1A5-6EC4-4CBF-8389-C5CE2E2E90C7",
@@ -261,14 +261,14 @@
         "_id" : "78E9F51C-E5E9-4FCB-B2AB-025995E60D36",
         "key" : "policyNumber",
         "label" : "POLICY NUMBER",
-        "value" : "CAA 23985827459235"
+        "value" : "CAA2398582"
       },
       {
         "_id" : "E3C938D2-B383-4CB0-A96E-5C8B46742CB7",
         "key" : "effectiveDate",
         "label" : "EFFECTIVE",
         "textAlignment" : "PKTextAlignmentRight",
-        "value" : "9\/14\/26 – 9\/14\/27"
+        "value" : "9\/14\/26–9\/14\/27"
       }
     ],
     "secondaryFields" : []
@@ -279,7 +279,7 @@
       "startDate" : "2027-08-15T07:00:00Z"
     }
   ],
-  "serialNumber" : "CAA23985827459235-ALT",
+  "serialNumber" : "CAA2398582-ALT",
   "suppressHeaderDarkening" : true,
   "teamIdentifier" : "",
   "useAutomaticColors" : false
