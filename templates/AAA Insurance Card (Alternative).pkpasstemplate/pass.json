@@ -1,6 +1,6 @@
 {
   "authenticationToken" : "",
-  "backgroundColor" : "rgb(4,44,88)",
+  "backgroundColor" : "rgb(28,77,166)",
   "barcodes" : [
 
   ],
@@ -20,8 +20,8 @@
       "type" : "place"
     }
   ],
-  "footerBackgroundColor" : "rgb(4,44,88)",
-  "foregroundColor" : "rgb(255,255,255)",
+  "footerBackgroundColor" : "rgb(28,77,166)",
+  "foregroundColor" : "rgb(239,247,255)",
   "formatVersion" : 1,
   "generic" : {
     "auxiliaryFields" : [
@@ -154,7 +154,8 @@
       }
     ]
   },
-  "labelColor" : "rgb(208,132,1)",
+  "labelColor" : "rgb(185,222,254)",
+  "logoText" : "MOCK",
   "organizationName" : "AAA",
   "passTypeIdentifier" : "pass.com.example.aaa.insurance",
   "posterGeneric" : {

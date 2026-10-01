@@ -3,7 +3,7 @@
     1094393125
   ],
   "authenticationToken" : "",
-  "backgroundColor" : "rgb(7,64,126)",
+  "backgroundColor" : "rgb(28,77,166)",
   "barcodes" : [
     {
       "_id" : "E4FD1E6E-100F-4455-90D5-FEAA43177955",
@@ -29,8 +29,8 @@
       "url" : "https:\/\/www.ace.aaa.com\/membership.html"
     }
   ],
-  "footerBackgroundColor" : "rgb(7,64,126)",
-  "foregroundColor" : "rgb(255,255,255)",
+  "footerBackgroundColor" : "rgb(28,77,166)",
+  "foregroundColor" : "rgb(239,247,255)",
   "formatVersion" : 1,
   "generic" : {
     "auxiliaryFields" : [
