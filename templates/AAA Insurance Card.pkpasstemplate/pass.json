@@ -1,7 +1,9 @@
 {
   "authenticationToken" : "",
   "backgroundColor" : "rgb(247,245,241)",
-  "barcodes" : [],
+  "barcodes" : [
+
+  ],
   "description" : "AAA Insurance Card",
   "expirationDate" : "2027-09-15T06:59:00Z",
   "featuredActions" : [
@@ -63,7 +65,7 @@
         "_id" : "8B3952AC-7D57-4032-AFAF-CD6A77BF6DD9",
         "key" : "policyPeriod",
         "label" : "Policy Period",
-        "value" : "9\/14\/26–9\/14\/27"
+        "value" : "9\/14\/26 – 9\/14\/27"
       },
       {
         "_id" : "A7BE29BC-ED9E-410A-BFE5-81C1BF5DD1C1",
@@ -119,7 +121,7 @@
         "key" : "effectiveDate",
         "label" : "EFFECTIVE DATE",
         "textAlignment" : "PKTextAlignmentRight",
-        "value" : "9\/14\/26–9\/14\/27"
+        "value" : "9\/14\/26 – 9\/14\/27"
       }
     ]
   },
@@ -127,7 +129,9 @@
   "organizationName" : "AAA",
   "passTypeIdentifier" : "pass.com.example.aaa.insurance",
   "posterGeneric" : {
-    "auxiliaryFields" : [],
+    "auxiliaryFields" : [
+
+    ],
     "backFields" : [
       {
         "_id" : "8FA15D29-3CFC-4585-960B-8B5E9A6E7AC1",
@@ -161,7 +165,7 @@
         "_id" : "8B3952AC-7D57-4032-AFAF-CD6A77BF6DD9",
         "key" : "policyPeriod",
         "label" : "Policy Period",
-        "value" : "9\/14\/26–9\/14\/27"
+        "value" : "9\/14\/26 – 9\/14\/27"
       },
       {
         "_id" : "A7BE29BC-ED9E-410A-BFE5-81C1BF5DD1C1",
@@ -196,7 +200,9 @@
         "value" : "COMPANY: INTERINSURANCE EXCHANGE"
       }
     ],
-    "headerFields" : [],
+    "headerFields" : [
+
+    ],
     "primaryFields" : [
       {
         "_id" : "00E927DF-D3A4-4C96-83EF-1E8831A28CDF",
@@ -215,10 +221,12 @@
         "key" : "effectiveDate",
         "label" : "EFFECTIVE DATE",
         "textAlignment" : "PKTextAlignmentRight",
-        "value" : "9\/14\/26–9\/14\/27"
+        "value" : "9\/14\/26 – 9\/14\/27"
       }
     ],
-    "secondaryFields" : []
+    "secondaryFields" : [
+
+    ]
   },
   "serialNumber" : "CAA2398582",
   "suppressHeaderDarkening" : false,

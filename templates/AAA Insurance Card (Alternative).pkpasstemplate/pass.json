@@ -1,7 +1,9 @@
 {
   "authenticationToken" : "",
   "backgroundColor" : "rgb(4,44,88)",
-  "barcodes" : [],
+  "barcodes" : [
+
+  ],
   "description" : "AAA Insurance Card",
   "expirationDate" : "2027-09-15T06:59:00Z",
   "featuredActions" : [
@@ -54,17 +56,21 @@
       },
       {
         "_id" : "7B5A29C8-A125-41D0-AF5D-7199D494CCA6",
-        "dataDetectorTypes" : [],
+        "dataDetectorTypes" : [
+
+        ],
         "key" : "policyNumber",
         "label" : "Policy number",
         "value" : "CAA2398582"
       },
       {
         "_id" : "22DA21C8-C97F-470B-B52E-C52FE9DC6954",
-        "dataDetectorTypes" : [],
+        "dataDetectorTypes" : [
+
+        ],
         "key" : "policyPeriod",
         "label" : "Policy period",
-        "value" : "9\/14\/26–9\/14\/27"
+        "value" : "9\/14\/26 – 9\/14\/27"
       },
       {
         "_id" : "7A06B1A5-6EC4-4CBF-8389-C5CE2E2E90C7",
@@ -82,7 +88,9 @@
       },
       {
         "_id" : "CEC94431-2E1D-4033-8B2B-C5C203B41AA2",
-        "dataDetectorTypes" : [],
+        "dataDetectorTypes" : [
+
+        ],
         "key" : "vehicles",
         "label" : "Vehicles",
         "value" : "2026 BMW X1 SDRIVE 286 SUV\nWDXCH9C04L5S339288"
@@ -142,7 +150,7 @@
         "key" : "effectiveDate",
         "label" : "EFFECTIVE",
         "textAlignment" : "PKTextAlignmentRight",
-        "value" : "9\/14\/26–9\/14\/27"
+        "value" : "9\/14\/26 – 9\/14\/27"
       }
     ]
   },
@@ -150,7 +158,9 @@
   "organizationName" : "AAA",
   "passTypeIdentifier" : "pass.com.example.aaa.insurance",
   "posterGeneric" : {
-    "auxiliaryFields" : [],
+    "auxiliaryFields" : [
+
+    ],
     "backFields" : [
       {
         "_id" : "367C603C-CFD8-4D71-AD74-66C15293AB28",
@@ -175,17 +185,21 @@
       },
       {
         "_id" : "7B5A29C8-A125-41D0-AF5D-7199D494CCA6",
-        "dataDetectorTypes" : [],
+        "dataDetectorTypes" : [
+
+        ],
         "key" : "policyNumber",
         "label" : "Policy number",
         "value" : "CAA2398582"
       },
       {
         "_id" : "22DA21C8-C97F-470B-B52E-C52FE9DC6954",
-        "dataDetectorTypes" : [],
+        "dataDetectorTypes" : [
+
+        ],
         "key" : "policyPeriod",
         "label" : "Policy period",
-        "value" : "9\/14\/26–9\/14\/27"
+        "value" : "9\/14\/26 – 9\/14\/27"
       },
       {
         "_id" : "7A06B1A5-6EC4-4CBF-8389-C5CE2E2E90C7",
@@ -203,7 +217,9 @@
       },
       {
         "_id" : "CEC94431-2E1D-4033-8B2B-C5C203B41AA2",
-        "dataDetectorTypes" : [],
+        "dataDetectorTypes" : [
+
+        ],
         "key" : "vehicles",
         "label" : "Vehicles",
         "value" : "2026 BMW X1 SDRIVE 286 SUV\nWDXCH9C04L5S339288"
@@ -268,10 +284,12 @@
         "key" : "effectiveDate",
         "label" : "EFFECTIVE",
         "textAlignment" : "PKTextAlignmentRight",
-        "value" : "9\/14\/26–9\/14\/27"
+        "value" : "9\/14\/26 – 9\/14\/27"
       }
     ],
-    "secondaryFields" : []
+    "secondaryFields" : [
+
+    ]
   },
   "relevantDates" : [
     {
