@@ -155,6 +155,7 @@ button,select{font:inherit;color:inherit}
 .thumbs img{max-height:34px;max-width:90px;background:repeating-conic-gradient(#3a3b40 0 25%,#2a2b2e 0 50%) 0/10px 10px;border-radius:4px}
 .miss{color:var(--dim);font-size:11px}
 .legend{max-width:720px;margin:26px auto 0;font-size:12px;color:var(--muted);text-align:center;line-height:1.5}
+.legend.tip{margin-top:10px;background:#1f2a3a;border:1px dashed #3b5f96;border-radius:10px;padding:10px 14px;color:#cdd9ea}.legend code{font-size:11.5px;color:#9fc6ff}
 .dropzone{position:fixed;inset:12px;border:3px dashed var(--accent);border-radius:20px;background:#0a1830cc;z-index:50;display:grid;place-items:center;font-size:20px;color:#fff;pointer-events:none}.dropzone[hidden]{display:none}
 .chooser{max-width:640px;margin:0 auto 16px;background:#22314a;border:1px solid #3b5f96;border-radius:12px;padding:12px 14px;font-size:13px}.chooser b{display:block;margin-bottom:8px}.chooser button{margin:4px 6px 0 0;border:1px solid #4f78b8;background:#2b4166;color:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
 .err{background:#4a1f1d;border:1px solid #7a302b;color:#ffd4d1;border-radius:8px;padding:10px 12px;margin:0 auto 16px;max-width:640px;font-size:13px}
@@ -177,7 +178,7 @@ button,select{font:inherit;color:inherit}
   <div class="doc"><b id="docName">Loading…</b><small id="docSub">Pass template</small></div>
   <span class="ro" title="This viewer never modifies the template">READ-ONLY</span>
   <span class="grow"></span>
-  <label class="tb-btn" title="A .zip of a .pkpasstemplate (e.g. from Download template) or a pass.json">Open .zip / pass.json<input id="jsonFile" type="file" accept=".zip,application/zip,.json,application/json"></label>
+  <label class="tb-btn" title="Drag a .pkpasstemplate onto the page, or click to pick a pass.json (a .zip of a template works too)">Drag and drop / pass.json<input id="jsonFile" type="file" accept=".zip,application/zip,.json,application/json"></label>
   <label class="tb-btn" title="macOS shows .pkpasstemplate as a single file, so pick the folder that contains it (e.g. outputs)">Open folder<input id="folder" type="file" webkitdirectory multiple></label>
   <div class="seg" role="group" aria-label="Side">
     <button id="showFront" class="on">Front</button>
@@ -216,7 +217,8 @@ button,select{font:inherit;color:inherit}
         <div class="flipper" data-flip="26"><div class="card3d" id="card26"><div class="face front" id="front26"></div><div class="face back details" id="back26"></div></div></div>
       </div>
     </div>
-    <p class="legend">Browser recreation of the Pass Designer canvas for review. Wallet renders the real pass: fonts, truncation, barcode artwork, and Featured Action labels and symbols come from the system. Drag a card sideways to turn it over. Select any component on the left to inspect its values and Apple's limits.</p>
+    <p class="legend">This is a browser remake of the Pass Designer canvas, so think of it as a very good mockup. Wallet still gets the final word on fonts, truncation, barcodes, and the Featured Action labels and icons. Flick a card sideways to flip it, and click anything on the left to see its values and Apple's limits.</p>
+    <p class="legend tip">🛠️ Confession: I couldn't get the import button to open a <code>.pkpasstemplate</code>. macOS treats it as a package, so the file picker just greys it out 🙃. The workaround is easy: <b>drag and drop the template onto this page</b> and it loads right up. A <code>.zip</code> or a plain <code>pass.json</code> works too.</p>
   </main>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
