@@ -1,5 +1,29 @@
 {
+  "AAA Insurance Card (Alternative).pkpasstemplate": [
+    "artwork@2x.png",
+    "artwork@3x.png",
+    "icon@2x.png",
+    "icon@3x.png",
+    "logo@2x.png",
+    "logo@3x.png",
+    "pass.json",
+    "primaryLogo@2x.png",
+    "primaryLogo@3x.png",
+    "tooling.json"
+  ],
   "AAA Insurance Card.pkpasstemplate": [
+    "artwork@2x.png",
+    "artwork@3x.png",
+    "icon@2x.png",
+    "icon@3x.png",
+    "logo@2x.png",
+    "logo@3x.png",
+    "pass.json",
+    "primaryLogo@2x.png",
+    "primaryLogo@3x.png",
+    "tooling.json"
+  ],
+  "AAA Membership Card (Alternative).pkpasstemplate": [
     "artwork@2x.png",
     "artwork@3x.png",
     "icon@2x.png",

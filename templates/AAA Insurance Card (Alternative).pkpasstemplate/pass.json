@@ -1,0 +1,286 @@
+{
+  "authenticationToken" : "",
+  "backgroundColor" : "rgb(4,44,88)",
+  "barcodes" : [],
+  "description" : "AAA Insurance Card",
+  "expirationDate" : "2027-09-15T06:59:00Z",
+  "featuredActions" : [
+    {
+      "_id" : "6D6E22DA-3A6D-4548-B9E5-129984D36A55",
+      "identifier" : "roadsideAssistance",
+      "type" : "call",
+      "url" : "tel:\/\/18004004222"
+    },
+    {
+      "_id" : "A5C9E2AB-4F31-4EE4-9A7F-5FCAE87EDE59",
+      "identifier" : "nearestBranch",
+      "placeIdentifier" : "I71B28B9C6AC9C7EF",
+      "type" : "place"
+    }
+  ],
+  "footerBackgroundColor" : "rgb(4,44,88)",
+  "foregroundColor" : "rgb(255,255,255)",
+  "formatVersion" : 1,
+  "generic" : {
+    "auxiliaryFields" : [
+      {
+        "_id" : "E0F62D9E-C0CC-491F-9F92-03B02E23DC36",
+        "key" : "insuranceCompany",
+        "label" : "INSURANCE COMPANY",
+        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 233598"
+      }
+    ],
+    "backFields" : [
+      {
+        "_id" : "367C603C-CFD8-4D71-AD74-66C15293AB28",
+        "attributedValue" : "Call <a href='tel:18004004222'>1-800-400-4222<\/a>\nOutside CA: <a href='tel:18002224357'>1-800-222-4357<\/a>",
+        "key" : "roadsideAssistance",
+        "label" : "Roadside Assistance · 24\/7",
+        "value" : "Call 1-800-400-4222\nOutside CA: 1-800-222-4357"
+      },
+      {
+        "_id" : "8AE732FB-6A51-496E-8B11-8AB7E1918B52",
+        "attributedValue" : "1-800-67-CLAIM (<a href='tel:18006725246'>1-800-672-5246<\/a>)",
+        "key" : "accidentAssist",
+        "label" : "24\/7 AAA Accident Assist Hotline",
+        "value" : "1-800-67-CLAIM (1-800-672-5246)"
+      },
+      {
+        "_id" : "B460C788-289C-42A7-9DB9-4C933535C5BD",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/insurance\/claims.html'>File an auto, home or life claim<\/a>",
+        "key" : "fileClaim",
+        "label" : "File or track a claim",
+        "value" : "File an auto, home or life claim"
+      },
+      {
+        "_id" : "7B5A29C8-A125-41D0-AF5D-7199D494CCA6",
+        "dataDetectorTypes" : [],
+        "key" : "policyNumber",
+        "label" : "Policy number",
+        "value" : "CAA 23985827459235"
+      },
+      {
+        "_id" : "22DA21C8-C97F-470B-B52E-C52FE9DC6954",
+        "dataDetectorTypes" : [],
+        "key" : "policyPeriod",
+        "label" : "Policy period",
+        "value" : "9\/14\/26 – 9\/14\/27"
+      },
+      {
+        "_id" : "7A06B1A5-6EC4-4CBF-8389-C5CE2E2E90C7",
+        "attributedValue" : "<a href='tel:18009426141'>1-800-942-6141<\/a>\n<a href='https:\/\/app.ace.aaa.com\/insurance\/make-a-payment\/'>Pay or manage your policy<\/a>",
+        "key" : "policyQuestions",
+        "label" : "Policy questions or changes",
+        "value" : "1-800-942-6141\nPay or manage your policy"
+      },
+      {
+        "_id" : "710A48C2-AC8E-4B90-886C-B8CBCC3911CC",
+        "attributedValue" : "<a href='https:\/\/app.ace.aaa.com\/insurance\/anon\/poi\/view'>Get proof of insurance online<\/a>",
+        "key" : "proofOfInsurance",
+        "label" : "Proof of insurance",
+        "value" : "Get proof of insurance online"
+      },
+      {
+        "_id" : "CEC94431-2E1D-4033-8B2B-C5C203B41AA2",
+        "dataDetectorTypes" : [],
+        "key" : "vehicles",
+        "label" : "Vehicles",
+        "value" : "2026 BMW X1 SDRIVE 286 SUV\nWDXCH9C04L5S339288"
+      },
+      {
+        "_id" : "433D933E-7B46-4956-9AAF-3496136E2740",
+        "key" : "insuredDrivers",
+        "label" : "Insured Drivers",
+        "value" : "Elijah Lopez"
+      },
+      {
+        "_id" : "96498BF1-F25E-4E5D-9533-5AD29E4EC4E5",
+        "key" : "company",
+        "label" : "Company Name",
+        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 233598\nP.O. Box 10006, Santa Ana, CA 92799-5006"
+      },
+      {
+        "_id" : "FAA513E5-6E6E-4259-9B35-5AFD71E9B7FE",
+        "key" : "disclaimer",
+        "label" : "Disclaimer",
+        "value" : "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle. Insurance information has already been submitted directly to the DMV electronically; submit this document to DMV only if specifically requested by DMV. The digital card may not be recognized in all states."
+      },
+      {
+        "_id" : "56B80619-5D2A-426F-8C9C-69526F485EDC",
+        "attributedValue" : "Glendale Branch · 1233 E Broadway, Glendale, CA 91205\n<a href='https:\/\/maps.apple.com\/place?place-id=I71B28B9C6AC9C7EF'>Get directions<\/a>",
+        "key" : "nearestBranch",
+        "label" : "Your AAA branch",
+        "value" : "Glendale Branch · 1233 E Broadway, Glendale, CA 91205\nGet directions"
+      }
+    ],
+    "headerFields" : [
+      {
+        "_id" : "8E20EDDF-B398-42D5-920D-383A13BD419A",
+        "key" : "cardTitle",
+        "label" : "CA Evidence of Liability",
+        "textAlignment" : "PKTextAlignmentRight",
+        "value" : "Insurance Card"
+      }
+    ],
+    "primaryFields" : [
+      {
+        "_id" : "1DB63B50-7CD4-4B28-80D1-87F633BF4E36",
+        "key" : "policyNumber",
+        "label" : "POLICY NUMBER",
+        "value" : "CAA 23985827459235"
+      }
+    ],
+    "secondaryFields" : [
+      {
+        "_id" : "ABBCF9DD-12D7-4E12-BAB3-F162222307BF",
+        "key" : "nameEnsured",
+        "label" : "NAME ENSURED",
+        "value" : "ELIJAH LOPEZ"
+      },
+      {
+        "_id" : "67C7DDFB-1126-4B39-9907-1F506A1DCB40",
+        "key" : "effectiveDate",
+        "label" : "EFFECTIVE",
+        "textAlignment" : "PKTextAlignmentRight",
+        "value" : "9\/14\/26 – 9\/14\/27"
+      }
+    ]
+  },
+  "labelColor" : "rgb(208,132,1)",
+  "organizationName" : "AAA",
+  "passTypeIdentifier" : "pass.com.example.aaa.insurance",
+  "posterGeneric" : {
+    "auxiliaryFields" : [],
+    "backFields" : [
+      {
+        "_id" : "367C603C-CFD8-4D71-AD74-66C15293AB28",
+        "attributedValue" : "Call <a href='tel:18004004222'>1-800-400-4222<\/a>\nOutside CA: <a href='tel:18002224357'>1-800-222-4357<\/a>",
+        "key" : "roadsideAssistance",
+        "label" : "Roadside Assistance · 24\/7",
+        "value" : "Call 1-800-400-4222\nOutside CA: 1-800-222-4357"
+      },
+      {
+        "_id" : "8AE732FB-6A51-496E-8B11-8AB7E1918B52",
+        "attributedValue" : "1-800-67-CLAIM (<a href='tel:18006725246'>1-800-672-5246<\/a>)",
+        "key" : "accidentAssist",
+        "label" : "24\/7 AAA Accident Assist Hotline",
+        "value" : "1-800-67-CLAIM (1-800-672-5246)"
+      },
+      {
+        "_id" : "B460C788-289C-42A7-9DB9-4C933535C5BD",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/insurance\/claims.html'>File an auto, home or life claim<\/a>",
+        "key" : "fileClaim",
+        "label" : "File or track a claim",
+        "value" : "File an auto, home or life claim"
+      },
+      {
+        "_id" : "7B5A29C8-A125-41D0-AF5D-7199D494CCA6",
+        "dataDetectorTypes" : [],
+        "key" : "policyNumber",
+        "label" : "Policy number",
+        "value" : "CAA 23985827459235"
+      },
+      {
+        "_id" : "22DA21C8-C97F-470B-B52E-C52FE9DC6954",
+        "dataDetectorTypes" : [],
+        "key" : "policyPeriod",
+        "label" : "Policy period",
+        "value" : "9\/14\/26 – 9\/14\/27"
+      },
+      {
+        "_id" : "7A06B1A5-6EC4-4CBF-8389-C5CE2E2E90C7",
+        "attributedValue" : "<a href='tel:18009426141'>1-800-942-6141<\/a>\n<a href='https:\/\/app.ace.aaa.com\/insurance\/make-a-payment\/'>Pay or manage your policy<\/a>",
+        "key" : "policyQuestions",
+        "label" : "Policy questions or changes",
+        "value" : "1-800-942-6141\nPay or manage your policy"
+      },
+      {
+        "_id" : "710A48C2-AC8E-4B90-886C-B8CBCC3911CC",
+        "attributedValue" : "<a href='https:\/\/app.ace.aaa.com\/insurance\/anon\/poi\/view'>Get proof of insurance online<\/a>",
+        "key" : "proofOfInsurance",
+        "label" : "Proof of insurance",
+        "value" : "Get proof of insurance online"
+      },
+      {
+        "_id" : "CEC94431-2E1D-4033-8B2B-C5C203B41AA2",
+        "dataDetectorTypes" : [],
+        "key" : "vehicles",
+        "label" : "Vehicles",
+        "value" : "2026 BMW X1 SDRIVE 286 SUV\nWDXCH9C04L5S339288"
+      },
+      {
+        "_id" : "433D933E-7B46-4956-9AAF-3496136E2740",
+        "key" : "insuredDrivers",
+        "label" : "Insured Drivers",
+        "value" : "Elijah Lopez"
+      },
+      {
+        "_id" : "96498BF1-F25E-4E5D-9533-5AD29E4EC4E5",
+        "key" : "company",
+        "label" : "Company Name",
+        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 233598\nP.O. Box 10006, Santa Ana, CA 92799-5006"
+      },
+      {
+        "_id" : "FAA513E5-6E6E-4259-9B35-5AFD71E9B7FE",
+        "key" : "disclaimer",
+        "label" : "Disclaimer",
+        "value" : "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle. Insurance information has already been submitted directly to the DMV electronically; submit this document to DMV only if specifically requested by DMV. The digital card may not be recognized in all states."
+      },
+      {
+        "_id" : "56B80619-5D2A-426F-8C9C-69526F485EDC",
+        "attributedValue" : "Glendale Branch · 1233 E Broadway, Glendale, CA 91205\n<a href='https:\/\/maps.apple.com\/place?place-id=I71B28B9C6AC9C7EF'>Get directions<\/a>",
+        "key" : "nearestBranch",
+        "label" : "Your AAA branch",
+        "value" : "Glendale Branch · 1233 E Broadway, Glendale, CA 91205\nGet directions"
+      }
+    ],
+    "footerFields" : [
+      {
+        "_id" : "D0A428E8-DE3F-42A2-9147-7EC070F19EBE",
+        "key" : "insuranceCompany",
+        "label" : "INSURANCE COMPANY",
+        "value" : "COMPANY: INTERINSURANCE EXCHANGE"
+      }
+    ],
+    "headerFields" : [
+      {
+        "_id" : "8E039297-8219-45D4-BBCD-BE820B40686A",
+        "key" : "cardTitle",
+        "label" : "CA EVIDENCE OF LIABILITY",
+        "value" : "Insurance Card"
+      }
+    ],
+    "primaryFields" : [
+      {
+        "_id" : "A298C3DD-77E6-4230-B0DA-A7A49913D933",
+        "key" : "nameEnsured",
+        "label" : "NAME ENSURED",
+        "value" : "ELIJAH LOPEZ"
+      },
+      {
+        "_id" : "78E9F51C-E5E9-4FCB-B2AB-025995E60D36",
+        "key" : "policyNumber",
+        "label" : "POLICY NUMBER",
+        "value" : "CAA 23985827459235"
+      },
+      {
+        "_id" : "E3C938D2-B383-4CB0-A96E-5C8B46742CB7",
+        "key" : "effectiveDate",
+        "label" : "EFFECTIVE",
+        "textAlignment" : "PKTextAlignmentRight",
+        "value" : "9\/14\/26 – 9\/14\/27"
+      }
+    ],
+    "secondaryFields" : []
+  },
+  "relevantDates" : [
+    {
+      "endDate" : "2027-09-15T06:59:00Z",
+      "startDate" : "2027-08-15T07:00:00Z"
+    }
+  ],
+  "serialNumber" : "CAA23985827459235-ALT",
+  "suppressHeaderDarkening" : true,
+  "teamIdentifier" : "",
+  "useAutomaticColors" : false
+}

@@ -48,7 +48,7 @@ button,select{font:inherit;color:inherit}
 .picker .thumb{width:46px;height:58px;border-radius:8px;background:#444 center top/cover;flex:none;box-shadow:0 2px 6px #0006}
 .picker .pt{min-width:0}.picker .pt b{display:block;font-size:18px;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .picker .thumb.blank{display:grid;place-items:center;background:#33343a;font-size:20px}
-.hero.three{max-width:860px}.hero.three .picker{flex-basis:100%}.hero.three .dl{flex:0 0 300px}
+.hero.three{max-width:1100px}.hero.three .picker{flex-basis:100%}.hero.three .dl{flex:0 0 300px}
 .picker .pt small{display:block;font-size:11.5px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dl{display:flex;align-items:center;gap:10px;border:0;border-radius:16px;padding:12px 18px;background:var(--accent);color:#fff;cursor:pointer;font:inherit;text-align:left;box-shadow:0 6px 18px #3b8cff55;flex:0 0 250px;min-width:0}.dl span{min-width:0}
 .dl:hover{background:#2f7cf0}.dl:disabled{opacity:.6;cursor:progress}
@@ -71,9 +71,14 @@ button,select{font:inherit;color:inherit}
 .poster{background:var(--bg);color:var(--fg)}
 .poster .art{position:absolute;inset:0;background-repeat:no-repeat;background-position:center top;background-size:cover}
 .poster .plogo{position:absolute;left:14px;top:12px;height:25px;max-width:105px;object-fit:contain;object-position:left}
-.poster .phead{position:absolute;right:14px;top:12px;text-align:right;color:#fff;text-shadow:0 1px 3px #0008;font:12px ui-monospace,SFMono-Regular,Menlo,monospace}
-.poster .phead small{display:block;font-size:10px;font-weight:700;text-transform:uppercase}
-.poster .body{position:absolute;left:0;right:0;bottom:0;background:var(--footer,#fff);padding:10px 12px 9px;min-height:24%}
+.poster .phead{position:absolute;right:14px;top:12px;text-align:right;color:var(--hv,#fff);font:12px ui-monospace,SFMono-Regular,Menlo,monospace;max-width:72%}
+.poster .phead small{display:block;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--hl,#fff);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Matches Pass Designer: the barcode floats on a white panel over the art; fields sit on the footer color. */
+.poster .bcwrap{position:absolute;left:50%;top:58%;transform:translateX(-50%);width:77%}
+.poster .bcwrap .bcpanel{width:100%;border-radius:7px;padding:8px 10px 6px}
+.poster .bcwrap .bc{width:100%;height:auto}
+.poster .bcwrap .bc-alt{font-size:11.5px}
+.poster .body{position:absolute;left:0;right:0;bottom:0;background:var(--footer,#fff);padding:4px 14px 11px}
 .poster .row{display:grid;gap:8px;margin-top:8px}.poster .row.n3{gap:6px}.poster .row.n3 .v{font-size:9px}.poster .row.n3 .l{font-size:8.5px}.poster .row.n4 .v{font-size:8.5px}.poster .row.n4 .l{font-size:8px}
 .fld{min-width:0}
 .fld .l{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--label);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -82,6 +87,7 @@ button,select{font:inherit;color:inherit}
 .poster .foot{font:9px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--fg);margin-top:12px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bc{display:block;margin:0 auto}
 .bc-alt{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#111;text-align:center;margin-top:3px}
+.bcpanel{background:#fff;border-radius:9px;padding:8px 10px 5px;width:max-content;max-width:100%;margin:0 auto}
 /* Generic (legacy) */
 .generic{background:var(--bg);color:var(--fg);padding:14px 16px;display:flex;flex-direction:column}
 .g-top{display:flex;align-items:center;gap:8px;min-height:44px}
@@ -200,8 +206,8 @@ button,select{font:inherit;color:inherit}
     <section class="inspector" id="inspector" hidden aria-live="polite"></section>
     <div class="dropzone" id="dropzone" hidden><div>Drop a <b>.pkpasstemplate</b>, a <b>.zip</b> of one, or a <b>pass.json</b></div></div>
     <div id="chooser"></div>
-    <div class="hero">
-      <div class="picker" id="picker" role="tablist" aria-label="Template">
+    <div class="hero three">
+      <div class="picker" id="picker" role="tablist" aria-label="Template" style="--tabs:4">
         <button role="tab" data-pass="membership" class="on" aria-selected="true">
           <span class="thumb" style="background-image:url('templates/AAA%20Membership%20Card.pkpasstemplate/artwork@2x.png')"></span>
           <span class="pt"><b>Membership</b><small>AAA Membership Card</small></span>
@@ -209,6 +215,14 @@ button,select{font:inherit;color:inherit}
         <button role="tab" data-pass="insurance" aria-selected="false">
           <span class="thumb" style="background-image:url('templates/AAA%20Insurance%20Card.pkpasstemplate/artwork@2x.png')"></span>
           <span class="pt"><b>Insurance</b><small>AAA Insurance Card</small></span>
+        </button>
+        <button role="tab" data-pass="membershipAlt" aria-selected="false">
+          <span class="thumb" style="background-image:url('templates/AAA%20Membership%20Card%20(Alternative).pkpasstemplate/artwork@2x.png')"></span>
+          <span class="pt"><b>Membership</b><small>Alternative</small></span>
+        </button>
+        <button role="tab" data-pass="insuranceAlt" aria-selected="false">
+          <span class="thumb" style="background-image:url('templates/AAA%20Insurance%20Card%20(Alternative).pkpasstemplate/artwork@2x.png')"></span>
+          <span class="pt"><b>Insurance</b><small>Alternative</small></span>
         </button>
       </div>
       <button id="download" class="dl" type="button">
@@ -257,7 +271,9 @@ const INF = Infinity;
 
 const DEFAULTS = {
   membership: 'AAA Membership Card.pkpasstemplate',
-  insurance: 'AAA Insurance Card.pkpasstemplate'
+  insurance: 'AAA Insurance Card.pkpasstemplate',
+  membershipAlt: 'AAA Membership Card (Alternative).pkpasstemplate',
+  insuranceAlt: 'AAA Insurance Card (Alternative).pkpasstemplate'
 };
 
 /* ---------- Apple limits (Wallet docs, Pass Designer, HIG) ---------- */
@@ -469,17 +485,26 @@ function fld(f, g, i, extra='', poster=false){
   const right = f.textAlignment === 'PKTextAlignmentRight';
   return `<div class="fld ${right?'r':''} ${extra}" data-f="${esc(g)}:${i}"><div class="l">${esc(poster ? titleCase(f.label) : f.label)}</div><div class="v">${esc(displayValue(f))}</div></div>`;
 }
+function parseRGB(c){ const m = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/.exec(String(c || '')); return m ? [+m[1], +m[2], +m[3]] : null; }
+/* useAutomaticColors: Wallet derives text colors from the art; approximate with the footer color's lightness. */
+function autoColors(p){
+  const f = parseRGB(p.footerBackgroundColor) || [255, 255, 255];
+  const lum = (0.2126 * f[0] + 0.7152 * f[1] + 0.0722 * f[2]) / 255;
+  if(lum > 0.55) return ';--fg:#1c1c1e;--label:#6e6e73';
+  const tint = f.map(c => Math.round(c + (255 - c) * 0.62));
+  return `;--fg:#ffffff;--label:rgb(${tint.join(',')})`;
+}
 function renderPoster(p, dict){
   const bc = (p.barcodes||[])[0];
   const prim = dict.primaryFields||[], foot = dict.footerFields||[], head = dict.headerFields||[];
   const art = asset('artwork'), logo = asset('primaryLogo') || asset('logo');
-  const auto = p.useAutomaticColors ? ';--fg:#1c1c1e;--label:#6e6e73' : '';
+  const auto = p.useAutomaticColors ? autoColors(p) + ';--hl:#fff;--hv:#fff' : ';--hl:var(--label);--hv:var(--fg)';
   return `<div class="face-in poster" style="${cssVars(p)}${auto};position:absolute;inset:0">
     ${art ? `<div class="art" style="background-image:url('${esc(art)}')"></div>` : '<div class="art" style="background:#5b6b82"></div>'}
     ${logo ? `<img class="plogo" src="${esc(logo)}" alt="Primary logo">` : ''}
     ${head[0] ? `<div class="phead" data-f="headerFields:0"><small>${esc(head[0].label)}</small>${esc(head[0].value)}</div>` : ''}
+    ${bc ? `<div class="bcwrap"><div class="bcpanel">${barcodeSVG(bc, 190, 48)}<div class="bc-alt">${esc(bc.altText||'')}</div></div></div>` : ''}
     <div class="body">
-      ${bc ? barcodeSVG(bc, 150, 38) + `<div class="bc-alt">${esc(bc.altText||'')}</div>` : ''}
       ${prim.length ? `<div class="row n${prim.length}" style="grid-template-columns:repeat(${prim.length},auto);justify-content:space-between">${prim.map((f,i)=>fld(f,'primaryFields',i, prim.length>1 && i===prim.length-1 ? 'r' : i>0 ? 'c' : '', true)).join('')}</div>` : ''}
       ${foot[0] ? `<div class="foot" data-f="footerFields:0">${esc(foot[0].value)}</div>` : ''}
     </div></div>`;
@@ -494,7 +519,7 @@ function renderGeneric(p, dict){
       <div class="g-head">${head.slice(0,3).map((f,i)=>fld(f,'headerFields',i,'r')).join('')}</div></div>
     <div class="g-prim">${prim.slice(0,1).map((f,i)=>fld(f,'primaryFields',i)).join('')}${thumb ? `<img src="${esc(thumb)}" alt="Thumbnail">` : ''}</div>
     ${row(sec.slice(0,4),'secondaryFields')}${row(aux.slice(0,4),'auxiliaryFields')}
-    <div class="g-bottom">${bc ? barcodeSVG(bc, 190, 52) + `<div class="bc-alt">${esc(bc.altText||'')}</div>` : ''}</div></div>`;
+    <div class="g-bottom">${bc ? `<div class="bcpanel">${barcodeSVG(bc, 190, 52)}<div class="bc-alt">${esc(bc.altText||'')}</div></div>` : ''}</div></div>`;
 }
 function linkify(f){
   if(!f.attributedValue) return esc(f.value);
@@ -868,8 +893,7 @@ async function openTemplate(t){
 }
 function renderImportedTab(){
   const picker = $('picker'); picker.querySelector('[data-pass="imported"]')?.remove();
-  picker.style.setProperty('--tabs', imported ? 3 : 2);
-  picker.closest('.hero').classList.toggle('three', !!imported);
+  picker.style.setProperty('--tabs', picker.querySelectorAll('[data-pass]').length + (imported ? 1 : 0));
   if(!imported) return;
   const art = imported.assets['artwork@2x.png'] || imported.assets['artwork@3x.png'] || imported.assets['logo@2x.png'] || '';
   const label = imported.name.replace(/\.pkpasstemplate$/i, '');
