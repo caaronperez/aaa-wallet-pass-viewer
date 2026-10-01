@@ -47,7 +47,7 @@ button,select{font:inherit;color:inherit}
 .picker button.on{background:#2b3b55;border-color:var(--accent);color:#fff}
 .picker .thumb{width:46px;height:58px;border-radius:8px;background:#444 center top/cover;flex:none;box-shadow:0 2px 6px #0006}
 .picker .pt{min-width:0}.picker .pt b{display:block;font-size:18px;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.picker .thumb.blank{display:grid;place-items:center;background:#33343a;font-size:20px}
+.picker .thumb.blank{display:grid;place-items:center;background:#33343a;font:700 10px ui-monospace,Menlo,monospace;color:var(--muted)}
 .hero.three{max-width:1100px}.hero.three .picker{flex-basis:100%}.hero.three .dl{flex:0 0 300px}
 .picker .pt small{display:block;font-size:11.5px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dl{display:flex;align-items:center;gap:10px;border:0;border-radius:16px;padding:12px 18px;background:var(--accent);color:#fff;cursor:pointer;font:inherit;text-align:left;box-shadow:0 6px 18px #3b8cff55;flex:0 0 250px;min-width:0}.dl span{min-width:0}
@@ -236,7 +236,7 @@ button,select{font:inherit;color:inherit}
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span>Rotate to see the back info</span>
       </button>
-      <span class="rotate-hint">👆 or just swipe a card (I was too tired and bored to write the rest 😴)</span>
+      <span class="rotate-hint">or just swipe a card (I was too tired and bored to write the rest)</span>
     </div>
     <div class="previews">
       <div class="col"><span class="pill">iOS 27</span><div class="col-note" id="note27"></div>
@@ -249,24 +249,24 @@ button,select{font:inherit;color:inherit}
     </div>
     <section class="proposal" aria-labelledby="proposalTitle">
       <div class="proposal-h">
-        <div><h2 id="proposalTitle">🎨 Design proposals <span class="credit">(the image canvas below and strings made by Claude, I just did the pass design and the web)</span></h2>
+        <div><h2 id="proposalTitle">Design proposals <span class="credit">(the image canvas below and strings made by Claude, I just did the pass design and the web)</span></h2>
         <p>Alternative designs for both cards: the photo fades into the app’s navy, and every color comes from the AAA app theme (gradientTopColor, blue200, warningTintColor, headingColor, bgRedColor). Built only from what Apple documents for Poster Generic passes. Download a proposal and drag it onto this page (or open it in Pass Designer), or tap “Open in viewer”. The Membership and Insurance templates above aren't changed.</p></div>
       </div>
       <div class="proposal-grid">
         <figure>
-          <figcaption><b>AAA Membership (alternative)</b><span class="fig-actions"><button type="button" data-tpl-dl="AAA Membership Card (Alternative).pkpasstemplate">⬇ Download template</button><button type="button" data-tpl-open="AAA Membership Card (Alternative).pkpasstemplate">Open in viewer</button><a href="proposal/aaa-membership-alternative@full.png" target="_blank" rel="noopener">Full size ↗</a></span></figcaption>
+          <figcaption><b>AAA Membership (alternative)</b><span class="fig-actions"><button type="button" data-tpl-dl="AAA Membership Card (Alternative).pkpasstemplate">Download template</button><button type="button" data-tpl-open="AAA Membership Card (Alternative).pkpasstemplate">Open in viewer</button><a href="proposal/aaa-membership-alternative@full.png" target="_blank" rel="noopener">Full size ↗</a></span></figcaption>
           <a href="proposal/aaa-membership-alternative@full.png" target="_blank" rel="noopener" class="proposal-img"><img src="proposal/aaa-membership-alternative.jpg" loading="lazy" width="2400" height="1866"
             alt="AAA Membership (alternative): the membership card on AAA blue, with the roadside photo fading into navy, “Membership Card · Plan: Premier” in the header, a barcode, member, valid-thru and member-since fields with sky-blue labels, a roadside footer, Call and View Membership Benefits actions, and the color palette. Below: collapsed card, Lock Screen suggestion, Pass Details and eight numbered notes."></a>
         </figure>
         <figure>
-          <figcaption><b>AAA Insurance (alternative)</b><span class="fig-actions"><button type="button" data-tpl-dl="AAA Insurance Card (Alternative).pkpasstemplate">⬇ Download template</button><button type="button" data-tpl-open="AAA Insurance Card (Alternative).pkpasstemplate">Open in viewer</button><a href="proposal/aaa-insurance-alternative@full.png" target="_blank" rel="noopener">Full size ↗</a></span></figcaption>
+          <figcaption><b>AAA Insurance (alternative)</b><span class="fig-actions"><button type="button" data-tpl-dl="AAA Insurance Card (Alternative).pkpasstemplate">Download template</button><button type="button" data-tpl-open="AAA Insurance Card (Alternative).pkpasstemplate">Open in viewer</button><a href="proposal/aaa-insurance-alternative@full.png" target="_blank" rel="noopener">Full size ↗</a></span></figcaption>
           <a href="proposal/aaa-insurance-alternative@full.png" target="_blank" rel="noopener" class="proposal-img"><img src="proposal/aaa-insurance-alternative.jpg" loading="lazy" width="2400" height="1866"
             alt="AAA Insurance (alternative): the insurance card on AAA blue, with the coastal sunset photo fading into dusk navy, “CA Evidence of Liability · Insurance Card” in the header, name ensured, policy number and effective-period fields with sunset-amber labels, the company in the footer, Call (Roadside Assistance) and Get Directions actions, and the color palette. Below: collapsed card, Lock Screen suggestion, Pass Details and eight numbered notes."></a>
         </figure>
       </div>
     </section>
     <p class="legend">This is a browser remake of the Pass Designer canvas, so think of it as a very good mockup. Wallet still gets the final word on fonts, truncation, barcodes, and the Featured Action labels and icons. Flick a card sideways to flip it, and click anything on the left to see its values and Apple's limits.</p>
-    <p class="legend tip">🛠️ Confession: I couldn't get the import button to open a <code>.pkpasstemplate</code>. macOS treats it as a package, so the file picker just greys it out 🙃. The workaround is easy: <b>drag and drop the template onto this page</b> and it loads right up. A <code>.zip</code> or a plain <code>pass.json</code> works too.</p>
+    <p class="legend tip">Confession: I couldn't get the import button to open a <code>.pkpasstemplate</code>. macOS treats it as a package, so the file picker just greys it out. The workaround is easy: <b>drag and drop the template onto this page</b> and it loads right up. A <code>.zip</code> or a plain <code>pass.json</code> works too.</p>
   </main>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -908,7 +908,7 @@ function renderImportedTab(){
   const label = imported.name.replace(/\.pkpasstemplate$/i, '');
   const b = document.createElement('button');
   b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.pass = 'imported'; b.title = imported.name;
-  b.innerHTML = `${art ? `<span class="thumb" style="background-image:url('${esc(art)}')"></span>` : '<span class="thumb blank" aria-hidden="true">📄</span>'}<span class="pt"><b>${esc(label)}</b><small>Imported · ${esc(imported.pass.description || imported.name)}</small></span>`;
+  b.innerHTML = `${art ? `<span class="thumb" style="background-image:url('${esc(art)}')"></span>` : '<span class="thumb blank" aria-hidden="true">JSON</span>'}<span class="pt"><b>${esc(label)}</b><small>Imported · ${esc(imported.pass.description || imported.name)}</small></span>`;
   picker.append(b);
 }
 async function importList(list){
