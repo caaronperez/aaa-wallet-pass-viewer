@@ -14,7 +14,6 @@
 html,body{margin:0;height:100%;background:var(--win)}
 button,select{font:inherit;color:inherit}
 .titlebar{height:52px;display:flex;align-items:center;gap:12px;padding:0 14px;border-bottom:1px solid #111;background:#232427;position:sticky;top:0;z-index:20}
-.dots{display:flex;gap:8px;margin-right:6px}.dots i{width:12px;height:12px;border-radius:50%;background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
 .doc b{display:block;font-size:13px}.doc small{font-size:11px;color:var(--muted)}
 .grow{flex:1}
 .seg{display:flex;background:#1a1b1d;border:1px solid var(--line);border-radius:8px;padding:2px}
@@ -42,13 +41,15 @@ button,select{font:inherit;color:inherit}
 .section-h{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin:14px 8px 4px}
 .canvas{position:relative;overflow:auto;padding:22px 24px 60px}
 .hero{display:flex;gap:14px;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:0 auto 26px;max-width:740px}
-.picker{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#17181a;border:1px solid var(--line);border-radius:16px;padding:6px;flex:1 1 420px}
+.picker{display:grid;grid-template-columns:repeat(var(--tabs,2),minmax(0,1fr));gap:6px;background:#17181a;border:1px solid var(--line);border-radius:16px;padding:6px;flex:1 1 420px}
 .picker button{display:flex;align-items:center;gap:12px;border:2px solid transparent;background:transparent;border-radius:12px;padding:8px 12px 8px 8px;cursor:pointer;text-align:left;color:var(--muted);transition:background .15s,border-color .15s}
 .picker button:hover{background:#26272b}
 .picker button.on{background:#2b3b55;border-color:var(--accent);color:#fff}
 .picker .thumb{width:46px;height:58px;border-radius:8px;background:#444 center top/cover;flex:none;box-shadow:0 2px 6px #0006}
-.picker .pt b{display:block;font-size:18px;letter-spacing:-.01em}
-.picker .pt small{font-size:11.5px;opacity:.8;white-space:nowrap}
+.picker .pt{min-width:0}.picker .pt b{display:block;font-size:18px;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.picker .thumb.blank{display:grid;place-items:center;background:#33343a;font-size:20px}
+.hero.three{max-width:860px}.hero.three .picker{flex-basis:100%}.hero.three .dl{flex:0 0 300px}
+.picker .pt small{display:block;font-size:11.5px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dl{display:flex;align-items:center;gap:10px;border:0;border-radius:16px;padding:12px 18px;background:var(--accent);color:#fff;cursor:pointer;font:inherit;text-align:left;box-shadow:0 6px 18px #3b8cff55;flex:0 0 250px;min-width:0}.dl span{min-width:0}
 .dl:hover{background:#2f7cf0}.dl:disabled{opacity:.6;cursor:progress}
 .dl svg{width:26px;height:26px;flex:none}
@@ -163,9 +164,9 @@ button,select{font:inherit;color:inherit}
   .app{grid-template-columns:1fr}
   .sidebar{position:static;max-height:none;border-right:0;border-top:1px solid #111;order:2}
   .titlebar{flex-wrap:wrap;height:auto;padding:8px 12px;position:static}
-  .dots{display:none}
   .canvas{padding:18px 16px 50px}
   .picker{flex:1 1 100%;min-width:0}.picker button{min-width:0;padding:6px 8px 6px 6px;gap:8px}.picker .pt{min-width:0}.picker .pt small{white-space:normal;display:block;line-height:1.2}.dl{flex:1 1 100%;justify-content:center}
+  .hero.three .picker{grid-template-columns:1fr}.hero.three .picker .pt small{white-space:nowrap}.hero.three .dl{flex:1 1 100%}
   .picker .pt b{font-size:16px}.picker .thumb{width:38px;height:48px}
   .inspector{position:fixed;left:16px;right:16px;top:16px;width:auto;max-height:calc(100vh - 32px)}
   .col,.card3d{width:min(300px,calc(100vw - 32px))}
@@ -174,7 +175,6 @@ button,select{font:inherit;color:inherit}
 </head>
 <body>
 <header class="titlebar">
-  <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="doc"><b id="docName">Loading…</b><small id="docSub">Pass template</small></div>
   <span class="ro" title="This viewer never modifies the template">READ-ONLY</span>
   <span class="grow"></span>
@@ -192,7 +192,7 @@ button,select{font:inherit;color:inherit}
     <div class="dropzone" id="dropzone" hidden><div>Drop a <b>.pkpasstemplate</b>, a <b>.zip</b> of one, or a <b>pass.json</b></div></div>
     <div id="chooser"></div>
     <div class="hero">
-      <div class="picker" role="tablist" aria-label="Template">
+      <div class="picker" id="picker" role="tablist" aria-label="Template">
         <button role="tab" data-pass="membership" class="on" aria-selected="true">
           <span class="thumb" style="background-image:url('templates/AAA%20Membership%20Card.pkpasstemplate/artwork@2x.png')"></span>
           <span class="pt"><b>Membership</b><small>AAA Membership Card</small></span>
@@ -365,6 +365,7 @@ const jump = (sel, text, title) => `<button type="button" class="jl" data-jump="
 const icon = (a, cls='dot') => `<span class="${cls}" style="background:${a.color}"><svg viewBox="0 0 24 24">${G[a.g]}</svg></span>`;
 
 /* ---------- State ---------- */
+let imported = null;
 let state = {key:'membership', pass:null, tooling:null, files:[], assets:{}, name:'', limitStyle:null, sel:null, actionPick:null, fallbackMode:null};
 
 function styleKey(p){ return ['posterGeneric','boardingPass','coupon','eventTicket','storeCard','generic'].find(k => p && p[k]) || 'generic'; }
@@ -374,6 +375,11 @@ function hasFile(base){ return ['@2x.png','@3x.png','.png'].filter(s => state.fi
 
 /* ---------- Loading ---------- */
 async function loadDefault(key){
+  if(key === 'imported'){
+    if(!imported) return;
+    state = {...state, key:'imported', ...imported, limitStyle:null, actionPick:null, fallbackMode:null};
+    showError(''); render(); return;
+  }
   const dir = DEFAULTS[key];
   const base = 'templates/' + encodeURIComponent(dir) + '/';
   try{
@@ -797,7 +803,7 @@ document.querySelectorAll('.flipper').forEach(fl => {
 });
 
 /* ---------- Template switching & import ---------- */
-document.querySelectorAll('[data-pass]').forEach(b => b.onclick = () => loadDefault(b.dataset.pass));
+$('picker').addEventListener('click', e => { const b = e.target.closest('[data-pass]'); if(b) loadDefault(b.dataset.pass); });
 /* .pkpasstemplate is a macOS package (a folder Finder shows as a file), so the folder picker
    can't select it directly. Accept a zip, the folder that contains templates, or drag and drop. */
 const isJunk = path => /(^|\/)(__MACOSX|\.DS_Store)/.test(path);
@@ -825,10 +831,25 @@ async function openTemplate(t){
     const assets = {}; files.filter(f => /\.png$/i.test(f.name)).forEach(f => assets[f.name] = URL.createObjectURL(f));
     const raw = {}; for(const f of files) raw[f.name] = f;
     const name = files.length === 1 ? 'pass.json' : t.name;
-    state = {...state, key:'', pass, tooling: tj ? JSON.parse(await tj.text()) : null, files: files.map(f => f.name), assets,
-      raw: name === 'pass.json' ? {'pass.json': await pj.text()} : raw, name, limitStyle:null, actionPick:null, fallbackMode:null};
-    $('chooser').innerHTML = ''; showError(''); render();
+    if(imported) Object.values(imported.assets).forEach(u => URL.revokeObjectURL(u));
+    imported = {pass, tooling: tj ? JSON.parse(await tj.text()) : null, files: files.map(f => f.name), assets,
+      raw: name === 'pass.json' ? {'pass.json': await pj.text()} : raw, name};
+    renderImportedTab();
+    $('chooser').innerHTML = '';
+    await loadDefault('imported');
   }catch{ showError('“' + t.name + '” contains invalid JSON.'); }
+}
+function renderImportedTab(){
+  const picker = $('picker'); picker.querySelector('[data-pass="imported"]')?.remove();
+  picker.style.setProperty('--tabs', imported ? 3 : 2);
+  picker.closest('.hero').classList.toggle('three', !!imported);
+  if(!imported) return;
+  const art = imported.assets['artwork@2x.png'] || imported.assets['artwork@3x.png'] || imported.assets['logo@2x.png'] || '';
+  const label = imported.name.replace(/\.pkpasstemplate$/i, '');
+  const b = document.createElement('button');
+  b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.pass = 'imported'; b.title = imported.name;
+  b.innerHTML = `${art ? `<span class="thumb" style="background-image:url('${esc(art)}')"></span>` : '<span class="thumb blank" aria-hidden="true">📄</span>'}<span class="pt"><b>${esc(label)}</b><small>Imported · ${esc(imported.pass.description || imported.name)}</small></span>`;
+  picker.append(b);
 }
 async function importList(list){
   list = list.filter(x => !isJunk(x.path));
@@ -886,7 +907,7 @@ $('download').addEventListener('click', async () => {
   try{
     if(!window.JSZip) throw new Error('The zip library did not load.');
     const zip = new JSZip(), dir = zip.folder(state.name || 'template.pkpasstemplate');
-    if(state.key){
+    if(DEFAULTS[state.key]){
       const base = 'templates/' + encodeURIComponent(DEFAULTS[state.key]) + '/';
       await Promise.all(state.files.map(async f => {
         const r = await fetch(base + encodeURIComponent(f)); if(!r.ok) throw new Error(f + ' (' + r.status + ')');
