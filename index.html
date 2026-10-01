@@ -180,7 +180,8 @@ button,select{font:inherit;color:inherit}
 #rotateBtn:hover{background:#38393e}#rotateBtn svg{width:18px;height:18px;transition:transform .55s}
 #rotateBtn[aria-pressed="true"] svg{transform:rotate(-180deg)}
 .rotate-hint{font-size:13px;color:var(--muted);text-align:center}
-.sim-bar{display:flex;justify-content:center;margin:-8px auto 22px}
+.sim-bar{display:flex;flex-direction:column;align-items:center;gap:6px;margin:-8px auto 22px}
+.sim-hint{font-size:13px;color:var(--muted)}
 #simOpen{display:inline-flex;align-items:center;gap:8px;border:0;background:var(--accent);color:#fff;border-radius:999px;padding:9px 18px;font:600 14px inherit;cursor:pointer;box-shadow:0 6px 16px #3b8cff44}
 #simOpen svg{width:18px;height:18px}
 .sim{position:fixed;inset:0;z-index:100;background:#000;color:#fff}
@@ -278,11 +279,11 @@ button,select{font:inherit;color:inherit}
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span>Rotate to see the back info</span>
       </button>
-      <span class="rotate-hint">or just swipe a card (I was too tired and bored to write the rest)</span>
+      <span class="rotate-hint">or just swipe a card (i was too tired and bored to write the rest)</span>
     </div>
     <div class="sim-bar"><button type="button" id="simOpen">
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      Simulate full screen on iPhone</button></div>
+      Simulate fullscreen wallet mock</button><span class="sim-hint">(i was too tired to do this)</span></div>
     <div class="previews">
       <div class="col"><span class="pill">iOS 27</span><div class="col-note" id="note27"></div>
         <div class="flipper" data-flip="27"><div class="card3d" id="card27"><div class="face front" id="front27"></div><div class="face back details" id="back27"></div></div></div>
@@ -294,7 +295,7 @@ button,select{font:inherit;color:inherit}
     </div>
     <section class="proposal" aria-labelledby="proposalTitle">
       <div class="proposal-h">
-        <div><h2 id="proposalTitle">Design proposals <span class="credit">(the image canvas below and strings made by Claude, I just did the pass design and the web)</span></h2>
+        <div><h2 id="proposalTitle">Design proposals <span class="credit">(the image canvas below and strings made by Claude, i just did the pass design and the web)</span></h2>
         <p>Alternative designs for both cards: the photo fades into the app’s navy, and every color comes from the AAA app theme (gradientTopColor, blue200, warningTintColor, headingColor, bgRedColor). Built only from what Apple documents for Poster Generic passes. Download a proposal and drag it onto this page (or open it in Pass Designer), or tap “Open in viewer”. The Membership and Insurance templates above aren't changed.</p></div>
       </div>
       <div class="proposal-grid">
@@ -311,7 +312,7 @@ button,select{font:inherit;color:inherit}
       </div>
     </section>
     <p class="legend">This is a browser remake of the Pass Designer canvas, so think of it as a very good mockup. Wallet still gets the final word on fonts, truncation, barcodes, and the Featured Action labels and icons. Flick a card sideways to flip it, and click anything on the left to see its values and Apple's limits.</p>
-    <p class="legend tip">Confession: I couldn't get the import button to open a <code>.pkpasstemplate</code>. macOS treats it as a package, so the file picker just greys it out. The workaround is easy: <b>drag and drop the template onto this page</b> and it loads right up. A <code>.zip</code> or a plain <code>pass.json</code> works too.</p>
+    <p class="legend tip">Confession: i couldn't get the import button to open a <code>.pkpasstemplate</code>. macOS treats it as a package, so the file picker just greys it out. The workaround is easy: <b>drag and drop the template onto this page</b> and it loads right up. A <code>.zip</code> or a plain <code>pass.json</code> works too.</p>
   </main>
 </div>
 <div class="sim" id="sim" hidden role="dialog" aria-modal="true" aria-label="iPhone Wallet simulation">
