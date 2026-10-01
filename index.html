@@ -179,6 +179,7 @@ button,select{font:inherit;color:inherit}
 #rotateBtn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#2d2e32;color:#fff;border-radius:999px;padding:8px 16px;font:600 14px inherit;cursor:pointer}
 #rotateBtn:hover{background:#38393e}#rotateBtn svg{width:18px;height:18px;transition:transform .55s}
 #rotateBtn[aria-pressed="true"] svg{transform:rotate(-180deg)}
+.ios-hint{text-align:center;font-size:13px;color:var(--muted);margin:-14px auto 18px}
 .rotate-hint{font-size:13px;color:var(--muted);text-align:center}
 .sim-bar{display:flex;flex-direction:column;align-items:center;gap:6px;margin:-8px auto 22px}
 .sim-hint{font-size:13px;color:var(--muted)}
@@ -255,7 +256,7 @@ button,select{font:inherit;color:inherit}
   <aside class="sidebar" id="sidebar" aria-label="Template components"></aside>
   <main class="canvas" id="canvas">
     <section class="inspector" id="inspector" hidden aria-live="polite"></section>
-    <div class="dropzone" id="dropzone" hidden><div>Drop a <b>.pkpasstemplate</b>, a <b>.zip</b> of one, or a <b>pass.json</b></div></div>
+    <div class="dropzone" id="dropzone" hidden><div>Drop your <b>.pkpasstemplate</b> here (a <b>.zip</b> or <b>pass.json</b> works too)</div></div>
     <div id="chooser"></div>
     <div class="hero">
       <div class="picker" id="picker" role="tablist" aria-label="Template" style="--tabs:2">
@@ -281,6 +282,7 @@ button,select{font:inherit;color:inherit}
       </button>
       <span class="rotate-hint">or just swipe a card (i was too tired and bored to write the rest)</span>
     </div>
+    <p class="ios-hint">open in safari on iphone to simulate fullscreen wallet behavior</p>
     <div class="sim-bar"><button type="button" id="simOpen">
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       Simulate fullscreen wallet mock</button><span class="sim-hint">(i was also too tired to complete this)</span></div>
@@ -296,7 +298,7 @@ button,select{font:inherit;color:inherit}
     <section class="proposal" aria-labelledby="proposalTitle">
       <div class="proposal-h">
         <div><h2 id="proposalTitle">Design proposals <span class="credit">(the image canvas below and strings made by Claude, i just did the pass design and the web)</span></h2>
-        <p>Alternative designs for both cards: the photo fades into the app’s navy, and every color comes from the AAA app theme (gradientTopColor, blue200, warningTintColor, headingColor, bgRedColor). Built only from what Apple documents for Poster Generic passes. Download a proposal and drag it onto this page (or open it in Pass Designer), or tap “Open in viewer”. The Membership and Insurance templates above aren't changed.</p></div>
+        <p>A different take on both cards: the photo fades into the AAA app’s navy and all the colors come straight from the app’s theme. Everything here is stuff Apple Wallet actually supports. Grab one with Download template and drag it onto this page (or open it in Pass Designer), or just hit Open in viewer. The Membership and Insurance cards up top stay as they are.</p></div>
       </div>
       <div class="proposal-grid">
         <figure>
@@ -311,8 +313,8 @@ button,select{font:inherit;color:inherit}
         </figure>
       </div>
     </section>
-    <p class="legend">This is a browser remake of the Pass Designer canvas, so think of it as a very good mockup. Wallet still gets the final word on fonts, truncation, barcodes, and the Featured Action labels and icons. Flick a card sideways to flip it, and click anything on the left to see its values and Apple's limits.</p>
-    <p class="legend tip">Confession: i couldn't get the import button to open a <code>.pkpasstemplate</code>. macOS treats it as a package, so the file picker just greys it out. The workaround is easy: <b>drag and drop the template onto this page</b> and it loads right up. A <code>.zip</code> or a plain <code>pass.json</code> works too.</p>
+    <p class="legend">This is a browser copy of the Pass Designer preview, so think of it as a really good mockup. The real Wallet app has the final say on fonts, cut-off text, barcodes and the buttons under the card. Flip a card to see the back, and click anything on the left to see what's in it and what Apple allows.</p>
+    <p class="legend tip">Confession: i couldn't get the import button to open a <code>.pkpasstemplate</code> (the Mac treats it like a single file, so the picker greys it out). Easy fix: <b>just drag and drop the template onto this page</b>. A <code>.zip</code> or a plain <code>pass.json</code> works too.</p>
   </main>
 </div>
 <div class="sim" id="sim" hidden role="dialog" aria-modal="true" aria-label="iPhone Wallet simulation">
@@ -320,7 +322,7 @@ button,select{font:inherit;color:inherit}
     <div class="phone" id="phone">
       <section class="scr scr-stack" id="scrStack">
         <div class="wl-head"><h3>Wallet</h3><span class="wl-actions"><button type="button" class="sim-exit" id="simExit">Exit</button><span class="wl-plus" aria-hidden="true">+</span></span></div>
-        <p class="wl-note">Tap the AAA pass. Pass Details are behind the ••• button, as in current iOS.</p>
+        <p class="wl-note">Tap the AAA pass. The extra info is behind the ••• button, like in the real Wallet.</p>
         <div class="wl-stack">
           <button type="button" class="mock mock-credit" data-mock="Credit Card"><b>Credit Card</b><span>•••• 4021</span></button>
           <button type="button" class="mock mock-rewards" data-mock="Rewards Card"><b>Rewards Card</b><span>1,250 pts</span></button>
@@ -511,7 +513,7 @@ async function loadDefault(key){
       files: manifest[dir] || [], assets: {}, raw: null, limitStyle: null, sel: state.sel, actionPick: null, fallbackMode: null};
     state.files.filter(f => f.endsWith('.png')).forEach(f => state.assets[f] = base + encodeURIComponent(f));
     showError(''); render();
-  }catch(e){ showError('Could not load the bundled template: '+e.message+'. Try reloading the page.'); }
+  }catch(e){ showError('Hmm, couldn\'t load the template ('+e.message+'). Try reloading the page.'); }
 }
 function showError(m){ $('error').innerHTML = m ? '<div class="err">'+esc(m)+'</div>' : ''; }
 
@@ -642,7 +644,7 @@ function render(){
   // iOS 27
   $('front27').innerHTML = sk === 'posterGeneric' ? renderPoster(p, dict) : renderGeneric(p, dict);
   $('back27').innerHTML = renderBack(p, dict);
-  $('note27').textContent = sk === 'posterGeneric' ? 'posterGeneric' : (STYLES[sk]?.name || sk) + ' (rendered with the generic layout)';
+  $('note27').textContent = sk === 'posterGeneric' ? 'How it looks on iOS 27' : (STYLES[sk]?.name || sk) + ' card (shown with the basic layout)';
   const acts = p.featuredActions || [];
   $('acts27').innerHTML = acts.slice(0, MAX_ACTIONS).map((a,i) => {
     const d = ACTION_BY_TYPE[a.type] || {title:a.type||'Unknown action',sub:'Unsupported type',color:'#636366',g:'star'};
@@ -658,15 +660,15 @@ function render(){
     $('front26').innerHTML = renderGeneric(p, fb.dict);
     $('back26').innerHTML = renderBack(p, fb.dict);
     n26.className = 'col-note';
-    n26.textContent = fb.mode === 'explicit' ? 'Custom generic fallback — shipped in pass.json (Generate Compatible Pass: off)'
-      : fb.mode === 'auto' ? (autoOn() ? 'Auto-generated by Pass Designer — shipped (Generate Compatible Pass: on)' : 'Preview only: what Designer generates if Generate Compatible Pass is turned on')
+    n26.textContent = fb.mode === 'explicit' ? 'How it looks on iOS 26 and older (our own version)'
+      : fb.mode === 'auto' ? (autoOn() ? 'How it looks on iOS 26 and older (made automatically by Pass Designer)' : 'Just a preview: what Pass Designer would make automatically')
       : '';
     if(fb.mode === 'auto' && !autoOn()) n26.className = 'col-note warn';
   }else{
     $('front26').innerHTML = renderPoster(p, dict);
     $('back26').innerHTML = renderBack(p, dict);
     n26.className = 'col-note warn';
-    n26.textContent = 'No fallback style: iOS 26 and earlier cannot display posterGeneric';
+    n26.textContent = 'iOS 26 and older can’t show this card style, and there’s no backup version';
   }
   const sw = $('fbSwitch'), cur = fb ? (fb.mode === 'explicit' ? 'custom' : fb.mode) : '';
   sw.hidden = sk !== 'posterGeneric';
@@ -708,9 +710,9 @@ function navItem(id, ic, label, extra='', cls=''){
 function renderSidebar(){
   const p = state.pass, sk = styleKey(p), dict = p[sk] || {}, L = STYLES[state.limitStyle] || STYLES.generic;
   const acts = p.featuredActions || [];
-  let h = `<div class="lim-pick"><label for="limitStyle">Show limits for pass style</label>
+  let h = `<div class="lim-pick"><label for="limitStyle">Check the limits for</label>
     <select id="limitStyle">${Object.entries(STYLES).map(([k,s])=>`<option value="${k}" ${k===state.limitStyle?'selected':''}>${esc(s.name)}${k===sk?' (this template)':''}</option>`).join('')}</select>
-    <p>${state.limitStyle===sk ? 'Counts are checked against this template\'s own style.' : 'Preview: how this template\'s fields would fit if it were converted to '+esc(L.name)+'. Red badges mean fields Wallet would not show.'}</p></div>`;
+    <p>${state.limitStyle===sk ? 'The numbers show how many fields this card uses vs. how many Apple allows.' : 'What if this card were a '+esc(L.name)+'? Red means those fields wouldn\'t show up.'}</p></div>`;
   h += '<ul class="nav">';
   h += navItem('identity', IC.id, 'Identity & Signing');
   h += navItem('style', IC.style, 'Style', `<span class="badge">${esc(STYLES[sk]?.name||sk)}</span>`);
@@ -727,7 +729,7 @@ function renderSidebar(){
   const fb = sk === 'posterGeneric' ? fallbackFor(p) : null;
   if(fb){
     const GM = STYLES.generic.max;
-    h += `</ul><div class="section-h">iOS 26 fallback · generic ${fb.mode==='auto'?'(auto)':'(custom)'}</div><ul class="nav">`;
+    h += `</ul><div class="section-h">iOS 26 and older ${fb.mode==='auto'?'(automatic)':'(our version)'}</div><ul class="nav">`;
     ['headerFields','primaryFields','secondaryFields','auxiliaryFields','backFields'].forEach(g => {
       const arr = fb.dict[g] || [];
       h += navItem('fgroup:'+g, IC.grp, `${GROUP_NAMES[g]} (${maxText(GM[g])})`, badge(arr.length, GM[g]), 'child');
@@ -968,7 +970,7 @@ async function openTemplate(t){
     renderImportedTab();
     $('chooser').innerHTML = '';
     await loadDefault('imported');
-  }catch{ showError('“' + t.name + '” contains invalid JSON.'); }
+  }catch{ showError('“' + t.name + '” has a broken pass.json.'); }
 }
 function renderImportedTab(){
   const picker = $('picker'); picker.querySelector('[data-pass="imported"]')?.remove();
@@ -988,20 +990,20 @@ async function importList(list){
   const zips = list.filter(x => /\.zip$/i.test(x.path));
   for(const z of zips) list = list.concat((await filesFromZip(z.file)).map(x => ({...x, path: z.path.replace(/[^/]*$/, '') + x.path})));
   const templates = groupTemplates(list);
-  if(!templates.length){ showError('No pass.json found. Choose a .pkpasstemplate (drag it in, or its .zip), the folder that contains it, or a pass.json.'); return; }
+  if(!templates.length){ showError('Didn\'t find a pass.json in there. Try dragging the .pkpasstemplate itself, a .zip of it, or a pass.json.'); return; }
   if(templates.length === 1) return openTemplate(templates[0]);
-  $('chooser').innerHTML = `<div class="chooser"><b>${templates.length} templates found — choose one:</b>${templates.map((t,i) => `<button type="button" data-tpl="${i}">${esc(t.name)}</button>`).join('')}</div>`;
+  $('chooser').innerHTML = `<div class="chooser"><b>Found ${templates.length} templates, pick one:</b>${templates.map((t,i) => `<button type="button" data-tpl="${i}">${esc(t.name)}</button>`).join('')}</div>`;
   $('chooser').querySelectorAll('[data-tpl]').forEach(b => b.onclick = () => openTemplate(templates[+b.dataset.tpl]));
 }
 $('jsonFile').addEventListener('change', async e => {
   const file = e.target.files[0]; if(!file) return;
   try{ await importList([{path: file.name, file}]); }
-  catch(err){ showError('Could not open “' + file.name + '”: ' + err.message); }
+  catch(err){ showError('Couldn\'t open “' + file.name + '” (' + err.message + ').'); }
   e.target.value = '';
 });
 $('folder').addEventListener('change', async e => {
   try{ await importList([...e.target.files].map(f => ({path: f.webkitRelativePath || f.name, file: f}))); }
-  catch(err){ showError('Could not open the folder: ' + err.message); }
+  catch(err){ showError('Couldn\'t open that folder (' + err.message + ').'); }
   e.target.value = '';
 });
 async function readEntry(entry, prefix = ''){
@@ -1023,7 +1025,7 @@ window.addEventListener('drop', async e => {
     const list = entries.length ? (await Promise.all(entries.map(en => readEntry(en)))).flat()
                                 : [...e.dataTransfer.files].map(f => ({path: f.name, file: f}));
     await importList(list);
-  }catch(err){ showError('Could not read the dropped item: ' + err.message); }
+  }catch(err){ showError('Couldn\'t read what you dropped (' + err.message + ').'); }
 });
 /* ---------- iPhone Wallet simulation ---------- */
 function simFit(){
@@ -1049,7 +1051,7 @@ $('pvMore').onclick = () => { const m = $('pvMenu'); m.hidden = !m.hidden; $('pv
 $('pvDetails').onclick = () => { simShow('scrDetails'); $('scrDetails').scrollTop = 0; };
 $('dtDone').onclick = () => simShow('scrPass');
 document.querySelectorAll('[data-mock]').forEach(b => b.onclick = () => {
-  const t = $('wlToast'); t.textContent = b.dataset.mock + ' is a mock card, tap the AAA pass'; t.hidden = false;
+  const t = $('wlToast'); t.textContent = b.dataset.mock + ' is just a mock, tap the AAA pass'; t.hidden = false;
   clearTimeout(t._h); t._h = setTimeout(() => t.hidden = true, 1800);
 });
 window.addEventListener('resize', () => { if(!$('sim').hidden) simFit(); });
@@ -1083,7 +1085,7 @@ document.querySelector('.proposal').addEventListener('click', async e => {
       list.forEach(x => folder.file(x.file.name, x.file));
       saveBlob(await zip.generateAsync({type:'blob'}), dir + '.zip');
     }
-  }catch(err){ showError('Could not load ' + dir + ': ' + err.message); }
+  }catch(err){ showError('Couldn\'t load ' + dir + ' (' + err.message + ').'); }
   finally{ b.disabled = false; b.textContent = was; }
 });
 $('download').addEventListener('click', async () => {
@@ -1107,7 +1109,7 @@ $('download').addEventListener('click', async () => {
       dir.file('pass.json', JSON.stringify(state.pass, null, 2));
     }
     saveBlob(await zip.generateAsync({type:'blob'}), (state.name || 'template.pkpasstemplate') + '.zip');
-  }catch(e){ showError('Download failed: ' + e.message); }
+  }catch(e){ showError('The download didn\'t work (' + e.message + ').'); }
   finally{ btn.disabled = false; label.textContent = was; }
 });
 loadDefault('membership');
