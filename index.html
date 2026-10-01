@@ -180,6 +180,50 @@ button,select{font:inherit;color:inherit}
 #rotateBtn:hover{background:#38393e}#rotateBtn svg{width:18px;height:18px;transition:transform .55s}
 #rotateBtn[aria-pressed="true"] svg{transform:rotate(-180deg)}
 .rotate-hint{font-size:13px;color:var(--muted);text-align:center}
+.sim-bar{display:flex;justify-content:center;margin:-8px auto 22px}
+#simOpen{display:inline-flex;align-items:center;gap:8px;border:0;background:var(--accent);color:#fff;border-radius:999px;padding:9px 18px;font:600 14px inherit;cursor:pointer;box-shadow:0 6px 16px #3b8cff44}
+#simOpen svg{width:18px;height:18px}
+.sim{position:fixed;inset:0;z-index:100;background:rgba(10,11,13,.92);backdrop-filter:blur(8px);display:flex;flex-direction:column}
+.sim[hidden]{display:none}
+.sim-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;flex-wrap:wrap}
+.sim-note{font-size:13px;color:var(--muted)}
+.sim-exit{border:1px solid var(--line);background:#2d2e32;color:#fff;border-radius:999px;padding:7px 14px;font:600 13px inherit;cursor:pointer}
+.sim-stage{flex:1;position:relative;overflow:hidden}
+.phone{position:absolute;left:50%;top:0;width:375px;height:812px;transform-origin:top center;background:#000;border-radius:54px;box-shadow:0 0 0 11px #1c1c1e,0 0 0 13px #3a3a3c,0 30px 80px rgba(0,0,0,.6);overflow:hidden;color:#fff}
+.island{position:absolute;left:50%;top:11px;width:122px;height:35px;margin-left:-61px;background:#000;border-radius:20px;z-index:20}
+.status{position:absolute;left:0;right:0;top:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:6px 30px 0 40px;z-index:15;font-size:15px}
+.status .sig{display:flex;gap:6px;align-items:center}.status svg{height:12px;fill:#fff;color:#fff}
+.homebar{position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:#fff;opacity:.85;z-index:20}
+.scr{position:absolute;inset:0;padding-top:54px;overflow-y:auto;scrollbar-width:none;animation:scrIn .32s ease}
+.scr::-webkit-scrollbar{display:none}
+.scr[hidden]{display:none}
+@keyframes scrIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.wl-head{display:flex;justify-content:space-between;align-items:center;padding:8px 18px 10px}
+.wl-head h3{margin:0;font-size:32px;font-weight:700;letter-spacing:-.02em}
+.wl-plus{width:34px;height:34px;border-radius:50%;background:#2c2c2e;display:grid;place-items:center;font-size:22px;color:#fff}
+.wl-stack{position:relative;margin:0 16px;height:640px}
+.mock{position:absolute;left:0;right:0;height:215px;border:0;border-radius:14px;text-align:left;padding:14px 16px;color:#fff;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;font:inherit}
+.mock b{font-size:16px}.mock span{font-size:13px;opacity:.85}
+.mock-credit{top:0;background:linear-gradient(135deg,#3a3a3c,#1c1c1e);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.mock-rewards{top:60px;background:#30b650}
+.wl-pass{position:absolute;left:0;top:120px;width:343px;height:482px;border:0;padding:0;background:none;cursor:pointer;border-radius:14px;box-shadow:0 -6px 20px rgba(0,0,0,.45)}
+.sim-pass{position:relative;width:300px;height:422px;transform:scale(1.1433);transform-origin:top left;border-radius:14px;overflow:hidden}
+.sim-pass .face-in{border-radius:14px}
+.wl-toast{position:absolute;left:50%;bottom:40px;transform:translateX(-50%);background:rgba(60,60,64,.95);padding:9px 14px;border-radius:12px;font-size:13px;white-space:nowrap}
+.pv-bar{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:6px 16px 10px;z-index:10}
+.glass{width:44px;height:44px;border-radius:50%;border:0;background:rgba(120,120,128,.32);backdrop-filter:blur(12px);color:#fff;display:grid;place-items:center;cursor:pointer}
+.glass svg{width:20px;height:20px;fill:currentColor}
+.glass-pair{display:flex;gap:0;background:rgba(120,120,128,.32);border-radius:22px}.glass-pair .glass{background:none}
+.pv-menu{position:absolute;right:16px;top:112px;width:220px;background:rgba(44,44,46,.97);border-radius:14px;overflow:hidden;z-index:12;box-shadow:0 12px 30px rgba(0,0,0,.5)}
+.pv-menu[hidden]{display:none}
+.pv-menu button{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid rgba(255,255,255,.08);background:none;color:#fff;padding:12px 16px;font:15px inherit;cursor:pointer}
+.pv-menu button:disabled{color:#8e8e93;cursor:default}.pv-menu button:last-child{border-bottom:0}
+.pv-body{padding:0 16px 40px}
+.pv-body .sim-pass.big{margin-bottom:62px}
+.sim-acts{margin-top:0}
+.dt-bar{position:sticky;top:0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:8px 16px 12px;background:#000;z-index:5}
+.dt-bar b{font-size:16px}.dt-bar button{justify-self:end;border:0;background:none;color:#0a84ff;font:600 16px inherit;cursor:pointer}
+.sim-details{margin:0 12px 40px;border-radius:16px}
 .dropzone{position:fixed;inset:12px;border:3px dashed var(--accent);border-radius:20px;background:#0a1830cc;z-index:50;display:grid;place-items:center;font-size:20px;color:#fff;pointer-events:none}.dropzone[hidden]{display:none}
 .chooser{max-width:640px;margin:0 auto 16px;background:#22314a;border:1px solid #3b5f96;border-radius:12px;padding:12px 14px;font-size:13px}.chooser b{display:block;margin-bottom:8px}.chooser button{margin:4px 6px 0 0;border:1px solid #4f78b8;background:#2b4166;color:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
 .err{background:#4a1f1d;border:1px solid #7a302b;color:#ffd4d1;border-radius:8px;padding:10px 12px;margin:0 auto 16px;max-width:640px;font-size:13px}
@@ -238,6 +282,9 @@ button,select{font:inherit;color:inherit}
       </button>
       <span class="rotate-hint">or just swipe a card (I was too tired and bored to write the rest)</span>
     </div>
+    <div class="sim-bar"><button type="button" id="simOpen">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      Simulate full screen on iPhone</button></div>
     <div class="previews">
       <div class="col"><span class="pill">iOS 27</span><div class="col-note" id="note27"></div>
         <div class="flipper" data-flip="27"><div class="card3d" id="card27"><div class="face front" id="front27"></div><div class="face back details" id="back27"></div></div></div>
@@ -268,6 +315,35 @@ button,select{font:inherit;color:inherit}
     <p class="legend">This is a browser remake of the Pass Designer canvas, so think of it as a very good mockup. Wallet still gets the final word on fonts, truncation, barcodes, and the Featured Action labels and icons. Flick a card sideways to flip it, and click anything on the left to see its values and Apple's limits.</p>
     <p class="legend tip">Confession: I couldn't get the import button to open a <code>.pkpasstemplate</code>. macOS treats it as a package, so the file picker just greys it out. The workaround is easy: <b>drag and drop the template onto this page</b> and it loads right up. A <code>.zip</code> or a plain <code>pass.json</code> works too.</p>
   </main>
+</div>
+<div class="sim" id="sim" hidden role="dialog" aria-modal="true" aria-label="iPhone Wallet simulation">
+  <div class="sim-top"><span class="sim-note">Tap the AAA pass. Pass Details are behind the ••• button, as in current iOS.</span><button type="button" class="sim-exit" id="simExit">Exit simulation</button></div>
+  <div class="sim-stage" id="simStage">
+    <div class="phone" id="phone">
+      <div class="island"></div>
+      <div class="status"><b>9:41</b><span class="sig"><svg viewBox="0 0 34 12" aria-hidden="true"><rect x="0" y="8" width="5" height="4" rx="1"/><rect x="7" y="5" width="5" height="7" rx="1"/><rect x="14" y="2" width="5" height="10" rx="1"/><rect x="21" y="0" width="5" height="12" rx="1" opacity=".35"/></svg><svg viewBox="0 0 26 12" aria-hidden="true"><rect x=".5" y=".5" width="21" height="11" rx="3" fill="none" stroke="currentColor"/><rect x="2" y="2" width="15" height="8" rx="1.5"/><rect x="23" y="4" width="2" height="4" rx="1"/></svg></span></div>
+      <section class="scr scr-stack" id="scrStack">
+        <div class="wl-head"><h3>Wallet</h3><span class="wl-plus" aria-hidden="true">+</span></div>
+        <div class="wl-stack">
+          <button type="button" class="mock mock-credit" data-mock="Credit Card"><b>Credit Card</b><span>•••• 4021</span></button>
+          <button type="button" class="mock mock-rewards" data-mock="Rewards Card"><b>Rewards Card</b><span>1,250 pts</span></button>
+          <button type="button" class="wl-pass" id="wlPass" aria-label="Open the AAA pass"><div class="sim-pass" id="simStackPass"></div></button>
+        </div>
+        <div class="wl-toast" id="wlToast" hidden></div>
+      </section>
+      <section class="scr scr-pass" id="scrPass" hidden>
+        <div class="pv-bar"><button type="button" class="glass" id="pvClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+          <span class="glass-pair"><span class="glass" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v12M7.5 7.5L12 3l4.5 4.5M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><button type="button" class="glass" id="pvMore" aria-label="More" aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg></button></span></div>
+        <div class="pv-menu" id="pvMenu" hidden><button type="button" id="pvDetails">Pass Details</button><button type="button" disabled>Share Pass</button><button type="button" disabled>Remove Pass</button></div>
+        <div class="pv-body"><div class="sim-pass big" id="simBigPass"></div><div class="acts sim-acts" id="simActs"></div></div>
+      </section>
+      <section class="scr scr-details" id="scrDetails" hidden>
+        <div class="dt-bar"><span></span><b>Pass Details</b><button type="button" id="dtDone">Done</button></div>
+        <div class="details sim-details" id="simDetails"></div>
+      </section>
+      <div class="homebar"></div>
+    </div>
+  </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
@@ -953,6 +1029,41 @@ window.addEventListener('drop', async e => {
     await importList(list);
   }catch(err){ showError('Could not read the dropped item: ' + err.message); }
 });
+/* ---------- iPhone Wallet simulation ---------- */
+function simFit(){
+  const stage = $('simStage'), ph = $('phone');
+  const k = Math.min(1, (stage.clientHeight - 24) / 812, (stage.clientWidth - 40) / 375);
+  ph.style.transform = `translateX(-50%) scale(${k})`;
+  ph.style.top = Math.max(0, (stage.clientHeight - 812 * k) / 2) + 'px';
+}
+function simShow(id){ ['scrStack','scrPass','scrDetails'].forEach(x => $(x).hidden = x !== id); $('pvMenu').hidden = true; $('pvMore').setAttribute('aria-expanded','false'); }
+function simOpen(){
+  const front = $('front27').innerHTML;
+  $('simStackPass').innerHTML = front;
+  $('simBigPass').innerHTML = front;
+  $('simActs').innerHTML = $('acts27').innerHTML;
+  $('simDetails').innerHTML = $('back27').innerHTML;
+  $('sim').hidden = false; document.body.style.overflow = 'hidden';
+  simShow('scrStack'); simFit(); $('wlPass').focus();
+}
+function simClose(){ $('sim').hidden = true; document.body.style.overflow = ''; $('simOpen').focus(); }
+$('simOpen').onclick = simOpen;
+$('simExit').onclick = simClose;
+$('wlPass').onclick = () => { simShow('scrPass'); $('scrPass').scrollTop = 0; };
+$('pvClose').onclick = () => simShow('scrStack');
+$('pvMore').onclick = () => { const m = $('pvMenu'); m.hidden = !m.hidden; $('pvMore').setAttribute('aria-expanded', String(!m.hidden)); };
+$('pvDetails').onclick = () => { simShow('scrDetails'); $('scrDetails').scrollTop = 0; };
+$('dtDone').onclick = () => simShow('scrPass');
+document.querySelectorAll('[data-mock]').forEach(b => b.onclick = () => {
+  const t = $('wlToast'); t.textContent = b.dataset.mock + ' is a mock card, tap the AAA pass'; t.hidden = false;
+  clearTimeout(t._h); t._h = setTimeout(() => t.hidden = true, 1800);
+});
+window.addEventListener('resize', () => { if(!$('sim').hidden) simFit(); });
+document.addEventListener('keydown', e => {
+  if($('sim').hidden || e.key !== 'Escape') return;
+  if(!$('scrDetails').hidden) simShow('scrPass'); else if(!$('scrPass').hidden) simShow('scrStack'); else simClose();
+});
+
 /* ---------- Download (read-only copy of the template) ---------- */
 function saveBlob(blob, filename){
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename;
