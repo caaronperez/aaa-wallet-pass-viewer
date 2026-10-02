@@ -27,7 +27,7 @@
         "_id" : "F801DCAE-1437-4EDA-888D-94935B242832",
         "key" : "insuranceCompany",
         "label" : "INSURANCE COMPANY",
-        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 233598"
+        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 000000"
       }
     ],
     "backFields" : [
@@ -81,7 +81,7 @@
         "_id" : "4AE5F33F-1209-42B2-B622-1F6750D51541",
         "key" : "company",
         "label" : "Company Name",
-        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 233598\nP.O. Box 10006, Santa Ana, CA 92799-5006"
+        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 000000\nP.O. Box 00000, City, CA 00000"
       },
       {
         "_id" : "05538C9F-C1D9-44E2-9A61-E1F9817D3571",
@@ -179,7 +179,7 @@
         "_id" : "4AE5F33F-1209-42B2-B622-1F6750D51541",
         "key" : "company",
         "label" : "Company Name",
-        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 233598\nP.O. Box 10006, Santa Ana, CA 92799-5006"
+        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 000000\nP.O. Box 00000, City, CA 00000"
       },
       {
         "_id" : "05538C9F-C1D9-44E2-9A61-E1F9817D3571",

@@ -3,7 +3,7 @@
     1094393125
   ],
   "authenticationToken" : "",
-  "backgroundColor" : "rgb(28,77,166)",
+  "backgroundColor" : "rgb(34,143,208)",
   "barcodes" : [
     {
       "_id" : "E4FD1E6E-100F-4455-90D5-FEAA43177955",
@@ -35,17 +35,10 @@
   "generic" : {
     "auxiliaryFields" : [
       {
-        "_id" : "1ECFBF24-9EC4-4421-A446-31768923B551",
-        "key" : "roadside",
-        "label" : "ROADSIDE 24\/7",
-        "value" : "1-800-400-4222"
-      },
-      {
-        "_id" : "ED4EEB73-9920-4D9B-8005-628890F8ED03",
-        "key" : "roadsideOutsideCA",
-        "label" : "OUTSIDE CA",
-        "textAlignment" : "PKTextAlignmentRight",
-        "value" : "1-800-222-4357"
+        "_id" : "3088C545-1DF6-40C8-BCDF-8F6F8874A314",
+        "key" : "roadsideFooter",
+        "label" : "ROADSIDE",
+        "value" : "ROADSIDE 24\/7 · 1-800-400-4222 · TAP CALL BELOW"
       }
     ],
     "backFields" : [
@@ -65,7 +58,9 @@
       },
       {
         "_id" : "DB2FEDA0-8051-49FB-9B04-0BCF257ED43D",
-        "dataDetectorTypes" : [],
+        "dataDetectorTypes" : [
+
+        ],
         "key" : "membershipNumber",
         "label" : "Membership number",
         "value" : "000 000 XXXXXXXXX 0"
@@ -92,17 +87,19 @@
       },
       {
         "_id" : "BE2501B8-01F7-4178-8567-4E80F216DAFB",
-        "dataDetectorTypes" : [],
+        "dataDetectorTypes" : [
+
+        ],
         "key" : "rentalCodes",
         "label" : "Car rental discount codes",
-        "value" : "Hertz CDP: 0004\nDollar CD: TB7104\nThrifty CD: 0010230726"
+        "value" : "Hertz CDP: 0000\nDollar CD: XX0000\nThrifty CD: 0000000000"
       },
       {
         "_id" : "4A097C5D-0A31-451F-95AC-2AF0CDD4AA5D",
-        "attributedValue" : "Glendale Branch\n1233 E Broadway, Glendale, CA 91205\nPhone: <a href='tel:18182402200'>818-240-2200<\/a>\nMon–Sat 9:00 AM – 5:00 PM\n<a href='https:\/\/maps.apple.com\/place?place-id=I71B28B9C6AC9C7EF'>Get directions<\/a> · <a href='https:\/\/www.ace.aaa.com\/locations.html'>Find another branch<\/a>",
+        "attributedValue" : "Sample Branch\n000 Main St, City, CA 00000\nPhone: <a href='tel:10000000000'>000-000-0000<\/a>\nMon–Sat 9:00 AM – 5:00 PM\n<a href='https:\/\/maps.apple.com\/place?place-id=I71B28B9C6AC9C7EF'>Get directions<\/a> · <a href='https:\/\/www.ace.aaa.com\/locations.html'>Find another branch<\/a>",
         "key" : "nearestBranch",
         "label" : "Your AAA branch",
-        "value" : "Glendale Branch\n1233 E Broadway, Glendale, CA 91205\nPhone: 818-240-2200\nMon–Sat 9:00 AM – 5:00 PM\nGet directions · Find another branch"
+        "value" : "Sample Branch\n000 Main St, City, CA 00000\nPhone: 000-000-0000\nMon–Sat 9:00 AM – 5:00 PM\nGet directions · Find another branch"
       },
       {
         "_id" : "A9165F0D-9954-4F34-9273-331776A719F2",
@@ -114,16 +111,15 @@
     ],
     "headerFields" : [
       {
-        "_id" : "483573F0-0F14-4CBC-AA48-2797ACD07BF5",
-        "key" : "plan",
-        "label" : "PLAN",
-        "textAlignment" : "PKTextAlignmentRight",
-        "value" : "Premier"
+        "_id" : "F4BF8486-01B1-4D95-8274-D9DC23F45446",
+        "key" : "cardTitle",
+        "label" : "MEMBERSHIP CARD",
+        "value" : "Plan: Premier"
       }
     ],
     "primaryFields" : [
       {
-        "_id" : "30B5AC8C-7938-42FA-BEDA-F0807ACCFDFB",
+        "_id" : "ECFFE41F-7536-4B95-BA8C-5E799D971A02",
         "key" : "memberName",
         "label" : "MEMBER",
         "value" : "FULANITO PEREZ"
@@ -131,16 +127,15 @@
     ],
     "secondaryFields" : [
       {
-        "_id" : "89A58086-DC6E-4A9A-9297-312DCEED54CF",
+        "_id" : "E68AFFEA-E72E-4298-B321-C1B23104E013",
         "key" : "validThru",
         "label" : "VALID THRU",
         "value" : "03\/27"
       },
       {
-        "_id" : "F616A425-5C6F-4C63-9786-454F2441C4D8",
+        "_id" : "EED2AD41-C8FE-46F1-B2DA-E8D5F23CB292",
         "key" : "memberSince",
         "label" : "MEMBER SINCE",
-        "textAlignment" : "PKTextAlignmentRight",
         "value" : "1994"
       }
     ]
@@ -150,14 +145,16 @@
     {
       "latitude" : 34.146313,
       "longitude" : -118.238001,
-      "relevantText" : "AAA Glendale Branch nearby · show your card"
+      "relevantText" : "AAA branch nearby · show your card"
     }
   ],
   "maxDistance" : 500,
   "organizationName" : "AAA",
   "passTypeIdentifier" : "pass.com.example.aaa.membership",
   "posterGeneric" : {
-    "auxiliaryFields" : [],
+    "auxiliaryFields" : [
+
+    ],
     "backFields" : [
       {
         "_id" : "3BC7022D-63A1-43D0-8DC4-007F33159329",
@@ -175,7 +172,9 @@
       },
       {
         "_id" : "DB2FEDA0-8051-49FB-9B04-0BCF257ED43D",
-        "dataDetectorTypes" : [],
+        "dataDetectorTypes" : [
+
+        ],
         "key" : "membershipNumber",
         "label" : "Membership number",
         "value" : "000 000 XXXXXXXXX 0"
@@ -202,17 +201,19 @@
       },
       {
         "_id" : "BE2501B8-01F7-4178-8567-4E80F216DAFB",
-        "dataDetectorTypes" : [],
+        "dataDetectorTypes" : [
+
+        ],
         "key" : "rentalCodes",
         "label" : "Car rental discount codes",
-        "value" : "Hertz CDP: 0004\nDollar CD: TB7104\nThrifty CD: 0010230726"
+        "value" : "Hertz CDP: 0000\nDollar CD: XX0000\nThrifty CD: 0000000000"
       },
       {
         "_id" : "4A097C5D-0A31-451F-95AC-2AF0CDD4AA5D",
-        "attributedValue" : "Glendale Branch\n1233 E Broadway, Glendale, CA 91205\nPhone: <a href='tel:18182402200'>818-240-2200<\/a>\nMon–Sat 9:00 AM – 5:00 PM\n<a href='https:\/\/maps.apple.com\/place?place-id=I71B28B9C6AC9C7EF'>Get directions<\/a> · <a href='https:\/\/www.ace.aaa.com\/locations.html'>Find another branch<\/a>",
+        "attributedValue" : "Sample Branch\n000 Main St, City, CA 00000\nPhone: <a href='tel:10000000000'>000-000-0000<\/a>\nMon–Sat 9:00 AM – 5:00 PM\n<a href='https:\/\/maps.apple.com\/place?place-id=I71B28B9C6AC9C7EF'>Get directions<\/a> · <a href='https:\/\/www.ace.aaa.com\/locations.html'>Find another branch<\/a>",
         "key" : "nearestBranch",
         "label" : "Your AAA branch",
-        "value" : "Glendale Branch\n1233 E Broadway, Glendale, CA 91205\nPhone: 818-240-2200\nMon–Sat 9:00 AM – 5:00 PM\nGet directions · Find another branch"
+        "value" : "Sample Branch\n000 Main St, City, CA 00000\nPhone: 000-000-0000\nMon–Sat 9:00 AM – 5:00 PM\nGet directions · Find another branch"
       },
       {
         "_id" : "A9165F0D-9954-4F34-9273-331776A719F2",
@@ -258,7 +259,9 @@
         "value" : "1994"
       }
     ],
-    "secondaryFields" : []
+    "secondaryFields" : [
+
+    ]
   },
   "serialNumber" : "000000XXXXXXXXX0-ALT",
   "suppressHeaderDarkening" : true,

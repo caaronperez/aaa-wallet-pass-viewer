@@ -74,16 +74,16 @@
       },
       {
         "_id" : "37611BEA-CFEF-46AB-B51D-22E981A6DDF0",
-        "attributedValue" : "Glendale Branch\n1233 E Broadway\nGlendale, CA 91205\nPhone: <a href='tel:18182402200'>818-240-2200<\/a>\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday",
+        "attributedValue" : "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: <a href='tel:10000000000'>000-000-0000<\/a>\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday",
         "key" : "branch",
         "label" : "Your Local AAA Branch",
-        "value" : "Glendale Branch\n1233 E Broadway\nGlendale, CA 91205\nPhone: 818-240-2200\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday"
+        "value" : "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: 000-000-0000\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday"
       },
       {
         "_id" : "4025175E-C99D-4AB3-B183-5C8CDE823479",
         "key" : "rentalCodes",
         "label" : "Car Rental Discounts Codes",
-        "value" : "Herz CDP: 0004\nDollar CD: TB7104\nThrifty CD: 0010230726"
+        "value" : "Hertz CDP: 0000\nDollar CD: XX0000\nThrifty CD: 0000000000"
       },
       {
         "_id" : "134FCBF5-75F3-40F8-80A2-0B31F5F0AF68",
@@ -160,16 +160,16 @@
       },
       {
         "_id" : "37611BEA-CFEF-46AB-B51D-22E981A6DDF0",
-        "attributedValue" : "Glendale Branch\n1233 E Broadway\nGlendale, CA 91205\nPhone: <a href='tel:18182402200'>818-240-2200<\/a>\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday",
+        "attributedValue" : "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: <a href='tel:10000000000'>000-000-0000<\/a>\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday",
         "key" : "branch",
         "label" : "Your Local AAA Branch",
-        "value" : "Glendale Branch\n1233 E Broadway\nGlendale, CA 91205\nPhone: 818-240-2200\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday"
+        "value" : "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: 000-000-0000\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday"
       },
       {
         "_id" : "4025175E-C99D-4AB3-B183-5C8CDE823479",
         "key" : "rentalCodes",
         "label" : "Car Rental Discounts Codes",
-        "value" : "Herz CDP: 0004\nDollar CD: TB7104\nThrifty CD: 0010230726"
+        "value" : "Hertz CDP: 0000\nDollar CD: XX0000\nThrifty CD: 0000000000"
       },
       {
         "_id" : "134FCBF5-75F3-40F8-80A2-0B31F5F0AF68",
