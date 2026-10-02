@@ -1,9 +1,7 @@
 {
   "authenticationToken" : "",
   "backgroundColor" : "rgb(28,77,166)",
-  "barcodes" : [
-
-  ],
+  "barcodes" : [],
   "description" : "AAA Insurance Card",
   "expirationDate" : "2027-09-15T06:59:00Z",
   "featuredActions" : [
@@ -56,18 +54,14 @@
       },
       {
         "_id" : "7B5A29C8-A125-41D0-AF5D-7199D494CCA6",
-        "dataDetectorTypes" : [
-
-        ],
+        "dataDetectorTypes" : [],
         "key" : "policyNumber",
         "label" : "Policy number",
-        "value" : "CAA2398582"
+        "value" : "CAA000XXXX"
       },
       {
         "_id" : "22DA21C8-C97F-470B-B52E-C52FE9DC6954",
-        "dataDetectorTypes" : [
-
-        ],
+        "dataDetectorTypes" : [],
         "key" : "policyPeriod",
         "label" : "Policy period",
         "value" : "9\/14\/26 – 9\/14\/27"
@@ -88,18 +82,16 @@
       },
       {
         "_id" : "CEC94431-2E1D-4033-8B2B-C5C203B41AA2",
-        "dataDetectorTypes" : [
-
-        ],
+        "dataDetectorTypes" : [],
         "key" : "vehicles",
         "label" : "Vehicles",
-        "value" : "2026 BMW X1 SDRIVE 286 SUV\nWDXCH9C04L5S339288"
+        "value" : "2026 SAMPLE SUV\nXXXXXXXXXXXXXXXXX"
       },
       {
         "_id" : "433D933E-7B46-4956-9AAF-3496136E2740",
         "key" : "insuredDrivers",
         "label" : "Insured Drivers",
-        "value" : "Elijah Lopez"
+        "value" : "Fulanito Perez"
       },
       {
         "_id" : "96498BF1-F25E-4E5D-9533-5AD29E4EC4E5",
@@ -135,7 +127,7 @@
         "_id" : "1DB63B50-7CD4-4B28-80D1-87F633BF4E36",
         "key" : "policyNumber",
         "label" : "POLICY NUMBER",
-        "value" : "CAA2398582"
+        "value" : "CAA000XXXX"
       }
     ],
     "secondaryFields" : [
@@ -143,7 +135,7 @@
         "_id" : "ABBCF9DD-12D7-4E12-BAB3-F162222307BF",
         "key" : "nameEnsured",
         "label" : "NAME ENSURED",
-        "value" : "ELIJAH LOPEZ"
+        "value" : "FULANITO PEREZ"
       },
       {
         "_id" : "67C7DDFB-1126-4B39-9907-1F506A1DCB40",
@@ -159,9 +151,7 @@
   "organizationName" : "AAA",
   "passTypeIdentifier" : "pass.com.example.aaa.insurance",
   "posterGeneric" : {
-    "auxiliaryFields" : [
-
-    ],
+    "auxiliaryFields" : [],
     "backFields" : [
       {
         "_id" : "367C603C-CFD8-4D71-AD74-66C15293AB28",
@@ -186,18 +176,14 @@
       },
       {
         "_id" : "7B5A29C8-A125-41D0-AF5D-7199D494CCA6",
-        "dataDetectorTypes" : [
-
-        ],
+        "dataDetectorTypes" : [],
         "key" : "policyNumber",
         "label" : "Policy number",
-        "value" : "CAA2398582"
+        "value" : "CAA000XXXX"
       },
       {
         "_id" : "22DA21C8-C97F-470B-B52E-C52FE9DC6954",
-        "dataDetectorTypes" : [
-
-        ],
+        "dataDetectorTypes" : [],
         "key" : "policyPeriod",
         "label" : "Policy period",
         "value" : "9\/14\/26 – 9\/14\/27"
@@ -218,18 +204,16 @@
       },
       {
         "_id" : "CEC94431-2E1D-4033-8B2B-C5C203B41AA2",
-        "dataDetectorTypes" : [
-
-        ],
+        "dataDetectorTypes" : [],
         "key" : "vehicles",
         "label" : "Vehicles",
-        "value" : "2026 BMW X1 SDRIVE 286 SUV\nWDXCH9C04L5S339288"
+        "value" : "2026 SAMPLE SUV\nXXXXXXXXXXXXXXXXX"
       },
       {
         "_id" : "433D933E-7B46-4956-9AAF-3496136E2740",
         "key" : "insuredDrivers",
         "label" : "Insured Drivers",
-        "value" : "Elijah Lopez"
+        "value" : "Fulanito Perez"
       },
       {
         "_id" : "96498BF1-F25E-4E5D-9533-5AD29E4EC4E5",
@@ -272,13 +256,13 @@
         "_id" : "A298C3DD-77E6-4230-B0DA-A7A49913D933",
         "key" : "nameEnsured",
         "label" : "NAME ENSURED",
-        "value" : "ELIJAH LOPEZ"
+        "value" : "FULANITO PEREZ"
       },
       {
         "_id" : "78E9F51C-E5E9-4FCB-B2AB-025995E60D36",
         "key" : "policyNumber",
         "label" : "POLICY NUMBER",
-        "value" : "CAA2398582"
+        "value" : "CAA000XXXX"
       },
       {
         "_id" : "E3C938D2-B383-4CB0-A96E-5C8B46742CB7",
@@ -288,9 +272,7 @@
         "value" : "9\/14\/26 – 9\/14\/27"
       }
     ],
-    "secondaryFields" : [
-
-    ]
+    "secondaryFields" : []
   },
   "relevantDates" : [
     {
@@ -298,7 +280,7 @@
       "startDate" : "2027-08-15T07:00:00Z"
     }
   ],
-  "serialNumber" : "CAA2398582-ALT",
+  "serialNumber" : "CAA000XXXX-ALT",
   "suppressHeaderDarkening" : true,
   "teamIdentifier" : "",
   "useAutomaticColors" : false

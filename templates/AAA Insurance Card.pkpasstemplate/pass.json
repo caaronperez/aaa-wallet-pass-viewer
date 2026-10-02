@@ -1,9 +1,7 @@
 {
   "authenticationToken" : "",
   "backgroundColor" : "rgb(247,245,241)",
-  "barcodes" : [
-
-  ],
+  "barcodes" : [],
   "description" : "AAA Insurance Card",
   "expirationDate" : "2027-09-15T06:59:00Z",
   "featuredActions" : [
@@ -71,13 +69,13 @@
         "_id" : "A7BE29BC-ED9E-410A-BFE5-81C1BF5DD1C1",
         "key" : "vehicles",
         "label" : "Vehicles",
-        "value" : "2026 BMW X1 SDRIVE 286 SUV\nWDXCH9C04L5S339288"
+        "value" : "2026 SAMPLE SUV\nXXXXXXXXXXXXXXXXX"
       },
       {
         "_id" : "22E17A51-1446-402E-9451-870DB19006B2",
         "key" : "insuredDrivers",
         "label" : "Insured Drivers",
-        "value" : "Elijah Lopez"
+        "value" : "Fulanito Perez"
       },
       {
         "_id" : "4AE5F33F-1209-42B2-B622-1F6750D51541",
@@ -106,7 +104,7 @@
         "_id" : "D1209B65-D61A-47BD-9A73-CA962C06F985",
         "key" : "policyNumber",
         "label" : "POLICY NUMBER",
-        "value" : "CAA2398582"
+        "value" : "CAA000XXXX"
       }
     ],
     "secondaryFields" : [
@@ -114,7 +112,7 @@
         "_id" : "B4623667-B365-46CA-A86D-6A4EC344B572",
         "key" : "nameEnsured",
         "label" : "NAME ENSURED",
-        "value" : "ELIJAH LOPEZ"
+        "value" : "FULANITO PEREZ"
       },
       {
         "_id" : "ECBF69BC-069E-44CF-B35A-A656A7B18E5B",
@@ -129,9 +127,7 @@
   "organizationName" : "AAA",
   "passTypeIdentifier" : "pass.com.example.aaa.insurance",
   "posterGeneric" : {
-    "auxiliaryFields" : [
-
-    ],
+    "auxiliaryFields" : [],
     "backFields" : [
       {
         "_id" : "8FA15D29-3CFC-4585-960B-8B5E9A6E7AC1",
@@ -171,13 +167,13 @@
         "_id" : "A7BE29BC-ED9E-410A-BFE5-81C1BF5DD1C1",
         "key" : "vehicles",
         "label" : "Vehicles",
-        "value" : "2026 BMW X1 SDRIVE 286 SUV\nWDXCH9C04L5S339288"
+        "value" : "2026 SAMPLE SUV\nXXXXXXXXXXXXXXXXX"
       },
       {
         "_id" : "22E17A51-1446-402E-9451-870DB19006B2",
         "key" : "insuredDrivers",
         "label" : "Insured Drivers",
-        "value" : "Elijah Lopez"
+        "value" : "Fulanito Perez"
       },
       {
         "_id" : "4AE5F33F-1209-42B2-B622-1F6750D51541",
@@ -200,21 +196,19 @@
         "value" : "COMPANY: INTERINSURANCE EXCHANGE"
       }
     ],
-    "headerFields" : [
-
-    ],
+    "headerFields" : [],
     "primaryFields" : [
       {
         "_id" : "00E927DF-D3A4-4C96-83EF-1E8831A28CDF",
         "key" : "nameEnsured",
         "label" : "NAME ENSURED",
-        "value" : "ELIJAH LOPEZ"
+        "value" : "FULANITO PEREZ"
       },
       {
         "_id" : "11524A02-3158-4073-924E-85EE2EAEA107",
         "key" : "policyNumber",
         "label" : "POLICY NUMBER",
-        "value" : "CAA2398582"
+        "value" : "CAA000XXXX"
       },
       {
         "_id" : "7A0CBC99-9C15-4356-923C-0FE48A63300C",
@@ -224,11 +218,9 @@
         "value" : "9\/14\/26 – 9\/14\/27"
       }
     ],
-    "secondaryFields" : [
-
-    ]
+    "secondaryFields" : []
   },
-  "serialNumber" : "CAA2398582",
+  "serialNumber" : "CAA000XXXX",
   "suppressHeaderDarkening" : false,
   "teamIdentifier" : "",
   "useAutomaticColors" : false

@@ -7,9 +7,9 @@
   "barcodes" : [
     {
       "_id" : "E4FD1E6E-100F-4455-90D5-FEAA43177955",
-      "altText" : "620 004 123456789 2",
+      "altText" : "000 000 XXXXXXXXX 0",
       "format" : "PKBarcodeFormatPDF417",
-      "message" : "620 004 123456789 2",
+      "message" : "000 000 XXXXXXXXX 0",
       "messageEncoding" : "iso-8859-1"
     }
   ],
@@ -68,7 +68,7 @@
         "dataDetectorTypes" : [],
         "key" : "membershipNumber",
         "label" : "Membership number",
-        "value" : "620 004 123456789 2"
+        "value" : "000 000 XXXXXXXXX 0"
       },
       {
         "_id" : "88EFB40E-5EDB-4AC5-B4DF-1C7EF45069D0",
@@ -126,7 +126,7 @@
         "_id" : "30B5AC8C-7938-42FA-BEDA-F0807ACCFDFB",
         "key" : "memberName",
         "label" : "MEMBER",
-        "value" : "ELIJAH LOPEZ"
+        "value" : "FULANITO PEREZ"
       }
     ],
     "secondaryFields" : [
@@ -178,7 +178,7 @@
         "dataDetectorTypes" : [],
         "key" : "membershipNumber",
         "label" : "Membership number",
-        "value" : "620 004 123456789 2"
+        "value" : "000 000 XXXXXXXXX 0"
       },
       {
         "_id" : "88EFB40E-5EDB-4AC5-B4DF-1C7EF45069D0",
@@ -243,7 +243,7 @@
         "_id" : "ECFFE41F-7536-4B95-BA8C-5E799D971A02",
         "key" : "memberName",
         "label" : "MEMBER",
-        "value" : "ELIJAH LOPEZ"
+        "value" : "FULANITO PEREZ"
       },
       {
         "_id" : "E68AFFEA-E72E-4298-B321-C1B23104E013",
@@ -260,7 +260,7 @@
     ],
     "secondaryFields" : []
   },
-  "serialNumber" : "6200041234567892-ALT",
+  "serialNumber" : "000000XXXXXXXXX0-ALT",
   "suppressHeaderDarkening" : true,
   "teamIdentifier" : "",
   "useAutomaticColors" : false
