@@ -15,11 +15,11 @@ Live: https://caaronperez.github.io/aaa-wallet-pass-viewer/
 
 **Download template** saves the selected template as a `.zip` of its `.pkpasstemplate` folder; unzip it and open the folder in Pass Designer. It is an unsigned design template, not an installable `.pkpass`.
 
-Open another template, all in the browser (nothing is uploaded):
+Open more templates, all in the browser (nothing is uploaded). Each one gets its own tab next to Membership and Insurance (close it with ×), and importing the same template again updates its tab:
 
 - **Drag** a `.pkpasstemplate` from Finder onto the page (also works with a `.zip` or `pass.json`).
 - **Drag and drop / pass.json** button: pick a single `pass.json` (a zip of a template, for example from Download template, works too).
-- **Open folder**: macOS shows `.pkpasstemplate` as a single file (it is a package), so the folder picker can't select it. Pick the folder that contains it instead, such as `outputs`; if several templates are inside, choose one from the list.
+- **Open folder**: macOS shows `.pkpasstemplate` as a single file (it is a package), so the folder picker can't select it. Pick the folder that contains it instead, such as `outputs`; every template inside opens in its own tab.
 
 ## Notes
 
