@@ -112,6 +112,30 @@ details summary{cursor:pointer;font-size:13px;color:#6cb2ff;margin-top:6px}
 .err{background:#4a1f1d;border:1px solid #7a302b;color:#ffd4d1;border-radius:8px;padding:10px 12px;margin:0 auto 16px;max-width:640px;font-size:13px}
 .dropzone{position:fixed;inset:12px;border:3px dashed var(--accent);border-radius:20px;background:#0a1830cc;z-index:50;display:grid;place-items:center;font-size:20px;color:#fff;pointer-events:none}
 .dropzone[hidden]{display:none}
+.side-tip{font-size:11.5px;color:var(--muted);margin:0 8px 6px;line-height:1.4}
+.tree{display:grid;gap:1px;margin-bottom:6px}
+.tree .tg{font-size:11px;color:#cfd0d6;font-weight:600;margin:8px 8px 3px}
+.node{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;gap:8px;padding:6px 8px 6px 16px;border-radius:7px;font-size:12.5px;cursor:pointer;color:#e6e6ea;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.node:hover{background:#323338}.node.on{background:#2b5fd9;color:#fff}.node:focus-visible{outline:2px solid var(--accent)}
+.node small{font-size:10px;color:var(--dim)}.node.on small{color:#dfe8ff}
+.gphone [data-c]{cursor:pointer}
+.gphone .hl{outline:3px solid #fbbc04;outline-offset:-3px;border-radius:14px}
+.gphone .gup.hl,.gphone .glow.hl{outline-offset:-4px}
+.inspector{position:fixed;right:20px;top:72px;width:380px;max-height:calc(100vh - 92px);overflow:auto;background:rgba(46,47,51,.97);backdrop-filter:blur(20px);border:1px solid #45464c;border-radius:14px;box-shadow:0 18px 50px #000a;z-index:20;padding:0 0 14px}
+.inspector[hidden]{display:none}
+.ins-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:inherit;z-index:1}
+.ins-h h2{font-size:15px;margin:0;overflow-wrap:anywhere}
+.x{width:24px;height:24px;border-radius:50%;border:0;background:#45464c;color:#fff;cursor:pointer;flex:none}
+.ins-sec{padding:10px 14px 0}.ins-sec h3{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin:6px 0 7px}
+.ins-sec p{font-size:13px;line-height:1.5;margin:0;color:#dcdde2}
+.ipath{display:block;font:12px ui-monospace,Menlo,monospace;color:#bfe9c8;background:#151618;border:1px solid var(--line);border-radius:7px;padding:6px 8px;overflow-wrap:anywhere}
+.ikv{display:grid;grid-template-columns:110px 1fr;gap:6px 10px;font-size:12.5px}.ikv span:nth-child(odd){color:var(--muted)}.ikv span{overflow-wrap:anywhere}.ikv em{color:var(--dim);font-style:normal}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;border:1px solid #fff5}
+.inote{font-size:12.5px;line-height:1.5;background:#26303f;border-radius:8px;padding:8px 10px;color:#d6e4ff}.inote.bad{background:#4a1f1d;color:#ffd4d1}
+.iimg{max-width:140px;max-height:120px;border-radius:10px;display:block;background:#fff}
+.iopen{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:500}
+.ijson{max-height:260px}
+@media (max-width:900px){.inspector{left:12px;right:12px;top:auto;bottom:12px;width:auto;max-height:50vh}}
 @media (max-width:900px){
   .app{grid-template-columns:minmax(0,1fr)}
   .sidebar{order:2;border-right:0;border-top:1px solid #111}
@@ -134,6 +158,9 @@ details summary{cursor:pointer;font-size:13px;color:#6cb2ff;margin-top:6px}
 </header>
 <div class="app">
   <aside class="sidebar" aria-label="Components and limits">
+    <div class="side-h">Components</div>
+    <p class="side-tip">Click (or right-click) any part of the pass, or pick it here.</p>
+    <div class="tree" id="tree"></div>
     <div class="side-h">This pass vs Google's limits</div>
     <ul class="lim" id="limits"></ul>
     <div class="side-h">Images</div>
@@ -145,6 +172,7 @@ details summary{cursor:pointer;font-size:13px;color:#6cb2ff;margin-top:6px}
     </ul>
   </aside>
   <main class="canvas">
+    <section class="inspector" id="inspector" hidden aria-live="polite"></section>
     <div class="dropzone" id="dropzone" hidden><div>Drop a Google Wallet pass JSON here</div></div>
     <div id="error"></div>
     <div class="hero">
@@ -214,6 +242,19 @@ details summary{cursor:pointer;font-size:13px;color:#6cb2ff;margin-top:6px}
           <p class="note">Google marks the per-link <code>title</code>, <code>description</code> and <code>appLogoImage</code> as not supported, and iOS app links aren't supported either.</p></details>
         </div>
         <div class="panel">
+          <h3>Those tappable rows under the image</h3>
+          <p>They look the same, but they come from different parts of the JSON. Click any of them on the pass to inspect it.</p>
+          <table class="cmp">
+            <tr><th>Row</th><th>What it is</th><th>You control</th></tr>
+            <tr><td>Module with a picture</td><td>Value-added module (<code>valueAddedModuleData</code>)</td><td>Title (60), line (50), picture, link. 1 shows here; 2+ get their own list.</td></tr>
+            <tr><td>Open Auto Club app</td><td>App link button (<code>appLinkData</code>), only 1 per pass</td><td>Label (30) and where it goes. No icon or subtitle: Wallet adds the phone icon.</td></tr>
+            <tr><td>Renew… / Pay… / Find a branch</td><td>Links module (<code>linksModuleData.uris</code>)</td><td>Label and link only. Wallet picks the icon from the link type (phone for <code>tel:</code>, globe for web). 10 from the class + 10 from the object.</td></tr>
+            <tr><td>Membership number, Roadside…</td><td>Text modules (<code>textModulesData</code>) not used in a card row</td><td>Label and value, plain text, no links.</td></tr>
+            <tr><td>Pass settings</td><td>Wallet's own screen</td><td>Nothing.</td></tr>
+          </table>
+          <p class="note">In this mock, the "App link button" subtitle you saw before is gone, since real Wallet doesn't show one. Icons follow the link type the same way, so "Find a branch" (a web link) gets a globe.</p>
+        </div>
+        <div class="panel">
           <h3>How the pass is laid out (2026 redesign)</h3>
           <p>Google moved passes to a <b>full-screen</b> look: no more card on a grey background. Your <code>hexBackgroundColor</code> fills the whole screen, so contrast matters more now (Google still picks white or black text for you).</p>
           <p>Top to bottom: round <b>logo</b> in the middle, <b>cardTitle</b> under it, then the <b>header</b> big and bold (up to two lines). Then the <b>barcode</b> with its alt text, then the field rows from <code>cardTemplateOverride</code> (1, 2 or 3 per row). The <b>hero image</b> becomes a full-width band, the biggest visual on the pass, so it's worth a good picture.</p>
@@ -257,16 +298,16 @@ function resolve(path, obj, cls){
 }
 function itemHTML(item, obj, cls, align){
   const f = item?.firstValue?.fields?.[0]?.fieldPath, t = resolve(f, obj, cls); if(t?.id) rowIds.add(t.id);
-  return t ? `<div class="${align}" data-tm="${esc(t.id || '')}"><div class="l">${esc(t.header)}</div><div class="v">${esc(t.body)}</div></div>` : '';
+  return t ? `<div class="${align}" data-c="text:${esc(t.id || '')}"><div class="l">${esc(t.header)}</div><div class="v">${esc(t.body)}</div></div>` : '';
 }
 const rowIds = new Set();
 function rowsHTML(obj, cls){
   rowIds.clear();
   const rows = cls?.classTemplateInfo?.cardTemplateOverride?.cardRowTemplateInfos || [];
-  return rows.map(r => {
-    if(r.oneItem) return `<div class="grw" style="grid-template-columns:1fr">${itemHTML(r.oneItem.item, obj, cls, '')}</div>`;
-    if(r.twoItems) return `<div class="grw" style="grid-template-columns:1fr 1fr">${itemHTML(r.twoItems.startItem, obj, cls, '')}${itemHTML(r.twoItems.endItem, obj, cls, 'e')}</div>`;
-    if(r.threeItems) return `<div class="grw" style="grid-template-columns:1fr auto 1fr">${itemHTML(r.threeItems.startItem, obj, cls, '')}${itemHTML(r.threeItems.middleItem, obj, cls, 'c')}${itemHTML(r.threeItems.endItem, obj, cls, 'e')}</div>`;
+  return rows.map((r, ri) => {
+    if(r.oneItem) return `<div class="grw" data-c="row:${ri}" style="grid-template-columns:1fr">${itemHTML(r.oneItem.item, obj, cls, '')}</div>`;
+    if(r.twoItems) return `<div class="grw" data-c="row:${ri}" style="grid-template-columns:1fr 1fr">${itemHTML(r.twoItems.startItem, obj, cls, '')}${itemHTML(r.twoItems.endItem, obj, cls, 'e')}</div>`;
+    if(r.threeItems) return `<div class="grw" data-c="row:${ri}" style="grid-template-columns:1fr auto 1fr">${itemHTML(r.threeItems.startItem, obj, cls, '')}${itemHTML(r.threeItems.middleItem, obj, cls, 'c')}${itemHTML(r.threeItems.endItem, obj, cls, 'e')}</div>`;
     return '';
   }).join('');
 }
@@ -284,6 +325,101 @@ function barcodeSVG(bc){
   out += `<rect x="0" y="0" width="8" height="${H}"/><rect x="232" y="0" width="8" height="${H}"/>`;
   return `<svg viewBox="0 0 240 ${H}" width="240" height="${H}" fill="#000" role="img" aria-label="${esc(bc.type)} barcode preview">${out}</svg>`;
 }
+
+
+/* ---------- Inspector: every part of the pass, like the Apple viewer ---------- */
+let COMPS = {}, selKey = null;
+const J = v => `<pre class="ijson">${esc(JSON.stringify(v, null, 2))}</pre>`;
+const KV = rows => `<div class="ikv">${rows.filter(r => r[1] !== undefined && r[1] !== '').map(([k, v, raw]) => `<span>${esc(k)}</span><span>${raw ? v : esc(v)}</span>`).join('')}</div>`;
+const LIM = (txt, bad) => `<div class="inote${bad ? ' bad' : ''}">${txt}</div>`;
+const WALLET = 'Drawn by Google Wallet. Not in your JSON and you can\'t change it.';
+function buildComps({obj, cls, vams, app, bg, fg, logo, hero, details}){
+  const C = {}, add = (key, c) => { C[key] = {key, ...c}; };
+  const from = (o, k) => o?.[k] !== undefined;
+  add('topbar', {group: 'Wallet (not editable)', name: 'Top bar', what: 'Back, favorite (star) and share. New in the 2026 design.', scope: 'Wallet', limits: LIM(WALLET)});
+  add('colors', {group: 'Top of the pass', name: 'Background color', what: 'Fills the whole screen in the 2026 design (it used to be just the card). Google picks white or black text on top of it.',
+    path: 'object.hexBackgroundColor', json: {hexBackgroundColor: obj.hexBackgroundColor || cls?.hexBackgroundColor},
+    kv: [['Color', `<span class="sw" style="background:${bg}"></span>${esc(bg)}`, true], ['Text color (auto)', fg]],
+    limits: LIM('Hex like <code>#1C4DA6</code>. Full-bleed now, so check contrast with your logo and hero image.')});
+  if(logo) add('logo', {group: 'Top of the pass', name: 'Logo', what: 'Round logo at the top center.', path: from(obj, 'logo') ? 'object.logo' : 'class.logo', json: obj.logo || cls?.logo, img: logo,
+    limits: LIM('660 × 660 px minimum, square. Google masks it to a circle, so keep the art inside the middle (15% safe margin). A <code>wideLogo</code> (1280 × 400) replaces logo + card title.')});
+  add('cardTitle', {group: 'Top of the pass', name: 'Card title', what: 'Small line under the logo, usually the company or program name.', path: 'object.cardTitle', json: obj.cardTitle, kv: [['Shows', tx(obj.cardTitle)]], limits: LIM('Required. Keep it short, it\'s one line.')});
+  if(obj.subheader) add('subheader', {group: 'Top of the pass', name: 'Subheader', what: 'Small label above the header.', path: 'object.subheader', json: obj.subheader, kv: [['Shows', tx(obj.subheader)]], limits: LIM('Optional.')});
+  add('header', {group: 'Top of the pass', name: 'Header', what: 'The big bold title. Up to two lines in the 2026 design.', path: 'object.header', json: obj.header, kv: [['Shows', tx(obj.header)], ['Length', String(tx(obj.header).length)]], limits: LIM('Required. Longer than two lines gets cut off.', tx(obj.header).length > 40)});
+  if(obj.barcode) add('barcode', {group: 'Top of the pass', name: 'Barcode', what: 'White panel with the code to scan, and the number under it (alternateText).', path: 'object.barcode', json: obj.barcode,
+    kv: [['Type', obj.barcode.type], ['Value', obj.barcode.value], ['Shown under it', obj.barcode.alternateText]], limits: LIM('Types: QR_CODE, PDF_417, AZTEC, CODE_128 and more. Rotating barcodes (TOTP) are supported too. The preview here is fake art.')});
+  const rows = cls?.classTemplateInfo?.cardTemplateOverride?.cardRowTemplateInfos || [];
+  rows.forEach((r, i) => {
+    const n = r.oneItem ? 1 : r.twoItems ? 2 : r.threeItems ? 3 : 0;
+    add('row:' + i, {group: 'Top of the pass', name: `Row ${i + 1} (${n} item${n > 1 ? 's' : ''})`, what: 'A line of fields under the barcode. Each item points at a text module with a fieldPath, so the layout lives on the class and the values on each member\'s object.',
+      path: `class.classTemplateInfo.cardTemplateOverride.cardRowTemplateInfos[${i}]`, json: r, limits: LIM('1, 2 or 3 items per row. Google recommends at most 2 rows.', rows.length > 2)});
+  });
+  if(hero) add('hero', {group: 'Top of the pass', name: 'Hero image', what: 'The full-width picture. In the 2026 design it\'s a big band in the middle, the most visible thing on the pass.', path: from(obj, 'heroImage') ? 'object.heroImage' : 'class.heroImage', json: obj.heroImage || cls?.heroImage, img: hero,
+    limits: LIM('1032 × 812 px recommended (about 5:4). PNG or JPG. Add a contentDescription for screen readers.')});
+  vams.forEach((v, i) => {
+    const onObj = (obj.valueAddedModuleData || []).includes(v), h = tx(v.header), b = tx(v.body);
+    add('vam:' + i, {group: 'Below the image', name: 'Module: ' + h, what: 'A value-added module: your own title, line of text and picture, tap goes to any link. Exactly 1 module shows on the pass itself; 2 or more move to their own list screen.',
+      path: `${onObj ? 'object' : 'class'}.valueAddedModuleData[${(onObj ? obj.valueAddedModuleData : cls.valueAddedModuleData).indexOf(v)}]`, json: v, img: imgSrc(v.image?.sourceUri?.uri), href: safeHref(v.uri),
+      kv: [['Header', `${esc(h)} <em>(${h.length}/60)</em>`, true], ['Body', b ? `${esc(b)} <em>(${b.length}/50)</em>` : undefined, true], ['Opens', v.uri], ['sortIndex', v.sortIndex === undefined ? undefined : String(v.sortIndex)]],
+      limits: LIM('Header ≤ 60 chars, body ≤ 50 (longer is cut). Image is shown square. Up to 15 modules (the API reference says 10 per object/class). Lowest sortIndex goes first.', h.length > 60 || b.length > 50)});
+  });
+  if(app) add('app', {group: 'Below the image', name: 'App link button', what: 'One button that opens your app. If <code>androidAppLinkInfo</code> is set, Android opens the app; otherwise it opens the web link. This is what Badge calls the "featured action". You only control the label: no icon, no subtitle (Wallet draws the phone icon).',
+    path: (obj.appLinkData ? 'object' : 'class') + '.appLinkData', json: app, href: safeHref(app.webAppLinkInfo?.appTarget?.targetUri?.uri || app.androidAppLinkInfo?.appTarget?.targetUri?.uri),
+    kv: [['Label', `${esc(tx(app.displayText))} <em>(${tx(app.displayText).length}/30)</em>`, true], ['Android', app.androidAppLinkInfo?.appTarget?.targetUri?.uri], ['Web', app.webAppLinkInfo?.appTarget?.targetUri?.uri]],
+    limits: LIM('Exactly 1 per pass. displayText ≤ 30 chars. iOS links, title, description and appLogoImage aren\'t supported.', tx(app.displayText).length > 30)});
+  const lk = [...(cls?.linksModuleData?.uris || []).map((l, i) => ({l, p: `class.linksModuleData.uris[${i}]`})), ...(obj.linksModuleData?.uris || []).map((l, i) => ({l, p: `object.linksModuleData.uris[${i}]`}))];
+  lk.forEach(({l, p}, i) => add('link:' + i, {group: 'Below the image', name: 'Link: ' + (l.description || l.uri), what: 'A row from the links module: just a label and a link. On the class every member gets it, on the object only that member. Wallet picks the icon from the link type, you can\'t upload one.',
+    path: p, json: l, href: safeHref(l.uri), kv: [['Label', l.description], ['Opens', l.uri], ['Icon (this mock)', /^tel:/i.test(l.uri) ? 'phone (tel:)' : /^mailto:/i.test(l.uri) ? 'mail (mailto:)' : /^geo:/i.test(l.uri) ? 'map pin (geo:)' : 'globe (web link)']],
+    limits: LIM('10 links from the class + 10 from the object. No custom icons or images.')}));
+  const allTexts = [...(cls?.textModulesData || []).map((t, i) => ({t, p: `class.textModulesData[${i}]`})), ...(obj.textModulesData || []).map((t, i) => ({t, p: `object.textModulesData[${i}]`}))];
+  allTexts.forEach(({t, p}) => { if(!t.id) return; const onFront = !details.includes(t);
+    add('text:' + t.id, {group: onFront ? 'Top of the pass' : 'Below the image', name: (onFront ? 'Field: ' : 'Detail: ') + (t.header || t.id), what: onFront ? 'A text module shown in a card row (a row\'s fieldPath points at it).' : 'A text module that isn\'t in a card row, so Wallet lists it with the details below.',
+      path: p, json: t, kv: [['id', t.id], ['Label', t.header], ['Value', t.body]], limits: LIM('10 from the class + 10 from the object (the template guide says 20 each). Plain text, no links.')}); });
+  add('settings', {group: 'Wallet (not editable)', name: 'Pass settings', what: 'Its own screen in the 2026 design: notifications, use across Google, sharing, archive and remove. Tap it on the pass to open it.', scope: 'Wallet', limits: LIM(WALLET)});
+  add('fine', {group: 'Wallet (not editable)', name: 'Disclaimer', what: 'Standard note that you, not Google, are responsible for the pass.', scope: 'Wallet', limits: LIM(WALLET)});
+  return C;
+}
+const GROUP_ORDER = ['Top of the pass', 'Below the image', 'Wallet (not editable)'];
+function renderTree(){
+  const byG = {}; Object.values(COMPS).forEach(c => (byG[c.group] ||= []).push(c));
+  $('tree').innerHTML = GROUP_ORDER.filter(g => byG[g]).map(g => `<div class="tg">${esc(g)}</div>` + byG[g].map(c => `<button type="button" class="node${c.key === selKey ? ' on' : ''}" data-ins="${esc(c.key)}">${esc(c.name)}${c.scope === 'Wallet' ? '<small>Wallet</small>' : ''}</button>`).join('')).join('');
+}
+function openInspector(key, scroll){
+  const c = COMPS[key]; if(!c) return;
+  selKey = key; renderTree(); highlight(scroll);
+  const ins = $('inspector');
+  ins.innerHTML = `<div class="ins-h"><h2>${esc(c.name)}</h2><button type="button" class="x" aria-label="Close">✕</button></div>
+    <div class="ins-sec"><h3>What it is</h3><p>${c.what}</p></div>
+    ${c.path ? `<div class="ins-sec"><h3>Where it lives</h3><code class="ipath">${esc(c.path)}</code></div>` : ''}
+    ${c.img ? `<div class="ins-sec"><img class="iimg" src="${esc(c.img)}" alt=""></div>` : ''}
+    ${c.kv ? `<div class="ins-sec"><h3>Values</h3>${KV(c.kv)}</div>` : ''}
+    ${c.href ? `<div class="ins-sec"><a class="iopen" href="${esc(c.href)}" target="_blank" rel="noopener">Open the link ↗</a></div>` : ''}
+    <div class="ins-sec"><h3>Limits</h3>${c.limits}</div>
+    ${c.json !== undefined ? `<div class="ins-sec"><h3>JSON</h3>${J(c.json)}</div>` : ''}`;
+  ins.hidden = false; if(scroll !== false) ins.scrollTop = 0;
+  ins.querySelector('.x').onclick = () => { selKey = null; closeInspector(); renderTree(); highlight(); };
+}
+function closeInspector(){ $('inspector').hidden = true; }
+function highlight(scroll){
+  document.querySelectorAll('.gphone .hl').forEach(n => n.classList.remove('hl'));
+  if(!selKey) return;
+  const els = [...document.querySelectorAll('.gphone [data-c]')].filter(n => n.dataset.c === selKey);
+  els.forEach(n => n.classList.add('hl'));
+  if(scroll && els[0]){ const ph = document.querySelector('.gphone').getBoundingClientRect(); if(ph.bottom < 60 || ph.top > innerHeight - 60) document.querySelector('.gphone').scrollIntoView({block: 'start', behavior: 'smooth'}); }
+  if(scroll && els[0]){ const sc = document.querySelector('.gscroll'), r = els[0].getBoundingClientRect(), sr = sc.getBoundingClientRect(); sc.scrollTo({top: sc.scrollTop + r.top - sr.top - sr.height / 3, behavior: 'smooth'}); }
+}
+function inspectFrom(e){
+  const n = e.target.closest('.gphone [data-c]'); if(!n) return false;
+  if(n.dataset.c === 'colors' && e.target.closest('[data-c]') !== n) return false;
+  e.preventDefault(); openInspector(n.dataset.c, true); return true;
+}
+document.addEventListener('contextmenu', e => { inspectFrom(e); });
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-ins]'); if(t){ openInspector(t.dataset.ins, true); return; }
+  const st = e.target.closest('[data-settings]'); if(st){ if(st.dataset.settings === 'open') openInspector('settings', false); return; }
+  inspectFrom(e);
+}, true);
+document.addEventListener('keydown', e => { if(e.key === 'Escape' && !$('inspector').hidden){ selKey = null; closeInspector(); renderTree(); highlight(); } });
 
 let vamMode = 'one';
 document.addEventListener('click', e => {
@@ -312,41 +448,42 @@ function render(){
     info: '<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
     gear: '<path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.5 7.5 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.5 7.5 0 0 0-1.7 1l-2.4-1-2 3.4L6.6 11a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1c.5.4 1.1.7 1.7 1l.4 2.5h4l.4-2.5c.6-.3 1.2-.6 1.7-1l2.4 1 2-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
     archive: '<path d="M4 4h16v4H4zM5 8v12h14V8M9.5 12h5" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+    mail: '<rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m3.5 6 8.5 7 8.5-7" fill="none" stroke="currentColor" stroke-width="1.8"/>',
     trash: '<path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13" fill="none" stroke="currentColor" stroke-width="1.8"/>'
   };
   const ic = n => `<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">${ICONS[n]}</svg>`;
-  const linkIcon = u => /^tel:/i.test(u) ? 'phone' : /maps|geo:|locat|branch/i.test(u) ? 'pin' : 'globe';
-  const row = (icon, label, href, sub) => `<a class="grow2" ${href ? `href="${esc(href)}" target="_blank" rel="noopener"` : ''}>${ic(icon)}<span><b>${label}</b>${sub ? `<small>${sub}</small>` : ''}</span></a>`;
-  const vamCard = v => {
+  const linkIcon = u => /^tel:/i.test(u) ? 'phone' : /^mailto:/i.test(u) ? 'mail' : /^geo:/i.test(u) ? 'pin' : 'globe';
+  const row = (icon, label, href, sub, key) => `<a class="grow2" data-c="${key}" ${href ? `href="${esc(href)}" target="_blank" rel="noopener"` : ''}>${ic(icon)}<span><b>${label}</b>${sub ? `<small>${sub}</small>` : ''}</span></a>`;
+  const vamCard = (v, i) => {
     const h = tx(v.header), b = tx(v.body), over = h.length > LIMITS.vamHeader || b.length > LIMITS.vamBody, href = safeHref(v.uri);
-    return `<a class="vam${over ? ' trunc' : ''}" ${href ? `href="${esc(href)}" target="_blank" rel="noopener"` : ''} title="${over ? 'Too long: Google truncates this' : esc(v.uri)}"><span><b>${esc(h.slice(0, LIMITS.vamHeader))}</b>${b ? `<small>${esc(b.slice(0, LIMITS.vamBody))}</small>` : ''}</span>${imgSrc(v.image?.sourceUri?.uri) ? `<img src="${esc(imgSrc(v.image.sourceUri.uri))}" alt="">` : ''}</a>`;
+    return `<a class="vam${over ? ' trunc' : ''}" data-c="vam:${i}" ${href ? `href="${esc(href)}" target="_blank" rel="noopener"` : ''} title="${over ? 'Too long: Google truncates this' : esc(v.uri)}"><span><b>${esc(h.slice(0, LIMITS.vamHeader))}</b>${b ? `<small>${esc(b.slice(0, LIMITS.vamBody))}</small>` : ''}</span>${imgSrc(v.image?.sourceUri?.uri) ? `<img src="${esc(imgSrc(v.image.sourceUri.uri))}" alt="">` : ''}</a>`;
   };
   const shown = vamMode === 'one' ? vams.slice(0, 1) : vams;
   const sectionTitle = `Recommendations from ${esc(cls?.issuerName || 'AAA')}`;
-  const modules = shown.length ? `<h4 class="gh4">${sectionTitle}${shown.length > 1 ? ` <small>${shown.length} modules: a list (needs its own screen)</small>` : ''}</h4>${shown.map(vamCard).join('')}` : '';
+  const modules = shown.length ? `<h4 class="gh4">${sectionTitle}${shown.length > 1 ? ` <small>${shown.length} modules: a list (needs its own screen)</small>` : ''}</h4>${shown.map((v, i) => vamCard(v, i)).join('')}` : '';
   const actions = [
-    app ? row('app', esc(tx(app.displayText) || 'Open app'), appHref, 'App link button') : '',
-    ...links.map(l => row(linkIcon(l.uri || ''), esc(l.description || l.uri), safeHref(l.uri)))
+    app ? row('app', esc(tx(app.displayText) || 'Open app'), appHref, '', 'app') : '',
+    ...links.map((l, i) => row(linkIcon(l.uri || ''), esc(l.description || l.uri), safeHref(l.uri), '', 'link:' + i))
   ].filter(Boolean).join('');
   const rowsMarkup = rowsHTML(obj, cls);
   const details = texts.filter(t => !rowIds.has(t.id));
   const screen = `
-    <div class="gbarx">${ic('back')}<span class="sp"></span>${ic('star')}${ic('share')}</div>
-    <div class="gup">
-      ${logo ? `<div class="glogo2"><img src="${esc(logo)}" alt=""></div>` : ''}
-      <div class="gissuer">${esc(tx(obj.cardTitle))}</div>
-      ${obj.subheader ? `<div class="gsub">${esc(tx(obj.subheader))}</div>` : ''}
-      <h2 class="gheader">${esc(tx(obj.header))}</h2>
-      ${bc ? `<div class="gbar">${barcodeSVG(bc)}</div>${bc.alternateText ? `<div class="galt">${esc(bc.alternateText)}</div>` : ''}` : ''}
+    <div class="gbarx" data-c="topbar">${ic('back')}<span class="sp"></span>${ic('star')}${ic('share')}</div>
+    <div class="gup" data-c="colors">
+      ${logo ? `<div class="glogo2" data-c="logo"><img src="${esc(logo)}" alt=""></div>` : ''}
+      <div class="gissuer" data-c="cardTitle">${esc(tx(obj.cardTitle))}</div>
+      ${obj.subheader ? `<div class="gsub" data-c="subheader">${esc(tx(obj.subheader))}</div>` : ''}
+      <h2 class="gheader" data-c="header">${esc(tx(obj.header))}</h2>
+      ${bc ? `<div data-c="barcode"><div class="gbar">${barcodeSVG(bc)}</div>${bc.alternateText ? `<div class="galt">${esc(bc.alternateText)}</div>` : ''}</div>` : ''}
       ${rowsMarkup}
     </div>
-    ${hero ? `<img class="ghero" src="${esc(hero)}" alt="${esc(tx(obj.heroImage?.contentDescription))}">` : ''}
-    <div class="glow${hero ? '' : ' nohero'}">
+    ${hero ? `<img class="ghero" data-c="hero" src="${esc(hero)}" alt="${esc(tx(obj.heroImage?.contentDescription))}">` : ''}
+    <div class="glow${hero ? '' : ' nohero'}" data-c="colors">
       ${modules}
       ${actions ? `<div class="ggroup">${actions}</div>` : ''}
-      ${details.length ? `<div class="ggroup">${details.map(t => `<div class="gdet"><small>${esc(t.header)}</small><b>${esc(t.body)}</b></div>`).join('')}</div>` : ''}
-      <div class="ggroup"><button type="button" class="grow2" data-settings="open">${ic('gear')}<span><b>Pass settings</b></span></button></div>
-      <p class="gfine">The pass provider or merchant is responsible for the info on this pass and may send you notifications. Contact them with any questions.</p>
+      ${details.length ? `<div class="ggroup">${details.map(t => `<div class="gdet" data-c="text:${esc(t.id || '')}"><small>${esc(t.header)}</small><b>${esc(t.body)}</b></div>`).join('')}</div>` : ''}
+      <div class="ggroup"><button type="button" class="grow2" data-settings="open" data-c="settings">${ic('gear')}<span><b>Pass settings</b></span></button></div>
+      <p class="gfine" data-c="fine">The pass provider or merchant is responsible for the info on this pass and may send you notifications. Contact them with any questions.</p>
     </div>
     <div class="gsettings" aria-hidden="true">
       <div class="gbarx"><button type="button" data-settings="close" aria-label="Back">${ic('back')}</button></div>
@@ -368,6 +505,9 @@ function render(){
   $('dlName').textContent = cur.name;
   document.querySelectorAll('#picker [data-key]').forEach(b => { b.classList.toggle('on', b.dataset.key === cur.key); b.setAttribute('aria-selected', String(b.dataset.key === cur.key)); });
   renderLimits({obj, cls, vams, texts, links, app});
+  COMPS = buildComps({obj, cls, vams, app, bg, fg, logo, hero, details});
+  renderTree(); highlight();
+  if(selKey && COMPS[selKey]) openInspector(selKey, false); else closeInspector();
 }
 function renderLimits({obj, cls, vams, texts, links, app}){
   const rows = cls?.classTemplateInfo?.cardTemplateOverride?.cardRowTemplateInfos || [];
@@ -393,7 +533,7 @@ function renderLimits({obj, cls, vams, texts, links, app}){
 async function load(key){
   try{
     const r = await fetch(SOURCES[key], {cache: 'no-cache'}); if(!r.ok) throw new Error(r.status);
-    cur = {key, data: await r.json(), name: SOURCES[key].split('/').pop()};
+    cur = {key, data: await r.json(), name: SOURCES[key].split('/').pop()}; selKey = null;
     $('error').innerHTML = ''; render();
   }catch(e){ $('error').innerHTML = `<div class="err">Couldn't load the pass (${esc(e.message)}). Try reloading.</div>`; }
 }
