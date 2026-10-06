@@ -21,6 +21,10 @@ Open more templates, all in the browser (nothing is uploaded). Each one gets its
 - **Drag and drop / pass.json** button: pick a single `pass.json` (a zip of a template, for example from Download template, works too).
 - **Open folder**: macOS shows `.pkpasstemplate` as a single file (it is a package), so the folder picker can't select it. Pick the folder that contains it instead, such as `outputs`; every template inside opens in its own tab.
 
+## Google Wallet
+
+`google.html` (Apple Wallet / Google Wallet switch in the title bar) shows the same two cards as Google Wallet Generic passes: `google/aaa-membership.json` and `google/aaa-insurance.json`, each `{genericClass, genericObject}` with mock data. It renders the Android card, value-added modules, app link, details and links, lists Google's limits, and compares Apple Featured Actions with Google's equivalents. Drop in your own pass JSON (or a JWT payload) to preview it. The issuer ID is a placeholder.
+
 ## Notes
 
 - This is a recreation for design review. Wallet and Pass Designer render the real pass, including fonts, truncation, barcode artwork, and Featured Action labels and symbols.

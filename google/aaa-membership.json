@@ -1,0 +1,262 @@
+{
+  "genericClass": {
+    "id": "3388000000000000000.aaa_membership",
+    "classTemplateInfo": {
+      "cardTemplateOverride": {
+        "cardRowTemplateInfos": [
+          {
+            "threeItems": {
+              "startItem": {
+                "firstValue": {
+                  "fields": [
+                    {
+                      "fieldPath": "object.textModulesData['plan']"
+                    }
+                  ]
+                }
+              },
+              "middleItem": {
+                "firstValue": {
+                  "fields": [
+                    {
+                      "fieldPath": "object.textModulesData['validThru']"
+                    }
+                  ]
+                }
+              },
+              "endItem": {
+                "firstValue": {
+                  "fields": [
+                    {
+                      "fieldPath": "object.textModulesData['memberSince']"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "linksModuleData": {
+      "uris": [
+        {
+          "uri": "https://app.ace.aaa.com/membership/quick-self-service",
+          "description": "Renew, add a family member or upgrade",
+          "id": "manage"
+        },
+        {
+          "uri": "https://app.ace.aaa.com/membership/make-a-payment/",
+          "description": "Pay membership bill",
+          "id": "pay"
+        },
+        {
+          "uri": "https://www.ace.aaa.com/locations.html",
+          "description": "Find a branch",
+          "id": "branches"
+        }
+      ]
+    }
+  },
+  "genericObject": {
+    "id": "3388000000000000000.aaa_membership_000000XXXXXXXXX0",
+    "classId": "3388000000000000000.aaa_membership",
+    "state": "ACTIVE",
+    "genericType": "GENERIC_TYPE_UNSPECIFIED",
+    "cardTitle": {
+      "defaultValue": {
+        "language": "en-US",
+        "value": "AAA Membership"
+      }
+    },
+    "subheader": {
+      "defaultValue": {
+        "language": "en-US",
+        "value": "Member"
+      }
+    },
+    "header": {
+      "defaultValue": {
+        "language": "en-US",
+        "value": "Fulanito Perez"
+      }
+    },
+    "logo": {
+      "sourceUri": {
+        "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/logo.png"
+      },
+      "contentDescription": {
+        "defaultValue": {
+          "language": "en-US",
+          "value": "AAA logo"
+        }
+      }
+    },
+    "heroImage": {
+      "sourceUri": {
+        "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/hero-membership.jpg"
+      },
+      "contentDescription": {
+        "defaultValue": {
+          "language": "en-US",
+          "value": "AAA roadside technician helping a member"
+        }
+      }
+    },
+    "hexBackgroundColor": "#1C4DA6",
+    "barcode": {
+      "type": "PDF_417",
+      "value": "000 000 XXXXXXXXX 0",
+      "alternateText": "000 000 XXXXXXXXX 0"
+    },
+    "validTimeInterval": {
+      "end": {
+        "date": "2027-03-31T23:59:00-07:00"
+      }
+    },
+    "textModulesData": [
+      {
+        "id": "plan",
+        "header": "Plan",
+        "body": "Premier"
+      },
+      {
+        "id": "validThru",
+        "header": "Valid thru",
+        "body": "03/27"
+      },
+      {
+        "id": "memberSince",
+        "header": "Member since",
+        "body": "1994"
+      },
+      {
+        "id": "membershipNumber",
+        "header": "Membership number",
+        "body": "000 000 XXXXXXXXX 0"
+      },
+      {
+        "id": "roadsidePhones",
+        "header": "Roadside Assistance · 24/7",
+        "body": "1-800-400-4222 · Outside CA 1-800-222-4357"
+      },
+      {
+        "id": "rentalCodes",
+        "header": "Car rental discount codes",
+        "body": "Hertz CDP 0000 · Dollar XX0000 · Thrifty 0000000000"
+      },
+      {
+        "id": "branch",
+        "header": "Your AAA branch",
+        "body": "Sample Branch · 000 Main St, City, CA 00000 · 000-000-0000"
+      }
+    ],
+    "valueAddedModuleData": [
+      {
+        "header": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "Roadside Assistance"
+          }
+        },
+        "body": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "Call 24/7 · 1-800-400-4222"
+          }
+        },
+        "uri": "tel:18004004222",
+        "image": {
+          "sourceUri": {
+            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-roadside.jpg"
+          },
+          "contentDescription": {
+            "defaultValue": {
+              "language": "en-US",
+              "value": "Roadside Assistance"
+            }
+          }
+        },
+        "sortIndex": 1
+      },
+      {
+        "header": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "Member benefits & discounts"
+          }
+        },
+        "body": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "Save with your membership card"
+          }
+        },
+        "uri": "https://www.ace.aaa.com/membership.html",
+        "image": {
+          "sourceUri": {
+            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-benefits.jpg"
+          },
+          "contentDescription": {
+            "defaultValue": {
+              "language": "en-US",
+              "value": "Member benefits & discounts"
+            }
+          }
+        },
+        "sortIndex": 2
+      },
+      {
+        "header": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "Renew or upgrade"
+          }
+        },
+        "body": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "Manage your membership online"
+          }
+        },
+        "uri": "https://app.ace.aaa.com/membership/quick-self-service",
+        "image": {
+          "sourceUri": {
+            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-renew.jpg"
+          },
+          "contentDescription": {
+            "defaultValue": {
+              "language": "en-US",
+              "value": "Renew or upgrade"
+            }
+          }
+        },
+        "sortIndex": 3
+      }
+    ],
+    "appLinkData": {
+      "androidAppLinkInfo": {
+        "appTarget": {
+          "targetUri": {
+            "uri": "https://play.google.com/store/apps/details?id=com.aaa.ace",
+            "description": "AAA Auto Club app"
+          }
+        }
+      },
+      "webAppLinkInfo": {
+        "appTarget": {
+          "targetUri": {
+            "uri": "https://www.ace.aaa.com/",
+            "description": "ace.aaa.com"
+          }
+        }
+      },
+      "displayText": {
+        "defaultValue": {
+          "language": "en-US",
+          "value": "Open Auto Club app"
+        }
+      }
+    }
+  }
+}

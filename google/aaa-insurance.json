@@ -1,0 +1,264 @@
+{
+  "genericClass": {
+    "id": "3388000000000000000.aaa_auto_insurance",
+    "classTemplateInfo": {
+      "cardTemplateOverride": {
+        "cardRowTemplateInfos": [
+          {
+            "twoItems": {
+              "startItem": {
+                "firstValue": {
+                  "fields": [
+                    {
+                      "fieldPath": "object.textModulesData['nameEnsured']"
+                    }
+                  ]
+                }
+              },
+              "endItem": {
+                "firstValue": {
+                  "fields": [
+                    {
+                      "fieldPath": "object.textModulesData['policyNumber']"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "oneItem": {
+              "item": {
+                "firstValue": {
+                  "fields": [
+                    {
+                      "fieldPath": "object.textModulesData['effective']"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "linksModuleData": {
+      "uris": [
+        {
+          "uri": "https://www.ace.aaa.com/insurance/claims.html",
+          "description": "File or track a claim",
+          "id": "claims"
+        },
+        {
+          "uri": "https://app.ace.aaa.com/insurance/make-a-payment/",
+          "description": "Pay or manage your policy",
+          "id": "pay"
+        },
+        {
+          "uri": "tel:18009426141",
+          "description": "Policy questions · 1-800-942-6141",
+          "id": "questions"
+        }
+      ]
+    }
+  },
+  "genericObject": {
+    "id": "3388000000000000000.aaa_auto_insurance_CAA000XXXX",
+    "classId": "3388000000000000000.aaa_auto_insurance",
+    "state": "ACTIVE",
+    "genericType": "GENERIC_TYPE_UNSPECIFIED",
+    "cardTitle": {
+      "defaultValue": {
+        "language": "en-US",
+        "value": "AAA Insurance"
+      }
+    },
+    "subheader": {
+      "defaultValue": {
+        "language": "en-US",
+        "value": "CA Evidence of Liability"
+      }
+    },
+    "header": {
+      "defaultValue": {
+        "language": "en-US",
+        "value": "Auto Insurance Card"
+      }
+    },
+    "logo": {
+      "sourceUri": {
+        "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/logo.png"
+      },
+      "contentDescription": {
+        "defaultValue": {
+          "language": "en-US",
+          "value": "AAA logo"
+        }
+      }
+    },
+    "heroImage": {
+      "sourceUri": {
+        "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/hero-insurance.jpg"
+      },
+      "contentDescription": {
+        "defaultValue": {
+          "language": "en-US",
+          "value": "Car driving along the California coast"
+        }
+      }
+    },
+    "hexBackgroundColor": "#1C4DA6",
+    "validTimeInterval": {
+      "start": {
+        "date": "2026-09-14T00:00:00-07:00"
+      },
+      "end": {
+        "date": "2027-09-14T23:59:00-07:00"
+      }
+    },
+    "textModulesData": [
+      {
+        "id": "nameEnsured",
+        "header": "Name ensured",
+        "body": "Fulanito Perez"
+      },
+      {
+        "id": "policyNumber",
+        "header": "Policy number",
+        "body": "CAA000XXXX"
+      },
+      {
+        "id": "effective",
+        "header": "Effective",
+        "body": "9/14/26 – 9/14/27"
+      },
+      {
+        "id": "company",
+        "header": "Insurance company",
+        "body": "Interinsurance Exchange of the Automobile Club NAIC# 000000"
+      },
+      {
+        "id": "vehicles",
+        "header": "Vehicle",
+        "body": "2026 SAMPLE SUV · VIN XXXXXXXXXXXXXXXXX"
+      },
+      {
+        "id": "drivers",
+        "header": "Insured drivers",
+        "body": "Fulanito Perez"
+      },
+      {
+        "id": "disclaimer",
+        "header": "Disclaimer",
+        "body": "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle."
+      }
+    ],
+    "valueAddedModuleData": [
+      {
+        "header": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "Roadside Assistance"
+          }
+        },
+        "body": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "Call 24/7 · 1-800-400-4222"
+          }
+        },
+        "uri": "tel:18004004222",
+        "image": {
+          "sourceUri": {
+            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-roadside.jpg"
+          },
+          "contentDescription": {
+            "defaultValue": {
+              "language": "en-US",
+              "value": "Roadside Assistance"
+            }
+          }
+        },
+        "sortIndex": 1
+      },
+      {
+        "header": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "Accident? File a claim"
+          }
+        },
+        "body": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "24/7 Accident Assist · 1-800-672-5246"
+          }
+        },
+        "uri": "tel:18006725246",
+        "image": {
+          "sourceUri": {
+            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-claim.jpg"
+          },
+          "contentDescription": {
+            "defaultValue": {
+              "language": "en-US",
+              "value": "Accident? File a claim"
+            }
+          }
+        },
+        "sortIndex": 2
+      },
+      {
+        "header": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "Proof of insurance"
+          }
+        },
+        "body": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "Get it online anytime"
+          }
+        },
+        "uri": "https://app.ace.aaa.com/insurance/anon/poi/view",
+        "image": {
+          "sourceUri": {
+            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-proof.jpg"
+          },
+          "contentDescription": {
+            "defaultValue": {
+              "language": "en-US",
+              "value": "Proof of insurance"
+            }
+          }
+        },
+        "sortIndex": 3
+      }
+    ],
+    "appLinkData": {
+      "androidAppLinkInfo": {
+        "appTarget": {
+          "targetUri": {
+            "uri": "https://play.google.com/store/apps/details?id=com.aaa.ace",
+            "description": "AAA Auto Club app"
+          }
+        }
+      },
+      "webAppLinkInfo": {
+        "appTarget": {
+          "targetUri": {
+            "uri": "https://www.ace.aaa.com/",
+            "description": "ace.aaa.com"
+          }
+        }
+      },
+      "displayText": {
+        "defaultValue": {
+          "language": "en-US",
+          "value": "Open Auto Club app"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AAA Google Wallet Viewer</title>
+<style>
+@font-face{font-family:Roboto;src:url(google/fonts/Roboto-Regular.ttf);font-weight:400}
+@font-face{font-family:Roboto;src:url(google/fonts/Roboto-Bold.ttf);font-weight:500 800}
+:root{
+  --win:#1e1f22;--side:#27282b;--line:#3d3e43;--text:#ececf0;--muted:#9a9ba3;--dim:#6c6d74;
+  --accent:#3b8cff;--warn:#f5b43c;--bad:#ff5f57;--ok:#34c759;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;color:var(--text);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--win)}
+button,select{font:inherit;color:inherit}
+a{color:#6cb2ff}
+.titlebar{min-height:52px;display:flex;align-items:center;flex-wrap:wrap;gap:10px 12px;padding:8px 14px;border-bottom:1px solid #111;background:#232427;position:sticky;top:0;z-index:20}
+.doc b{display:block;font-size:13px}.doc small{font-size:11px;color:var(--muted)}
+.grow{flex:1}
+.ro{font-size:11px;color:#111;background:var(--warn);border-radius:5px;padding:2px 7px;font-weight:600}
+.platform{display:flex;background:#1a1b1d;border:1px solid var(--line);border-radius:9px;padding:2px}
+.platform a{padding:6px 12px;border-radius:7px;font-size:13px;color:var(--muted);text-decoration:none}
+.platform a.on{background:#4a4b51;color:#fff}
+.tb-btn{border:1px solid var(--line);background:#2d2e32;border-radius:7px;padding:5px 10px;font-size:12px;cursor:pointer}
+.tb-btn input{display:none}
+.app{display:grid;grid-template-columns:300px 1fr}
+.sidebar{background:var(--side);border-right:1px solid #111;padding:12px 10px 40px}
+.side-h{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin:14px 6px 6px}
+.lim{list-style:none;margin:0;padding:0}
+.lim li{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;padding:7px 8px;border-radius:7px;font-size:12.5px}
+.lim li:hover{background:#323338}
+.lim li small{display:block;color:var(--muted);font-size:11px;margin-top:2px;line-height:1.35}
+.badge{font-size:10px;font-weight:600;border-radius:9px;padding:1px 7px;background:#3a3b40;color:#cfd0d6;white-space:nowrap}
+.badge.full{background:#2f4f7a;color:#cfe2ff}.badge.over{background:#6b2723;color:#ffd4d1}
+.canvas{padding:22px 24px 60px;min-width:0}
+.hero{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:1000px;margin:0 auto 22px}
+.picker{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px;background:#17181a;border:1px solid var(--line);border-radius:16px;padding:6px;flex:1 1 420px}
+.picker button{display:flex;align-items:center;gap:12px;border:2px solid transparent;background:transparent;border-radius:12px;padding:8px 12px 8px 8px;cursor:pointer;text-align:left;color:var(--muted)}
+.picker button:hover{background:#26272b}.picker button.on{background:#2b3b55;border-color:var(--accent);color:#fff}
+.picker .thumb{width:46px;height:46px;border-radius:50%;background:#444 center/cover;flex:none}
+.picker b{display:block;font-size:17px}.picker small{font-size:11.5px;opacity:.8}
+.dl{display:flex;align-items:center;gap:10px;border:0;border-radius:16px;padding:12px 18px;background:var(--accent);color:#fff;cursor:pointer;font:inherit;text-align:left;box-shadow:0 6px 18px #3b8cff55}
+.dl b{display:block;font-size:15px}.dl small{font-size:11px;opacity:.9}
+.dl svg{width:24px;height:24px;flex:none}
+.cols{display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);gap:28px;max-width:1100px;margin:0 auto;align-items:start}
+.colh{font:600 12px ui-monospace,Menlo,monospace;background:#3a3b40;border-radius:14px;padding:5px 10px;display:inline-block;margin-bottom:12px}
+/* ---- Google Wallet pass (Android look) ---- */
+.gw{font-family:Roboto,"Google Sans",system-ui,sans-serif}
+.gcard{border-radius:24px;overflow:hidden;color:var(--fg,#fff);background:var(--bg,#1c4da6);box-shadow:0 12px 30px #0007;position:relative}
+.gtop{display:flex;align-items:center;gap:12px;padding:18px 18px 0}
+.glogo{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#fff;flex:none}
+.gtitle{font-size:15px;font-weight:500}
+.ghead{padding:16px 18px 4px}
+.ghead small{display:block;font-size:13px;opacity:.75}
+.ghead b{display:block;font-size:24px;font-weight:400;line-height:1.25;margin-top:2px}
+.grw{display:grid;gap:10px;padding:10px 18px 0}
+.grw .l{font-size:12px;opacity:.75}.grow .v{font-size:15px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.grw .c{text-align:center}.grw .e{text-align:right}
+.gbar{margin:18px 18px 0;background:#fff;border-radius:14px;padding:14px 12px 10px;text-align:center;color:#202124}
+.gbar svg{display:block;margin:0 auto;max-width:100%;height:auto}
+.gbar small{display:block;font-size:13px;margin-top:6px;letter-spacing:.02em}
+.ghero{display:block;width:100%;aspect-ratio:1032/812;object-fit:cover;margin-top:18px}
+.gpad{height:18px}
+.gapp{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px 0 0;border-radius:999px;padding:11px 16px;background:#2d2f31;color:#e8eaed;font-size:14px;font-weight:500;text-decoration:none}
+.gsec{margin-top:18px}
+.gsec h4{margin:0 2px 8px;font:500 14px Roboto,system-ui,sans-serif;color:#e8eaed}
+.vam{display:flex;align-items:center;gap:12px;background:#2d2f31;border-radius:16px;padding:10px 12px;margin-bottom:8px;color:#e8eaed;text-decoration:none}
+.vam img{width:52px;height:52px;border-radius:12px;object-fit:cover;flex:none}
+.vam b{display:block;font-size:14px;font-weight:500}.vam small{display:block;font-size:12.5px;color:#bdc1c6;margin-top:2px}
+.vam .chev{margin-left:auto;color:#9aa0a6}
+.vam.trunc{outline:1px dashed var(--bad)}
+.dlist{background:#2d2f31;border-radius:16px;padding:4px 14px}
+.ditem{padding:10px 0;border-bottom:1px solid #3c4043}.ditem:last-child{border-bottom:0}
+.ditem .l{font-size:12px;color:#9aa0a6}.ditem .v{font-size:14px;color:#e8eaed;margin-top:2px;white-space:pre-line}
+.dlink{display:flex;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid #3c4043;color:#8ab4f8;text-decoration:none;font-size:14px}
+.dlink:last-child{border-bottom:0}
+.hl{outline:2px solid var(--warn);outline-offset:2px;border-radius:10px}
+/* ---- right column ---- */
+.panel{background:#232427;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+.panel h3{margin:0 0 8px;font-size:16px}
+.panel p{margin:6px 0;font-size:13px;line-height:1.5;color:#cfd0d6}
+.cmp{width:100%;border-collapse:collapse;font-size:12.5px}
+.cmp th,.cmp td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:7px 6px;line-height:1.4}
+.cmp th{color:var(--muted);font-weight:500}
+.cmp td:first-child{color:#fff;white-space:nowrap}
+pre{background:#151618;border:1px solid var(--line);border-radius:9px;padding:10px;font:11.5px/1.5 ui-monospace,Menlo,monospace;color:#bfe9c8;overflow:auto;margin:8px 0 0;white-space:pre}
+details summary{cursor:pointer;font-size:13px;color:#6cb2ff;margin-top:6px}
+.note{font-size:12px;color:var(--muted);line-height:1.45}
+.err{background:#4a1f1d;border:1px solid #7a302b;color:#ffd4d1;border-radius:8px;padding:10px 12px;margin:0 auto 16px;max-width:640px;font-size:13px}
+.dropzone{position:fixed;inset:12px;border:3px dashed var(--accent);border-radius:20px;background:#0a1830cc;z-index:50;display:grid;place-items:center;font-size:20px;color:#fff;pointer-events:none}
+.dropzone[hidden]{display:none}
+@media (max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .sidebar{order:2;border-right:0;border-top:1px solid #111}
+  .canvas{padding:18px 16px 50px}
+  .cols{grid-template-columns:minmax(0,1fr)}
+  .cols>*{min-width:0}
+  table{display:block;overflow-x:auto}
+  pre{max-width:100%;overflow-x:auto}
+  .dl{flex:1 1 100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+<header class="titlebar">
+  <div class="doc"><b id="docName">Loading…</b><small id="docSub">Google Wallet · Generic pass</small></div>
+  <span class="ro" title="This viewer never modifies the pass">READ-ONLY</span>
+  <nav class="platform" aria-label="Wallet"><a href="./">Apple Wallet</a><a href="google.html" class="on" aria-current="page">Google Wallet</a></nav>
+  <span class="grow"></span>
+  <label class="tb-btn" title="A Google Wallet pass JSON: {genericClass, genericObject} or a JWT payload with genericClasses/genericObjects">Drag and drop / pass JSON<input id="jsonFile" type="file" accept=".json,application/json"></label>
+</header>
+<div class="app">
+  <aside class="sidebar" aria-label="Components and limits">
+    <div class="side-h">This pass vs Google's limits</div>
+    <ul class="lim" id="limits"></ul>
+    <div class="side-h">Images</div>
+    <ul class="lim">
+      <li><span>Logo<small>660 × 660 px minimum, square. Google masks it to a circle; keep it inside the 15% safe margin.</small></span></li>
+      <li><span>Hero image<small>1032 × 812 px (≈5:4), PNG/JPG, full width at the bottom of the card. Transparent PNG lets the color show through.</small></span></li>
+      <li><span>Wide logo<small>1280 × 400 px (16:5), transparent PNG. Replaces logo + card title on Android.</small></span></li>
+      <li><span>Module images<small>Value-added module images are resized to 1:1.</small></span></li>
+    </ul>
+  </aside>
+  <main class="canvas">
+    <div class="dropzone" id="dropzone" hidden><div>Drop a Google Wallet pass JSON here</div></div>
+    <div id="error"></div>
+    <div class="hero">
+      <div class="picker" id="picker" role="tablist" aria-label="Pass">
+        <button role="tab" data-key="membership" class="on" aria-selected="true"><span class="thumb" style="background-image:url('google/img/hero-membership.jpg')"></span><span><b>Membership</b><small>Generic pass</small></span></button>
+        <button role="tab" data-key="insurance" aria-selected="false"><span class="thumb" style="background-image:url('google/img/hero-insurance.jpg')"></span><span><b>Insurance</b><small>Generic pass</small></span></button>
+      </div>
+      <button id="download" class="dl" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Download pass JSON</b><small id="dlName">class + object</small></span></button>
+    </div>
+    <div class="cols">
+      <section>
+        <span class="colh">Android · Google Wallet</span>
+        <div class="gw" id="pass"></div>
+      </section>
+      <section>
+        <div class="panel">
+          <h3>Featured actions: Apple vs Google</h3>
+          <p>Google Wallet doesn't have Apple's fixed “Featured Actions”. The closest things are <b>value-added modules</b> (custom tappable cards), the <b>app link button</b>, and the <b>links module</b> in the details. Unlike Apple, you write the text and pick the image yourself.</p>
+          <table class="cmp">
+            <tr><th></th><th>Apple Wallet (iOS 27)</th><th>Google Wallet</th></tr>
+            <tr><td>How many</td><td>Max 2</td><td>Value-added modules: up to 10 per object in the API reference (the guide says up to 15 shown). Links: 10 from class + 10 from object.</td></tr>
+            <tr><td>Custom text</td><td>No: Wallet sets the label from the type</td><td>Yes: header (60 chars) + body (50 chars). App link button text: 30 chars.</td></tr>
+            <tr><td>Icon</td><td>No: system SF Symbol per type</td><td>Yes: your own image, shown 1:1 (square)</td></tr>
+            <tr><td>Destination</td><td>Fixed types: call, place (Maps ID), https links</td><td>Any web link or deep link, including tel:</td></tr>
+            <tr><td>Where it shows</td><td>Cards under the pass</td><td>Pass details; a single module also shows on the front</td></tr>
+            <tr><td>Ordering / timing</td><td>Order in the array</td><td><code>sortIndex</code> (lower first) and <code>viewConstraints.displayInterval</code> (start/end time)</td></tr>
+          </table>
+          <details><summary>How to add a value-added module (JSON)</summary>
+<pre>"valueAddedModuleData": [{
+  "header": {"defaultValue": {"language": "en-US", "value": "Roadside Assistance"}},
+  "body":   {"defaultValue": {"language": "en-US", "value": "Call 24/7 · 1-800-400-4222"}},
+  "image":  {"sourceUri": {"uri": "https://…/vam-roadside.jpg"}},
+  "uri": "tel:18004004222",
+  "sortIndex": 1,
+  "viewConstraints": {"displayInterval": {"end": {"date": "2027-03-31T23:59:00-07:00"}}}
+}]</pre></details>
+          <details><summary>How to add the app link button (JSON)</summary>
+<pre>"appLinkData": {
+  "androidAppLinkInfo": {"appTarget": {"targetUri": {"uri": "https://play.google.com/…", "description": "AAA app"}}},
+  "webAppLinkInfo":     {"appTarget": {"targetUri": {"uri": "https://www.ace.aaa.com/", "description": "Website"}}},
+  "displayText": {"defaultValue": {"language": "en-US", "value": "Open Auto Club app"}}
+}</pre>
+          <p class="note">Google marks the per-link <code>title</code>, <code>description</code> and <code>appLogoImage</code> as not supported, and iOS app links aren't supported either.</p></details>
+        </div>
+        <div class="panel">
+          <h3>How the card is laid out</h3>
+          <p>Top: round <b>logo</b> + <b>cardTitle</b>. Then <b>subheader</b> (small) and <b>header</b> (big). Then rows from <code>classTemplateInfo.cardTemplateOverride</code>: each row is one, two or three items (Google recommends at most two rows). Then the <b>barcode</b> with its alt text, and the <b>hero image</b> across the bottom.</p>
+          <p>Google picks the text color (white or black) from <code>hexBackgroundColor</code>. Everything else (text modules, links, images) goes to the details below the card.</p>
+        </div>
+        <div class="panel">
+          <h3>Complete pass JSON</h3>
+          <details open><summary>genericClass + genericObject</summary><pre id="json"></pre></details>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const SOURCES = {membership: 'google/aaa-membership.json', insurance: 'google/aaa-insurance.json'};
+const LIMITS = {vamHeader: 60, vamBody: 50, appText: 30, rowItems: 3, rowsRecommended: 2, vamObject: 10, links: 10, text: 10, messages: 10};
+let cur = {key: 'membership', data: null, name: ''};
+
+const tx = ls => ls?.defaultValue?.value ?? ls?.translatedValues?.[0]?.value ?? (typeof ls === 'string' ? ls : '');
+const safeColor = c => /^#[0-9a-f]{6}$/i.test(String(c || '')) ? c : '#1c4da6';
+function textColorFor(hex){
+  const [r, g, b] = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255).map(c => c <= .03928 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4);
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.4 ? '#202124' : '#ffffff';
+}
+/* Our sample passes point at the published site; load those images from this site's folder so local copies work too. */
+const SELF = 'https://caaronperez.github.io/aaa-wallet-pass-viewer/';
+const imgSrc = u => String(u || '').startsWith(SELF) ? String(u).slice(SELF.length) : (/^https:/i.test(String(u || '')) ? u : '');
+const safeHref = u => /^(https:|tel:|mailto:)/i.test(String(u || '')) ? u : '';
+
+/* Resolve a template fieldPath like object.textModulesData['plan'] */
+function resolve(path, obj, cls){
+  const m = /^(object|class)\.textModulesData\['([^']+)'\]$/.exec(path || '');
+  if(m){ const src = m[1] === 'object' ? obj : cls; return (src?.textModulesData || []).find(t => t.id === m[2]); }
+  const n = /^(object|class)\.(\w+)$/.exec(path || '');
+  if(n){ const v = (n[1] === 'object' ? obj : cls)?.[n[2]]; return v ? {header: '', body: tx(v) || String(v)} : null; }
+  return null;
+}
+function itemHTML(item, obj, cls, align){
+  const f = item?.firstValue?.fields?.[0]?.fieldPath, t = resolve(f, obj, cls);
+  return t ? `<div class="${align}" data-tm="${esc(t.id || '')}"><div class="l">${esc(t.header)}</div><div class="v">${esc(t.body)}</div></div>` : '';
+}
+function rowsHTML(obj, cls){
+  const rows = cls?.classTemplateInfo?.cardTemplateOverride?.cardRowTemplateInfos || [];
+  return rows.map(r => {
+    if(r.oneItem) return `<div class="grw" style="grid-template-columns:1fr">${itemHTML(r.oneItem.item, obj, cls, '')}</div>`;
+    if(r.twoItems) return `<div class="grw" style="grid-template-columns:1fr 1fr">${itemHTML(r.twoItems.startItem, obj, cls, '')}${itemHTML(r.twoItems.endItem, obj, cls, 'e')}</div>`;
+    if(r.threeItems) return `<div class="grw" style="grid-template-columns:1fr auto 1fr">${itemHTML(r.threeItems.startItem, obj, cls, '')}${itemHTML(r.threeItems.middleItem, obj, cls, 'c')}${itemHTML(r.threeItems.endItem, obj, cls, 'e')}</div>`;
+    return '';
+  }).join('');
+}
+/* Visual-only barcode (seeded by the value) */
+function barcodeSVG(bc){
+  let h = 2166136261; for(const c of String(bc.value)){ h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); }
+  const rnd = () => (h = (Math.imul(h ^ (h >>> 15), 2246822507) + 0x6D2B79F5) >>> 0) / 4294967296;
+  let out = '', x = 0; const H = 56;
+  if(/QR|AZTEC/.test(bc.type)){
+    const n = 25, s = 4;
+    for(let y = 0; y < n; y++) for(let i = 0; i < n; i++) if(rnd() > .5) out += `<rect x="${i*s}" y="${y*s}" width="${s}" height="${s}"/>`;
+    return `<svg viewBox="0 0 100 100" width="120" height="120" fill="#000" role="img" aria-label="${esc(bc.type)} barcode preview">${out}</svg>`;
+  }
+  for(let r = 0; r < 8; r++) for(let c = 0; c < 70; c++) if(rnd() > .48) out += `<rect x="${12 + c * 3}" y="${r * 7}" width="3" height="7.3"/>`;
+  out += `<rect x="0" y="0" width="8" height="${H}"/><rect x="232" y="0" width="8" height="${H}"/>`;
+  return `<svg viewBox="0 0 240 ${H}" width="240" height="${H}" fill="#000" role="img" aria-label="${esc(bc.type)} barcode preview">${out}</svg>`;
+}
+
+function render(){
+  const {genericClass: cls, genericObject: obj} = cur.data;
+  const bg = safeColor(obj.hexBackgroundColor || cls?.hexBackgroundColor), fg = textColorFor(bg);
+  const logo = imgSrc(obj.logo?.sourceUri?.uri || cls?.logo?.sourceUri?.uri), hero = imgSrc(obj.heroImage?.sourceUri?.uri || cls?.heroImage?.sourceUri?.uri);
+  const bc = obj.barcode;
+  const vams = [...(obj.valueAddedModuleData || []), ...(cls?.valueAddedModuleData || [])].sort((a, b) => (a.sortIndex ?? 2e9) - (b.sortIndex ?? 2e9));
+  const texts = [...(cls?.textModulesData || []), ...(obj.textModulesData || [])];
+  const links = [...(cls?.linksModuleData?.uris || []), ...(obj.linksModuleData?.uris || [])];
+  const app = obj.appLinkData || cls?.appLinkData;
+  const appHref = safeHref(app?.webAppLinkInfo?.appTarget?.targetUri?.uri || app?.androidAppLinkInfo?.appTarget?.targetUri?.uri);
+  const card = `<div class="gcard" style="--bg:${bg};--fg:${fg}">
+    <div class="gtop">${logo ? `<img class="glogo" src="${esc(logo)}" alt="">` : ''}<span class="gtitle">${esc(tx(obj.cardTitle))}</span></div>
+    <div class="ghead">${obj.subheader ? `<small>${esc(tx(obj.subheader))}</small>` : ''}<b>${esc(tx(obj.header))}</b></div>
+    ${rowsHTML(obj, cls)}
+    ${bc ? `<div class="gbar">${barcodeSVG(bc)}${bc.alternateText ? `<small>${esc(bc.alternateText)}</small>` : ''}</div>` : ''}
+    ${hero ? `<img class="ghero" src="${esc(hero)}" alt="${esc(tx(obj.heroImage?.contentDescription))}">` : '<div class="gpad"></div>'}
+  </div>`;
+  const vamHTML = vams.map(v => {
+    const h = tx(v.header), b = tx(v.body), over = h.length > LIMITS.vamHeader || b.length > LIMITS.vamBody, href = safeHref(v.uri);
+    return `<a class="vam${over ? ' trunc' : ''}" ${href ? `href="${esc(href)}" target="_blank" rel="noopener"` : ''} title="${over ? 'Too long: Google truncates this' : esc(v.uri)}">${imgSrc(v.image?.sourceUri?.uri) ? `<img src="${esc(imgSrc(v.image.sourceUri.uri))}" alt="">` : ''}<span><b>${esc(h.slice(0, LIMITS.vamHeader))}</b>${b ? `<small>${esc(b.slice(0, LIMITS.vamBody))}</small>` : ''}</span><span class="chev" aria-hidden="true">›</span></a>`;
+  }).join('');
+  $('pass').innerHTML = card
+    + (app ? `<a class="gapp" ${appHref ? `href="${esc(appHref)}" target="_blank" rel="noopener"` : ''}>${esc(tx(app.displayText) || 'Open app')}</a>` : '')
+    + (vams.length ? `<div class="gsec"><h4>Value-added modules</h4>${vamHTML}</div>` : '')
+    + (texts.length ? `<div class="gsec"><h4>Details</h4><div class="dlist">${texts.map(t => `<div class="ditem"><div class="l">${esc(t.header)}</div><div class="v">${esc(t.body)}</div></div>`).join('')}</div></div>` : '')
+    + (links.length ? `<div class="gsec"><h4>Links</h4><div class="dlist">${links.map(l => { const h = safeHref(l.uri); return `<a class="dlink" ${h ? `href="${esc(h)}" target="_blank" rel="noopener"` : ''}>${esc(l.description || l.uri)} <span aria-hidden="true">↗</span></a>`; }).join('')}</div></div>` : '');
+  $('json').textContent = JSON.stringify(cur.data, null, 2);
+  $('docName').textContent = cur.name;
+  $('dlName').textContent = cur.name;
+  document.querySelectorAll('#picker [data-key]').forEach(b => { b.classList.toggle('on', b.dataset.key === cur.key); b.setAttribute('aria-selected', String(b.dataset.key === cur.key)); });
+  renderLimits({obj, cls, vams, texts, links, app});
+}
+function renderLimits({obj, cls, vams, texts, links, app}){
+  const rows = cls?.classTemplateInfo?.cardTemplateOverride?.cardRowTemplateInfos || [];
+  const itemsPerRow = rows.map(r => r.oneItem ? 1 : r.twoItems ? 2 : r.threeItems ? 3 : 0);
+  const badge = (n, max, soft) => `<span class="badge ${n > max ? (soft ? 'full' : 'over') : n === max ? 'full' : ''}">${n}/${max}</span>`;
+  const longV = vams.filter(v => tx(v.header).length > LIMITS.vamHeader || tx(v.body).length > LIMITS.vamBody).length;
+  const appLen = tx(app?.displayText).length;
+  const req = ['cardTitle', 'header'].filter(k => !tx(obj[k]));
+  $('limits').innerHTML = [
+    `<li><span>Required fields<small>id, classId, cardTitle and header. ${req.length ? 'Missing: ' + req.join(', ') : 'All present.'}</small></span><span class="badge ${req.length ? 'over' : 'full'}">${req.length ? 'missing' : 'ok'}</span></li>`,
+    `<li><span>Card rows<small>1, 2 or 3 items per row (this pass: ${itemsPerRow.join(' + ') || 'none'}). Google recommends at most 2 rows.</small></span>${badge(rows.length, LIMITS.rowsRecommended, true)}</li>`,
+    `<li><span>Value-added modules<small>Max 10 per object (API reference; the guide says 15 shown). Header ≤ 60, body ≤ 50 chars${longV ? `, ${longV} too long` : ''}.</small></span>${badge(vams.length, LIMITS.vamObject)}</li>`,
+    `<li><span>App link button<small>One button; displayText ≤ 30 chars (${appLen}).</small></span><span class="badge ${appLen > LIMITS.appText ? 'over' : 'full'}">${app ? '1/1' : '0/1'}</span></li>`,
+    `<li><span>Text modules<small>10 from the class + 10 from the object are shown (the template guide says 20 each).</small></span>${badge(texts.length, 20)}</li>`,
+    `<li><span>Links module<small>10 from the class + 10 from the object.</small></span>${badge(links.length, 20)}</li>`,
+    `<li><span>Messages<small>Up to 10, shown as notifications/messages on the pass.</small></span>${badge((obj.messages || []).length, LIMITS.messages)}</li>`,
+    `<li><span>Image modules<small>1 from the class + 1 from the object are shown.</small></span>${badge((obj.imageModulesData || []).length + (cls?.imageModulesData || []).length, 2)}</li>`,
+    `<li><span>Barcode<small>${obj.barcode ? esc(obj.barcode.type) + ' with alt text' : 'None (fine for proof of insurance)'}. Rotating barcodes are also supported.</small></span></li>`,
+    `<li><span>Validity<small>${obj.validTimeInterval?.end?.date ? 'Expires ' + esc(obj.validTimeInterval.end.date.slice(0, 10)) + '; Wallet shows it as expired after that.' : 'No end date set.'}</small></span></li>`
+  ].join('');
+}
+
+async function load(key){
+  try{
+    const r = await fetch(SOURCES[key], {cache: 'no-cache'}); if(!r.ok) throw new Error(r.status);
+    cur = {key, data: await r.json(), name: SOURCES[key].split('/').pop()};
+    $('error').innerHTML = ''; render();
+  }catch(e){ $('error').innerHTML = `<div class="err">Couldn't load the pass (${esc(e.message)}). Try reloading.</div>`; }
+}
+/* Accepts {genericClass, genericObject} or a JWT-style payload {payload:{genericClasses, genericObjects}} */
+function normalize(j){
+  const p = j.payload || j;
+  const obj = j.genericObject || p.genericObjects?.[0], cls = j.genericClass || p.genericClasses?.[0] || null;
+  if(!obj) throw new Error('No genericObject found');
+  return {genericClass: cls, genericObject: obj};
+}
+async function importFile(file){
+  try{ cur = {key: '', data: normalize(JSON.parse(await file.text())), name: file.name}; $('error').innerHTML = ''; render(); }
+  catch(e){ $('error').innerHTML = `<div class="err">Couldn't read “${esc(file.name)}” (${esc(e.message)}).</div>`; }
+}
+$('picker').addEventListener('click', e => { const b = e.target.closest('[data-key]'); if(b) load(b.dataset.key); });
+$('jsonFile').addEventListener('change', e => { const f = e.target.files[0]; if(f) importFile(f); e.target.value = ''; });
+$('download').onclick = () => {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(cur.data, null, 2)], {type: 'application/json'}));
+  a.download = cur.name || 'google-wallet-pass.json'; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+};
+let depth = 0; const hasFiles = e => [...(e.dataTransfer?.types || [])].includes('Files');
+addEventListener('dragenter', e => { if(!hasFiles(e)) return; e.preventDefault(); depth++; $('dropzone').hidden = false; });
+addEventListener('dragover', e => { if(hasFiles(e)) e.preventDefault(); });
+addEventListener('dragleave', e => { if(hasFiles(e) && --depth <= 0){ depth = 0; $('dropzone').hidden = true; } });
+addEventListener('drop', e => { if(!hasFiles(e)) return; e.preventDefault(); depth = 0; $('dropzone').hidden = true; const f = e.dataTransfer.files[0]; if(f) importFile(f); });
+load('membership');
+</script>
+</body>
+</html>

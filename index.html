@@ -21,6 +21,7 @@ button,select{font:inherit;color:inherit}
 .seg button.on{background:#4a4b51;color:#fff}
 .tb-btn{border:1px solid var(--line);background:#2d2e32;border-radius:7px;padding:5px 10px;font-size:12px;cursor:pointer}
 .tb-btn input{display:none}
+.platform{display:flex;background:#1a1b1d;border:1px solid var(--line);border-radius:9px;padding:2px}.platform a{padding:6px 12px;border-radius:7px;font-size:13px;color:var(--muted);text-decoration:none}.platform a.on{background:#4a4b51;color:#fff}
 .ro{font-size:11px;color:#111;background:var(--warn);border-radius:5px;padding:2px 7px;font-weight:600}
 .app{display:grid;grid-template-columns:290px 1fr;min-height:calc(100vh - 52px)}
 .sidebar{background:var(--side);border-right:1px solid #111;padding:10px 8px 40px;overflow:auto;max-height:calc(100vh - 52px);position:sticky;top:52px}
@@ -270,6 +271,7 @@ button,select{font:inherit;color:inherit}
 <header class="titlebar">
   <div class="doc"><b id="docName">Loading…</b><small id="docSub">Pass template</small></div>
   <span class="ro" title="This viewer never modifies the template">READ-ONLY</span>
+  <nav class="platform" aria-label="Wallet"><a href="./" class="on" aria-current="page">Apple Wallet</a><a href="google.html">Google Wallet</a></nav>
   <span class="grow"></span>
   <label class="tb-btn" title="Drag a .pkpasstemplate onto the page, or click to pick a pass.json (a .zip of a template works too)">Drag and drop / pass.json<input id="jsonFile" type="file" accept=".zip,application/zip,.json,application/json"></label>
   <label class="tb-btn" title="macOS shows .pkpasstemplate as a single file, so pick the folder that contains it (e.g. outputs)">Open folder<input id="folder" type="file" webkitdirectory multiple></label>
