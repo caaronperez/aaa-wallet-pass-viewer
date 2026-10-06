@@ -46,31 +46,42 @@ a{color:#6cb2ff}
 .dl svg{width:24px;height:24px;flex:none}
 .cols{display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);gap:28px;max-width:1100px;margin:0 auto;align-items:start}
 .colh{font:600 12px ui-monospace,Menlo,monospace;background:#3a3b40;border-radius:14px;padding:5px 10px;display:inline-block;margin-bottom:12px}
-/* ---- Google Wallet pass (Android look) ---- */
-.gw{font-family:Roboto,"Google Sans",system-ui,sans-serif}
-.gcard{border-radius:24px;overflow:hidden;color:var(--fg,#fff);background:var(--bg,#1c4da6);box-shadow:0 12px 30px #0007;position:relative}
-.gtop{display:flex;align-items:center;gap:12px;padding:18px 18px 0}
-.glogo{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#fff;flex:none}
-.gtitle{font-size:15px;font-weight:500}
-.ghead{padding:16px 18px 4px}
-.ghead small{display:block;font-size:13px;opacity:.75}
-.ghead b{display:block;font-size:24px;font-weight:400;line-height:1.25;margin-top:2px}
-.grw{display:grid;gap:10px;padding:10px 18px 0}
-.grw .l{font-size:12px;opacity:.75}.grow .v{font-size:15px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.grw .c{text-align:center}.grw .e{text-align:right}
-.gbar{margin:18px 18px 0;background:#fff;border-radius:14px;padding:14px 12px 10px;text-align:center;color:#202124}
+/* ---- Google Wallet pass, 2026 full-screen look ---- */
+.gw{font-family:"Google Sans",Roboto,system-ui,sans-serif}
+.gphone{position:relative;width:100%;max-width:380px;height:780px;border-radius:36px;overflow:hidden;background:var(--bg);color:var(--fg);box-shadow:0 12px 30px #0007;margin:0 auto}
+.gscroll{height:100%;overflow-y:auto;scrollbar-width:none}.gscroll::-webkit-scrollbar{display:none}
+.gbarx{display:flex;align-items:center;gap:18px;padding:18px 18px 4px;position:sticky;top:0;background:var(--bg);z-index:3}
+.gbarx .sp{flex:1}.gbarx button{all:unset;cursor:pointer;display:flex}
+.gup{position:relative;z-index:2;background:var(--bg);border-radius:0 0 28px 28px;padding:6px 20px 22px;text-align:center}
+.glogo2{width:84px;height:84px;border-radius:50%;background:var(--tint);display:grid;place-items:center;margin:4px auto 10px}
+.glogo2 img{width:68px;height:68px;border-radius:50%;object-fit:cover;background:#fff}
+.gissuer{font-size:15px}.gsub{font-size:13px;opacity:.8;margin-top:10px}
+.gheader{font:700 34px/1.12 "Google Sans",Roboto,system-ui,sans-serif;margin:2px 0 16px;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.gbar{background:#fff;border-radius:18px;padding:16px 14px;color:#202124}
 .gbar svg{display:block;margin:0 auto;max-width:100%;height:auto}
-.gbar small{display:block;font-size:13px;margin-top:6px;letter-spacing:.02em}
-.ghero{display:block;width:100%;aspect-ratio:1032/812;object-fit:cover;margin-top:18px}
-.gpad{height:18px}
-.gapp{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px 0 0;border-radius:999px;padding:11px 16px;background:#2d2f31;color:#e8eaed;font-size:14px;font-weight:500;text-decoration:none}
-.gsec{margin-top:18px}
-.gsec h4{margin:0 2px 8px;font:500 14px Roboto,system-ui,sans-serif;color:#e8eaed}
-.vam{display:flex;align-items:center;gap:14px;background:#2d2f31;border-radius:18px;padding:14px 14px 14px 18px;margin-bottom:10px;color:#e8eaed;text-decoration:none}
+.galt{font-size:13px;font-weight:600;margin-top:8px;letter-spacing:.02em}
+.grw{display:grid;gap:10px;padding:16px 0 0;text-align:left}
+.grw .l{font-size:13px;opacity:.85}.grw .v{font-size:16px;font-weight:600;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.grw .c{text-align:center}.grw .e{text-align:right}
+.ghero{display:block;width:100%;aspect-ratio:1032/812;object-fit:cover;margin:-28px 0}
+.glow{position:relative;z-index:2;background:var(--bg);border-radius:28px 28px 0 0;padding:22px 16px 26px}
+.glow.nohero{border-radius:0}
+.gh4{margin:2px 4px 10px;font-size:14px;font-weight:500}.gh4 small{display:block;font-size:11.5px;opacity:.75;font-weight:400;margin-top:2px}
+.ggroup{border-radius:20px;overflow:hidden;margin-bottom:14px;display:grid;gap:3px}
+.grow2{display:flex;align-items:center;gap:16px;background:var(--tint);padding:17px 18px;color:inherit;text-decoration:none;font:inherit;text-align:left;border:0;width:100%;cursor:pointer}
+.grow2 svg{flex:none}.grow2 b{display:block;font-size:15.5px;font-weight:600}.grow2 small{display:block;font-size:12px;opacity:.75;margin-top:1px}
+.gdet{background:var(--tint);padding:12px 18px}.gdet small{display:block;font-size:12.5px;opacity:.8}.gdet b{display:block;font-size:15px;font-weight:600;margin-top:2px;white-space:pre-line}
+.gfine{font-size:12px;opacity:.8;line-height:1.5;margin:14px 4px 0}
+.gsettings{position:absolute;inset:0;background:var(--bg);z-index:5;transform:translateX(100%);transition:transform .3s ease;padding:0 16px;overflow-y:auto}
+.gphone.settings .gsettings{transform:none}
+.gsettings .gbarx{padding:18px 2px 4px}
+.gstitle{font:400 28px "Google Sans",Roboto,system-ui,sans-serif;margin:18px 6px 22px}
+.gtog{display:flex;align-items:center;gap:12px;background:var(--tint);padding:16px 18px}.gtog b{display:block;font-size:15px}.gtog small{display:block;font-size:12.5px;opacity:.85;margin-top:2px}
+.gtog i{flex:none;margin-left:auto;width:44px;height:26px;border-radius:13px;background:rgba(255,255,255,.35);position:relative}
+.gtog i.on{background:#fff}.gtog i.on::after{content:"";position:absolute;right:3px;top:3px;width:20px;height:20px;border-radius:50%;background:var(--bg)}
+.vam{display:flex;align-items:center;gap:14px;background:var(--tint);border-radius:20px;padding:14px 14px 14px 18px;margin-bottom:10px;color:inherit;text-decoration:none}
 .vam img{width:72px;height:72px;border-radius:12px;object-fit:cover;flex:none;margin-left:auto}
-.vam b{display:block;font-size:15px;font-weight:600;line-height:1.35}.vam small{display:block;font-size:13px;color:#e8eaed;margin-top:3px;line-height:1.35}
-.gfront{background:#1f2023;border-radius:0 0 22px 22px;padding:16px 14px 6px;margin-top:-22px;padding-top:34px}
-.gfront h4{display:flex;justify-content:space-between;margin:0 4px 12px;font:500 14px Roboto,system-ui,sans-serif;color:#e8eaed}
+.vam b{display:block;font-size:15px;font-weight:600;line-height:1.35}.vam small{display:block;font-size:13px;margin-top:3px;line-height:1.35;opacity:.9}
 .vmode{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
 .vmode button{border:1px solid var(--line);background:#26272b;color:var(--muted);border-radius:999px;padding:5px 12px;font-size:12px;cursor:pointer}
 .vmode button.on{background:#2b3b55;border-color:var(--accent);color:#fff}
@@ -128,7 +139,7 @@ details summary{cursor:pointer;font-size:13px;color:#6cb2ff;margin-top:6px}
     <div class="side-h">Images</div>
     <ul class="lim">
       <li><span>Logo<small>660 × 660 px minimum, square. Google masks it to a circle; keep it inside the 15% safe margin.</small></span></li>
-      <li><span>Hero image<small>1032 × 812 px (≈5:4), PNG/JPG, full width at the bottom of the card. Transparent PNG lets the color show through.</small></span></li>
+      <li><span>Hero image<small>1032 × 812 px (≈5:4), PNG/JPG, a full-width band under the fields in the 2026 design, the biggest visual on the pass. Transparent PNG lets the color show through.</small></span></li>
       <li><span>Wide logo<small>1280 × 400 px (16:5), transparent PNG. Replaces logo + card title on Android.</small></span></li>
       <li><span>Module images<small>Value-added module images are resized to 1:1.</small></span></li>
     </ul>
@@ -145,7 +156,7 @@ details summary{cursor:pointer;font-size:13px;color:#6cb2ff;margin-top:6px}
     </div>
     <div class="cols">
       <section>
-        <span class="colh">Android · Google Wallet</span>
+        <span class="colh">Android · Google Wallet 2026</span>
         <div class="gw" id="pass"></div>
       </section>
       <section>
@@ -203,9 +214,11 @@ details summary{cursor:pointer;font-size:13px;color:#6cb2ff;margin-top:6px}
           <p class="note">Google marks the per-link <code>title</code>, <code>description</code> and <code>appLogoImage</code> as not supported, and iOS app links aren't supported either.</p></details>
         </div>
         <div class="panel">
-          <h3>How the card is laid out</h3>
-          <p>Top: round <b>logo</b> + <b>cardTitle</b>. Then <b>subheader</b> (small) and <b>header</b> (big). Then rows from <code>classTemplateInfo.cardTemplateOverride</code>: each row is one, two or three items (Google recommends at most two rows). Then the <b>barcode</b> with its alt text, and the <b>hero image</b> across the bottom.</p>
-          <p>Google picks the text color (white or black) from <code>hexBackgroundColor</code>. Everything else (text modules, links, images) goes to the details below the card.</p>
+          <h3>How the pass is laid out (2026 redesign)</h3>
+          <p>Google moved passes to a <b>full-screen</b> look: no more card on a grey background. Your <code>hexBackgroundColor</code> fills the whole screen, so contrast matters more now (Google still picks white or black text for you).</p>
+          <p>Top to bottom: round <b>logo</b> in the middle, <b>cardTitle</b> under it, then the <b>header</b> big and bold (up to two lines). Then the <b>barcode</b> with its alt text, then the field rows from <code>cardTemplateOverride</code> (1, 2 or 3 per row). The <b>hero image</b> becomes a full-width band, the biggest visual on the pass, so it's worth a good picture.</p>
+          <p>Scroll down and links, the app link button and modules show as tinted, tappable rows with icons. Pass settings (notifications, archive, remove) has its own screen now: tap it in the mock.</p>
+          <p class="note">Source: <a href="https://www.walletwallet.dev/blog/google-wallet-passes-redesign-2026/" target="_blank" rel="noopener" style="color:#6cb2ff">WalletWallet: Google Wallet passes redesign 2026</a>. Google hasn't published how value-added modules look in the new design, so that part is my best guess. The JSON fields and limits didn't change.</p>
         </div>
         <div class="panel">
           <h3>Complete pass JSON</h3>
@@ -243,10 +256,12 @@ function resolve(path, obj, cls){
   return null;
 }
 function itemHTML(item, obj, cls, align){
-  const f = item?.firstValue?.fields?.[0]?.fieldPath, t = resolve(f, obj, cls);
+  const f = item?.firstValue?.fields?.[0]?.fieldPath, t = resolve(f, obj, cls); if(t?.id) rowIds.add(t.id);
   return t ? `<div class="${align}" data-tm="${esc(t.id || '')}"><div class="l">${esc(t.header)}</div><div class="v">${esc(t.body)}</div></div>` : '';
 }
+const rowIds = new Set();
 function rowsHTML(obj, cls){
+  rowIds.clear();
   const rows = cls?.classTemplateInfo?.cardTemplateOverride?.cardRowTemplateInfos || [];
   return rows.map(r => {
     if(r.oneItem) return `<div class="grw" style="grid-template-columns:1fr">${itemHTML(r.oneItem.item, obj, cls, '')}</div>`;
@@ -271,7 +286,10 @@ function barcodeSVG(bc){
 }
 
 let vamMode = 'one';
-document.addEventListener('click', e => { const b = e.target.closest('[data-vm]'); if(b){ vamMode = b.dataset.vm; render(); } });
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-vm]'); if(b){ vamMode = b.dataset.vm; render(); return; }
+  const st = e.target.closest('[data-settings]'); if(st){ const ph = document.querySelector('.gphone'); ph.classList.toggle('settings', st.dataset.settings === 'open'); ph.querySelector('.gsettings').setAttribute('aria-hidden', String(st.dataset.settings !== 'open')); }
+});
 function render(){
   const {genericClass: cls, genericObject: obj} = cur.data;
   const bg = safeColor(obj.hexBackgroundColor || cls?.hexBackgroundColor), fg = textColorFor(bg);
@@ -282,29 +300,69 @@ function render(){
   const links = [...(cls?.linksModuleData?.uris || []), ...(obj.linksModuleData?.uris || [])];
   const app = obj.appLinkData || cls?.appLinkData;
   const appHref = safeHref(app?.webAppLinkInfo?.appTarget?.targetUri?.uri || app?.androidAppLinkInfo?.appTarget?.targetUri?.uri);
-  const card = `<div class="gcard" style="--bg:${bg};--fg:${fg}">
-    <div class="gtop">${logo ? `<img class="glogo" src="${esc(logo)}" alt="">` : ''}<span class="gtitle">${esc(tx(obj.cardTitle))}</span></div>
-    <div class="ghead">${obj.subheader ? `<small>${esc(tx(obj.subheader))}</small>` : ''}<b>${esc(tx(obj.header))}</b></div>
-    ${rowsHTML(obj, cls)}
-    ${bc ? `<div class="gbar">${barcodeSVG(bc)}${bc.alternateText ? `<small>${esc(bc.alternateText)}</small>` : ''}</div>` : ''}
-    ${hero ? `<img class="ghero" src="${esc(hero)}" alt="${esc(tx(obj.heroImage?.contentDescription))}">` : '<div class="gpad"></div>'}
-  </div>`;
+  const tint = fg === '#000000' || fg === '#000' || fg === '#202124' ? 'rgba(255,255,255,.38)' : 'rgba(255,255,255,.14)';
+  const ICONS = {
+    back: '<path d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20z"/>',
+    star: '<path d="M12 17.3 18.2 21l-1.6-7 5.4-4.7-7.2-.6L12 2 9.2 8.7 2 9.3 7.4 14l-1.6 7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
+    share: '<path d="M18 16a3 3 0 0 0-2.4 1.2L8.9 13.4a3 3 0 0 0 0-2.8l6.7-3.8A3 3 0 1 0 15 5l-6.7 3.8a3 3 0 1 0 0 6.4L15 19a3 3 0 1 0 3-3z"/>',
+    phone: '<path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+    pin: '<path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+    globe: '<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+    app: '<rect x="6" y="2.5" width="12" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 18.5h4" stroke="currentColor" stroke-width="1.8"/>',
+    info: '<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+    gear: '<path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.5 7.5 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.5 7.5 0 0 0-1.7 1l-2.4-1-2 3.4L6.6 11a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1c.5.4 1.1.7 1.7 1l.4 2.5h4l.4-2.5c.6-.3 1.2-.6 1.7-1l2.4 1 2-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    archive: '<path d="M4 4h16v4H4zM5 8v12h14V8M9.5 12h5" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+    trash: '<path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13" fill="none" stroke="currentColor" stroke-width="1.8"/>'
+  };
+  const ic = n => `<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">${ICONS[n]}</svg>`;
+  const linkIcon = u => /^tel:/i.test(u) ? 'phone' : /maps|geo:|locat|branch/i.test(u) ? 'pin' : 'globe';
+  const row = (icon, label, href, sub) => `<a class="grow2" ${href ? `href="${esc(href)}" target="_blank" rel="noopener"` : ''}>${ic(icon)}<span><b>${label}</b>${sub ? `<small>${sub}</small>` : ''}</span></a>`;
   const vamCard = v => {
     const h = tx(v.header), b = tx(v.body), over = h.length > LIMITS.vamHeader || b.length > LIMITS.vamBody, href = safeHref(v.uri);
     return `<a class="vam${over ? ' trunc' : ''}" ${href ? `href="${esc(href)}" target="_blank" rel="noopener"` : ''} title="${over ? 'Too long: Google truncates this' : esc(v.uri)}"><span><b>${esc(h.slice(0, LIMITS.vamHeader))}</b>${b ? `<small>${esc(b.slice(0, LIMITS.vamBody))}</small>` : ''}</span>${imgSrc(v.image?.sourceUri?.uri) ? `<img src="${esc(imgSrc(v.image.sourceUri.uri))}" alt="">` : ''}</a>`;
   };
   const shown = vamMode === 'one' ? vams.slice(0, 1) : vams;
   const sectionTitle = `Recommendations from ${esc(cls?.issuerName || 'AAA')}`;
-  const front = shown.length === 1 ? `<div class="gfront"><h4>${sectionTitle}</h4>${vamCard(shown[0])}</div>` : '';
-  const list = shown.length > 1 ? `<div class="gsec"><h4>${sectionTitle} <small style="color:#9aa0a6;font-weight:400">· ${shown.length} modules, shown as a list in the pass details</small></h4>${shown.map(vamCard).join('')}</div>` : '';
+  const modules = shown.length ? `<h4 class="gh4">${sectionTitle}${shown.length > 1 ? ` <small>${shown.length} modules: a list (needs its own screen)</small>` : ''}</h4>${shown.map(vamCard).join('')}` : '';
+  const actions = [
+    app ? row('app', esc(tx(app.displayText) || 'Open app'), appHref, 'App link button') : '',
+    ...links.map(l => row(linkIcon(l.uri || ''), esc(l.description || l.uri), safeHref(l.uri)))
+  ].filter(Boolean).join('');
+  const rowsMarkup = rowsHTML(obj, cls);
+  const details = texts.filter(t => !rowIds.has(t.id));
+  const screen = `
+    <div class="gbarx">${ic('back')}<span class="sp"></span>${ic('star')}${ic('share')}</div>
+    <div class="gup">
+      ${logo ? `<div class="glogo2"><img src="${esc(logo)}" alt=""></div>` : ''}
+      <div class="gissuer">${esc(tx(obj.cardTitle))}</div>
+      ${obj.subheader ? `<div class="gsub">${esc(tx(obj.subheader))}</div>` : ''}
+      <h2 class="gheader">${esc(tx(obj.header))}</h2>
+      ${bc ? `<div class="gbar">${barcodeSVG(bc)}</div>${bc.alternateText ? `<div class="galt">${esc(bc.alternateText)}</div>` : ''}` : ''}
+      ${rowsMarkup}
+    </div>
+    ${hero ? `<img class="ghero" src="${esc(hero)}" alt="${esc(tx(obj.heroImage?.contentDescription))}">` : ''}
+    <div class="glow${hero ? '' : ' nohero'}">
+      ${modules}
+      ${actions ? `<div class="ggroup">${actions}</div>` : ''}
+      ${details.length ? `<div class="ggroup">${details.map(t => `<div class="gdet"><small>${esc(t.header)}</small><b>${esc(t.body)}</b></div>`).join('')}</div>` : ''}
+      <div class="ggroup"><button type="button" class="grow2" data-settings="open">${ic('gear')}<span><b>Pass settings</b></span></button></div>
+      <p class="gfine">The pass provider or merchant is responsible for the info on this pass and may send you notifications. Contact them with any questions.</p>
+    </div>
+    <div class="gsettings" aria-hidden="true">
+      <div class="gbarx"><button type="button" data-settings="close" aria-label="Back">${ic('back')}</button></div>
+      <h2 class="gstitle">Pass settings</h2>
+      <div class="ggroup">
+        <div class="gtog"><span><b>Use across Google</b><small>See your pass in places like Maps and more</small></span><i class="on"></i></div>
+        <div class="gtog"><span><b>Get notifications</b><small>Alerts for pass updates and nearby notifications</small></span><i class="on"></i></div>
+        <div class="gtog"><span><b>Pass can't be shared</b><small>Learn more about sharing with Google Wallet</small></span></div>
+      </div>
+      <div class="ggroup"><div class="grow2">${ic('archive')}<span><b>Archive</b></span></div><div class="grow2">${ic('trash')}<span><b>Remove</b></span></div></div>
+      <p class="gfine">Mock screen: Wallet draws this page itself, you can't customize it.</p>
+    </div>`;
   $('pass').innerHTML = `<div class="vmode" role="group" aria-label="Value-added modules preview">
-      <button type="button" data-vm="one" class="${vamMode === 'one' ? 'on' : ''}">1 module (shows on the front)</button>
-      <button type="button" data-vm="all" class="${vamMode === 'all' ? 'on' : ''}">All ${vams.length} modules (details list)</button></div>`
-    + card + front
-    + (app ? `<a class="gapp" ${appHref ? `href="${esc(appHref)}" target="_blank" rel="noopener"` : ''}>${esc(tx(app.displayText) || 'Open app')}</a>` : '')
-    + list
-    + (texts.length ? `<div class="gsec"><h4>Details</h4><div class="dlist">${texts.map(t => `<div class="ditem"><div class="l">${esc(t.header)}</div><div class="v">${esc(t.body)}</div></div>`).join('')}</div></div>` : '')
-    + (links.length ? `<div class="gsec"><h4>Links</h4><div class="dlist">${links.map(l => { const h = safeHref(l.uri); return `<a class="dlink" ${h ? `href="${esc(h)}" target="_blank" rel="noopener"` : ''}>${esc(l.description || l.uri)} <span aria-hidden="true">↗</span></a>`; }).join('')}</div></div>` : '');
+      <button type="button" data-vm="one" class="${vamMode === 'one' ? 'on' : ''}">1 module</button>
+      <button type="button" data-vm="all" class="${vamMode === 'all' ? 'on' : ''}">All ${vams.length} modules</button></div>
+    <div class="gphone" style="--bg:${bg};--fg:${fg};--tint:${tint}"><div class="gscroll">${screen}</div></div>`;
   $('json').textContent = JSON.stringify(cur.data, null, 2);
   $('docName').textContent = cur.name;
   $('dlName').textContent = cur.name;
