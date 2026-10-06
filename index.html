@@ -51,7 +51,7 @@ button,select{font:inherit;color:inherit}
 .picker button{position:relative}.picker button:has(.tab-x){padding-right:30px}
 .tab-x{position:absolute;top:4px;right:6px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:15px;line-height:1;color:var(--muted);background:#2d2e32}
 .tab-x:hover{color:#fff;background:#45464c}
-.hero.three{max-width:1100px}.hero.three .picker{flex-basis:100%;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}.hero.three .dl{flex:0 0 300px}
+.hero.three{max-width:1100px}.hero.three .picker{flex-basis:100%;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}.hero.three .dl{flex:0 0 300px}
 .picker .pt small{display:block;font-size:11.5px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dl{display:flex;align-items:center;gap:10px;border:0;border-radius:16px;padding:12px 18px;background:var(--accent);color:#fff;cursor:pointer;font:inherit;text-align:left;box-shadow:0 6px 18px #3b8cff55;flex:0 0 250px;min-width:0}.dl span{min-width:0}
 .dl:hover{background:#2f7cf0}.dl:disabled{opacity:.6;cursor:progress}
@@ -284,15 +284,23 @@ button,select{font:inherit;color:inherit}
     <section class="inspector" id="inspector" hidden aria-live="polite"></section>
     <div class="dropzone" id="dropzone" hidden><div>Drop your <b>.pkpasstemplate</b> here (a <b>.zip</b> or <b>pass.json</b> works too)</div></div>
     <div id="chooser"></div>
-    <div class="hero">
-      <div class="picker" id="picker" role="tablist" aria-label="Template" style="--tabs:2">
-        <button role="tab" data-pass="membership" class="on" aria-selected="true">
+    <div class="hero three">
+      <div class="picker" id="picker" role="tablist" aria-label="Template" style="--tabs:4">
+        <button role="tab" data-pass="membershipAlt" class="on" aria-selected="true">
+          <span class="thumb" style="background-image:url('templates/AAA%20Membership%20Card%20(Alternative).pkpasstemplate/artwork@2x.png')"></span>
+          <span class="pt"><b>Membership</b><small>Alternative</small></span>
+        </button>
+        <button role="tab" data-pass="insuranceAlt" aria-selected="false">
+          <span class="thumb" style="background-image:url('templates/AAA%20Insurance%20Card%20(Alternative).pkpasstemplate/artwork@2x.png')"></span>
+          <span class="pt"><b>Insurance</b><small>Alternative</small></span>
+        </button>
+        <button role="tab" data-pass="membership" aria-selected="false">
           <span class="thumb" style="background-image:url('templates/AAA%20Membership%20Card.pkpasstemplate/artwork@2x.png')"></span>
-          <span class="pt"><b>Membership</b><small>AAA Membership Card</small></span>
+          <span class="pt"><b>Membership</b><small>Original</small></span>
         </button>
         <button role="tab" data-pass="insurance" aria-selected="false">
           <span class="thumb" style="background-image:url('templates/AAA%20Insurance%20Card.pkpasstemplate/artwork@2x.png')"></span>
-          <span class="pt"><b>Insurance</b><small>AAA Insurance Card</small></span>
+          <span class="pt"><b>Insurance</b><small>Original</small></span>
         </button>
       </div>
       <button id="download" class="dl" type="button">
@@ -379,9 +387,10 @@ const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt
 const INF = Infinity;
 
 const DEFAULTS = {
+  membershipAlt: 'AAA Membership Card (Alternative).pkpasstemplate',
+  insuranceAlt: 'AAA Insurance Card (Alternative).pkpasstemplate',
   membership: 'AAA Membership Card.pkpasstemplate',
   insurance: 'AAA Insurance Card.pkpasstemplate'
-
 };
 
 /* ---------- Apple limits (Wallet docs, Pass Designer, HIG) ---------- */
@@ -1028,7 +1037,7 @@ function closeImport(key){
   Object.values(entry.assets).forEach(u => URL.revokeObjectURL(u));
   imports = imports.filter(x => x !== entry);
   renderImportTabs();
-  if(state.key === key) loadDefault('membership');
+  if(state.key === key) loadDefault('membershipAlt');
 }
 function renderImportTabs(){
   const picker = $('picker'); picker.querySelectorAll('[data-pass^="imp:"]').forEach(b => b.remove());
@@ -1113,10 +1122,10 @@ function simRender(entry){
 }
 let simCards = [], simExpired = false, simFromExpired = false;
 async function simBuildStack(){
-  const keys = ['membership', 'insurance'].concat(imports.map(x => 'imp:' + x.id));
-  const sel = keys.includes(state.key) ? state.key : 'membership';
+  const keys = ['membershipAlt', 'insuranceAlt', 'membership', 'insurance'].concat(imports.map(x => 'imp:' + x.id));
+  const sel = keys.includes(state.key) ? state.key : 'membershipAlt';
   const order = keys.filter(k => k !== sel).concat(sel);
-  const aaa = await Promise.all(order.map(async k => ({key: k, ...simRender(await simEntry(k)), label: k.startsWith('imp:') ? importById(k).name.replace(/\.pkpasstemplate$/i, '') : k === 'membership' ? 'Membership' : 'Insurance'})));
+  const aaa = await Promise.all(order.map(async k => ({key: k, ...simRender(await simEntry(k)), label: k.startsWith('imp:') ? importById(k).name.replace(/\.pkpasstemplate$/i, '') : ({membershipAlt:'Membership (Alternative)', insuranceAlt:'Insurance (Alternative)', membership:'Membership', insurance:'Insurance'})[k]})));
   simCards = [{mock: true, name: 'Credit Card', color: 'linear-gradient(135deg,#3a3a3c,#1c1c1e)', meta: '•••• 4021'},
               {mock: true, name: 'Rewards Card', color: '#30b650', meta: '1,250 pts'}].concat(aaa);
   const front = simCards.length - 1;                  // selected template is last (front)
@@ -1226,8 +1235,8 @@ document.querySelector('.proposal').addEventListener('click', async e => {
   const dir = b.dataset.tplDl || b.dataset.tplOpen, was = b.textContent;
   b.disabled = true; b.textContent = 'Loading…';
   try{
-    const list = await bundledFiles(dir);
-    if(b.dataset.tplOpen){ await importList(list); window.scrollTo({top: 0, behavior: 'smooth'}); }
+    const list = b.dataset.tplOpen ? null : await bundledFiles(dir);
+    if(b.dataset.tplOpen){ const key = Object.keys(DEFAULTS).find(k => DEFAULTS[k] === dir); await loadDefault(key); window.scrollTo({top: 0, behavior: 'smooth'}); }
     else{
       const zip = new JSZip(), folder = zip.folder(dir);
       list.forEach(x => folder.file(x.file.name, x.file));
@@ -1260,7 +1269,7 @@ $('download').addEventListener('click', async () => {
   }catch(e){ showError('The download didn\'t work (' + e.message + ').'); }
   finally{ btn.disabled = false; label.textContent = was; }
 });
-loadDefault('membership');
+loadDefault('membershipAlt');
 </script>
 </body>
 </html>
