@@ -66,10 +66,20 @@ a{color:#6cb2ff}
 .gapp{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px 0 0;border-radius:999px;padding:11px 16px;background:#2d2f31;color:#e8eaed;font-size:14px;font-weight:500;text-decoration:none}
 .gsec{margin-top:18px}
 .gsec h4{margin:0 2px 8px;font:500 14px Roboto,system-ui,sans-serif;color:#e8eaed}
-.vam{display:flex;align-items:center;gap:12px;background:#2d2f31;border-radius:16px;padding:10px 12px;margin-bottom:8px;color:#e8eaed;text-decoration:none}
-.vam img{width:52px;height:52px;border-radius:12px;object-fit:cover;flex:none}
-.vam b{display:block;font-size:14px;font-weight:500}.vam small{display:block;font-size:12.5px;color:#bdc1c6;margin-top:2px}
-.vam .chev{margin-left:auto;color:#9aa0a6}
+.vam{display:flex;align-items:center;gap:14px;background:#2d2f31;border-radius:18px;padding:14px 14px 14px 18px;margin-bottom:10px;color:#e8eaed;text-decoration:none}
+.vam img{width:72px;height:72px;border-radius:12px;object-fit:cover;flex:none;margin-left:auto}
+.vam b{display:block;font-size:15px;font-weight:600;line-height:1.35}.vam small{display:block;font-size:13px;color:#e8eaed;margin-top:3px;line-height:1.35}
+.gfront{background:#1f2023;border-radius:0 0 22px 22px;padding:16px 14px 6px;margin-top:-22px;padding-top:34px}
+.gfront h4{display:flex;justify-content:space-between;margin:0 4px 12px;font:500 14px Roboto,system-ui,sans-serif;color:#e8eaed}
+.vmode{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+.vmode button{border:1px solid var(--line);background:#26272b;color:var(--muted);border-radius:999px;padding:5px 12px;font-size:12px;cursor:pointer}
+.vmode button.on{background:#2b3b55;border-color:var(--accent);color:#fff}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:10px}
+.shots figure{margin:0}.shots img{width:100%;border-radius:12px;border:1px solid var(--line);display:block;background:#000}
+.shots figcaption{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.4}
+.parts{display:grid;gap:8px;margin-top:10px}.parts figure{margin:0;display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center}
+.parts img{width:150px;border-radius:8px;display:block}.parts figcaption{font-size:12px;color:#cfd0d6;line-height:1.4}
+.src{font-size:12px;line-height:1.6;margin:8px 0 0;padding-left:18px}.src a{color:#6cb2ff}
 .vam.trunc{outline:1px dashed var(--bad)}
 .dlist{background:#2d2f31;border-radius:16px;padding:4px 14px}
 .ditem{padding:10px 0;border-bottom:1px solid #3c4043}.ditem:last-child{border-bottom:0}
@@ -140,15 +150,39 @@ details summary{cursor:pointer;font-size:13px;color:#6cb2ff;margin-top:6px}
       </section>
       <section>
         <div class="panel">
+          <h3>Google's "featured action": examples</h3>
+          <p>Google has no feature literally called "featured actions". There are two real things:</p>
+          <p><b>1. App link button</b> (<code>appLinkData</code>): exactly <b>1 per pass</b>, label ≤ 30 chars, <b>no icon</b> (Google marks the logo, title and description as not supported). If an Android app is set it opens the app, otherwise the web link. That's what Badge's "1 Featured Action, ~30 chars, Android package wins" describes: it's Badge's name for this button. Ours is "Open Auto Club app".</p>
+          <p><b>2. Value-added modules</b> (<code>valueAddedModuleData</code>): the ones with <b>your own text and image</b>. If the pass has <b>exactly one</b>, it shows on the front under the hero image. Add more and they all move to a list in the details (up to 15). These screenshots are from Google's docs:</p>
+          <div class="shots">
+            <figure><img src="google/img/docs/vam-single.png" alt="Google Wallet pass with one value-added module card under the hero image" loading="lazy"><figcaption>1 module: on the front, under the hero</figcaption></figure>
+            <figure><img src="google/img/docs/vam-list.png" alt="Google Wallet details page listing several value-added module cards" loading="lazy"><figcaption>2+ modules: a list in the details</figcaption></figure>
+          </div>
+          <div class="parts">
+            <figure><img src="google/img/docs/vam-header.png" alt="Module with the header highlighted" loading="lazy"><figcaption><b>header</b> (required): bold title, 60 chars max, longer gets cut</figcaption></figure>
+            <figure><img src="google/img/docs/vam-body.png" alt="Module with the body highlighted" loading="lazy"><figcaption><b>body</b> (optional): one line under it, 50 chars max</figcaption></figure>
+            <figure><img src="google/img/docs/vam-image.png" alt="Module with the image highlighted" loading="lazy"><figcaption><b>image</b> (optional): your own picture, shown square (1:1, resized to fit). That's the "icon".</figcaption></figure>
+          </div>
+          <p><b>uri</b> (required) is where a tap goes: a web link or a deep link (our Roadside one uses <code>tel:</code>). <b>sortIndex</b> picks which comes first (lower wins), so with one slot on the front, it decides what members see. <b>viewConstraints.displayInterval</b> sets start/end dates, handy for "Renew now" only near expiry. Modules can live on the class (everyone) or the object (one member).</p>
+          <p>Use the switch above the card to see both setups with our AAA modules.</p>
+          <p class="note">Screenshots © Google, from the Google Wallet developer docs (CC BY 4.0).</p>
+          <ul class="src">
+            <li><a href="https://developers.google.com/wallet/generic/use-cases/value-added-opportunities" target="_blank" rel="noopener">Google: Value Added Opportunities (generic passes)</a>: the 1-on-front rule, 15 modules, limits</li>
+            <li><a href="https://developers.google.com/wallet/reference/rest/v1/ValueAddedModuleData" target="_blank" rel="noopener">Google: ValueAddedModuleData API reference</a>: fields, 10 per object/class</li>
+            <li><a href="https://developers.google.com/wallet/reference/rest/v1/AppLinkData" target="_blank" rel="noopener">Google: AppLinkData API reference</a>: app link button, 30 chars</li>
+            <li><a href="https://help.trybadge.com/en/articles/16764919-featured-actions" target="_blank" rel="noopener">Badge: Featured Actions</a>: Badge's own product; their 1 button maps to Google's app link button</li>
+          </ul>
+        </div>
+        <div class="panel">
           <h3>Featured actions: Apple vs Google</h3>
           <p>Google Wallet doesn't have Apple's fixed “Featured Actions”. The closest things are <b>value-added modules</b> (custom tappable cards), the <b>app link button</b>, and the <b>links module</b> in the details. Unlike Apple, you write the text and pick the image yourself.</p>
           <table class="cmp">
             <tr><th></th><th>Apple Wallet (iOS 27)</th><th>Google Wallet</th></tr>
-            <tr><td>How many</td><td>Max 2</td><td>Value-added modules: up to 10 per object in the API reference (the guide says up to 15 shown). Links: 10 from class + 10 from object.</td></tr>
+            <tr><td>How many</td><td>Max 2</td><td><b>1 shows on the front.</b> Add more and they move to a list in the pass details: up to 15 shown (guide; the API reference says 10 per object/class). App link button: exactly 1 (this is what Badge calls the featured action). Links: 10 + 10.</td></tr>
             <tr><td>Custom text</td><td>No: Wallet sets the label from the type</td><td>Yes: header (60 chars) + body (50 chars). App link button text: 30 chars.</td></tr>
             <tr><td>Icon</td><td>No: system SF Symbol per type</td><td>Yes: your own image, shown 1:1 (square)</td></tr>
             <tr><td>Destination</td><td>Fixed types: call, place (Maps ID), https links</td><td>Any web link or deep link, including tel:</td></tr>
-            <tr><td>Where it shows</td><td>Cards under the pass</td><td>Pass details; a single module also shows on the front</td></tr>
+            <tr><td>Where it shows</td><td>Cards under the pass</td><td>Exactly 1 module: on the front, under the hero image. 2 or more: a list in the details.</td></tr>
             <tr><td>Ordering / timing</td><td>Order in the array</td><td><code>sortIndex</code> (lower first) and <code>viewConstraints.displayInterval</code> (start/end time)</td></tr>
           </table>
           <details><summary>How to add a value-added module (JSON)</summary>
@@ -236,6 +270,8 @@ function barcodeSVG(bc){
   return `<svg viewBox="0 0 240 ${H}" width="240" height="${H}" fill="#000" role="img" aria-label="${esc(bc.type)} barcode preview">${out}</svg>`;
 }
 
+let vamMode = 'one';
+document.addEventListener('click', e => { const b = e.target.closest('[data-vm]'); if(b){ vamMode = b.dataset.vm; render(); } });
 function render(){
   const {genericClass: cls, genericObject: obj} = cur.data;
   const bg = safeColor(obj.hexBackgroundColor || cls?.hexBackgroundColor), fg = textColorFor(bg);
@@ -253,13 +289,20 @@ function render(){
     ${bc ? `<div class="gbar">${barcodeSVG(bc)}${bc.alternateText ? `<small>${esc(bc.alternateText)}</small>` : ''}</div>` : ''}
     ${hero ? `<img class="ghero" src="${esc(hero)}" alt="${esc(tx(obj.heroImage?.contentDescription))}">` : '<div class="gpad"></div>'}
   </div>`;
-  const vamHTML = vams.map(v => {
+  const vamCard = v => {
     const h = tx(v.header), b = tx(v.body), over = h.length > LIMITS.vamHeader || b.length > LIMITS.vamBody, href = safeHref(v.uri);
-    return `<a class="vam${over ? ' trunc' : ''}" ${href ? `href="${esc(href)}" target="_blank" rel="noopener"` : ''} title="${over ? 'Too long: Google truncates this' : esc(v.uri)}">${imgSrc(v.image?.sourceUri?.uri) ? `<img src="${esc(imgSrc(v.image.sourceUri.uri))}" alt="">` : ''}<span><b>${esc(h.slice(0, LIMITS.vamHeader))}</b>${b ? `<small>${esc(b.slice(0, LIMITS.vamBody))}</small>` : ''}</span><span class="chev" aria-hidden="true">›</span></a>`;
-  }).join('');
-  $('pass').innerHTML = card
+    return `<a class="vam${over ? ' trunc' : ''}" ${href ? `href="${esc(href)}" target="_blank" rel="noopener"` : ''} title="${over ? 'Too long: Google truncates this' : esc(v.uri)}"><span><b>${esc(h.slice(0, LIMITS.vamHeader))}</b>${b ? `<small>${esc(b.slice(0, LIMITS.vamBody))}</small>` : ''}</span>${imgSrc(v.image?.sourceUri?.uri) ? `<img src="${esc(imgSrc(v.image.sourceUri.uri))}" alt="">` : ''}</a>`;
+  };
+  const shown = vamMode === 'one' ? vams.slice(0, 1) : vams;
+  const sectionTitle = `Recommendations from ${esc(cls?.issuerName || 'AAA')}`;
+  const front = shown.length === 1 ? `<div class="gfront"><h4>${sectionTitle}</h4>${vamCard(shown[0])}</div>` : '';
+  const list = shown.length > 1 ? `<div class="gsec"><h4>${sectionTitle} <small style="color:#9aa0a6;font-weight:400">· ${shown.length} modules, shown as a list in the pass details</small></h4>${shown.map(vamCard).join('')}</div>` : '';
+  $('pass').innerHTML = `<div class="vmode" role="group" aria-label="Value-added modules preview">
+      <button type="button" data-vm="one" class="${vamMode === 'one' ? 'on' : ''}">1 module (shows on the front)</button>
+      <button type="button" data-vm="all" class="${vamMode === 'all' ? 'on' : ''}">All ${vams.length} modules (details list)</button></div>`
+    + card + front
     + (app ? `<a class="gapp" ${appHref ? `href="${esc(appHref)}" target="_blank" rel="noopener"` : ''}>${esc(tx(app.displayText) || 'Open app')}</a>` : '')
-    + (vams.length ? `<div class="gsec"><h4>Value-added modules</h4>${vamHTML}</div>` : '')
+    + list
     + (texts.length ? `<div class="gsec"><h4>Details</h4><div class="dlist">${texts.map(t => `<div class="ditem"><div class="l">${esc(t.header)}</div><div class="v">${esc(t.body)}</div></div>`).join('')}</div></div>` : '')
     + (links.length ? `<div class="gsec"><h4>Links</h4><div class="dlist">${links.map(l => { const h = safeHref(l.uri); return `<a class="dlink" ${h ? `href="${esc(h)}" target="_blank" rel="noopener"` : ''}>${esc(l.description || l.uri)} <span aria-hidden="true">↗</span></a>`; }).join('')}</div></div>` : '');
   $('json').textContent = JSON.stringify(cur.data, null, 2);
@@ -278,7 +321,7 @@ function renderLimits({obj, cls, vams, texts, links, app}){
   $('limits').innerHTML = [
     `<li><span>Required fields<small>id, classId, cardTitle and header. ${req.length ? 'Missing: ' + req.join(', ') : 'All present.'}</small></span><span class="badge ${req.length ? 'over' : 'full'}">${req.length ? 'missing' : 'ok'}</span></li>`,
     `<li><span>Card rows<small>1, 2 or 3 items per row (this pass: ${itemsPerRow.join(' + ') || 'none'}). Google recommends at most 2 rows.</small></span>${badge(rows.length, LIMITS.rowsRecommended, true)}</li>`,
-    `<li><span>Value-added modules<small>Max 10 per object (API reference; the guide says 15 shown). Header ≤ 60, body ≤ 50 chars${longV ? `, ${longV} too long` : ''}.</small></span>${badge(vams.length, LIMITS.vamObject)}</li>`,
+    `<li><span>Value-added modules<small>Only 1 module goes on the front; 2+ become a list in the details (15 shown max; API reference says 10 per object). Header ≤ 60, body ≤ 50 chars, image 1:1${longV ? `, ${longV} too long` : ''}.</small></span>${badge(vams.length, 15)}</li>`,
     `<li><span>App link button<small>One button; displayText ≤ 30 chars (${appLen}).</small></span><span class="badge ${appLen > LIMITS.appText ? 'over' : 'full'}">${app ? '1/1' : '0/1'}</span></li>`,
     `<li><span>Text modules<small>10 from the class + 10 from the object are shown (the template guide says 20 each).</small></span>${badge(texts.length, 20)}</li>`,
     `<li><span>Links module<small>10 from the class + 10 from the object.</small></span>${badge(links.length, 20)}</li>`,
