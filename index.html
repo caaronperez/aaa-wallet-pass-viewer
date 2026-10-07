@@ -128,7 +128,8 @@ button,select{font:inherit;color:inherit}
 .xl{color:#6cb2ff;text-decoration:none;word-break:break-all}.xl:hover{text-decoration:underline}
 .jl{border:0;background:none;padding:0;color:#6cb2ff;cursor:pointer;font:inherit;text-align:left}.jl:hover{text-decoration:underline}
 .act.empty{border:1px dashed #4a4b50;background:transparent;color:var(--dim);font-size:11px;align-items:center;justify-content:center;text-align:center}
-.hl{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.hl{outline:2px solid rgba(251,188,4,.85);outline-offset:2px;border-radius:6px;box-shadow:0 0 0 5px rgba(251,188,4,.14);transition:outline-color .2s,box-shadow .2s}
+.hl-face{outline-offset:-2px;box-shadow:inset 0 0 0 5px rgba(251,188,4,.12);border-radius:inherit}
 /* Inspector */
 .inspector{position:absolute;left:18px;top:14px;width:380px;max-height:calc(100vh - 100px);overflow:auto;background:rgba(46,47,51,.97);backdrop-filter:blur(20px);border:1px solid #45464c;border-radius:14px;box-shadow:0 18px 50px #000a;z-index:10;padding:0 0 14px}
 .inspector[hidden]{display:none}
@@ -800,7 +801,7 @@ $('sidebar').addEventListener('click', e => {
   state.sel = state.sel === b.dataset.sel ? null : b.dataset.sel;
   renderSidebar();
   state.sel ? openInspector(state.sel, true) : closeInspector();
-  highlight();
+  highlight(true);
 });
 
 /* ---------- Inspector (read-only) ---------- */
@@ -950,14 +951,32 @@ function fieldCard(f, i, mx){
   return `<div class="fieldcard ${over?'over':''}"><h4><span>${esc(f.label||'(no label)')}</span>${over?'<span class="badge over">not displayed</span>':''}</h4>${kv([['Key',f.key],['Label',f.label],['Value',f.value],['Alignment',f.textAlignment],['Displays as', f.dateStyle ? displayValue(f) + '  (Wallet formats per the viewer\'s locale)' : undefined],['Ignores time zone',f.ignoresTimeZone],['Attributed',f.attributedValue],['Date style',f.dateStyle],['Change message',f.changeMessage]].filter(r=>r[1]!==undefined || ['Key','Label','Value'].includes(r[0])))}</div>`;
 }
 function closeInspector(){ $('inspector').hidden = true; }
-function highlight(){
-  document.querySelectorAll('.hl').forEach(n => n.classList.remove('hl'));
+function highlight(fromMenu){
+  document.querySelectorAll('.hl').forEach(n => n.classList.remove('hl', 'hl-face'));
   const s = state.sel || '';
-  let sel = null;
-  if(s.startsWith('field:')){ const [, g, i] = s.split(':'); sel = `#card27 [data-f="${g}:${i}"]`; }
-  else if(s.startsWith('ffield:')){ const [, g, i] = s.split(':'); sel = `#card26 [data-f="${g}:${i}"]`; }
-  else if(s === 'actions') sel = '#acts27 .act';
-  if(sel) document.querySelectorAll(sel).forEach(n => n.classList.add('hl'));
+  const [kind, g, i] = s.split(':');
+  const MAP = {
+    identity: '#front27 .face-in, #front26 .face-in',
+    style: '#front27 .face-in, #front26 .face-in',
+    images: '#card27 .art, #card27 .plogo, #card26 .g-top img, #card26 .g-prim img',
+    barcode: '#card27 .bcpanel, #card26 .bcpanel',
+    actions: '#acts27 .act',
+    fields: '#front27 [data-f], #front26 [data-f]',
+    group: `#card27 [data-f^="${g}:"]`,
+    field: `#card27 [data-f="${g}:${i}"]`,
+    fgroup: `#card26 [data-f^="${g}:"]`,
+    ffield: `#card26 [data-f="${g}:${i}"]`
+  };
+  const els = MAP[kind] ? [...document.querySelectorAll(MAP[kind])] : [];
+  els.forEach(n => n.classList.add('hl', ...(n.classList.contains('face-in') ? ['hl-face'] : [])));
+  if(!fromMenu || !els.length) return;
+  const onBack = g === 'backFields';
+  if(['group', 'field', 'fgroup', 'ffield', 'images', 'barcode', 'fields', 'identity', 'style'].includes(kind)){
+    const cards = kind === 'fgroup' || kind === 'ffield' ? ['26'] : kind === 'group' || kind === 'field' ? ['27'] : ['27', '26'];
+    cards.forEach(c => { if($('card' + c).classList.contains('flip') !== onBack) flip(c, onBack); });
+  }
+  const r = els[0].getBoundingClientRect();
+  if(r.bottom < 60 || r.top > innerHeight - 40) els[0].scrollIntoView({block: 'center', behavior: 'smooth'});
 }
 
 /* ---------- Front / back + drag rotation ---------- */
