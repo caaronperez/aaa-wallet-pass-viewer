@@ -11,7 +11,7 @@
       "_id" : "6D898A90-146D-4F88-82E6-12A07BE4AA17",
       "identifier" : "memberBenefits",
       "type" : "membershipBenefits",
-      "url" : "https:\/\/www.ace.aaa.com\/membership.html?wallet=benefits&prompt=roadside"
+      "url" : "https:\/\/autoclubapp.page.link\/wallet-benefits"
     },
     {
       "_id" : "A5C9E2AB-4F31-4EE4-9A7F-5FCAE87EDE59",
@@ -42,7 +42,7 @@
       },
       {
         "_id" : "1FAB5755-4D26-4DC9-BACD-6B5023DEE556",
-        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/membership.html?wallet=benefits&amp;prompt=roadside'>Explore all membership benefits<\/a>\n<a href='https:\/\/www.ace.aaa.com\/discounts.html'>Show this card at participating businesses<\/a>",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/membership.html'>Explore all membership benefits<\/a>\n<a href='https:\/\/www.ace.aaa.com\/discounts.html'>Show this card at participating businesses<\/a>",
         "key" : "memberBenefits",
         "label" : "Member benefits & discounts",
         "value" : "Explore all membership benefits\nShow this card at participating businesses"
@@ -179,7 +179,7 @@
       },
       {
         "_id" : "1FAB5755-4D26-4DC9-BACD-6B5023DEE556",
-        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/membership.html?wallet=benefits&amp;prompt=roadside'>Explore all membership benefits<\/a>\n<a href='https:\/\/www.ace.aaa.com\/discounts.html'>Show this card at participating businesses<\/a>",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/membership.html'>Explore all membership benefits<\/a>\n<a href='https:\/\/www.ace.aaa.com\/discounts.html'>Show this card at participating businesses<\/a>",
         "key" : "memberBenefits",
         "label" : "Member benefits & discounts",
         "value" : "Explore all membership benefits\nShow this card at participating businesses"
