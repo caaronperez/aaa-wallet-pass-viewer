@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script src="gate.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AAA Pass Template Viewer</title>
@@ -172,6 +173,18 @@ button,select{font:inherit;color:inherit}
 .proposal-open{flex:none;background:var(--accent);color:#fff;text-decoration:none;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600}
 .proposal-img img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid #2c2d32}
 .proposal-grid{display:grid;gap:22px}
+.todo{max-width:1100px;margin:22px auto 0;background:#1b1c20;border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+.todo h2{margin:0 0 4px;font-size:19px}.todo h2 small{font-size:12px;font-weight:700;letter-spacing:.06em;color:#2b1d00;background:#ffd27a;border-radius:999px;padding:3px 9px;margin-left:8px;vertical-align:3px}
+.todo>p{margin:0 0 14px;color:var(--muted);font-size:13px;line-height:1.5}
+.todo details{border-top:1px solid var(--line);padding:12px 0 2px}
+.todo summary{cursor:pointer;font-weight:600;font-size:14.5px}
+.todo h3{font-size:13px;margin:14px 0 6px;color:#fff}
+.todo p,.todo li{font-size:13px;line-height:1.55;color:#cfd0d6}
+.todo ul,.todo ol{margin:6px 0 4px;padding-left:20px}
+.todo .qa{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:8px 16px;margin-top:10px;font-size:13px;line-height:1.5}
+.todo .qa b{color:#fff}.todo .qa span{color:#cfd0d6}
+.todo code{font-size:12px}
+@media (max-width:700px){.todo .qa{grid-template-columns:1fr}.todo .qa b{margin-top:6px}}
 .proposal figure{margin:0}
 .proposal figcaption{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 2px 10px;font-size:15px}
 .fig-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
@@ -341,14 +354,46 @@ button,select{font:inherit;color:inherit}
         <figure>
           <figcaption><b>AAA Membership (alternative)</b><span class="fig-actions"><button type="button" data-tpl-dl="AAA Membership Card (Alternative).pkpasstemplate">Download template</button><button type="button" data-tpl-open="AAA Membership Card (Alternative).pkpasstemplate">Open in viewer</button><a href="proposal/aaa-membership-alternative@full.png" target="_blank" rel="noopener">Full size ↗</a></span></figcaption>
           <a href="proposal/aaa-membership-alternative@full.png" target="_blank" rel="noopener" class="proposal-img"><img src="proposal/aaa-membership-alternative.jpg" loading="lazy" width="2400" height="1866"
-            alt="AAA Membership (alternative): the membership card on AAA blue, with the roadside photo fading into navy, “Membership Card · Plan: Premier” in the header, a barcode, member, valid-thru and member-since fields with sky-blue labels, a roadside footer, Call and View Membership Benefits actions, and the color palette. Below: collapsed card, Lock Screen suggestion, Pass Details and eight numbered notes."></a>
+            alt="AAA Membership (alternative): the membership card in the app's blues, with the roadside photo fading into primary blue, “Membership Card · Plan: Premier” in the header, a barcode, member, valid-thru and member-since fields, a roadside footer, View Membership Benefits and Get Directions actions, the color palette, and the Auto Club app's Membership Benefits screen marked proposal, not final. Below: collapsed card, Lock Screen suggestion, Pass Details and eight numbered notes."></a>
         </figure>
         <figure>
           <figcaption><b>AAA Insurance (alternative)</b><span class="fig-actions"><button type="button" data-tpl-dl="AAA Insurance Card (Alternative).pkpasstemplate">Download template</button><button type="button" data-tpl-open="AAA Insurance Card (Alternative).pkpasstemplate">Open in viewer</button><a href="proposal/aaa-insurance-alternative@full.png" target="_blank" rel="noopener">Full size ↗</a></span></figcaption>
           <a href="proposal/aaa-insurance-alternative@full.png" target="_blank" rel="noopener" class="proposal-img"><img src="proposal/aaa-insurance-alternative.jpg" loading="lazy" width="2400" height="1866"
-            alt="AAA Insurance (alternative): the insurance card on AAA blue, with the coastal sunset photo fading into dusk navy, “CA Evidence of Liability · Insurance Card” in the header, name ensured, policy number and effective-period fields with sunset-amber labels, the company in the footer, Call (Roadside Assistance) and Get Directions actions, and the color palette. Below: collapsed card, Lock Screen suggestion, Pass Details and eight numbered notes."></a>
+            alt="AAA Insurance (alternative): the insurance card with the coastal sunset photo fading into primary blue, “CA Evidence of Liability · Auto Insurance Card” in the header, name ensured, policy number and effective-period fields, the company in the footer, View Membership Benefits and Get Directions actions, the color palette, and the Auto Club app's Membership Benefits screen marked proposal, not final. Below: collapsed card, Lock Screen suggestion, Pass Details and eight numbered notes."></a>
         </figure>
       </div>
+    </section>
+    <section class="todo" aria-labelledby="todoTitle">
+      <h2 id="todoTitle">Next steps <small>TODO</small></h2>
+      <p>Stuff we still need to figure out before these passes go live. Short version: the pass is a signed file, so anything that changes per member or over time has to come from our server.</p>
+      <details open>
+        <summary>“Get Directions”: how the branch (Maps place ID) gets set and updated</summary>
+        <div class="qa">
+          <b>What's in the pass</b><span><code>{"type": "place", "identifier": "nearestBranch", "placeIdentifier": "I71B28B9C6AC9C7EF"}</code>. <code>placeIdentifier</code> is an Apple Maps Place ID (the sample is one AAA branch). <code>identifier</code> is just our own name for the action. It pairs with the back field that has the same key (“Your AAA branch”) and never needs to change.</span>
+          <b>Can members change it in Wallet?</b><span>No. Neither the member nor Wallet can edit it, and Pass Designer only sets it at design time. The pass is signed, so the place ID is fixed until we send a new version.</span>
+          <b>Does it need our server?</b><span>Yes. Whatever builds and signs the member's <code>.pkpass</code> (with our Pass Type ID certificate) writes the place ID in when it generates the pass. Updating it later needs the Wallet web service on our side: <code>webServiceURL</code> + <code>authenticationToken</code> in the pass, devices register, we send an APNs push, and Wallet downloads the new signed pass.</span>
+          <b>One for everyone, or per member?</b><span>Per member. Each pass gets one place: the member's home branch, or the branch nearest the address on file. Everyone getting the same branch only makes sense for a demo.</span>
+          <b>Can it follow the phone's location?</b><span>Not live. Wallet doesn't pick a “nearest branch” when you tap; the action always opens the place that's in the pass. Options: (1) update it when the member moves or changes their branch, using a push update; (2) also add up to 10 nearby branches to <code>locations</code> with <code>relevantText</code> so the pass shows up on the Lock Screen near them. That's for relevance only and doesn't change the button.</span>
+          <b>Where do place IDs come from?</b><span>Look them up on the server with the Apple Maps Server API (search for the branch and get its place ID) or MapKit (<code>MKLocalSearch</code>, then check it with <code>MKMapItemRequest</code>). That's how i found the sample one. Store it with each branch record so we don't search for every pass.</span>
+          <b>Keep them valid</b><span>Place IDs are meant to stay stable, but places can merge or move, and Wallet drops the action if the ID doesn't resolve. Re-check stored IDs every so often (Apple can give back a newer ID for an old one) and regenerate affected passes.</span>
+        </div>
+        <h3>To do</h3>
+        <ol>
+          <li>Add a place ID to every branch record (one-time lookup, then refresh now and then).</li>
+          <li>Pass generation: fill <code>placeIdentifier</code> from the member's branch; also fill the matching “Your AAA branch” back field (name, address, phone).</li>
+          <li>Set up the Wallet web service (register, list updated passes, return the latest pass) and push updates when a member's branch changes.</li>
+          <li>Fallback: if a member has no branch, leave Get Directions out (and use the slot for something else) rather than ship an ID that might not work.</li>
+        </ol>
+      </details>
+      <details>
+        <summary>“View Membership Benefits”: opening the app</summary>
+        <p>Right now the action uses <code>https://autoclubapp.page.link/wallet-benefits</code>. The app already claims that domain, so it just opens the app. That domain is old Firebase Dynamic Links, which Google shut down, and people without the app get a “not found” page.</p>
+        <ol>
+          <li>Host an <code>apple-app-site-association</code> file on an AAA domain (for example www.ace.aaa.com) and add <code>applinks:</code> for it to the app.</li>
+          <li>Add an app route that opens the assistant on Membership Benefits, Roadside first (screen above, not final).</li>
+          <li>Point the action at that link. Without the app, it falls back to the membership page on the website.</li>
+        </ol>
+      </details>
     </section>
     <p class="legend">This is a browser copy of the Pass Designer preview, so think of it as a really good mockup. The real Wallet app has the final say on fonts, cut-off text, barcodes and the buttons under the card. Flip a card to see the back, and click anything on the left to see what's in it and what Apple allows.</p>
     <p class="legend tip">Confession: i couldn't get the import button to open a <code>.pkpasstemplate</code> (the Mac treats it like a single file, so the picker greys it out). Easy fix: <b>just drag and drop the template onto this page</b>. A <code>.zip</code> or a plain <code>pass.json</code> works too.</p>
