@@ -1143,8 +1143,10 @@ function simRender(entry){
 }
 let simCards = [], simExpired = false, simFromExpired = false;
 async function simBuildStack(){
-  const keys = ['membershipAlt', 'insuranceAlt', 'membership', 'insurance'].concat(imports.map(x => 'imp:' + x.id));
-  const sel = keys.includes(state.key) ? state.key : 'membershipAlt';
+  // Originals open with just the two originals; proposals (or an import) open with the proposals plus any imported passes.
+  const imported = imports.map(x => 'imp:' + x.id);
+  const keys = ['membership', 'insurance'].includes(state.key) ? ['membership', 'insurance'] : ['membershipAlt', 'insuranceAlt'].concat(imported);
+  const sel = keys.includes(state.key) ? state.key : keys[0];
   const order = keys.filter(k => k !== sel).concat(sel);
   const aaa = await Promise.all(order.map(async k => ({key: k, ...simRender(await simEntry(k)), label: k.startsWith('imp:') ? importById(k).name.replace(/\.pkpasstemplate$/i, '') : ({membershipAlt:'Membership (Alternative)', insuranceAlt:'Insurance (Alternative)', membership:'Membership', insurance:'Insurance'})[k]})));
   simCards = [{mock: true, name: 'Credit Card', color: 'linear-gradient(135deg,#3a3a3c,#1c1c1e)', meta: '•••• 4021'},
