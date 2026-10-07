@@ -8,10 +8,10 @@
   "expirationDate" : "2027-09-15T06:59:00Z",
   "featuredActions" : [
     {
-      "_id" : "6D6E22DA-3A6D-4548-B9E5-129984D36A55",
-      "identifier" : "roadsideAssistance",
-      "type" : "call",
-      "url" : "tel:\/\/18004004222"
+      "_id" : "6D898A90-146D-4F88-82E6-12A07BE4AA17",
+      "identifier" : "memberBenefits",
+      "type" : "membershipBenefits",
+      "url" : "https:\/\/www.ace.aaa.com\/membership.html?wallet=benefits&prompt=roadside"
     },
     {
       "_id" : "A5C9E2AB-4F31-4EE4-9A7F-5FCAE87EDE59",
@@ -39,6 +39,13 @@
         "key" : "roadsideAssistance",
         "label" : "Roadside Assistance · 24\/7",
         "value" : "Call 1-800-400-4222\nOutside CA: 1-800-222-4357"
+      },
+      {
+        "_id" : "1FAB5755-4D26-4DC9-BACD-6B5023DEE556",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/membership.html?wallet=benefits&amp;prompt=roadside'>Explore all membership benefits<\/a>\n<a href='https:\/\/www.ace.aaa.com\/discounts.html'>Show this card at participating businesses<\/a>",
+        "key" : "memberBenefits",
+        "label" : "Member benefits & discounts",
+        "value" : "Explore all membership benefits\nShow this card at participating businesses"
       },
       {
         "_id" : "8AE732FB-6A51-496E-8B11-8AB7E1918B52",
@@ -169,6 +176,13 @@
         "key" : "roadsideAssistance",
         "label" : "Roadside Assistance · 24\/7",
         "value" : "Call 1-800-400-4222\nOutside CA: 1-800-222-4357"
+      },
+      {
+        "_id" : "1FAB5755-4D26-4DC9-BACD-6B5023DEE556",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/membership.html?wallet=benefits&amp;prompt=roadside'>Explore all membership benefits<\/a>\n<a href='https:\/\/www.ace.aaa.com\/discounts.html'>Show this card at participating businesses<\/a>",
+        "key" : "memberBenefits",
+        "label" : "Member benefits & discounts",
+        "value" : "Explore all membership benefits\nShow this card at participating businesses"
       },
       {
         "_id" : "8AE732FB-6A51-496E-8B11-8AB7E1918B52",

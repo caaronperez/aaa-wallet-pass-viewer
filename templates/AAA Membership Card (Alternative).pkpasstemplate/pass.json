@@ -17,16 +17,16 @@
   "expirationDate" : "2027-04-01T06:59:00Z",
   "featuredActions" : [
     {
-      "_id" : "BF2D85CF-916E-475A-9BBE-2553DDD2501A",
-      "identifier" : "roadsideAssistance",
-      "type" : "call",
-      "url" : "tel:\/\/18004004222"
-    },
-    {
       "_id" : "B28682DD-2D79-49A2-85B0-0BC554E8D361",
       "identifier" : "memberBenefits",
       "type" : "membershipBenefits",
-      "url" : "https:\/\/www.ace.aaa.com\/membership.html"
+      "url" : "https:\/\/www.ace.aaa.com\/membership.html?wallet=benefits&prompt=roadside"
+    },
+    {
+      "_id" : "416B1BAF-10E3-438F-A72C-383C6E03F523",
+      "identifier" : "nearestBranch",
+      "placeIdentifier" : "I71B28B9C6AC9C7EF",
+      "type" : "place"
     }
   ],
   "footerBackgroundColor" : "rgb(28,77,166)",
@@ -38,7 +38,7 @@
         "_id" : "3088C545-1DF6-40C8-BCDF-8F6F8874A314",
         "key" : "roadsideFooter",
         "label" : "ROADSIDE",
-        "value" : "ROADSIDE 24\/7 · 1-800-400-4222 · TAP CALL BELOW"
+        "value" : "ROADSIDE 24\/7 · 1-800-400-4222"
       }
     ],
     "backFields" : [
@@ -80,7 +80,7 @@
       },
       {
         "_id" : "C753539A-7AD7-4C4A-B625-6686D5C1F0CE",
-        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/membership.html'>Explore all membership benefits<\/a>\n<a href='https:\/\/www.ace.aaa.com\/discounts.html'>Show this card at participating businesses<\/a>",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/membership.html?wallet=benefits&amp;prompt=roadside'>Explore all membership benefits<\/a>\n<a href='https:\/\/www.ace.aaa.com\/discounts.html'>Show this card at participating businesses<\/a>",
         "key" : "memberBenefits",
         "label" : "Member benefits & discounts",
         "value" : "Explore all membership benefits\nShow this card at participating businesses"
@@ -194,7 +194,7 @@
       },
       {
         "_id" : "C753539A-7AD7-4C4A-B625-6686D5C1F0CE",
-        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/membership.html'>Explore all membership benefits<\/a>\n<a href='https:\/\/www.ace.aaa.com\/discounts.html'>Show this card at participating businesses<\/a>",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/membership.html?wallet=benefits&amp;prompt=roadside'>Explore all membership benefits<\/a>\n<a href='https:\/\/www.ace.aaa.com\/discounts.html'>Show this card at participating businesses<\/a>",
         "key" : "memberBenefits",
         "label" : "Member benefits & discounts",
         "value" : "Explore all membership benefits\nShow this card at participating businesses"
@@ -228,7 +228,7 @@
         "_id" : "3088C545-1DF6-40C8-BCDF-8F6F8874A314",
         "key" : "roadsideFooter",
         "label" : "ROADSIDE",
-        "value" : "ROADSIDE 24\/7 · 1-800-400-4222 · TAP CALL BELOW"
+        "value" : "ROADSIDE 24\/7 · 1-800-400-4222"
       }
     ],
     "headerFields" : [
