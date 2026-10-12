@@ -35,40 +35,33 @@
     ],
     "primaryFields" : [
       {
-        "_id" : "554FCDFC-7749-5C1D-A8FB-141A25CD73A4",
-        "key" : "policyNumber",
-        "label" : "Policy Number",
-        "value" : "CAA000XXXX"
-      }
-    ],
-    "secondaryFields" : [
-      {
         "_id" : "3CDCFF07-4E5F-5443-BD77-2C4A2B064154",
         "key" : "nameEnsured",
         "label" : "Name Ensured",
         "value" : "FULANITO PEREZ"
+      }
+    ],
+    "secondaryFields" : [
+      {
+        "_id" : "554FCDFC-7749-5C1D-A8FB-141A25CD73A4",
+        "key" : "policyNumber",
+        "label" : "Policy Number",
+        "value" : "CAA000XXXX"
       },
       {
-        "_id" : "D68F1052-01D8-5B93-B4F1-07CDCBA8310B",
-        "key" : "roadsidePhone",
-        "label" : "Roadside 24\/7",
-        "value" : "1-800-400-4222",
+        "_id" : "CCF4DDA1-15F5-5C57-BD7F-46689760BD7A",
+        "key" : "effectiveDate",
+        "label" : "Effective",
+        "value" : "9\/14\/26 – 9\/14\/27",
         "textAlignment" : "PKTextAlignmentRight"
       }
     ],
     "auxiliaryFields" : [
       {
-        "_id" : "CCF4DDA1-15F5-5C57-BD7F-46689760BD7A",
-        "key" : "effectiveDate",
-        "label" : "Effective",
-        "value" : "9\/14\/26 – 9\/14\/27"
-      },
-      {
-        "_id" : "E78E1D32-4DC2-58B0-BD39-12B0F5269C8D",
-        "key" : "insuranceCompany",
-        "label" : "Company",
-        "value" : "Interinsurance Exchange",
-        "textAlignment" : "PKTextAlignmentRight"
+        "_id" : "D68F1052-01D8-5B93-B4F1-07CDCBA8310B",
+        "key" : "roadsidePhone",
+        "label" : "Roadside Assistance 24\/7",
+        "value" : "1-800-400-4222"
       }
     ],
     "backFields" : [
@@ -277,12 +270,6 @@
         "key" : "insuranceCompany",
         "label" : "INSURANCE COMPANY",
         "value" : "COMPANY: INTERINSURANCE EXCHANGE"
-      },
-      {
-        "_id" : "D68F1052-01D8-5B93-B4F1-07CDCBA8310B",
-        "key" : "roadsidePhone",
-        "label" : "Roadside Assistance",
-        "value" : "1-800-400-4222"
       }
     ],
     "headerFields" : [

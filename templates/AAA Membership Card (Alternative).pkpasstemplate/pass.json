@@ -27,12 +27,44 @@
   "foregroundColor" : "rgb(50,74,114)",
   "formatVersion" : 1,
   "generic" : {
+    "headerFields" : [
+      {
+        "_id" : "205ED54E-39E3-5C1E-8D68-FC46EB41BF69",
+        "key" : "cardTitle",
+        "label" : "MEMBERSHIP CARD",
+        "value" : "Premier",
+        "textAlignment" : "PKTextAlignmentRight"
+      }
+    ],
+    "primaryFields" : [
+      {
+        "_id" : "7219175B-8E18-5AB1-9E57-45A531415269",
+        "key" : "memberName",
+        "label" : "Member Name",
+        "value" : "FULANITO PEREZ"
+      }
+    ],
+    "secondaryFields" : [
+      {
+        "_id" : "4A47C8AE-24FD-5BD1-9414-9C05170D8DA6",
+        "key" : "validThru",
+        "label" : "Valid Through",
+        "value" : "03\/27"
+      },
+      {
+        "_id" : "1F5E6637-9FFA-5866-B787-B551A092CD1F",
+        "key" : "memberSince",
+        "label" : "Member Since",
+        "value" : "1994",
+        "textAlignment" : "PKTextAlignmentRight"
+      }
+    ],
     "auxiliaryFields" : [
       {
         "_id" : "6EF7DA84-35C8-577A-BF53-9D7842E39201",
         "key" : "roadsidePhone",
-        "label" : "Call 24\/7",
-        "value" : "Roadside Assistance 1-800-400-4222"
+        "label" : "Roadside Assistance 24\/7",
+        "value" : "1-800-400-4222"
       }
     ],
     "backFields" : [
@@ -101,36 +133,6 @@
         "key" : "autoClubApp",
         "label" : "Auto Club app",
         "value" : "The fastest way to request Roadside Assistance"
-      }
-    ],
-    "headerFields" : [
-      {
-        "_id" : "F4BF8486-01B1-4D95-8274-D9DC23F45446",
-        "key" : "cardTitle",
-        "label" : "MEMBERSHIP CARD",
-        "value" : "Premier"
-      }
-    ],
-    "primaryFields" : [
-      {
-        "_id" : "ECFFE41F-7536-4B95-BA8C-5E799D971A02",
-        "key" : "memberName",
-        "label" : "Member Name",
-        "value" : "FULANITO PEREZ"
-      }
-    ],
-    "secondaryFields" : [
-      {
-        "_id" : "E68AFFEA-E72E-4298-B321-C1B23104E013",
-        "key" : "validThru",
-        "label" : "Valid Through",
-        "value" : "03\/27"
-      },
-      {
-        "_id" : "EED2AD41-C8FE-46F1-B2DA-E8D5F23CB292",
-        "key" : "memberSince",
-        "label" : "Member Since",
-        "value" : "1994"
       }
     ]
   },
@@ -219,10 +221,10 @@
     ],
     "footerFields" : [
       {
-        "_id" : "6EF7DA84-35C8-577A-BF53-9D7842E39201",
-        "key" : "roadsidePhone",
-        "label" : "Call 24\/7",
-        "value" : "Roadside Assistance 1-800-400-4222"
+        "_id" : "9038262F-5EA5-56F8-A1EC-FEEDBE30F617",
+        "key" : "roadsideFooter",
+        "label" : "Roadside",
+        "value" : "24\/7 ROADSIDE & MORE: TAP MEMBERSHIP BENEFITS"
       }
     ],
     "headerFields" : [
