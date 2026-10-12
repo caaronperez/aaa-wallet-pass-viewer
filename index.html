@@ -57,6 +57,7 @@ button,select{font:inherit;color:inherit}
 .hero.three{max-width:1100px}.hero.three .picker{flex-basis:100%;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}.hero.three .dl{flex:0 0 300px}
 .picker .pt small{display:block;font-size:11.5px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dl{display:flex;align-items:center;gap:10px;border:0;border-radius:16px;padding:12px 18px;background:var(--accent);color:#fff;cursor:pointer;font:inherit;text-align:left;box-shadow:0 6px 18px #3b8cff55;flex:0 0 250px;min-width:0}.dl span{min-width:0}
+.dl.up{background:transparent;color:var(--accent);box-shadow:inset 0 0 0 2px var(--accent)}.dl.up:hover{background:rgba(59,140,255,.12)}
 .dl:hover{background:#2f7cf0}.dl:disabled{opacity:.6;cursor:progress}
 .dl svg{width:26px;height:26px;flex:none}
 .dl b{display:block;font-size:16px}.dl small{display:block;font-size:11px;opacity:.9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -389,6 +390,10 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
       <button id="download" class="dl" type="button">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span><b>Download template</b><small id="dlName">.pkpasstemplate (zip)</small></span>
+      </button>
+      <button id="upload" class="dl up" type="button" title="Pick a .zip of a .pkpasstemplate or a pass.json. Or just drag a .pkpasstemplate onto the page.">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3m0 0L7 8m5-5l5 5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><b>Upload template</b><small>.zip or pass.json · or drag it here</small></span>
       </button>
     </div>
     <div id="error"></div>
@@ -1228,6 +1233,7 @@ async function importList(list){
   // Open every template found; the last one is shown.
   for(let i = 0; i < templates.length; i++) await openTemplate(templates[i], i === templates.length - 1);
 }
+$('upload').onclick = () => $('jsonFile').click();
 $('jsonFile').addEventListener('change', async e => {
   const file = e.target.files[0]; if(!file) return;
   try{ await importList([{path: file.name, file}]); }
