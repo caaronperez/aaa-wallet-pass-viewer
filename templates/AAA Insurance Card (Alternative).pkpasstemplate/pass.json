@@ -23,12 +23,51 @@
   "foregroundColor" : "rgb(50,74,114)",
   "formatVersion" : 1,
   "generic" : {
+    "headerFields" : [
+      {
+        "_id" : "B098BAB2-2239-526B-9E34-FCFCC817BDBB",
+        "key" : "cardTitle",
+        "label" : "CA Evidence of Liability",
+        "value" : "Auto Insurance Card",
+        "textAlignment" : "PKTextAlignmentRight"
+      }
+    ],
+    "primaryFields" : [
+      {
+        "_id" : "554FCDFC-7749-5C1D-A8FB-141A25CD73A4",
+        "key" : "policyNumber",
+        "label" : "Policy Number",
+        "value" : "CAA000XXXX"
+      }
+    ],
+    "secondaryFields" : [
+      {
+        "_id" : "3CDCFF07-4E5F-5443-BD77-2C4A2B064154",
+        "key" : "nameEnsured",
+        "label" : "Name Ensured",
+        "value" : "FULANITO PEREZ"
+      },
+      {
+        "_id" : "D68F1052-01D8-5B93-B4F1-07CDCBA8310B",
+        "key" : "roadsidePhone",
+        "label" : "Roadside 24\/7",
+        "value" : "1-800-400-4222",
+        "textAlignment" : "PKTextAlignmentRight"
+      }
+    ],
     "auxiliaryFields" : [
       {
-        "_id" : "E0F62D9E-C0CC-491F-9F92-03B02E23DC36",
+        "_id" : "CCF4DDA1-15F5-5C57-BD7F-46689760BD7A",
+        "key" : "effectiveDate",
+        "label" : "Effective",
+        "value" : "9\/14\/26 – 9\/14\/27"
+      },
+      {
+        "_id" : "E78E1D32-4DC2-58B0-BD39-12B0F5269C8D",
         "key" : "insuranceCompany",
-        "label" : "INSURANCE COMPANY",
-        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 000000"
+        "label" : "Company",
+        "value" : "Interinsurance Exchange",
+        "textAlignment" : "PKTextAlignmentRight"
       }
     ],
     "backFields" : [
@@ -125,38 +164,6 @@
         "key" : "nearestBranch",
         "label" : "Your AAA branch",
         "value" : "Sample Branch · 000 Main St, City, CA 00000\nGet directions"
-      }
-    ],
-    "headerFields" : [
-      {
-        "_id" : "8E20EDDF-B398-42D5-920D-383A13BD419A",
-        "key" : "cardTitle",
-        "label" : "CA Evidence of Liability",
-        "textAlignment" : "PKTextAlignmentRight",
-        "value" : "Auto Insurance Card"
-      }
-    ],
-    "primaryFields" : [
-      {
-        "_id" : "1DB63B50-7CD4-4B28-80D1-87F633BF4E36",
-        "key" : "policyNumber",
-        "label" : "Policy Number",
-        "value" : "CAA000XXXX"
-      }
-    ],
-    "secondaryFields" : [
-      {
-        "_id" : "ABBCF9DD-12D7-4E12-BAB3-F162222307BF",
-        "key" : "nameEnsured",
-        "label" : "Name Ensured",
-        "value" : "FULANITO PEREZ"
-      },
-      {
-        "_id" : "67C7DDFB-1126-4B39-9907-1F506A1DCB40",
-        "key" : "effectiveDate",
-        "label" : "Effective",
-        "textAlignment" : "PKTextAlignmentRight",
-        "value" : "9\/14\/26 – 9\/14\/27"
       }
     ]
   },
@@ -269,6 +276,12 @@
         "key" : "insuranceCompany",
         "label" : "INSURANCE COMPANY",
         "value" : "COMPANY: INTERINSURANCE EXCHANGE"
+      },
+      {
+        "_id" : "D68F1052-01D8-5B93-B4F1-07CDCBA8310B",
+        "key" : "roadsidePhone",
+        "label" : "Roadside 24\/7",
+        "value" : "1-800-400-4222"
       }
     ],
     "headerFields" : [
