@@ -3,15 +3,9 @@
     1094393125
   ],
   "authenticationToken" : "",
-  "backgroundColor" : "rgb(255,255,255)",
+  "backgroundColor" : "rgb(242,228,228)",
   "barcodes" : [
-    {
-      "_id" : "E4FD1E6E-100F-4455-90D5-FEAA43177955",
-      "altText" : "000 000 XXXXXXXXX 0",
-      "format" : "PKBarcodeFormatPDF417",
-      "message" : "000 000 XXXXXXXXX 0",
-      "messageEncoding" : "iso-8859-1"
-    }
+
   ],
   "description" : "AAA Membership Card",
   "expirationDate" : "2027-04-01T06:59:00Z",
@@ -29,7 +23,6 @@
       "type" : "place"
     }
   ],
-  "footerBackgroundColor" : "rgb(242,228,228)",
   "foregroundColor" : "rgb(50,74,114)",
   "formatVersion" : 1,
   "generic" : {
@@ -266,5 +259,6 @@
   "serialNumber" : "000000XXXXXXXXX0-ALT",
   "suppressHeaderDarkening" : true,
   "teamIdentifier" : "",
-  "useAutomaticColors" : false
+  "useAutomaticColors" : false,
+  "footerBackgroundColor" : "rgb(242,228,228)"
 }
