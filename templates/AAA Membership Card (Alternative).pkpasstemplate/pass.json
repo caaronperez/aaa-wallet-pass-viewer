@@ -3,7 +3,7 @@
     1094393125
   ],
   "authenticationToken" : "",
-  "backgroundColor" : "rgb(34,143,208)",
+  "backgroundColor" : "rgb(239,247,255)",
   "barcodes" : [
     {
       "_id" : "E4FD1E6E-100F-4455-90D5-FEAA43177955",
@@ -29,16 +29,16 @@
       "type" : "place"
     }
   ],
-  "footerBackgroundColor" : "rgb(28,77,166)",
-  "foregroundColor" : "rgb(239,247,255)",
+  "footerBackgroundColor" : "rgb(239,247,255)",
+  "foregroundColor" : "rgb(28,77,166)",
   "formatVersion" : 1,
   "generic" : {
     "auxiliaryFields" : [
       {
         "_id" : "3088C545-1DF6-40C8-BCDF-8F6F8874A314",
         "key" : "roadsideFooter",
-        "label" : "ROADSIDE",
-        "value" : "ROADSIDE 24\/7 · 1-800-400-4222"
+        "label" : "Roadside",
+        "value" : "ROADSIDE 24\/7 & MORE: TAP MEMBERSHIP BENEFITS"
       }
     ],
     "backFields" : [
@@ -114,14 +114,14 @@
         "_id" : "F4BF8486-01B1-4D95-8274-D9DC23F45446",
         "key" : "cardTitle",
         "label" : "MEMBERSHIP CARD",
-        "value" : "Plan: Premier"
+        "value" : "Premier"
       }
     ],
     "primaryFields" : [
       {
         "_id" : "ECFFE41F-7536-4B95-BA8C-5E799D971A02",
         "key" : "memberName",
-        "label" : "MEMBER",
+        "label" : "Member Name",
         "value" : "FULANITO PEREZ"
       }
     ],
@@ -129,18 +129,18 @@
       {
         "_id" : "E68AFFEA-E72E-4298-B321-C1B23104E013",
         "key" : "validThru",
-        "label" : "VALID THRU",
+        "label" : "Valid Through",
         "value" : "03\/27"
       },
       {
         "_id" : "EED2AD41-C8FE-46F1-B2DA-E8D5F23CB292",
         "key" : "memberSince",
-        "label" : "MEMBER SINCE",
+        "label" : "Member Since",
         "value" : "1994"
       }
     ]
   },
-  "labelColor" : "rgb(185,222,254)",
+  "labelColor" : "rgb(64,64,64)",
   "locations" : [
     {
       "latitude" : 34.146313,
@@ -227,8 +227,8 @@
       {
         "_id" : "3088C545-1DF6-40C8-BCDF-8F6F8874A314",
         "key" : "roadsideFooter",
-        "label" : "ROADSIDE",
-        "value" : "ROADSIDE 24\/7 · 1-800-400-4222"
+        "label" : "Roadside",
+        "value" : "ROADSIDE 24\/7 & MORE: TAP MEMBERSHIP BENEFITS"
       }
     ],
     "headerFields" : [
@@ -236,26 +236,26 @@
         "_id" : "F4BF8486-01B1-4D95-8274-D9DC23F45446",
         "key" : "cardTitle",
         "label" : "MEMBERSHIP CARD",
-        "value" : "Plan: Premier"
+        "value" : "Premier"
       }
     ],
     "primaryFields" : [
       {
         "_id" : "ECFFE41F-7536-4B95-BA8C-5E799D971A02",
         "key" : "memberName",
-        "label" : "MEMBER",
+        "label" : "Member Name",
         "value" : "FULANITO PEREZ"
       },
       {
         "_id" : "E68AFFEA-E72E-4298-B321-C1B23104E013",
         "key" : "validThru",
-        "label" : "VALID THRU",
+        "label" : "Valid Through",
         "value" : "03\/27"
       },
       {
         "_id" : "EED2AD41-C8FE-46F1-B2DA-E8D5F23CB292",
         "key" : "memberSince",
-        "label" : "MEMBER SINCE",
+        "label" : "Member Since",
         "value" : "1994"
       }
     ],

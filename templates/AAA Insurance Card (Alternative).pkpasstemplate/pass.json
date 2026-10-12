@@ -1,6 +1,6 @@
 {
   "authenticationToken" : "",
-  "backgroundColor" : "rgb(28,77,166)",
+  "backgroundColor" : "rgb(239,247,255)",
   "barcodes" : [
 
   ],
@@ -20,8 +20,8 @@
       "type" : "place"
     }
   ],
-  "footerBackgroundColor" : "rgb(28,77,166)",
-  "foregroundColor" : "rgb(239,247,255)",
+  "footerBackgroundColor" : "rgb(239,247,255)",
+  "foregroundColor" : "rgb(28,77,166)",
   "formatVersion" : 1,
   "generic" : {
     "auxiliaryFields" : [
@@ -141,7 +141,7 @@
       {
         "_id" : "1DB63B50-7CD4-4B28-80D1-87F633BF4E36",
         "key" : "policyNumber",
-        "label" : "POLICY NUMBER",
+        "label" : "Policy Number",
         "value" : "CAA000XXXX"
       }
     ],
@@ -149,19 +149,19 @@
       {
         "_id" : "ABBCF9DD-12D7-4E12-BAB3-F162222307BF",
         "key" : "nameEnsured",
-        "label" : "NAME ENSURED",
+        "label" : "Name Ensured",
         "value" : "FULANITO PEREZ"
       },
       {
         "_id" : "67C7DDFB-1126-4B39-9907-1F506A1DCB40",
         "key" : "effectiveDate",
-        "label" : "EFFECTIVE",
+        "label" : "Effective",
         "textAlignment" : "PKTextAlignmentRight",
         "value" : "9\/14\/26 – 9\/14\/27"
       }
     ]
   },
-  "labelColor" : "rgb(185,222,254)",
+  "labelColor" : "rgb(64,64,64)",
   "logoText" : "MOCK",
   "organizationName" : "AAA",
   "passTypeIdentifier" : "pass.com.example.aaa.insurance",
@@ -285,19 +285,19 @@
       {
         "_id" : "A298C3DD-77E6-4230-B0DA-A7A49913D933",
         "key" : "nameEnsured",
-        "label" : "NAME ENSURED",
+        "label" : "Name Ensured",
         "value" : "FULANITO PEREZ"
       },
       {
         "_id" : "78E9F51C-E5E9-4FCB-B2AB-025995E60D36",
         "key" : "policyNumber",
-        "label" : "POLICY NUMBER",
+        "label" : "Policy Number",
         "value" : "CAA000XXXX"
       },
       {
         "_id" : "E3C938D2-B383-4CB0-A96E-5C8B46742CB7",
         "key" : "effectiveDate",
-        "label" : "EFFECTIVE",
+        "label" : "Effective",
         "textAlignment" : "PKTextAlignmentRight",
         "value" : "9\/14\/26 – 9\/14\/27"
       }

@@ -125,6 +125,8 @@ button,select{font:inherit;color:inherit}
 .act .dot{width:24px;height:24px;border-radius:50%;display:grid;place-items:center}
 .act .dot svg{width:14px;height:14px}
 .act b{font-size:13px;margin-top:7px}.act small{margin-top:auto;color:var(--muted);font-size:11px}
+.acts .act.act-glass{background:rgba(255,255,255,.86);color:#1c1c1e;border:1px solid rgba(255,255,255,.6);box-shadow:0 8px 24px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.9);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6)}
+.acts .act.act-glass small{color:#6e6e73}.acts .act.link.act-glass:hover{background:#fff}
 .act.link{color:inherit;text-decoration:none;cursor:pointer;transition:background .15s,transform .15s}.act.link:hover{background:#3a3a3d;transform:translateY(-1px)}.act.link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .xl{color:#6cb2ff;text-decoration:none;word-break:break-all}.xl:hover{text-decoration:underline}
 .jl{border:0;background:none;padding:0;color:#6cb2ff;cursor:pointer;font:inherit;text-align:left}.jl:hover{text-decoration:underline}
@@ -348,7 +350,7 @@ button,select{font:inherit;color:inherit}
     <section class="proposal" aria-labelledby="proposalTitle">
       <div class="proposal-h">
         <div><h2 id="proposalTitle">Design proposals <span class="credit">(the image canvas below and strings made by Claude, i just did the pass design and the web)</span></h2>
-        <p>A different take on both cards: the photo fades into the AAA app’s blue and all the colors come straight from the app’s theme, softened for lower contrast. Everything here is stuff Apple Wallet actually supports. Grab one with Download template and drag it onto this page (or open it in Pass Designer), or just hit Open in viewer. The Membership and Insurance cards up top stay as they are.</p></div>
+        <p>A different take on both cards, now in a light iOS 27 glass look: the photo melts into a frosted, almost-white blue (the app’s blue100), values are the app’s link navy and labels use its text gray. Everything here is stuff Apple Wallet actually supports. Grab one with Download template and drag it onto this page (or open it in Pass Designer), or just hit Open in viewer. Heads up: the images below still show the earlier blue version; the templates are the latest. The Membership and Insurance cards up top stay as they are.</p></div>
       </div>
       <div class="proposal-grid">
         <figure>
@@ -685,13 +687,20 @@ function fitRows(root){
     }
   });
 }
+/* Light passes get Wallet's light, frosted action cards (iOS 27 glass); dark passes keep the dark ones. */
+function isLightPass(p){
+  const c = String(p.backgroundColor || ''), m = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(c) || /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i.exec(c);
+  if(!m) return false;
+  const v = m.slice(1, 4).map(x => c.startsWith('#') ? parseInt(x, 16) : +x);
+  return (0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]) / 255 > 0.6;
+}
 function actsHTML(p){
-  const acts = p.featuredActions || [];
+  const acts = p.featuredActions || [], glass = isLightPass(p) ? ' act-glass' : '';
   return acts.slice(0, MAX_ACTIONS).map((a,i) => {
     const d = ACTION_BY_TYPE[a.type] || {title:a.type||'Unknown action',sub:'Unsupported type',color:'#636366',g:'star'};
     const href = actionHref(a), tip = a.type === 'place' ? 'Opens this place in Apple Maps' : a.type === 'call' ? 'Calls ' + href.slice(4) : 'Opens ' + href;
-    return href ? `<a class="act link" data-f="featuredActions:${i}" href="${esc(href)}" target="_blank" rel="noopener" title="${esc(tip)}">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)} <span aria-hidden="true">↗</span></small></a>`
-                : `<div class="act" data-f="featuredActions:${i}" title="No valid destination">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)}</small></div>`;
+    return href ? `<a class="act link${glass}" data-f="featuredActions:${i}" href="${esc(href)}" target="_blank" rel="noopener" title="${esc(tip)}">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)} <span aria-hidden="true">↗</span></small></a>`
+                : `<div class="act${glass}" data-f="featuredActions:${i}" title="No valid destination">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)}</small></div>`;
   }).join('') + (acts.length < MAX_ACTIONS ? '<div class="act empty">Empty action slot</div>'.repeat(MAX_ACTIONS - acts.length) : '');
 }
 function renderGeneric(p, dict){
