@@ -29,16 +29,10 @@
   "generic" : {
     "auxiliaryFields" : [
       {
-        "_id" : "3088C545-1DF6-40C8-BCDF-8F6F8874A314",
-        "key" : "roadsideFooter",
-        "label" : "Roadside",
-        "value" : "24\/7 ROADSIDE & MORE: TAP MEMBERSHIP BENEFITS"
-      },
-      {
         "_id" : "6EF7DA84-35C8-577A-BF53-9D7842E39201",
         "key" : "roadsidePhone",
-        "label" : "Roadside 24\/7",
-        "value" : "1-800-400-4222"
+        "label" : "Call 24\/7",
+        "value" : "Roadside Assistance 1-800-400-4222"
       }
     ],
     "backFields" : [
@@ -225,16 +219,10 @@
     ],
     "footerFields" : [
       {
-        "_id" : "3088C545-1DF6-40C8-BCDF-8F6F8874A314",
-        "key" : "roadsideFooter",
-        "label" : "Roadside",
-        "value" : "24\/7 ROADSIDE & MORE: TAP MEMBERSHIP BENEFITS"
-      },
-      {
         "_id" : "6EF7DA84-35C8-577A-BF53-9D7842E39201",
         "key" : "roadsidePhone",
-        "label" : "Roadside 24\/7",
-        "value" : "1-800-400-4222"
+        "label" : "Call 24\/7",
+        "value" : "Roadside Assistance 1-800-400-4222"
       }
     ],
     "headerFields" : [

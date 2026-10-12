@@ -24,18 +24,51 @@
   "foregroundColor" : "rgb(50,74,114)",
   "formatVersion" : 1,
   "generic" : {
-    "auxiliaryFields" : [
+    "headerFields" : [
       {
-        "_id" : "D0A428E8-DE3F-42A2-9147-7EC070F19EBE",
-        "key" : "insuranceCompany",
-        "label" : "INSURANCE COMPANY",
-        "value" : "COMPANY: INTERINSURANCE EXCHANGE"
+        "_id" : "B098BAB2-2239-526B-9E34-FCFCC817BDBB",
+        "key" : "cardTitle",
+        "label" : "CA Evidence of Liability",
+        "value" : "Auto Insurance Card",
+        "textAlignment" : "PKTextAlignmentRight"
+      }
+    ],
+    "primaryFields" : [
+      {
+        "_id" : "554FCDFC-7749-5C1D-A8FB-141A25CD73A4",
+        "key" : "policyNumber",
+        "label" : "Policy Number",
+        "value" : "CAA000XXXX"
+      }
+    ],
+    "secondaryFields" : [
+      {
+        "_id" : "3CDCFF07-4E5F-5443-BD77-2C4A2B064154",
+        "key" : "nameEnsured",
+        "label" : "Name Ensured",
+        "value" : "FULANITO PEREZ"
       },
       {
         "_id" : "D68F1052-01D8-5B93-B4F1-07CDCBA8310B",
         "key" : "roadsidePhone",
         "label" : "Roadside 24\/7",
-        "value" : "1-800-400-4222"
+        "value" : "1-800-400-4222",
+        "textAlignment" : "PKTextAlignmentRight"
+      }
+    ],
+    "auxiliaryFields" : [
+      {
+        "_id" : "CCF4DDA1-15F5-5C57-BD7F-46689760BD7A",
+        "key" : "effectiveDate",
+        "label" : "Effective",
+        "value" : "9\/14\/26 – 9\/14\/27"
+      },
+      {
+        "_id" : "E78E1D32-4DC2-58B0-BD39-12B0F5269C8D",
+        "key" : "insuranceCompany",
+        "label" : "Company",
+        "value" : "Interinsurance Exchange",
+        "textAlignment" : "PKTextAlignmentRight"
       }
     ],
     "backFields" : [
@@ -132,37 +165,6 @@
         "key" : "nearestBranch",
         "label" : "Your AAA branch",
         "value" : "Sample Branch · 000 Main St, City, CA 00000\nGet directions"
-      }
-    ],
-    "headerFields" : [
-      {
-        "_id" : "8E039297-8219-45D4-BBCD-BE820B40686A",
-        "key" : "cardTitle",
-        "label" : "CA EVIDENCE OF LIABILITY",
-        "value" : "Auto Insurance Card"
-      }
-    ],
-    "primaryFields" : [
-      {
-        "_id" : "A298C3DD-77E6-4230-B0DA-A7A49913D933",
-        "key" : "nameEnsured",
-        "label" : "Name Ensured",
-        "value" : "FULANITO PEREZ"
-      }
-    ],
-    "secondaryFields" : [
-      {
-        "_id" : "78E9F51C-E5E9-4FCB-B2AB-025995E60D36",
-        "key" : "policyNumber",
-        "label" : "Policy Number",
-        "value" : "CAA000XXXX"
-      },
-      {
-        "_id" : "E3C938D2-B383-4CB0-A96E-5C8B46742CB7",
-        "key" : "effectiveDate",
-        "label" : "Effective",
-        "textAlignment" : "PKTextAlignmentRight",
-        "value" : "9\/14\/26 – 9\/14\/27"
       }
     ]
   },
@@ -279,7 +281,7 @@
       {
         "_id" : "D68F1052-01D8-5B93-B4F1-07CDCBA8310B",
         "key" : "roadsidePhone",
-        "label" : "Roadside 24\/7",
+        "label" : "Roadside Assistance",
         "value" : "1-800-400-4222"
       }
     ],
