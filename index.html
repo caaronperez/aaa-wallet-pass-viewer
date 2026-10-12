@@ -83,13 +83,14 @@ button,select{font:inherit;color:inherit}
 .poster .bcwrap .bcpanel{width:100%;border-radius:7px;padding:8px 10px 6px}
 .poster .bcwrap .bc{width:100%;height:auto}
 .poster .bcwrap .bc-alt{font-size:11.5px}
-.poster .body{position:absolute;left:0;right:0;bottom:0;background:var(--footer,#fff);padding:4px 14px 11px}
+/* Like Pass Designer: the artwork melts into footerBackgroundColor behind the fields instead of a hard edge. */
+.poster .body{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--footer,#fff) 85%,transparent) 34%,var(--footer,#fff) 62%);padding:58px 14px 11px}
 .poster .row{display:grid;gap:8px;margin-top:8px}.poster .row.n3{gap:6px}.poster .row.n3 .v{font-size:9px}.poster .row.n3 .l{font-size:8.5px}.poster .row.n4 .v{font-size:8.5px}.poster .row.n4 .l{font-size:8px}
 .fld{min-width:0}
 .fld .l{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--label);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fld .v{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fld.r{text-align:right}.fld.c{text-align:center}
-.poster .foot{font:9px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--fg);margin-top:12px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.poster .foot{font:9px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--fg);margin-top:12px;text-transform:uppercase;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .bc{display:block;margin:0 auto}
 .bc-alt{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#111;text-align:center;margin-top:3px}
 .bcpanel{background:#fff;border-radius:9px;padding:8px 10px 5px;width:max-content;max-width:100%;margin:0 auto}
@@ -350,7 +351,7 @@ button,select{font:inherit;color:inherit}
     <section class="proposal" aria-labelledby="proposalTitle">
       <div class="proposal-h">
         <div><h2 id="proposalTitle">Design proposals <span class="credit">(the image canvas below and strings made by Claude, i just did the pass design and the web)</span></h2>
-        <p>A different take on both cards, now in a light iOS 27 glass look: the photo melts into a frosted, almost-white blue (the app’s blue100), values are the app’s link navy and labels use its text gray. Everything here is stuff Apple Wallet actually supports. Grab one with Download template and drag it onto this page (or open it in Pass Designer), or just hit Open in viewer. Heads up: the images below still show the earlier blue version; the templates are the latest. The Membership and Insurance cards up top stay as they are.</p></div>
+        <p>A different take on both cards, now in the light iOS 27 glass look from the Figma design (iOS 27 WALLET page): Figma’s photos and top tints, the photo melts into the footer color set in the pass (#F2E4E4, like Pass Designer’s gradient), values in Navy/700 and labels in Grey/900. Everything here is stuff Apple Wallet actually supports. Grab one with Download template and drag it onto this page (or open it in Pass Designer), or just hit Open in viewer. Heads up: the images below still show the earlier blue version; the templates are the latest. The Membership and Insurance cards up top stay as they are.</p></div>
       </div>
       <div class="proposal-grid">
         <figure>

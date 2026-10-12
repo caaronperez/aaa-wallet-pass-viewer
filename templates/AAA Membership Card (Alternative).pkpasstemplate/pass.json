@@ -3,7 +3,7 @@
     1094393125
   ],
   "authenticationToken" : "",
-  "backgroundColor" : "rgb(239,247,255)",
+  "backgroundColor" : "rgb(255,255,255)",
   "barcodes" : [
     {
       "_id" : "E4FD1E6E-100F-4455-90D5-FEAA43177955",
@@ -29,8 +29,8 @@
       "type" : "place"
     }
   ],
-  "footerBackgroundColor" : "rgb(239,247,255)",
-  "foregroundColor" : "rgb(28,77,166)",
+  "footerBackgroundColor" : "rgb(242,228,228)",
+  "foregroundColor" : "rgb(50,74,114)",
   "formatVersion" : 1,
   "generic" : {
     "auxiliaryFields" : [
@@ -38,7 +38,7 @@
         "_id" : "3088C545-1DF6-40C8-BCDF-8F6F8874A314",
         "key" : "roadsideFooter",
         "label" : "Roadside",
-        "value" : "ROADSIDE 24\/7 & MORE: TAP MEMBERSHIP BENEFITS"
+        "value" : "FOR 24\/7 ROADSIDE ASSISTANCE AND MORE, TAP VIEW MEMBERSHIP BENEFITS"
       }
     ],
     "backFields" : [
@@ -140,7 +140,7 @@
       }
     ]
   },
-  "labelColor" : "rgb(64,64,64)",
+  "labelColor" : "rgb(39,41,43)",
   "locations" : [
     {
       "latitude" : 34.146313,
@@ -228,7 +228,7 @@
         "_id" : "3088C545-1DF6-40C8-BCDF-8F6F8874A314",
         "key" : "roadsideFooter",
         "label" : "Roadside",
-        "value" : "ROADSIDE 24\/7 & MORE: TAP MEMBERSHIP BENEFITS"
+        "value" : "FOR 24\/7 ROADSIDE ASSISTANCE AND MORE, TAP VIEW MEMBERSHIP BENEFITS"
       }
     ],
     "headerFields" : [
