@@ -432,7 +432,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
     </section>
     <section class="todo" aria-labelledby="todoTitle">
       <h2 id="todoTitle">Next steps <small>TODO</small></h2>
-      <p>Stuff we still need to figure out before these passes go live. Short version: the pass is a signed file, so anything that changes per member or over time has to come from our server.</p>
+      <p>For design and product: what each feature does, what we can do now and what it needs from whom. Short version: the pass is a signed file built by our server, so anything that changes per member or over time is backend work. The app only downloads the card and adds it to Wallet.</p>
       <details open>
         <summary>“Get Directions”: how the branch (Maps place ID) gets set and updated</summary>
         <div class="qa">
@@ -452,13 +452,38 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
           <li>Fallback: if a member has no branch, leave Get Directions out (and use the slot for something else) rather than ship an ID that might not work.</li>
         </ol>
       </details>
-      <details>
-        <summary>“View Membership Benefits”: opening the app</summary>
-        <p>Right now the action uses <code>https://autoclubapp.page.link/wallet-benefits</code>. The app already claims that domain, so it just opens the app. That domain is old Firebase Dynamic Links, which Google shut down, and people without the app get a “not found” page.</p>
+      <details open>
+        <summary>“View Membership Benefits”: what tapping it does</summary>
+        <div class="qa">
+          <b>What it is</b><span>One of Apple's Featured Action types (<code>membershipBenefits</code>). Apple sets the label and icon; we only give it an <code>https</code> link. A pass can have 2 actions, and iOS 26 and older don't show them at all.</span>
+          <b>The plan (agreed)</b><span>Tapping opens the Auto Club app on the <b>Membership Benefits</b> bottom sheet (same style as the Discounts filter and sort sheets, glass close button) with <b>Roadside Assistance first</b>, so the button's label matches what members see. Without the app, the same link opens the membership page on ace.aaa.com.</span>
+          <b>Today, in this proposal</b><span>The link is <code>https://autoclubapp.page.link/wallet-benefits</code>. It only opens the app, on whatever screen was last open, because the app still claims that old Firebase Dynamic Links domain. Google shut that service down, so it can stop working any time, and without the app it shows “not found”.</span>
+          <b>iOS 26 and older</b><span>No Featured Actions there, so the cards show the Roadside number (1-800-400-4222) on the front instead, and the back of the pass keeps tappable phone numbers and links.</span>
+          <b>Can't change</b><span>The label (“View Membership Benefits”), the icon, the 2-action limit, and that front fields aren't tappable.</span>
+        </div>
+        <h3>What we need</h3>
         <ol>
-          <li>Host an <code>apple-app-site-association</code> file on an AAA domain (for example www.ace.aaa.com) and add <code>applinks:</code> for it to the app.</li>
-          <li>Add an app route that opens the assistant on Membership Benefits, Roadside first (screen above, not final).</li>
-          <li>Point the action at that link. Without the app, it falls back to the membership page on the website.</li>
+          <li><b>Web / platform:</b> host an <code>apple-app-site-association</code> file on an AAA domain (for example www.ace.aaa.com) that claims one path, such as <code>/wallet/benefits</code>, and serve the membership page at that same URL for people without the app.</li>
+          <li><b>iOS:</b> add <code>applinks:</code> for that domain and a deep-link route that opens the Membership Benefits sheet with Roadside first. The app's deep links today only cover push notifications (My Cards, Pay Bill), so this is a new route.</li>
+          <li><b>Design:</b> finalize the sheet (it's marked “proposal, not final” in the images above): content, order and the Roadside call-to-action.</li>
+          <li><b>Backend (pass service):</b> put the new link in the pass's Featured Action when it builds the card. Add something like <code>?source=wallet</code> so analytics can count opens from Wallet.</li>
+        </ol>
+      </details>
+      <details open>
+        <summary>Lock Screen suggestions near AAA places (like a gym key)</summary>
+        <div class="qa">
+          <b>How others do it</b><span>A gym key that pops up on the Lock Screen near the gym is a Wallet pass feature, not the gym's app. The pass lists up to <b>10 locations</b> (latitude/longitude, an optional short message like “Your AAA card is ready”, and <code>maxDistance</code>, which can only make the radius smaller). The iPhone checks them in the background and suggests the pass when you're close. It doesn't need the app installed or location permission, and the company never sees where the member is. Passes can also wake up from a Bluetooth beacon (good indoors) or at a date and time (<code>relevantDates</code>).</span>
+          <b>Where we are</b><span>The app already downloads the Membership card from our backend (<code>PostMembershipPKPass</code>, pass type <code>pass.com.aaa.membercard</code>, sending the member's ZIP code) and adds it to Wallet; Insurance works the same way. The server builds and signs the pass, so <b>this needs no app change</b>. It's backend work.</span>
+          <b>What we can do</b><span>Add the member's 10 nearest AAA places to the pass, picked from their ZIP code: branches, approved repair shops, or the most-used discount partners. Add a short message per place, plus dates where useful (renewal, policy start). The same works for the Insurance card.</span>
+          <b>Keep it current</b><span>With the Wallet web service (push updates), the server can refresh the list later (new branch, member moved) without the member adding the card again. The app only needs to re-add the card when the member changes ZIP or club.</span>
+          <b>Limits</b><span>10 places per pass, so it's “nearest 10”, not every partner. Apple decides when the pass actually appears; we can't force it. The message is short, fixed in the pass and the same for every visit. Test on a real device: whether iOS 27 suggests poster passes this way is Apple's call.</span>
+          <b>Bigger options (app)</b><span>If the app itself should react to places: region monitoring (up to 20 places) needs “Always” location permission, which raises privacy and App Review questions. A location-aware Home Screen widget can show up in the Smart Stack near relevant places. For “show my AAA card at the counter”, the Wallet pass is the best fit.</span>
+        </div>
+        <h3>What we need</h3>
+        <ol>
+          <li><b>Product:</b> pick the place types (branches, repair shops, discount partners) and the Lock Screen message for each.</li>
+          <li><b>Backend (pass service):</b> add <code>locations</code> (nearest 10 to the member's ZIP), <code>relevantText</code> and, if wanted, <code>relevantDates</code> and beacons when generating the pass; then the Wallet web service for updates.</li>
+          <li><b>iOS:</b> nothing to start. Later, re-add the card when ZIP or club changes.</li>
         </ol>
       </details>
     </section>
