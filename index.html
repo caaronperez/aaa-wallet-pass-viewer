@@ -82,15 +82,14 @@ button,select{font:inherit;color:inherit}
 .poster .phead small{display:block;font:700 11px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;letter-spacing:.01em;text-transform:uppercase;color:var(--hl,#fff);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* Matches Pass Designer: the barcode floats on a white panel over the art; fields sit on the footer color. */
 .poster .bcwrap{position:absolute;left:50%;top:58%;transform:translateX(-50%);width:77%}
-.poster .bcwrap .bcpanel{width:100%;border-radius:7px;padding:8px 10px 6px}
+.poster .bcwrap .bcpanel{width:100%;border-radius:7px;padding:8px 10px 10.5px}
 .poster .bcwrap .bc{width:100%;height:auto}
 .poster .bcwrap .bc-alt{font-size:11.5px}
 /* Like Pass Designer: the artwork melts into footerBackgroundColor behind the fields instead of a hard edge. */
 /* No footerBackgroundColor: iOS 27 draws frosted glass over the artwork, starting ~341pt down a 448pt pass. */
 .poster .body.glassfoot{top:76.1%;background:none;padding:10px 14px 11px;isolation:isolate}
-/* Glass like Pass Designer: heavy blur, a little lift. With a barcode, the glass starts at the barcode's bottom edge. */
+/* Glass like Pass Designer: heavy blur, a little lift. It starts at ~76% and the barcode panel overlaps its top edge, as in Wallet. */
 .poster .body.glassfoot::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(32px) saturate(1.5) brightness(1.04);backdrop-filter:blur(32px) saturate(1.5) brightness(1.04)}
-.poster .body.glassfoot.hasbc::before{top:9.2%}
 .poster .body{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--footer,#fff) 85%,transparent) 34%,var(--footer,#fff) 62%);padding:58px 14px 11px}
 .poster .row{display:grid;gap:8px;margin-top:8px}.poster .row.n3{gap:6px}.poster .row.n3 .v{font-size:9px}.poster .row.n3 .l{font-size:8.5px}.poster .row.n4 .v{font-size:8.5px}.poster .row.n4 .l{font-size:8px}
 .fld{min-width:0}
