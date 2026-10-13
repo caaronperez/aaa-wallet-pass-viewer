@@ -224,7 +224,7 @@ html[data-theme="light"] .acts .act.empty{background:transparent;border:1px dash
 .gd-txt.prim i{display:block;font-style:normal;font-size:2.7cqw;color:#27292b}
 .gd-txt.prim b{display:block;font-weight:400;font-size:3.6cqw}
 .gd-txt.ft{top:76%;font-size:2.6cqw;text-transform:uppercase}
-.gd-logo{position:absolute;left:3.35%;top:2.7%;width:22%;height:auto}
+.gd-logo{position:absolute;left:3.35%;top:2.7%;height:5.9%;width:auto}
 .gd-head{position:absolute;right:3.35%;top:2.7%;text-align:right;font:3.4cqw ui-monospace,SFMono-Regular,Menlo,monospace;color:#192842}
 .gd-head i{display:block;font:700 3cqw -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;font-style:normal;color:#27292b}
 .gd-bc{position:absolute;left:11.5%;width:77%;top:58%;height:20.3%;z-index:3;background:#fff;border-radius:2cqw;padding:2.5cqw 3cqw;box-sizing:border-box;display:flex;flex-direction:column;gap:1.2cqw}
@@ -239,13 +239,17 @@ html[data-theme="light"] .acts .act.empty{background:transparent;border:1px dash
 .gd-box.foot{border-color:#ff9f0a}.gd-box.foot b{background:#ff9f0a;color:#1c1c1e}.gd-box.foot.hot{background:rgba(255,159,10,.18)}
 .gd-pass[data-guides=off] .gd-box{display:none}
 .gd-box b{position:absolute;left:-8px;top:-8px;transform:none;width:16px;height:16px;padding:0;border-radius:50%;display:grid;place-items:center;font:700 9.5px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;box-shadow:0 1px 3px rgba(0,0,0,.4)}
-.gd-box b.r{left:auto;right:-8px}.gd-box b.bl{top:auto;bottom:4px;left:4px}.gd-box b.br{top:auto;bottom:4px;left:auto;right:4px}.gd-box b.in{left:3px;top:3px}.gd-box b.ir{left:auto;right:-8px;top:50%;transform:translate(-100%,-50%);right:auto;left:-6px}
+.gd-box b.r{left:auto;right:-8px}.gd-box b.bl{top:auto;bottom:4px;left:4px}.gd-box b.br{top:auto;bottom:4px;left:auto;right:4px}.gd-box b.in{left:3px;top:3px}.gd-box b.out{left:calc(100% + 4px);top:50%;transform:translateY(-50%)}.gd-box b.ir{left:auto;right:-8px;top:50%;transform:translate(-100%,-50%);right:auto;left:-6px}
 .gd-box.dk{border-color:#bf5af2}.gd-box.dk b{background:#bf5af2}.gd-box.dk.hot{background:rgba(191,90,242,.18)}
 .gd-box.bc{border-color:#64d2ff}.gd-box.bc b{background:#64d2ff;color:#1c1c1e}
 .gd-dark{position:absolute;left:0;right:0;top:0;height:28%;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,0));opacity:0;transition:opacity .2s;pointer-events:none}
 .gd-pass[data-dark=on] .gd-dark{opacity:1}
 .gd-pass[data-dark=on] .gd-head,.gd-pass[data-dark=on] .gd-head i{color:#fff}
-.gd-pass[data-bc=off] .gd-box[data-g=H]{display:none}
+.gd-pass[data-bc=off] .gd-box[data-g=H],.gd-pass[data-bc=off] [data-g=L]{display:none}
+.gd-ovl{position:absolute;left:11.5%;width:77%;top:76.1%;height:2.2%;z-index:3;background:repeating-linear-gradient(135deg,rgba(255,55,95,.75) 0 3px,rgba(255,55,95,0) 3px 6px);pointer-events:none}
+.gd-pass[data-guides=off] .gd-ovl{display:none}
+.gd-box.ov{border-color:#ff375f}.gd-box.ov b{background:#ff375f}.gd-box.ov.hot{background:rgba(255,55,95,.18)}
+.gd-legend li[data-g=L] b{background:#ff375f}
 .gd-legend{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:3px;font-size:12.3px;max-width:340px}
 .gd-legend li{position:relative;padding:3px 6px 3px 30px;border-radius:7px;color:var(--text);cursor:default;line-height:1.45}
 .gd-legend li span{color:var(--muted)}
@@ -258,12 +262,31 @@ html[data-theme="light"] .acts .act.empty{background:transparent;border:1px dash
 .guide-spec{border:1px solid var(--line);border-radius:12px;padding:11px 13px;font-size:12.8px;line-height:1.5;color:var(--text)}
 .guide-spec h3{display:flex;align-items:center;gap:7px;margin:0 0 4px;font-size:13.5px}
 .guide-spec h3 .n{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:50%;background:#0a84ff;color:#fff;font-size:11px;flex:none}
-.guide-spec h3 .n.zone{background:#ffd60a;color:#1c1c1e}.guide-spec h3 .n.foot{background:#ff9f0a;color:#1c1c1e}
+.guide-spec h3 .n.zone{background:#ffd60a;color:#1c1c1e}.guide-spec h3 .n.cy{background:#64d2ff;color:#1c1c1e}.guide-spec h3 .n.pu{background:#bf5af2}.guide-spec h3 .n.foot{background:#ff9f0a;color:#1c1c1e}
 .guide-spec p{margin:0 0 4px;color:var(--muted)}.guide-spec p b,.guide-spec li b{color:var(--text)}
 .guide-spec ul{margin:2px 0 0;padding-left:17px;color:var(--muted)}
 .guide-spec code{font-size:11.5px}
 .guide-spec.hot{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
 .guide-spec[data-g]{cursor:default}
+.guide-ex{margin-top:20px;border-top:1px solid var(--line);padding-top:14px}
+.guide-ex h2{margin:0 0 4px;font-size:16px}.guide-ex h3{margin:16px 0 3px;font-size:14px}
+.guide-ex .sub{color:var(--muted);font-size:12.5px;margin:0 0 10px;line-height:1.5}
+.gx-arts{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.gx-art{display:flex;flex-direction:column;align-items:flex-start;gap:5px;text-align:left;font:inherit;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:12px;padding:8px;cursor:pointer}
+.gx-art:hover{border-color:var(--accent)}.gx-art:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.gx-art b{font-size:12.5px}.gx-art small{font-size:11.5px;color:var(--muted);line-height:1.4}
+.gx-img{position:relative;width:100%;aspect-ratio:358/448;border-radius:9px;background:#555 center top/cover}
+.gx-line{position:absolute;left:0;right:0;top:76.1%;border-top:2px dashed #ff9f0a}
+.guide-ex table{width:100%;border-collapse:collapse;font-size:12.5px}.guide-ex th{text-align:left;font-weight:600;color:var(--muted);font-size:11.5px;padding:6px 8px;border-bottom:1px solid var(--line)}.guide-ex td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:middle}.guide-ex td.n{white-space:nowrap;font-variant-numeric:tabular-nums}.guide-ex .sw{display:inline-grid;place-items:center;width:38px;height:24px;border-radius:6px;font:700 12px -apple-system,BlinkMacSystemFont,sans-serif;border:1px solid rgba(127,127,127,.35);vertical-align:middle;margin-right:6px}
+.gx-colors{min-width:600px}.gx-colors code{font-size:11.5px}
+.gx-fonts{display:grid;gap:8px}
+.gx-fonts>div{display:flex;flex-direction:column;gap:2px;border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.gx-fonts small{font-size:11.5px;color:var(--muted)}.gx-fonts small b{color:var(--text)}
+.gx-f1{font:700 14px -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;letter-spacing:.01em}
+.gx-f2{font:17px ui-monospace,"SF Mono",SFMono-Regular,Menlo,monospace}
+.gx-f3{font:12.5px ui-monospace,"SF Mono",SFMono-Regular,Menlo,monospace;color:var(--muted)}
+.gx-f4{font:12px ui-monospace,"SF Mono",SFMono-Regular,Menlo,monospace}
+.gx-f5{font:700 18px Roboto,"Roboto",-apple-system,sans-serif}
 .guide-res{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
 .guide-res h2{margin:0 0 8px;font-size:16px}
 .guide-res ul{margin:0;padding-left:18px;columns:2 300px;column-gap:28px;font-size:13px;line-height:1.7}
@@ -446,6 +469,8 @@ html[data-theme="light"] .proposal-img img{border:1px solid #dcdcdc}
 html[data-theme="light"] .guide{background:#f0f0f0}
 html[data-theme="light"] .guide-jump a.pri{color:#000000}
 html[data-theme="light"] .guide-seg button.on{color:#000000}
+html[data-theme="light"] .gx-img{background:#ffffff center top/cover}
+html[data-theme="light"] .guide-ex .sw{border:1px solid rgba(160,160,160,0.35)}
 html[data-theme="light"] .a11y{background:#f0f0f0}
 html[data-theme="light"] .a11y .sw{border:1px solid rgba(160,160,160,0.35)}
 html[data-theme="light"] .todo{background:#f0f0f0}
@@ -465,6 +490,7 @@ html[data-theme="light"] .dt-bar{background:#e4e4e4}
 html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode button.on{background:#e7f0ff;color:#0a3d91}html[data-theme="light"] .picker button.on small{color:#3d5f99}html[data-theme="light"] .exp-sw .track{background:#d1d1d6}
 /* END LIGHT THEME */
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 <header class="titlebar">
@@ -487,7 +513,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
     <section class="guide" id="guide" aria-labelledby="guideTitle">
       <div class="guide-h">
         <h1 id="guideTitle">Designing an iOS 27 Poster pass</h1>
-        <p>A quick map for UI/UX before making artwork: where the logo, header, barcode and fields sit on the card, what the footer does with and without a color, and which fonts and colors Wallet allows. Every field is marked with a letter. Flip the switches to see each case, and hover a note or a letter to find it on the card.</p>
+        <p>Where everything sits on the card, and what changes with each setting. Flip the switches; hover a note to find it on the card.</p>
       </div>
       <nav class="guide-jump" aria-label="On this page"><a class="pri" href="#picker">See the AAA templates ↓</a><a href="#a11yTitle">Text contrast check ↓</a><a href="https://developer.apple.com/documentation/walletpasses/defining-the-metadata-of-your-wallet-pass#Add-Featured-Actions" target="_blank" rel="noopener">Apple’s docs ↗</a></nav>
       <div class="guide-grid">
@@ -506,11 +532,13 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
             <div class="gd-foot"><div class="gd-txt prim"><div><i>Member Name</i><b>FULANITO PEREZ</b></div><div><i>Valid Through</i><b>03/27</b></div><div style="text-align:right"><i>Member Since</i><b>1994</b></div></div><div class="gd-txt ft">24/7 Roadside &amp; more: tap Membership Benefits</div></div>
             <div class="gd-dark" aria-hidden="true"></div>
             <div class="gd-box zone gd-focus-on" data-g="J" style="left:3%;right:3%"><b class="in">J</b></div>
-            <div class="gd-box" data-g="A" style="left:2.2%;top:1.6%;width:25%;height:8%"><b class="in">A</b></div>
+            <div class="gd-box" data-g="A" style="left:2.2%;top:1.6%;width:15.5%;height:8.2%"><b class="out">A</b></div>
             <div class="gd-box" data-g="B" style="right:2.2%;top:1.6%;width:36%;height:4.4%"><b class="ir">B</b></div>
             <div class="gd-box" data-g="C" style="right:2.2%;top:6.2%;width:20%;height:4.4%"><b class="ir">C</b></div>
             <div class="gd-box dk" data-g="K" style="left:.6%;right:.6%;top:.4%;height:22%"><b class="bl">K</b></div>
             <div class="gd-box bc" data-g="H" style="left:10.5%;width:79%;top:57.3%;height:21.7%"><b>H</b></div>
+            <div class="gd-ovl" data-g="L" aria-hidden="true"></div>
+            <div class="gd-box ov" data-g="L" style="left:10.5%;width:79%;top:75.6%;height:3.2%"><b class="ir">L</b></div>
             <div class="gd-box foot" data-g="I" style="left:.6%;right:.6%;top:76.1%;bottom:.5%"><b class="br">I</b></div>
             <div class="gd-box" data-g="D" style="left:2.8%;width:36%;top:82.4%;height:8.6%"><b>D</b></div>
             <div class="gd-box" data-g="E" style="left:42%;width:22%;top:82.4%;height:8.6%"><b>E</b></div>
@@ -518,51 +546,56 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
             <div class="gd-box" data-g="G" style="left:2.8%;width:76%;top:93.3%;height:4.6%"><b>G</b></div>
           </div>
           <ol class="gd-legend" id="gdLegend">
-            <li data-g="A"><b>A</b>Logo <code>primaryLogo</code> (falls back to <code>logo</code>)</li>
-            <li data-g="B"><b>B</b>Header field label <span>· labelColor</span></li>
-            <li data-g="C"><b>C</b>Header field value <span>· foregroundColor · 1 header field</span></li>
-            <li data-g="D"><b>D</b>Primary field 1 <span>· label + value</span></li>
+            <li data-g="A"><b>A</b>Logo</li>
+            <li data-g="B"><b>B</b>Header label</li>
+            <li data-g="C"><b>C</b>Header value</li>
+            <li data-g="D"><b>D</b>Primary field 1</li>
             <li data-g="E"><b>E</b>Primary field 2</li>
-            <li data-g="F"><b>F</b>Primary field 3 <span>· up to 4 allowed, 2–3 stay readable</span></li>
-            <li data-g="G"><b>G</b>Footer field <span>· value only, label hidden on iOS 27</span></li>
-            <li data-g="H"><b>H</b>Barcode <span>· PDF417 panel, as our cards use</span></li>
-            <li data-g="I"><b>I</b>Footer area <span>· solid color or frosted glass</span></li>
+            <li data-g="F"><b>F</b>Primary field 3</li>
+            <li data-g="G"><b>G</b>Footer field <span>· value only</span></li>
+            <li data-g="H"><b>H</b>Barcode <span>· PDF417, like ours</span></li>
+            <li data-g="L"><b>L</b>Barcode overlap <span>· ≈10 pt (11%)</span></li>
+            <li data-g="I"><b>I</b>Footer area</li>
             <li data-g="J"><b>J</b>Safe area for the subject</li>
-            <li data-g="K"><b>K</b>Header darkening gradient <span>· size and strength not published</span></li>
+            <li data-g="K"><b>K</b>Header darkening <span>· no % from Apple</span></li>
           </ol>
-          <p class="guide-src">Positions measured in Pass Designer and shown in points (pt) on the 358 × 448 pt card. Values marked ≈ are measurements, not numbers from Apple.</p>
+          <p class="guide-src">Card: 358 × 448 pt. ≈ = measured in Pass Designer.</p>
         </div>
         <div class="guide-specs">
-          <div class="guide-spec" data-g="J"><h3><span class="n zone">1</span>Artwork</h3>
-            <p><b>artwork@2x.png</b> 716 × 896 px and <b>artwork@3x.png</b> 1074 × 1344 px (358 × 448 pt). It fills the whole card, including behind the footer.</p>
-            <p>Keep faces and key subjects between the header (≈45 pt) and the top of the barcode (≈260 pt), or down to the footer (≈341 pt) when there’s no barcode.</p>
-            <p>Gradients and tints must be baked into the image. Colors in pass.json are solid only.</p></div>
-          <div class="guide-spec" data-g="A B C K"><h3><span class="n">2</span>Logo &amp; header</h3>
-            <p><b>primaryLogo</b> (or logo) sits top-left, about 25 pt tall. <b>One header field</b> (label + value) sits top-right.</p>
-            <p>Both sit on the artwork, so the top ≈45 pt needs calm art that contrasts with them.</p></div>
-          <div class="guide-spec" data-g="K"><h3><span class="n">3</span>Header darkening</h3>
-            <p><b>Default (key missing or <code>false</code>):</b> Wallet draws a <b>dark gradient</b> over the top of the artwork so the logo and a white header stay readable. Apple calls it the “header darkening gradient” and <b>doesn’t publish a percentage or height</b>. The shading on the sample is only an illustration.</p>
-            <p><b><code>suppressHeaderDarkening: true</code>:</b> no gradient. The art shows exactly as designed, and header contrast is up to your artwork. Our Alternative cards use this because they put dark header text over a light, tinted sky.</p></div>
-          <div class="guide-spec" data-g="H"><h3><span class="n">4</span>Barcode: with or without</h3>
-            <p><b>With a barcode:</b> a white panel, centered, about 260–351 pt. It’s drawn <b>in front of</b> the footer and overlaps its top edge by about 10 pt. Barcodes stay black on white. Never tint them.</p>
-            <p><b>Without one</b> (NFC or no code): that space just shows the artwork. The footer and fields don’t move.</p></div>
-          <div class="guide-spec" data-g="I"><h3><span class="n foot">5</span>Footer area</h3>
-            <p>A fixed band from ≈341 pt to the bottom (≈107 pt tall). It holds the <b>primary fields</b> row (up to 4; 2–3 stay readable) and <b>one footer line</b>. iOS 27 hides footer labels.</p></div>
-          <div class="guide-spec" data-g="I"><h3><span class="n foot">6</span>Footer color set</h3>
-            <p><code>footerBackgroundColor</code> (an <code>rgb()</code> value) gives a <b>solid, opaque band</b> of exactly that color, and the artwork behind it is hidden. Apple’s reference lists the key for poster event tickets; Pass Designer applies it to Poster Generic as well. Fade the bottom of the art into the same color so the edge is seamless (the white-footer template does this).</p></div>
-          <div class="guide-spec" data-g="I"><h3><span class="n foot">7</span>No footer color: frosted glass</h3>
-            <p>Leave it out and iOS 27 draws <b>frosted glass</b>: a heavy blur of whatever artwork sits behind the footer. Apple <b>doesn’t publish the blur amount or tint</b>. This viewer matches Pass Designer with a 34 px blur, 1.45× saturation and 94% brightness, which is an approximation.</p>
-            <p>The photo’s colors bleed into the glass, so text contrast depends on the art. Lighten the bottom of the artwork with a <b>white veil</b> (the AA templates use 57% and 39%) or pick text colors that pass.</p></div>
-          <div class="guide-spec" data-g="D E F G"><h3><span class="n">8</span>Fonts</h3>
-            <p>Wallet draws every field in <b>Apple’s system fonts</b>. A pass can’t embed a brand font. On the poster, field values use a monospaced face, as in Apple’s layout figure.</p>
-            <p>A brand font is only possible as text baked into the artwork, which can’t change per member and VoiceOver can’t read. Keep member data in fields.</p></div>
-          <div class="guide-spec" data-g="D E F G"><h3><span class="n">9</span>Text colors</h3>
-            <p><code>foregroundColor</code> sets values and the header value. <code>labelColor</code> sets labels. Both are solid <code>rgb()</code> only. Aim for <b>4.5:1</b> against the footer: see the contrast check below.</p></div>
-          <div class="guide-spec" data-g="B C D E F G"><h3><span class="n">10</span>Automatic colors</h3>
-            <p><b><code>useAutomaticColors: true</code>:</b> Wallet picks the text and label colors itself and <b>ignores</b> <code>foregroundColor</code> and <code>labelColor</code>. It also derives the background color from the artwork.</p>
-            <p><b>No <code>labelColor</code>:</b> the system picks the label color. Set every color yourself when you need contrast you can check.</p></div>
-          <div class="guide-spec"><h3><span class="n">11</span>Featured Actions</h3>
-            <p>Up to <b>two</b> cards under the pass on iOS 27. Each has an SF Symbol (prefer circular, filled), a short call to action and a label for what happens. Predefined ones include <code>membershipBenefits</code>, <code>viewOffersRewards</code>, <code>place</code>, <code>call</code> and <code>shop</code>.</p></div>
+          <div class="guide-spec" data-g="J"><h3><span class="n zone">1</span>Artwork</h3><ul><li><b>716 × 896 px</b> (@2x) · <b>1074 × 1344 px</b> (@3x)</li><li>Fills the whole card, behind the footer too</li><li>Keep the subject between ≈45 and ≈260 pt</li><li>Bake gradients into the image</li></ul></div>
+          <div class="guide-spec" data-g="A B C"><h3><span class="n ">2</span>Logo &amp; header</h3><ul><li>Logo top-left, <b>≈26 pt tall</b></li><li><b>1</b> header field, top-right</li></ul></div>
+          <div class="guide-spec" data-g="K"><h3><span class="n pu">3</span>Header darkening</h3><ul><li>Default: dark gradient behind the header</li><li>Apple gives <b>no %</b></li><li><code>suppressHeaderDarkening: true</code> turns it off</li></ul></div>
+          <div class="guide-spec" data-g="H L"><h3><span class="n cy">4</span>Barcode</h3><ul><li><b>77%</b> of the card width, centered</li><li>≈260–351 pt</li><li>Sits <b>in front</b> of the footer, never blurred</li><li>Overlaps the footer by <b>≈10 pt = 11%</b> of the barcode</li><li>No barcode: the art shows there, nothing moves</li></ul></div>
+          <div class="guide-spec" data-g="I"><h3><span class="n foot">5</span>Footer area</h3><ul><li>Starts at <b>≈341 pt</b> (76% down)</li><li>Primary fields + 1 footer line</li><li>Footer labels are hidden</li></ul></div>
+          <div class="guide-spec" data-g="I"><h3><span class="n foot">6</span>Footer color set</h3><ul><li><code>footerBackgroundColor</code>: solid band, art hidden</li><li>Fade the art into the same color</li></ul></div>
+          <div class="guide-spec" data-g="I"><h3><span class="n foot">7</span>No footer color = glass</h3><ul><li>Blur <b>≈11%</b> of the card width</li><li>Saturation <b>145%</b> · brightness <b>94%</b></li><li>Apple gives no %; ours matches Pass Designer</li><li>Light glass needs light art: add a white veil (<b>57%</b> / <b>39%</b> in our AA cards)</li></ul></div>
+          <div class="guide-spec" data-g="D E F G"><h3><span class="n ">8</span>Fonts</h3><ul><li>System fonts only, no custom fonts</li><li>Labels and values are monospaced</li><li>Brand font (Roboto) only baked into the art</li></ul></div>
+          <div class="guide-spec" data-g="B C D E F G"><h3><span class="n ">9</span>Text colors</h3><ul><li><code>foregroundColor</code> = values · <code>labelColor</code> = labels</li><li>Solid <code>rgb()</code> only</li><li>Aim for <b>4.5:1</b></li></ul></div>
+          <div class="guide-spec" data-g="B C D E F G"><h3><span class="n ">10</span>Automatic colors</h3><ul><li><code>useAutomaticColors: true</code>: Wallet picks the text colors and ignores yours</li></ul></div>
+          <div class="guide-spec"><h3><span class="n ">11</span>Featured Actions</h3><ul><li>Up to <b>2</b> cards below the pass</li><li>SF Symbol + short title</li><li>e.g. <code>membershipBenefits</code>, <code>place</code></li></ul></div>
+        </div>
+      </div>
+      <div class="guide-ex">
+        <h2>Files to make</h2>
+        <p class="sub">PNG, in pixels. One set at @2x and one at @3x.</p>
+        <div class="a11y-scroll"><table class="gx-colors"><thead><tr><th>File</th><th>Size (px)</th><th>What it’s for</th><th></th></tr></thead><tbody><tr><td><code>artwork@2x.png</code><br><code>artwork@3x.png</code></td><td class="n">716 × 896<br>1074 × 1344</td><td>The iOS 27 card photo</td><td><span class="a11y-v ok">Needed</span></td></tr><tr><td><code>primaryLogo@2x.png</code><br><code>primaryLogo@3x.png</code></td><td class="n">100 × 60<br>150 × 90</td><td>Logo on the iOS 27 card</td><td><span class="a11y-v ok">Needed</span></td></tr><tr><td><code>logo@2x.png</code><br><code>logo@3x.png</code></td><td class="n">172 × 100<br>258 × 150</td><td>Logo on the iOS 26 card</td><td><span class="a11y-v ok">Needed</span></td></tr><tr><td><code>icon@2x.png</code><br><code>icon@3x.png</code></td><td class="n">76 × 76<br>114 × 114</td><td>Notifications, Lock Screen, Mail</td><td><span class="a11y-v ok">Needed</span></td></tr><tr><td><code>background@2x.png</code><br><code>background@3x.png</code></td><td class="n">690 × 1010<br>1035 × 1515</td><td>Apple Watch backdrop (our choice)</td><td><span class="a11y-v mid">Optional</span></td></tr><tr><td><code>thumbnail@2x.png</code><br><code>thumbnail@3x.png</code></td><td class="n">180 × 180<br>270 × 270</td><td>Small image on the iOS 26 card (not used)</td><td><span class="a11y-v mid">Optional</span></td></tr></tbody></table></div>
+      </div>
+      <div class="guide-ex">
+        <h2>Examples</h2>
+        <h3>Artwork</h3>
+        <p class="sub">Orange line = footer start. Click to open.</p>
+        <div class="gx-arts"><button type="button" class="gx-art" data-gx="membershipBlurAA"><span class="gx-img" style="background-image:url('templates/AAA%20Membership%20Card%20%28Alternative%20Blur%20Glass%20AA%29.pkpasstemplate/artwork@2x.png')"><i class="gx-line" aria-hidden="true"></i></span><span class="a11y-v ok">✓ Do</span><b>Membership · Blur glass AA</b><small>Subject above the barcode · 57% white veil</small></button><button type="button" class="gx-art" data-gx="insuranceAltAA"><span class="gx-img" style="background-image:url('templates/AAA%20Insurance%20Card%20%28Alternative%20AA%29.pkpasstemplate/artwork@2x.png')"><i class="gx-line" aria-hidden="true"></i></span><span class="a11y-v ok">✓ Do</span><b>Insurance · Alternative AA</b><small>Subject mid-card · 39% white veil</small></button><button type="button" class="gx-art" data-gx="membershipAlt"><span class="gx-img" style="background-image:url('templates/AAA%20Membership%20Card%20%28Alternative%29.pkpasstemplate/artwork@2x.png')"><i class="gx-line" aria-hidden="true"></i></span><span class="a11y-v ok">✓ Do</span><b>Membership · white footer</b><small>Photo fades into a solid footer</small></button><button type="button" class="gx-art" data-gx="membershipGlass"><span class="gx-img" style="background-image:url('templates/AAA%20Membership%20Card%20%28Alternative%20Glass%29.pkpasstemplate/artwork@2x.png')"><i class="gx-line" aria-hidden="true"></i></span><span class="a11y-v bad">✕ Avoid</span><b>Membership · iOS 27 glass</b><small>Red car behind the glass · text 1.0:1</small></button></div>
+        <h3>Text colors</h3>
+        <p class="sub">Contrast on each footer. Need 4.5:1.</p>
+        <div class="a11y-scroll"><table class="gx-colors"><thead><tr><th>Color</th><th>Use</th><th>Solid white footer<br><span class="sub">#FAF8FA</span></th><th>Membership AA glass</th><th>Insurance AA glass</th></tr></thead><tbody><tr><td><span class="sw" style="background:#192842;color:#fff">Aa</span><code>#192842</code></td><td><b>Navy AA</b><br><span class="sub">Values, header value</span></td><td class="n"><span class="a11y-v ok">13.96:1</span></td><td class="n"><span class="a11y-v ok">6.52:1</span></td><td class="n"><span class="a11y-v ok">7.29:1</span></td></tr><tr><td><span class="sw" style="background:#27292B;color:#fff">Aa</span><code>#27292B</code></td><td><b>Grey/900</b><br><span class="sub">Labels</span></td><td class="n"><span class="a11y-v ok">13.82:1</span></td><td class="n"><span class="a11y-v ok">6.45:1</span></td><td class="n"><span class="a11y-v ok">7.22:1</span></td></tr><tr><td><span class="sw" style="background:#1C1C1E;color:#fff">Aa</span><code>#1C1C1E</code></td><td><b>Near-black</b><br><span class="sub">Values or labels</span></td><td class="n"><span class="a11y-v ok">16.10:1</span></td><td class="n"><span class="a11y-v ok">7.52:1</span></td><td class="n"><span class="a11y-v ok">8.41:1</span></td></tr><tr><td><span class="sw" style="background:#324A72;color:#fff">Aa</span><code>#324A72</code></td><td><b>Navy/700 (Figma)</b><br><span class="sub">Solid white footer only</span></td><td class="n"><span class="a11y-v ok">8.43:1</span></td><td class="n"><span class="a11y-v bad">3.93:1</span></td><td class="n"><span class="a11y-v bad">4.40:1</span></td></tr><tr><td><span class="sw" style="background:#1C4DA6;color:#fff">Aa</span><code>#1C4DA6</code></td><td><b>Link blue</b><br><span class="sub">Solid white footer only</span></td><td class="n"><span class="a11y-v ok">7.47:1</span></td><td class="n"><span class="a11y-v bad">3.49:1</span></td><td class="n"><span class="a11y-v bad">3.90:1</span></td></tr><tr><td><span class="sw" style="background:#0C72DF;color:#fff">Aa</span><code>#0C72DF</code></td><td><b>Primary blue</b><br><span class="sub">Not for text</span></td><td class="n"><span class="a11y-v bad">4.43:1</span></td><td class="n"><span class="a11y-v bad">2.07:1</span></td><td class="n"><span class="a11y-v bad">2.31:1</span></td></tr><tr><td><span class="sw" style="background:#FFFFFF;color:#000">Aa</span><code>#FFFFFF</code></td><td><b>White</b><br><span class="sub">Dark art only</span></td><td class="n"><span class="a11y-v bad">1.06:1</span></td><td class="n"><span class="a11y-v bad">2.26:1</span></td><td class="n"><span class="a11y-v bad">2.02:1</span></td></tr></tbody></table></div>
+        <h3>Fonts</h3>
+        <p class="sub">For mockups, use SF Pro and SF Mono (Apple Fonts).</p>
+        <div class="gx-fonts">
+          <div><span class="gx-f1">MEMBERSHIP CARD</span><small><b>Header label</b> · SF Pro Bold, caps</small></div>
+          <div><span class="gx-f2">Premier</span><small><b>Header value</b> · SF Mono</small></div>
+          <div><span class="gx-f3">Member Name</span><span class="gx-f2">FULANITO PEREZ</span><small><b>Field label + value</b> · SF Mono</small></div>
+          <div><span class="gx-f4">24/7 ROADSIDE &amp; MORE: TAP MEMBERSHIP BENEFITS</span><small><b>Footer line</b> · SF Mono, caps, 1 line</small></div>
+          <div><span class="gx-f5">Roadside, wherever the road goes.</span><small><b>Art only</b> · Roboto, for titles, never member data</small></div>
         </div>
       </div>
       <div class="guide-res">
@@ -1462,6 +1495,7 @@ document.querySelectorAll('.flipper').forEach(fl => {
   seg('data-gfoot', v => pass.dataset.foot = v);
   seg('data-gart', v => pass.style.backgroundImage = `url('${ART[v]}')`);
   color.addEventListener('input', update);
+  document.querySelectorAll('[data-gx]').forEach(b => b.addEventListener('click', () => { loadDefault(b.dataset.gx); $('picker').scrollIntoView({behavior:'smooth', block:'start'}); }));
   $('gdGuides').addEventListener('change', e => pass.dataset.guides = e.target.checked ? 'on' : 'off');
   document.querySelectorAll('.guide-spec[data-g], #gdLegend li[data-g]').forEach(c => {
     const on = v => { c.classList.toggle('hot', v); pass.querySelectorAll(c.dataset.g.split(' ').map(g => `.gd-box[data-g="${g}"]`).join(',')).forEach(b => b.classList.toggle('hot', v)); };
