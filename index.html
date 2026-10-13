@@ -195,6 +195,71 @@ html[data-theme="light"] .acts .act.empty{background:transparent;border:1px dash
 .proposal-open{flex:none;background:var(--accent);color:#fff;text-decoration:none;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600}
 .proposal-img img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid #2c2d32}
 .proposal-grid{display:grid;gap:22px}
+/* Design guide: first thing on the page */
+.guide{max-width:1100px;margin:6px auto 26px;background:#1b1c20;border:1px solid var(--line);border-radius:18px;padding:20px 22px}
+.guide-h h1{margin:0 0 6px;font-size:24px;letter-spacing:-.01em}
+.guide-h p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.5;max-width:820px}
+.guide-jump{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}
+.guide-jump a{font-size:13px;font-weight:600;text-decoration:none;border-radius:999px;padding:7px 13px;border:1px solid var(--line);color:var(--text)}
+.guide-jump a.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.guide-grid{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:26px;align-items:start}
+@media (max-width:860px){.guide-grid{grid-template-columns:1fr}}
+.guide-ctl{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.guide-ctl .crow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.guide-ctl .crow>span{width:62px;flex:none}
+.guide-seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.guide-seg button{font:600 12px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;background:transparent;color:var(--muted);border:0;padding:6px 10px;cursor:pointer}
+.guide-seg button.on{background:var(--accent);color:#fff}
+.guide-seg button:focus-visible,.guide-ctl input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.guide-ctl input[type=color]{width:34px;height:26px;border:1px solid var(--line);border-radius:7px;padding:0;background:none;cursor:pointer}
+.guide-ctl input[type=color]:disabled{opacity:.35;cursor:not-allowed}
+.guide-ratio{font-size:12px;color:var(--muted)}
+.gd-pass{position:relative;width:100%;max-width:340px;aspect-ratio:358/448;border-radius:16px;overflow:hidden;background:#555 center top/cover;box-shadow:0 10px 30px rgba(0,0,0,.35);container-type:inline-size}
+.gd-foot{position:absolute;left:0;right:0;top:76.1%;bottom:0;isolation:isolate}
+.gd-foot::before{content:"";position:absolute;inset:0;z-index:-1}
+.gd-pass[data-foot=glass] .gd-foot::before{-webkit-backdrop-filter:blur(11cqw) saturate(1.45) brightness(.94);backdrop-filter:blur(11cqw) saturate(1.45) brightness(.94)}
+.gd-pass[data-foot=color] .gd-foot::before{background:var(--gd-foot,#faf8fa)}
+.gd-txt{position:absolute;left:3.9%;right:3.9%;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#192842}
+.gd-txt.prim{top:29%;display:flex;justify-content:space-between;gap:6px}
+.gd-txt.prim i{display:block;font-style:normal;font-size:2.7cqw;color:#27292b}
+.gd-txt.prim b{display:block;font-weight:400;font-size:3.6cqw}
+.gd-txt.ft{top:76%;font-size:2.6cqw;text-transform:uppercase}
+.gd-logo{position:absolute;left:3.35%;top:2.7%;width:22%;height:auto}
+.gd-head{position:absolute;right:3.35%;top:2.7%;text-align:right;font:3.4cqw ui-monospace,SFMono-Regular,Menlo,monospace;color:#192842}
+.gd-head i{display:block;font:700 3cqw -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;font-style:normal;color:#27292b}
+.gd-bc{position:absolute;left:11.5%;width:77%;top:58%;height:20.3%;z-index:3;background:#fff;border-radius:2cqw;padding:2.5cqw 3cqw;box-sizing:border-box;display:flex;flex-direction:column;gap:1.2cqw}
+.gd-bc span{flex:1;background:repeating-linear-gradient(90deg,#000 0 2px,#fff 2px 3px,#000 3px 4px,#fff 4px 7px,#000 7px 8px,#fff 8px 10px)}
+.gd-bc small{font:2.5cqw ui-monospace,Menlo,monospace;color:#000;text-align:center}
+.gd-pass[data-bc=off] .gd-bc{display:none}
+.gd-box{position:absolute;border:1.5px dashed #0a84ff;border-radius:6px;z-index:4;pointer-events:none;transition:background .15s,border-color .15s}
+.gd-box b{position:absolute;left:-1px;top:-1px;transform:translateY(-100%);font:700 9.5px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;background:#0a84ff;color:#fff;border-radius:5px 5px 5px 0;padding:1px 5px;white-space:nowrap}
+.gd-box.under b{top:auto;bottom:-1px;transform:translateY(100%);border-radius:0 5px 5px 5px}
+.gd-box.right b{left:auto;right:-1px;border-radius:5px 5px 0 5px}.gd-box.under.right b{border-radius:5px 0 5px 5px}
+.gd-box.inb b{top:4px;left:4px;transform:none;border-radius:5px}
+.gd-box.inr b{top:4px;left:auto;right:4px;transform:none;border-radius:5px}
+.gd-box.side b{top:50%;left:calc(100% + 5px);transform:translateY(-50%);border-radius:5px}
+.gd-focus-on{top:13%;height:44.5%}.gd-pass[data-bc=off] .gd-focus-on{height:62.6%}
+.gd-box.hot{background:rgba(10,132,255,.22);border-style:solid}
+.gd-box.zone{border-color:#ffd60a}.gd-box.zone b{background:#ffd60a;color:#1c1c1e}.gd-box.zone.hot{background:rgba(255,214,10,.18)}
+.gd-box.foot{border-color:#ff9f0a}.gd-box.foot b{background:#ff9f0a;color:#1c1c1e}.gd-box.foot.hot{background:rgba(255,159,10,.18)}
+.gd-pass[data-bc=off] .gd-box[data-g=bc]{display:none}
+.gd-pass[data-guides=off] .gd-box{display:none}
+.guide-src{margin:10px 0 0;font-size:11.5px;color:var(--muted);line-height:1.5;max-width:340px}
+.guide-specs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.guide-spec{border:1px solid var(--line);border-radius:12px;padding:11px 13px;font-size:12.8px;line-height:1.5;color:var(--text)}
+.guide-spec h3{display:flex;align-items:center;gap:7px;margin:0 0 4px;font-size:13.5px}
+.guide-spec h3 .n{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:50%;background:#0a84ff;color:#fff;font-size:11px;flex:none}
+.guide-spec h3 .n.zone{background:#ffd60a;color:#1c1c1e}.guide-spec h3 .n.foot{background:#ff9f0a;color:#1c1c1e}
+.guide-spec p{margin:0 0 4px;color:var(--muted)}.guide-spec p b,.guide-spec li b{color:var(--text)}
+.guide-spec ul{margin:2px 0 0;padding-left:17px;color:var(--muted)}
+.guide-spec code{font-size:11.5px}
+.guide-spec.hot{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.guide-spec[data-g]{cursor:default}
+.guide-res{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+.guide-res h2{margin:0 0 8px;font-size:16px}
+.guide-res ul{margin:0;padding-left:18px;columns:2 300px;column-gap:28px;font-size:13px;line-height:1.7}
+.guide-res a{color:var(--accent)}
+.guide-res .sub{color:var(--muted)}
 /* Text contrast (WCAG) section under the previews */
 .a11y{max-width:1100px;margin:30px auto 0;background:#1b1c20;border:1px solid var(--line);border-radius:18px;padding:18px 20px}
 .a11y h2{margin:0 0 6px;font-size:19px}
@@ -369,6 +434,9 @@ html[data-theme="light"] .thumbs img{background:repeating-conic-gradient(#fdfdfd
 html[data-theme="light"] .proposal{background:#f0f0f0}
 html[data-theme="light"] .proposal-open{color:#000000}
 html[data-theme="light"] .proposal-img img{border:1px solid #dcdcdc}
+html[data-theme="light"] .guide{background:#f0f0f0}
+html[data-theme="light"] .guide-jump a.pri{color:#000000}
+html[data-theme="light"] .guide-seg button.on{color:#000000}
 html[data-theme="light"] .a11y{background:#f0f0f0}
 html[data-theme="light"] .a11y .sw{border:1px solid rgba(160,160,160,0.35)}
 html[data-theme="light"] .todo{background:#f0f0f0}
@@ -407,9 +475,79 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
   <main class="canvas" id="canvas">
     <section class="inspector" id="inspector" hidden aria-live="polite"></section>
     <div class="dropzone" id="dropzone" hidden><div>Drop your <b>.pkpasstemplate</b> here (a <b>.zip</b> or <b>pass.json</b> works too)</div></div>
+    <section class="guide" id="guide" aria-labelledby="guideTitle">
+      <div class="guide-h">
+        <h1 id="guideTitle">Designing an iOS 27 Poster pass</h1>
+        <p>A quick map for UI/UX before making artwork: where the logo, header, barcode and fields sit on the card, what the footer does with and without a color, and which fonts and colors Wallet allows. Flip the switches on the pass to see each case. Hover a note to find it on the card.</p>
+      </div>
+      <nav class="guide-jump" aria-label="On this page"><a class="pri" href="#picker">See the AAA templates ↓</a><a href="#a11yTitle">Text contrast check ↓</a><a href="https://developer.apple.com/documentation/walletpasses/defining-the-metadata-of-your-wallet-pass#Add-Featured-Actions" target="_blank" rel="noopener">Apple’s docs ↗</a></nav>
+      <div class="guide-grid">
+        <div>
+          <div class="guide-ctl">
+            <div class="crow"><span>Barcode</span><div class="guide-seg" role="group" aria-label="Barcode"><button type="button" data-gbc="on" class="on" aria-pressed="true">With barcode</button><button type="button" data-gbc="off" aria-pressed="false">No barcode</button></div></div>
+            <div class="crow"><span>Footer</span><div class="guide-seg" role="group" aria-label="Footer background"><button type="button" data-gfoot="glass" class="on" aria-pressed="true">No color · frosted glass</button><button type="button" data-gfoot="color" aria-pressed="false">Solid color</button></div><input type="color" id="gdColor" value="#faf8fa" aria-label="footerBackgroundColor" disabled></div>
+            <div class="crow"><span>Artwork</span><div class="guide-seg" role="group" aria-label="Sample artwork"><button type="button" data-gart="m" class="on" aria-pressed="true">Convertible</button><button type="button" data-gart="i" aria-pressed="false">Palms</button></div><label style="display:inline-flex;align-items:center;gap:5px"><input type="checkbox" id="gdGuides" checked> Guides</label></div>
+            <div class="guide-ratio" id="gdRatio" aria-live="polite"></div>
+          </div>
+          <div class="gd-pass" id="gdPass" data-bc="on" data-foot="glass" data-guides="on" style="background-image:url('templates/AAA%20Membership%20Card%20%28Alternative%20Glass%29.pkpasstemplate/artwork@2x.png')" role="img" aria-label="Poster pass layout: logo and header at the top, artwork, barcode, and the footer with fields at the bottom">
+            <img class="gd-logo" src="templates/AAA%20Membership%20Card%20%28Alternative%29.pkpasstemplate/primaryLogo@2x.png" alt="">
+            <div class="gd-head"><i>MEMBERSHIP CARD</i>Premier</div>
+            <div class="gd-bc"><span></span><small>000 000 XXXXXXXXX 0</small></div>
+            <div class="gd-foot"><div class="gd-txt prim"><div><i>Member Name</i><b>FULANITO PEREZ</b></div><div><i>Valid Through</i><b>03/27</b></div><div style="text-align:right"><i>Member Since</i><b>1994</b></div></div><div class="gd-txt ft">24/7 Roadside &amp; more: tap Membership Benefits</div></div>
+            <div class="gd-box zone gd-focus-on inb" data-g="art" style="left:3%;right:3%"><b>1 Keep the subject here</b></div>
+            <div class="gd-box under" data-g="logo" style="left:2.2%;top:1.8%;width:27%;height:7.6%"><b>2 Logo</b></div>
+            <div class="gd-box under right" data-g="logo" style="right:2.2%;top:1.8%;width:40%;height:8.2%"><b>2 Header field</b></div>
+            <div class="gd-box" data-g="bc" style="left:10.5%;width:79%;top:57.3%;height:21.7%"><b>3 Barcode</b></div>
+            <div class="gd-box foot inb" data-g="foot" style="left:.8%;right:.8%;top:76.1%;bottom:.6%"><b>4 Footer area</b></div>
+            <div class="gd-box" data-g="fields" style="left:2.8%;right:2.8%;top:82.4%;height:8.8%"><b style="left:auto;right:-1px;border-radius:5px 5px 0 5px">Primary fields</b></div>
+            <div class="gd-box side" data-g="fields" style="left:2.8%;width:76%;top:93.3%;height:4.6%"><b>Footer field</b></div>
+          </div>
+          <p class="guide-src">Positions measured in Pass Designer and shown in points (pt) on the 358 × 448 pt card. Values marked ≈ are measurements, not numbers from Apple.</p>
+        </div>
+        <div class="guide-specs">
+          <div class="guide-spec" data-g="art"><h3><span class="n zone">1</span>Artwork</h3>
+            <p><b>artwork@2x.png</b> 716 × 896 px and <b>artwork@3x.png</b> 1074 × 1344 px (358 × 448 pt). It fills the whole card, including behind the footer.</p>
+            <p>Keep faces and key subjects between the header (≈45 pt) and the top of the barcode (≈260 pt), or down to the footer (≈341 pt) when there’s no barcode.</p>
+            <p>Gradients and tints must be baked into the image. Colors in pass.json are solid only.</p></div>
+          <div class="guide-spec" data-g="logo"><h3><span class="n">2</span>Logo &amp; header</h3>
+            <p><b>primaryLogo</b> (or logo) sits top-left, about 25 pt tall. <b>One header field</b> (label + value) sits top-right.</p>
+            <p>Both sit on the artwork, so the top ≈45 pt needs calm art that contrasts with them. <code>suppressHeaderDarkening</code> stops Wallet darkening that strip.</p></div>
+          <div class="guide-spec" data-g="bc"><h3><span class="n">3</span>Barcode: with or without</h3>
+            <p><b>With a barcode:</b> a white panel, centered, about 260–351 pt. It’s drawn <b>in front of</b> the footer and overlaps its top edge by about 10 pt. Barcodes stay black on white. Never tint them.</p>
+            <p><b>Without one</b> (NFC or no code): that space just shows the artwork. The footer and fields don’t move.</p></div>
+          <div class="guide-spec" data-g="foot"><h3><span class="n foot">4</span>Footer area</h3>
+            <p>A fixed band from ≈341 pt to the bottom (≈107 pt tall). It holds the <b>primary fields</b> row (up to 4; 2–3 stay readable) and <b>one footer line</b>. iOS 27 hides footer labels.</p></div>
+          <div class="guide-spec" data-g="foot"><h3><span class="n foot">5</span>Footer color set</h3>
+            <p><code>footerBackgroundColor</code> gives a <b>solid band</b> of that color, and the artwork behind it is hidden. Fade the bottom of the art into the same color so the edge is seamless (the white-footer template does this).</p></div>
+          <div class="guide-spec" data-g="foot"><h3><span class="n foot">6</span>No footer color: frosted glass</h3>
+            <p>Leave it out and iOS 27 draws <b>frosted glass</b>: a heavy blur of whatever artwork sits behind the footer (≈34 px blur, a bit more saturated, slightly darker in our tuning).</p>
+            <p>The photo’s colors bleed into the glass, so text contrast depends on the art. Lighten the bottom of the artwork with a <b>white veil</b> (the AA templates use 57% and 39%) or pick text colors that pass.</p></div>
+          <div class="guide-spec" data-g="fields"><h3><span class="n">7</span>Fonts</h3>
+            <p>Wallet draws every field in <b>Apple’s system fonts</b>. A pass can’t embed a brand font. On the poster, field values use a monospaced face, as in Apple’s layout figure.</p>
+            <p>A brand font is only possible as text baked into the artwork, which can’t change per member and VoiceOver can’t read. Keep member data in fields.</p></div>
+          <div class="guide-spec" data-g="fields"><h3><span class="n">8</span>Text colors</h3>
+            <p><code>foregroundColor</code> sets values and the header value. <code>labelColor</code> sets labels. Both are solid <code>rgb()</code> only. Aim for <b>4.5:1</b> against the footer: see the contrast check below.</p></div>
+          <div class="guide-spec"><h3><span class="n">9</span>Featured Actions</h3>
+            <p>Up to <b>two</b> cards under the pass on iOS 27. Each has an SF Symbol (prefer circular, filled), a short call to action and a label for what happens. Predefined ones include <code>membershipBenefits</code>, <code>viewOffersRewards</code>, <code>place</code>, <code>call</code> and <code>shop</code>.</p></div>
+        </div>
+      </div>
+      <div class="guide-res">
+        <h2>Where this comes from &amp; resources</h2>
+        <ul>
+          <li><a href="https://developer.apple.com/documentation/walletpasses/defining-the-metadata-of-your-wallet-pass#Add-Featured-Actions" target="_blank" rel="noopener">Defining the metadata of your Wallet pass</a> <span class="sub">· field layouts, Featured Actions list</span></li>
+          <li><a href="https://developer.apple.com/documentation/walletpasses/creating-a-poster-generic-pass" target="_blank" rel="noopener">Creating a Poster Generic pass</a> <span class="sub">· field counts, backward compatibility, barcodes</span></li>
+          <li><a href="https://developer.apple.com/documentation/walletpasses/creating-a-pass-with-pass-designer" target="_blank" rel="noopener">Creating a pass with Pass Designer</a> <span class="sub">· the template tool</span></li>
+          <li><a href="https://developer.apple.com/design/human-interface-guidelines/wallet" target="_blank" rel="noopener">Human Interface Guidelines › Wallet</a> <span class="sub">· design guidance, field types</span></li>
+          <li><a href="https://developer.apple.com/wallet/add-to-apple-wallet-guidelines/" target="_blank" rel="noopener">Add to Apple Wallet guidelines</a> <span class="sub">· badge artwork and usage</span></li>
+          <li><a href="https://developer.apple.com/sf-symbols/" target="_blank" rel="noopener">SF Symbols</a> <span class="sub">· icons for Featured Actions</span></li>
+          <li><a href="https://developer.apple.com/fonts/" target="_blank" rel="noopener">Apple Fonts</a> <span class="sub">· SF Pro and SF Mono for mockups</span></li>
+          <li><a href="https://developer.apple.com/design/resources/" target="_blank" rel="noopener">Apple Design Resources</a> <span class="sub">· iOS UI kits for Figma and Sketch</span></li>
+        </ul>
+      </div>
+    </section>
     <div id="chooser"></div>
     <div class="hero three">
-      <div class="picker" id="picker" role="tablist" aria-label="Template" style="--tabs:6">
+      <div class="picker" id="picker" role="tablist" aria-label="Template" style="--tabs:8">
         <button role="tab" data-pass="membershipAlt" class="on" aria-selected="true">
           <span class="thumb" style="background-image:url('templates/AAA%20Membership%20Card%20(Alternative).pkpasstemplate/artwork@2x.png')"></span>
           <span class="pt"><b>Membership</b><small>Alternative · white footer</small></span>
@@ -422,9 +560,17 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
           <span class="thumb" style="background-image:url('templates/AAA%20Membership%20Card%20(Alternative%20Blur%20Glass).pkpasstemplate/artwork@2x.png')"></span>
           <span class="pt"><b>Membership</b><small>Alternative · blur glass</small></span>
         </button>
+        <button role="tab" data-pass="membershipBlurAA" aria-selected="false">
+          <span class="thumb" style="background-image:url('templates/AAA%20Membership%20Card%20%28Alternative%20Blur%20Glass%20AA%29.pkpasstemplate/artwork@2x.png')"></span>
+          <span class="pt"><b>Membership</b><small>Blur glass · AA contrast ✓</small></span>
+        </button>
         <button role="tab" data-pass="insuranceAlt" aria-selected="false">
           <span class="thumb" style="background-image:url('templates/AAA%20Insurance%20Card%20(Alternative).pkpasstemplate/artwork@2x.png')"></span>
           <span class="pt"><b>Insurance</b><small>Alternative</small></span>
+        </button>
+        <button role="tab" data-pass="insuranceAltAA" aria-selected="false">
+          <span class="thumb" style="background-image:url('templates/AAA%20Insurance%20Card%20%28Alternative%20AA%29.pkpasstemplate/artwork@2x.png')"></span>
+          <span class="pt"><b>Insurance</b><small>Alternative · AA contrast ✓</small></span>
         </button>
         <button role="tab" data-pass="membership" aria-selected="false">
           <span class="thumb" style="background-image:url('templates/AAA%20Membership%20Card.pkpasstemplate/artwork@2x.png')"></span>
@@ -472,7 +618,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
       <div class="a11y-detail" id="a11yDetail" aria-live="polite"></div>
       <ul class="a11y-notes">
         <li><b>How it’s measured:</b> the glass is rebuilt from each template’s artwork the same way the viewer draws it (blur 34px, saturate 1.45, brightness .94), which matches Pass Designer to within about 10–20 RGB levels. Every pixel behind each line of text is checked, and “Lowest” is the worst spot.</li>
-        <li><b>Glass drift:</b> the lowest ratio again after shifting the glass 15 RGB levels toward the text color, to cover the difference from Pass Designer and the device.</li>
+        <li><b>Glass drift:</b> the lowest ratio again after shifting the glass 15 RGB levels toward the text color (less contrast), to cover the difference from Pass Designer and the device. A card only counts as safe when this column passes too.</li>
         <li><b>Original cards</b> use automatic colors, so Wallet picks the text color from the art. The viewer approximates that pick, and the white and dark columns show both possible outcomes.</li>
         <li>Not covered: iOS 26 cards (solid colors, no glass), the barcode panel (black on white), and Apple Watch. Confirm on a device with Xcode’s Accessibility Inspector before shipping.</li>
       </ul>
@@ -596,6 +742,8 @@ const DEFAULTS = {
   membershipAlt: 'AAA Membership Card (Alternative).pkpasstemplate',
   membershipGlass: 'AAA Membership Card (Alternative Glass).pkpasstemplate',
   membershipBlur: 'AAA Membership Card (Alternative Blur Glass).pkpasstemplate',
+  membershipBlurAA: 'AAA Membership Card (Alternative Blur Glass AA).pkpasstemplate',
+  insuranceAltAA: 'AAA Insurance Card (Alternative AA).pkpasstemplate',
   insuranceAlt: 'AAA Insurance Card (Alternative).pkpasstemplate',
   membership: 'AAA Membership Card.pkpasstemplate',
   insurance: 'AAA Insurance Card.pkpasstemplate'
@@ -1256,9 +1404,40 @@ document.querySelectorAll('.flipper').forEach(fl => {
   fl.addEventListener('pointercancel', () => { start = null; card.style.transition = ''; card.style.transform = ''; });
 });
 
+/* ---------- Design guide (top of the page) ---------- */
+(function(){
+  const pass = $('gdPass'), color = $('gdColor'), ratioEl = $('gdRatio');
+  const ART = {m:"templates/AAA%20Membership%20Card%20%28Alternative%20Glass%29.pkpasstemplate/artwork@2x.png", i:"templates/AAA%20Insurance%20Card%20%28Alternative%29.pkpasstemplate/artwork@2x.png"};
+  const lin = c => { c /= 255; return c <= .04045 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4); };
+  const lum = h => { const n = parseInt(h.slice(1), 16), r = n >> 16, g = n >> 8 & 255, b = n & 255; return .2126 * lin(r) + .7152 * lin(g) + .0722 * lin(b); };
+  const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
+  function update(){
+    const solid = pass.dataset.foot === 'color';
+    color.disabled = !solid; pass.style.setProperty('--gd-foot', color.value);
+    if(solid){
+      const v = ratio(color.value, '#192842'), l = ratio(color.value, '#27292b'), ok = Math.min(v, l) >= 4.5;
+      ratioEl.innerHTML = `Footer <code>${color.value.toUpperCase()}</code>: values ${v.toFixed(1)}:1, labels ${l.toFixed(1)}:1 <b style="color:${ok ? 'var(--ok)' : 'var(--bad)'}">${ok ? '✓ passes AA' : '✕ below 4.5:1'}</b>`;
+    } else ratioEl.textContent = 'Frosted glass: contrast depends on the artwork behind the footer (see the contrast check below).';
+  }
+  const seg = (attr, fn) => document.querySelectorAll('[' + attr + ']').forEach(b => b.addEventListener('click', () => {
+    b.parentElement.querySelectorAll('button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', String(x === b)); });
+    fn(b.getAttribute(attr)); update();
+  }));
+  seg('data-gbc', v => pass.dataset.bc = v);
+  seg('data-gfoot', v => pass.dataset.foot = v);
+  seg('data-gart', v => pass.style.backgroundImage = `url('${ART[v]}')`);
+  color.addEventListener('input', update);
+  $('gdGuides').addEventListener('change', e => pass.dataset.guides = e.target.checked ? 'on' : 'off');
+  document.querySelectorAll('.guide-spec[data-g]').forEach(c => {
+    const on = v => { c.classList.toggle('hot', v); pass.querySelectorAll(`.gd-box[data-g="${c.dataset.g}"]`).forEach(b => b.classList.toggle('hot', v)); };
+    c.addEventListener('mouseenter', () => on(true)); c.addEventListener('mouseleave', () => on(false));
+  });
+  update();
+})();
+
 /* ---------- Text contrast (WCAG 2.2 AA) ----------
    Measured offline by template-build/contrast/check_contrast.py from each template's artwork. */
-const A11Y = [{"key":"membershipAlt","name":["Membership","Alternative \u00b7 white footer"],"glass":false,"auto":false,"fix":"The white footer passes easily. Only the header value (\u201cPremier\u201d, #324A72 over the tinted sky) is short at 3.5:1. Using the label color #27292B there gives 5.7:1.","rows":[{"t":"Field labels","on":"solid","c":[39,41,43],"bg":[250,248,250],"min":13.82,"med":13.82,"worst":14.6,"w":1.06,"b":16.1},{"t":"Field values","on":"solid","c":[50,74,114],"bg":[250,248,250],"min":8.43,"med":8.43,"worst":8.91,"w":1.06,"b":16.1},{"t":"Footer line","on":"solid","c":[50,74,114],"bg":[250,248,250],"min":8.43,"med":8.43,"worst":8.91,"w":1.06,"b":16.1},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[195,191,219],"min":5.74,"med":8.54,"worst":5.74,"w":1.47,"b":6.69},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[195,191,219],"min":3.5,"med":5.21,"worst":3.5,"w":1.47,"b":6.69}]},{"key":"membershipGlass","name":["Membership","Alternative \u00b7 iOS 27 glass"],"glass":true,"auto":false,"fix":"Fails on the glass: the red car shows straight through it. White text still fails the footer line. Dark #1C1C1E text passes once about 38% white veil sits under the glass, which is what the Blur Glass version does.","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[185,43,34],"min":1.41,"med":2.66,"worst":1.74,"w":4.19,"b":1.64},{"t":"Field values","on":"glass","c":[50,74,114],"bg":[197,47,36],"min":1.02,"med":1.75,"worst":1.27,"w":4.15,"b":1.95},{"t":"Footer line","on":"glass","c":[50,74,114],"bg":[218,54,39],"min":1.09,"med":2.08,"worst":1.35,"w":2.65,"b":2.09},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[195,191,219],"min":5.74,"med":8.54,"worst":5.74,"w":1.47,"b":6.69},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[195,191,219],"min":3.5,"med":5.21,"worst":3.5,"w":1.47,"b":6.69}]},{"key":"membershipBlur","name":["Membership","Alternative \u00b7 blur glass"],"glass":true,"auto":false,"fix":"Closest of the glass versions. Switch foregroundColor and labelColor to #1C1C1E and raise the white veil under the glass from 38% to about 41%. Then every line on the glass passes. The header value has the same 3.5:1 issue as the white-footer version.","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[205,117,111],"min":3.61,"med":4.63,"worst":4.4,"w":2.85,"b":4.2},{"t":"Field values","on":"glass","c":[50,74,114],"bg":[213,119,112],"min":2.41,"med":2.98,"worst":2.93,"w":2.56,"b":4.61},{"t":"Footer line","on":"glass","c":[50,74,114],"bg":[226,124,114],"min":2.51,"med":3.15,"worst":3.04,"w":1.89,"b":4.8},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[195,191,219],"min":5.74,"med":8.54,"worst":5.74,"w":1.47,"b":6.69},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[195,191,219],"min":3.5,"med":5.21,"worst":3.5,"w":1.47,"b":6.69}]},{"key":"insuranceAlt","name":["Insurance","Alternative"],"glass":true,"auto":false,"fix":"Fails on the glass. With #1C1C1E text and a white veil of about 15% under the glass (like the Blur Glass Membership), every line passes. The header already passes.","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[181,126,92],"min":2.89,"med":4.37,"worst":3.57,"w":2.39,"b":3.37},{"t":"Field values","on":"glass","c":[50,74,114],"bg":[188,136,105],"min":2.04,"med":2.95,"worst":2.5,"w":2.07,"b":3.91},{"t":"Footer line","on":"glass","c":[50,74,114],"bg":[207,173,155],"min":3.54,"med":4.24,"worst":4.21,"w":1.59,"b":6.77},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[199,194,224],"min":7.79,"med":8.47,"worst":7.79,"w":1.55,"b":9.07},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[199,194,224],"min":4.75,"med":5.17,"worst":4.75,"w":1.55,"b":9.07}]},{"key":"membership","name":["Membership","Original"],"glass":true,"auto":true,"fix":"Wallet picks the text colors here (useAutomaticColors), so the viewer approximates them. The glass is mid-tone, so neither white nor dark text passes the labels. Dark text plus about a 36% white veil under the glass fixes it, or set a solid footerBackgroundColor. The header is white on bright sky (2.4:1). Dark text there gets 6.1:1.","rows":[{"t":"Field labels","on":"glass","c":[110,110,115],"bg":[121,110,113],"min":1.0,"med":1.41,"worst":1.0,"w":2.66,"b":1.63},{"t":"Field values","on":"glass","c":[28,28,30],"bg":[127,115,118],"min":1.91,"med":3.78,"worst":2.41,"w":2.88,"b":1.91},{"t":"Footer line","on":"glass","c":[28,28,30],"bg":[134,121,126],"min":3.37,"med":4.1,"worst":4.17,"w":3.69,"b":3.37},{"t":"Header label","on":"photo","c":[255,255,255],"bg":[69,165,250],"min":2.4,"med":2.61,"worst":2.4,"w":2.4,"b":6.05},{"t":"Header value","on":"photo","c":[255,255,255],"bg":[69,165,250],"min":2.4,"med":2.61,"worst":2.4,"w":2.4,"b":6.05}]},{"key":"insurance","name":["Insurance","Original"],"glass":true,"auto":true,"fix":"Wallet picks the text colors here (useAutomaticColors). The glass is dark, so white text passes every line (6:1 or better), while the viewer\u2019s dark-text approximation fails. Set foregroundColor and labelColor to white so the result doesn\u2019t depend on Wallet\u2019s choice.","rows":[{"t":"Field labels","on":"glass","c":[110,110,115],"bg":[97,56,36],"min":1.29,"med":1.55,"worst":1.61,"w":6.53,"b":1.0},{"t":"Field values","on":"glass","c":[28,28,30],"bg":[102,59,36],"min":1.0,"med":2.21,"worst":1.17,"w":6.37,"b":1.0},{"t":"Footer line","on":"glass","c":[28,28,30],"bg":[119,67,39],"min":1.22,"med":2.29,"worst":1.52,"w":5.97,"b":1.22}]}];
+const A11Y = [{"key":"membershipBlurAA","name":["Membership","Blur glass \u00b7 AA"],"glass":true,"auto":false,"fix":"Passes AA everywhere, even with the glass 15 RGB levels darker. Same artwork and layout as Blur glass, with the white veil under the glass raised from 38% to 57% and values plus header in a deeper navy (#192842, Navy/700\u2019s hue). Labels stay Grey/900 #27292B.","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[216,154,151],"min":5.61,"med":6.44,"worst":4.66,"w":2.16,"b":6.54},{"t":"Field values","on":"glass","c":[25,40,66],"bg":[221,156,151],"min":5.98,"med":6.66,"worst":4.98,"w":1.95,"b":6.89},{"t":"Footer line","on":"glass","c":[25,40,66],"bg":[230,159,153],"min":6.15,"med":6.87,"worst":5.13,"w":1.61,"b":7.09},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[195,191,219],"min":5.74,"med":8.54,"worst":5.74,"w":1.47,"b":6.69},{"t":"Header value","on":"photo","c":[25,40,66],"bg":[195,191,219],"min":5.8,"med":8.63,"worst":5.8,"w":1.47,"b":6.69}]},{"key":"insuranceAltAA","name":["Insurance","Alternative \u00b7 AA"],"glass":true,"auto":false,"fix":"Passes AA everywhere, even with the glass 15 RGB levels darker. Same artwork as Insurance \u00b7 Alternative, with a 39% white veil under the glass and values plus header in a deeper navy (#192842). Labels stay Grey/900 #27292B.","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[204,170,149],"min":5.57,"med":6.87,"worst":4.62,"w":1.78,"b":6.49},{"t":"Field values","on":"glass","c":[25,40,66],"bg":[208,176,157],"min":6.09,"med":7.35,"worst":5.08,"w":1.63,"b":7.03},{"t":"Footer line","on":"glass","c":[25,40,66],"bg":[220,199,188],"min":8.16,"med":9.04,"worst":6.93,"w":1.39,"b":9.41},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[199,194,224],"min":7.79,"med":8.47,"worst":7.79,"w":1.55,"b":9.07},{"t":"Header value","on":"photo","c":[25,40,66],"bg":[199,194,224],"min":7.87,"med":8.56,"worst":7.87,"w":1.55,"b":9.07}]},{"key":"membershipAlt","name":["Membership","Alternative \u00b7 white footer"],"glass":false,"auto":false,"fix":"The white footer passes easily. Only the header value (\u201cPremier\u201d, #324A72 over the tinted sky) is short at 3.5:1. Using the label color #27292B there gives 5.7:1.","rows":[{"t":"Field labels","on":"solid","c":[39,41,43],"bg":[250,248,250],"min":13.82,"med":13.82,"worst":12.09,"w":1.06,"b":16.1},{"t":"Field values","on":"solid","c":[50,74,114],"bg":[250,248,250],"min":8.43,"med":8.43,"worst":7.37,"w":1.06,"b":16.1},{"t":"Footer line","on":"solid","c":[50,74,114],"bg":[250,248,250],"min":8.43,"med":8.43,"worst":7.37,"w":1.06,"b":16.1},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[195,191,219],"min":5.74,"med":8.54,"worst":5.74,"w":1.47,"b":6.69},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[195,191,219],"min":3.5,"med":5.21,"worst":3.5,"w":1.47,"b":6.69}]},{"key":"membershipGlass","name":["Membership","Alternative \u00b7 iOS 27 glass"],"glass":true,"auto":false,"fix":"Fails on the glass: the red car shows straight through it. White text still fails the footer line. Dark text passes once roughly 55\u201360% white veil sits under the glass (see Blur glass \u00b7 AA).","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[185,43,34],"min":1.41,"med":2.66,"worst":1.15,"w":4.19,"b":1.64},{"t":"Field values","on":"glass","c":[50,74,114],"bg":[197,47,36],"min":1.02,"med":1.75,"worst":1.0,"w":4.15,"b":1.95},{"t":"Footer line","on":"glass","c":[50,74,114],"bg":[218,54,39],"min":1.09,"med":2.08,"worst":1.0,"w":2.65,"b":2.09},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[195,191,219],"min":5.74,"med":8.54,"worst":5.74,"w":1.47,"b":6.69},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[195,191,219],"min":3.5,"med":5.21,"worst":3.5,"w":1.47,"b":6.69}]},{"key":"membershipBlur","name":["Membership","Alternative \u00b7 blur glass"],"glass":true,"auto":false,"fix":"Fails on the glass with the 38% veil. The Blur glass \u00b7 AA version fixes it with a 57% veil and a deeper navy (#192842) for the values and header.","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[205,117,111],"min":3.61,"med":4.63,"worst":2.92,"w":2.85,"b":4.2},{"t":"Field values","on":"glass","c":[50,74,114],"bg":[213,119,112],"min":2.41,"med":2.98,"worst":1.97,"w":2.56,"b":4.61},{"t":"Footer line","on":"glass","c":[50,74,114],"bg":[226,124,114],"min":2.51,"med":3.15,"worst":2.05,"w":1.89,"b":4.8},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[195,191,219],"min":5.74,"med":8.54,"worst":5.74,"w":1.47,"b":6.69},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[195,191,219],"min":3.5,"med":5.21,"worst":3.5,"w":1.47,"b":6.69}]},{"key":"insuranceAlt","name":["Insurance","Alternative"],"glass":true,"auto":false,"fix":"Fails on the glass. The Insurance \u00b7 Alternative AA version fixes it with a 39% white veil under the glass and a deeper navy (#192842).","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[181,126,92],"min":2.89,"med":4.37,"worst":2.32,"w":2.39,"b":3.37},{"t":"Field values","on":"glass","c":[50,74,114],"bg":[188,136,105],"min":2.04,"med":2.95,"worst":1.65,"w":2.07,"b":3.91},{"t":"Footer line","on":"glass","c":[50,74,114],"bg":[207,173,155],"min":3.54,"med":4.24,"worst":2.95,"w":1.59,"b":6.77},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[199,194,224],"min":7.79,"med":8.47,"worst":7.79,"w":1.55,"b":9.07},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[199,194,224],"min":4.75,"med":5.17,"worst":4.75,"w":1.55,"b":9.07}]},{"key":"membership","name":["Membership","Original"],"glass":true,"auto":true,"fix":"Wallet picks the text colors here (useAutomaticColors), so the viewer approximates them. The glass is mid-tone, so neither white nor dark text passes the labels. A strong white veil under the glass plus dark text, or a solid footerBackgroundColor, fixes it. The header is white on bright sky (2.4:1). Dark text there gets 6.1:1.","rows":[{"t":"Field labels","on":"glass","c":[110,110,115],"bg":[121,110,113],"min":1.0,"med":1.41,"worst":1.0,"w":2.66,"b":1.63},{"t":"Field values","on":"glass","c":[28,28,30],"bg":[127,115,118],"min":1.91,"med":3.78,"worst":1.51,"w":2.88,"b":1.91},{"t":"Footer line","on":"glass","c":[28,28,30],"bg":[134,121,126],"min":3.37,"med":4.1,"worst":2.69,"w":3.69,"b":3.37},{"t":"Header label","on":"photo","c":[255,255,255],"bg":[69,165,250],"min":2.4,"med":2.61,"worst":2.4,"w":2.4,"b":6.05},{"t":"Header value","on":"photo","c":[255,255,255],"bg":[69,165,250],"min":2.4,"med":2.61,"worst":2.4,"w":2.4,"b":6.05}]},{"key":"insurance","name":["Insurance","Original"],"glass":true,"auto":true,"fix":"Wallet picks the text colors here (useAutomaticColors). The glass is dark, so white text passes every line (6:1 or better), while the viewer\u2019s dark-text approximation fails. Set foregroundColor and labelColor to white so the result doesn\u2019t depend on Wallet\u2019s choice.","rows":[{"t":"Field labels","on":"glass","c":[110,110,115],"bg":[97,56,36],"min":1.29,"med":1.55,"worst":1.04,"w":6.53,"b":1.0},{"t":"Field values","on":"glass","c":[28,28,30],"bg":[102,59,36],"min":1.0,"med":2.21,"worst":1.0,"w":6.37,"b":1.0},{"t":"Footer line","on":"glass","c":[28,28,30],"bg":[119,67,39],"min":1.22,"med":2.29,"worst":1.02,"w":5.97,"b":1.22}]}];
 const a11yRowOk = r => r.min >= 4.5;
 const a11yVerdict = c => c.rows.every(a11yRowOk) ? ['ok','Passes AA'] : c.rows.some(r => r.on !== 'photo' && !a11yRowOk(r)) ? ['bad','Fails on the ' + (c.glass ? 'glass' : 'footer')] : ['mid','Footer passes · header fails'];
 const a11yRatio = v => `<span class="${v >= 4.5 ? '' : 'sub'}">${v.toFixed(2)}:1</span>`;
@@ -1416,7 +1595,7 @@ let simCards = [], simExpired = false, simFromExpired = false;
 async function simBuildStack(){
   // Originals open with just the two originals; proposals (or an import) open with the proposals plus any imported passes.
   const imported = imports.map(x => 'imp:' + x.id);
-  const keys = ['membership', 'insurance'].includes(state.key) ? ['membership', 'insurance'] : ['membershipAlt', 'membershipGlass', 'membershipBlur', 'insuranceAlt'].concat(imported);
+  const keys = ['membership', 'insurance'].includes(state.key) ? ['membership', 'insurance'] : ['membershipAlt', 'membershipGlass', 'membershipBlur', 'membershipBlurAA', 'insuranceAlt', 'insuranceAltAA'].concat(imported);
   const sel = keys.includes(state.key) ? state.key : keys[0];
   const order = keys.filter(k => k !== sel).concat(sel);
   const aaa = await Promise.all(order.map(async k => ({key: k, ...simRender(await simEntry(k)), label: k.startsWith('imp:') ? importById(k).name.replace(/\.pkpasstemplate$/i, '') : ({membershipAlt:'Membership (Alternative)', membershipGlass:'Membership (Glass)', membershipBlur:'Membership (Blur Glass)', insuranceAlt:'Insurance (Alternative)', membership:'Membership', insurance:'Insurance'})[k]})));
