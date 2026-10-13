@@ -379,10 +379,18 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
     <div class="dropzone" id="dropzone" hidden><div>Drop your <b>.pkpasstemplate</b> here (a <b>.zip</b> or <b>pass.json</b> works too)</div></div>
     <div id="chooser"></div>
     <div class="hero three">
-      <div class="picker" id="picker" role="tablist" aria-label="Template" style="--tabs:4">
+      <div class="picker" id="picker" role="tablist" aria-label="Template" style="--tabs:6">
         <button role="tab" data-pass="membershipAlt" class="on" aria-selected="true">
           <span class="thumb" style="background-image:url('templates/AAA%20Membership%20Card%20(Alternative).pkpasstemplate/artwork@2x.png')"></span>
-          <span class="pt"><b>Membership</b><small>Alternative</small></span>
+          <span class="pt"><b>Membership</b><small>Alternative · white footer</small></span>
+        </button>
+        <button role="tab" data-pass="membershipGlass" aria-selected="false">
+          <span class="thumb" style="background-image:url('templates/AAA%20Membership%20Card%20(Alternative%20Glass).pkpasstemplate/artwork@2x.png')"></span>
+          <span class="pt"><b>Membership</b><small>Alternative · iOS 27 glass</small></span>
+        </button>
+        <button role="tab" data-pass="membershipBlur" aria-selected="false">
+          <span class="thumb" style="background-image:url('templates/AAA%20Membership%20Card%20(Alternative%20Blur%20Glass).pkpasstemplate/artwork@2x.png')"></span>
+          <span class="pt"><b>Membership</b><small>Alternative · blur glass</small></span>
         </button>
         <button role="tab" data-pass="insuranceAlt" aria-selected="false">
           <span class="thumb" style="background-image:url('templates/AAA%20Insurance%20Card%20(Alternative).pkpasstemplate/artwork@2x.png')"></span>
@@ -542,6 +550,8 @@ const INF = Infinity;
 
 const DEFAULTS = {
   membershipAlt: 'AAA Membership Card (Alternative).pkpasstemplate',
+  membershipGlass: 'AAA Membership Card (Alternative Glass).pkpasstemplate',
+  membershipBlur: 'AAA Membership Card (Alternative Blur Glass).pkpasstemplate',
   insuranceAlt: 'AAA Insurance Card (Alternative).pkpasstemplate',
   membership: 'AAA Membership Card.pkpasstemplate',
   insurance: 'AAA Insurance Card.pkpasstemplate'
@@ -1338,10 +1348,10 @@ let simCards = [], simExpired = false, simFromExpired = false;
 async function simBuildStack(){
   // Originals open with just the two originals; proposals (or an import) open with the proposals plus any imported passes.
   const imported = imports.map(x => 'imp:' + x.id);
-  const keys = ['membership', 'insurance'].includes(state.key) ? ['membership', 'insurance'] : ['membershipAlt', 'insuranceAlt'].concat(imported);
+  const keys = ['membership', 'insurance'].includes(state.key) ? ['membership', 'insurance'] : ['membershipAlt', 'membershipGlass', 'membershipBlur', 'insuranceAlt'].concat(imported);
   const sel = keys.includes(state.key) ? state.key : keys[0];
   const order = keys.filter(k => k !== sel).concat(sel);
-  const aaa = await Promise.all(order.map(async k => ({key: k, ...simRender(await simEntry(k)), label: k.startsWith('imp:') ? importById(k).name.replace(/\.pkpasstemplate$/i, '') : ({membershipAlt:'Membership (Alternative)', insuranceAlt:'Insurance (Alternative)', membership:'Membership', insurance:'Insurance'})[k]})));
+  const aaa = await Promise.all(order.map(async k => ({key: k, ...simRender(await simEntry(k)), label: k.startsWith('imp:') ? importById(k).name.replace(/\.pkpasstemplate$/i, '') : ({membershipAlt:'Membership (Alternative)', membershipGlass:'Membership (Glass)', membershipBlur:'Membership (Blur Glass)', insuranceAlt:'Insurance (Alternative)', membership:'Membership', insurance:'Insurance'})[k]})));
   simCards = [{mock: true, name: 'Credit Card', color: 'linear-gradient(135deg,#3a3a3c,#1c1c1e)', meta: '•••• 4021'},
               {mock: true, name: 'Rewards Card', color: '#30b650', meta: '1,250 pts'}].concat(aaa);
   const front = simCards.length - 1;                  // selected template is last (front)

@@ -18,7 +18,6 @@
       "type" : "place"
     }
   ],
-  "footerBackgroundColor" : "rgb(255,255,255)",
   "foregroundColor" : "rgb(0,0,0)",
   "formatVersion" : 1,
   "generic" : {
@@ -223,5 +222,5 @@
   "serialNumber" : "CAA000XXXX",
   "suppressHeaderDarkening" : false,
   "teamIdentifier" : "",
-  "useAutomaticColors" : false
+  "useAutomaticColors" : true
 }
