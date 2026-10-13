@@ -216,18 +216,33 @@ html[data-theme="light"] .acts .act.empty{background:transparent;border:1px dash
 .guide-ctl input[type=color]:disabled{opacity:.35;cursor:not-allowed}
 .guide-ratio{font-size:12px;color:var(--muted)}
 .gd-pass{position:relative;width:100%;max-width:340px;aspect-ratio:358/448;border-radius:16px;overflow:hidden;background:#555 center top/cover;box-shadow:0 10px 30px rgba(0,0,0,.35);container-type:inline-size}
+.gd-pass[data-art=none]{background:repeating-conic-gradient(#e5e5ea 0 25%,#f2f2f7 0 50%) 0 0/18px 18px}
+.gd-empty{position:absolute;left:12%;right:12%;top:18%;height:34%;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1cqw;text-align:center;font:600 4.6cqw -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;color:#0a3d7a;background:rgba(10,132,255,.12);border:2px dashed #0a84ff;border-radius:4cqw;cursor:pointer}
+.gd-empty:hover{background:rgba(10,132,255,.32)}.gd-empty:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.gd-empty-ic{display:grid;place-items:center;width:11cqw;height:11cqw;border-radius:50%;background:#0a84ff;color:#fff;font-size:7cqw;line-height:1}
+.gd-upload{display:flex;align-items:center;gap:12px;width:100%;max-width:340px;box-sizing:border-box;padding:12px 16px;border:0;border-radius:12px;background:var(--accent);color:#fff;cursor:pointer;text-align:left;font:inherit;margin-bottom:4px}
+.gd-upload svg{width:24px;height:24px;flex:none}.gd-upload b{display:block;font-size:15px}.gd-upload small{display:block;font-size:12px;opacity:.85}
+.gd-upload:hover{filter:brightness(1.08)}.gd-upload:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.gd-empty small{font-weight:400;font-size:3.2cqw;color:#3a5f8f}
+.gd-pass:not([data-art=none]) .gd-empty{display:none}
+.gd-pass[data-logo=none] .gd-logo{display:none}
+.gd-logo{max-width:30%;object-fit:contain;object-position:left}
+.gd-txt,.gd-head{color:var(--gd-fg,#192842)}
+.gd-txt.prim i,.gd-head i{color:var(--gd-label,#27292b)}
+.gd-pick{display:inline-flex;align-items:center;gap:5px;color:var(--text)}
+.gd-pick input{width:30px;height:24px;border:1px solid var(--line);border-radius:6px;padding:0;background:none;cursor:pointer}
 .gd-foot{position:absolute;left:0;right:0;top:76.1%;bottom:0;isolation:isolate}
 .gd-foot::before{content:"";position:absolute;inset:0;z-index:-1}
 .gd-pass[data-foot=glass] .gd-foot::before{-webkit-backdrop-filter:blur(11cqw) saturate(1.45) brightness(.94);backdrop-filter:blur(11cqw) saturate(1.45) brightness(.94)}
 .gd-pass[data-foot=color] .gd-foot::before{background:var(--gd-foot,#faf8fa)}
-.gd-txt{position:absolute;left:3.9%;right:3.9%;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#192842}
+.gd-txt{position:absolute;left:3.9%;right:3.9%;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 .gd-txt.prim{top:29%;display:flex;justify-content:space-between;gap:6px}
-.gd-txt.prim i{display:block;font-style:normal;font-size:2.7cqw;color:#27292b}
+.gd-txt.prim i{display:block;font-style:normal;font-size:2.7cqw}
 .gd-txt.prim b{display:block;font-weight:400;font-size:3.6cqw}
 .gd-txt.ft{top:76%;font-size:2.6cqw;text-transform:uppercase}
 .gd-logo{position:absolute;left:3.35%;top:2.7%;height:5.9%;width:auto}
-.gd-head{position:absolute;right:3.35%;top:2.7%;text-align:right;font:3.4cqw ui-monospace,SFMono-Regular,Menlo,monospace;color:#192842}
-.gd-head i{display:block;font:700 3cqw -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;font-style:normal;color:#27292b}
+.gd-head{position:absolute;right:3.35%;top:2.7%;text-align:right;font:3.4cqw ui-monospace,SFMono-Regular,Menlo,monospace}
+.gd-head i{display:block;font:700 3cqw -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;font-style:normal}
 .gd-bc{position:absolute;left:11.5%;width:77%;top:58%;height:20.3%;z-index:3;background:#fff;border-radius:2cqw;padding:2.5cqw 3cqw;box-sizing:border-box;display:flex;flex-direction:column;gap:1.2cqw}
 .gd-bc span{flex:1;background:repeating-linear-gradient(90deg,#000 0 2px,#fff 2px 3px,#000 3px 4px,#fff 4px 7px,#000 7px 8px,#fff 8px 10px)}
 .gd-bc small{font:2.5cqw ui-monospace,Menlo,monospace;color:#000;text-align:center}
@@ -245,7 +260,6 @@ html[data-theme="light"] .acts .act.empty{background:transparent;border:1px dash
 .gd-box.bc{border-color:#64d2ff}.gd-box.bc b{background:#64d2ff;color:#1c1c1e}
 .gd-dark{position:absolute;left:0;right:0;top:0;height:28%;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,0));opacity:0;transition:opacity .2s;pointer-events:none}
 .gd-pass[data-dark=on] .gd-dark{opacity:1}
-.gd-pass[data-dark=on] .gd-head,.gd-pass[data-dark=on] .gd-head i{color:#fff}
 .gd-pass[data-bc=off] .gd-box[data-g=H],.gd-pass[data-bc=off] [data-g=L]{display:none}
 .gd-ovl{position:absolute;left:11.5%;width:77%;top:76.1%;height:2.2%;z-index:3;background:repeating-linear-gradient(135deg,rgba(255,55,95,.75) 0 3px,rgba(255,55,95,0) 3px 6px);pointer-events:none}
 .gd-pass[data-guides=off] .gd-ovl{display:none}
@@ -519,21 +533,26 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
     <section class="guide" id="guide" aria-labelledby="guideTitle">
       <div class="guide-h">
         <h1 id="guideTitle">Designing an iOS 27 Poster pass</h1>
-        <p>Where everything sits on the card, and what changes with each setting. Flip the switches; hover a note to find it on the card.</p>
+        <p>Where everything sits on the card, and what changes with each setting. Try your own artwork, logo and text colors on the empty card. Uploads stay in your browser.</p>
         <p class="guide-fixed"><b>Fixed:</b> the logo, header, barcode, fields and footer can’t be moved or resized, and the <b>fonts can’t be changed</b>. Wallet sets them. <b>Yours to change:</b> the artwork and the colors. Lighten, veil or recompose the image to get better contrast.</p>
       </div>
       <nav class="guide-jump" aria-label="On this page"><a class="pri" href="#picker">See the AAA templates ↓</a><a href="#a11yTitle">Text contrast check ↓</a><a href="https://developer.apple.com/documentation/walletpasses/defining-the-metadata-of-your-wallet-pass#Add-Featured-Actions" target="_blank" rel="noopener">Apple’s docs ↗</a></nav>
       <div class="guide-grid">
         <div>
           <div class="guide-ctl">
+            <button type="button" class="gd-upload" id="gdUploadBig"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3m0 0L7 8m5-5l5 5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Upload your artwork</b><small>PNG or JPG · 716 × 896 px · stays in your browser</small></span></button>
             <div class="crow"><span>Barcode</span><div class="guide-seg" role="group" aria-label="Barcode"><button type="button" data-gbc="on" class="on" aria-pressed="true">With barcode</button><button type="button" data-gbc="off" aria-pressed="false">No barcode</button></div></div>
             <div class="crow"><span>Footer</span><div class="guide-seg" role="group" aria-label="Footer background"><button type="button" data-gfoot="glass" class="on" aria-pressed="true">No color · frosted glass</button><button type="button" data-gfoot="color" aria-pressed="false">Solid color</button></div><input type="color" id="gdColor" value="#faf8fa" aria-label="footerBackgroundColor" disabled></div>
             <div class="crow"><span>Header</span><div class="guide-seg" role="group" aria-label="Header darkening"><button type="button" data-gdark="on" aria-pressed="false">Darkening on (default)</button><button type="button" data-gdark="off" class="on" aria-pressed="true">suppressHeaderDarkening</button></div></div>
-            <div class="crow"><span>Artwork</span><div class="guide-seg" role="group" aria-label="Sample artwork"><button type="button" data-gart="m" class="on" aria-pressed="true">Convertible</button><button type="button" data-gart="i" aria-pressed="false">Palms</button></div><label style="display:inline-flex;align-items:center;gap:5px"><input type="checkbox" id="gdGuides" checked> Guides</label></div>
+            <div class="crow"><span>Artwork</span><div class="guide-seg" role="group" aria-label="Artwork"><button type="button" data-gart="none" class="on" aria-pressed="true">None</button><button type="button" data-gart="m" aria-pressed="false">Convertible</button><button type="button" data-gart="i" aria-pressed="false">Palms</button><button type="button" data-gart="up" aria-pressed="false">Upload…</button></div><input type="file" id="gdArtFile" accept="image/*" hidden></div>
+            <div class="crow"><span>Logo</span><div class="guide-seg" role="group" aria-label="Logo"><button type="button" data-glogo="none" class="on" aria-pressed="true">None</button><button type="button" data-glogo="aaa" aria-pressed="false">AAA</button><button type="button" data-glogo="up" aria-pressed="false">Upload…</button></div><input type="file" id="gdLogoFile" accept="image/*" hidden></div>
+            <div class="crow"><span>Text</span><label class="gd-pick"><input type="color" id="gdFg" value="#192842"> Values</label><label class="gd-pick"><input type="color" id="gdLabel" value="#27292b"> Labels</label></div>
+            <div class="crow"><span></span><label style="display:inline-flex;align-items:center;gap:5px"><input type="checkbox" id="gdGuides" checked> Show guides</label></div>
             <div class="guide-ratio" id="gdRatio" aria-live="polite"></div>
           </div>
-          <div class="gd-pass" id="gdPass" data-bc="on" data-foot="glass" data-guides="on" data-dark="off" style="background-image:url('templates/AAA%20Membership%20Card%20%28Alternative%20Glass%29.pkpasstemplate/artwork@2x.png')" role="img" aria-label="Poster pass layout: logo and header at the top, artwork, barcode, and the footer with fields at the bottom">
-            <img class="gd-logo" src="templates/AAA%20Membership%20Card%20%28Alternative%29.pkpasstemplate/primaryLogo@2x.png" alt="">
+          <div class="gd-pass" id="gdPass" data-bc="on" data-foot="glass" data-guides="on" data-dark="off" data-art="none" data-logo="none" role="img" aria-label="Poster pass layout: logo and header at the top, artwork, barcode, and the footer with fields at the bottom">
+            <button type="button" class="gd-empty" id="gdEmpty"><span class="gd-empty-ic" aria-hidden="true">＋</span>Upload artwork<br><small>716 × 896 px (@2x)</small></button>
+            <img class="gd-logo" id="gdLogo" alt="">
             <div class="gd-head"><i>MEMBERSHIP CARD</i>Premier</div>
             <div class="gd-bc"><span></span><small>000 000 XXXXXXXXX 0</small></div>
             <div class="gd-foot"><div class="gd-txt prim"><div><i>Member Name</i><b>FULANITO PEREZ</b></div><div><i>Valid Through</i><b>03/27</b></div><div style="text-align:right"><i>Member Since</i><b>1994</b></div></div><div class="gd-txt ft">24/7 Roadside &amp; more: tap Membership Benefits</div></div>
@@ -578,8 +597,9 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
           <div class="guide-spec" data-g="I"><h3><span class="n foot">7</span>No footer color = glass</h3><ul><li>Blur <b>≈11%</b> of the card width</li><li>Saturation <b>145%</b> · brightness <b>94%</b></li><li>Apple gives no %; ours matches Pass Designer</li><li>Light glass needs light art: add a white veil (<b>57%</b> / <b>39%</b> in our AA cards)</li></ul></div>
           <div class="guide-spec" data-g="D E F G"><h3><span class="n ">8</span>Fonts</h3><ul><li><b>Can’t be changed</b>: a pass has no font setting</li><li>Wallet always uses Apple’s system fonts</li><li>Labels and values are monospaced</li><li>Brand font (Roboto) only baked into the art</li></ul></div>
           <div class="guide-spec" data-g="B C D E F G"><h3><span class="n ">9</span>Text colors</h3><ul><li><code>foregroundColor</code> = values · <code>labelColor</code> = labels</li><li>Solid <code>rgb()</code> only</li><li>Aim for <b>4.5:1</b></li></ul></div>
-          <div class="guide-spec" data-g="B C D E F G"><h3><span class="n ">10</span>Automatic colors</h3><ul><li><code>useAutomaticColors: true</code>: Wallet picks the text colors and ignores yours</li></ul></div>
-          <div class="guide-spec"><h3><span class="n ">11</span>Featured Actions</h3><ul><li>Up to <b>2</b> cards below the pass</li><li>Pick from Apple’s <b>14</b> predefined actions</li><li>Icon and title are set by Apple</li><li>e.g. <code>membershipBenefits</code>, <code>place</code></li></ul></div>
+          <div class="guide-spec" data-g="B C D E F G"><h3><span class="n">10</span>Max characters</h3><ul><li>Header label <b>≈28</b> (caps)</li><li>Header value <b>≈30</b></li><li>Primary fields, 1–2: <b>≈33</b> across the row</li><li>Primary fields, 3: <b>≈48</b> across the row (smaller text)</li><li>Footer line <b>≈50</b>, one line</li><li>Longer text shrinks, then gets cut off (…)</li></ul></div>
+          <div class="guide-spec" data-g="B C D E F G"><h3><span class="n ">11</span>Automatic colors</h3><ul><li><code>useAutomaticColors: true</code>: Wallet picks the text colors and ignores yours</li></ul></div>
+          <div class="guide-spec"><h3><span class="n ">12</span>Featured Actions</h3><ul><li>Up to <b>2</b> cards below the pass</li><li>Pick from Apple’s <b>14</b> predefined actions</li><li>Icon and title are set by Apple</li><li>e.g. <code>membershipBenefits</code>, <code>place</code></li></ul></div>
         </div>
       </div>
       <div class="guide-ex">
@@ -1486,30 +1506,64 @@ function setArchive(open){
 }
 document.addEventListener('click', e => { if(e.target.closest('[data-arch]')) setArchive(!document.documentElement.classList.contains('arch-open')); });
 
-/* ---------- Design guide (top of the page) ---------- */
+/* ---------- Design guide (top of the page): an empty card to try artwork, logo and text colors ---------- */
 (function(){
-  const pass = $('gdPass'), color = $('gdColor'), ratioEl = $('gdRatio');
+  const pass = $('gdPass'), color = $('gdColor'), ratioEl = $('gdRatio'), fg = $('gdFg'), label = $('gdLabel'), logo = $('gdLogo');
   const ART = {m:"templates/AAA%20Membership%20Card%20%28Alternative%20Glass%29.pkpasstemplate/artwork@2x.png", i:"templates/AAA%20Insurance%20Card%20%28Alternative%29.pkpasstemplate/artwork@2x.png"};
+  const AAA_LOGO = "templates/AAA%20Membership%20Card%20%28Alternative%29.pkpasstemplate/primaryLogo@2x.png";
+  let artURL = null, upArt = null, upLogo = null, glassTone = null;
   const lin = c => { c /= 255; return c <= .04045 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4); };
-  const lum = h => { const n = parseInt(h.slice(1), 16), r = n >> 16, g = n >> 8 & 255, b = n & 255; return .2126 * lin(r) + .7152 * lin(g) + .0722 * lin(b); };
-  const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
-  function update(){
-    const solid = pass.dataset.foot === 'color';
-    color.disabled = !solid; pass.style.setProperty('--gd-foot', color.value);
-    if(solid){
-      const v = ratio(color.value, '#192842'), l = ratio(color.value, '#27292b'), ok = Math.min(v, l) >= 4.5;
-      ratioEl.innerHTML = `Footer <code>${color.value.toUpperCase()}</code>: values ${v.toFixed(1)}:1, labels ${l.toFixed(1)}:1 <b style="color:${ok ? 'var(--ok)' : 'var(--bad)'}">${ok ? '✓ passes AA' : '✕ below 4.5:1'}</b>`;
-    } else ratioEl.textContent = 'Frosted glass: contrast depends on the artwork behind the footer (see the contrast check below).';
+  const rgbOf = h => { const n = parseInt(h.slice(1), 16); return [n >> 16, n >> 8 & 255, n & 255]; };
+  const lumRGB = ([r, g, b]) => .2126 * lin(r) + .7152 * lin(g) + .0722 * lin(b);
+  const ratioL = (x, y) => (Math.max(x, y) + .05) / (Math.min(x, y) + .05);
+  /* Glass tone behind the text: the footer strip of the artwork (cover, top aligned) shrunk to a few pixels (≈ the heavy blur),
+     then saturate 1.45 and brightness .94 like the viewer's glass. Returns the luminance of every sample. */
+  function measureGlass(url){
+    glassTone = null; if(!url) return update();
+    const img = new Image();
+    img.onload = () => {
+      /* The footer strip (341–448 pt) of the artwork as drawn on the card (cover, top aligned), at 10 pt per pixel. */
+      const W = 358, H = 448, k = Math.max(W / img.width, H / img.height), cw = 36, ch = 11, c = document.createElement('canvas');
+      c.width = cw; c.height = ch; const x = c.getContext('2d'); x.imageSmoothingQuality = 'high';
+      x.drawImage(img, ((img.width * k - W) / 2) / k, 341 / k, W / k, 107 / k, 0, 0, cw, ch);
+      const d = x.getImageData(0, 0, cw, ch).data;
+      let px = []; for(let i = 0; i < d.length; i += 4) px.push([d[i], d[i + 1], d[i + 2]]);
+      /* Three box blurs (radius 3 px, edges clamped) ≈ the glass's Gaussian blur (σ ≈ 36 pt). */
+      const box = (src, horiz) => src.map((_, i) => { const cx = i % cw, cy = (i / cw) | 0, acc = [0, 0, 0];
+        for(let o = -3; o <= 3; o++){ const xx = horiz ? Math.min(cw - 1, Math.max(0, cx + o)) : cx, yy = horiz ? cy : Math.min(ch - 1, Math.max(0, cy + o)); const p = src[yy * cw + xx]; acc[0] += p[0]; acc[1] += p[1]; acc[2] += p[2]; }
+        return acc.map(v => v / 7); });
+      for(let n = 0; n < 3; n++) px = box(box(px, true), false);
+      const S = 1.45, m = [[.2126 + .7874 * S, .7152 - .7152 * S, .0722 - .0722 * S], [.2126 - .2126 * S, .7152 + .2848 * S, .0722 - .0722 * S], [.2126 - .2126 * S, .7152 - .7152 * S, .0722 + .9278 * S]];
+      const rows = [4, 5, 6, 9, 10], out = [];   /* the field rows (≈378–404 pt) and the footer line (≈427–439 pt) */
+      rows.forEach(r => { for(let cx = 1; cx < cw - 1; cx++){ const [R, G, B] = px[r * cw + cx]; out.push(lumRGB(m.map(row => Math.min(255, Math.max(0, (row[0] * R + row[1] * G + row[2] * B) * .94))))); } });
+      glassTone = out; update();
+    };
+    img.src = url;
   }
-  const seg = (attr, fn) => document.querySelectorAll('[' + attr + ']').forEach(b => b.addEventListener('click', () => {
-    b.parentElement.querySelectorAll('button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', String(x === b)); });
-    fn(b.getAttribute(attr)); update();
-  }));
-  seg('data-gbc', v => pass.dataset.bc = v);
-  seg('data-gdark', v => pass.dataset.dark = v);
-  seg('data-gfoot', v => pass.dataset.foot = v);
-  seg('data-gart', v => pass.style.backgroundImage = `url('${ART[v]}')`);
-  color.addEventListener('input', update);
+  const verdict = (v, l) => { const ok = Math.min(v, l) >= 4.5; return `values ${v.toFixed(1)}:1, labels ${l.toFixed(1)}:1 <b style="color:${ok ? 'var(--ok)' : 'var(--bad)'}">${ok ? '✓ passes AA' : '✕ below 4.5:1'}</b>`; };
+  function update(){
+    const solid = pass.dataset.foot === 'color', lf = lumRGB(rgbOf(fg.value)), ll = lumRGB(rgbOf(label.value));
+    color.disabled = !solid;
+    pass.style.setProperty('--gd-foot', color.value); pass.style.setProperty('--gd-fg', fg.value); pass.style.setProperty('--gd-label', label.value);
+    if(solid){ const lb = lumRGB(rgbOf(color.value)); ratioEl.innerHTML = `Solid footer: ${verdict(ratioL(lb, lf), ratioL(lb, ll))}`; }
+    else if(pass.dataset.art === 'none') ratioEl.textContent = 'Frosted glass: add artwork to check contrast.';
+    else if(!glassTone) ratioEl.textContent = 'Frosted glass: measuring…';
+    else ratioEl.innerHTML = `Frosted glass (≈, worst spot): ${verdict(Math.min(...glassTone.map(t => ratioL(t, lf))), Math.min(...glassTone.map(t => ratioL(t, ll))))}`;
+  }
+  const pick = (b, attr) => b.parentElement.querySelectorAll('button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', String(x === b)); });
+  const seg = (attr, fn) => document.querySelectorAll('[' + attr + ']').forEach(b => b.addEventListener('click', () => { if(fn(b.getAttribute(attr), b) !== false) pick(b); update(); }));
+  function setArt(url){
+    pass.dataset.art = url ? 'on' : 'none'; pass.style.backgroundImage = url ? `url('${url}')` : ''; artURL = url; measureGlass(url);
+  }
+  seg('data-gbc', v => { pass.dataset.bc = v; });
+  seg('data-gdark', v => { pass.dataset.dark = v; });
+  seg('data-gfoot', v => { pass.dataset.foot = v; });
+  seg('data-gart', v => { if(v === 'up' && !upArt){ $('gdArtFile').click(); return false; } setArt(v === 'none' ? null : v === 'up' ? upArt : ART[v]); });
+  seg('data-glogo', v => { if(v === 'up' && !upLogo){ $('gdLogoFile').click(); return false; } pass.dataset.logo = v === 'none' ? 'none' : 'on'; if(v !== 'none') logo.src = v === 'up' ? upLogo : AAA_LOGO; });
+  [$('gdUploadBig'), $('gdEmpty')].forEach(b => b.addEventListener('click', () => $('gdArtFile').click()));
+  $('gdArtFile').addEventListener('change', e => { const f = e.target.files[0]; if(!f) return; if(upArt) URL.revokeObjectURL(upArt); upArt = URL.createObjectURL(f); pick(document.querySelector('[data-gart="up"]')); setArt(upArt); e.target.value = ''; });
+  $('gdLogoFile').addEventListener('change', e => { const f = e.target.files[0]; if(!f) return; if(upLogo) URL.revokeObjectURL(upLogo); upLogo = URL.createObjectURL(f); pick(document.querySelector('[data-glogo="up"]')); pass.dataset.logo = 'on'; logo.src = upLogo; e.target.value = ''; });
+  [color, fg, label].forEach(i => i.addEventListener('input', update));
   document.querySelectorAll('[data-gx]').forEach(b => b.addEventListener('click', () => { loadDefault(b.dataset.gx); $('picker').scrollIntoView({behavior:'smooth', block:'start'}); }));
   $('gdGuides').addEventListener('change', e => pass.dataset.guides = e.target.checked ? 'on' : 'off');
   document.querySelectorAll('.guide-spec[data-g], #gdLegend li[data-g]').forEach(c => {
