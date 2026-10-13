@@ -5,7 +5,13 @@
   "authenticationToken" : "",
   "backgroundColor" : "rgb(242,228,228)",
   "barcodes" : [
-
+    {
+      "_id" : "E4FD1E6E-100F-4455-90D5-FEAA43177955",
+      "altText" : "000 000 XXXXXXXXX 0",
+      "format" : "PKBarcodeFormatPDF417",
+      "message" : "000 000 XXXXXXXXX 0",
+      "messageEncoding" : "iso-8859-1"
+    }
   ],
   "description" : "AAA Membership Card",
   "expirationDate" : "2027-04-01T06:59:00Z",
