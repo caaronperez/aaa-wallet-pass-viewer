@@ -229,6 +229,16 @@ html[data-theme="light"] .acts .act.empty{background:transparent;border:1px dash
 .gd-logo{max-width:30%;object-fit:contain;object-position:left}
 .gd-txt,.gd-head{color:var(--gd-fg,#192842)}
 .gd-txt.prim i,.gd-head i{color:var(--gd-label,#27292b)}
+.guide-h p.guide-key{margin-top:12px;padding:11px 14px;border-radius:10px;background:rgba(10,132,255,.14);border:1px solid rgba(10,132,255,.5);color:var(--text);font-size:14px}
+.gd-check{background:#34c759;color:#06290f}
+.gd-upload[hidden],.gd-result[hidden]{display:none}
+.gd-result{max-width:340px;box-sizing:border-box;border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.5;border:1px solid var(--line)}
+.gd-result.ok{border-color:#34c759;background:rgba(52,199,89,.10)}.gd-result.bad{border-color:#ff5f57;background:rgba(255,95,87,.10)}
+.gd-result h4{margin:0 0 6px;font-size:14px}.gd-result ul{list-style:none;margin:0 0 8px;padding:0}.gd-result li{display:flex;align-items:center;gap:7px}
+.gd-result p{margin:4px 0 0}.gd-result .sub{color:var(--muted);font-size:12px}
+.gd-result .sw{display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid rgba(127,127,127,.5);flex:none}
+.gd-try{display:inline-flex;align-items:center;gap:5px;margin:3px 4px 0 0;padding:4px 9px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--text);font:600 12px -apple-system,BlinkMacSystemFont,sans-serif;cursor:pointer}
+.gd-try:hover{border-color:var(--accent)}
 .gd-pick{display:inline-flex;align-items:center;gap:5px;color:var(--text)}
 .gd-pick input{width:30px;height:24px;border:1px solid var(--line);border-radius:6px;padding:0;background:none;cursor:pointer}
 .gd-foot{position:absolute;left:0;right:0;top:76.1%;bottom:0;isolation:isolate}
@@ -534,6 +544,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
       <div class="guide-h">
         <h1 id="guideTitle">Designing an iOS 27 Poster pass</h1>
         <p>Where everything sits on the card, and what changes with each setting. Try your own artwork, logo and text colors on the empty card. Uploads stay in your browser.</p>
+        <p class="guide-key"><b>What matters most:</b> picking the <b>right artwork</b> and the <b>right text color</b>. The bottom quarter of the art sits under the glass, so keep it calm and evenly light or dark, then pick text that contrasts with it.</p>
         <p class="guide-fixed"><b>Fixed:</b> the logo, header, barcode, fields and footer can’t be moved or resized, and the <b>fonts can’t be changed</b>. Wallet sets them. <b>Yours to change:</b> the artwork and the colors. Lighten, veil or recompose the image to get better contrast.</p>
       </div>
       <nav class="guide-jump" aria-label="On this page"><a class="pri" href="#picker">See the AAA templates ↓</a><a href="#a11yTitle">Text contrast check ↓</a><a href="https://developer.apple.com/documentation/walletpasses/defining-the-metadata-of-your-wallet-pass#Add-Featured-Actions" target="_blank" rel="noopener">Apple’s docs ↗</a></nav>
@@ -549,6 +560,8 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
             <div class="crow"><span>Text</span><label class="gd-pick"><input type="color" id="gdFg" value="#192842"> Values</label><label class="gd-pick"><input type="color" id="gdLabel" value="#27292b"> Labels</label></div>
             <div class="crow"><span></span><label style="display:inline-flex;align-items:center;gap:5px"><input type="checkbox" id="gdGuides" checked> Show guides</label></div>
             <div class="guide-ratio" id="gdRatio" aria-live="polite"></div>
+            <button type="button" class="gd-upload gd-check" id="gdCheck" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span><b>Check contrast</b><small>Is the text readable on this artwork? (ADA AA)</small></span></button>
+            <div class="gd-result" id="gdResult" hidden aria-live="polite"></div>
           </div>
           <div class="gd-pass" id="gdPass" data-bc="on" data-foot="glass" data-guides="on" data-dark="off" data-art="none" data-logo="none" role="img" aria-label="Poster pass layout: logo and header at the top, artwork, barcode, and the footer with fields at the bottom">
             <button type="button" class="gd-empty" id="gdEmpty"><span class="gd-empty-ic" aria-hidden="true">＋</span>Upload artwork<br><small>716 × 896 px (@2x)</small></button>
@@ -1509,7 +1522,7 @@ document.addEventListener('click', e => { if(e.target.closest('[data-arch]')) se
 /* ---------- Design guide (top of the page): an empty card to try artwork, logo and text colors ---------- */
 (function(){
   const pass = $('gdPass'), color = $('gdColor'), ratioEl = $('gdRatio'), fg = $('gdFg'), label = $('gdLabel'), logo = $('gdLogo');
-  const ART = {m:"templates/AAA%20Membership%20Card%20%28Alternative%20Glass%29.pkpasstemplate/artwork@2x.png", i:"templates/AAA%20Insurance%20Card%20%28Alternative%29.pkpasstemplate/artwork@2x.png"};
+  const ART = {m:'guide/convertible.jpg', i:'guide/palms.jpg'};   /* the untouched Figma photos, no tints or veils */
   const AAA_LOGO = "templates/AAA%20Membership%20Card%20%28Alternative%29.pkpasstemplate/primaryLogo@2x.png";
   let artURL = null, upArt = null, upLogo = null, glassTone = null;
   const lin = c => { c /= 255; return c <= .04045 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4); };
@@ -1534,9 +1547,9 @@ document.addEventListener('click', e => { if(e.target.closest('[data-arch]')) se
         return acc.map(v => v / 7); });
       for(let n = 0; n < 3; n++) px = box(box(px, true), false);
       const S = 1.45, m = [[.2126 + .7874 * S, .7152 - .7152 * S, .0722 - .0722 * S], [.2126 - .2126 * S, .7152 + .2848 * S, .0722 - .0722 * S], [.2126 - .2126 * S, .7152 - .7152 * S, .0722 + .9278 * S]];
-      const rows = [4, 5, 6, 9, 10], out = [];   /* the field rows (≈378–404 pt) and the footer line (≈427–439 pt) */
-      rows.forEach(r => { for(let cx = 1; cx < cw - 1; cx++){ const [R, G, B] = px[r * cw + cx]; out.push(lumRGB(m.map(row => Math.min(255, Math.max(0, (row[0] * R + row[1] * G + row[2] * B) * .94))))); } });
-      glassTone = out; update();
+      const tone = rows => { const out = []; rows.forEach(r => { for(let cx = 1; cx < cw - 1; cx++){ const [R, G, B] = px[r * cw + cx]; out.push(lumRGB(m.map(row => Math.min(255, Math.max(0, (row[0] * R + row[1] * G + row[2] * B) * .94))))); } }); return out; };
+      glassTone = {labels: tone([4]), values: tone([5, 6]), footer: tone([9, 10])};   /* ≈378–389, 389–404 and 427–439 pt */
+      update();
     };
     img.src = url;
   }
@@ -1548,11 +1561,32 @@ document.addEventListener('click', e => { if(e.target.closest('[data-arch]')) se
     if(solid){ const lb = lumRGB(rgbOf(color.value)); ratioEl.innerHTML = `Solid footer: ${verdict(ratioL(lb, lf), ratioL(lb, ll))}`; }
     else if(pass.dataset.art === 'none') ratioEl.textContent = 'Frosted glass: add artwork to check contrast.';
     else if(!glassTone) ratioEl.textContent = 'Frosted glass: measuring…';
-    else ratioEl.innerHTML = `Frosted glass (≈, worst spot): ${verdict(Math.min(...glassTone.map(t => ratioL(t, lf))), Math.min(...glassTone.map(t => ratioL(t, ll))))}`;
+    else ratioEl.innerHTML = `Frosted glass (≈, worst spot): ${verdict(Math.min(...glassTone.values.concat(glassTone.footer).map(t => ratioL(t, lf))), Math.min(...glassTone.labels.map(t => ratioL(t, ll))))}`;
+    $('gdCheck').hidden = pass.dataset.art === 'none';
+    if(!$('gdResult').hidden) showCheck();
+  }
+  /* Contrast check: every line of text against the glass (or the solid footer), plus the best plain text colors for this artwork. */
+  function showCheck(){
+    const box = $('gdResult'), solid = pass.dataset.foot === 'color';
+    if(!solid && !glassTone){ box.hidden = false; box.innerHTML = '<p>Measuring…</p>'; return; }
+    const bg = solid ? {labels: [lumRGB(rgbOf(color.value))], values: [lumRGB(rgbOf(color.value))], footer: [lumRGB(rgbOf(color.value))]} : glassTone;
+    const worst = (tones, hex) => Math.min(...tones.map(t => ratioL(t, lumRGB(rgbOf(hex)))));
+    const lines = [['Field labels', bg.labels, label.value], ['Field values', bg.values, fg.value], ['Footer line', bg.footer, fg.value]];
+    const all = bg.labels.concat(bg.values, bg.footer), opts = [['White', '#ffffff'], ['Near-black', '#1c1c1e'], ['Navy AA', '#192842']].map(([n, h]) => [n, h, worst(all, h)]).sort((a, b) => b[2] - a[2]);
+    const ok = lines.every(([, t, h]) => worst(t, h) >= 4.5);
+    box.hidden = false;
+    box.className = 'gd-result ' + (ok ? 'ok' : 'bad');
+    box.innerHTML = `<h4>${ok ? '✓ Passes ADA contrast (AA 4.5:1)' : '✕ Doesn’t pass ADA contrast (AA 4.5:1)'}</h4>
+      <ul>${lines.map(([n, t, h]) => { const r = worst(t, h); return `<li><span class="sw" style="background:${h}"></span>${n} <b>${r.toFixed(1)}:1</b> ${r >= 4.5 ? '✓' : '✕'}</li>`; }).join('')}</ul>
+      <p><b>Best plain text color here:</b> ${opts.map(([n, h, r]) => `<button type="button" class="gd-try" data-try="${h}"><span class="sw" style="background:${h}"></span>${n} ${r.toFixed(1)}:1</button>`).join(' ')}</p>
+      ${ok ? '' : `<p class="sub">${opts[0][2] >= 4.5 ? 'Tap the best color to apply it.' : 'No text color passes on this artwork. Pick a calmer, more even area for the bottom quarter, or use a solid footer color.'}</p>`}
+      <p class="sub">≈ estimate from the glass as Pass Designer draws it. Confirm on a device.</p>`;
+    box.querySelectorAll('[data-try]').forEach(b => b.addEventListener('click', () => { fg.value = label.value = b.dataset.try; update(); }));
   }
   const pick = (b, attr) => b.parentElement.querySelectorAll('button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', String(x === b)); });
   const seg = (attr, fn) => document.querySelectorAll('[' + attr + ']').forEach(b => b.addEventListener('click', () => { if(fn(b.getAttribute(attr), b) !== false) pick(b); update(); }));
   function setArt(url){
+    $('gdResult').hidden = true;
     pass.dataset.art = url ? 'on' : 'none'; pass.style.backgroundImage = url ? `url('${url}')` : ''; artURL = url; measureGlass(url);
   }
   seg('data-gbc', v => { pass.dataset.bc = v; });
@@ -1564,6 +1598,7 @@ document.addEventListener('click', e => { if(e.target.closest('[data-arch]')) se
   $('gdArtFile').addEventListener('change', e => { const f = e.target.files[0]; if(!f) return; if(upArt) URL.revokeObjectURL(upArt); upArt = URL.createObjectURL(f); pick(document.querySelector('[data-gart="up"]')); setArt(upArt); e.target.value = ''; });
   $('gdLogoFile').addEventListener('change', e => { const f = e.target.files[0]; if(!f) return; if(upLogo) URL.revokeObjectURL(upLogo); upLogo = URL.createObjectURL(f); pick(document.querySelector('[data-glogo="up"]')); pass.dataset.logo = 'on'; logo.src = upLogo; e.target.value = ''; });
   [color, fg, label].forEach(i => i.addEventListener('input', update));
+  $('gdCheck').addEventListener('click', showCheck);
   document.querySelectorAll('[data-gx]').forEach(b => b.addEventListener('click', () => { loadDefault(b.dataset.gx); $('picker').scrollIntoView({behavior:'smooth', block:'start'}); }));
   $('gdGuides').addEventListener('change', e => pass.dataset.guides = e.target.checked ? 'on' : 'off');
   document.querySelectorAll('.guide-spec[data-g], #gdLegend li[data-g]').forEach(c => {
