@@ -233,17 +233,26 @@ html[data-theme="light"] .acts .act.empty{background:transparent;border:1px dash
 .gd-pass[data-bc=off] .gd-bc{display:none}
 .gd-box{position:absolute;border:1.5px dashed #0a84ff;border-radius:6px;z-index:4;pointer-events:none;transition:background .15s,border-color .15s}
 .gd-box b{position:absolute;left:-1px;top:-1px;transform:translateY(-100%);font:700 9.5px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;background:#0a84ff;color:#fff;border-radius:5px 5px 5px 0;padding:1px 5px;white-space:nowrap}
-.gd-box.under b{top:auto;bottom:-1px;transform:translateY(100%);border-radius:0 5px 5px 5px}
-.gd-box.right b{left:auto;right:-1px;border-radius:5px 5px 0 5px}.gd-box.under.right b{border-radius:5px 0 5px 5px}
-.gd-box.inb b{top:4px;left:4px;transform:none;border-radius:5px}
-.gd-box.inr b{top:4px;left:auto;right:4px;transform:none;border-radius:5px}
-.gd-box.side b{top:50%;left:calc(100% + 5px);transform:translateY(-50%);border-radius:5px}
 .gd-focus-on{top:13%;height:44.5%}.gd-pass[data-bc=off] .gd-focus-on{height:62.6%}
 .gd-box.hot{background:rgba(10,132,255,.22);border-style:solid}
 .gd-box.zone{border-color:#ffd60a}.gd-box.zone b{background:#ffd60a;color:#1c1c1e}.gd-box.zone.hot{background:rgba(255,214,10,.18)}
 .gd-box.foot{border-color:#ff9f0a}.gd-box.foot b{background:#ff9f0a;color:#1c1c1e}.gd-box.foot.hot{background:rgba(255,159,10,.18)}
-.gd-pass[data-bc=off] .gd-box[data-g=bc]{display:none}
 .gd-pass[data-guides=off] .gd-box{display:none}
+.gd-box b{position:absolute;left:-8px;top:-8px;transform:none;width:16px;height:16px;padding:0;border-radius:50%;display:grid;place-items:center;font:700 9.5px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.gd-box b.r{left:auto;right:-8px}.gd-box b.bl{top:auto;bottom:4px;left:4px}.gd-box b.br{top:auto;bottom:4px;left:auto;right:4px}.gd-box b.in{left:3px;top:3px}.gd-box b.ir{left:auto;right:-8px;top:50%;transform:translate(-100%,-50%);right:auto;left:-6px}
+.gd-box.dk{border-color:#bf5af2}.gd-box.dk b{background:#bf5af2}.gd-box.dk.hot{background:rgba(191,90,242,.18)}
+.gd-box.bc{border-color:#64d2ff}.gd-box.bc b{background:#64d2ff;color:#1c1c1e}
+.gd-dark{position:absolute;left:0;right:0;top:0;height:28%;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,0));opacity:0;transition:opacity .2s;pointer-events:none}
+.gd-pass[data-dark=on] .gd-dark{opacity:1}
+.gd-pass[data-dark=on] .gd-head,.gd-pass[data-dark=on] .gd-head i{color:#fff}
+.gd-pass[data-bc=off] .gd-box[data-g=H]{display:none}
+.gd-legend{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:3px;font-size:12.3px;max-width:340px}
+.gd-legend li{position:relative;padding:3px 6px 3px 30px;border-radius:7px;color:var(--text);cursor:default;line-height:1.45}
+.gd-legend li span{color:var(--muted)}
+.gd-legend li b{position:absolute;left:6px;top:4px;display:grid;place-items:center;width:17px;height:17px;border-radius:50%;background:#0a84ff;color:#fff;font-size:10px}
+.gd-legend li[data-g=H] b{background:#64d2ff;color:#1c1c1e}.gd-legend li[data-g=I] b{background:#ff9f0a;color:#1c1c1e}.gd-legend li[data-g=J] b{background:#ffd60a;color:#1c1c1e}.gd-legend li[data-g=K] b{background:#bf5af2}
+.gd-legend li.hot{background:rgba(10,132,255,.14)}
+.gd-legend code{font-size:11px}
 .guide-src{margin:10px 0 0;font-size:11.5px;color:var(--muted);line-height:1.5;max-width:340px}
 .guide-specs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
 .guide-spec{border:1px solid var(--line);border-radius:12px;padding:11px 13px;font-size:12.8px;line-height:1.5;color:var(--text)}
@@ -478,7 +487,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
     <section class="guide" id="guide" aria-labelledby="guideTitle">
       <div class="guide-h">
         <h1 id="guideTitle">Designing an iOS 27 Poster pass</h1>
-        <p>A quick map for UI/UX before making artwork: where the logo, header, barcode and fields sit on the card, what the footer does with and without a color, and which fonts and colors Wallet allows. Flip the switches on the pass to see each case. Hover a note to find it on the card.</p>
+        <p>A quick map for UI/UX before making artwork: where the logo, header, barcode and fields sit on the card, what the footer does with and without a color, and which fonts and colors Wallet allows. Every field is marked with a letter. Flip the switches to see each case, and hover a note or a letter to find it on the card.</p>
       </div>
       <nav class="guide-jump" aria-label="On this page"><a class="pri" href="#picker">See the AAA templates ↓</a><a href="#a11yTitle">Text contrast check ↓</a><a href="https://developer.apple.com/documentation/walletpasses/defining-the-metadata-of-your-wallet-pass#Add-Featured-Actions" target="_blank" rel="noopener">Apple’s docs ↗</a></nav>
       <div class="guide-grid">
@@ -486,48 +495,73 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
           <div class="guide-ctl">
             <div class="crow"><span>Barcode</span><div class="guide-seg" role="group" aria-label="Barcode"><button type="button" data-gbc="on" class="on" aria-pressed="true">With barcode</button><button type="button" data-gbc="off" aria-pressed="false">No barcode</button></div></div>
             <div class="crow"><span>Footer</span><div class="guide-seg" role="group" aria-label="Footer background"><button type="button" data-gfoot="glass" class="on" aria-pressed="true">No color · frosted glass</button><button type="button" data-gfoot="color" aria-pressed="false">Solid color</button></div><input type="color" id="gdColor" value="#faf8fa" aria-label="footerBackgroundColor" disabled></div>
+            <div class="crow"><span>Header</span><div class="guide-seg" role="group" aria-label="Header darkening"><button type="button" data-gdark="on" aria-pressed="false">Darkening on (default)</button><button type="button" data-gdark="off" class="on" aria-pressed="true">suppressHeaderDarkening</button></div></div>
             <div class="crow"><span>Artwork</span><div class="guide-seg" role="group" aria-label="Sample artwork"><button type="button" data-gart="m" class="on" aria-pressed="true">Convertible</button><button type="button" data-gart="i" aria-pressed="false">Palms</button></div><label style="display:inline-flex;align-items:center;gap:5px"><input type="checkbox" id="gdGuides" checked> Guides</label></div>
             <div class="guide-ratio" id="gdRatio" aria-live="polite"></div>
           </div>
-          <div class="gd-pass" id="gdPass" data-bc="on" data-foot="glass" data-guides="on" style="background-image:url('templates/AAA%20Membership%20Card%20%28Alternative%20Glass%29.pkpasstemplate/artwork@2x.png')" role="img" aria-label="Poster pass layout: logo and header at the top, artwork, barcode, and the footer with fields at the bottom">
+          <div class="gd-pass" id="gdPass" data-bc="on" data-foot="glass" data-guides="on" data-dark="off" style="background-image:url('templates/AAA%20Membership%20Card%20%28Alternative%20Glass%29.pkpasstemplate/artwork@2x.png')" role="img" aria-label="Poster pass layout: logo and header at the top, artwork, barcode, and the footer with fields at the bottom">
             <img class="gd-logo" src="templates/AAA%20Membership%20Card%20%28Alternative%29.pkpasstemplate/primaryLogo@2x.png" alt="">
             <div class="gd-head"><i>MEMBERSHIP CARD</i>Premier</div>
             <div class="gd-bc"><span></span><small>000 000 XXXXXXXXX 0</small></div>
             <div class="gd-foot"><div class="gd-txt prim"><div><i>Member Name</i><b>FULANITO PEREZ</b></div><div><i>Valid Through</i><b>03/27</b></div><div style="text-align:right"><i>Member Since</i><b>1994</b></div></div><div class="gd-txt ft">24/7 Roadside &amp; more: tap Membership Benefits</div></div>
-            <div class="gd-box zone gd-focus-on inb" data-g="art" style="left:3%;right:3%"><b>1 Keep the subject here</b></div>
-            <div class="gd-box under" data-g="logo" style="left:2.2%;top:1.8%;width:27%;height:7.6%"><b>2 Logo</b></div>
-            <div class="gd-box under right" data-g="logo" style="right:2.2%;top:1.8%;width:40%;height:8.2%"><b>2 Header field</b></div>
-            <div class="gd-box" data-g="bc" style="left:10.5%;width:79%;top:57.3%;height:21.7%"><b>3 Barcode</b></div>
-            <div class="gd-box foot inb" data-g="foot" style="left:.8%;right:.8%;top:76.1%;bottom:.6%"><b>4 Footer area</b></div>
-            <div class="gd-box" data-g="fields" style="left:2.8%;right:2.8%;top:82.4%;height:8.8%"><b style="left:auto;right:-1px;border-radius:5px 5px 0 5px">Primary fields</b></div>
-            <div class="gd-box side" data-g="fields" style="left:2.8%;width:76%;top:93.3%;height:4.6%"><b>Footer field</b></div>
+            <div class="gd-dark" aria-hidden="true"></div>
+            <div class="gd-box zone gd-focus-on" data-g="J" style="left:3%;right:3%"><b class="in">J</b></div>
+            <div class="gd-box" data-g="A" style="left:2.2%;top:1.6%;width:25%;height:8%"><b class="in">A</b></div>
+            <div class="gd-box" data-g="B" style="right:2.2%;top:1.6%;width:36%;height:4.4%"><b class="ir">B</b></div>
+            <div class="gd-box" data-g="C" style="right:2.2%;top:6.2%;width:20%;height:4.4%"><b class="ir">C</b></div>
+            <div class="gd-box dk" data-g="K" style="left:.6%;right:.6%;top:.4%;height:22%"><b class="bl">K</b></div>
+            <div class="gd-box bc" data-g="H" style="left:10.5%;width:79%;top:57.3%;height:21.7%"><b>H</b></div>
+            <div class="gd-box foot" data-g="I" style="left:.6%;right:.6%;top:76.1%;bottom:.5%"><b class="br">I</b></div>
+            <div class="gd-box" data-g="D" style="left:2.8%;width:36%;top:82.4%;height:8.6%"><b>D</b></div>
+            <div class="gd-box" data-g="E" style="left:42%;width:22%;top:82.4%;height:8.6%"><b>E</b></div>
+            <div class="gd-box" data-g="F" style="right:2.8%;width:22%;top:82.4%;height:8.6%"><b class="ir">F</b></div>
+            <div class="gd-box" data-g="G" style="left:2.8%;width:76%;top:93.3%;height:4.6%"><b>G</b></div>
           </div>
+          <ol class="gd-legend" id="gdLegend">
+            <li data-g="A"><b>A</b>Logo <code>primaryLogo</code> (falls back to <code>logo</code>)</li>
+            <li data-g="B"><b>B</b>Header field label <span>· labelColor</span></li>
+            <li data-g="C"><b>C</b>Header field value <span>· foregroundColor · 1 header field</span></li>
+            <li data-g="D"><b>D</b>Primary field 1 <span>· label + value</span></li>
+            <li data-g="E"><b>E</b>Primary field 2</li>
+            <li data-g="F"><b>F</b>Primary field 3 <span>· up to 4 allowed, 2–3 stay readable</span></li>
+            <li data-g="G"><b>G</b>Footer field <span>· value only, label hidden on iOS 27</span></li>
+            <li data-g="H"><b>H</b>Barcode <span>· PDF417 panel, as our cards use</span></li>
+            <li data-g="I"><b>I</b>Footer area <span>· solid color or frosted glass</span></li>
+            <li data-g="J"><b>J</b>Safe area for the subject</li>
+            <li data-g="K"><b>K</b>Header darkening gradient <span>· size and strength not published</span></li>
+          </ol>
           <p class="guide-src">Positions measured in Pass Designer and shown in points (pt) on the 358 × 448 pt card. Values marked ≈ are measurements, not numbers from Apple.</p>
         </div>
         <div class="guide-specs">
-          <div class="guide-spec" data-g="art"><h3><span class="n zone">1</span>Artwork</h3>
+          <div class="guide-spec" data-g="J"><h3><span class="n zone">1</span>Artwork</h3>
             <p><b>artwork@2x.png</b> 716 × 896 px and <b>artwork@3x.png</b> 1074 × 1344 px (358 × 448 pt). It fills the whole card, including behind the footer.</p>
             <p>Keep faces and key subjects between the header (≈45 pt) and the top of the barcode (≈260 pt), or down to the footer (≈341 pt) when there’s no barcode.</p>
             <p>Gradients and tints must be baked into the image. Colors in pass.json are solid only.</p></div>
-          <div class="guide-spec" data-g="logo"><h3><span class="n">2</span>Logo &amp; header</h3>
+          <div class="guide-spec" data-g="A B C K"><h3><span class="n">2</span>Logo &amp; header</h3>
             <p><b>primaryLogo</b> (or logo) sits top-left, about 25 pt tall. <b>One header field</b> (label + value) sits top-right.</p>
-            <p>Both sit on the artwork, so the top ≈45 pt needs calm art that contrasts with them. <code>suppressHeaderDarkening</code> stops Wallet darkening that strip.</p></div>
-          <div class="guide-spec" data-g="bc"><h3><span class="n">3</span>Barcode: with or without</h3>
+            <p>Both sit on the artwork, so the top ≈45 pt needs calm art that contrasts with them.</p></div>
+          <div class="guide-spec" data-g="K"><h3><span class="n">3</span>Header darkening</h3>
+            <p><b>Default (key missing or <code>false</code>):</b> Wallet draws a <b>dark gradient</b> over the top of the artwork so the logo and a white header stay readable. Apple calls it the “header darkening gradient” and <b>doesn’t publish a percentage or height</b>. The shading on the sample is only an illustration.</p>
+            <p><b><code>suppressHeaderDarkening: true</code>:</b> no gradient. The art shows exactly as designed, and header contrast is up to your artwork. Our Alternative cards use this because they put dark header text over a light, tinted sky.</p></div>
+          <div class="guide-spec" data-g="H"><h3><span class="n">4</span>Barcode: with or without</h3>
             <p><b>With a barcode:</b> a white panel, centered, about 260–351 pt. It’s drawn <b>in front of</b> the footer and overlaps its top edge by about 10 pt. Barcodes stay black on white. Never tint them.</p>
             <p><b>Without one</b> (NFC or no code): that space just shows the artwork. The footer and fields don’t move.</p></div>
-          <div class="guide-spec" data-g="foot"><h3><span class="n foot">4</span>Footer area</h3>
+          <div class="guide-spec" data-g="I"><h3><span class="n foot">5</span>Footer area</h3>
             <p>A fixed band from ≈341 pt to the bottom (≈107 pt tall). It holds the <b>primary fields</b> row (up to 4; 2–3 stay readable) and <b>one footer line</b>. iOS 27 hides footer labels.</p></div>
-          <div class="guide-spec" data-g="foot"><h3><span class="n foot">5</span>Footer color set</h3>
-            <p><code>footerBackgroundColor</code> gives a <b>solid band</b> of that color, and the artwork behind it is hidden. Fade the bottom of the art into the same color so the edge is seamless (the white-footer template does this).</p></div>
-          <div class="guide-spec" data-g="foot"><h3><span class="n foot">6</span>No footer color: frosted glass</h3>
-            <p>Leave it out and iOS 27 draws <b>frosted glass</b>: a heavy blur of whatever artwork sits behind the footer (≈34 px blur, a bit more saturated, slightly darker in our tuning).</p>
+          <div class="guide-spec" data-g="I"><h3><span class="n foot">6</span>Footer color set</h3>
+            <p><code>footerBackgroundColor</code> (an <code>rgb()</code> value) gives a <b>solid, opaque band</b> of exactly that color, and the artwork behind it is hidden. Apple’s reference lists the key for poster event tickets; Pass Designer applies it to Poster Generic as well. Fade the bottom of the art into the same color so the edge is seamless (the white-footer template does this).</p></div>
+          <div class="guide-spec" data-g="I"><h3><span class="n foot">7</span>No footer color: frosted glass</h3>
+            <p>Leave it out and iOS 27 draws <b>frosted glass</b>: a heavy blur of whatever artwork sits behind the footer. Apple <b>doesn’t publish the blur amount or tint</b>. This viewer matches Pass Designer with a 34 px blur, 1.45× saturation and 94% brightness, which is an approximation.</p>
             <p>The photo’s colors bleed into the glass, so text contrast depends on the art. Lighten the bottom of the artwork with a <b>white veil</b> (the AA templates use 57% and 39%) or pick text colors that pass.</p></div>
-          <div class="guide-spec" data-g="fields"><h3><span class="n">7</span>Fonts</h3>
+          <div class="guide-spec" data-g="D E F G"><h3><span class="n">8</span>Fonts</h3>
             <p>Wallet draws every field in <b>Apple’s system fonts</b>. A pass can’t embed a brand font. On the poster, field values use a monospaced face, as in Apple’s layout figure.</p>
             <p>A brand font is only possible as text baked into the artwork, which can’t change per member and VoiceOver can’t read. Keep member data in fields.</p></div>
-          <div class="guide-spec" data-g="fields"><h3><span class="n">8</span>Text colors</h3>
+          <div class="guide-spec" data-g="D E F G"><h3><span class="n">9</span>Text colors</h3>
             <p><code>foregroundColor</code> sets values and the header value. <code>labelColor</code> sets labels. Both are solid <code>rgb()</code> only. Aim for <b>4.5:1</b> against the footer: see the contrast check below.</p></div>
-          <div class="guide-spec"><h3><span class="n">9</span>Featured Actions</h3>
+          <div class="guide-spec" data-g="B C D E F G"><h3><span class="n">10</span>Automatic colors</h3>
+            <p><b><code>useAutomaticColors: true</code>:</b> Wallet picks the text and label colors itself and <b>ignores</b> <code>foregroundColor</code> and <code>labelColor</code>. It also derives the background color from the artwork.</p>
+            <p><b>No <code>labelColor</code>:</b> the system picks the label color. Set every color yourself when you need contrast you can check.</p></div>
+          <div class="guide-spec"><h3><span class="n">11</span>Featured Actions</h3>
             <p>Up to <b>two</b> cards under the pass on iOS 27. Each has an SF Symbol (prefer circular, filled), a short call to action and a label for what happens. Predefined ones include <code>membershipBenefits</code>, <code>viewOffersRewards</code>, <code>place</code>, <code>call</code> and <code>shop</code>.</p></div>
         </div>
       </div>
@@ -1424,12 +1458,13 @@ document.querySelectorAll('.flipper').forEach(fl => {
     fn(b.getAttribute(attr)); update();
   }));
   seg('data-gbc', v => pass.dataset.bc = v);
+  seg('data-gdark', v => pass.dataset.dark = v);
   seg('data-gfoot', v => pass.dataset.foot = v);
   seg('data-gart', v => pass.style.backgroundImage = `url('${ART[v]}')`);
   color.addEventListener('input', update);
   $('gdGuides').addEventListener('change', e => pass.dataset.guides = e.target.checked ? 'on' : 'off');
-  document.querySelectorAll('.guide-spec[data-g]').forEach(c => {
-    const on = v => { c.classList.toggle('hot', v); pass.querySelectorAll(`.gd-box[data-g="${c.dataset.g}"]`).forEach(b => b.classList.toggle('hot', v)); };
+  document.querySelectorAll('.guide-spec[data-g], #gdLegend li[data-g]').forEach(c => {
+    const on = v => { c.classList.toggle('hot', v); pass.querySelectorAll(c.dataset.g.split(' ').map(g => `.gd-box[data-g="${g}"]`).join(',')).forEach(b => b.classList.toggle('hot', v)); };
     c.addEventListener('mouseenter', () => on(true)); c.addEventListener('mouseleave', () => on(false));
   });
   update();
