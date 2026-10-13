@@ -438,7 +438,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
     <section class="todo" aria-labelledby="todoTitle">
       <h2 id="todoTitle">Next steps <small>TODO</small></h2>
       <p>For design and product: what each feature does, what we can do now and what it needs from whom. Short version: the pass is a signed file built by our server, so anything that changes per member or over time is backend work. The app only downloads the card and adds it to Wallet.</p>
-      <details open>
+      <details>
         <summary>“Get Directions”: how the branch (Maps place ID) gets set and updated</summary>
         <div class="qa">
           <b>What's in the pass</b><span><code>{"type": "place", "identifier": "nearestBranch", "placeIdentifier": "I71B28B9C6AC9C7EF"}</code>. <code>placeIdentifier</code> is an Apple Maps Place ID (the sample is one AAA branch). <code>identifier</code> is just our own name for the action. It pairs with the back field that has the same key (“Your AAA branch”) and never needs to change.</span>
@@ -457,7 +457,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
           <li>Fallback: if a member has no branch, leave Get Directions out (and use the slot for something else) rather than ship an ID that might not work.</li>
         </ol>
       </details>
-      <details open>
+      <details>
         <summary>“View Membership Benefits”: what tapping it does</summary>
         <div class="qa">
           <b>What it is</b><span>One of Apple's Featured Action types (<code>membershipBenefits</code>). Apple sets the label and icon; we only give it an <code>https</code> link. A pass can have 2 actions, and iOS 26 and older don't show them at all.</span>
@@ -474,7 +474,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
           <li><b>Backend (pass service):</b> put the new link in the pass's Featured Action when it builds the card. Add something like <code>?source=wallet</code> so analytics can count opens from Wallet.</li>
         </ol>
       </details>
-      <details open>
+      <details>
         <summary>Lock Screen suggestions near AAA places (like a gym key)</summary>
         <div class="qa">
           <b>How others do it</b><span>A gym key that pops up on the Lock Screen near the gym is a Wallet pass feature, not the gym's app. The pass lists up to <b>10 locations</b> (latitude/longitude, an optional short message like “Your AAA card is ready”, and <code>maxDistance</code>, which can only make the radius smaller). The iPhone checks them in the background and suggests the pass when you're close. It doesn't need the app installed or location permission, and the company never sees where the member is. Passes can also wake up from a Bluetooth beacon (good indoors) or at a date and time (<code>relevantDates</code>).</span>
