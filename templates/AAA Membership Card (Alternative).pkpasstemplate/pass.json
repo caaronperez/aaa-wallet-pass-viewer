@@ -267,5 +267,6 @@
   "serialNumber" : "000000XXXXXXXXX0-ALT",
   "suppressHeaderDarkening" : true,
   "teamIdentifier" : "",
-  "useAutomaticColors" : false
+  "useAutomaticColors" : false,
+  "footerBackgroundColor" : "rgb(250,248,250)"
 }
