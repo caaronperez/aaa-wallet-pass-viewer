@@ -146,6 +146,13 @@ html[data-theme="light"] .acts .act.empty{background:transparent;border:1px dash
 .x{width:24px;height:24px;border-radius:50%;border:0;background:#45464c;cursor:pointer}
 .ins-sec{padding:10px 14px 0}
 .ins-sec h3{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin:6px 0 7px}
+.sprops{display:grid;gap:6px}
+.sprop{all:unset;box-sizing:border-box;display:block;width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:8px 10px;cursor:pointer;font-size:12px}
+.sprop:hover{border-color:#5a5b62}.sprop.on{border-color:rgba(251,188,4,.85);box-shadow:0 0 0 3px rgba(251,188,4,.14)}.sprop:focus-visible{outline:2px solid var(--accent)}
+.sprop .sp-h{display:flex;justify-content:space-between;gap:10px;align-items:center}.sprop .sp-h b{font-weight:600}
+.sprop .sp-v{color:var(--muted);text-align:right;overflow-wrap:anywhere}
+.sprop .sp-b{display:block;margin-top:6px;line-height:1.45;color:var(--text)}
+.sprop .sp-t{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin:6px 0 2px}
 .kv{display:grid;grid-template-columns:118px 1fr;gap:6px 10px;align-items:start;font-size:12px}
 .kv .k{color:var(--muted);padding-top:4px}
 .kv .val{background:#232427;border:1px solid var(--line);border-radius:6px;padding:4px 7px;min-height:24px;white-space:pre-wrap;word-break:break-word;color:#d9d9de;cursor:not-allowed}
@@ -318,6 +325,7 @@ html[data-theme="light"] .act.link:hover{background:#fcfcfc}
 html[data-theme="light"] .act.empty{border:1px dashed #c6c6c6}
 html[data-theme="light"] .inspector{background:rgba(0,0,0,0.339);border:1px solid #c9c9c9;box-shadow:0 18px 50px rgba(0,0,0,0.233)}
 html[data-theme="light"] .x{background:#ffffff}
+html[data-theme="light"] .sprop:hover{border-color:#b9b9b9}
 html[data-theme="light"] .kv .val{background:#f3f3f3;color:#242424}
 html[data-theme="light"] .sw{border:1px solid rgba(0,0,0,0.16)}
 html[data-theme="light"] .note{color:#2d2d2d;background:#f4f4f4}
@@ -671,7 +679,7 @@ const icon = (a, cls='dot') => `<span class="${cls}" style="background:${a.color
 /* ---------- State ---------- */
 let imports = [], importSeq = 0;
 const importById = key => imports.find(x => 'imp:' + x.id === key);
-let state = {key:'membership', pass:null, tooling:null, files:[], assets:{}, name:'', limitStyle:null, sel:null, actionPick:null, fallbackMode:null};
+let state = {key:'membership', pass:null, tooling:null, files:[], assets:{}, name:'', limitStyle:null, sel:null, actionPick:null, fallbackMode:null, styleHl:null};
 
 function styleKey(p){ return ['posterGeneric','boardingPass','coupon','eventTicket','storeCard','generic'].find(k => p && p[k]) || 'generic'; }
 function safeColor(c, fb){ return /^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(,\s*[\d.]+\s*)?\)$/.test(String(c||'').trim()) ? String(c).trim() : fb; }
@@ -682,7 +690,7 @@ function hasFile(base){ return ['@2x.png','@3x.png','.png'].filter(s => state.fi
 async function loadDefault(key){
   if(key.startsWith('imp:')){
     const entry = importById(key); if(!entry) return;
-    state = {...state, key, ...entry, limitStyle:null, actionPick:null, fallbackMode:null};
+    state = {...state, key, ...entry, limitStyle:null, actionPick:null, fallbackMode:null, styleHl:null};
     showError(''); render(); return;
   }
   const dir = DEFAULTS[key];
@@ -692,7 +700,7 @@ async function loadDefault(key){
     if(!pr.ok) throw new Error('pass.json request failed ('+pr.status+')');
     const manifest = mr.ok ? await mr.json() : {};
     state = {...state, key, pass: await pr.json(), tooling: tr.ok ? await tr.json() : null, name: dir,
-      files: manifest[dir] || [], assets: {}, raw: null, limitStyle: null, sel: state.sel, actionPick: null, fallbackMode: null};
+      files: manifest[dir] || [], assets: {}, raw: null, limitStyle: null, sel: state.sel, actionPick: null, fallbackMode: null, styleHl: null};
     state.files.filter(f => f.endsWith('.png')).forEach(f => state.assets[f] = base + encodeURIComponent(f));
     showError(''); render();
   }catch(e){ showError('Hmm, couldn\'t load the template ('+e.message+'). Try reloading the page.'); }
@@ -956,6 +964,32 @@ $('sidebar').addEventListener('click', e => {
 const kv = rows => '<div class="kv">' + rows.filter(Boolean).map(([k,v,raw]) => `<div class="k">${esc(k)}</div><div class="val" aria-readonly="true">${raw ? v : esc(v === undefined || v === '' ? '—' : v)}</div>`).join('') + '</div>';
 const note = (t, cls='') => `<div class="note ${cls}">${t}</div>`;
 const sec = (title, body) => `<div class="ins-sec"><h3>${esc(title)}</h3>${body}</div>`;
+const STYLE_PROPS = [
+  {key:'fg', name:'Foreground color', val:p => colorVal(p.foregroundColor), sel:'#card27 .v, #card27 .phead, #card27 .foot, #card26 .v',
+   where:'The <b>values</b> of every field: header value, primary fields and footer on iOS 27; every field value on the iOS 26 card. Also used on Apple Watch.',
+   limits:'One color for all values (no per-field colors). Must read on the artwork, the footer color and the iOS 26 card at once. Ignored when Automatic Colors is on.'},
+  {key:'label', name:'Label color', val:p => colorVal(p.labelColor), sel:'#card27 .l, #card27 .phead small, #card26 .l',
+   where:'Field <b>labels</b> (“Member Name”, the header label) on iOS 27 and iOS 26.',
+   limits:'One color for all labels. Footer labels aren\'t shown on iOS 27. Ignored when Automatic Colors is on.'},
+  {key:'bg', name:'Background color', val:p => colorVal(p.backgroundColor), sel:'#front26 .face-in, #front27 .face-in',
+   where:'The whole <b>iOS 26 card</b>. On iOS 27 it only shows where the artwork is transparent (and behind the fields if there\'s no footer color).',
+   limits:'A flat color, no gradients (put gradients in the artwork). Apple Watch builds its own background from the artwork instead.'},
+  {key:'footer', name:'Footer background', val:p => p.footerBackgroundColor ? colorVal(p.footerBackgroundColor) : '— (system glass)', sel:'#card27 .body',
+   where:'iOS 27 only: the <b>area behind the primary and footer fields</b> at the bottom of the poster.',
+   limits:'A static color replaces Wallet\'s glass material. Leave it out and iOS draws frosted glass from the artwork, which you can\'t color. Fade the artwork into this exact color to avoid a visible edge. Not used on iOS 26.'},
+  {key:'auto', name:'Automatic colors', val:p => esc(String(!!p.useAutomaticColors)), sel:'#card27 .l, #card27 .v, #card27 .phead, #card27 .foot',
+   where:'iOS 27 text: Wallet picks label and value colors from the artwork.',
+   limits:'When on, Foreground and Label colors are ignored and the result isn\'t predictable. Doesn\'t change the Apple Watch text color.'},
+  {key:'darken', name:'Suppress header darkening', val:p => esc(String(!!p.suppressHeaderDarkening)), sel:'#card27 .plogo, #card27 .phead',
+   where:'iOS 27 only: the <b>top of the poster</b> (logo and header field).',
+   limits:'On: Wallet stops drawing its dark gradient behind the header, so the header text must read on the artwork by itself (here, the light top tint in the artwork does that).'},
+  {key:'logotext', name:'Logo text', val:p => p.logoText ? esc(p.logoText) : '—', sel:'#card26 .lt, #card27 .plogo',
+   where:'Text <b>next to the logo</b> on iOS 26; on iOS 27 it is drawn beside the primary logo over the artwork.',
+   limits:'One short line, cut off if long, uses the foreground color. These templates leave it empty and use a header field instead.'},
+  {key:'compat', name:'Generate Compatible Pass', val:() => state.tooling ? esc(String(!!state.tooling.automaticallyGenerateCompatiblePass)) : 'unknown', sel:'#front26 .face-in',
+   where:'The <b>iOS 26 and older</b> card (the <code>generic</code> style in the same pass.json).',
+   limits:'On: Pass Designer rebuilds iOS 26 from the poster fields on every save and overwrites a custom layout. Off: the custom iOS 26 layout ships, but Pass Designer previews the poster in its iOS 26 column (use this viewer\'s Custom tab).'},
+];
 function colorVal(c){ return c ? `<span class="sw" style="background:${esc(safeColor(c,'transparent'))}"></span>${esc(c)}` : '—'; }
 
 function openInspector(id, scroll){
@@ -976,7 +1010,13 @@ function openInspector(id, scroll){
   }
   else if(id === 'style'){
     title = 'Style';
-    body = sec('Values', kv([['Style',S.name + '  (' + sk + ')'],['Available on',S.os],['Generate Compatible Pass', state.tooling ? String(!!state.tooling.automaticallyGenerateCompatiblePass) : 'unknown (no tooling.json)'],['Fallback style', autoOn() ? 'Generic (auto-generated by Designer)' : p.generic && sk!=='generic' ? 'generic (custom, hand-authored)' : 'none'],['Logo Text',p.logoText],['Foreground',colorVal(p.foregroundColor),true],['Background',colorVal(p.backgroundColor),true],['Label',colorVal(p.labelColor),true],['Footer Background',colorVal(p.footerBackgroundColor),true],['Automatic Colors',p.useAutomaticColors],['Suppress Header Darkening',p.suppressHeaderDarkening]]))
+    const props = STYLE_PROPS.map(d => {
+      const on = state.styleHl === d.key, val = d.val(p);
+      return `<button type="button" class="sprop ${on ? 'on' : ''}" data-shl="${d.key}" aria-expanded="${on}"><span class="sp-h"><b>${esc(d.name)}</b><span class="sp-v">${val}</span></span>`
+        + (on ? `<span class="sp-b"><span class="sp-t">Where it applies</span>${d.where}<span class="sp-t">Limits</span>${d.limits}</span>` : '') + '</button>';
+    }).join('');
+    body = sec('Colors & settings <small style="text-transform:none;letter-spacing:0;font-weight:400">· click one to highlight it on the cards</small>', `<div class="sprops">${props}</div>`)
+      + sec('Values', kv([['Style',S.name + '  (' + sk + ')'],['Available on',S.os],['Generate Compatible Pass', state.tooling ? String(!!state.tooling.automaticallyGenerateCompatiblePass) : 'unknown (no tooling.json)'],['Fallback style', autoOn() ? 'Generic (auto-generated by Designer)' : p.generic && sk!=='generic' ? 'generic (custom, hand-authored)' : 'none'],['Logo Text',p.logoText],['Foreground',colorVal(p.foregroundColor),true],['Background',colorVal(p.backgroundColor),true],['Label',colorVal(p.labelColor),true],['Footer Background',colorVal(p.footerBackgroundColor),true],['Automatic Colors',p.useAutomaticColors],['Suppress Header Darkening',p.suppressHeaderDarkening]]))
       + sec('Limitations', note('Colors apply to both the new pass style and its fallback style, so they must read well on the poster footer and on the legacy card.')
         + note('<code>useAutomaticColors</code> ignores foregroundColor and labelColor. Apple documents <code>footerBackgroundColor</code>, <code>suppressHeaderDarkening</code> and <code>useAutomaticColors</code> for poster event tickets; Pass Designer also exposes them for Poster Generic.')
         + note('<code>logoText</code> is shared: on Poster Generic it also draws beside the primary logo over the artwork, so these templates keep the title in the artwork and put it in a generic header field instead.','warn')
@@ -1067,6 +1107,7 @@ function openInspector(id, scroll){
   const ap = ins.querySelector('#actPick');
   if(ap) ap.onchange = e => { state.actionPick = e.target.value; openInspector('actions', false); };
   ins.querySelectorAll('[data-act]').forEach(b => b.onclick = () => { state.actionPick = b.dataset.act; openInspector('actions', false); });
+  ins.querySelectorAll('[data-shl]').forEach(b => b.onclick = () => { state.styleHl = state.styleHl === b.dataset.shl ? null : b.dataset.shl; openInspector('style', false); highlight(true); });
   ins.querySelectorAll('[data-jump]').forEach(b => b.onclick = () => {
     const j = b.dataset.jump;
     if(j.startsWith('act:')){
@@ -1115,7 +1156,8 @@ function highlight(fromMenu){
     fgroup: `#card26 [data-f^="${g}:"]`,
     ffield: `#card26 [data-f="${g}:${i}"]`
   };
-  const els = MAP[kind] ? [...document.querySelectorAll(MAP[kind])] : [];
+  const sp = kind === 'style' && state.styleHl ? STYLE_PROPS.find(d => d.key === state.styleHl) : null;
+  const els = sp ? [...document.querySelectorAll(sp.sel)] : MAP[kind] ? [...document.querySelectorAll(MAP[kind])] : [];
   els.forEach(n => n.classList.add('hl', ...(n.classList.contains('face-in') ? ['hl-face'] : [])));
   if(!fromMenu || !els.length) return;
   const onBack = g === 'backFields';
