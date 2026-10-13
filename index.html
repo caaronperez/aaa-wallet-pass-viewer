@@ -515,7 +515,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
       <div class="guide-h">
         <h1 id="guideTitle">Designing an iOS 27 Poster pass</h1>
         <p>Where everything sits on the card, and what changes with each setting. Flip the switches; hover a note to find it on the card.</p>
-        <p class="guide-fixed"><b>Fixed:</b> the logo, header, barcode, fields and footer can’t be moved or resized. Wallet places them. <b>Yours to change:</b> the artwork and the colors. Lighten, veil or recompose the image to get better contrast.</p>
+        <p class="guide-fixed"><b>Fixed:</b> the logo, header, barcode, fields and footer can’t be moved or resized, and the <b>fonts can’t be changed</b>. Wallet sets them. <b>Yours to change:</b> the artwork and the colors. Lighten, veil or recompose the image to get better contrast.</p>
       </div>
       <nav class="guide-jump" aria-label="On this page"><a class="pri" href="#picker">See the AAA templates ↓</a><a href="#a11yTitle">Text contrast check ↓</a><a href="https://developer.apple.com/documentation/walletpasses/defining-the-metadata-of-your-wallet-pass#Add-Featured-Actions" target="_blank" rel="noopener">Apple’s docs ↗</a></nav>
       <div class="guide-grid">
@@ -571,7 +571,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
           <div class="guide-spec" data-g="I"><h3><span class="n foot">5</span>Footer area</h3><ul><li>Starts at <b>≈341 pt</b> (76% down)</li><li>Primary fields + 1 footer line</li><li>Footer labels are hidden</li></ul></div>
           <div class="guide-spec" data-g="I"><h3><span class="n foot">6</span>Footer color set</h3><ul><li><code>footerBackgroundColor</code>: solid band, art hidden</li><li>Fade the art into the same color</li></ul></div>
           <div class="guide-spec" data-g="I"><h3><span class="n foot">7</span>No footer color = glass</h3><ul><li>Blur <b>≈11%</b> of the card width</li><li>Saturation <b>145%</b> · brightness <b>94%</b></li><li>Apple gives no %; ours matches Pass Designer</li><li>Light glass needs light art: add a white veil (<b>57%</b> / <b>39%</b> in our AA cards)</li></ul></div>
-          <div class="guide-spec" data-g="D E F G"><h3><span class="n ">8</span>Fonts</h3><ul><li>System fonts only, no custom fonts</li><li>Labels and values are monospaced</li><li>Brand font (Roboto) only baked into the art</li></ul></div>
+          <div class="guide-spec" data-g="D E F G"><h3><span class="n ">8</span>Fonts</h3><ul><li><b>Can’t be changed</b>: a pass has no font setting</li><li>Wallet always uses Apple’s system fonts</li><li>Labels and values are monospaced</li><li>Brand font (Roboto) only baked into the art</li></ul></div>
           <div class="guide-spec" data-g="B C D E F G"><h3><span class="n ">9</span>Text colors</h3><ul><li><code>foregroundColor</code> = values · <code>labelColor</code> = labels</li><li>Solid <code>rgb()</code> only</li><li>Aim for <b>4.5:1</b></li></ul></div>
           <div class="guide-spec" data-g="B C D E F G"><h3><span class="n ">10</span>Automatic colors</h3><ul><li><code>useAutomaticColors: true</code>: Wallet picks the text colors and ignores yours</li></ul></div>
           <div class="guide-spec"><h3><span class="n ">11</span>Featured Actions</h3><ul><li>Up to <b>2</b> cards below the pass</li><li>Pick from Apple’s <b>14</b> predefined actions</li><li>Icon and title are set by Apple</li><li>e.g. <code>membershipBenefits</code>, <code>place</code></li></ul></div>
