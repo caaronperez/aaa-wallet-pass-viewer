@@ -195,6 +195,28 @@ html[data-theme="light"] .acts .act.empty{background:transparent;border:1px dash
 .proposal-open{flex:none;background:var(--accent);color:#fff;text-decoration:none;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600}
 .proposal-img img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid #2c2d32}
 .proposal-grid{display:grid;gap:22px}
+/* Text contrast (WCAG) section under the previews */
+.a11y{max-width:1100px;margin:30px auto 0;background:#1b1c20;border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+.a11y h2{margin:0 0 6px;font-size:19px}
+.a11y>p{margin:0 0 14px;color:var(--muted);font-size:13px;line-height:1.5;max-width:860px}
+.a11y-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-bottom:16px}
+.a11y-card{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;font:inherit;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:12px;padding:9px 11px;cursor:pointer}
+.a11y-card b{font-size:13px}.a11y-card small{font-size:11.5px;color:var(--muted)}
+.a11y-card.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.a11y-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.a11y-v{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 8px}
+.a11y-v.ok{background:rgba(52,199,89,.16);color:#30d158}.a11y-v.bad{background:rgba(255,95,87,.16);color:#ff6961}.a11y-v.mid{background:rgba(245,180,60,.18);color:#ffc54d}
+html[data-theme="light"] .a11y-v.ok{color:#1a7f37}html[data-theme="light"] .a11y-v.bad{color:#c4271f}html[data-theme="light"] .a11y-v.mid{color:#8a5a00}
+.a11y-detail h3{margin:0 0 4px;font-size:15px}
+.a11y-detail .a11y-fix{margin:0 0 12px;font-size:13px;line-height:1.5;color:var(--text)}
+.a11y-scroll{overflow-x:auto}
+.a11y table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:640px}
+.a11y th{text-align:left;font-weight:600;color:var(--muted);font-size:11.5px;padding:6px 8px;border-bottom:1px solid var(--line)}
+.a11y td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+.a11y td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.a11y .sw{display:inline-grid;place-items:center;width:38px;height:24px;border-radius:6px;font:700 12px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;border:1px solid rgba(127,127,127,.35);vertical-align:middle;margin-right:6px}
+.a11y .sub{color:var(--muted);font-size:11.5px}
+.a11y .a11y-notes{margin:12px 0 0;padding-left:18px;color:var(--muted);font-size:12px;line-height:1.55}
 .todo{max-width:1100px;margin:22px auto 0;background:#1b1c20;border:1px solid var(--line);border-radius:18px;padding:18px 20px}
 .todo h2{margin:0 0 4px;font-size:19px}.todo h2 small{font-size:12px;font-weight:700;letter-spacing:.06em;color:#2b1d00;background:#ffd27a;border-radius:999px;padding:3px 9px;margin-left:8px;vertical-align:3px}
 .todo>p{margin:0 0 14px;color:var(--muted);font-size:13px;line-height:1.5}
@@ -347,6 +369,8 @@ html[data-theme="light"] .thumbs img{background:repeating-conic-gradient(#fdfdfd
 html[data-theme="light"] .proposal{background:#f0f0f0}
 html[data-theme="light"] .proposal-open{color:#000000}
 html[data-theme="light"] .proposal-img img{border:1px solid #dcdcdc}
+html[data-theme="light"] .a11y{background:#f0f0f0}
+html[data-theme="light"] .a11y .sw{border:1px solid rgba(160,160,160,0.35)}
 html[data-theme="light"] .todo{background:#f0f0f0}
 html[data-theme="light"] .todo h3{color:#000000}
 html[data-theme="light"] .todo p,html[data-theme="light"] .todo li{color:#2d2d2d}
@@ -441,6 +465,18 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
         <div class="flipper" data-flip="26"><div class="card3d" id="card26"><div class="face front" id="front26"></div><div class="face back details" id="back26"></div></div></div>
       </div>
     </div>
+    <section class="a11y" aria-labelledby="a11yTitle">
+      <h2 id="a11yTitle">Text contrast · ADA (WCAG 2.2 AA)</h2>
+      <p>Each card’s iOS 27 text checked against what sits behind it: the frosted glass footer, the solid footer, or the photo under the header. AA needs <b>4.5:1</b> for regular text. None of the Wallet poster text is large enough for the 3:1 large-text rule. Pick a card to see every line.</p>
+      <div class="a11y-cards" id="a11yCards" role="list"></div>
+      <div class="a11y-detail" id="a11yDetail" aria-live="polite"></div>
+      <ul class="a11y-notes">
+        <li><b>How it’s measured:</b> the glass is rebuilt from each template’s artwork the same way the viewer draws it (blur 34px, saturate 1.45, brightness .94), which matches Pass Designer to within about 10–20 RGB levels. Every pixel behind each line of text is checked, and “Lowest” is the worst spot.</li>
+        <li><b>Glass drift:</b> the lowest ratio again after shifting the glass 15 RGB levels toward the text color, to cover the difference from Pass Designer and the device.</li>
+        <li><b>Original cards</b> use automatic colors, so Wallet picks the text color from the art. The viewer approximates that pick, and the white and dark columns show both possible outcomes.</li>
+        <li>Not covered: iOS 26 cards (solid colors, no glass), the barcode panel (black on white), and Apple Watch. Confirm on a device with Xcode’s Accessibility Inspector before shipping.</li>
+      </ul>
+    </section>
     <section class="proposal" aria-labelledby="proposalTitle">
       <div class="proposal-h">
         <div><h2 id="proposalTitle">Design proposals <span class="credit">(the image canvas below and strings made by Claude, i just did the pass design and the web)</span></h2>
@@ -883,6 +919,7 @@ function render(){
   $('note27').textContent = sk === 'posterGeneric' ? 'How it looks on iOS 27' : (STYLES[sk]?.name || sk) + ' card (shown with the basic layout)';
   const acts = p.featuredActions || [];
   $('acts27').innerHTML = actsHTML(p);
+  renderA11y();
 
   // iOS 26
   const fb = sk === 'posterGeneric' ? fallbackFor(p) : {dict, mode:'same'};
@@ -1218,6 +1255,29 @@ document.querySelectorAll('.flipper').forEach(fl => {
   fl.addEventListener('pointerup', end);
   fl.addEventListener('pointercancel', () => { start = null; card.style.transition = ''; card.style.transform = ''; });
 });
+
+/* ---------- Text contrast (WCAG 2.2 AA) ----------
+   Measured offline by template-build/contrast/check_contrast.py from each template's artwork. */
+const A11Y = [{"key":"membershipAlt","name":["Membership","Alternative \u00b7 white footer"],"glass":false,"auto":false,"fix":"The white footer passes easily. Only the header value (\u201cPremier\u201d, #324A72 over the tinted sky) is short at 3.5:1. Using the label color #27292B there gives 5.7:1.","rows":[{"t":"Field labels","on":"solid","c":[39,41,43],"bg":[250,248,250],"min":13.82,"med":13.82,"worst":14.6,"w":1.06,"b":16.1},{"t":"Field values","on":"solid","c":[50,74,114],"bg":[250,248,250],"min":8.43,"med":8.43,"worst":8.91,"w":1.06,"b":16.1},{"t":"Footer line","on":"solid","c":[50,74,114],"bg":[250,248,250],"min":8.43,"med":8.43,"worst":8.91,"w":1.06,"b":16.1},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[195,191,219],"min":5.74,"med":8.54,"worst":5.74,"w":1.47,"b":6.69},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[195,191,219],"min":3.5,"med":5.21,"worst":3.5,"w":1.47,"b":6.69}]},{"key":"membershipGlass","name":["Membership","Alternative \u00b7 iOS 27 glass"],"glass":true,"auto":false,"fix":"Fails on the glass: the red car shows straight through it. White text still fails the footer line. Dark #1C1C1E text passes once about 38% white veil sits under the glass, which is what the Blur Glass version does.","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[185,43,34],"min":1.41,"med":2.66,"worst":1.74,"w":4.19,"b":1.64},{"t":"Field values","on":"glass","c":[50,74,114],"bg":[197,47,36],"min":1.02,"med":1.75,"worst":1.27,"w":4.15,"b":1.95},{"t":"Footer line","on":"glass","c":[50,74,114],"bg":[218,54,39],"min":1.09,"med":2.08,"worst":1.35,"w":2.65,"b":2.09},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[195,191,219],"min":5.74,"med":8.54,"worst":5.74,"w":1.47,"b":6.69},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[195,191,219],"min":3.5,"med":5.21,"worst":3.5,"w":1.47,"b":6.69}]},{"key":"membershipBlur","name":["Membership","Alternative \u00b7 blur glass"],"glass":true,"auto":false,"fix":"Closest of the glass versions. Switch foregroundColor and labelColor to #1C1C1E and raise the white veil under the glass from 38% to about 41%. Then every line on the glass passes. The header value has the same 3.5:1 issue as the white-footer version.","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[205,117,111],"min":3.61,"med":4.63,"worst":4.4,"w":2.85,"b":4.2},{"t":"Field values","on":"glass","c":[50,74,114],"bg":[213,119,112],"min":2.41,"med":2.98,"worst":2.93,"w":2.56,"b":4.61},{"t":"Footer line","on":"glass","c":[50,74,114],"bg":[226,124,114],"min":2.51,"med":3.15,"worst":3.04,"w":1.89,"b":4.8},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[195,191,219],"min":5.74,"med":8.54,"worst":5.74,"w":1.47,"b":6.69},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[195,191,219],"min":3.5,"med":5.21,"worst":3.5,"w":1.47,"b":6.69}]},{"key":"insuranceAlt","name":["Insurance","Alternative"],"glass":true,"auto":false,"fix":"Fails on the glass. With #1C1C1E text and a white veil of about 15% under the glass (like the Blur Glass Membership), every line passes. The header already passes.","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[181,126,92],"min":2.89,"med":4.37,"worst":3.57,"w":2.39,"b":3.37},{"t":"Field values","on":"glass","c":[50,74,114],"bg":[188,136,105],"min":2.04,"med":2.95,"worst":2.5,"w":2.07,"b":3.91},{"t":"Footer line","on":"glass","c":[50,74,114],"bg":[207,173,155],"min":3.54,"med":4.24,"worst":4.21,"w":1.59,"b":6.77},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[199,194,224],"min":7.79,"med":8.47,"worst":7.79,"w":1.55,"b":9.07},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[199,194,224],"min":4.75,"med":5.17,"worst":4.75,"w":1.55,"b":9.07}]},{"key":"membership","name":["Membership","Original"],"glass":true,"auto":true,"fix":"Wallet picks the text colors here (useAutomaticColors), so the viewer approximates them. The glass is mid-tone, so neither white nor dark text passes the labels. Dark text plus about a 36% white veil under the glass fixes it, or set a solid footerBackgroundColor. The header is white on bright sky (2.4:1). Dark text there gets 6.1:1.","rows":[{"t":"Field labels","on":"glass","c":[110,110,115],"bg":[121,110,113],"min":1.0,"med":1.41,"worst":1.0,"w":2.66,"b":1.63},{"t":"Field values","on":"glass","c":[28,28,30],"bg":[127,115,118],"min":1.91,"med":3.78,"worst":2.41,"w":2.88,"b":1.91},{"t":"Footer line","on":"glass","c":[28,28,30],"bg":[134,121,126],"min":3.37,"med":4.1,"worst":4.17,"w":3.69,"b":3.37},{"t":"Header label","on":"photo","c":[255,255,255],"bg":[69,165,250],"min":2.4,"med":2.61,"worst":2.4,"w":2.4,"b":6.05},{"t":"Header value","on":"photo","c":[255,255,255],"bg":[69,165,250],"min":2.4,"med":2.61,"worst":2.4,"w":2.4,"b":6.05}]},{"key":"insurance","name":["Insurance","Original"],"glass":true,"auto":true,"fix":"Wallet picks the text colors here (useAutomaticColors). The glass is dark, so white text passes every line (6:1 or better), while the viewer\u2019s dark-text approximation fails. Set foregroundColor and labelColor to white so the result doesn\u2019t depend on Wallet\u2019s choice.","rows":[{"t":"Field labels","on":"glass","c":[110,110,115],"bg":[97,56,36],"min":1.29,"med":1.55,"worst":1.61,"w":6.53,"b":1.0},{"t":"Field values","on":"glass","c":[28,28,30],"bg":[102,59,36],"min":1.0,"med":2.21,"worst":1.17,"w":6.37,"b":1.0},{"t":"Footer line","on":"glass","c":[28,28,30],"bg":[119,67,39],"min":1.22,"med":2.29,"worst":1.52,"w":5.97,"b":1.22}]}];
+const a11yRowOk = r => r.min >= 4.5;
+const a11yVerdict = c => c.rows.every(a11yRowOk) ? ['ok','Passes AA'] : c.rows.some(r => r.on !== 'photo' && !a11yRowOk(r)) ? ['bad','Fails on the ' + (c.glass ? 'glass' : 'footer')] : ['mid','Footer passes · header fails'];
+const a11yRatio = v => `<span class="${v >= 4.5 ? '' : 'sub'}">${v.toFixed(2)}:1</span>`;
+function renderA11y(){
+  const sel = A11Y.find(c => c.key === state.key);
+  $('a11yCards').innerHTML = A11Y.map(c => { const [cls, txt] = a11yVerdict(c);
+    return `<button type="button" role="listitem" class="a11y-card${sel && sel.key === c.key ? ' on' : ''}" data-a11y="${c.key}" aria-pressed="${!!sel && sel.key === c.key}"><b>${esc(c.name[0])}</b><small>${esc(c.name[1])}</small><span class="a11y-v ${cls}">${cls === 'ok' ? '✓' : '✕'} ${txt}</span></button>`; }).join('');
+  if(!sel){ $('a11yDetail').innerHTML = '<p class="a11y-fix">Uploaded templates aren’t measured yet. Pick one of the six cards above.</p>'; return; }
+  const rgb = a => `rgb(${a.join(',')})`, hex = a => '#' + a.map(v => v.toString(16).padStart(2,'0')).join('').toUpperCase();
+  const on = {glass:'Frosted glass', solid:'Solid footer', photo:'Photo (header)'};
+  $('a11yDetail').innerHTML = `<h3>${esc(sel.name.join(' · '))}</h3><p class="a11y-fix">${esc(sel.fix)}</p>
+    <div class="a11y-scroll"><table><thead><tr><th>Text</th><th>Sits on</th><th>Text on background</th><th>Lowest</th><th>Typical</th><th>Glass drift</th><th>AA</th><th>If white text</th><th>If dark text</th></tr></thead><tbody>
+    ${sel.rows.map(r => `<tr><td>${esc(r.t)}</td><td>${on[r.on]}</td><td><span class="sw" style="color:${rgb(r.c)};background:${rgb(r.bg)}">Aa</span><span class="sub">${hex(r.c)} on ~${hex(r.bg)}</span></td>
+      <td class="n"><b>${r.min.toFixed(2)}:1</b></td><td class="n">${r.med.toFixed(2)}:1</td><td class="n">${r.on === 'glass' ? r.worst.toFixed(2) + ':1' : '<span class="sub">n/a</span>'}</td>
+      <td><span class="a11y-v ${a11yRowOk(r) ? 'ok' : r.min >= 3 ? 'mid' : 'bad'}">${a11yRowOk(r) ? '✓ Pass' : '✕ Fail'}</span></td>
+      <td class="n">${a11yRatio(r.w)}</td><td class="n">${a11yRatio(r.b)}</td></tr>`).join('')}
+    </tbody></table></div>`;
+}
+$('a11yCards').addEventListener('click', e => { const b = e.target.closest('[data-a11y]'); if(b) loadDefault(b.dataset.a11y); });
 
 /* ---------- Template switching & import ---------- */
 $('picker').addEventListener('click', e => {
