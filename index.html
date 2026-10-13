@@ -89,8 +89,12 @@ button,select{font:inherit;color:inherit}
 /* No footerBackgroundColor: iOS 27 draws frosted glass over the artwork, starting ~341pt down a 448pt pass. */
 .poster .body.glassfoot{top:76.1%;background:none;padding:10px 14px 11px;isolation:isolate}
 /* Glass like Pass Designer: heavy blur, a little lift. It starts at ~76% and the barcode panel overlaps its top edge, as in Wallet. */
-.poster .body.glassfoot::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(32px) saturate(1.5) brightness(1.04);backdrop-filter:blur(32px) saturate(1.5) brightness(1.04)}
+.poster .body.glassfoot::before{content:"";position:absolute;inset:0;z-index:-1;background:transparent;-webkit-backdrop-filter:blur(34px) saturate(1.45) brightness(.94);backdrop-filter:blur(34px) saturate(1.45) brightness(.94)}
 .poster .body{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--footer,#fff) 85%,transparent) 34%,var(--footer,#fff) 62%);padding:58px 14px 11px}
+/* Pass Designer layout: the field area starts at 76.1% of the card; labels sit at ~84.5%, the footer line at ~95.5%. */
+.poster .body,.poster .body.glassfoot{top:76.1%;padding:0}
+.poster .body .row{position:absolute;left:14px;right:14px;top:35%;margin:0}
+.poster .body .foot{position:absolute;left:14px;right:14px;top:80%;margin:0}
 .poster .row{display:grid;gap:8px;margin-top:8px}.poster .row.n3{gap:6px}.poster .row.n3 .v{font-size:9px}.poster .row.n3 .l{font-size:8.5px}.poster .row.n4 .v{font-size:8.5px}.poster .row.n4 .l{font-size:8px}
 .fld{min-width:0}
 .fld .l{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--label);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
