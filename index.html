@@ -554,6 +554,8 @@ const $ = id => document.getElementById(id);
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const INF = Infinity;
 
+/* Template images change often; skip the 10-minute browser cache so every visit shows the latest artwork. */
+const ASSET_V = '?v=' + Date.now();
 const DEFAULTS = {
   membershipAlt: 'AAA Membership Card (Alternative).pkpasstemplate',
   membershipGlass: 'AAA Membership Card (Alternative Glass).pkpasstemplate',
@@ -719,7 +721,7 @@ async function loadDefault(key){
     const manifest = mr.ok ? await mr.json() : {};
     state = {...state, key, pass: await pr.json(), tooling: tr.ok ? await tr.json() : null, name: dir,
       files: manifest[dir] || [], assets: {}, raw: null, limitStyle: null, sel: state.sel, actionPick: null, fallbackMode: null, styleHl: null};
-    state.files.filter(f => f.endsWith('.png')).forEach(f => state.assets[f] = base + encodeURIComponent(f));
+    state.files.filter(f => f.endsWith('.png')).forEach(f => state.assets[f] = base + encodeURIComponent(f) + ASSET_V);
     showError(''); render();
   }catch(e){ showError('Hmm, couldn\'t load the template ('+e.message+'). Try reloading the page.'); }
 }
@@ -1339,7 +1341,7 @@ async function simEntry(key){
   const dir = DEFAULTS[key], base = 'templates/' + encodeURIComponent(dir) + '/';
   const [pass, manifest] = await Promise.all([fetchFresh(base + 'pass.json').then(r => r.json()), fetchFresh('templates/manifest.json').then(r => r.json())]);
   const files = manifest[dir] || [], assets = {};
-  files.filter(f => f.endsWith('.png')).forEach(f => assets[f] = base + encodeURIComponent(f));
+  files.filter(f => f.endsWith('.png')).forEach(f => assets[f] = base + encodeURIComponent(f) + ASSET_V);
   return simCache[key] = {pass, assets, files, name: dir};
 }
 function simRender(entry){
