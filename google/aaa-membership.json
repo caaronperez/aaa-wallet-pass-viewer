@@ -215,6 +215,60 @@
         "header": {
           "defaultValue": {
             "language": "en-US",
+            "value": "Find your AAA branch"
+          }
+        },
+        "body": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "Directions, hours and services"
+          }
+        },
+        "uri": "https://www.ace.aaa.com/locations.html",
+        "image": {
+          "sourceUri": {
+            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-branch.jpg"
+          },
+          "contentDescription": {
+            "defaultValue": {
+              "language": "en-US",
+              "value": "City skyline at sunset"
+            }
+          }
+        },
+        "sortIndex": 3
+      },
+      {
+        "header": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "Travel with AAA"
+          }
+        },
+        "body": {
+          "defaultValue": {
+            "language": "en-US",
+            "value": "Hotels, rental cars and trip planning"
+          }
+        },
+        "uri": "https://www.ace.aaa.com/travel.html",
+        "image": {
+          "sourceUri": {
+            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-travel.jpg"
+          },
+          "contentDescription": {
+            "defaultValue": {
+              "language": "en-US",
+              "value": "Coastal road by the ocean"
+            }
+          }
+        },
+        "sortIndex": 4
+      },
+      {
+        "header": {
+          "defaultValue": {
+            "language": "en-US",
             "value": "Renew or upgrade"
           }
         },
@@ -236,7 +290,7 @@
             }
           }
         },
-        "sortIndex": 3
+        "sortIndex": 5
       }
     ],
     "appLinkData": {
