@@ -518,7 +518,9 @@ function textColorFor(hex){
 }
 /* Our sample passes point at the published site; load those images from this site's folder so local copies work too. */
 const SELF = 'https://caaronperez.github.io/aaa-wallet-pass-viewer/';
-const imgSrc = u => String(u || '').startsWith(SELF) ? String(u).slice(SELF.length) : (/^https:/i.test(String(u || '')) ? u : '');
+/* GitHub Pages lets browsers cache images for 10 minutes; a per-load version makes edits show up right away. */
+const ASSET_V = '?v=' + Date.now();
+const imgSrc = u => String(u || '').startsWith(SELF) ? String(u).slice(SELF.length) + ASSET_V : (/^https:/i.test(String(u || '')) ? u : '');
 const safeHref = u => /^(https:|tel:|mailto:)/i.test(String(u || '')) ? u : '';
 
 /* Resolve a template fieldPath like object.textModulesData['plan'] */
@@ -862,12 +864,13 @@ addEventListener('dragenter', e => { if(!hasFiles(e)) return; e.preventDefault()
 addEventListener('dragover', e => { if(hasFiles(e)) e.preventDefault(); });
 addEventListener('dragleave', e => { if(hasFiles(e) && --depth <= 0){ depth = 0; $('dropzone').hidden = true; } });
 addEventListener('drop', e => { if(!hasFiles(e)) return; e.preventDefault(); depth = 0; $('dropzone').hidden = true; const f = e.dataTransfer.files[0]; if(f) importFile(f); });
+document.querySelectorAll('img[src^="google/img/"]').forEach(i => i.src = i.getAttribute('src') + ASSET_V);
 load('membership');
 renderCards();
 /* ---------- Design playground (top): empty pass to try hero, logo, color and text ---------- */
 (function(){
   const gp = $('gp'), bgIn = $('ggBg'), hero = $('ggHero'), logo = $('ggLogo');
-  const HERO = {m: 'google/img/hero-membership.jpg', i: 'google/img/hero-insurance.jpg'};
+  const HERO = {m: 'google/img/hero-membership.jpg' + ASSET_V, i: 'google/img/hero-insurance.jpg' + ASSET_V};
   let upHero = null, upLogo = null;
   const lin = c => { c /= 255; return c <= .03928 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4; };
   const L = h => { const n = parseInt(h.slice(1), 16); return .2126 * lin(n >> 16) + .7152 * lin(n >> 8 & 255) + .0722 * lin(n & 255); };
@@ -893,7 +896,7 @@ renderCards();
   const seg = (attr, fn) => document.querySelectorAll('[' + attr + ']').forEach(b => b.addEventListener('click', () => { if(fn(b.getAttribute(attr)) !== false) pick(b); update(); }));
   const setHero = url => { gp.dataset.hero = url ? 'on' : 'none'; if(url) hero.src = url; };
   seg('data-gh', v => { if(v === 'up' && !upHero){ $('ggHeroFile').click(); return false; } setHero(v === 'none' ? null : v === 'up' ? upHero : HERO[v]); });
-  seg('data-gl', v => { if(v === 'up' && !upLogo){ $('ggLogoFile').click(); return false; } gp.dataset.logo = v === 'none' ? 'none' : 'on'; logo.hidden = v === 'none'; if(v !== 'none') logo.src = v === 'up' ? upLogo : 'google/img/logo.png'; });
+  seg('data-gl', v => { if(v === 'up' && !upLogo){ $('ggLogoFile').click(); return false; } gp.dataset.logo = v === 'none' ? 'none' : 'on'; logo.hidden = v === 'none'; if(v !== 'none') logo.src = v === 'up' ? upLogo : 'google/img/logo.png' + ASSET_V; });
   seg('data-gglass', v => { gp.dataset.glass = v; });
   seg('data-gbc', v => { gp.dataset.bc = v; });
   [$('ggUpBig'), $('ggEmpty')].forEach(b => b.addEventListener('click', () => $('ggHeroFile').click()));
