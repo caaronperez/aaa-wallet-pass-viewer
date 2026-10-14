@@ -180,7 +180,7 @@ a{color:#6cb2ff}
 .gp-top{position:relative;z-index:1;background:var(--gbg,#f2e4e4);border-radius:0 0 7cqw 7cqw}
 .gp-mod{display:flex;align-items:center;gap:12px;border-radius:5cqw;padding:12px 12px 12px 16px;background:var(--gtint)}
 .gp-mod b{display:block;font-size:4.2cqw}.gp-mod small{display:block;font-size:3.5cqw;opacity:.85;margin-top:2px}
-.gp-mod span:last-child{margin-left:auto;width:16cqw;height:16cqw;border-radius:3cqw;background:rgba(127,127,127,.25);flex:none}
+.gp-mod img{margin-left:auto;width:16cqw;height:16cqw;border-radius:3cqw;object-fit:cover;flex:none}
 .gg-cmp{margin-top:20px;border-top:1px solid var(--line);padding-top:14px}
 .gg-cmp h2{margin:0 0 6px;font-size:16px}
 .gg-cmp table{width:100%;border-collapse:collapse;font-size:12.8px}
@@ -369,7 +369,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
               <div class="gp-rw"><div><i>Plan</i><b>Premier</b></div><div class="c"><i>Valid thru</i><b>03/27</b></div><div class="e"><i>Member since</i><b>1994</b></div></div>
             </div>
             <div class="gp-hero"><img id="ggHero" alt=""><div class="gp-glass" aria-hidden="true"></div><button type="button" class="gp-empty" id="ggEmpty"><span style="font-size:7cqw;line-height:1">＋</span>Upload hero image<small>1032 × 812 px</small></button></div>
-            <div class="gp-low"><div class="gp-mod"><span><b>Roadside Assistance</b><small>Call 24/7 · 1-800-400-4222</small></span><span></span></div></div>
+            <div class="gp-low"><div class="gp-mod"><span><b>Roadside Assistance</b><small>Get help in the app: tow, battery, tire, lockout</small></span><img src="google/img/vam-roadside-chat.png" alt=""></div></div>
           </div>
         </div>
         <div>
@@ -435,7 +435,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
             <figure><img src="google/img/docs/vam-body.png" alt="Module with the body highlighted" loading="lazy"><figcaption><b>body</b> (optional): one line under it, 50 chars max</figcaption></figure>
             <figure><img src="google/img/docs/vam-image.png" alt="Module with the image highlighted" loading="lazy"><figcaption><b>image</b> (optional): your own picture, shown square (1:1, resized to fit). That's the "icon".</figcaption></figure>
           </div>
-          <p><b>uri</b> (required) is where a tap goes: a web link or a deep link (our Roadside one uses <code>tel:</code>). <b>sortIndex</b> picks which comes first (lower wins), so with one slot on the front, it decides what members see. <b>viewConstraints.displayInterval</b> sets start/end dates, handy for "Renew now" only near expiry. Modules can live on the class (everyone) or the object (one member).</p>
+          <p><b>uri</b> (required) is where a tap goes: a web link or a deep link (our Roadside one is an App Link that opens the app’s chatbot; the phone number stays in the links list). <b>sortIndex</b> picks which comes first (lower wins), so with one slot on the front, it decides what members see. <b>viewConstraints.displayInterval</b> sets start/end dates, handy for "Renew now" only near expiry. Modules can live on the class (everyone) or the object (one member).</p>
           <p>Use the switch above the card to see both setups with our AAA modules.</p>
           <p class="note">Screenshots © Google, from the Google Wallet developer docs (CC BY 4.0).</p>
           <ul class="src">
@@ -460,9 +460,9 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
           <details><summary>How to add a value-added module (JSON)</summary>
 <pre>"valueAddedModuleData": [{
   "header": {"defaultValue": {"language": "en-US", "value": "Roadside Assistance"}},
-  "body":   {"defaultValue": {"language": "en-US", "value": "Call 24/7 · 1-800-400-4222"}},
-  "image":  {"sourceUri": {"uri": "https://…/vam-roadside.jpg"}},
-  "uri": "tel:18004004222",
+  "body":   {"defaultValue": {"language": "en-US", "value": "Get help in the app: tow, battery, tire, lockout"}},
+  "image":  {"sourceUri": {"uri": "https://…/vam-roadside-chat.png"}},
+  "uri": "https://www.ace.aaa.com/wallet/roadside?source=google-wallet",
   "sortIndex": 1,
   "viewConstraints": {"displayInterval": {"end": {"date": "2027-03-31T23:59:00-07:00"}}}
 }]</pre></details>
@@ -591,8 +591,9 @@ function buildComps({obj, cls, vams, app, bg, fg, logo, hero, details}){
     limits: LIM('1032 × 812 px recommended (about 5:4). PNG or JPG. Add a contentDescription for screen readers.')});
   vams.forEach((v, i) => {
     const onObj = (obj.valueAddedModuleData || []).includes(v), h = tx(v.header), b = tx(v.body);
-    add('vam:' + i, {group: 'Below the image', name: 'Module: ' + h, what: 'A value-added module: your own title, line of text and picture, tap goes to any link. Exactly 1 module shows on the pass itself; 2 or more move to their own list screen.',
+    add('vam:' + i, {group: 'Below the image', name: 'Module: ' + h,
       path: `${onObj ? 'object' : 'class'}.valueAddedModuleData[${(onObj ? obj.valueAddedModuleData : cls.valueAddedModuleData).indexOf(v)}]`, json: v, img: imgSrc(v.image?.sourceUri?.uri), href: safeHref(v.uri),
+      what: /\/wallet\/roadside/.test(v.uri || '') ? 'Roadside Assistance comes first (sortIndex 1), so it’s the one module on the front of the pass. Tapping it opens the AAA app straight into the chatbot’s Roadside help, so members don’t have to find it. The line under the title says what they can get (tow, battery, tire, lockout). Members without the app get the roadside web page; the phone number stays in the links below.' : 'A value-added module: your own title, line of text and picture, tap goes to any link. Exactly 1 module shows on the pass itself; 2 or more move to their own list screen.',
       kv: [['Header', `${esc(h)} <em>(${h.length}/60)</em>`, true], ['Body', b ? `${esc(b)} <em>(${b.length}/50)</em>` : undefined, true], ['Opens', v.uri], ['sortIndex', v.sortIndex === undefined ? undefined : String(v.sortIndex)]],
       limits: LIM('Header ≤ 60 chars, body ≤ 50 (longer is cut). Image is shown square. Up to 15 modules (the API reference says 10 per object/class). Lowest sortIndex goes first.', h.length > 60 || b.length > 50)});
   });

@@ -41,6 +41,11 @@
     "linksModuleData": {
       "uris": [
         {
+          "uri": "tel:18004004222",
+          "description": "Call Roadside 24/7 · 1-800-400-4222",
+          "id": "callRoadside"
+        },
+        {
           "uri": "https://app.ace.aaa.com/membership/quick-self-service",
           "description": "Renew, add a family member or upgrade",
           "id": "manage"
@@ -162,18 +167,18 @@
         "body": {
           "defaultValue": {
             "language": "en-US",
-            "value": "Call 24/7 · 1-800-400-4222"
+            "value": "Get help in the app: tow, battery, tire, lockout"
           }
         },
-        "uri": "tel:18004004222",
+        "uri": "https://www.ace.aaa.com/wallet/roadside?source=google-wallet",
         "image": {
           "sourceUri": {
-            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-roadside.jpg"
+            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-roadside-chat.png"
           },
           "contentDescription": {
             "defaultValue": {
               "language": "en-US",
-              "value": "Roadside Assistance"
+              "value": "Tow truck with a chat bubble: get roadside help in the app"
             }
           }
         },
