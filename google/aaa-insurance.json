@@ -175,12 +175,12 @@
         "uri": "https://www.ace.aaa.com/wallet/roadside?source=google-wallet",
         "image": {
           "sourceUri": {
-            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-roadside-chat.png"
+            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-roadside.jpg"
           },
           "contentDescription": {
             "defaultValue": {
               "language": "en-US",
-              "value": "Tow truck with a chat bubble: get roadside help in the app"
+              "value": "Roadside Assistance tow truck"
             }
           }
         },
