@@ -46,7 +46,8 @@ a{color:#6cb2ff}
 .dl{display:flex;align-items:center;gap:10px;border:0;border-radius:16px;padding:12px 18px;background:var(--accent);color:#fff;cursor:pointer;font:inherit;text-align:left;box-shadow:0 6px 18px #3b8cff55}
 .dl b{display:block;font-size:15px}.dl small{font-size:11px;opacity:.9}
 .dl svg{width:24px;height:24px;flex:none}
-.cols{display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);gap:28px;max-width:1100px;margin:0 auto;align-items:start}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(300px,380px));justify-content:center;gap:28px 36px;max-width:1100px;margin:0 auto;align-items:start}
+.cols>.panels{grid-column:1/-1}
 .colh{font:600 12px ui-monospace,Menlo,monospace;background:#3a3b40;border-radius:14px;padding:5px 10px;display:inline-block;margin-bottom:12px}
 /* ---- Google Wallet pass, 2026 full-screen look ---- */
 .gw{font-family:"Google Sans",Roboto,system-ui,sans-serif}
@@ -192,6 +193,28 @@ a{color:#6cb2ff}
 .gg-adv{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-top:12px}
 .gg-adv div{border:1px solid var(--line);border-radius:12px;padding:11px 13px;font-size:12.8px;line-height:1.5}
 .gg-adv h3{margin:0 0 4px;font-size:13.5px}.gg-adv ul{margin:0;padding-left:17px;color:var(--muted)}.gg-adv b{color:var(--text)}
+/* ---- Before 2026: card on a white page ---- */
+.gold{--bg:#ffffff;--fg:#202124;--tint:#f1f3f4;background:#fff;color:#202124}
+.gold .gbarx{background:#fff}
+.go-card{margin:6px 14px 16px;border-radius:22px;overflow:hidden;background:var(--cbg);color:var(--cfg);box-shadow:0 1px 3px rgba(60,64,67,.3),0 4px 8px rgba(60,64,67,.15)}
+.go-head{display:flex;align-items:center;gap:10px;padding:14px 16px 12px;border-bottom:1px solid rgba(127,127,127,.35)}
+.go-head img{width:30px;height:30px;border-radius:50%;background:#fff;object-fit:cover;flex:none}
+.go-head span{font-size:15px;font-weight:500}
+.go-body{padding:12px 16px 14px}
+.go-sub{font-size:12.5px;opacity:.85}
+.go-h{font-size:23px;line-height:1.2;margin:2px 0 4px;overflow-wrap:anywhere}
+.go-body .grw{padding-top:12px}.go-body .grw .l{font-size:12px}.go-body .grw .v{font-size:14.5px}
+.go-bc{background:#fff;border-radius:10px;padding:12px;margin:14px auto 0;max-width:260px;color:#202124;text-align:center}
+.go-bc svg{display:block;margin:0 auto;max-width:100%;height:auto}.go-bc small{display:block;font-size:12px;margin-top:6px}
+.go-hero{display:block;width:100%;aspect-ratio:1032/336;object-fit:cover}
+.go-sec{padding:0 14px 10px}
+.go-sec h4{font-size:14px;font-weight:500;margin:10px 4px 8px;color:#202124}
+.go-app{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 14px 12px;border:1px solid #dadce0;border-radius:999px;padding:10px 14px;color:#1a73e8;font-size:14px;font-weight:500;text-decoration:none}
+.go-list{border-top:1px solid #e8eaed}
+.go-row{display:block;padding:12px 18px;border-bottom:1px solid #e8eaed;color:#202124;text-decoration:none}
+.go-row small{display:block;font-size:12px;color:#5f6368}.go-row b{display:block;font-size:14.5px;font-weight:400;margin-top:2px;white-space:pre-line}
+.go-row.lk b{color:#1a73e8}
+.gold .vam{background:#f1f3f4;color:#202124}
 /* ---- right column ---- */
 .panel{background:#232427;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:16px}
 .panel h3{margin:0 0 8px;font-size:16px}
@@ -295,7 +318,6 @@ html[data-theme="light"] .gp-glass::before{-webkit-mask-image:linear-gradient(#e
 html[data-theme="light"] .gp-glass::after{-webkit-mask-image:linear-gradient(transparent,#e4e4e4);mask-image:linear-gradient(transparent,#e4e4e4)}
 html[data-theme="light"] .gp-low{background:var(--gbg,#e9e9e9)}
 html[data-theme="light"] .gp-top{background:var(--gbg,#e9e9e9)}
-html[data-theme="light"] .gp-mod span:last-child{background:rgba(255,255,255,0.25)}
 html[data-theme="light"] .panel{background:#f3f3f3}
 html[data-theme="light"] .panel p{color:#2d2d2d}
 html[data-theme="light"] .cmp td:first-child{color:#000000}
@@ -415,6 +437,11 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
         <div class="gw" id="pass"></div>
       </section>
       <section>
+        <span class="colh">Before 2026 (older Google Wallet)</span>
+        <p class="note" style="margin:0 0 12px;min-height:30px">The same JSON in the previous design: a card on a white page, logo top-left, hero as a strip at the bottom of the card.</p>
+        <div class="gw" id="passOld"></div>
+      </section>
+      <section class="panels">
         <div class="panel" id="mkPanel">
           <h3>Elements &amp; limits</h3>
           <p>Every part of the pass has a letter on the mock. Hover a row to find it, click to inspect it. Google draws everything; you fill in the JSON. The only things that change the look are the <b>colors</b> and the <b>images</b>.</p>
@@ -805,6 +832,27 @@ function render(){
       <button type="button" data-shownew class="${showNew ? 'on' : ''}" aria-pressed="${showNew}">Show what's new in 2026</button>
       <button type="button" data-marks class="${showMarks ? 'on' : ''}" aria-pressed="${showMarks}">Show letters</button></div>
     <div class="gphone" style="--bg:${bg};--fg:${fg};--tint:${tint}"><div class="gscroll">${screen}</div></div>`;
+  /* Before 2026: same data, previous layout */
+  const oldScreen = `
+    <div class="gbarx">${ic('back')}<span class="sp"></span>${ic('share')}</div>
+    <div class="go-card" style="--cbg:${bg};--cfg:${fg}" data-c="colors">
+      <div class="go-head">${logo ? `<img src="${esc(logo)}" alt="" data-c="logo">` : ''}<span data-c="cardTitle">${esc(tx(obj.cardTitle))}</span></div>
+      <div class="go-body">
+        ${obj.subheader ? `<div class="go-sub" data-c="subheader">${esc(tx(obj.subheader))}</div>` : ''}
+        <div class="go-h" data-c="header">${esc(tx(obj.header))}</div>
+        ${rowsHTML(obj, cls)}
+        ${bc ? `<div class="go-bc" data-c="barcode">${barcodeSVG(bc)}${bc.alternateText ? `<small>${esc(bc.alternateText)}</small>` : ''}</div>` : ''}
+      </div>
+      ${hero ? `<img class="go-hero" src="${esc(hero)}" alt="" data-c="hero">` : ''}
+    </div>
+    ${shown.length ? `<div class="go-sec"><h4>${sectionTitle}</h4>${shown.map((v, i) => vamCard(v, i)).join('')}</div>` : ''}
+    ${app ? `<a class="go-app" data-c="app" ${appHref ? `href="${esc(appHref)}" target="_blank" rel="noopener"` : ''}>${ic('app')}${esc(tx(app.displayText) || 'Open app')}</a>` : ''}
+    <div class="go-list">
+      ${details.map(t => `<div class="go-row" data-c="text:${esc(t.id || '')}"><small>${esc(t.header)}</small><b>${esc(t.body)}</b></div>`).join('')}
+      ${links.map((l, i) => `<a class="go-row lk" data-c="link:${i}" ${safeHref(l.uri) ? `href="${esc(safeHref(l.uri))}" target="_blank" rel="noopener"` : ''}><b>${esc(l.description || l.uri)}</b></a>`).join('')}
+    </div>
+    <p class="gfine" style="padding:0 16px 20px">The pass provider or merchant is responsible for the info on this pass. Contact them with any questions.</p>`;
+  $('passOld').innerHTML = `<div class="vmode" style="visibility:hidden"><button type="button">.</button></div><div class="gphone gold"><div class="gscroll">${oldScreen}</div></div>`;
   $('json').textContent = JSON.stringify(cur.data, null, 2);
   $('docName').textContent = cur.name;
   $('dlName').textContent = cur.name;
