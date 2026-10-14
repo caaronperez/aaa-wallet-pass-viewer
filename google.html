@@ -100,6 +100,35 @@ a{color:#6cb2ff}
 .dlink{display:flex;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid #3c4043;color:#8ab4f8;text-decoration:none;font-size:14px}
 .dlink:last-child{border-bottom:0}
 .hl{outline:2px solid var(--warn);outline-offset:2px;border-radius:10px}
+/* ---- Markers (A–N) on the pass, legend, list cards ---- */
+.gphone.marks [data-mk]{position:relative}
+.gphone.marks [data-mk]::before{content:attr(data-mk);position:absolute;left:4px;top:4px;z-index:6;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font:700 10px/18px Roboto,system-ui,sans-serif;text-align:center;background:#0a84ff;color:#fff;box-shadow:0 1px 4px rgba(0,0,0,.45);pointer-events:none}
+.gphone.marks .glogo2[data-mk]::before{left:-6px;top:-6px}
+.gphone.marks .gup[data-mk]::before{background:#ff9f0a;color:#1c1c1e}
+.gphone.marks .gheadw[data-mk]::before{top:50%;transform:translateY(-50%)}
+.gphone.marks .gbarx[data-mk]::before{left:52px;top:22px}
+.gphone.marks .grw[data-mk]::before{left:-17px;top:18px}
+.gphone.marks .gherow[data-mk]::before{top:36px;left:10px}
+.gphone.marks [data-mk="M"]::before,.gphone.marks [data-mk="N"]::before{background:#8e8e93}
+.gphone .hov{outline:3px solid #0a84ff;outline-offset:-3px;border-radius:14px}
+.mkleg{width:100%;border-collapse:collapse;font-size:12.5px}
+.mkleg th,.mkleg td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:7px 6px;line-height:1.4}
+.mkleg th{color:var(--muted);font-weight:500;font-size:11.5px}
+.mkleg tr[data-mkrow]{cursor:pointer}.mkleg tr[data-mkrow]:hover td{background:rgba(10,132,255,.12)}
+.mkleg code{font-size:11px}
+.mkb{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:50%;background:#0a84ff;color:#fff;font:700 10.5px Roboto,system-ui,sans-serif}
+.mkb.o{background:#ff9f0a;color:#1c1c1e}.mkb.g{background:#8e8e93}
+.ins-h h2 .mkb{margin-right:7px;vertical-align:1px}
+.picker.cards{display:flex;flex-wrap:wrap;gap:14px;background:none;border:0;padding:0}
+.picker.cards button{display:block;padding:0;border-radius:18px;border:2px solid transparent;flex:1 1 240px;max-width:300px;background:none}
+.picker.cards button.on{border-color:var(--accent);background:none}
+.gcard{border-radius:16px;overflow:hidden;background:var(--bg);color:var(--fg);text-align:left;box-shadow:0 6px 18px rgba(0,0,0,.3);font-family:"Google Sans",Roboto,system-ui,sans-serif}
+.gcard .gc-top{display:flex;align-items:center;gap:9px;padding:12px 14px 4px}
+.gcard .gc-top img{width:30px;height:30px;border-radius:50%;background:#fff;object-fit:cover;flex:none}
+.gcard .gc-top span{font-size:13.5px;font-weight:500}
+.gcard .gc-h{font-size:20px;font-weight:700;padding:4px 14px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gcard .gc-hero{display:block;width:100%;aspect-ratio:1032/406;object-fit:cover}
+.cards-note{flex-basis:100%;font-size:12px;color:var(--muted);margin:2px 2px 0}
 /* ---- right column ---- */
 .panel{background:#232427;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:16px}
 .panel h3{margin:0 0 8px;font-size:16px}
@@ -189,6 +218,7 @@ html[data-theme="light"] .ditem{border-bottom:1px solid #cfcfcf}
 html[data-theme="light"] .ditem .l{color:#5f5f5f}
 html[data-theme="light"] .ditem .v{color:#151515}
 html[data-theme="light"] .dlink{border-bottom:1px solid #cfcfcf}
+html[data-theme="light"] .mkb.g{background:#909090}
 html[data-theme="light"] .panel{background:#f3f3f3}
 html[data-theme="light"] .panel p{color:#2d2d2d}
 html[data-theme="light"] .cmp td:first-child{color:#000000}
@@ -236,9 +266,10 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
     <div class="dropzone" id="dropzone" hidden><div>Drop a Google Wallet pass JSON here</div></div>
     <div id="error"></div>
     <div class="hero">
-      <div class="picker" id="picker" role="tablist" aria-label="Pass">
-        <button role="tab" data-key="membership" class="on" aria-selected="true"><span class="thumb" style="background-image:url('google/img/hero-membership.jpg')"></span><span><b>Membership</b><small>Generic pass</small></span></button>
-        <button role="tab" data-key="insurance" aria-selected="false"><span class="thumb" style="background-image:url('google/img/hero-insurance.jpg')"></span><span><b>Insurance</b><small>Generic pass</small></span></button>
+      <div class="picker cards" id="picker" role="tablist" aria-label="Pass">
+        <button role="tab" data-key="membership" class="on" aria-selected="true" aria-label="Membership pass"></button>
+        <button role="tab" data-key="insurance" aria-selected="false" aria-label="Insurance pass"></button>
+        <p class="cards-note">How the cards look in the Google Wallet list. Tap one to open it. Same artwork and colors as the Apple Wallet AA cards.</p>
       </div>
       <button id="download" class="dl" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Download pass JSON</b><small id="dlName">class + object</small></span></button>
     </div>
@@ -248,6 +279,12 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
         <div class="gw" id="pass"></div>
       </section>
       <section>
+        <div class="panel" id="mkPanel">
+          <h3>Elements &amp; limits</h3>
+          <p>Every part of the pass has a letter on the mock. Hover a row to find it, click to inspect it. Google draws everything; you fill in the JSON. The only things that change the look are the <b>colors</b> and the <b>images</b>.</p>
+          <table class="mkleg" id="mkLegend"></table>
+          <p class="note">≈ = measured in this mock at Google Wallet's 2026 sizes; Google doesn't publish character limits for these. Longer text gets cut off (…) or wraps.</p>
+        </div>
         <div class="panel">
           <h3>Google's "featured action": examples</h3>
           <p>Google has no feature literally called "featured actions". There are two real things:</p>
@@ -400,7 +437,7 @@ function buildComps({obj, cls, vams, app, bg, fg, logo, hero, details}){
   add('colors', {nw: 'changed', was: 'Color only on a rounded card sitting on a grey background.', group: 'Top of the pass', name: 'Background color', what: 'Fills the whole screen in the 2026 design (it used to be just the card). Google picks white or black text on top of it.',
     path: 'object.hexBackgroundColor', json: {hexBackgroundColor: obj.hexBackgroundColor || cls?.hexBackgroundColor},
     kv: [['Color', `<span class="sw" style="background:${bg}"></span>${esc(bg)}`, true], ['Text color (auto)', fg]],
-    limits: LIM('Hex like <code>#1C4DA6</code>. Full-bleed now, so check contrast with your logo and hero image.')});
+    limits: LIM('Hex like <code>#F2E4E4</code> (the Apple Wallet AA cards’ blush). Full screen now, and you can’t set the text color: Google picks black or white, so check that it reads well with your hero image.')});
   if(logo) add('logo', {nw: 'changed', was: 'Small logo at the top left, next to the card title.', group: 'Top of the pass', name: 'Logo', what: 'Round logo at the top center.', path: from(obj, 'logo') ? 'object.logo' : 'class.logo', json: obj.logo || cls?.logo, img: logo,
     limits: LIM('660 × 660 px minimum, square. Google masks it to a circle, so keep the art inside the middle (15% safe margin). A <code>wideLogo</code> (1280 × 400) replaces logo + card title.')});
   add('cardTitle', {nw: 'changed', was: 'Next to the logo at the top left, with a line under it.', group: 'Top of the pass', name: 'Card title', what: 'Small line under the logo, usually the company or program name.', path: 'object.cardTitle', json: obj.cardTitle, kv: [['Shows', tx(obj.cardTitle)]], limits: LIM('Required. Keep it short, it\'s one line.')});
@@ -448,14 +485,15 @@ function openInspector(key, scroll){
   const c = COMPS[key]; if(!c) return;
   selKey = key; renderTree(); highlight(scroll);
   const ins = $('inspector');
-  ins.innerHTML = `<div class="ins-h"><h2>${esc(c.name)}</h2><button type="button" class="x" aria-label="Close">✕</button></div>
+  const ml = mkOf(key);
+  ins.innerHTML = `<div class="ins-h"><h2>${ml ? `<span class="mkb${ml === 'L' ? ' o' : ml === 'M' || ml === 'N' ? ' g' : ''}">${ml}</span>` : ''}${esc(c.name)}</h2><button type="button" class="x" aria-label="Close">✕</button></div>
     <div class="ins-sec"><h3>What it is</h3><p>${c.what}</p></div>
     ${c.nw ? `<div class="ins-sec"><h3>2026 redesign <i class="nw ${c.nw}">${c.nw === 'new' ? 'New' : 'Changed'}</i></h3><p><b>Before 2026:</b> ${esc(c.was)}</p></div>` : ''}
     ${c.path ? `<div class="ins-sec"><h3>Where it lives</h3><code class="ipath">${esc(c.path)}</code></div>` : ''}
     ${c.img ? `<div class="ins-sec"><img class="iimg" src="${esc(c.img)}" alt=""></div>` : ''}
     ${c.kv ? `<div class="ins-sec"><h3>Values</h3>${KV(c.kv)}</div>` : ''}
     ${c.href ? `<div class="ins-sec"><a class="iopen" href="${esc(c.href)}" target="_blank" rel="noopener">Open the link ↗</a></div>` : ''}
-    <div class="ins-sec"><h3>Limits</h3>${c.limits}</div>
+    <div class="ins-sec"><h3>Limits</h3>${c.limits}${ml ? `<p class="note" style="margin-top:6px">${esc(MK.find(m => m[0] === ml)[4])}</p>` : ''}</div>
     ${c.json !== undefined ? `<div class="ins-sec"><h3>JSON</h3>${J(c.json)}</div>` : ''}`;
   ins.hidden = false; if(scroll !== false) ins.scrollTop = 0;
   ins.querySelector('.x').onclick = () => { selKey = null; closeInspector(); renderTree(); highlight(); };
@@ -482,7 +520,66 @@ document.addEventListener('click', e => {
 }, true);
 document.addEventListener('keydown', e => { if(e.key === 'Escape' && !$('inspector').hidden){ selKey = null; closeInspector(); renderTree(); highlight(); } });
 
-let vamMode = 'one', showNew = true;
+/* ---------- Markers: one letter per element, shared by the mock, the legend and the inspector ---------- */
+const MK = [
+  ['A', 'Logo', 'logo', 'logo', '660 × 660 px, square; shown as a circle (keep 15% margin)'],
+  ['B', 'Card title', 'cardTitle', 'cardTitle', 'Required · 1 line, ≈30 characters'],
+  ['C', 'Subheader', 'subheader', 'subheader', 'Optional · 1 line, ≈35 characters'],
+  ['D', 'Header', 'header', 'header', 'Required · 2 lines, ≈30 characters'],
+  ['E', 'Barcode', 'barcode', 'barcode', 'QR, PDF417, Aztec, Code 128… · alt text 1 line'],
+  ['F', 'Field rows', 'row:', 'classTemplateInfo', '1–3 fields per row, ≤2 rows · value ≈30 / ≈14 / ≈9 characters (1 / 2 / 3 per row)'],
+  ['G', 'Hero image', 'hero', 'heroImage', '1032 × 812 px (≈5:4), PNG or JPG'],
+  ['H', 'Value-added module', 'vam:', 'valueAddedModuleData', 'Title 60 · line 50 characters · image 1:1 · 1 on the front'],
+  ['I', 'App link button', 'app', 'appLinkData', '1 per pass · label 30 characters · no icon'],
+  ['J', 'Links', 'link:', 'linksModuleData', '10 + 10 · label only, Wallet picks the icon'],
+  ['K', 'Details', 'text:', 'textModulesData', '10 + 10 · label + value, plain text'],
+  ['L', 'Background color', 'colors', 'hexBackgroundColor', 'Hex, full screen · Google picks black or white text'],
+  ['M', 'Pass settings', 'settings', '(Wallet)', 'Can\'t be changed'],
+  ['N', 'Top bar', 'topbar', '(Wallet)', 'Can\'t be changed']
+];
+const mkOf = key => { if(!key) return null; const m = MK.find(([, , p]) => p.endsWith(':') ? key.startsWith(p) : key === p); return m ? m[0] : null; };
+let showMarks = true;
+function placeMarks(){
+  const ph = document.querySelector('.gphone'); if(!ph) return;
+  ph.classList.toggle('marks', showMarks);
+  const seen = new Set();
+  ph.querySelectorAll('[data-c]').forEach(n => {
+    delete n.dataset.mk;
+    const k = n.dataset.c, l = mkOf(k);
+    if(!l || (l === 'K' && n.closest('.grw'))) return;          /* fields inside a row are part of F */
+    if(seen.has(l)) return; seen.add(l); n.dataset.mk = l;
+  });
+  const present = new Set([...ph.querySelectorAll('[data-c]')].map(n => mkOf(n.dataset.c)).filter(Boolean));
+  $('mkLegend').innerHTML = '<tr><th></th><th>Element</th><th>JSON</th><th>Limit</th></tr>' + MK.map(([l, name, , json, lim]) =>
+    `<tr data-mkrow="${l}"${present.has(l) ? '' : ' style="opacity:.55"'}><td><span class="mkb${l === 'L' ? ' o' : l === 'M' || l === 'N' ? ' g' : ''}">${l}</span></td><td><b>${esc(name)}</b>${present.has(l) ? '' : '<br><small class="note">not on this pass</small>'}</td><td><code>${esc(json)}</code></td><td>${esc(lim)}</td></tr>`).join('');
+}
+function hoverMark(l, on){
+  document.querySelectorAll('.gphone .hov').forEach(n => n.classList.remove('hov'));
+  if(!on) return;
+  const els = [...document.querySelectorAll('.gphone [data-c]')].filter(n => mkOf(n.dataset.c) === l && !(l === 'K' && n.closest('.grw')));
+  els.forEach(n => n.classList.add('hov'));
+  if(els[0]){ const sc = document.querySelector('.gscroll'), r = els[0].getBoundingClientRect(), sr = sc.getBoundingClientRect(); if(r.top < sr.top || r.bottom > sr.bottom) sc.scrollTo({top: sc.scrollTop + r.top - sr.top - sr.height / 3, behavior: 'smooth'}); }
+}
+document.addEventListener('mouseover', e => { const r = e.target.closest('[data-mkrow]'); if(r) hoverMark(r.dataset.mkrow, true); });
+document.addEventListener('mouseout', e => { const r = e.target.closest('[data-mkrow]'); if(r && !r.contains(e.relatedTarget)) hoverMark(null, false); });
+document.addEventListener('click', e => {
+  const r = e.target.closest('[data-mkrow]'); if(r){ const n = [...document.querySelectorAll('.gphone [data-c]')].find(x => mkOf(x.dataset.c) === r.dataset.mkrow && !(r.dataset.mkrow === 'K' && x.closest('.grw'))); if(n) openInspector(n.dataset.c, true); return; }
+  if(e.target.closest('[data-marks]')){ showMarks = !showMarks; render(); }
+});
+
+/* ---------- List cards (how each pass looks in the Google Wallet list) ---------- */
+const CARD_DATA = {};
+async function renderCards(){
+  await Promise.all(Object.keys(SOURCES).map(async k => { if(!CARD_DATA[k]) CARD_DATA[k] = await (await fetch(SOURCES[k], {cache: 'no-cache'})).json(); }));
+  document.querySelectorAll('#picker [data-key]').forEach(b => {
+    const {genericObject: o, genericClass: c} = CARD_DATA[b.dataset.key];
+    const bg = safeColor(o.hexBackgroundColor || c?.hexBackgroundColor), fg = textColorFor(bg);
+    const logo = imgSrc(o.logo?.sourceUri?.uri || c?.logo?.sourceUri?.uri), hero = imgSrc(o.heroImage?.sourceUri?.uri || c?.heroImage?.sourceUri?.uri);
+    b.innerHTML = `<div class="gcard" style="--bg:${bg};--fg:${fg}"><div class="gc-top">${logo ? `<img src="${esc(logo)}" alt="">` : ''}<span>${esc(tx(o.cardTitle))}</span></div><div class="gc-h">${esc(tx(o.header))}</div>${hero ? `<img class="gc-hero" src="${esc(hero)}" alt="">` : ''}</div>`;
+  });
+}
+
+let vamMode = 'one', showNew = false;
 function markNew(){
   const ph = document.querySelector('.gphone'); if(!ph) return;
   ph.classList.toggle('shownew', showNew);
@@ -566,7 +663,8 @@ function render(){
   $('pass').innerHTML = `<div class="vmode" role="group" aria-label="Value-added modules preview">
       <button type="button" data-vm="one" class="${vamMode === 'one' ? 'on' : ''}">1 module</button>
       <button type="button" data-vm="all" class="${vamMode === 'all' ? 'on' : ''}">All ${vams.length} modules</button>
-      <button type="button" data-shownew class="${showNew ? 'on' : ''}" aria-pressed="${showNew}">Show what's new in 2026</button></div>
+      <button type="button" data-shownew class="${showNew ? 'on' : ''}" aria-pressed="${showNew}">Show what's new in 2026</button>
+      <button type="button" data-marks class="${showMarks ? 'on' : ''}" aria-pressed="${showMarks}">Show letters</button></div>
     <div class="gphone" style="--bg:${bg};--fg:${fg};--tint:${tint}"><div class="gscroll">${screen}</div></div>`;
   $('json').textContent = JSON.stringify(cur.data, null, 2);
   $('docName').textContent = cur.name;
@@ -574,7 +672,7 @@ function render(){
   document.querySelectorAll('#picker [data-key]').forEach(b => { b.classList.toggle('on', b.dataset.key === cur.key); b.setAttribute('aria-selected', String(b.dataset.key === cur.key)); });
   renderLimits({obj, cls, vams, texts, links, app});
   COMPS = buildComps({obj, cls, vams, app, bg, fg, logo, hero, details});
-  renderTree(); highlight(); markNew();
+  renderTree(); highlight(); markNew(); placeMarks();
   if(selKey && COMPS[selKey]) openInspector(selKey, false); else closeInspector();
 }
 function renderLimits({obj, cls, vams, texts, links, app}){
@@ -628,6 +726,7 @@ addEventListener('dragover', e => { if(hasFiles(e)) e.preventDefault(); });
 addEventListener('dragleave', e => { if(hasFiles(e) && --depth <= 0){ depth = 0; $('dropzone').hidden = true; } });
 addEventListener('drop', e => { if(!hasFiles(e)) return; e.preventDefault(); depth = 0; $('dropzone').hidden = true; const f = e.dataTransfer.files[0]; if(f) importFile(f); });
 load('membership');
+renderCards();
 </script>
 </body>
 </html>

@@ -103,7 +103,7 @@
         }
       }
     },
-    "hexBackgroundColor": "#1C4DA6",
+    "hexBackgroundColor": "#F2E4E4",
     "barcode": {
       "type": "PDF_417",
       "value": "000 000 XXXXXXXXX 0",
