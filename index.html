@@ -355,6 +355,7 @@ html[data-theme="light"] .a11y-v.ok{color:#1a7f37}html[data-theme="light"] .a11y
 .todo .qa{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:8px 16px;margin-top:10px;font-size:13px;line-height:1.5}
 .todo .qa b{color:#fff}.todo .qa span{color:#cfd0d6}
 .todo code{font-size:12px}
+.todo pre.todo-json{margin:12px 0 4px;background:#151618;border:1px solid var(--line);border-radius:9px;padding:10px 12px;font:12px/1.5 ui-monospace,Menlo,monospace;color:#bfe9c8;overflow:auto;white-space:pre}
 @media (max-width:700px){.todo .qa{grid-template-columns:1fr}.todo .qa b{margin-top:6px}}
 .proposal figure{margin:0}
 .proposal figcaption{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 2px 10px;font-size:15px}
@@ -508,6 +509,7 @@ html[data-theme="light"] .todo h3{color:#000000}
 html[data-theme="light"] .todo p,html[data-theme="light"] .todo li{color:#2d2d2d}
 html[data-theme="light"] .todo .qa b{color:#000000}
 html[data-theme="light"] .todo .qa span{color:#2d2d2d}
+html[data-theme="light"] .todo pre.todo-json{background:#ededed}
 html[data-theme="light"] .proposal figcaption a,html[data-theme="light"] .proposal figcaption button{color:#000000;background:#f7f7f7}
 html[data-theme="light"] #rotateBtn{background:#f7f7f7;color:#000000}
 html[data-theme="light"] #rotateBtn:hover{background:#fcfcfc}
@@ -793,13 +795,21 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
           <b>How others do it</b><span>A gym key that pops up on the Lock Screen near the gym is a Wallet pass feature, not the gym's app. The pass lists up to <b>10 locations</b> (latitude/longitude, an optional short message like “Your AAA card is ready”, and <code>maxDistance</code>, which can only make the radius smaller). The iPhone checks them in the background and suggests the pass when you're close. It doesn't need the app installed or location permission, and the company never sees where the member is. Passes can also wake up from a Bluetooth beacon (good indoors) or at a date and time (<code>relevantDates</code>).</span>
           <b>Where we are</b><span>The app already downloads the Membership card from our backend (<code>PostMembershipPKPass</code>, pass type <code>pass.com.aaa.membercard</code>, sending the member's ZIP code) and adds it to Wallet; Insurance works the same way. The server builds and signs the pass, so <b>this needs no app change</b>. It's backend work.</span>
           <b>What we can do</b><span>Add the member's 10 nearest AAA places to the pass, picked from their ZIP code: branches, approved repair shops, or the most-used discount partners. Add a short message per place, plus dates where useful (renewal, policy start). The same works for the Insurance card.</span>
+          <b>The fields</b><span><code>locations</code>: up to 10 places, each with <code>latitude</code> and <code>longitude</code> and an optional <code>relevantText</code> (the Lock Screen line, e.g. “AAA branch nearby · show your card”). <code>maxDistance</code>: how close (in meters) the member must be. Wallet uses the <b>smaller</b> of this and its own default, so 500 can only shrink the radius, never grow it.</span>
+          <b>Pull them from the home club</b><span>The app already finds branches with the TDR search (<code>POST travel/services/td/v1/geolocationsearch</code>, type <code>office</code>, the member's <b>club code</b>, a point and a radius, sorted by distance). The pass service can do the same when it builds the card: (1) turn the member's ZIP into a point, (2) search offices for their club within ~25 miles, (3) skip offices with no walk-in service (the app already flags these), (4) keep the nearest 10, each with its name in <code>relevantText</code>.</span>
           <b>Keep it current</b><span>With the Wallet web service (push updates), the server can refresh the list later (new branch, member moved) without the member adding the card again. The app only needs to re-add the card when the member changes ZIP or club.</span>
           <b>Limits</b><span>10 places per pass, so it's “nearest 10”, not every partner. Apple decides when the pass actually appears; we can't force it. The message is short, fixed in the pass and the same for every visit. Test on a real device: whether iOS 27 suggests poster passes this way is Apple's call.</span>
         </div>
+<pre class="todo-json">"locations": [
+  { "latitude": 34.146313, "longitude": -118.238001,
+    "relevantText": "AAA branch nearby · show your card" }
+  // … up to 10, nearest branches for the member's club
+],
+"maxDistance": 500</pre>
         <h3>What we need</h3>
         <ol>
           <li><b>Product:</b> pick the place types (branches, repair shops, discount partners) and the Lock Screen message for each.</li>
-          <li><b>Backend (pass service):</b> add <code>locations</code> (nearest 10 to the member's ZIP), <code>relevantText</code> and, if wanted, <code>relevantDates</code> and beacons when generating the pass; then the Wallet web service for updates.</li>
+          <li><b>Backend (pass service):</b> add <code>locations</code> (nearest 10 offices from the TDR search for the member's club and ZIP), <code>relevantText</code> and, if wanted, <code>relevantDates</code> and beacons when generating the pass; then the Wallet web service for updates.</li>
           <li><b>iOS:</b> nothing to start. Later, re-add the card when ZIP or club changes.</li>
         </ol>
       </details>
