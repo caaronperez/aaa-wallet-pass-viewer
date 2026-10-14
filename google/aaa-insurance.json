@@ -19,19 +19,6 @@
                 "firstValue": {
                   "fields": [
                     {
-                      "fieldPath": "object.textModulesData['policyNumber']"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          {
-            "oneItem": {
-              "item": {
-                "firstValue": {
-                  "fields": [
-                    {
                       "fieldPath": "object.textModulesData['effective']"
                     }
                   ]
@@ -75,7 +62,7 @@
     "cardTitle": {
       "defaultValue": {
         "language": "en-US",
-        "value": "AAA Insurance"
+        "value": "AAA Auto Insurance Card"
       }
     },
     "subheader": {
@@ -87,7 +74,7 @@
     "header": {
       "defaultValue": {
         "language": "en-US",
-        "value": "Auto Insurance Card"
+        "value": "CAA000XXXX"
       }
     },
     "logo": {
@@ -126,11 +113,6 @@
         "id": "nameEnsured",
         "header": "Name ensured",
         "body": "Fulanito Perez"
-      },
-      {
-        "id": "policyNumber",
-        "header": "Policy number",
-        "body": "CAA000XXXX"
       },
       {
         "id": "effective",
