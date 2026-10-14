@@ -129,6 +129,69 @@ a{color:#6cb2ff}
 .gcard .gc-h{font-size:20px;font-weight:700;padding:4px 14px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .gcard .gc-hero{display:block;width:100%;aspect-ratio:1032/406;object-fit:cover}
 .cards-note{flex-basis:100%;font-size:12px;color:var(--muted);margin:2px 2px 0}
+/* ---- Design guide / playground (top of the page) ---- */
+.guide{max-width:1100px;margin:0 auto 26px;background:#1b1c20;border:1px solid var(--line);border-radius:18px;padding:20px 22px}
+.guide h1{margin:0 0 6px;font-size:24px;letter-spacing:-.01em}
+.guide>p{margin:0 0 6px;color:var(--muted);font-size:13.5px;line-height:1.5;max-width:860px}
+.gg-grid{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:26px;align-items:start;margin-top:14px}
+@media (max-width:860px){.gg-grid{grid-template-columns:1fr}}
+.gg-ctl{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.gg-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.gg-row>span:first-child{width:66px;flex:none}
+.gg-seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.gg-seg button{font:600 12px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;background:transparent;color:var(--muted);border:0;padding:6px 10px;cursor:pointer}
+.gg-seg button.on{background:var(--accent);color:#fff}
+.gg-row input[type=color]{width:34px;height:26px;border:1px solid var(--line);border-radius:7px;padding:0;background:none;cursor:pointer}
+.gg-row input[type=text]{flex:1;min-width:120px;background:transparent;border:1px solid var(--line);border-radius:7px;padding:5px 8px;color:var(--text);font:13px -apple-system,BlinkMacSystemFont,sans-serif}
+.gg-row .cnt{font:600 11px ui-monospace,Menlo,monospace;min-width:44px;text-align:right}.gg-row .cnt.over{color:var(--bad)}
+.gg-big{display:flex;align-items:center;gap:12px;width:100%;max-width:340px;padding:12px 16px;border:0;border-radius:12px;background:var(--accent);color:#fff;cursor:pointer;text-align:left;font:inherit}
+.gg-big svg{width:24px;height:24px;flex:none}.gg-big b{display:block;font-size:15px}.gg-big small{display:block;font-size:12px;opacity:.85}
+.gg-big.chk{background:#34c759;color:#06290f}.gg-big[hidden]{display:none}
+.gg-res{max-width:340px;border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.5;border:1px solid var(--line)}
+.gg-res.ok{border-color:#34c759;background:rgba(52,199,89,.10)}.gg-res.bad{border-color:#ff5f57;background:rgba(255,95,87,.10)}.gg-res[hidden]{display:none}
+.gg-res h4{margin:0 0 4px;font-size:14px}.gg-res p{margin:3px 0 0}
+.gp{position:relative;width:100%;max-width:340px;border-radius:30px;overflow:hidden;background:var(--gbg,#f2e4e4);color:var(--gfg,#202124);font-family:"Google Sans",Roboto,system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.35);container-type:inline-size}
+.gp-top{padding:16px 18px 18px;text-align:center}
+.gp-logo{width:22cqw;height:22cqw;border-radius:50%;margin:6px auto 8px;background:rgba(255,255,255,.55);display:grid;place-items:center;overflow:hidden;border:2px dashed rgba(127,127,127,.5)}
+.gp-logo img{width:100%;height:100%;object-fit:cover;background:#fff}
+.gp[data-logo=on] .gp-logo{border:0}
+.gp-t{font-size:4.2cqw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gp-s{font-size:3.6cqw;opacity:.8;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gp-h{font-weight:700;font-size:9cqw;line-height:1.12;margin:2px 0 12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.gp-bc{background:#fff;border-radius:5cqw;padding:4cqw;margin-bottom:4px}
+.gp-bc span{display:block;height:15cqw;background:repeating-linear-gradient(90deg,#000 0 2px,#fff 2px 3px,#000 3px 5px,#fff 5px 7px,#000 7px 8px,#fff 8px 10px)}
+.gp-alt{font-size:3.4cqw;font-weight:600;margin-top:6px}
+.gp[data-bc=off] .gp-bcw{display:none}
+.gp-rw{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;padding-top:12px;text-align:left}
+.gp-rw i{display:block;font-style:normal;font-size:3.4cqw;opacity:.85}.gp-rw b{display:block;font-size:4.2cqw;margin-top:2px}
+.gp-rw .c{text-align:center}.gp-rw .e{text-align:right}
+.gp-hero{position:relative;aspect-ratio:1032/812;background:repeating-conic-gradient(#e5e5ea 0 25%,#f2f2f7 0 50%) 0 0/18px 18px center/cover;margin:-6cqw 0;z-index:0}
+.gp-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gp[data-hero=none] .gp-hero img{display:none}
+.gp-empty{position:absolute;inset:14% 14%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1cqw;border:2px dashed #0a84ff;border-radius:4cqw;background:rgba(10,132,255,.12);color:#0a3d7a;font:600 4.4cqw -apple-system,BlinkMacSystemFont,sans-serif;cursor:pointer}
+.gp-empty small{font-weight:400;font-size:3.2cqw;color:#3a5f8f}
+.gp:not([data-hero=none]) .gp-empty{display:none}
+.gp-glass{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .2s}
+.gp[data-glass=on] .gp-glass{opacity:1}
+.gp-glass::before,.gp-glass::after{content:"";position:absolute;left:0;right:0;-webkit-backdrop-filter:blur(7cqw);backdrop-filter:blur(7cqw)}
+.gp-glass::before{top:0;height:24%;background:linear-gradient(var(--gbg),transparent);-webkit-mask-image:linear-gradient(#000,transparent);mask-image:linear-gradient(#000,transparent)}
+.gp-glass::after{bottom:0;height:32%;background:linear-gradient(transparent,var(--gbg));-webkit-mask-image:linear-gradient(transparent,#000);mask-image:linear-gradient(transparent,#000)}
+.gp-low{position:relative;z-index:1;background:var(--gbg,#f2e4e4);border-radius:7cqw 7cqw 0 0;padding:16px 14px 18px}
+.gp-top{position:relative;z-index:1;background:var(--gbg,#f2e4e4);border-radius:0 0 7cqw 7cqw}
+.gp-mod{display:flex;align-items:center;gap:12px;border-radius:5cqw;padding:12px 12px 12px 16px;background:var(--gtint)}
+.gp-mod b{display:block;font-size:4.2cqw}.gp-mod small{display:block;font-size:3.5cqw;opacity:.85;margin-top:2px}
+.gp-mod span:last-child{margin-left:auto;width:16cqw;height:16cqw;border-radius:3cqw;background:rgba(127,127,127,.25);flex:none}
+.gg-cmp{margin-top:20px;border-top:1px solid var(--line);padding-top:14px}
+.gg-cmp h2{margin:0 0 6px;font-size:16px}
+.gg-cmp table{width:100%;border-collapse:collapse;font-size:12.8px}
+.gg-cmp th,.gg-cmp td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:8px 8px;line-height:1.45}
+.gg-cmp th{color:var(--muted);font-weight:600;font-size:11.5px}
+.gg-cmp td:first-child{font-weight:600;white-space:nowrap}
+.gg-figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+.gg-figs figure{margin:0}.gg-figs img{width:100%;border-radius:12px;display:block}.gg-figs figcaption{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.4}
+.gg-adv{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-top:12px}
+.gg-adv div{border:1px solid var(--line);border-radius:12px;padding:11px 13px;font-size:12.8px;line-height:1.5}
+.gg-adv h3{margin:0 0 4px;font-size:13.5px}.gg-adv ul{margin:0;padding-left:17px;color:var(--muted)}.gg-adv b{color:var(--text)}
 /* ---- right column ---- */
 .panel{background:#232427;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:16px}
 .panel h3{margin:0 0 8px;font-size:16px}
@@ -219,6 +282,20 @@ html[data-theme="light"] .ditem .l{color:#5f5f5f}
 html[data-theme="light"] .ditem .v{color:#151515}
 html[data-theme="light"] .dlink{border-bottom:1px solid #cfcfcf}
 html[data-theme="light"] .mkb.g{background:#909090}
+html[data-theme="light"] .guide{background:#f0f0f0}
+html[data-theme="light"] .gg-seg button.on{color:#000000}
+html[data-theme="light"] .gg-big{color:#000000}
+html[data-theme="light"] .gp{background:var(--gbg,#e9e9e9);color:var(--gfg,#dddddd);box-shadow:0 10px 30px rgba(0,0,0,0.122)}
+html[data-theme="light"] .gp-logo{background:rgba(0,0,0,0.33);border:2px dashed rgba(160,160,160,0.5)}
+html[data-theme="light"] .gp-logo img{background:#ffffff}
+html[data-theme="light"] .gp-bc{background:#ffffff}
+html[data-theme="light"] .gp-bc span{background:repeating-linear-gradient(90deg,#e4e4e4 0 2px,#ffffff 2px 3px,#e4e4e4 3px 5px,#ffffff 5px 7px,#e4e4e4 7px 8px,#ffffff 8px 10px)}
+html[data-theme="light"] .gp-hero{background:repeating-conic-gradient(#e7e7e7 0 25%,#f4f4f4 0 50%) 0 0/18px 18px center/cover}
+html[data-theme="light"] .gp-glass::before{-webkit-mask-image:linear-gradient(#e4e4e4,transparent);mask-image:linear-gradient(#e4e4e4,transparent)}
+html[data-theme="light"] .gp-glass::after{-webkit-mask-image:linear-gradient(transparent,#e4e4e4);mask-image:linear-gradient(transparent,#e4e4e4)}
+html[data-theme="light"] .gp-low{background:var(--gbg,#e9e9e9)}
+html[data-theme="light"] .gp-top{background:var(--gbg,#e9e9e9)}
+html[data-theme="light"] .gp-mod span:last-child{background:rgba(255,255,255,0.25)}
 html[data-theme="light"] .panel{background:#f3f3f3}
 html[data-theme="light"] .panel p{color:#2d2d2d}
 html[data-theme="light"] .cmp td:first-child{color:#000000}
@@ -265,6 +342,65 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
     <section class="inspector" id="inspector" hidden aria-live="polite"></section>
     <div class="dropzone" id="dropzone" hidden><div>Drop a Google Wallet pass JSON here</div></div>
     <div id="error"></div>
+    <section class="guide" id="guide" aria-labelledby="ggTitle">
+      <h1 id="ggTitle">Designing a Google Wallet pass <small style="font-size:14px;font-weight:500;color:var(--muted)">Android · 2026 design</small></h1>
+      <p>Try your own hero image, logo and colors. Google draws the layout; you only choose <b>images</b>, the <b>background color</b> and the <b>text</b>. Google calls it a generic pass, not a poster: text never sits on the photo.</p>
+      <div class="gg-grid">
+        <div>
+          <div class="gg-ctl">
+            <button type="button" class="gg-big" id="ggUpBig"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3m0 0L7 8m5-5l5 5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Upload your hero image</b><small>PNG or JPG · 1032 × 812 px · stays in your browser</small></span></button>
+            <div class="gg-row"><span>Hero</span><div class="gg-seg" role="group" aria-label="Hero image"><button type="button" data-gh="none" class="on" aria-pressed="true">None</button><button type="button" data-gh="m" aria-pressed="false">Convertible</button><button type="button" data-gh="i" aria-pressed="false">Palms</button><button type="button" data-gh="up" aria-pressed="false">Upload…</button></div><input type="file" id="ggHeroFile" accept="image/*" hidden></div>
+            <div class="gg-row"><span>Hero style</span><div class="gg-seg" role="group" aria-label="Hero style"><button type="button" data-gglass="off" class="on" aria-pressed="true">Plain</button><button type="button" data-gglass="on" aria-pressed="false">Baked glass edges</button></div></div>
+            <div class="gg-row"><span>Logo</span><div class="gg-seg" role="group" aria-label="Logo"><button type="button" data-gl="none" class="on" aria-pressed="true">None</button><button type="button" data-gl="aaa" aria-pressed="false">AAA</button><button type="button" data-gl="up" aria-pressed="false">Upload…</button></div><input type="file" id="ggLogoFile" accept="image/*" hidden></div>
+            <div class="gg-row"><span>Background</span><input type="color" id="ggBg" value="#f2e4e4" aria-label="hexBackgroundColor"><span id="ggAuto"></span></div>
+            <div class="gg-row"><span>Barcode</span><div class="gg-seg" role="group" aria-label="Barcode"><button type="button" data-gbc="on" class="on" aria-pressed="true">With barcode</button><button type="button" data-gbc="off" aria-pressed="false">No barcode</button></div></div>
+            <div class="gg-row"><span>Card title</span><input type="text" id="ggTitle" value="AAA Membership" maxlength="80"><span class="cnt" data-max="30"></span></div>
+            <div class="gg-row"><span>Header</span><input type="text" id="ggHeader" value="Fulanito Perez" maxlength="80"><span class="cnt" data-max="30"></span></div>
+            <button type="button" class="gg-big chk" id="ggCheck"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span><b>Check contrast</b><small>Is the text readable on this background? (ADA AA)</small></span></button>
+            <div class="gg-res" id="ggRes" hidden aria-live="polite"></div>
+          </div>
+          <div class="gp" id="gp" data-hero="none" data-logo="none" data-bc="on" data-glass="off">
+            <div class="gp-top">
+              <div class="gp-logo"><img id="ggLogo" alt="" hidden></div>
+              <div class="gp-t" id="gpT"></div>
+              <div class="gp-s">Member</div>
+              <div class="gp-h" id="gpH"></div>
+              <div class="gp-bcw"><div class="gp-bc"><span></span></div><div class="gp-alt">000 000 XXXXXXXXX 0</div></div>
+              <div class="gp-rw"><div><i>Plan</i><b>Premier</b></div><div class="c"><i>Valid thru</i><b>03/27</b></div><div class="e"><i>Member since</i><b>1994</b></div></div>
+            </div>
+            <div class="gp-hero"><img id="ggHero" alt=""><div class="gp-glass" aria-hidden="true"></div><button type="button" class="gp-empty" id="ggEmpty"><span style="font-size:7cqw;line-height:1">＋</span>Upload hero image<small>1032 × 812 px</small></button></div>
+            <div class="gp-low"><div class="gp-mod"><span><b>Roadside Assistance</b><small>Call 24/7 · 1-800-400-4222</small></span><span></span></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="gg-cmp" style="margin-top:0;border-top:0;padding-top:0">
+            <h2>Can it be glass or blur?</h2>
+            <p class="note" style="font-size:13px;color:var(--text)"><b>No, not natively.</b> Google Wallet has no glass or blur material. The background is one solid color, there are no gradients, and text never sits on top of an image. The closest look is to <b>bake the blur into the hero image</b>: blur and fade its edges into the background color, as in “Baked glass edges”. It looks soft, but it’s part of the picture, so it doesn’t react to anything.</p>
+            <div class="gg-figs">
+              <figure><img src="google/img/hero-membership.jpg" alt="Plain hero image" loading="lazy"><figcaption>Plain hero</figcaption></figure>
+              <figure><img src="google/img/hero-membership-glass.jpg" alt="Hero with blurred edges fading into the blush background" loading="lazy"><figcaption>Baked glass edges: blur + fade into #F2E4E4, saved in the image</figcaption></figure>
+            </div>
+          </div>
+          <div class="gg-cmp">
+            <h2>Apple vs Google: design</h2>
+            <table>
+              <tr><th></th><th>Apple Wallet (iOS 27 poster)</th><th>Google Wallet (2026)</th></tr>
+              <tr><td>Glass / blur</td><td>Yes, automatic frosted glass footer</td><td>No; only baked into the hero image</td></tr>
+              <tr><td>Artwork</td><td>One full-card image behind everything</td><td>Hero band 1032 × 812 + round logo + module images</td></tr>
+              <tr><td>Text on the photo</td><td>Yes (header, fields over glass)</td><td>Never</td></tr>
+              <tr><td>Text color</td><td>You choose</td><td>Google picks black or white</td></tr>
+              <tr><td>Background</td><td>Solid color + artwork</td><td>Solid color, full screen</td></tr>
+              <tr><td>Fonts</td><td>Apple system fonts, can’t change</td><td>Google Sans, can’t change</td></tr>
+              <tr><td>Actions</td><td>2 of Apple’s 14 predefined</td><td>Custom modules (your text + image), app button, links</td></tr>
+            </table>
+            <div class="gg-adv">
+              <div><h3>Apple advantages</h3><ul><li><b>Immersive:</b> the photo fills the whole card</li><li><b>Glass</b> blends fields into the art</li><li>You pick the <b>exact text colors</b></li></ul></div>
+              <div><h3>Google advantages</h3><ul><li><b>Always readable:</b> text sits on a solid color, so only the background color affects contrast</li><li><b>Bigger photo</b> band, never covered by text</li><li><b>Custom actions</b> with your own words and pictures</li></ul></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <div class="hero">
       <div class="picker cards" id="picker" role="tablist" aria-label="Pass">
         <button role="tab" data-key="membership" class="on" aria-selected="true" aria-label="Membership pass"></button>
@@ -727,6 +863,45 @@ addEventListener('dragleave', e => { if(hasFiles(e) && --depth <= 0){ depth = 0;
 addEventListener('drop', e => { if(!hasFiles(e)) return; e.preventDefault(); depth = 0; $('dropzone').hidden = true; const f = e.dataTransfer.files[0]; if(f) importFile(f); });
 load('membership');
 renderCards();
+/* ---------- Design playground (top): empty pass to try hero, logo, color and text ---------- */
+(function(){
+  const gp = $('gp'), bgIn = $('ggBg'), hero = $('ggHero'), logo = $('ggLogo');
+  const HERO = {m: 'google/img/hero-membership.jpg', i: 'google/img/hero-insurance.jpg'};
+  let upHero = null, upLogo = null;
+  const lin = c => { c /= 255; return c <= .03928 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4; };
+  const L = h => { const n = parseInt(h.slice(1), 16); return .2126 * lin(n >> 16) + .7152 * lin(n >> 8 & 255) + .0722 * lin(n & 255); };
+  const ratio = (a, b) => { const x = L(a), y = L(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
+  function update(){
+    const bg = bgIn.value, fg = textColorFor(bg);
+    gp.style.setProperty('--gbg', bg); gp.style.setProperty('--gfg', fg);
+    gp.style.setProperty('--gtint', fg === '#ffffff' ? 'rgba(255,255,255,.14)' : 'rgba(255,255,255,.45)');
+    $('ggAuto').innerHTML = `Google picks <b style="color:var(--text)">${fg === '#ffffff' ? 'white' : 'black'}</b> text`;
+    $('gpT').textContent = $('ggTitle').value; $('gpH').textContent = $('ggHeader').value;
+    document.querySelectorAll('.gg-row .cnt').forEach(c => { const v = c.previousElementSibling.value.length, m = +c.dataset.max; c.textContent = `${v}/≈${m}`; c.classList.toggle('over', v > m); });
+    if(!$('ggRes').hidden) check();
+  }
+  function check(){
+    const bg = bgIn.value, fg = textColorFor(bg), r = ratio(bg, fg), ok = r >= 4.5, res = $('ggRes');
+    const best = Math.max(ratio(bg, '#ffffff'), ratio(bg, '#202124'));
+    res.hidden = false; res.className = 'gg-res ' + (ok ? 'ok' : 'bad');
+    res.innerHTML = `<h4>${ok ? '✓ Passes ADA contrast (AA 4.5:1)' : '✕ Doesn’t pass ADA contrast (AA 4.5:1)'}</h4>
+      <p>${fg === '#ffffff' ? 'White' : 'Black'} text on <code>${bg.toUpperCase()}</code>: <b>${r.toFixed(1)}:1</b></p>
+      <p class="note">${ok ? 'Text never sits on the hero, so the image can’t hurt readability.' : best >= 4.5 ? 'Google picked the weaker of black and white here. Choose a lighter or darker background.' : 'Mid-tone colors fail with both black and white. Pick a clearly light or dark background.'}</p>`;
+  }
+  const pick = b => b.parentElement.querySelectorAll('button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', String(x === b)); });
+  const seg = (attr, fn) => document.querySelectorAll('[' + attr + ']').forEach(b => b.addEventListener('click', () => { if(fn(b.getAttribute(attr)) !== false) pick(b); update(); }));
+  const setHero = url => { gp.dataset.hero = url ? 'on' : 'none'; if(url) hero.src = url; };
+  seg('data-gh', v => { if(v === 'up' && !upHero){ $('ggHeroFile').click(); return false; } setHero(v === 'none' ? null : v === 'up' ? upHero : HERO[v]); });
+  seg('data-gl', v => { if(v === 'up' && !upLogo){ $('ggLogoFile').click(); return false; } gp.dataset.logo = v === 'none' ? 'none' : 'on'; logo.hidden = v === 'none'; if(v !== 'none') logo.src = v === 'up' ? upLogo : 'google/img/logo.png'; });
+  seg('data-gglass', v => { gp.dataset.glass = v; });
+  seg('data-gbc', v => { gp.dataset.bc = v; });
+  [$('ggUpBig'), $('ggEmpty')].forEach(b => b.addEventListener('click', () => $('ggHeroFile').click()));
+  $('ggHeroFile').addEventListener('change', e => { const f = e.target.files[0]; if(!f) return; if(upHero) URL.revokeObjectURL(upHero); upHero = URL.createObjectURL(f); pick(document.querySelector('[data-gh="up"]')); setHero(upHero); e.target.value = ''; });
+  $('ggLogoFile').addEventListener('change', e => { const f = e.target.files[0]; if(!f) return; if(upLogo) URL.revokeObjectURL(upLogo); upLogo = URL.createObjectURL(f); pick(document.querySelector('[data-gl="up"]')); gp.dataset.logo = 'on'; logo.hidden = false; logo.src = upLogo; e.target.value = ''; });
+  [bgIn, $('ggTitle'), $('ggHeader')].forEach(i => i.addEventListener('input', update));
+  $('ggCheck').addEventListener('click', check);
+  update();
+})();
 </script>
 </body>
 </html>
