@@ -785,14 +785,14 @@ html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-t
         <div class="qa">
           <b>What it is</b><span>One of Apple's Featured Action types (<code>membershipBenefits</code>). Apple sets the label and icon; we only give it an <code>https</code> link. A pass can have 2 actions, and iOS 26 and older don't show them at all.</span>
           <b>The plan (agreed)</b><span>Tapping opens the Auto Club app on the <b>Membership Benefits</b> bottom sheet (same style as the Discounts filter and sort sheets, glass close button) with <b>Roadside Assistance first</b>, so the button's label matches what members see. Without the app, the same link opens the membership page on ace.aaa.com.</span>
-          <b>Today, in this proposal</b><span>The link is <code>https://autoclubapp.page.link/wallet-benefits</code>. It only opens the app, on whatever screen was last open, because the app still claims that old Firebase Dynamic Links domain. Google shut that service down, so it can stop working any time, and without the app it shows “not found”.</span>
+          <b>Today, in this proposal</b><span>The link is the app's own deep link, <code>aceautoclub-uat1://wallet/benefits?source=wallet</code> (UAT1 build). It opens the app straight on the Membership Benefits sheet, no browser first and no sign-in needed, and the app reads <code>source=wallet</code>. Each build has its own scheme so installed builds don't clash: <code>aceautoclub</code> (production), <code>aceautoclub-uat1</code>, <code>-uat2</code>, <code>-beta</code>, <code>-acceptance</code>, <code>-dev</code>. Tap it in the card above (Safari on a phone or simulator with the UAT1 app installed) to try it. Without the app nothing opens, so the https link below is still the goal.</span>
           <b>iOS 26 and older</b><span>No Featured Actions there, so the cards show the Roadside number (1-800-400-4222) on the front instead, and the back of the pass keeps tappable phone numbers and links.</span>
           <b>Can't change</b><span>The label (“View Membership Benefits”), the icon, the 2-action limit, and that front fields aren't tappable.</span>
         </div>
         <h3>What we need</h3>
         <ol>
           <li><b>Web / platform:</b> host an <code>apple-app-site-association</code> file on an AAA domain (for example www.ace.aaa.com) that claims one path, such as <code>/wallet/benefits</code>, and serve the membership page at that same URL for people without the app.</li>
-          <li><b>iOS:</b> add <code>applinks:</code> for that domain and a deep-link route that opens the Membership Benefits sheet with Roadside first. The app's deep links today only cover push notifications (My Cards, Pay Bill), so this is a new route.</li>
+          <li><b>iOS:</b> done on branch <code>b/wallet-deeplink-benefits</code>: the app opens the Membership Benefits sheet (empty for now) from <code>aceautoclub…://wallet/benefits</code> and from <code>https://app.ace.aaa.com/wallet/benefits</code> / <code>appuat1</code> / <code>appuat2</code>. The https version starts working once the web team adds an <code>applinks</code> section for <code>/wallet/benefits</code> to those domains' <code>apple-app-site-association</code> (today they only have <code>webcredentials</code>).</li>
           <li><b>Design:</b> finalize the sheet (it's marked “proposal, not final” in the images above): content, order and the Roadside call-to-action.</li>
           <li><b>Backend (pass service):</b> put the new link in the pass's Featured Action when it builds the card. Add something like <code>?source=wallet</code> so analytics can count opens from Wallet.</li>
         </ol>
@@ -999,9 +999,13 @@ function actionHref(a){
   if(a.type === 'place') return a.placeIdentifier && !/X{3,}/.test(a.placeIdentifier) ? 'https://maps.apple.com/place?place-id=' + encodeURIComponent(a.placeIdentifier) : '';
   const u = String(a.url || '');
   if(a.type === 'call'){ const n = u.replace(/^tel:\/*/i, '').replace(/[^\d+]/g, ''); return n.length >= 6 ? 'tel:' + n : ''; }
-  return /^https:\/\/[^/]+\.[^/]+/.test(u) ? u : '';
+  return /^https:\/\/[^/]+\.[^/]+/.test(u) || isAppLink(u) ? u : '';
 }
-const extLink = (href, text) => href ? `<a class="xl" href="${esc(href)}" target="_blank" rel="noopener">${esc(text)} <span aria-hidden="true">↗</span></a>` : esc(text);
+/* The Auto Club app's own deep link (aceautoclub://, aceautoclub-uat1://, …). Opens the app directly, no browser hop. */
+const isAppLink = u => /^aceautoclub(-[a-z0-9]+)?:\/\/./i.test(String(u || ''));
+/* App links open in the same tab: Safari hands them to the app instead of leaving an empty new tab behind. */
+const linkTarget = href => isAppLink(href) ? '' : ' target="_blank" rel="noopener"';
+const extLink = (href, text) => href ? `<a class="xl" href="${esc(href)}"${linkTarget(href)}>${esc(text)} <span aria-hidden="true">↗</span></a>` : esc(text);
 const jump = (sel, text, title) => `<button type="button" class="jl" data-jump="${esc(sel)}" title="${esc(title)}">${esc(text)} <span aria-hidden="true">→</span></button>`;
 const icon = (a, cls='dot') => `<span class="${cls}" style="background:${a.color}"><svg viewBox="0 0 24 24">${G[a.g]}</svg></span>`;
 
@@ -1129,8 +1133,8 @@ function actsHTML(p){
   const acts = p.featuredActions || [], glass = '';
   return acts.slice(0, MAX_ACTIONS).map((a,i) => {
     const d = ACTION_BY_TYPE[a.type] || {title:a.type||'Unknown action',sub:'Unsupported type',color:'#636366',g:'star'};
-    const href = actionHref(a), tip = a.type === 'place' ? 'Opens this place in Apple Maps' : a.type === 'call' ? 'Calls ' + href.slice(4) : 'Opens ' + href;
-    return href ? `<a class="act link${glass}" data-f="featuredActions:${i}" href="${esc(href)}" target="_blank" rel="noopener" title="${esc(tip)}">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)} <span aria-hidden="true">↗</span></small></a>`
+    const href = actionHref(a), tip = a.type === 'place' ? 'Opens this place in Apple Maps' : a.type === 'call' ? 'Calls ' + href.slice(4) : isAppLink(href) ? 'Opens the Auto Club app (' + href + ')' : 'Opens ' + href;
+    return href ? `<a class="act link${glass}" data-f="featuredActions:${i}" href="${esc(href)}"${linkTarget(href)} title="${esc(tip)}">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)} <span aria-hidden="true">↗</span></small></a>`
                 : `<div class="act${glass}" data-f="featuredActions:${i}" title="No valid destination">${icon(d)}<b>${esc(d.title)}</b><small>${esc(d.sub)}</small></div>`;
   }).join('') + (acts.length < MAX_ACTIONS ? '<div class="act empty">Empty action slot</div>'.repeat(MAX_ACTIONS - acts.length) : '');
 }
@@ -1390,7 +1394,7 @@ function openInspector(id, scroll){
       if(!x.identifier) return `${esc(d.doc)}: missing identifier.`;
       if(d.key === 'placeIdentifier' && (!x.placeIdentifier || /X{3,}|^\d{1,6}$/.test(x.placeIdentifier))) return `${esc(d.doc)}: placeIdentifier “${esc(x.placeIdentifier||'')}” is a placeholder — Maps needs a real Apple Maps Place ID.`;
       if(d.key === 'url' && d.scheme === 'tel' && !/^tel:\/*\+?\d{6,}/.test(x.url||'')) return `${esc(d.doc)}: url must be a tel: link with a number.`;
-      if(d.key === 'url' && d.scheme === 'https' && !/^https:\/\/[^/]+\.[^/]+/.test(x.url||'')) return `${esc(d.doc)}: url “${esc(x.url||'')}” is not a complete https link.`;
+      if(d.key === 'url' && d.scheme === 'https' && !isAppLink(x.url) && !/^https:\/\/[^/]+\.[^/]+/.test(x.url||'')) return `${esc(d.doc)}: url “${esc(x.url||'')}” is not a complete https link.`;
       return '';
     }).filter(Boolean);
     const dupIds = acts.map(x=>x.identifier).filter((v,i,arr)=>v && arr.indexOf(v)!==i);
