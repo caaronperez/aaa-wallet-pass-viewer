@@ -165,6 +165,11 @@ html[data-theme="light"] .acts .act.empty{background:transparent;border:1px dash
 .kv .k{color:var(--muted);padding-top:4px}
 .kv .val{background:#232427;border:1px solid var(--line);border-radius:6px;padding:4px 7px;min-height:24px;white-space:pre-wrap;word-break:break-word;color:#d9d9de;cursor:not-allowed}
 .kv .val code{font-size:11px}
+.kv .k.locked,.kv .val.locked{opacity:.45}
+.kv .val.mine{border-color:rgba(48,209,88,.55)}
+.own{display:inline-block;margin-left:6px;font:700 9px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;letter-spacing:.03em;text-transform:uppercase;border-radius:4px;padding:3px 5px;vertical-align:1px}
+.own.you{background:#1e8e3e;color:#fff}.own.apple{background:#55565c;color:#e5e5ea}
+.own-legend{margin:2px 0 10px;font-size:11.5px;color:var(--muted)}.own-legend .own{margin:0 3px 0 0}
 .sw{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid #fff4;vertical-align:-2px;margin-right:6px}
 .note{font-size:12px;line-height:1.45;color:#cfd0d6;background:#26272a;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:7px;padding:8px 10px;margin:8px 0}
 .note.warn{border-left-color:var(--warn)}.note.bad{border-left-color:var(--bad)}.note.ok{border-left-color:var(--ok)}
@@ -485,6 +490,7 @@ html[data-theme="light"] .inspector{background:rgba(0,0,0,0.339);border:1px soli
 html[data-theme="light"] .x{background:#ffffff}
 html[data-theme="light"] .sprop:hover{border-color:#b9b9b9}
 html[data-theme="light"] .kv .val{background:#f3f3f3;color:#242424}
+html[data-theme="light"] .own.apple{background:#ffffff;color:#181818}
 html[data-theme="light"] .sw{border:1px solid rgba(0,0,0,0.16)}
 html[data-theme="light"] .note{color:#2d2d2d;background:#f4f4f4}
 html[data-theme="light"] .fieldcard{background:#f5f5f5}
@@ -521,6 +527,7 @@ html[data-theme="light"] .dt-bar{background:#e4e4e4}
 @media (max-width:860px){html[data-theme="light"] .sidebar{border-top:1px solid #f2f2f2}}
 html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode button.on{background:#e7f0ff;color:#0a3d91}html[data-theme="light"] .picker button.on small{color:#3d5f99}html[data-theme="light"] .exp-sw .track{background:#d1d1d6}
 /* END LIGHT THEME */
+html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-theme="light"] .kv .val.mine{border-color:rgba(26,127,55,.55)}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -1284,7 +1291,9 @@ $('sidebar').addEventListener('click', e => {
 });
 
 /* ---------- Inspector (read-only) ---------- */
-const kv = rows => '<div class="kv">' + rows.filter(Boolean).map(([k,v,raw]) => `<div class="k">${esc(k)}</div><div class="val" aria-readonly="true">${raw ? v : esc(v === undefined || v === '' ? '—' : v)}</div>`).join('') + '</div>';
+const OWN = {you: '<span class="own you" title="You set this in pass.json">You set</span>', apple: '<span class="own apple" title="Fixed by Apple, can\'t be changed">Apple</span>'};
+const kv = rows => '<div class="kv">' + rows.filter(Boolean).map(([k,v,raw,own]) => `<div class="k${own === 'apple' ? ' locked' : ''}">${esc(k)}${own ? OWN[own] : ''}</div><div class="val${own === 'apple' ? ' locked' : own === 'you' ? ' mine' : ''}" aria-readonly="true">${raw ? v : esc(v === undefined || v === '' ? '—' : v)}</div>`).join('') + '</div>';
+const ownLegend = () => '<p class="own-legend"><span class="own you">You set</span> editable in pass.json · <span class="own apple">Apple</span> fixed, can\'t be changed</p>';
 const note = (t, cls='') => `<div class="note ${cls}">${t}</div>`;
 const sec = (title, body) => `<div class="ins-sec"><h3>${esc(title)}</h3>${body}</div>`;
 const STYLE_PROPS = [
@@ -1386,11 +1395,11 @@ function openInspector(id, scroll){
     const dupIds = acts.map(x=>x.identifier).filter((v,i,arr)=>v && arr.indexOf(v)!==i);
     if(dupIds.length) issues.push('Identifiers must be unique: ' + esc(dupIds.join(', ')));
     if(acts.length > MAX_ACTIONS) issues.push(`${acts.length} actions — passes support a maximum of ${MAX_ACTIONS}.`);
-    body = sec(`In this template · ${acts.length} of ${MAX_ACTIONS}`, acts.map(x => { const d = ACTION_BY_TYPE[x.type]||{doc:x.type}; return `<div class="fieldcard"><h4><span>${esc(d.doc)}</span><span class="badge full">${esc(x.type)}</span></h4>${actionAttrs(x, d)}${wordingFor(x)}</div>`; }).join('') || note('No Featured Actions.'))
+    body = sec(`In this template · ${acts.length} of ${MAX_ACTIONS}`, (acts.length ? ownLegend() : '') + acts.map(x => { const d = ACTION_BY_TYPE[x.type]||{doc:x.type}; return `<div class="fieldcard"><h4><span>${esc(d.doc)}</span><span class="badge full">${esc(x.type)}</span></h4>${actionAttrs(x, d)}${wordingFor(x)}</div>`; }).join('') || note('No Featured Actions.'))
       + sec('All available actions', `<label class="k" for="actPick" style="font-size:11px;color:var(--muted)">Action type (✓ = in this template)</label>
         <select id="actPick" class="dd">${ACTIONS.map(x=>`<option value="${x.type}" ${x.type===pick?'selected':''}>${used.has(x.type)?'✓ ':'   '}${esc(x.doc)} — ${esc(x.cat)}</option>`).join('')}</select>
         <div class="fieldcard ${used.has(pick)?'':''}"><h4><span>${icon(a)} ${esc(a.doc)}</span><span class="badge ${used.has(pick)?'full':'na'}">${used.has(pick)?'in template':'available'}</span></h4>
-        ${kv([['API type',a.type],['Designer label',a.title + ' · ' + a.sub],['Purpose',a.purpose],['Category',a.cat],['Required keys','identifier, type, ' + a.key],['Value format', a.key==='placeIdentifier' ? 'Apple Maps Place ID, e.g. I71B28B9C6AC9C7EF (look it up with MapKit: MKLocalSearch → MKMapItem.identifier)' : a.scheme === 'tel' ? 'tel:// phone link' : 'https:// link to your app or website'], inst ? ['Template value', actionHref(inst) ? extLink(actionHref(inst), inst.placeIdentifier ?? inst.url) : esc(inst.placeIdentifier ?? inst.url), true] : null])}</div>
+        ${ownLegend()}${kv([['API type',a.type,false,'you'],['Designer label',a.title + ' · ' + a.sub,false,'apple'],['Purpose',a.purpose,false,'apple'],['Category',a.cat,false,'apple'],['Required keys','identifier, type, ' + a.key,false,'apple'],['Value format', a.key==='placeIdentifier' ? 'Apple Maps Place ID, e.g. I71B28B9C6AC9C7EF (look it up with MapKit: MKLocalSearch → MKMapItem.identifier)' : a.scheme === 'tel' ? 'tel:// phone link' : 'https:// link to your app or website',false,'apple'], inst ? ['Template value', actionHref(inst) ? extLink(actionHref(inst), inst.placeIdentifier ?? inst.url) : esc(inst.placeIdentifier ?? inst.url), true, 'you'] : null])}</div>
         <div class="agrid">${ACTIONS.map(x=>`<button class="atile ${used.has(x.type)?'in':''} ${x.type===pick?'pick':''}" data-act="${x.type}">${used.has(x.type)?'<span class="tag">IN TEMPLATE</span>':''}${icon(x)}<b>${esc(x.title)}</b><small>${esc(x.cat)}</small></button>`).join('')}</div>`)
       + sec('Limitations', note(`A pass supports at most <b>${MAX_ACTIONS}</b> Featured Actions (Pass Designer: “To add another action, remove an existing one.”).`)
         + note('Requires iOS and watchOS 27 or later; they appear as cards under the pass. Earlier systems (the iOS 26 column) ignore them.')
@@ -1447,10 +1456,10 @@ function actionAttrs(x, d){
   const bi = back.findIndex(f => f.key === x.identifier);
   const href = actionHref(x), dest = x.placeIdentifier ?? x.url;
   return kv([
-    ['Identifier', bi >= 0 ? jump('field:backFields:' + bi, x.identifier, 'Show the paired back field') : esc(x.identifier), true],
-    ['Type', ACTION_BY_TYPE[x.type] ? jump('act:' + x.type, x.type, 'Show this action type') : esc(x.type), true],
-    [d.key === 'placeIdentifier' ? 'Maps Place ID' : 'URL', href ? extLink(href, dest) : esc(dest) + ' <span class="miss">(not openable)</span>', true],
-    ['Card shows (Wallet)', (d.title || x.type) + ' · ' + (d.sub || '')]
+    ['Identifier', bi >= 0 ? jump('field:backFields:' + bi, x.identifier, 'Show the paired back field') : esc(x.identifier), true, 'you'],
+    ['Type', ACTION_BY_TYPE[x.type] ? jump('act:' + x.type, x.type, 'Show this action type') : esc(x.type), true, 'you'],
+    [d.key === 'placeIdentifier' ? 'Maps Place ID' : 'URL', href ? extLink(href, dest) : esc(dest) + ' <span class="miss">(not openable)</span>', true, 'you'],
+    ['Card shows (Wallet)', (d.title || x.type) + ' · ' + (d.sub || ''), false, 'apple']
   ]);
 }
 function wordingFor(x){
