@@ -20,7 +20,7 @@
       "_id" : "B28682DD-2D79-49A2-85B0-0BC554E8D361",
       "identifier" : "memberBenefits",
       "type" : "membershipBenefits",
-      "url" : "aceautoclub-uat1:\/\/wallet\/benefits?source=wallet"
+      "url" : "aceautoclub-beta:\/\/wallet\/benefits?source=wallet"
     },
     {
       "_id" : "416B1BAF-10E3-438F-A72C-383C6E03F523",
