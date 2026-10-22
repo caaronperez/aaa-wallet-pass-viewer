@@ -233,8 +233,28 @@ html[data-theme="light"] .acts .act.empty{background:transparent;border:1px dash
 .gd-pass:not([data-art=none]) .gd-empty{display:none}
 .gd-pass[data-logo=none] .gd-logo{display:none}
 .gd-logo{max-width:30%;object-fit:contain;object-position:left}
-.gd-txt,.gd-head{color:var(--gd-fg,#192842)}
-.gd-txt.prim i,.gd-head i{color:var(--gd-label,#27292b)}
+.gd-txt{color:var(--gd-fg,#192842)}
+.gd-txt.prim i{color:var(--gd-label,#27292b)}
+.gd-head{color:var(--gd-hv,var(--gd-fg,#192842))}
+.gd-head i{color:var(--gd-hl,var(--gd-label,#27292b))}
+.gd-pick input:disabled{opacity:.45;cursor:not-allowed}
+.gd-auto{display:inline-flex;align-items:center;gap:6px;margin-left:4px;padding:3px 9px 3px 4px;border:1px solid var(--line);border-radius:999px;color:var(--text);cursor:pointer;user-select:none}
+.gd-auto input{appearance:none;-webkit-appearance:none;width:30px;height:18px;border-radius:999px;background:var(--panel-2);position:relative;margin:0;cursor:pointer;transition:background .15s}
+.gd-auto input::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .15s}
+.gd-auto input:checked{background:var(--ok)}
+.gd-auto input:checked::after{transform:translateX(12px)}
+.gd-auto input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.gd-prio{grid-column:1/-1;border:1px solid rgba(255,214,10,.5);background:rgba(255,214,10,.07);border-radius:12px;padding:12px 14px;font-size:12.8px;line-height:1.5;color:var(--text)}
+.gd-prio h3{margin:0 0 2px;font-size:14px}
+.gd-prio>p{margin:0 0 8px;color:var(--muted)}
+.gd-prio ol{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.gd-prio li{display:grid;grid-template-columns:auto 1fr;gap:2px 9px;padding:7px 9px;border-radius:9px;border:1px solid var(--line);cursor:default}
+.gd-prio li.hot{border-color:#0a84ff;background:rgba(10,132,255,.10)}
+.gd-prio li .rk{grid-row:span 2;align-self:start;display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font-weight:700;font-size:12px;background:#ff9f0a;color:#1c1c1e}
+.gd-prio li .rk.hd{background:#bf5af2;color:#fff}.gd-prio li .rk.lg{background:#0a84ff;color:#fff}.gd-prio li .rk.zn{background:#ffd60a}
+.gd-prio li b.t{font-size:13px}
+.gd-prio li span.d{color:var(--muted)}
+.gd-prio .tip{margin:9px 0 0;padding-top:8px;border-top:1px solid var(--line)}
 .guide-key{margin-top:12px;padding:11px 14px;border-radius:10px;background:rgba(10,132,255,.14);border:1px solid rgba(10,132,255,.5);color:var(--text);font-size:14px}
 .gd-check{background:#34c759;color:#06290f}
 .gd-upload[hidden],.gd-result[hidden]{display:none}
@@ -566,7 +586,7 @@ html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-t
             <div class="crow"><span>Header</span><div class="guide-seg" role="group" aria-label="Header darkening"><button type="button" data-gdark="on" aria-pressed="false">Darkening on (default)</button><button type="button" data-gdark="off" class="on" aria-pressed="true">suppressHeaderDarkening</button></div></div>
             <div class="crow"><span>Artwork</span><div class="guide-seg" role="group" aria-label="Artwork"><button type="button" data-gart="none" class="on" aria-pressed="true">None</button><button type="button" data-gart="m" aria-pressed="false">Convertible</button><button type="button" data-gart="i" aria-pressed="false">Palms</button><button type="button" data-gart="up" aria-pressed="false">Upload…</button></div><input type="file" id="gdArtFile" accept="image/*" hidden></div>
             <div class="crow"><span>Logo</span><div class="guide-seg" role="group" aria-label="Logo"><button type="button" data-glogo="none" class="on" aria-pressed="true">None</button><button type="button" data-glogo="aaa" aria-pressed="false">AAA</button><button type="button" data-glogo="up" aria-pressed="false">Upload…</button></div><input type="file" id="gdLogoFile" accept="image/*" hidden></div>
-            <div class="crow"><span>Text</span><label class="gd-pick"><input type="color" id="gdFg" value="#192842"> Values</label><label class="gd-pick"><input type="color" id="gdLabel" value="#27292b"> Labels</label></div>
+            <div class="crow"><span>Text</span><label class="gd-pick"><input type="color" id="gdFg" value="#192842"> Values</label><label class="gd-pick"><input type="color" id="gdLabel" value="#27292b"> Labels</label><label class="gd-auto" title="useAutomaticColors: Wallet picks the text colors from the artwork and ignores the ones you set"><input type="checkbox" id="gdAuto" role="switch"> Automatic colors</label></div>
             <div class="crow"><span></span><label style="display:inline-flex;align-items:center;gap:5px"><input type="checkbox" id="gdGuides" checked> Show guides</label></div>
             <div class="guide-ratio" id="gdRatio" aria-live="polite"></div>
             <button type="button" class="gd-upload gd-check" id="gdCheck" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span><b>Check contrast</b><small>Is the text readable on this artwork? (ADA AA)</small></span></button>
@@ -610,6 +630,17 @@ html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-t
           <p class="guide-src">Card: 358 × 448 pt. ≈ = measured in Pass Designer.</p>
         </div>
         <div class="guide-specs">
+          <div class="gd-prio" id="gdPrio">
+            <h3>Choosing the artwork: where to focus (ADA)</h3>
+            <p>Text must reach <b>4.5:1</b> against what’s right behind it. Only these areas sit behind text, so check them in this order:</p>
+            <ol>
+              <li data-g="I D E F G"><span class="rk">1</span><b class="t">Bottom quarter · footer (≈341–448 pt)</b><span class="d">Most important: the fields and footer line sit here. The glass blurs it but keeps its colors, so keep this area <b>one even tone</b>, clearly light (dark text) or clearly dark (white text). No bright, saturated colors or busy detail.</span></li>
+              <li data-g="B C K"><span class="rk hd">2</span><b class="t">Top-right · header (top ≈11%)</b><span class="d">The header text sits right on the photo, with no glass. Keep it plain, like sky or a flat wall. Header darkening helps white text; with it off, the art alone has to give the contrast.</span></li>
+              <li data-g="A"><span class="rk lg">3</span><b class="t">Top-left · logo</b><span class="d">A calm area so the logo stands out.</span></li>
+              <li data-g="J H"><span class="rk zn">4</span><b class="t">Middle · the subject (≈45–260 pt)</b><span class="d">No text here, so this is the place for the car, the scenery, the detail. The barcode’s white panel covers ≈260–351 pt, so keep anything important above it.</span></li>
+            </ol>
+            <p class="tip"><b>Order:</b> pick the artwork, then the text colors (or <b>Automatic colors</b>), then press <b>Check contrast</b>. If it fails: lighten or darken the bottom quarter (a veil), move the subject up, or use a solid footer color.</p>
+          </div>
           <div class="guide-spec" data-g="J"><h3><span class="n zone">1</span>Artwork</h3><ul><li><b>716 × 896 px</b> (@2x) · <b>1074 × 1344 px</b> (@3x)</li><li>Fills the whole card, behind the footer too</li><li>Keep the subject between ≈45 and ≈260 pt</li><li>Bake gradients into the image</li></ul></div>
           <div class="guide-spec" data-g="A B C"><h3><span class="n ">2</span>Logo &amp; header</h3><ul><li>Logo top-left, <b>≈26 pt tall</b></li><li><b>1</b> header field, top-right</li></ul></div>
           <div class="guide-spec" data-g="K"><h3><span class="n pu">3</span>Header darkening</h3><ul><li>Default: dark gradient behind the header</li><li>Apple gives <b>no %</b></li><li><code>suppressHeaderDarkening: true</code> turns it off</li></ul></div>
@@ -620,7 +651,7 @@ html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-t
           <div class="guide-spec" data-g="D E F G"><h3><span class="n ">8</span>Fonts</h3><ul><li><b>Can’t be changed</b>: a pass has no font setting</li><li>Wallet always uses Apple’s system fonts</li><li>Labels and values are monospaced</li><li>Brand font (Roboto) only baked into the art</li></ul></div>
           <div class="guide-spec" data-g="B C D E F G"><h3><span class="n ">9</span>Text colors</h3><ul><li><code>foregroundColor</code> = values · <code>labelColor</code> = labels</li><li>Solid <code>rgb()</code> only</li><li>Aim for <b>4.5:1</b></li></ul></div>
           <div class="guide-spec" data-g="B C D E F G"><h3><span class="n">10</span>Max characters</h3><ul><li>Header label <b>≈28</b> (caps)</li><li>Header value <b>≈30</b></li><li>Primary fields, 1–2: <b>≈33</b> across the row</li><li>Primary fields, 3: <b>≈48</b> across the row (smaller text)</li><li>Footer line <b>≈50</b>, one line</li><li>Longer text shrinks, then gets cut off (…)</li></ul></div>
-          <div class="guide-spec" data-g="B C D E F G"><h3><span class="n ">11</span>Automatic colors</h3><ul><li><code>useAutomaticColors: true</code>: Wallet picks the text colors and ignores yours</li></ul></div>
+          <div class="guide-spec" data-g="B C D E F G"><h3><span class="n ">11</span>Automatic colors</h3><ul><li><code>useAutomaticColors: true</code>: Wallet picks the text colors and ignores yours</li><li>Try it with the <b>Automatic colors</b> switch</li><li>Wallet’s pick isn’t guaranteed to pass, so still check contrast</li></ul></div>
           <div class="guide-spec"><h3><span class="n ">12</span>Featured Actions</h3><ul><li>Up to <b>2</b> cards below the pass</li><li>Pick from Apple’s <b>14</b> predefined actions</li><li>Icon and title are set by Apple</li><li>e.g. <code>membershipBenefits</code>, <code>place</code></li></ul></div>
         </div>
       </div>
@@ -1546,7 +1577,8 @@ document.addEventListener('click', e => { if(e.target.closest('[data-arch]')) se
 
 /* ---------- Design guide (top of the page): an empty card to try artwork, logo and text colors ---------- */
 (function(){
-  const pass = $('gdPass'), color = $('gdColor'), ratioEl = $('gdRatio'), fg = $('gdFg'), label = $('gdLabel'), logo = $('gdLogo');
+  const pass = $('gdPass'), color = $('gdColor'), ratioEl = $('gdRatio'), fg = $('gdFg'), label = $('gdLabel'), logo = $('gdLogo'), auto = $('gdAuto');
+  let manual = {fg: fg.value, label: label.value};
   const ART = {m:'guide/convertible.jpg', i:'guide/palms.jpg'};   /* the untouched Figma photos, no tints or veils */
   const AAA_LOGO = "templates/AAA%20Membership%20Card%20%28Alternative%29.pkpasstemplate/primaryLogo@2x.png";
   let artURL = null, upArt = null, upLogo = null, glassTone = null;
@@ -1578,15 +1610,28 @@ document.addEventListener('click', e => { if(e.target.closest('[data-arch]')) se
     };
     img.src = url;
   }
+  /* useAutomaticColors (≈): Wallet picks light or dark text from what's behind the fields, like the viewer's autoColors(). */
+  const median = a => { const b = a.slice().sort((x, y) => x - y); return b[b.length >> 1]; };
+  function automaticColors(){
+    const solid = pass.dataset.foot === 'color';
+    const bg = solid ? lumRGB(rgbOf(color.value)) : glassTone ? median(glassTone.values.concat(glassTone.footer)) : lumRGB(rgbOf('#555555'));
+    if(ratioL(bg, lumRGB(rgbOf('#1c1c1e'))) >= ratioL(bg, 1)) return {fg: '#1c1c1e', label: '#6e6e73'};
+    if(!solid) return {fg: '#ffffff', label: '#ebebf0'};
+    const tint = rgbOf(color.value).map(c => Math.round(c + (255 - c) * .62));
+    return {fg: '#ffffff', label: '#' + tint.map(c => c.toString(16).padStart(2, '0')).join('')};
+  }
   const verdict = (v, l) => { const ok = Math.min(v, l) >= 4.5; return `values ${v.toFixed(1)}:1, labels ${l.toFixed(1)}:1 <b style="color:${ok ? 'var(--ok)' : 'var(--bad)'}">${ok ? '✓ passes AA' : '✕ below 4.5:1'}</b>`; };
   function update(){
+    if(auto.checked){ const a = automaticColors(); fg.value = a.fg; label.value = a.label; }
+    fg.disabled = label.disabled = auto.checked;
+    pass.style.setProperty('--gd-hv', auto.checked ? '#fff' : fg.value); pass.style.setProperty('--gd-hl', auto.checked ? '#fff' : label.value);
     const solid = pass.dataset.foot === 'color', lf = lumRGB(rgbOf(fg.value)), ll = lumRGB(rgbOf(label.value));
     color.disabled = !solid;
     pass.style.setProperty('--gd-foot', color.value); pass.style.setProperty('--gd-fg', fg.value); pass.style.setProperty('--gd-label', label.value);
-    if(solid){ const lb = lumRGB(rgbOf(color.value)); ratioEl.innerHTML = `Solid footer: ${verdict(ratioL(lb, lf), ratioL(lb, ll))}`; }
+    if(solid){ const lb = lumRGB(rgbOf(color.value)); ratioEl.innerHTML = `${auto.checked ? 'Automatic colors (≈ Wallet’s pick) · ' : ''}Solid footer: ${verdict(ratioL(lb, lf), ratioL(lb, ll))}`; }
     else if(pass.dataset.art === 'none') ratioEl.textContent = 'Frosted glass: add artwork to check contrast.';
     else if(!glassTone) ratioEl.textContent = 'Frosted glass: measuring…';
-    else ratioEl.innerHTML = `Frosted glass (≈, worst spot): ${verdict(Math.min(...glassTone.values.concat(glassTone.footer).map(t => ratioL(t, lf))), Math.min(...glassTone.labels.map(t => ratioL(t, ll))))}`;
+    else ratioEl.innerHTML = `${auto.checked ? 'Automatic colors (≈ Wallet’s pick) · ' : ''}Frosted glass (≈, worst spot): ${verdict(Math.min(...glassTone.values.concat(glassTone.footer).map(t => ratioL(t, lf))), Math.min(...glassTone.labels.map(t => ratioL(t, ll))))}`;
     $('gdCheck').hidden = pass.dataset.art === 'none';
     if(!$('gdResult').hidden) showCheck();
   }
@@ -1606,7 +1651,7 @@ document.addEventListener('click', e => { if(e.target.closest('[data-arch]')) se
       <p><b>Best plain text color here:</b> ${opts.map(([n, h, r]) => `<button type="button" class="gd-try" data-try="${h}"><span class="sw" style="background:${h}"></span>${n} ${r.toFixed(1)}:1</button>`).join(' ')}</p>
       ${ok ? '' : `<p class="sub">${opts[0][2] >= 4.5 ? 'Tap the best color to apply it.' : 'No text color passes on this artwork. Pick a calmer, more even area for the bottom quarter, or use a solid footer color.'}</p>`}
       <p class="sub">≈ estimate from the glass as Pass Designer draws it. Confirm on a device.</p>`;
-    box.querySelectorAll('[data-try]').forEach(b => b.addEventListener('click', () => { fg.value = label.value = b.dataset.try; update(); }));
+    box.querySelectorAll('[data-try]').forEach(b => b.addEventListener('click', () => { auto.checked = false; fg.value = label.value = b.dataset.try; manual = {fg: fg.value, label: label.value}; update(); }));
   }
   const pick = (b, attr) => b.parentElement.querySelectorAll('button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', String(x === b)); });
   const seg = (attr, fn) => document.querySelectorAll('[' + attr + ']').forEach(b => b.addEventListener('click', () => { if(fn(b.getAttribute(attr), b) !== false) pick(b); update(); }));
@@ -1623,10 +1668,12 @@ document.addEventListener('click', e => { if(e.target.closest('[data-arch]')) se
   $('gdArtFile').addEventListener('change', e => { const f = e.target.files[0]; if(!f) return; if(upArt) URL.revokeObjectURL(upArt); upArt = URL.createObjectURL(f); pick(document.querySelector('[data-gart="up"]')); setArt(upArt); e.target.value = ''; });
   $('gdLogoFile').addEventListener('change', e => { const f = e.target.files[0]; if(!f) return; if(upLogo) URL.revokeObjectURL(upLogo); upLogo = URL.createObjectURL(f); pick(document.querySelector('[data-glogo="up"]')); pass.dataset.logo = 'on'; logo.src = upLogo; e.target.value = ''; });
   [color, fg, label].forEach(i => i.addEventListener('input', update));
+  [fg, label].forEach(i => i.addEventListener('input', () => { manual = {fg: fg.value, label: label.value}; }));
+  auto.addEventListener('change', () => { if(!auto.checked){ fg.value = manual.fg; label.value = manual.label; } update(); });
   $('gdCheck').addEventListener('click', showCheck);
   document.querySelectorAll('[data-gx]').forEach(b => b.addEventListener('click', () => { loadDefault(b.dataset.gx); $('picker').scrollIntoView({behavior:'smooth', block:'start'}); }));
   $('gdGuides').addEventListener('change', e => pass.dataset.guides = e.target.checked ? 'on' : 'off');
-  document.querySelectorAll('.guide-spec[data-g], #gdLegend li[data-g]').forEach(c => {
+  document.querySelectorAll('.guide-spec[data-g], #gdLegend li[data-g], #gdPrio li[data-g]').forEach(c => {
     const on = v => { c.classList.toggle('hot', v); pass.querySelectorAll(c.dataset.g.split(' ').map(g => `.gd-box[data-g="${g}"]`).join(',')).forEach(b => b.classList.toggle('hot', v)); };
     c.addEventListener('mouseenter', () => on(true)); c.addEventListener('mouseleave', () => on(false));
   });
