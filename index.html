@@ -115,10 +115,10 @@ button,select{font:inherit;color:inherit}
 .g-prim{display:flex;gap:10px;margin-top:22px;align-items:flex-start}
 .g-prim .fld{flex:1}
 .g-prim .l{font-size:10px;font-weight:700;color:var(--label)}
-.g-prim .v{font-size:22px;font-weight:600;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:inherit}
+.g-prim .v{font-size:22px;font-weight:600;color:var(--fg);white-space:normal;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.15;font-family:inherit}
 .g-prim img{width:66px;height:66px;object-fit:cover;flex:none}
 .g-sec{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
-.g-sec .fld{min-width:0}
+.g-sec .fld{min-width:0;flex:0 1 auto}
 .g-sec .v{font-size:15px;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:inherit}
 .g-sec .fld.wide .v{font-size:12px;white-space:normal}
 .g-bottom{margin-top:auto;text-align:center;padding-top:10px}
@@ -703,6 +703,18 @@ html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-t
         </ul></div>
         <h4 class="fl-h">iOS 27 (poster)</h4><div class="a11y-scroll"><table class="gx-colors fl-tbl"><thead><tr><th>Type</th><th>Field</th><th>Value now</th><th>Max before “…”</th><th>Longest expected</th><th>Why it’s there</th></tr></thead><tbody><tr class=""><td><span class="fl-t fl-header">Header</span></td><td><b>Header label</b></td><td>CA EVIDENCE OF LIABILITY · 24 <span class="a11y-v ok">Fits</span></td><td class="n"><b>22</b><br><small>this text fits (narrow letters)</small></td><td>Fixed text</td><td>Document type, shows when cards are stacked.</td></tr><tr class=""><td><span class="fl-t fl-header">Header</span></td><td><b>Header value</b></td><td>Auto Insurance Card · 19 <span class="a11y-v ok">Fits</span></td><td class="n"><b>26</b></td><td>Fixed text</td><td>Names the card like the paper ID card.</td></tr><tr class=""><td><span class="fl-t fl-primary">Primary</span></td><td><b>Name Insured</b></td><td>FULANITO PEREZ · 14 <span class="a11y-v ok">Fits</span></td><td class="n"><b>21</b><br><small>shrinks past ≈16</small></td><td><span class="a11y-v mid">30–35</span> long names: cut past 21</td><td>The insured person, checked against the driver’s license.</td></tr><tr class=""><td><span class="fl-t fl-primary">Primary</span></td><td><b>Policy Number</b></td><td>CAA000XXXX · 10 <span class="a11y-v ok">Fits</span></td><td class="n"><b>21</b><br><small>shrinks past ≈16</small></td><td>≈10–13 (TX: ATX001031422 = 12)</td><td>The number an officer, DMV or claims agent asks for.</td></tr><tr class=""><td><span class="fl-t fl-primary">Primary</span></td><td><b>Effective</b></td><td>09/14/26 – 09/14/27 · 19 <span class="a11y-v ok">Fits</span></td><td class="n"><b>25</b><br><small>shrinks past ≈19</small></td><td>19, always (MM/DD/YY – MM/DD/YY) <span class="a11y-v ok">Fits</span></td><td>Proves the policy covers today.</td></tr><tr class=""><td><span class="fl-t fl-primary">Primary</span></td><td><b>Labels</b> (all 3)</td><td>6–13 <span class="a11y-v ok">Fits</span></td><td class="n"><b>≈14–15</b> each</td><td>Fixed text</td><td>Title case.</td></tr><tr class="fl-new"><td><span class="fl-t fl-footer">Footer</span></td><td><b>Insurance company · NAIC #</b> <small>one line</small></td><td>INTERINSURANCE EXCHANGE · NAIC # 00000 · 38 <span class="a11y-v ok">Fits</span></td><td class="n"><b>52</b></td><td>61 with the full legal name <span class="a11y-v bad">cut</span> → use the short name. TX: AUTO CLUB COUNTY MUTUAL · NAIC # 29327 = 38 <span class="a11y-v ok">Fits</span></td><td>Insurer and its NAIC company code. Only the first footer field shows on iOS 27 and footer labels are hidden, so both share one line.</td></tr></tbody></table></div>
         <h4 class="fl-h">iOS 26 and older (our custom design)</h4><div class="a11y-scroll"><table class="gx-colors fl-tbl"><thead><tr><th>Type</th><th>Field</th><th>Value now</th><th>Max before “…”</th><th>Longest expected</th><th>Why it’s there</th></tr></thead><tbody><tr class=""><td><span class="fl-t fl-header">Header</span></td><td><b>Header label</b></td><td>CA EVIDENCE OF LIABILITY · 24 <span class="a11y-v bad">Cut: “CA EVIDENCE OF…”</span></td><td class="n"><b>13–14</b></td><td>Fixed text</td><td>Document type. Shorten to ≤13 (e.g. “CA INSURANCE”).</td></tr><tr class=""><td><span class="fl-t fl-header">Header</span></td><td><b>Header value</b></td><td>Auto Insurance Card · 19 <span class="a11y-v bad">Cut: “AUTO INSURANCE…”</span></td><td class="n"><b>14</b></td><td>Fixed text</td><td>Shorten to ≤14 (e.g. “ID CARD”).</td></tr><tr class=""><td><span class="fl-t fl-primary">Primary</span></td><td><b>Name Insured</b></td><td>FULANITO PEREZ · 14 <span class="a11y-v ok">Fits</span></td><td class="n">2 lines, ≈37 each<br><small>cut with no “…”</small></td><td>30–35 <span class="a11y-v ok">Fits</span> MARIA GUADALUPE HERNANDEZ RODRIGUEZ (34) shows in full on 2 lines</td><td>The longest value on the card, so it gets the big line that wraps. Checked against the driver’s license.</td></tr><tr class=""><td><span class="fl-t fl-secondary">Secondary</span></td><td><b>Policy Number</b></td><td>CAA000XXXX · 10 <span class="a11y-v ok">Fits</span></td><td class="n"><b>39</b><br><small>shrinks first</small></td><td>≈10–13 <span class="a11y-v ok">Fits</span></td><td>The number an officer, DMV or claims agent asks for. Short and fixed length, so the second row is enough.</td></tr><tr class=""><td><span class="fl-t fl-secondary">Secondary</span></td><td><b>Effective</b></td><td>09/14/26 – 09/14/27 · 19 <span class="a11y-v ok">Fits</span></td><td class="n"><b>40</b><br><small>shrinks first</small></td><td>19, always <span class="a11y-v ok">Fits</span></td><td>Proves the policy covers today.</td></tr><tr class=""><td><span class="fl-t fl-secondary">Secondary</span></td><td><b>Labels</b></td><td>9–13 <span class="a11y-v ok">Fits</span></td><td class="n"><b>≈28</b> each<br><small>17–23 if both are long</small></td><td>Fixed text</td><td>Shown in capitals.</td></tr><tr class="fl-new"><td><span class="fl-t fl-auxiliary">Auxiliary</span></td><td><b>Insurance Company</b></td><td>Interinsurance Exchange of the Automobile Club · 46 <span class="a11y-v ok">Fits</span></td><td class="n"><b>49</b><br><small>with NAIC # beside it, shrinks first</small></td><td>46 (TX: Auto Club County Mutual Insurance Company = 41 <span class="a11y-v ok">Fits</span>)</td><td>Insurer, like the current Texas card.</td></tr><tr class="fl-new"><td><span class="fl-t fl-auxiliary">Auxiliary</span></td><td><b>NAIC #</b> <small>right</small></td><td>00000 · 5 <span class="a11y-v ok">Fits</span></td><td class="n">5 digits</td><td>5 (fixed)</td><td>The insurer’s NAIC company code. Roadside moves to the back.</td></tr></tbody></table></div>
+        <h3 id="flStateFront">Insurance card · state-front template (AL, IL, LA, KY, PA, WV)</h3>
+        <p class="sub">For the states whose rules put the required data on the <b>front</b>. Classic <code>generic</code> layout on every iOS (no poster), one card per vehicle. Measured in Pass Designer. A line break inside a bottom-row value hides everything after it, and the <code>row</code> key is ignored on generic passes, so every value stays on one line.</p>
+        <div class="a11y-scroll"><table class="gx-colors fl-tbl"><thead><tr><th>Type</th><th>Field</th><th>Value now</th><th>Max before “…”</th><th>Why</th></tr></thead><tbody><tr class=""><td><span class="fl-t fl-header">Header</span></td><td><b>Expires</b></td><td>01/09/2027 · 10 <span class="a11y-v ok">Fits</span></td><td class="n"><b>14</b><br><small>only 1 header field fits</small></td><td>Next to the logo. A 2nd header field gets reversed and cut.</td></tr><tr class=""><td><span class="fl-t fl-primary">Primary</span></td><td><b>Card title</b> <small>(field label)</small></td><td>ILLINOIS INSURANCE CARD · 23 <span class="a11y-v ok">Fits</span></td><td class="n"><b>≈43–44</b> caps</td><td>The state’s required title at the top of the front.</td></tr><tr class=""><td><span class="fl-t fl-primary">Primary</span></td><td><b>Named Insured</b> <small>(value)</small></td><td>FULANITO PEREZ · 14 <span class="a11y-v ok">Fits</span></td><td class="n">2 lines, <b>≈37</b> each</td><td>MARIA GUADALUPE HERNANDEZ RODRIGUEZ (34) shows in full.</td></tr><tr class=""><td><span class="fl-t fl-secondary">Secondary</span></td><td><b>Policy #</b></td><td>MOA000XXXX · 10 <span class="a11y-v ok">Fits</span></td><td class="n"><b>≈12</b></td><td>Shares the row with Effective and the vehicle.</td></tr><tr class=""><td><span class="fl-t fl-secondary">Secondary</span></td><td><b>Effective</b></td><td>01/09/2026 · 10 <span class="a11y-v ok">Fits</span></td><td class="n"><b>10</b> (MM/DD/YYYY)</td><td>Expiration is in the header.</td></tr><tr class=""><td><span class="fl-t fl-secondary">Secondary</span></td><td><b>Vehicle</b> <small>(field label)</small> + <b>VIN</b> <small>(value)</small></td><td>2026 SAMPLE SUV · 15 + VIN · 17 <span class="a11y-v ok">Fits</span></td><td class="n">label <b>≈17</b> · VIN <b>17</b> (full)</td><td>Send year + make (abbreviate the make if longer). The full VIN never gets cut.</td></tr><tr class=""><td><span class="fl-t fl-auxiliary">Auxiliary</span></td><td><b>Insurance Company</b></td><td>Automobile Club Inter-Insurance Exchange · 40 <span class="a11y-v ok">Fits</span></td><td class="n"><b>49</b></td><td>PA’s 46-character name fits too.</td></tr><tr class=""><td><span class="fl-t fl-auxiliary">Auxiliary</span></td><td><b>NAIC #</b></td><td>15512 · 5 <span class="a11y-v ok">Fits</span></td><td class="n">5</td><td>On the front, as these states require.</td></tr></tbody></table></div>
+        <h4 class="fl-h">Per state</h4>
+        <div class="a11y-scroll"><table class="gx-colors fl-tbl"><thead><tr><th>State</th><th>Card title to send (≤ 43)</th><th>Company · NAIC #</th><th>Can’t fit on the front (goes on the back, OGC to confirm)</th></tr></thead><tbody>
+<tr><td><b>AL</b></td><td><code>ALABAMA INSURANCE ID CARD</code> <small>(no title required; today’s 51-char header won’t fit)</small></td><td>Automobile Club Inter-Insurance Exchange · 15512</td><td>—</td></tr>
+<tr><td><b>IL</b></td><td><code>ILLINOIS INSURANCE CARD</code> <small>(required words)</small></td><td>Automobile Club Inter-Insurance Exchange · 15512</td><td>Disclaimer “Examine policy exclusions carefully…” (allowed off the front)</td></tr>
+<tr><td><b>LA</b></td><td><code>LOUISIANA AUTO INSURANCE IDENTIFICATION CARD</code> (44, fits)</td><td>Automobile Club Inter-Insurance Exchange · 15512</td><td>Company address and the two required statements</td></tr>
+<tr><td><b>KY</b></td><td><code>COMMONWEALTH OF KENTUCKY PROOF OF INSURANCE</code> (43)</td><td>Auto Club Indemnity Company · 11008</td><td>Policy type (Personal/PL); KY also wants a fixed order</td></tr>
+<tr><td><b>PA</b></td><td><code>FINANCIAL RESPONSIBILITY IDENTIFICATION CARD</code> (44, fits)</td><td>Interinsurance Exchange of the Automobile Club · 15598</td><td>“NOT VALID MORE THAN 1 YEAR FROM EFFECTIVE DATE.” (rule puts it under the date)</td></tr>
+<tr><td><b>WV</b></td><td><code>CERTIFICATE OF INSURANCE - WEST VIRGINIA</code> (40)</td><td>Auto Club Indemnity Company · 11008</td><td>Certification statement, signature, plate box; WV-1B layout needs DMV approval</td></tr>
+</tbody></table></div>
         <h3 id="flDates">Dates: what to send</h3>
         <div class="a11y-scroll"><table class="gx-colors fl-tbl"><thead><tr><th>Field</th><th>Send</th><th>Shows</th><th>Notes</th></tr></thead><tbody>
           <tr><td><b>Valid Through</b></td><td>Text <code>"03/2027"</code> (MM/YYYY)<br><small>or a date field: <code>"value": "2027-03-31T23:59:59-07:00"</code>, <code>"dateStyle": "PKDateStyleMedium"</code>, <code>"ignoresTimeZone": true</code></small></td><td class="n">03/2027<br><small>Mar 31, 2027</small></td><td>Full year either way. Short date style only gives a 2-digit year (3/31/27). A date field is shown in the member’s own language and region; <code>ignoresTimeZone</code> stops it showing the day before or after.</td></tr>
@@ -768,6 +780,10 @@ html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-t
         <button role="tab" data-pass="insuranceAltAA" aria-selected="false">
           <span class="thumb" style="background-image:url('templates/AAA%20Insurance%20Card%20%28Alternative%20AA%29.pkpasstemplate/artwork@2x.png')"></span>
           <span class="pt"><b>Insurance</b><small>AA contrast ✓</small></span>
+        </button>
+        <button role="tab" data-pass="insuranceStateFront" aria-selected="false">
+          <span class="thumb" style="background:#fff url('templates/AAA%20Insurance%20Card%20%28State%20Front%29.pkpasstemplate/logo@2x.png') center 22%/74% no-repeat"></span>
+          <span class="pt"><b>Insurance</b><small>State front · AL IL LA KY PA WV</small></span>
         </button>
         <button role="tab" data-pass="membershipAlt" class="arch" aria-selected="false">
           <span class="thumb" style="background-image:url('templates/AAA%20Membership%20Card%20(Alternative).pkpasstemplate/artwork@2x.png')"></span>
@@ -958,6 +974,7 @@ const DEFAULTS = {
   membershipBlur: 'AAA Membership Card (Alternative Blur Glass).pkpasstemplate',
   membershipBlurAA: 'AAA Membership Card (Alternative Blur Glass AA).pkpasstemplate',
   insuranceAltAA: 'AAA Insurance Card (Alternative AA).pkpasstemplate',
+  insuranceStateFront: 'AAA Insurance Card (State Front).pkpasstemplate',
   insuranceAlt: 'AAA Insurance Card (Alternative).pkpasstemplate',
   membership: 'AAA Membership Card.pkpasstemplate',
   insurance: 'AAA Insurance Card.pkpasstemplate'
@@ -1271,6 +1288,17 @@ function fallbackFor(p){
   return null;
 }
 
+/* Wallet shrinks a row's values to fit before it cuts them with "…"; mimic that so the preview doesn't truncate early. */
+function fitGenericRows(){
+  document.querySelectorAll('.face-in.generic .g-sec').forEach(row => {
+    const vs = [...row.querySelectorAll('.v')], fl = [...row.querySelectorAll('.fld')];
+    vs.forEach(v => v.style.fontSize = '');
+    fl.forEach(f => f.style.flex = 'none');
+    let size = parseFloat(getComputedStyle(vs[0] || row).fontSize) || 15;
+    while(row.scrollWidth > row.clientWidth + 1 && size > 8){ size -= 0.5; vs.forEach(v => v.style.fontSize = size + 'px'); }
+    fl.forEach(f => f.style.flex = '');
+  });
+}
 function render(){
   const p = state.pass, sk = styleKey(p), dict = p[sk] || {};
   if(!state.limitStyle) state.limitStyle = sk;
@@ -1282,7 +1310,7 @@ function render(){
   // iOS 27
   $('front27').innerHTML = sk === 'posterGeneric' ? renderPoster(p, dict) : renderGeneric(p, dict);
   $('back27').innerHTML = renderBack(p, dict);
-  $('note27').textContent = sk === 'posterGeneric' ? 'How it looks on iOS 27' : (STYLES[sk]?.name || sk) + ' card (shown with the basic layout)';
+  $('note27').textContent = sk === 'posterGeneric' ? 'How it looks on iOS 27' : (STYLES[sk]?.name || sk) + ' card: same layout on every iOS';
   const acts = p.featuredActions || [];
   $('acts27').innerHTML = actsHTML(p);
   renderA11y();
@@ -1305,6 +1333,7 @@ function render(){
     n26.className = 'col-note warn';
     n26.textContent = 'iOS 26 and older can’t show this card style, and there’s no backup version';
   }
+  requestAnimationFrame(fitGenericRows);
   const sw = $('fbSwitch'), cur = fb ? (fb.mode === 'explicit' ? 'custom' : fb.mode) : '';
   sw.hidden = sk !== 'posterGeneric';
   sw.querySelectorAll('button').forEach(b => {
@@ -1903,10 +1932,10 @@ let simCards = [], simExpired = false, simFromExpired = false;
 async function simBuildStack(){
   // Originals open with just the two originals; proposals (or an import) open with the proposals plus any imported passes.
   const imported = imports.map(x => 'imp:' + x.id);
-  const keys = ['membership', 'insurance'].includes(state.key) ? ['membership', 'insurance'] : ['membershipGlass', 'membershipBlurAA', 'insuranceAlt', 'insuranceAltAA'].concat(ARCHIVED.includes(state.key) && !['membership', 'insurance'].includes(state.key) ? [state.key] : []).concat(imported);
+  const keys = ['membership', 'insurance'].includes(state.key) ? ['membership', 'insurance'] : ['membershipGlass', 'membershipBlurAA', 'insuranceAlt', 'insuranceAltAA', 'insuranceStateFront'].concat(ARCHIVED.includes(state.key) && !['membership', 'insurance'].includes(state.key) ? [state.key] : []).concat(imported);
   const sel = keys.includes(state.key) ? state.key : keys[0];
   const order = keys.filter(k => k !== sel).concat(sel);
-  const aaa = await Promise.all(order.map(async k => ({key: k, ...simRender(await simEntry(k)), label: k.startsWith('imp:') ? importById(k).name.replace(/\.pkpasstemplate$/i, '') : ({membershipAlt:'Membership (Alternative)', membershipGlass:'Membership (Provided)', membershipBlur:'Membership (Blur Glass)', membershipBlurAA:'Membership (AA)', insuranceAlt:'Insurance (Provided)', insuranceAltAA:'Insurance (AA)', membership:'Membership', insurance:'Insurance'})[k]})));
+  const aaa = await Promise.all(order.map(async k => ({key: k, ...simRender(await simEntry(k)), label: k.startsWith('imp:') ? importById(k).name.replace(/\.pkpasstemplate$/i, '') : ({membershipAlt:'Membership (Alternative)', membershipGlass:'Membership (Provided)', membershipBlur:'Membership (Blur Glass)', membershipBlurAA:'Membership (AA)', insuranceAlt:'Insurance (Provided)', insuranceStateFront:'Insurance (State front)', insuranceAltAA:'Insurance (AA)', membership:'Membership', insurance:'Insurance'})[k]})));
   simCards = [{mock: true, name: 'Credit Card', color: 'linear-gradient(135deg,#3a3a3c,#1c1c1e)', meta: '•••• 4021'},
               {mock: true, name: 'Rewards Card', color: '#30b650', meta: '1,250 pts'}].concat(aaa);
   const front = simCards.length - 1;                  // selected template is last (front)

@@ -1,0 +1,137 @@
+{
+  "authenticationToken": "",
+  "backgroundColor": "rgb(255, 255, 255)",
+  "barcodes": [],
+  "description": "Illinois Insurance Card",
+  "expirationDate": "2027-01-09T23:59:59-06:00",
+  "foregroundColor": "rgb(25, 40, 66)",
+  "formatVersion": 1,
+  "generic": {
+    "headerFields": [
+      {
+        "_id": "EE57E0A0-3C5E-427E-A461-897FED0ABF34",
+        "key": "expirationDate",
+        "label": "Expires",
+        "value": "01/09/2027",
+        "textAlignment": "PKTextAlignmentRight"
+      }
+    ],
+    "primaryFields": [
+      {
+        "_id": "EF1149B9-359D-4C29-B027-6445D4188265",
+        "key": "namedInsured",
+        "label": "ILLINOIS INSURANCE CARD",
+        "value": "FULANITO PEREZ"
+      }
+    ],
+    "secondaryFields": [
+      {
+        "_id": "5A1A3A58-A19D-42EE-8A83-7C872A270A96",
+        "key": "policyNumber",
+        "label": "Policy #",
+        "value": "MOA000XXXX"
+      },
+      {
+        "_id": "F7C8BF59-4AAA-4A41-85ED-06B9B41AF35E",
+        "key": "effectiveDate",
+        "label": "Effective",
+        "value": "01/09/2026"
+      },
+      {
+        "_id": "169A66A0-A172-431B-989C-0FF0A8F228C8",
+        "key": "vin",
+        "label": "2026 SAMPLE SUV",
+        "value": "XXXXXXXXXXXXXXXXX",
+        "textAlignment": "PKTextAlignmentRight"
+      }
+    ],
+    "auxiliaryFields": [
+      {
+        "_id": "5DFC42CF-BEBD-4E6B-8005-32317C3E14AF",
+        "key": "insuranceCompany",
+        "label": "Insurance Company",
+        "value": "Automobile Club Inter-Insurance Exchange"
+      },
+      {
+        "_id": "CCCB0596-B4E0-4EE2-BF84-A0534DA89A42",
+        "key": "naic",
+        "label": "NAIC #",
+        "value": "15512",
+        "textAlignment": "PKTextAlignmentRight"
+      }
+    ],
+    "backFields": [
+      {
+        "_id": "CF1E9C1E-05A9-4062-A449-994DDC4F6738",
+        "key": "disclaimer",
+        "label": "Disclaimer",
+        "value": "EXAMINE POLICY EXCLUSIONS CAREFULLY. THIS FORM DOES NOT CONSTITUTE ANY PART OF YOUR INSURANCE POLICY.\nCoverage subject to policy terms and limits. The digital card may not be recognized in all states."
+      },
+      {
+        "_id": "DA3E9C84-7AC9-4436-AE74-C24C470AADC0",
+        "key": "namedInsureds",
+        "label": "Named Insured(s)",
+        "value": "FULANITO PEREZ\nSAMPLE SECOND INSURED"
+      },
+      {
+        "_id": "221455CA-6F74-48F9-9A44-9D3DBC2EC218",
+        "key": "insuredAddress",
+        "label": "Insured address",
+        "value": "000 Main St, City, IL 00000"
+      },
+      {
+        "_id": "B8EDAEB1-75CA-4364-957C-148A1020253B",
+        "key": "vehicles",
+        "label": "Vehicle on this card",
+        "value": "2026 SAMPLE SUV\nVIN XXXXXXXXXXXXXXXXX"
+      },
+      {
+        "_id": "01FEFE82-643F-4E31-AD41-F7D739FF5F3F",
+        "key": "excludedDrivers",
+        "label": "Excluded drivers",
+        "value": "None"
+      },
+      {
+        "_id": "E61A8AC4-8743-4281-93F4-4AE35AD18C0E",
+        "key": "policyPeriod",
+        "label": "Policy period",
+        "value": "01/09/2026 – 01/09/2027"
+      },
+      {
+        "_id": "636ECB0B-7A6F-4E6D-98A2-AF02C7FA6AF2",
+        "key": "company",
+        "label": "Insurance company",
+        "value": "Automobile Club Inter-Insurance Exchange\nNAIC # 15512\n12901 North Forty Drive, St. Louis, MO 63141"
+      },
+      {
+        "_id": "5FBF1E74-E2FA-4D34-9A1C-F8792D4022C3",
+        "key": "agent",
+        "label": "Agent",
+        "value": "Sample Agent · 000-000-0000"
+      },
+      {
+        "_id": "A8F1F1EB-9F0B-4284-ACE7-9E6297A5DC88",
+        "key": "accidentAssist",
+        "label": "24/7 AAA Accident Assist Hotline",
+        "value": "1-866-222-2378"
+      },
+      {
+        "_id": "4328B4CD-4744-42D2-A811-2A9837CD3087",
+        "key": "policyQuestions",
+        "label": "Policy questions or changes",
+        "value": "1-800-924-6141"
+      },
+      {
+        "_id": "2B01F93F-4DD3-4B1C-8FBD-AFC05CAB3294",
+        "key": "stateNote",
+        "label": "Template",
+        "value": "State-front layout for AL, IL, LA, KY, PA and WV. Every value this state requires on the front is on the front; one card per vehicle."
+      }
+    ]
+  },
+  "labelColor": "rgb(39, 41, 43)",
+  "organizationName": "AAA",
+  "passTypeIdentifier": "pass.com.example.aaa.insurance",
+  "serialNumber": "CAA000XXXX-ALT-AA",
+  "teamIdentifier": ""
+}
