@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Wallet Templates</title>
+    <script>
+      try {
+        window.gateAlwaysAsk = !(Number(localStorage.getItem('awtUnlockedUntil')) > Date.now());
+      } catch (e) {
+        window.gateAlwaysAsk = true;
+      }
+    </script>
+    <script src="../gate.js"></script>
     <style>
       :root {
         --bg: #f5f5f7;
@@ -421,8 +429,8 @@
             el('h1', { text: 'Wallet Templates' }),
             el('p', {
               text: device
-                ? 'Enter the 6-digit code from your authenticator app. Access lasts 30 minutes.'
-                : 'This device is not linked yet. Paste your setup key and enter the current 6-digit code from your authenticator app.'
+                ? 'Enter the 6-digit code from the Passwords app. Access lasts 30 minutes.'
+                : 'First time on this device: paste your setup key once and enter the current 6-digit code from the Passwords app. After that it only asks for the code.'
             }),
             device ? null : el('label', { for: 'setupKey', text: 'Setup key' }),
             device ? null : keyInput,
@@ -503,7 +511,11 @@
               });
           });
           root.appendChild(el('div', { class: 'lock' }, [form]));
-          (device ? codeInput : keyInput).focus();
+          var firstField = device ? codeInput : keyInput;
+          window.openForHash = function () {
+            firstField.focus();
+          };
+          firstField.focus();
         }
 
         var crcTable = (function () {
