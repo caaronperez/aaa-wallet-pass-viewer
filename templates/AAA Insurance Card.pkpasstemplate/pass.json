@@ -110,7 +110,7 @@
       {
         "_id" : "B4623667-B365-46CA-A86D-6A4EC344B572",
         "key" : "nameEnsured",
-        "label" : "NAME ENSURED",
+        "label" : "NAME INSURED",
         "value" : "FULANITO PEREZ"
       },
       {
@@ -200,7 +200,7 @@
       {
         "_id" : "00E927DF-D3A4-4C96-83EF-1E8831A28CDF",
         "key" : "nameEnsured",
-        "label" : "NAME ENSURED",
+        "label" : "NAME INSURED",
         "value" : "FULANITO PEREZ"
       },
       {
