@@ -1,317 +1,306 @@
 {
-  "authenticationToken" : "",
-  "backgroundColor" : "rgb(242,228,228)",
-  "barcodes" : [
-
-  ],
-  "description" : "AAA Insurance Card",
-  "expirationDate" : "2027-09-15T06:59:00Z",
-  "featuredActions" : [
+  "authenticationToken": "",
+  "backgroundColor": "rgb(242,228,228)",
+  "barcodes": [],
+  "description": "AAA Insurance Card",
+  "expirationDate": "2027-09-15T06:59:00Z",
+  "featuredActions": [
     {
-      "_id" : "6D898A90-146D-4F88-82E6-12A07BE4AA17",
-      "identifier" : "memberBenefits",
-      "type" : "membershipBenefits",
-      "url" : "aceautoclub-beta:\/\/wallet\/benefits?source=wallet"
+      "_id": "6D898A90-146D-4F88-82E6-12A07BE4AA17",
+      "identifier": "memberBenefits",
+      "type": "membershipBenefits",
+      "url": "aceautoclub-beta://wallet/benefits?source=wallet"
     },
     {
-      "_id" : "A5C9E2AB-4F31-4EE4-9A7F-5FCAE87EDE59",
-      "identifier" : "nearestBranch",
-      "placeIdentifier" : "I71B28B9C6AC9C7EF",
-      "type" : "place"
+      "_id": "A5C9E2AB-4F31-4EE4-9A7F-5FCAE87EDE59",
+      "identifier": "nearestBranch",
+      "placeIdentifier": "I71B28B9C6AC9C7EF",
+      "type": "place"
     }
   ],
-  "foregroundColor" : "rgb(25,40,66)",
-  "formatVersion" : 1,
-  "generic" : {
-    "headerFields" : [
+  "foregroundColor": "rgb(25,40,66)",
+  "formatVersion": 1,
+  "generic": {
+    "headerFields": [
       {
-        "_id" : "B098BAB2-2239-526B-9E34-FCFCC817BDBB",
-        "key" : "cardTitle",
-        "label" : "CA Evidence of Liability",
-        "value" : "Auto Insurance Card",
-        "textAlignment" : "PKTextAlignmentRight"
+        "_id": "B098BAB2-2239-526B-9E34-FCFCC817BDBB",
+        "key": "cardTitle",
+        "label": "CA Evidence of Liability",
+        "value": "Auto Insurance Card",
+        "textAlignment": "PKTextAlignmentRight"
       }
     ],
-    "primaryFields" : [
+    "primaryFields": [
       {
-        "_id" : "554FCDFC-7749-5C1D-A8FB-141A25CD73A4",
-        "key" : "policyNumber",
-        "label" : "Policy Number",
-        "value" : "CAA000XXXX"
+        "_id": "554FCDFC-7749-5C1D-A8FB-141A25CD73A4",
+        "key": "policyNumber",
+        "label": "Policy Number",
+        "value": "CAA000XXXX"
       }
     ],
-    "secondaryFields" : [
+    "secondaryFields": [
       {
-        "_id" : "3CDCFF07-4E5F-5443-BD77-2C4A2B064154",
-        "key" : "nameEnsured",
-        "label" : "Name Insured",
-        "value" : "FULANITO PEREZ"
+        "_id": "3CDCFF07-4E5F-5443-BD77-2C4A2B064154",
+        "key": "nameEnsured",
+        "label": "Name Insured",
+        "value": "FULANITO PEREZ"
       },
       {
-        "_id" : "CCF4DDA1-15F5-5C57-BD7F-46689760BD7A",
-        "key" : "effectiveDate",
-        "label" : "Effective",
-        "value" : "9\/14\/26 – 9\/14\/27",
-        "textAlignment" : "PKTextAlignmentRight"
+        "_id": "CCF4DDA1-15F5-5C57-BD7F-46689760BD7A",
+        "key": "effectiveDate",
+        "label": "Effective",
+        "value": "9/14/26 – 9/14/27",
+        "textAlignment": "PKTextAlignmentRight"
       }
     ],
-    "auxiliaryFields" : [
+    "auxiliaryFields": [
       {
-        "_id" : "D68F1052-01D8-5B93-B4F1-07CDCBA8310B",
-        "key" : "roadsidePhone",
-        "label" : "Roadside Assistance 24\/7",
-        "value" : "1-800-400-4222"
+        "_id": "4F7E976A-CDCE-427F-BF8F-AC85FA3D3B1B",
+        "key": "insuranceCompany",
+        "label": "Insurance Company",
+        "value": "Interinsurance Exchange of the Automobile Club"
+      },
+      {
+        "_id": "F670CC2F-04A5-415C-923D-7DED122A7C22",
+        "key": "naicNumber",
+        "label": "NAIC #",
+        "value": "00000",
+        "textAlignment": "PKTextAlignmentRight"
       }
     ],
-    "backFields" : [
+    "backFields": [
       {
-        "_id" : "367C603C-CFD8-4D71-AD74-66C15293AB28",
-        "attributedValue" : "Call <a href='tel:18004004222'>1-800-400-4222<\/a>\nOutside CA: <a href='tel:18002224357'>1-800-222-4357<\/a>",
-        "key" : "roadsideAssistance",
-        "label" : "Roadside Assistance · 24\/7",
-        "value" : "Call 1-800-400-4222\nOutside CA: 1-800-222-4357"
+        "_id": "367C603C-CFD8-4D71-AD74-66C15293AB28",
+        "attributedValue": "Call <a href='tel:18004004222'>1-800-400-4222</a>\nOutside CA: <a href='tel:18002224357'>1-800-222-4357</a>",
+        "key": "roadsideAssistance",
+        "label": "Roadside Assistance · 24/7",
+        "value": "Call 1-800-400-4222\nOutside CA: 1-800-222-4357"
       },
       {
-        "_id" : "1FAB5755-4D26-4DC9-BACD-6B5023DEE556",
-        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/membership.html'>Explore all membership benefits<\/a>\n<a href='https:\/\/www.ace.aaa.com\/discounts.html'>Show this card at participating businesses<\/a>",
-        "key" : "memberBenefits",
-        "label" : "Member benefits & discounts",
-        "value" : "Explore all membership benefits\nShow this card at participating businesses"
+        "_id": "1FAB5755-4D26-4DC9-BACD-6B5023DEE556",
+        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>",
+        "key": "memberBenefits",
+        "label": "Member benefits & discounts",
+        "value": "Explore all membership benefits\nShow this card at participating businesses"
       },
       {
-        "_id" : "8AE732FB-6A51-496E-8B11-8AB7E1918B52",
-        "attributedValue" : "1-800-67-CLAIM (<a href='tel:18006725246'>1-800-672-5246<\/a>)",
-        "key" : "accidentAssist",
-        "label" : "24\/7 AAA Accident Assist Hotline",
-        "value" : "1-800-67-CLAIM (1-800-672-5246)"
+        "_id": "8AE732FB-6A51-496E-8B11-8AB7E1918B52",
+        "attributedValue": "1-800-67-CLAIM (<a href='tel:18006725246'>1-800-672-5246</a>)",
+        "key": "accidentAssist",
+        "label": "24/7 AAA Accident Assist Hotline",
+        "value": "1-800-67-CLAIM (1-800-672-5246)"
       },
       {
-        "_id" : "B460C788-289C-42A7-9DB9-4C933535C5BD",
-        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/insurance\/claims.html'>File an auto, home or life claim<\/a>",
-        "key" : "fileClaim",
-        "label" : "File or track a claim",
-        "value" : "File an auto, home or life claim"
+        "_id": "B460C788-289C-42A7-9DB9-4C933535C5BD",
+        "attributedValue": "<a href='https://www.ace.aaa.com/insurance/claims.html'>File an auto, home or life claim</a>",
+        "key": "fileClaim",
+        "label": "File or track a claim",
+        "value": "File an auto, home or life claim"
       },
       {
-        "_id" : "7B5A29C8-A125-41D0-AF5D-7199D494CCA6",
-        "dataDetectorTypes" : [
-
-        ],
-        "key" : "policyNumber",
-        "label" : "Policy number",
-        "value" : "CAA000XXXX"
+        "_id": "7B5A29C8-A125-41D0-AF5D-7199D494CCA6",
+        "dataDetectorTypes": [],
+        "key": "policyNumber",
+        "label": "Policy number",
+        "value": "CAA000XXXX"
       },
       {
-        "_id" : "22DA21C8-C97F-470B-B52E-C52FE9DC6954",
-        "dataDetectorTypes" : [
-
-        ],
-        "key" : "policyPeriod",
-        "label" : "Policy period",
-        "value" : "9\/14\/26 – 9\/14\/27"
+        "_id": "22DA21C8-C97F-470B-B52E-C52FE9DC6954",
+        "dataDetectorTypes": [],
+        "key": "policyPeriod",
+        "label": "Policy period",
+        "value": "9/14/26 – 9/14/27"
       },
       {
-        "_id" : "7A06B1A5-6EC4-4CBF-8389-C5CE2E2E90C7",
-        "attributedValue" : "<a href='tel:18009426141'>1-800-942-6141<\/a>\n<a href='https:\/\/app.ace.aaa.com\/insurance\/make-a-payment\/'>Pay or manage your policy<\/a>",
-        "key" : "policyQuestions",
-        "label" : "Policy questions or changes",
-        "value" : "1-800-942-6141\nPay or manage your policy"
+        "_id": "7A06B1A5-6EC4-4CBF-8389-C5CE2E2E90C7",
+        "attributedValue": "<a href='tel:18009426141'>1-800-942-6141</a>\n<a href='https://app.ace.aaa.com/insurance/make-a-payment/'>Pay or manage your policy</a>",
+        "key": "policyQuestions",
+        "label": "Policy questions or changes",
+        "value": "1-800-942-6141\nPay or manage your policy"
       },
       {
-        "_id" : "710A48C2-AC8E-4B90-886C-B8CBCC3911CC",
-        "attributedValue" : "<a href='https:\/\/app.ace.aaa.com\/insurance\/anon\/poi\/view'>Get proof of insurance online<\/a>",
-        "key" : "proofOfInsurance",
-        "label" : "Proof of insurance",
-        "value" : "Get proof of insurance online"
+        "_id": "710A48C2-AC8E-4B90-886C-B8CBCC3911CC",
+        "attributedValue": "<a href='https://app.ace.aaa.com/insurance/anon/poi/view'>Get proof of insurance online</a>",
+        "key": "proofOfInsurance",
+        "label": "Proof of insurance",
+        "value": "Get proof of insurance online"
       },
       {
-        "_id" : "CEC94431-2E1D-4033-8B2B-C5C203B41AA2",
-        "dataDetectorTypes" : [
-
-        ],
-        "key" : "vehicles",
-        "label" : "Vehicles",
-        "value" : "2026 SAMPLE SUV\nXXXXXXXXXXXXXXXXX"
+        "_id": "CEC94431-2E1D-4033-8B2B-C5C203B41AA2",
+        "dataDetectorTypes": [],
+        "key": "vehicles",
+        "label": "Vehicles",
+        "value": "2026 SAMPLE SUV\nXXXXXXXXXXXXXXXXX"
       },
       {
-        "_id" : "433D933E-7B46-4956-9AAF-3496136E2740",
-        "key" : "insuredDrivers",
-        "label" : "Insured Drivers",
-        "value" : "Fulanito Perez"
+        "_id": "433D933E-7B46-4956-9AAF-3496136E2740",
+        "key": "insuredDrivers",
+        "label": "Insured Drivers",
+        "value": "Fulanito Perez"
       },
       {
-        "_id" : "96498BF1-F25E-4E5D-9533-5AD29E4EC4E5",
-        "key" : "company",
-        "label" : "Company Name",
-        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 000000\nP.O. Box 00000, City, CA 00000"
+        "_id": "96498BF1-F25E-4E5D-9533-5AD29E4EC4E5",
+        "key": "company",
+        "label": "Company Name",
+        "value": "Interinsurance Exchange of the Automobile Club NAIC# 000000\nP.O. Box 00000, City, CA 00000"
       },
       {
-        "_id" : "FAA513E5-6E6E-4259-9B35-5AFD71E9B7FE",
-        "key" : "disclaimer",
-        "label" : "Disclaimer",
-        "value" : "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle. Insurance information has already been submitted directly to the DMV electronically; submit this document to DMV only if specifically requested by DMV. The digital card may not be recognized in all states."
+        "_id": "FAA513E5-6E6E-4259-9B35-5AFD71E9B7FE",
+        "key": "disclaimer",
+        "label": "Disclaimer",
+        "value": "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle. Insurance information has already been submitted directly to the DMV electronically; submit this document to DMV only if specifically requested by DMV. The digital card may not be recognized in all states."
       },
       {
-        "_id" : "56B80619-5D2A-426F-8C9C-69526F485EDC",
-        "attributedValue" : "Sample Branch · 000 Main St, City, CA 00000\n<a href='https:\/\/maps.apple.com\/place?place-id=I71B28B9C6AC9C7EF'>Get directions<\/a>",
-        "key" : "nearestBranch",
-        "label" : "Your AAA branch",
-        "value" : "Sample Branch · 000 Main St, City, CA 00000\nGet directions"
+        "_id": "56B80619-5D2A-426F-8C9C-69526F485EDC",
+        "attributedValue": "Sample Branch · 000 Main St, City, CA 00000\n<a href='https://maps.apple.com/place?place-id=I71B28B9C6AC9C7EF'>Get directions</a>",
+        "key": "nearestBranch",
+        "label": "Your AAA branch",
+        "value": "Sample Branch · 000 Main St, City, CA 00000\nGet directions"
       }
     ]
   },
-  "labelColor" : "rgb(39,41,43)",
-  "organizationName" : "AAA",
-  "passTypeIdentifier" : "pass.com.example.aaa.insurance",
-  "posterGeneric" : {
-    "auxiliaryFields" : [
-
-    ],
-    "backFields" : [
+  "labelColor": "rgb(39,41,43)",
+  "organizationName": "AAA",
+  "passTypeIdentifier": "pass.com.example.aaa.insurance",
+  "posterGeneric": {
+    "auxiliaryFields": [],
+    "backFields": [
       {
-        "_id" : "367C603C-CFD8-4D71-AD74-66C15293AB28",
-        "attributedValue" : "Call <a href='tel:18004004222'>1-800-400-4222<\/a>\nOutside CA: <a href='tel:18002224357'>1-800-222-4357<\/a>",
-        "key" : "roadsideAssistance",
-        "label" : "Roadside Assistance · 24\/7",
-        "value" : "Call 1-800-400-4222\nOutside CA: 1-800-222-4357"
+        "_id": "367C603C-CFD8-4D71-AD74-66C15293AB28",
+        "attributedValue": "Call <a href='tel:18004004222'>1-800-400-4222</a>\nOutside CA: <a href='tel:18002224357'>1-800-222-4357</a>",
+        "key": "roadsideAssistance",
+        "label": "Roadside Assistance · 24/7",
+        "value": "Call 1-800-400-4222\nOutside CA: 1-800-222-4357"
       },
       {
-        "_id" : "1FAB5755-4D26-4DC9-BACD-6B5023DEE556",
-        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/membership.html'>Explore all membership benefits<\/a>\n<a href='https:\/\/www.ace.aaa.com\/discounts.html'>Show this card at participating businesses<\/a>",
-        "key" : "memberBenefits",
-        "label" : "Member benefits & discounts",
-        "value" : "Explore all membership benefits\nShow this card at participating businesses"
+        "_id": "1FAB5755-4D26-4DC9-BACD-6B5023DEE556",
+        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>",
+        "key": "memberBenefits",
+        "label": "Member benefits & discounts",
+        "value": "Explore all membership benefits\nShow this card at participating businesses"
       },
       {
-        "_id" : "8AE732FB-6A51-496E-8B11-8AB7E1918B52",
-        "attributedValue" : "1-800-67-CLAIM (<a href='tel:18006725246'>1-800-672-5246<\/a>)",
-        "key" : "accidentAssist",
-        "label" : "24\/7 AAA Accident Assist Hotline",
-        "value" : "1-800-67-CLAIM (1-800-672-5246)"
+        "_id": "8AE732FB-6A51-496E-8B11-8AB7E1918B52",
+        "attributedValue": "1-800-67-CLAIM (<a href='tel:18006725246'>1-800-672-5246</a>)",
+        "key": "accidentAssist",
+        "label": "24/7 AAA Accident Assist Hotline",
+        "value": "1-800-67-CLAIM (1-800-672-5246)"
       },
       {
-        "_id" : "B460C788-289C-42A7-9DB9-4C933535C5BD",
-        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/insurance\/claims.html'>File an auto, home or life claim<\/a>",
-        "key" : "fileClaim",
-        "label" : "File or track a claim",
-        "value" : "File an auto, home or life claim"
+        "_id": "B460C788-289C-42A7-9DB9-4C933535C5BD",
+        "attributedValue": "<a href='https://www.ace.aaa.com/insurance/claims.html'>File an auto, home or life claim</a>",
+        "key": "fileClaim",
+        "label": "File or track a claim",
+        "value": "File an auto, home or life claim"
       },
       {
-        "_id" : "7B5A29C8-A125-41D0-AF5D-7199D494CCA6",
-        "dataDetectorTypes" : [
-
-        ],
-        "key" : "policyNumber",
-        "label" : "Policy number",
-        "value" : "CAA000XXXX"
+        "_id": "7B5A29C8-A125-41D0-AF5D-7199D494CCA6",
+        "dataDetectorTypes": [],
+        "key": "policyNumber",
+        "label": "Policy number",
+        "value": "CAA000XXXX"
       },
       {
-        "_id" : "22DA21C8-C97F-470B-B52E-C52FE9DC6954",
-        "dataDetectorTypes" : [
-
-        ],
-        "key" : "policyPeriod",
-        "label" : "Policy period",
-        "value" : "9\/14\/26 – 9\/14\/27"
+        "_id": "22DA21C8-C97F-470B-B52E-C52FE9DC6954",
+        "dataDetectorTypes": [],
+        "key": "policyPeriod",
+        "label": "Policy period",
+        "value": "9/14/26 – 9/14/27"
       },
       {
-        "_id" : "7A06B1A5-6EC4-4CBF-8389-C5CE2E2E90C7",
-        "attributedValue" : "<a href='tel:18009426141'>1-800-942-6141<\/a>\n<a href='https:\/\/app.ace.aaa.com\/insurance\/make-a-payment\/'>Pay or manage your policy<\/a>",
-        "key" : "policyQuestions",
-        "label" : "Policy questions or changes",
-        "value" : "1-800-942-6141\nPay or manage your policy"
+        "_id": "7A06B1A5-6EC4-4CBF-8389-C5CE2E2E90C7",
+        "attributedValue": "<a href='tel:18009426141'>1-800-942-6141</a>\n<a href='https://app.ace.aaa.com/insurance/make-a-payment/'>Pay or manage your policy</a>",
+        "key": "policyQuestions",
+        "label": "Policy questions or changes",
+        "value": "1-800-942-6141\nPay or manage your policy"
       },
       {
-        "_id" : "710A48C2-AC8E-4B90-886C-B8CBCC3911CC",
-        "attributedValue" : "<a href='https:\/\/app.ace.aaa.com\/insurance\/anon\/poi\/view'>Get proof of insurance online<\/a>",
-        "key" : "proofOfInsurance",
-        "label" : "Proof of insurance",
-        "value" : "Get proof of insurance online"
+        "_id": "710A48C2-AC8E-4B90-886C-B8CBCC3911CC",
+        "attributedValue": "<a href='https://app.ace.aaa.com/insurance/anon/poi/view'>Get proof of insurance online</a>",
+        "key": "proofOfInsurance",
+        "label": "Proof of insurance",
+        "value": "Get proof of insurance online"
       },
       {
-        "_id" : "CEC94431-2E1D-4033-8B2B-C5C203B41AA2",
-        "dataDetectorTypes" : [
-
-        ],
-        "key" : "vehicles",
-        "label" : "Vehicles",
-        "value" : "2026 SAMPLE SUV\nXXXXXXXXXXXXXXXXX"
+        "_id": "CEC94431-2E1D-4033-8B2B-C5C203B41AA2",
+        "dataDetectorTypes": [],
+        "key": "vehicles",
+        "label": "Vehicles",
+        "value": "2026 SAMPLE SUV\nXXXXXXXXXXXXXXXXX"
       },
       {
-        "_id" : "433D933E-7B46-4956-9AAF-3496136E2740",
-        "key" : "insuredDrivers",
-        "label" : "Insured Drivers",
-        "value" : "Fulanito Perez"
+        "_id": "433D933E-7B46-4956-9AAF-3496136E2740",
+        "key": "insuredDrivers",
+        "label": "Insured Drivers",
+        "value": "Fulanito Perez"
       },
       {
-        "_id" : "96498BF1-F25E-4E5D-9533-5AD29E4EC4E5",
-        "key" : "company",
-        "label" : "Company Name",
-        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 000000\nP.O. Box 00000, City, CA 00000"
+        "_id": "96498BF1-F25E-4E5D-9533-5AD29E4EC4E5",
+        "key": "company",
+        "label": "Company Name",
+        "value": "Interinsurance Exchange of the Automobile Club NAIC# 000000\nP.O. Box 00000, City, CA 00000"
       },
       {
-        "_id" : "FAA513E5-6E6E-4259-9B35-5AFD71E9B7FE",
-        "key" : "disclaimer",
-        "label" : "Disclaimer",
-        "value" : "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle. Insurance information has already been submitted directly to the DMV electronically; submit this document to DMV only if specifically requested by DMV. The digital card may not be recognized in all states."
+        "_id": "FAA513E5-6E6E-4259-9B35-5AFD71E9B7FE",
+        "key": "disclaimer",
+        "label": "Disclaimer",
+        "value": "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle. Insurance information has already been submitted directly to the DMV electronically; submit this document to DMV only if specifically requested by DMV. The digital card may not be recognized in all states."
       },
       {
-        "_id" : "56B80619-5D2A-426F-8C9C-69526F485EDC",
-        "attributedValue" : "Sample Branch · 000 Main St, City, CA 00000\n<a href='https:\/\/maps.apple.com\/place?place-id=I71B28B9C6AC9C7EF'>Get directions<\/a>",
-        "key" : "nearestBranch",
-        "label" : "Your AAA branch",
-        "value" : "Sample Branch · 000 Main St, City, CA 00000\nGet directions"
+        "_id": "56B80619-5D2A-426F-8C9C-69526F485EDC",
+        "attributedValue": "Sample Branch · 000 Main St, City, CA 00000\n<a href='https://maps.apple.com/place?place-id=I71B28B9C6AC9C7EF'>Get directions</a>",
+        "key": "nearestBranch",
+        "label": "Your AAA branch",
+        "value": "Sample Branch · 000 Main St, City, CA 00000\nGet directions"
       }
     ],
-    "footerFields" : [
+    "footerFields": [
       {
-        "_id" : "D0A428E8-DE3F-42A2-9147-7EC070F19EBE",
-        "key" : "insuranceCompany",
-        "label" : "INSURANCE COMPANY",
-        "value" : "COMPANY: INTERINSURANCE EXCHANGE"
+        "_id": "D0A428E8-DE3F-42A2-9147-7EC070F19EBE",
+        "key": "insuranceCompany",
+        "label": "INSURANCE COMPANY",
+        "value": "INTERINSURANCE EXCHANGE · NAIC # 00000"
       }
     ],
-    "headerFields" : [
+    "headerFields": [
       {
-        "_id" : "8E039297-8219-45D4-BBCD-BE820B40686A",
-        "key" : "cardTitle",
-        "label" : "CA EVIDENCE OF LIABILITY",
-        "value" : "Auto Insurance Card"
+        "_id": "8E039297-8219-45D4-BBCD-BE820B40686A",
+        "key": "cardTitle",
+        "label": "CA EVIDENCE OF LIABILITY",
+        "value": "Auto Insurance Card"
       }
     ],
-    "primaryFields" : [
+    "primaryFields": [
       {
-        "_id" : "A298C3DD-77E6-4230-B0DA-A7A49913D933",
-        "key" : "nameEnsured",
-        "label" : "Name Insured",
-        "value" : "FULANITO PEREZ"
+        "_id": "A298C3DD-77E6-4230-B0DA-A7A49913D933",
+        "key": "nameEnsured",
+        "label": "Name Insured",
+        "value": "FULANITO PEREZ"
       },
       {
-        "_id" : "78E9F51C-E5E9-4FCB-B2AB-025995E60D36",
-        "key" : "policyNumber",
-        "label" : "Policy Number",
-        "value" : "CAA000XXXX"
+        "_id": "78E9F51C-E5E9-4FCB-B2AB-025995E60D36",
+        "key": "policyNumber",
+        "label": "Policy Number",
+        "value": "CAA000XXXX"
       },
       {
-        "_id" : "E3C938D2-B383-4CB0-A96E-5C8B46742CB7",
-        "key" : "effectiveDate",
-        "label" : "Effective",
-        "textAlignment" : "PKTextAlignmentRight",
-        "value" : "9\/14\/26 – 9\/14\/27"
+        "_id": "E3C938D2-B383-4CB0-A96E-5C8B46742CB7",
+        "key": "effectiveDate",
+        "label": "Effective",
+        "textAlignment": "PKTextAlignmentRight",
+        "value": "9/14/26 – 9/14/27"
       }
     ],
-    "secondaryFields" : [
-
-    ]
+    "secondaryFields": []
   },
-  "relevantDates" : [
+  "relevantDates": [
     {
-      "endDate" : "2027-09-15T06:59:00Z",
-      "startDate" : "2027-08-15T07:00:00Z"
+      "endDate": "2027-09-15T06:59:00Z",
+      "startDate": "2027-08-15T07:00:00Z"
     }
   ],
-  "serialNumber" : "CAA000XXXX-ALT-AA",
-  "suppressHeaderDarkening" : true,
-  "teamIdentifier" : "",
-  "useAutomaticColors" : false
+  "serialNumber": "CAA000XXXX-ALT-AA",
+  "suppressHeaderDarkening": true,
+  "teamIdentifier": "",
+  "useAutomaticColors": false
 }
