@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Wallet Templates</title>
+    <style>
+      :root {
+        --bg: #f5f5f7;
+        --surface: #ffffff;
+        --text: #1d1d1f;
+        --muted: #6e6e73;
+        --line: #d2d2d7;
+        --accent: #0c72df;
+        --bad-bg: #fdecec;
+        --bad: #b3261e;
+        --ok: #1e7b34;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          --bg: #121317;
+          --surface: #1d1e23;
+          --text: #ececf0;
+          --muted: #a1a2ab;
+          --line: #2f3038;
+          --accent: #3d8ef0;
+          --bad-bg: #3a1d1d;
+          --bad: #ff8a80;
+          --ok: #6fd18a;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          15px/1.45 -apple-system,
+          system-ui,
+          sans-serif;
+      }
+      .lock {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 16px;
+      }
+      .card {
+        width: 100%;
+        max-width: 360px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 22px;
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: 19px;
+      }
+      p {
+        margin: 0 0 14px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      label {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        margin: 12px 0 6px;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 11px 12px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: var(--bg);
+        color: var(--text);
+        font: inherit;
+      }
+      #code {
+        font-size: 22px;
+        letter-spacing: 6px;
+        text-align: center;
+      }
+      button,
+      .button {
+        padding: 10px 14px;
+        border: 0;
+        border-radius: 10px;
+        background: var(--accent);
+        color: #fff;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+      }
+      button.secondary {
+        background: transparent;
+        color: var(--accent);
+        border: 1px solid var(--line);
+        font-weight: 500;
+      }
+      .card button[type='submit'] {
+        width: 100%;
+        margin-top: 16px;
+      }
+      .error {
+        min-height: 18px;
+        margin: 8px 0 0;
+        color: var(--bad);
+        font-size: 12.5px;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 12px;
+        align-items: center;
+        padding: 12px 16px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--line);
+      }
+      header h1 {
+        margin: 0;
+        flex: 1 1 auto;
+      }
+      header .meta {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      main {
+        padding: 16px;
+      }
+      .rows {
+        display: grid;
+        gap: 10px;
+      }
+      .row {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px 14px;
+        display: grid;
+        gap: 6px;
+        min-width: 0;
+      }
+      .row.bad {
+        border-color: var(--bad);
+        background: var(--bad-bg);
+      }
+      .row .top {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 12px;
+        align-items: baseline;
+      }
+      .row .state {
+        font-weight: 700;
+        font-size: 17px;
+      }
+      .small {
+        color: var(--muted);
+        font-size: 12.5px;
+        overflow-wrap: anywhere;
+      }
+      .issue {
+        color: var(--bad);
+        font-size: 12.5px;
+        overflow-wrap: anywhere;
+      }
+      .fits {
+        color: var(--ok);
+        font-size: 12.5px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .actions button {
+        padding: 7px 10px;
+        font-size: 13px;
+      }
+      pre {
+        margin: 6px 0 0;
+        padding: 10px;
+        background: var(--bg);
+        border-radius: 8px;
+        overflow: auto;
+        font-size: 12px;
+        max-height: 360px;
+      }
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+      .toolbar select {
+        width: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      (function () {
+        var SESSION_MINUTES = 30;
+        var MAX_ATTEMPTS = 5;
+        var COOLDOWN_SECONDS = 30;
+        var UNLOCK_KEY = 'awtUnlockedUntil';
+        var root = document.getElementById('root');
+        var lockTimer = null;
+        var objectUrls = [];
+        var failedAttempts = 0;
+        var blockedUntil = 0;
+        var encoder = new TextEncoder();
+
+        function el(tag, attrs, children) {
+          var node = document.createElement(tag);
+          Object.keys(attrs || {}).forEach(function (key) {
+            if (key === 'text') node.textContent = attrs[key];
+            else if (key.indexOf('on') === 0) node.addEventListener(key.slice(2), attrs[key]);
+            else node.setAttribute(key, attrs[key]);
+          });
+          (children || []).forEach(function (child) {
+            if (child) node.appendChild(child);
+          });
+          return node;
+        }
+
+        function base32Decode(text) {
+          var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567',
+            bits = '',
+            bytes = [];
+          text
+            .toUpperCase()
+            .replace(/[^A-Z2-7]/g, '')
+            .split('')
+            .forEach(function (char) {
+              bits += alphabet.indexOf(char).toString(2).padStart(5, '0');
+            });
+          for (var i = 0; i + 8 <= bits.length; i += 8) bytes.push(parseInt(bits.slice(i, i + 8), 2));
+          return new Uint8Array(bytes);
+        }
+
+        function openDb() {
+          return new Promise(function (resolve, reject) {
+            var request = indexedDB.open('aaa-wallet-templates', 1);
+            request.onupgradeneeded = function () {
+              request.result.createObjectStore('keys');
+            };
+            request.onsuccess = function () {
+              resolve(request.result);
+            };
+            request.onerror = function () {
+              reject(request.error);
+            };
+          });
+        }
+        function dbRequest(mode, action) {
+          return openDb().then(function (db) {
+            return new Promise(function (resolve, reject) {
+              var request = action(db.transaction('keys', mode).objectStore('keys'));
+              request.onsuccess = function () {
+                resolve(request.result);
+              };
+              request.onerror = function () {
+                reject(request.error);
+              };
+            });
+          });
+        }
+        var loadDevice = function () {
+          return dbRequest('readonly', function (store) {
+            return store.get('device');
+          });
+        };
+        var saveDevice = function (device) {
+          return dbRequest('readwrite', function (store) {
+            return store.put(device, 'device');
+          });
+        };
+        var forgetDevice = function () {
+          return dbRequest('readwrite', function (store) {
+            return store.delete('device');
+          });
+        };
+
+        function deviceKeys(secret) {
+          return Promise.all([
+            crypto.subtle.importKey('raw', secret, { name: 'HMAC', hash: 'SHA-1' }, false, ['sign']),
+            crypto.subtle.importKey('raw', secret, 'HKDF', false, ['deriveKey']).then(function (base) {
+              return crypto.subtle.deriveKey(
+                {
+                  name: 'HKDF',
+                  hash: 'SHA-256',
+                  salt: encoder.encode('aaa-wallet-templates'),
+                  info: encoder.encode('content-key-v1')
+                },
+                base,
+                { name: 'AES-GCM', length: 256 },
+                false,
+                ['decrypt']
+              );
+            })
+          ]).then(function (keys) {
+            return { hmacKey: keys[0], contentKey: keys[1], lastCounter: 0 };
+          });
+        }
+
+        function totp(hmacKey, counter) {
+          var message = new ArrayBuffer(8),
+            view = new DataView(message);
+          view.setUint32(0, Math.floor(counter / 4294967296));
+          view.setUint32(4, counter >>> 0);
+          return crypto.subtle.sign('HMAC', hmacKey, message).then(function (signature) {
+            var hash = new Uint8Array(signature),
+              offset = hash[hash.length - 1] & 15;
+            var number =
+              ((hash[offset] & 127) << 24) | (hash[offset + 1] << 16) | (hash[offset + 2] << 8) | hash[offset + 3];
+            return String(number % 1000000).padStart(6, '0');
+          });
+        }
+
+        function matchingCounter(hmacKey, code) {
+          var now = Math.floor(Date.now() / 30000),
+            counters = [now - 1, now, now + 1];
+          return Promise.all(
+            counters.map(function (counter) {
+              return totp(hmacKey, counter);
+            })
+          ).then(function (codes) {
+            var index = codes.indexOf(code);
+            return index < 0 ? null : counters[index];
+          });
+        }
+
+        function decryptPayload(contentKey) {
+          return fetch('data.bin', { cache: 'no-store' })
+            .then(function (response) {
+              if (!response.ok) throw new Error('missing');
+              return response.arrayBuffer();
+            })
+            .then(function (buffer) {
+              var bytes = new Uint8Array(buffer);
+              return crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytes.slice(0, 12) }, contentKey, bytes.slice(12));
+            })
+            .then(function (gzipped) {
+              return new Response(new Blob([gzipped]).stream().pipeThrough(new DecompressionStream('gzip'))).json();
+            });
+        }
+
+        function unlockedUntil() {
+          try {
+            return Number(localStorage.getItem(UNLOCK_KEY)) || 0;
+          } catch (e) {
+            return 0;
+          }
+        }
+
+        function lock(message) {
+          clearTimeout(lockTimer);
+          try {
+            localStorage.removeItem(UNLOCK_KEY);
+          } catch (e) {}
+          objectUrls.forEach(URL.revokeObjectURL);
+          objectUrls = [];
+          root.textContent = '';
+          loadDevice().then(function (device) {
+            showLock(device, message);
+          });
+        }
+
+        function scheduleLock() {
+          clearTimeout(lockTimer);
+          lockTimer = setTimeout(
+            function () {
+              lock('Your 30 minutes ended. Enter a new code.');
+            },
+            Math.max(0, unlockedUntil() - Date.now())
+          );
+        }
+
+        ['visibilitychange', 'focus'].forEach(function (event) {
+          window.addEventListener(event, function () {
+            if (root.querySelector('header') && Date.now() >= unlockedUntil())
+              lock('Your 30 minutes ended. Enter a new code.');
+          });
+        });
+
+        function showLock(device, message) {
+          root.textContent = '';
+          var error = el('p', { class: 'error', role: 'alert', text: message || '' });
+          var keyInput = el('input', {
+            id: 'setupKey',
+            type: 'password',
+            autocomplete: 'off',
+            autocapitalize: 'characters',
+            spellcheck: 'false',
+            required: ''
+          });
+          var codeInput = el('input', {
+            id: 'code',
+            inputmode: 'numeric',
+            autocomplete: 'one-time-code',
+            pattern: '[0-9]{6}',
+            maxlength: '6',
+            required: ''
+          });
+          var submit = el('button', { type: 'submit', text: device ? 'Unlock' : 'Link this device' });
+          var form = el('form', { class: 'card' }, [
+            el('h1', { text: 'Wallet Templates' }),
+            el('p', {
+              text: device
+                ? 'Enter the 6-digit code from your authenticator app. Access lasts 30 minutes.'
+                : 'This device is not linked yet. Paste your setup key and enter the current 6-digit code from your authenticator app.'
+            }),
+            device ? null : el('label', { for: 'setupKey', text: 'Setup key' }),
+            device ? null : keyInput,
+            el('label', { for: 'code', text: '6-digit code' }),
+            codeInput,
+            error,
+            submit,
+            device
+              ? el('p', { style: 'margin:14px 0 0' }, [
+                  el('button', {
+                    type: 'button',
+                    class: 'secondary',
+                    text: 'Forget this device',
+                    onclick: function () {
+                      forgetDevice().then(function () {
+                        lock('This device was unlinked.');
+                      });
+                    }
+                  })
+                ])
+              : null
+          ]);
+          form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            if (Date.now() < blockedUntil) {
+              error.textContent =
+                'Too many wrong codes. Try again in ' + Math.ceil((blockedUntil - Date.now()) / 1000) + ' s.';
+              return;
+            }
+            submit.disabled = true;
+            var code = codeInput.value.replace(/\D/g, '');
+            var keysReady = device ? Promise.resolve(device) : deviceKeys(base32Decode(keyInput.value));
+            keysReady
+              .then(function (keys) {
+                return matchingCounter(keys.hmacKey, code).then(function (counter) {
+                  if (counter === null) throw new Error('code');
+                  if (counter <= keys.lastCounter) throw new Error('reused');
+                  keys.lastCounter = counter;
+                  return decryptPayload(keys.contentKey).then(
+                    function (payload) {
+                      return saveDevice(keys).then(function () {
+                        return payload;
+                      });
+                    },
+                    function () {
+                      throw new Error(device ? 'stale' : 'key');
+                    }
+                  );
+                });
+              })
+              .then(function (payload) {
+                failedAttempts = 0;
+                try {
+                  localStorage.setItem(UNLOCK_KEY, String(Date.now() + SESSION_MINUTES * 60000));
+                } catch (e) {}
+                render(payload);
+              })
+              .catch(function (failure) {
+                submit.disabled = false;
+                var reason = failure && failure.message;
+                if (reason === 'reused') {
+                  error.textContent = 'That code was already used. Wait for the next one.';
+                  return;
+                }
+                if (reason === 'stale') {
+                  error.textContent =
+                    'The page was published with a new setup key. Forget this device and link it again.';
+                  return;
+                }
+                failedAttempts += 1;
+                if (failedAttempts >= MAX_ATTEMPTS) {
+                  failedAttempts = 0;
+                  blockedUntil = Date.now() + COOLDOWN_SECONDS * 1000;
+                }
+                error.textContent =
+                  reason === 'key' ? 'That setup key does not open this page.' : 'Wrong code. Try again.';
+                codeInput.select();
+              });
+          });
+          root.appendChild(el('div', { class: 'lock' }, [form]));
+          (device ? codeInput : keyInput).focus();
+        }
+
+        var crcTable = (function () {
+          var table = [];
+          for (var n = 0; n < 256; n++) {
+            var c = n;
+            for (var k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+            table[n] = c >>> 0;
+          }
+          return table;
+        })();
+        function crc32(bytes) {
+          var crc = 0xffffffff;
+          for (var i = 0; i < bytes.length; i++) crc = crcTable[(crc ^ bytes[i]) & 255] ^ (crc >>> 8);
+          return (crc ^ 0xffffffff) >>> 0;
+        }
+        function zip(files) {
+          var parts = [],
+            central = [],
+            offset = 0;
+          files.forEach(function (file) {
+            var name = encoder.encode(file.path),
+              data = file.data,
+              crc = crc32(data);
+            var local = new DataView(new ArrayBuffer(30));
+            local.setUint32(0, 0x04034b50, true);
+            local.setUint16(4, 20, true);
+            local.setUint16(6, 0x0800, true);
+            local.setUint32(14, crc, true);
+            local.setUint32(18, data.length, true);
+            local.setUint32(22, data.length, true);
+            local.setUint16(26, name.length, true);
+            var entry = new DataView(new ArrayBuffer(46));
+            entry.setUint32(0, 0x02014b50, true);
+            entry.setUint16(4, 20, true);
+            entry.setUint16(6, 20, true);
+            entry.setUint16(8, 0x0800, true);
+            entry.setUint32(16, crc, true);
+            entry.setUint32(20, data.length, true);
+            entry.setUint32(24, data.length, true);
+            entry.setUint16(28, name.length, true);
+            entry.setUint32(42, offset, true);
+            parts.push(local, name, data);
+            central.push(entry, name);
+            offset += 30 + name.length + data.length;
+          });
+          var size = central.reduce(function (total, part) {
+            return total + part.byteLength;
+          }, 0);
+          var end = new DataView(new ArrayBuffer(22));
+          end.setUint32(0, 0x06054b50, true);
+          end.setUint16(8, files.length, true);
+          end.setUint16(10, files.length, true);
+          end.setUint32(12, size, true);
+          end.setUint32(16, offset, true);
+          return new Blob(parts.concat(central, [end]), { type: 'application/zip' });
+        }
+
+        function blobBytes(payload, id) {
+          var binary = atob(payload.blobs[id]),
+            bytes = new Uint8Array(binary.length);
+          for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+          return bytes;
+        }
+
+        function download(name, blob) {
+          var url = URL.createObjectURL(blob);
+          objectUrls.push(url);
+          var link = el('a', { href: url, download: name });
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+        }
+
+        function downloadTemplate(payload, fixture, info, legacy) {
+          var row = payload.rows[fixture][info.state];
+          var folder = info.state + ' ' + info.club + ' ' + fixture + (legacy ? ' legacy' : '') + '.pkpasstemplate/';
+          var files = Object.assign({}, payload.templates[info.variant], legacy ? {} : payload.artwork[info.club]);
+          var entries = Object.keys(files)
+            .filter(function (name) {
+              return !(legacy && payload.posterOnlyFiles.indexOf(name) >= 0);
+            })
+            .map(function (name) {
+              return { path: folder + name, data: blobBytes(payload, files[name]) };
+            });
+          entries.push({
+            path: folder + 'pass.json',
+            data: encoder.encode(JSON.stringify(legacy ? row.legacy : row.design, null, 2))
+          });
+          download(folder.slice(0, -1) + '.zip', zip(entries));
+        }
+
+        function render(payload) {
+          root.textContent = '';
+          var fixture = payload.fixtures[0];
+          var rowsNode = el('div', { class: 'rows' });
+          var select = el(
+            'select',
+            {
+              'aria-label': 'Policy fixture',
+              onchange: function () {
+                fixture = select.value;
+                fill();
+              }
+            },
+            payload.fixtures.map(function (name) {
+              return el('option', { value: name, text: name });
+            })
+          );
+          var until = new Date(unlockedUntil());
+          root.appendChild(
+            el('header', {}, [
+              el('h1', { text: 'Wallet Templates' }),
+              el('span', {
+                class: 'meta',
+                text: 'Locks at ' + until.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })
+              }),
+              el('button', {
+                class: 'secondary',
+                text: 'Lock now',
+                onclick: function () {
+                  lock('Locked.');
+                }
+              })
+            ])
+          );
+          root.appendChild(
+            el('main', {}, [
+              el('div', { class: 'toolbar' }, [el('label', { text: 'Policy fixture', style: 'margin:0' }), select]),
+              el('p', {
+                text:
+                  'Exported ' +
+                  new Date(payload.generatedAt).toLocaleString() +
+                  '. Each download is a .pkpasstemplate folder (zipped) for Pass Designer: "New design" is the pass as Wallet gets it, "Legacy" is what iOS < 26 shows.'
+              }),
+              rowsNode
+            ])
+          );
+
+          function fill() {
+            rowsNode.textContent = '';
+            payload.states.forEach(function (info) {
+              var row = payload.rows[fixture][info.state],
+                values = row.values;
+              var valuesView = el('pre', { hidden: '', text: JSON.stringify(values, null, 2) });
+              rowsNode.appendChild(
+                el('div', { class: 'row' + (row.issues.length ? ' bad' : '') }, [
+                  el('div', { class: 'top' }, [
+                    el('span', { class: 'state', text: info.state }),
+                    el('span', { class: 'small', text: 'club ' + info.club + ' · ' + info.variant })
+                  ]),
+                  el('div', { text: info.frontTitle + (info.legacyTitle ? ' · legacy: ' + info.legacyTitle : '') }),
+                  el('div', {
+                    class: 'small',
+                    text: [values.namedInsured, values.policyNumber, values.effective]
+                      .map(function (field) {
+                        return field ? field.value : '';
+                      })
+                      .join(' · ')
+                  }),
+                  el('div', {
+                    class: 'small',
+                    text: values.insuranceCompanyFooter ? values.insuranceCompanyFooter.value : ''
+                  }),
+                  row.issues.length
+                    ? el(
+                        'div',
+                        {},
+                        row.issues.map(function (issue) {
+                          return el('div', { class: 'issue', text: issue });
+                        })
+                      )
+                    : el('div', { class: 'fits', text: '✓ every value fits' }),
+                  el('div', { class: 'actions' }, [
+                    el('button', {
+                      text: 'New design',
+                      onclick: function () {
+                        downloadTemplate(payload, fixture, info, false);
+                      }
+                    }),
+                    el('button', {
+                      text: 'Legacy (iOS < 26)',
+                      onclick: function () {
+                        downloadTemplate(payload, fixture, info, true);
+                      }
+                    }),
+                    el('button', {
+                      class: 'secondary',
+                      text: 'Values',
+                      onclick: function () {
+                        valuesView.hidden = !valuesView.hidden;
+                      }
+                    })
+                  ]),
+                  valuesView
+                ])
+              );
+            });
+          }
+          fill();
+          scheduleLock();
+        }
+
+        loadDevice()
+          .then(function (device) {
+            if (device && Date.now() < unlockedUntil()) {
+              return decryptPayload(device.contentKey).then(render, function () {
+                lock('The page was published with a new setup key. Forget this device and link it again.');
+              });
+            }
+            showLock(device);
+          })
+          .catch(function () {
+            showLock(null, 'This browser blocks the storage this page needs (private window?).');
+          });
+      })();
+    </script>
+  </body>
+</html>
