@@ -27,7 +27,7 @@
       sha(SALT + input.value).then(function(h){
         if(h !== HASH){ d.querySelector('#gateErr').textContent = 'Wrong password. Try again.'; input.select(); return; }
         try { localStorage.setItem(KEY, HASH); } catch(err){}
-        d.remove(); root.style.visibility = '';
+        d.remove(); root.style.visibility = ''; if(window.openForHash) window.openForHash();
       });
     });
   }
