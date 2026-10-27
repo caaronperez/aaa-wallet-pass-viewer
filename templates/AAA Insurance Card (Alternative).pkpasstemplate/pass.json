@@ -32,18 +32,18 @@
     ],
     "primaryFields": [
       {
-        "_id": "554FCDFC-7749-5C1D-A8FB-141A25CD73A4",
-        "key": "policyNumber",
-        "label": "Policy Number",
-        "value": "CAA000XXXX"
-      }
-    ],
-    "secondaryFields": [
-      {
         "_id": "3CDCFF07-4E5F-5443-BD77-2C4A2B064154",
         "key": "nameEnsured",
         "label": "Name Insured",
         "value": "FULANITO PEREZ"
+      }
+    ],
+    "secondaryFields": [
+      {
+        "_id": "554FCDFC-7749-5C1D-A8FB-141A25CD73A4",
+        "key": "policyNumber",
+        "label": "Policy Number",
+        "value": "CAA000XXXX"
       },
       {
         "_id": "CCF4DDA1-15F5-5C57-BD7F-46689760BD7A",
