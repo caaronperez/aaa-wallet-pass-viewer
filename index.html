@@ -354,6 +354,10 @@ html.arch-open .arch{display:flex !important}
 .gx-line{position:absolute;left:0;right:0;top:76.1%;border-top:2px dashed #ff9f0a}
 .guide-ex table{width:100%;border-collapse:collapse;font-size:12.5px}.guide-ex th{text-align:left;font-weight:600;color:var(--muted);font-size:11.5px;padding:6px 8px;border-bottom:1px solid var(--line)}.guide-ex td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:middle}.guide-ex td.n{white-space:nowrap;font-variant-numeric:tabular-nums}.guide-ex .sw{display:inline-grid;place-items:center;width:38px;height:24px;border-radius:6px;font:700 12px -apple-system,BlinkMacSystemFont,sans-serif;border:1px solid rgba(127,127,127,.35);vertical-align:middle;margin-right:6px}
 .gx-colors{min-width:600px}.gx-colors code{font-size:11.5px}
+.sr-pick{display:flex;align-items:center;gap:10px;margin:14px 0 10px;flex-wrap:wrap}.sr-pick label{font-weight:600;font-size:13px}.sr-pick select{max-width:100%;padding:8px 10px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--text);font:inherit}
+.sr-detail{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--panel)}.sr-detail h3{margin:0 0 8px}.sr-detail h3 small{color:var(--muted);font-weight:500;font-size:13px}.sr-detail h4{margin:10px 0 4px;font-size:13px}.sr-detail ul{margin:0;padding-left:18px;font-size:13px;line-height:1.5}.sr-detail p{font-size:13px;line-height:1.5;margin:6px 0}
+.sr-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.sr-none{color:var(--muted)}.sr-src a{color:var(--accent)}
+.sr-chip{font:inherit;font-size:12px;font-weight:600;padding:3px 9px;margin:2px 0;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer}.sr-chip:hover{border-color:var(--accent);color:var(--accent)}.fl-tbl.sr-sum{min-width:0}
 .fl-tbl{min-width:880px}.fl-h{margin:12px 0 4px;font-size:12.5px;color:var(--muted);font-weight:600}
 .fl-t{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:6px;white-space:nowrap}
 .fl-header{background:rgba(191,90,242,.18);color:#d48cff}.fl-primary{background:rgba(10,132,255,.18);color:#64a8ff}.fl-secondary{background:rgba(100,210,255,.16);color:#64d2ff}.fl-auxiliary{background:rgba(52,199,89,.16);color:#30d158}.fl-footer{background:rgba(255,159,10,.18);color:#ffb340}
@@ -704,7 +708,7 @@ html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-t
         <h4 class="fl-h">iOS 27 (poster)</h4><div class="a11y-scroll"><table class="gx-colors fl-tbl"><thead><tr><th>Type</th><th>Field</th><th>Value now</th><th>Max before “…”</th><th>Longest expected</th><th>Why it’s there</th></tr></thead><tbody><tr class=""><td><span class="fl-t fl-header">Header</span></td><td><b>Header label</b></td><td>CA EVIDENCE OF LIABILITY · 24 <span class="a11y-v ok">Fits</span></td><td class="n"><b>22</b><br><small>this text fits (narrow letters)</small></td><td>Fixed text</td><td>Document type, shows when cards are stacked.</td></tr><tr class=""><td><span class="fl-t fl-header">Header</span></td><td><b>Header value</b></td><td>Auto Insurance Card · 19 <span class="a11y-v ok">Fits</span></td><td class="n"><b>26</b></td><td>Fixed text</td><td>Names the card like the paper ID card.</td></tr><tr class=""><td><span class="fl-t fl-primary">Primary</span></td><td><b>Name Insured</b></td><td>FULANITO PEREZ · 14 <span class="a11y-v ok">Fits</span></td><td class="n"><b>21</b><br><small>shrinks past ≈16</small></td><td><span class="a11y-v mid">30–35</span> long names: cut past 21</td><td>The insured person, checked against the driver’s license.</td></tr><tr class=""><td><span class="fl-t fl-primary">Primary</span></td><td><b>Policy Number</b></td><td>CAA000XXXX · 10 <span class="a11y-v ok">Fits</span></td><td class="n"><b>21</b><br><small>shrinks past ≈16</small></td><td>≈10–13 (TX: ATX001031422 = 12)</td><td>The number an officer, DMV or claims agent asks for.</td></tr><tr class=""><td><span class="fl-t fl-primary">Primary</span></td><td><b>Effective</b></td><td>09/14/26 – 09/14/27 · 19 <span class="a11y-v ok">Fits</span></td><td class="n"><b>25</b><br><small>shrinks past ≈19</small></td><td>19, always (MM/DD/YY – MM/DD/YY) <span class="a11y-v ok">Fits</span></td><td>Proves the policy covers today.</td></tr><tr class=""><td><span class="fl-t fl-primary">Primary</span></td><td><b>Labels</b> (all 3)</td><td>6–13 <span class="a11y-v ok">Fits</span></td><td class="n"><b>≈14–15</b> each</td><td>Fixed text</td><td>Title case.</td></tr><tr class="fl-new"><td><span class="fl-t fl-footer">Footer</span></td><td><b>Insurance company · NAIC #</b> <small>one line</small></td><td>INTERINSURANCE EXCHANGE · NAIC # 00000 · 38 <span class="a11y-v ok">Fits</span></td><td class="n"><b>52</b></td><td>61 with the full legal name <span class="a11y-v bad">cut</span> → use the short name. TX: AUTO CLUB COUNTY MUTUAL · NAIC # 29327 = 38 <span class="a11y-v ok">Fits</span></td><td>Insurer and its NAIC company code. Only the first footer field shows on iOS 27 and footer labels are hidden, so both share one line.</td></tr></tbody></table></div>
         <h4 class="fl-h">iOS 26 and older (our custom design)</h4><div class="a11y-scroll"><table class="gx-colors fl-tbl"><thead><tr><th>Type</th><th>Field</th><th>Value now</th><th>Max before “…”</th><th>Longest expected</th><th>Why it’s there</th></tr></thead><tbody><tr class=""><td><span class="fl-t fl-header">Header</span></td><td><b>Header label</b></td><td>CA EVIDENCE OF LIABILITY · 24 <span class="a11y-v bad">Cut: “CA EVIDENCE OF…”</span></td><td class="n"><b>13–14</b></td><td>Fixed text</td><td>Document type. Shorten to ≤13 (e.g. “CA INSURANCE”).</td></tr><tr class=""><td><span class="fl-t fl-header">Header</span></td><td><b>Header value</b></td><td>Auto Insurance Card · 19 <span class="a11y-v bad">Cut: “AUTO INSURANCE…”</span></td><td class="n"><b>14</b></td><td>Fixed text</td><td>Shorten to ≤14 (e.g. “ID CARD”).</td></tr><tr class=""><td><span class="fl-t fl-primary">Primary</span></td><td><b>Name Insured</b></td><td>FULANITO PEREZ · 14 <span class="a11y-v ok">Fits</span></td><td class="n">2 lines, ≈37 each<br><small>cut with no “…”</small></td><td>30–35 <span class="a11y-v ok">Fits</span> MARIA GUADALUPE HERNANDEZ RODRIGUEZ (34) shows in full on 2 lines</td><td>The longest value on the card, so it gets the big line that wraps. Checked against the driver’s license.</td></tr><tr class=""><td><span class="fl-t fl-secondary">Secondary</span></td><td><b>Policy Number</b></td><td>CAA000XXXX · 10 <span class="a11y-v ok">Fits</span></td><td class="n"><b>39</b><br><small>shrinks first</small></td><td>≈10–13 <span class="a11y-v ok">Fits</span></td><td>The number an officer, DMV or claims agent asks for. Short and fixed length, so the second row is enough.</td></tr><tr class=""><td><span class="fl-t fl-secondary">Secondary</span></td><td><b>Effective</b></td><td>09/14/26 – 09/14/27 · 19 <span class="a11y-v ok">Fits</span></td><td class="n"><b>40</b><br><small>shrinks first</small></td><td>19, always <span class="a11y-v ok">Fits</span></td><td>Proves the policy covers today.</td></tr><tr class=""><td><span class="fl-t fl-secondary">Secondary</span></td><td><b>Labels</b></td><td>9–13 <span class="a11y-v ok">Fits</span></td><td class="n"><b>≈28</b> each<br><small>17–23 if both are long</small></td><td>Fixed text</td><td>Shown in capitals.</td></tr><tr class="fl-new"><td><span class="fl-t fl-auxiliary">Auxiliary</span></td><td><b>Insurance Company</b></td><td>Interinsurance Exchange of the Automobile Club · 46 <span class="a11y-v ok">Fits</span></td><td class="n"><b>49</b><br><small>with NAIC # beside it, shrinks first</small></td><td>46 (TX: Auto Club County Mutual Insurance Company = 41 <span class="a11y-v ok">Fits</span>)</td><td>Insurer, like the current Texas card.</td></tr><tr class="fl-new"><td><span class="fl-t fl-auxiliary">Auxiliary</span></td><td><b>NAIC #</b> <small>right</small></td><td>00000 · 5 <span class="a11y-v ok">Fits</span></td><td class="n">5 digits</td><td>5 (fixed)</td><td>The insurer’s NAIC company code. Roadside moves to the back.</td></tr></tbody></table></div>
         <h3 id="flStateFront">Insurance card · state-front template (AL, IL, LA, KY, PA, WV)</h3>
-        <p class="sub">For the states whose rules put the required data on the <b>front</b>. Classic <code>generic</code> layout on every iOS (no poster), one card per vehicle. Measured in Pass Designer. A line break inside a bottom-row value hides everything after it, and the <code>row</code> key is ignored on generic passes, so every value stays on one line.</p>
+        <p class="sub">For the states whose rules put the required data on the <b>front</b>. These cards use the new design on iOS 26 and later like every other state; the full state front below is the <b>legacy card shown before iOS 26</b>, one card per vehicle. Measured in Pass Designer. A line break inside a bottom-row value hides everything after it, and the <code>row</code> key is ignored on generic passes, so every value stays on one line.</p>
         <div class="a11y-scroll"><table class="gx-colors fl-tbl"><thead><tr><th>Type</th><th>Field</th><th>Value now</th><th>Max before “…”</th><th>Why</th></tr></thead><tbody><tr class=""><td><span class="fl-t fl-header">Header</span></td><td><b>Expires</b></td><td>01/09/2027 · 10 <span class="a11y-v ok">Fits</span></td><td class="n"><b>14</b><br><small>only 1 header field fits</small></td><td>Next to the logo. A 2nd header field gets reversed and cut.</td></tr><tr class=""><td><span class="fl-t fl-primary">Primary</span></td><td><b>Card title</b> <small>(field label)</small></td><td>ILLINOIS INSURANCE CARD · 23 <span class="a11y-v ok">Fits</span></td><td class="n"><b>≈43–44</b> caps</td><td>The state’s required title at the top of the front.</td></tr><tr class=""><td><span class="fl-t fl-primary">Primary</span></td><td><b>Named Insured</b> <small>(value)</small></td><td>FULANITO PEREZ · 14 <span class="a11y-v ok">Fits</span></td><td class="n">2 lines, <b>≈37</b> each</td><td>MARIA GUADALUPE HERNANDEZ RODRIGUEZ (34) shows in full.</td></tr><tr class=""><td><span class="fl-t fl-secondary">Secondary</span></td><td><b>Policy #</b></td><td>MOA000XXXX · 10 <span class="a11y-v ok">Fits</span></td><td class="n"><b>≈12</b></td><td>Shares the row with Effective and the vehicle.</td></tr><tr class=""><td><span class="fl-t fl-secondary">Secondary</span></td><td><b>Effective</b></td><td>01/09/2026 · 10 <span class="a11y-v ok">Fits</span></td><td class="n"><b>10</b> (MM/DD/YYYY)</td><td>Expiration is in the header.</td></tr><tr class=""><td><span class="fl-t fl-secondary">Secondary</span></td><td><b>Vehicle</b> <small>(field label)</small> + <b>VIN</b> <small>(value)</small></td><td>2026 SAMPLE SUV · 15 + VIN · 17 <span class="a11y-v ok">Fits</span></td><td class="n">label <b>≈17</b> · VIN <b>17</b> (full)</td><td>Send year + make (abbreviate the make if longer). The full VIN never gets cut.</td></tr><tr class=""><td><span class="fl-t fl-auxiliary">Auxiliary</span></td><td><b>Insurance Company</b></td><td>Automobile Club Inter-Insurance Exchange · 40 <span class="a11y-v ok">Fits</span></td><td class="n"><b>49</b></td><td>PA’s 46-character name fits too.</td></tr><tr class=""><td><span class="fl-t fl-auxiliary">Auxiliary</span></td><td><b>NAIC #</b></td><td>15512 · 5 <span class="a11y-v ok">Fits</span></td><td class="n">5</td><td>On the front, as these states require.</td></tr></tbody></table></div>
         <h4 class="fl-h">Per state</h4>
         <div class="a11y-scroll"><table class="gx-colors fl-tbl"><thead><tr><th>State</th><th>Card title to send (≤ 43)</th><th>Company · NAIC #</th><th>Can’t fit on the front (goes on the back, OGC to confirm)</th></tr></thead><tbody>
@@ -724,6 +728,20 @@ html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-t
           <tr><td><b>Card expiry</b> <small>(not a field)</small></td><td><code>"expirationDate": "2027-03-31T23:59:59-07:00"</code></td><td>Greyed-out card when expired</td><td>ISO 8601 with the time zone offset. Membership: last day of the valid-through month. Insurance: end of the policy period.</td></tr>
         </tbody></table></div>
         <p class="sub">Date styles for <b>March 31, 2027</b> in US English: Short <b>3/31/27</b> (7) · Medium <b>Mar 31, 2027</b> (12) · Long <b>March 31, 2027</b> (14) · Full <b>Wednesday, March 31, 2027</b> (24).</p>
+      </details>
+      <details class="guide-ex more-d" id="stateRules">
+        <summary><span class="fl-st"><h2>State requirements: what must be on the front</h2><small>All 27 states our clubs cover: required fields and text, front rules, NAIC # and official sources</small></span><span class="gt-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
+        <p class="sub">From the state statutes and regulations (checked Oct 2026). <b>Not legal advice:</b> none of these rules mention digital wallet passes, so whether a front rule applies to the pass front is for Insurance Communications / OGC to confirm.</p>
+        <div class="a11y-scroll"><table class="gx-colors fl-tbl sr-sum"><thead><tr><th>At a glance</th><th>States</th></tr></thead><tbody>
+          <tr><td><b>Must be on the front</b> (or a fixed layout)</td><td><span class="sr-chips" data-filter="front"></span></td></tr>
+          <tr><td><b>Front only for paper or printed cards</b></td><td><span class="sr-chips" data-filter="paper"></span></td></tr>
+          <tr><td><b>NAIC # required</b></td><td><span class="sr-chips" data-filter="naic"></span></td></tr>
+          <tr><td><b>Own insurer code instead of NAIC #</b></td><td><span class="sr-chips" data-filter="ownCode"></span></td></tr>
+          <tr><td><b>Required title or wording</b></td><td><span class="sr-chips" data-filter="text"></span></td></tr>
+          <tr><td><b>No insurance card from us today</b></td><td><span class="sr-chips" data-filter="noCard"></span></td></tr>
+        </tbody></table></div>
+        <div class="sr-pick"><label for="srState">State</label><select id="srState"></select></div>
+        <div id="srDetail" class="sr-detail" aria-live="polite"></div>
       </details>
       <details class="guide-ex more-d" id="filesToMake">
         <summary><span class="fl-st"><h2>Files to make</h2><small>PNG sizes for the artwork, logos and icons, @2x and @3x</small></span><span class="gt-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
@@ -2080,6 +2098,187 @@ $('download').addEventListener('click', async () => {
   finally{ btn.disabled = false; label.textContent = was; }
 });
 loadDefault('membershipBlurAA');
+</script>
+<script>
+(function () {
+  const STATES = [
+    { code: 'AL', name: 'Alabama', clubs: '001', group: 'ACE clubs', front: 'yes', naic: 'required', card: 'stateFront',
+      frontRule: '“All required information shall appear on the front of the card.”',
+      fields: ['Vehicle year, make and VIN', 'Insured name(s)', 'Insurer name and NAIC #', 'Alabama policy number', 'Effective and expiration dates (at most 12 months apart)'],
+      text: [],
+      sources: [['Code of Alabama §32-7A-6', 'https://alison.legislature.state.al.us/code-of-alabama?section=32-7A-6'], ['Act 2015-506 memo (AL Revenue)', 'https://revenue.alabama.gov/wp-content/uploads/2017/05/Memo_2015-015_Legislation_Effective_August_2015.pdf'], ['AL DOI bulletin', 'https://aldoi.gov/currentnewsitem.aspx?ID=88']] },
+    { code: 'CA', name: 'California', clubs: '004', group: 'ACE clubs', front: 'no', naic: 'required', card: 'standard',
+      frontRule: 'No front rule. Electronic cards must contain “all of the same titling and content”.',
+      fields: ['Primary named insured or owner', 'VIN, make and model year', 'Policy number', 'Effective and expiration dates', 'Insurer name, address and 5-digit NAIC #'],
+      text: ['One of 5 approved titles, e.g. “California Evidence of Liability Insurance”', '“This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code.”', '“Evidence of financial responsibility shall at all times be carried in the vehicle.”', 'The DMV electronic-submission statement'],
+      sources: [['13 CCR §82.00 adopted text (DMV)', 'https://qr.dmv.ca.gov/portal/file/adopted_regulatory_text_accessible-2024-0708-01s-pdf'], ['Vehicle Code §16028', 'https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=VEH&sectionNum=16028'], ['Vehicle Code §16020', 'https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=VEH&sectionNum=16020']] },
+    { code: 'HI', name: 'Hawaii', clubs: '018', group: 'ACE clubs', front: 'no', naic: 'no', card: 'standard',
+      frontRule: 'No front rule. The card must be “resistant to forgery”, and its design is approved by the commissioner.',
+      fields: ['Vehicle make and VIN', 'Policy number', 'Insured name', 'Insurer name', 'Effective and expiration dates'],
+      text: [],
+      sources: [['HRS §431:10C-107', 'https://data.capitol.hawaii.gov/hrscurrent/Vol09_Ch0431-0435H/HRS0431/HRS_0431-0010C-0107.htm'], ['HRS §286-116', 'https://data.capitol.hawaii.gov/hrscurrent/Vol05_Ch0261-0319/HRS0286/HRS_0286-0116.htm'], ['Act 82 (2016)', 'https://data.capitol.hawaii.gov/sessions/session2016/Bills/HB1705_SD1_.HTM']] },
+    { code: 'ME', name: 'Maine', clubs: '036', group: 'ACE clubs', front: 'no', naic: 'no', card: 'standard',
+      frontRule: 'No front rule. Everything must be readable, and nothing may obscure the required items.',
+      fields: ['Insurer name', 'Insured name', 'Policy number', 'Effective and expiration dates', 'Vehicle year, make, model and VIN', 'Excluded drivers'],
+      text: ['Title “Maine Motor Vehicle Insurance Identification Card”', '“provides the minimum liability insurance coverage required by law”', 'Digital cards: the operator “must be able to display evidence of liability insurance … on the demand of a law enforcement officer”'],
+      sources: [['29-A MRSA §1601', 'https://legislature.maine.gov/statutes/29-a/title29-asec1601.html'], ['24-A MRSA §2412', 'https://legislature.maine.gov/statutes/24-A/title24-Asec2412.html'], ['Rule 02-031 ch. 391 (Secretary of State rules, agency 02)', 'https://www.maine.gov/sos/cec/rules/02/chaps02.htm']] },
+    { code: 'NH', name: 'New Hampshire', clubs: '036 / 240', group: 'ACE clubs', front: 'no', naic: 'no', card: 'standard',
+      frontRule: 'No front rule. New Hampshire has no insurance ID card law.',
+      fields: ['Not specified'], text: [],
+      sources: [['RSA ch. 264', 'https://gc.nh.gov/rsa/html/xxi/264/264-mrg.htm'], ['HB 1558 (2026)', 'https://gc.nh.gov/bill_status/legacy/bs2016/billText.aspx?sy=2026&id=2060&txtFormat=html']] },
+    { code: 'VT', name: 'Vermont', clubs: '036', group: 'ACE clubs', front: 'no', naic: 'no', card: 'standard',
+      frontRule: 'No front rule (the 1985 rule may be outdated).',
+      fields: ['Insurer name', 'Named insured', 'Policy number', 'Effective and expiration dates', 'Vehicle year, make or model, and VIN'],
+      text: ['Title “Vermont Automobile Insurance Identification Card”', 'Card must be carried in the vehicle or in the insured’s possession', '“provides the minimum insurance prescribed by law”'],
+      sources: [['23 V.S.A. §800', 'https://legislature.vermont.gov/statutes/section/23/011/00800'], ['DFR Insurance Bulletin 77', 'https://dfr.vermont.gov/sites/finreg/files/regbul/dfr-bulletin-insurance-77.pdf']] },
+    { code: 'MO', name: 'Missouri', clubs: '065', group: 'ACE clubs', front: 'no', naic: 'no', card: 'standard',
+      frontRule: 'No front rule, but the carry statement must be prominently displayed.',
+      fields: ['Insurer name and address', 'Named insured', 'Policy number', 'Effective dates (month/day/year)', 'Vehicle year and make, or the last 5 of the VIN'],
+      text: ['“THIS CARD MUST BE CARRIED IN THE INSURED MOTOR VEHICLE FOR PRODUCTION UPON DEMAND”, prominently displayed'],
+      sources: [['RSMo §303.024', 'https://revisor.mo.gov/main/OneSection.aspx?section=303.024']] },
+    { code: 'AR', name: 'Arkansas', clubs: '065', group: 'ACE clubs', front: 'no', naic: 'required', card: 'standard',
+      frontRule: 'No front rule. A digital card must be readable “as clearly as a paper” card.',
+      fields: ['Insurer name, address, phone and NAIC #', 'Agent name and phone', 'Policy number', 'Effective and expiration dates', 'VIN and vehicle description', 'Insured name and address', '“Excluded Driver(s)” if any'],
+      text: [],
+      sources: [['Arkansas Code §§23-89-213, 27-22-104, 27-13-102 (Arkansas Legislature; search the citation)', 'https://www.arkleg.state.ar.us/']] },
+    { code: 'LA', name: 'Louisiana', clubs: '065', group: 'ACE clubs', front: 'yes', naic: 'required', card: 'stateFront',
+      frontRule: 'Yes, for the title, the statements and all the fields. The IMPORTANT NOTICE goes on the reverse.',
+      fields: ['Insurer name, address and NAIC #', 'Insured name', 'Policy number', 'Effective and expiration dates', 'Year, make and full VIN', 'Excluded drivers'],
+      text: ['Title “Louisiana Auto Insurance Identification Card”', '“An insurer authorized to transact business in Louisiana has issued the Motor Vehicle Policy identified hereon…”', '“This card must be carried in the vehicle at all times…”', 'On the reverse: an “IMPORTANT NOTICE” (R.S. 32:863.1 penalties)'],
+      sources: [['La. R.S. 32:863.1', 'https://legis.la.gov/legis/LawPrint.aspx?d=88607'], ['La. R.S. 32:862', 'https://www.legis.la.gov/Legis/LawPrint.aspx?d=88605'], ['LAC Title 55 Part III §1760', 'https://www.doa.la.gov/media/4hphiwka/55v1-17.docx']] },
+    { code: 'MS', name: 'Mississippi', clubs: '065', group: 'ACE clubs', front: 'no', naic: 'no', card: 'standard',
+      frontRule: 'No front rule.',
+      fields: ['Not specified by statute; commercial policies must be marked “Commercial Auto Insurance” or “Fleet”'], text: [],
+      sources: [['Miss. Code §§63-15-4, 63-15-3 (Mississippi Legislature; search the citation)', 'https://www.legislature.ms.gov/']] },
+    { code: 'IL', name: 'Illinois', clubs: '065 (part)', group: 'ACE clubs', front: 'yes', naic: 'required', card: 'stateFront',
+      frontRule: 'Yes. Everything except the disclaimer goes on the front, in upper case. Digital cards must meet the same “form and content”.',
+      fields: ['Vehicle year, make and VIN (or the last 6)', 'Insured name(s)', 'Company name and NAIC #', 'Policy number', 'Effective and expiration dates (at most 12 months apart)'],
+      text: ['Title “ILLINOIS INSURANCE CARD” at the top of the front', '“Examine policy exclusions carefully. This form does not constitute any part of your insurance policy.”'],
+      sources: [['50 Ill. Adm. Code 8010.20', 'https://www.ilga.gov/ftp/JCAR/AdminCode/050/050080100000200R.html'], ['625 ILCS 5/7-602', 'https://www.ilga.gov/legislation/ilcs/documents/062500050K7-602.htm'], ['P.A. 98-0521', 'https://witnessslips.ilga.gov/ftp/Public%20Acts/98/098-0521.htm']] },
+    { code: 'IN', name: 'Indiana', clubs: '065 (part)', group: 'ACE clubs', front: 'no', naic: 'no', card: 'standard',
+      frontRule: 'No front rule.', fields: ['Not specified'], text: [],
+      sources: [['IC 9-25-4-7', 'https://iga.in.gov/laws/2024/ic/titles/9#9-25-4-7'], ['BMV: proof of financial responsibility', 'https://www.in.gov/bmv/licenses-permits-ids/suspension-and-reinstatement/proof-of-financial-responsibility/']] },
+    { code: 'KS', name: 'Kansas', clubs: '065 (part)', group: 'ACE clubs', front: 'no', naic: 'no', card: 'standard',
+      frontRule: 'No front rule.',
+      fields: ['Insurer name', 'Policy number', 'Vehicle make and year', 'Effective and expiration dates'], text: [],
+      sources: [['K.S.A. 40-3104', 'https://www.ksrevisor.gov/statutes/chapters/ch40/040_031_0004.html'], ['SB 85 (2013)', 'https://www.kslegislature.gov/li_2014/b2013_14/measures/documents/sb85_00_0000.pdf'], ['K.A.R. 40-3-53 (Secretary of State publications)', 'https://www.sos.ks.gov/publications/pubs_kar.aspx']] },
+    { code: 'KY', name: 'Kentucky', clubs: '215', group: 'ACE clubs', front: 'yes', naic: 'required', card: 'stateFront',
+      frontRule: 'Effectively yes: items must be “prominent” and in the order listed below, paper or electronic. A photo of a paper card doesn’t count; the image must come from the insurer.',
+      fields: ['Title', 'Insurer name and 5-digit NAIC #', 'Named insured', 'Effective and expiration dates', 'Policy number', 'Policy type (“Personal”/“PL” or “Commercial”/“CL”)', 'Year, make, model and VIN'],
+      text: ['Title “COMMONWEALTH OF KENTUCKY PROOF OF INSURANCE”'],
+      sources: [['KRS 304.39-117 (current)', 'https://apps.legislature.ky.gov/law/Statutes/statute.aspx?id=42996'], ['KRS 304.39-117 (effective 1/1/2027)', 'https://apps.legislature.ky.gov/law/Statutes/statute.aspx?id=56707'], ['806 KAR 39:070', 'https://apps.legislature.ky.gov/law/kar/titles/806/039/070/']] },
+    { code: 'NY', name: 'New York', clubs: '215 / 240', group: 'ACE clubs', front: 'yes', naic: 'ownCode', card: 'none',
+      frontRule: 'Yes, the strictest. Electronic cards follow the paper rules, nothing may appear in the barcode area, and the encrypted barcode format is confidential (needs a DMV agreement).',
+      fields: ['DMV insurance company code (not NAIC) and insurer name and address', 'Insured name and address', 'Policy number', 'Dates as MM/DD/YYYY with “12:01a.m.”', 'Year, make and full VIN', 'Certification statement', '“(Not acceptable to obtain registration after 45 days from effective date)”', 'Encrypted 2D barcode built to DMV specs'],
+      text: ['Title “NEW YORK STATE INSURANCE IDENTIFICATION CARD”', '4 statements (front or back), e.g. “THIS ID CARD MUST BE CARRIED IN THE INSURED VEHICLE…”'],
+      sources: [['DMV bulletin with the rule text (15 NYCRR §32.16)', 'https://www.ejustice.ny.gov/LawEnforcement/docs/dmv/P13-M12-Electronic-Insurance-ID-Cards.pdf'], ['DMV notice (Apr 29, 2015)', 'https://dmv.ny.gov/book/export/html/15411'], ['15 NYCRR §§32.9, 32.16 (official NYCRR)', 'https://govt.westlaw.com/nycrr/']] },
+    { code: 'OH', name: 'Ohio', clubs: '215', group: 'ACE clubs', front: 'no', naic: 'no', card: 'standard',
+      frontRule: 'No front rule.',
+      fields: ['Policy period (effective and expiration dates)', 'Year, make, model and VIN', 'Policyholder name', 'Company name', 'Policy number'],
+      text: ['Title “Insurance Identification Card” (or similar)'],
+      sources: [['R.C. 4509.103', 'https://codes.ohio.gov/ohio-revised-code/section-4509.103'], ['OAC 4501:1-2-02', 'https://codes.ohio.gov/ohio-administrative-code/rule-4501:1-2-02']] },
+    { code: 'PA', name: 'Pennsylvania', clubs: '215', group: 'ACE clubs', front: 'paper', naic: 'required', card: 'stateFront',
+      frontRule: 'Yes for printed cards (front and back are prescribed). Not explicit for electronic cards.',
+      fields: ['NAIC #', 'Insurer name', 'Named insured name and address', 'Year, make and full VIN', 'Policy number', 'Effective date'],
+      text: ['Title “Financial Responsibility Identification Card”', '“NOT VALID MORE THAN 1 YEAR FROM EFFECTIVE DATE.”', '4 required statements on the back'],
+      sources: [['31 Pa. Code §67.24', 'https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/031/chapter67/s67.24.html'], ['75 Pa.C.S. §1786', 'https://www.legis.state.pa.us/cfdocs/legis/LI/consCheck.cfm?txtType=HTM&ttl=75&div=0&chpt=17&sctn=86&subsctn=0']] },
+    { code: 'WV', name: 'West Virginia', clubs: '215', group: 'ACE clubs', front: 'yes', naic: 'required', card: 'stateFront',
+      frontRule: 'Yes. The DMV form WV-1B fixes the layout; any other arrangement needs DMV approval. A digital card must include the same information.',
+      fields: ['Insurer and NAIC # (upper-right corner)', 'Insured (and owner) name and address', 'Policy number', 'Issue date', 'Term from / to', 'Year, make and full VIN', 'Minimum-liability certification', 'Plate-number box', 'Authorized signature'],
+      text: ['Title “CERTIFICATE OF INSURANCE - WEST VIRGINIA”', '“An authorized West Virginia Insurer certifies…”', '“THIS CERTIFICATE MUST BE CARRIED IN THE VEHICLE…”'],
+      sources: [['W. Va. Code §17D-2A-4', 'https://code.wvlegislature.gov/17D-2A-4/'], ['91 CSR 13 (Secretary of State)', 'https://apps.sos.wv.gov/adlaw/csr/rule.aspx?rule=91-13'], ['WV-1B sample and specs (DMV)', 'https://webapps.transportation.wv.gov/TWS/WVDOTDocumentStorageMigration/PDF/Transportation/DMV/DMVFormSearch/WV-1B_Certificate_of_Insurance_Sample_and_Specifications.pdf']] },
+    { code: 'TX', name: 'Texas', clubs: '252', group: 'ACE clubs', front: 'no', naic: 'no', card: 'standard',
+      frontRule: 'No front rule for digital cards. The “Texas Liability Insurance Card” title and the Side A/B layout are not required on phone images.',
+      fields: ['Insurer name', 'Policy number', 'Policy period', 'Name and address of each insured', 'Policy limits, or a statement that minimums are met', 'Make and model of each vehicle'],
+      text: [],
+      sources: [['Transp. Code ch. 601 (§§601.053, 601.081)', 'https://statutes.capitol.texas.gov/Docs/TN/htm/TN.601.htm'], ['28 TAC §5.204 (Secretary of State)', 'https://texreg.sos.state.tx.us/public/readtac$ext.TacPage?sl=R&app=9&p_dir=&p_rloc=&p_tloc=&p_ploc=&pg=1&p_tac=&ti=28&pt=1&ch=5&rl=204'], ['TDI 2020 rule amendment', 'https://www.Tdi.texas.gov/rules/2020/documents/20206449.pdf']] },
+    { code: 'VA', name: 'Virginia', clubs: '258', group: 'ACE clubs', front: 'no', naic: 'no', card: 'standard',
+      frontRule: 'No front rule. Virginia relies on insurers reporting coverage electronically to DMV; no statute on electronic proof was found (accepted in practice).',
+      fields: ['Not specified'], text: [],
+      sources: [['Code §§46.2-705 to 46.2-708', 'https://law.lis.virginia.gov/vacodefull/title46.2/chapter6/article8/'], ['DMV insurance requirements', 'https://www.dmv.virginia.gov/node/8681/insurance-requirements']] },
+    { code: 'NM', name: 'New Mexico', clubs: '601', group: 'ACE clubs', front: 'no', naic: 'no', card: 'standard',
+      frontRule: 'No front rule. If vehicle details are left off, “any owned vehicle” must be shown on the card’s face.',
+      fields: ['Insured or owner name and address', 'Vehicle year, make and VIN', 'Policy number', 'Effective and expiration dates', 'Insurer name (not listed in the rule text, but include it)'],
+      text: ['“any owned vehicle” on the face if vehicle details are left off'],
+      sources: [['18.18.5 NMAC', 'https://srca.nm.gov/parts/title18/18.018.0005.html'], ['SB 107 (2019) final text', 'https://www.nmlegis.gov/Sessions/19%20Regular/final/SB0107.pdf'], ['MVD: mandatory insurance', 'https://www.mvd.newmexico.gov/chapter-11-mandatory-insurance/']] },
+    { code: 'CT', name: 'Connecticut', clubs: '240', group: 'Partner clubs', front: 'no', naic: 'required', card: 'standard',
+      frontRule: 'No front rule. The repair-shop notice must be in bold capitals.',
+      fields: ['Insured name', 'Insurer name and NAIC #', 'Policy number', 'Effective date (expiration only if exactly 1 year later)', 'Vehicle year, make or model, and VIN', 'Producer or company phone', 'Lessee and lessor for leased cars'],
+      text: ['Title “Connecticut Insurance Card Issued Pursuant to Connecticut Law”', 'In bold capitals: “NOTICE: YOU HAVE THE RIGHT TO CHOOSE THE LICENSED REPAIR SHOP…”'],
+      sources: [['CID Bulletin PC-87', 'https://portal.ct.gov/cid/-/media/cid/pc87insuranceidpdf.pdf'], ['Public Act 18-108', 'https://prdext3.cga.ct.gov/2018/ACT/pa/pdf/2018PA-00108-R00HB-05203-PA.pdf']] },
+    { code: 'MA', name: 'Massachusetts', clubs: '240', group: 'Partner clubs', front: 'no', naic: 'no', card: 'standard',
+      frontRule: 'No front rule. There is no driver ID card; insurance is certified to the RMV at registration.',
+      fields: ['None'], text: [],
+      sources: [['M.G.L. c.90 §34A', 'https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section34A'], ['M.G.L. c.90 §11', 'https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section11']] },
+    { code: 'NJ', name: 'New Jersey', clubs: '240', group: 'Partner clubs', front: 'paper', naic: 'ownCode', card: 'none',
+      frontRule: 'Yes for paper cards (items 1–10). Digital cards just need everything “displayed”, plus an anti-counterfeiting measure.',
+      fields: ['MVC insurance company code and insurer name', 'Insured name and address', 'Complete policy number', 'Effective and expiration dates (month/day/year)', 'Year, make and complete VIN', 'Insurer or issuing office name and address', 'PIP medical notification address'],
+      text: ['Heading “State of New Jersey Insurance Identification Card”', '“ADDRESS FOR NOTIFICATION OF COMMENCEMENT OF MEDICAL TREATMENT”', 'Digital cards: an anti-counterfeiting measure'],
+      sources: [['N.J.A.C. 11:3-6 (DOBI)', 'https://www.nj.gov/dobi/division_insurance/pdfs/autoidrule161219.pdf'], ['Rule proposal (front/reverse text)', 'https://nj.gov/dobi/proposed/prn16_096.pdf'], ['MVC electronic cards notice', 'https://nj.gov/mvc/pdf/about/2017_03_Electronic_Ins_Cards.pdf']] },
+    { code: 'RI', name: 'Rhode Island', clubs: '240', group: 'Partner clubs', front: 'no', naic: 'no', card: 'standard',
+      frontRule: 'No front rule.', fields: ['Not specified'], text: [],
+      sources: [['R.I.G.L. §31-47-2', 'https://webserver.rilegislature.gov/Statutes/TITLE31/31-47/31-47-2.htm'], ['R.I.G.L. §31-47-12', 'https://webserver.rilegislature.gov/Statutes/TITLE31/31-47/31-47-12.htm']] },
+    { code: 'WA', name: 'Washington', clubs: '260', group: 'Partner clubs', front: 'no', naic: 'no', card: 'none',
+      frontRule: 'No front rule. Required items must be “readily discernible”.',
+      fields: ['Insurer name', 'Policy number', 'Effective and expiration dates', 'Vehicle year/make/model or insured driver’s name'], text: [],
+      sources: [['RCW 46.30.030', 'https://app.leg.wa.gov/rcw/default.aspx?cite=46.30.030'], ['RCW 46.30.020', 'https://app.leg.wa.gov/rcw/default.aspx?cite=46.30.020'], ['WAC 308-106', 'https://app.leg.wa.gov/wac/default.aspx?cite=308-106&full=true']] },
+    { code: 'ID', name: 'Idaho', clubs: '260', group: 'Partner clubs', front: 'no', naic: 'no', card: 'none',
+      frontRule: 'No front rule.',
+      fields: ['Insurer', 'Owner name and address', 'Vehicle description including ID number', 'Coverage start and end', 'Policy number (optional)'], text: [],
+      sources: [['Idaho Code §49-1232', 'https://legislature.idaho.gov/statutesrules/idstat/Title49/T49CH12/SECT49-1232'], ['IDAPA 18.02.03', 'https://adminrules.idaho.gov/rules/current/18/180203.pdf']] }
+  ];
+
+  const FRONT = { yes: ['bad', 'Must be on the front'], paper: ['mid', 'Front for paper / printed cards'], no: ['ok', 'No front rule'] };
+  const NAIC = { required: 'Required', ownCode: 'Not used: the state uses its own insurer code', no: 'Not required' };
+  const CARD = {
+    stateFront: 'iOS 26 and later: the new design (title, name, policy #, effective, company · NAIC #); the vehicle with its VIN and the legal title are on the back. Before iOS 26: the full state front (Expires, legal title, name, policy #, effective, vehicle + VIN, company and NAIC #). OGC to confirm the iOS 26+ front.',
+    standard: 'New design on iOS 26 and later (title, name, policy #, effective, company · NAIC #) and the legacy card before iOS 26; every other required item and statement is on the back.',
+    none: 'No ACE insurance card is issued for this state today (it is not in the per-state constants).'
+  };
+  const FILTERS = {
+    front: (s) => s.front === 'yes', paper: (s) => s.front === 'paper', naic: (s) => s.naic === 'required',
+    ownCode: (s) => s.naic === 'ownCode', text: (s) => s.text.length > 0, noCard: (s) => s.card === 'none'
+  };
+
+  const select = document.getElementById('srState');
+  const detail = document.getElementById('srDetail');
+  if (!select || !detail) return;
+
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  const list = (items) => items.length ? '<ul>' + items.map((i) => '<li>' + esc(i) + '</li>').join('') + '</ul>' : '<p class="sr-none">None required</p>';
+
+  document.querySelectorAll('.sr-chips').forEach((holder) => {
+    const states = STATES.filter(FILTERS[holder.dataset.filter]);
+    holder.innerHTML = states.map((s) => '<button type="button" class="sr-chip" data-code="' + s.code + '">' + s.code + '</button>').join(' ');
+  });
+
+  ['ACE clubs', 'Partner clubs'].forEach((group) => {
+    const og = document.createElement('optgroup');
+    og.label = group;
+    STATES.filter((s) => s.group === group).forEach((s) => og.appendChild(new Option(s.name + ' (' + s.code + ') · club ' + s.clubs, s.code)));
+    select.appendChild(og);
+  });
+
+  function show(code) {
+    const s = STATES.find((x) => x.code === code) || STATES[0];
+    select.value = s.code;
+    const [tone, label] = FRONT[s.front];
+    detail.innerHTML =
+      '<h3>' + esc(s.name) + ' <small>club ' + esc(s.clubs) + '</small></h3>' +
+      '<p><span class="a11y-v ' + tone + '">' + label + '</span> ' + esc(s.frontRule) + '</p>' +
+      '<div class="sr-cols"><div><h4>Must show</h4>' + list(s.fields) + '</div><div><h4>Required title or wording</h4>' + list(s.text) + '</div></div>' +
+      '<p><b>NAIC #:</b> ' + NAIC[s.naic] + '</p>' +
+      '<div class="fl-note"><b>Our card</b><br>' + esc(CARD[s.card]) + '</div>' +
+      '<h4>Official sources</h4><ul class="sr-src">' + s.sources.map(([t, u]) => '<li><a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(t) + '</a></li>').join('') + '</ul>';
+  }
+
+  select.addEventListener('change', () => show(select.value));
+  document.querySelectorAll('.sr-chip').forEach((chip) => chip.addEventListener('click', () => { show(chip.dataset.code); detail.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }));
+  const fromHash = () => { const m = location.hash.match(/^#state-([A-Za-z]{2})$/); if (m) { document.getElementById('stateRules').open = true; show(m[1].toUpperCase()); detail.scrollIntoView({ block: 'start' }); } };
+  window.addEventListener('hashchange', fromHash);
+  show('AL');
+  fromHash();
+})();
 </script>
 </body>
 </html>
