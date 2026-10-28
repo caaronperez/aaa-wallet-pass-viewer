@@ -201,6 +201,26 @@
         font-size: 12px;
         max-height: 360px;
       }
+      .picker {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+      }
+      .picker select {
+        width: auto;
+        max-width: 100%;
+        padding: 7px 10px;
+        font-size: 13px;
+      }
+      .picker button {
+        padding: 7px 10px;
+        font-size: 13px;
+      }
+      .picker button.wallet {
+        background: #000;
+        color: #fff;
+      }
       .toolbar {
         display: flex;
         flex-wrap: wrap;
@@ -222,7 +242,6 @@
         var EXPIRED_MESSAGE = 'Your 30 minutes ended. Enter the password and a new code.';
         var root = document.getElementById('root');
         var lockTimer = null;
-        var objectUrls = [];
         var encoder = new TextEncoder();
 
         function el(tag, attrs, children) {
@@ -298,8 +317,6 @@
           try {
             localStorage.removeItem(SESSION_KEY);
           } catch (e) {}
-          objectUrls.forEach(URL.revokeObjectURL);
-          objectUrls = [];
           showPassword(message);
         }
 
@@ -417,115 +434,34 @@
           input.focus();
         }
 
-        var crcTable = (function () {
-          var table = [];
-          for (var n = 0; n < 256; n++) {
-            var c = n;
-            for (var k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
-            table[n] = c >>> 0;
-          }
-          return table;
-        })();
-        function crc32(bytes) {
-          var crc = 0xffffffff;
-          for (var i = 0; i < bytes.length; i++) crc = crcTable[(crc ^ bytes[i]) & 255] ^ (crc >>> 8);
-          return (crc ^ 0xffffffff) >>> 0;
-        }
-        function zip(files) {
-          var parts = [],
-            central = [],
-            offset = 0;
-          files.forEach(function (file) {
-            var name = encoder.encode(file.path),
-              data = file.data,
-              crc = crc32(data);
-            var local = new DataView(new ArrayBuffer(30));
-            local.setUint32(0, 0x04034b50, true);
-            local.setUint16(4, 20, true);
-            local.setUint16(6, 0x0800, true);
-            local.setUint32(14, crc, true);
-            local.setUint32(18, data.length, true);
-            local.setUint32(22, data.length, true);
-            local.setUint16(26, name.length, true);
-            var entry = new DataView(new ArrayBuffer(46));
-            entry.setUint32(0, 0x02014b50, true);
-            entry.setUint16(4, 20, true);
-            entry.setUint16(6, 20, true);
-            entry.setUint16(8, 0x0800, true);
-            entry.setUint32(16, crc, true);
-            entry.setUint32(20, data.length, true);
-            entry.setUint32(24, data.length, true);
-            entry.setUint16(28, name.length, true);
-            entry.setUint32(42, offset, true);
-            parts.push(local, name, data);
-            central.push(entry, name);
-            offset += 30 + name.length + data.length;
-          });
-          var size = central.reduce(function (total, part) {
-            return total + part.byteLength;
-          }, 0);
-          var end = new DataView(new ArrayBuffer(22));
-          end.setUint32(0, 0x06054b50, true);
-          end.setUint16(8, files.length, true);
-          end.setUint16(10, files.length, true);
-          end.setUint32(12, size, true);
-          end.setUint32(16, offset, true);
-          return new Blob(parts.concat(central, [end]), { type: 'application/zip' });
-        }
-
-        function blobBytes(payload, id) {
-          var binary = atob(payload.blobs[id]),
-            bytes = new Uint8Array(binary.length);
-          for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-          return bytes;
-        }
-
-        function download(name, blob) {
-          var url = URL.createObjectURL(blob);
-          objectUrls.push(url);
-          var link = el('a', { href: url, download: name });
-          document.body.appendChild(link);
-          link.click();
-          link.remove();
-        }
-
-        function downloadPass(payload, name, templateFiles, artworkFiles, row, legacy) {
-          var folder = name + (legacy ? ' legacy' : '') + '.pkpasstemplate/';
-          var files = Object.assign({}, templateFiles, legacy ? {} : artworkFiles);
-          var entries = Object.keys(files)
-            .filter(function (file) {
-              return !(legacy && payload.posterOnlyFiles.indexOf(file) >= 0);
+        function artworkPicker(picker) {
+          if (!picker) return null;
+          var artworkSelect = el(
+            'select',
+            { 'aria-label': 'Artwork' },
+            picker.options.map(function (option) {
+              var node = el('option', { value: option.id, text: option.label });
+              if (option.id === picker.defaultOption) node.selected = true;
+              return node;
             })
-            .map(function (file) {
-              return { path: folder + file, data: blobBytes(payload, files[file]) };
-            });
-          entries.push({
-            path: folder + 'pass.json',
-            data: encoder.encode(JSON.stringify(legacy ? row.legacy : row.design, null, 2))
+          );
+          var darkeningSelect = el('select', { 'aria-label': 'Suppress header darkening' }, [
+            el('option', { value: 'on', text: 'Suppress header darkening: Yes' }),
+            el('option', { value: 'off', text: 'Suppress header darkening: No' })
+          ]);
+          var addButton = el('button', {
+            class: 'wallet',
+            text: 'Add to Apple Wallet',
+            onclick: function (event) {
+              addToWallet(event.currentTarget, picker.passIds[artworkSelect.value][darkeningSelect.value]);
+            }
           });
-          download(folder.slice(0, -1) + '.zip', zip(entries));
-        }
-
-        function downloadTemplate(payload, fixture, info, legacy) {
-          downloadPass(
-            payload,
-            info.state + ' ' + info.club + ' ' + fixture,
-            payload.templates[info.variant],
-            payload.artwork[info.club],
-            payload.rows[fixture][info.state],
-            legacy
-          );
-        }
-
-        function downloadMembership(payload, row, legacy) {
-          downloadPass(
-            payload,
-            'Membership ' + row.club,
-            payload.templates.membership,
-            payload.membershipArtwork[row.club],
-            row,
-            legacy
-          );
+          return el('div', { class: 'picker' }, [
+            el('label', { class: 'small', text: 'Artwork' }),
+            artworkSelect,
+            darkeningSelect,
+            addButton
+          ]);
         }
 
         function addToWallet(button, id) {
@@ -612,7 +548,7 @@
                 text:
                   'Exported ' +
                   new Date(payload.generatedAt).toLocaleString() +
-                  '. "Add to Apple Wallet" installs the signed pass (open this page in Safari on your iPhone). "New design" and "Legacy" download a .pkpasstemplate folder (zipped) for Pass Designer; Legacy is what iOS < 26 shows.'
+                  '. "Add to Apple Wallet" installs the signed pass (open this page in Safari on your iPhone). California (insurance) and club 004 (membership) also let you pick the artwork and whether the header darkening is suppressed.'
               }),
               rowsNode
             ])
@@ -665,20 +601,11 @@
                   }),
                   el('div', { class: 'small', text: 'Membership number ' + values.membershipNumber.value }),
                   issuesView(row.issues),
+                  row.club === '004' ? artworkPicker(payload.pickers && payload.pickers.membership) : null,
                   el('div', { class: 'actions' }, [
-                    walletButton(row.passId),
-                    el('button', {
-                      text: 'New design',
-                      onclick: function () {
-                        downloadMembership(payload, row, false);
-                      }
-                    }),
-                    el('button', {
-                      text: 'Legacy (iOS < 26)',
-                      onclick: function () {
-                        downloadMembership(payload, row, true);
-                      }
-                    }),
+                    row.club === '004' && payload.pickers && payload.pickers.membership
+                      ? null
+                      : walletButton(row.passId),
                     el('button', {
                       class: 'secondary',
                       text: 'Values',
@@ -755,20 +682,13 @@
                         })
                       )
                     : el('div', { class: 'fits', text: '✓ every value fits' }),
+                  info.state === 'CA' && fixture === 'default'
+                    ? artworkPicker(payload.pickers && payload.pickers.insurance)
+                    : null,
                   el('div', { class: 'actions' }, [
-                    walletButton(payload.passIds && payload.passIds[fixture][info.state]),
-                    el('button', {
-                      text: 'New design',
-                      onclick: function () {
-                        downloadTemplate(payload, fixture, info, false);
-                      }
-                    }),
-                    el('button', {
-                      text: 'Legacy (iOS < 26)',
-                      onclick: function () {
-                        downloadTemplate(payload, fixture, info, true);
-                      }
-                    }),
+                    info.state === 'CA' && fixture === 'default' && payload.pickers && payload.pickers.insurance
+                      ? null
+                      : walletButton(payload.passIds && payload.passIds[fixture][info.state]),
                     el('button', {
                       class: 'secondary',
                       text: 'Values',
