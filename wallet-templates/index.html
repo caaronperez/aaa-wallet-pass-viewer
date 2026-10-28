@@ -489,22 +489,43 @@
           link.remove();
         }
 
-        function downloadTemplate(payload, fixture, info, legacy) {
-          var row = payload.rows[fixture][info.state];
-          var folder = info.state + ' ' + info.club + ' ' + fixture + (legacy ? ' legacy' : '') + '.pkpasstemplate/';
-          var files = Object.assign({}, payload.templates[info.variant], legacy ? {} : payload.artwork[info.club]);
+        function downloadPass(payload, name, templateFiles, artworkFiles, row, legacy) {
+          var folder = name + (legacy ? ' legacy' : '') + '.pkpasstemplate/';
+          var files = Object.assign({}, templateFiles, legacy ? {} : artworkFiles);
           var entries = Object.keys(files)
-            .filter(function (name) {
-              return !(legacy && payload.posterOnlyFiles.indexOf(name) >= 0);
+            .filter(function (file) {
+              return !(legacy && payload.posterOnlyFiles.indexOf(file) >= 0);
             })
-            .map(function (name) {
-              return { path: folder + name, data: blobBytes(payload, files[name]) };
+            .map(function (file) {
+              return { path: folder + file, data: blobBytes(payload, files[file]) };
             });
           entries.push({
             path: folder + 'pass.json',
             data: encoder.encode(JSON.stringify(legacy ? row.legacy : row.design, null, 2))
           });
           download(folder.slice(0, -1) + '.zip', zip(entries));
+        }
+
+        function downloadTemplate(payload, fixture, info, legacy) {
+          downloadPass(
+            payload,
+            info.state + ' ' + info.club + ' ' + fixture,
+            payload.templates[info.variant],
+            payload.artwork[info.club],
+            payload.rows[fixture][info.state],
+            legacy
+          );
+        }
+
+        function downloadMembership(payload, row, legacy) {
+          downloadPass(
+            payload,
+            'Membership ' + row.club,
+            payload.templates.membership,
+            payload.membershipArtwork[row.club],
+            row,
+            legacy
+          );
         }
 
         function addToWallet(button, id) {
@@ -531,7 +552,24 @@
         function render(payload) {
           root.textContent = '';
           var fixture = payload.fixtures[0];
+          var card = 'insurance';
           var rowsNode = el('div', { class: 'rows' });
+          var cardSelect = el(
+            'select',
+            {
+              'aria-label': 'Card',
+              onchange: function () {
+                card = cardSelect.value;
+                fixtureLabel.hidden = select.hidden = card !== 'insurance';
+                fill();
+              }
+            },
+            [
+              el('option', { value: 'insurance', text: 'Insurance (by state)' }),
+              payload.membership ? el('option', { value: 'membership', text: 'Membership (by club)' }) : null
+            ]
+          );
+          var fixtureLabel = el('label', { text: 'Policy fixture', style: 'margin:0' });
           var select = el(
             'select',
             {
@@ -564,7 +602,12 @@
           );
           root.appendChild(
             el('main', {}, [
-              el('div', { class: 'toolbar' }, [el('label', { text: 'Policy fixture', style: 'margin:0' }), select]),
+              el('div', { class: 'toolbar' }, [
+                el('label', { text: 'Card', style: 'margin:0' }),
+                cardSelect,
+                fixtureLabel,
+                select
+              ]),
               el('p', {
                 text:
                   'Exported ' +
@@ -575,8 +618,83 @@
             ])
           );
 
+          function walletButton(id) {
+            return id
+              ? el('button', {
+                  class: 'wallet',
+                  text: 'Add to Apple Wallet',
+                  onclick: function (event) {
+                    addToWallet(event.currentTarget, id);
+                  }
+                })
+              : null;
+          }
+
+          function issuesView(issues) {
+            return issues.length
+              ? el(
+                  'div',
+                  {},
+                  issues.map(function (issue) {
+                    return el('div', { class: 'issue', text: issue });
+                  })
+                )
+              : el('div', { class: 'fits', text: '✓ every value fits' });
+          }
+
+          function fillMembership() {
+            payload.membership.forEach(function (row) {
+              var values = row.values;
+              var valuesView = el('pre', { hidden: '', text: JSON.stringify(values, null, 2) });
+              rowsNode.appendChild(
+                el('div', { class: 'row' + (row.issues.length ? ' bad' : '') }, [
+                  el('div', { class: 'top' }, [
+                    el('span', { class: 'state', text: 'Club ' + row.club }),
+                    el('span', { class: 'small', text: 'membership' })
+                  ]),
+                  el('div', { text: values.memberName.value + ' · ' + values.plan.value }),
+                  el('div', {
+                    class: 'small',
+                    text: [values.loyalMember, values.roadside]
+                      .filter(Boolean)
+                      .map(function (field) {
+                        return field.value;
+                      })
+                      .join(' · ')
+                  }),
+                  el('div', { class: 'small', text: values.membershipNumberFooter.value }),
+                  issuesView(row.issues),
+                  el('div', { class: 'actions' }, [
+                    walletButton(row.passId),
+                    el('button', {
+                      text: 'New design',
+                      onclick: function () {
+                        downloadMembership(payload, row, false);
+                      }
+                    }),
+                    el('button', {
+                      text: 'Legacy (iOS < 26)',
+                      onclick: function () {
+                        downloadMembership(payload, row, true);
+                      }
+                    }),
+                    el('button', {
+                      class: 'secondary',
+                      text: 'Values',
+                      onclick: function () {
+                        valuesView.hidden = !valuesView.hidden;
+                      }
+                    })
+                  ]),
+                  valuesView
+                ])
+              );
+            });
+          }
+
           function fill() {
             rowsNode.textContent = '';
+            if (card === 'membership') return fillMembership();
             payload.states.forEach(function (info) {
               var row = payload.rows[fixture][info.state],
                 values = row.values;
@@ -610,15 +728,7 @@
                       )
                     : el('div', { class: 'fits', text: '✓ every value fits' }),
                   el('div', { class: 'actions' }, [
-                    payload.passIds && payload.passIds[fixture][info.state]
-                      ? el('button', {
-                          class: 'wallet',
-                          text: 'Add to Apple Wallet',
-                          onclick: function (event) {
-                            addToWallet(event.currentTarget, payload.passIds[fixture][info.state]);
-                          }
-                        })
-                      : null,
+                    walletButton(payload.passIds && payload.passIds[fixture][info.state]),
                     el('button', {
                       text: 'New design',
                       onclick: function () {
