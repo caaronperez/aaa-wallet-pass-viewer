@@ -184,6 +184,10 @@
         flex-wrap: wrap;
         gap: 6px;
       }
+      .actions button.wallet {
+        background: #000;
+        color: #fff;
+      }
       .actions button {
         padding: 7px 10px;
         font-size: 13px;
@@ -503,6 +507,27 @@
           download(folder.slice(0, -1) + '.zip', zip(entries));
         }
 
+        function addToWallet(button, id) {
+          var session = savedSession();
+          if (!session) return lock(EXPIRED_MESSAGE);
+          button.disabled = true;
+          callAccess('/pass-link', { token: session.token, id: id })
+            .then(function (response) {
+              button.disabled = false;
+              if (response.ok) {
+                window.location.href = response.data.url;
+              } else if (response.data.error === 'expired') {
+                lock(EXPIRED_MESSAGE);
+              } else {
+                button.textContent = 'Pass not available';
+              }
+            })
+            .catch(function () {
+              button.disabled = false;
+              button.textContent = 'Try again';
+            });
+        }
+
         function render(payload) {
           root.textContent = '';
           var fixture = payload.fixtures[0];
@@ -544,7 +569,7 @@
                 text:
                   'Exported ' +
                   new Date(payload.generatedAt).toLocaleString() +
-                  '. Each download is a .pkpasstemplate folder (zipped) for Pass Designer: "New design" is the pass as Wallet gets it, "Legacy" is what iOS < 26 shows.'
+                  '. "Add to Apple Wallet" installs the signed pass (open this page in Safari on your iPhone). "New design" and "Legacy" download a .pkpasstemplate folder (zipped) for Pass Designer; Legacy is what iOS < 26 shows.'
               }),
               rowsNode
             ])
@@ -585,6 +610,15 @@
                       )
                     : el('div', { class: 'fits', text: '✓ every value fits' }),
                   el('div', { class: 'actions' }, [
+                    payload.passIds && payload.passIds[fixture][info.state]
+                      ? el('button', {
+                          class: 'wallet',
+                          text: 'Add to Apple Wallet',
+                          onclick: function (event) {
+                            addToWallet(event.currentTarget, payload.passIds[fixture][info.state]);
+                          }
+                        })
+                      : null,
                     el('button', {
                       text: 'New design',
                       onclick: function () {
