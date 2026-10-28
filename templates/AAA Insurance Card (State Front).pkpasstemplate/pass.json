@@ -1,15 +1,147 @@
 {
+  "appLaunchURL": "aceautoclub://wallet/benefits?source=wallet",
+  "associatedStoreIdentifiers": [
+    1094393125
+  ],
   "authenticationToken": "",
-  "backgroundColor": "rgb(255, 255, 255)",
+  "backgroundColor": "rgb(242,228,228)",
   "barcodes": [],
-  "description": "Illinois Insurance Card",
-  "expirationDate": "2027-01-09T23:59:59-06:00",
-  "foregroundColor": "rgb(25, 40, 66)",
+  "description": "AAA Auto Insurance Card",
+  "expirationDate": "2027-09-15T06:59:00Z",
+  "featuredActions": [
+    {
+      "_id": "6D898A90-146D-4F88-82E6-12A07BE4AA17",
+      "identifier": "memberBenefits",
+      "type": "membershipBenefits",
+      "url": "aceautoclub://wallet/benefits?source=wallet"
+    },
+    {
+      "_id": "A5C9E2AB-4F31-4EE4-9A7F-5FCAE87EDE59",
+      "identifier": "nearestBranch",
+      "placeIdentifier": "I71B28B9C6AC9C7EF",
+      "type": "place"
+    }
+  ],
+  "foregroundColor": "rgb(25,40,66)",
   "formatVersion": 1,
+  "labelColor": "rgb(39,41,43)",
+  "organizationName": "AAA",
+  "passTypeIdentifier": "pass.com.example.aaa.insurance",
+  "serialNumber": "CAA000XXXX-ALT-AA",
+  "suppressHeaderDarkening": true,
+  "teamIdentifier": "",
+  "useAutomaticColors": false,
+  "posterGeneric": {
+    "headerFields": [
+      {
+        "_id": "041A0AE6-820D-42F0-833D-91DAFBB356A2",
+        "key": "cardTitle",
+        "label": "IL INSURANCE CARD",
+        "value": "Auto Insurance Card"
+      }
+    ],
+    "primaryFields": [
+      {
+        "_id": "369E2568-23C2-4A28-96B8-6E833AECD401",
+        "key": "namedInsured",
+        "label": "Named Insured",
+        "value": "FULANITO PEREZ"
+      },
+      {
+        "_id": "5FB970D9-44B6-4DE2-BD94-105302DF768F",
+        "key": "policyNumber",
+        "label": "Policy Number",
+        "value": "CAA000XXXX"
+      },
+      {
+        "_id": "36008DE2-0CE8-4D68-95ED-6A0C69101720",
+        "key": "effective",
+        "label": "Effective",
+        "value": "01/09/26 – 01/09/27",
+        "textAlignment": "PKTextAlignmentRight"
+      }
+    ],
+    "footerFields": [
+      {
+        "_id": "1EF1701E-928B-4121-91EC-AA74C4EE5E9F",
+        "key": "insuranceCompanyFooter",
+        "label": "Insurance Company",
+        "value": "INTERINSURANCE EXCHANGE · NAIC # 15598"
+      }
+    ],
+    "backFields": [
+      {
+        "_id": "45129856-FAA5-4460-B53B-5D4859B2C9F7",
+        "key": "disclaimer",
+        "label": "Disclaimer",
+        "value": "State disclaimer and required statements"
+      },
+      {
+        "_id": "E82436E8-8E01-47FE-86F7-704DEEFC4F4D",
+        "key": "namedInsureds",
+        "label": "Named Insured(s)",
+        "value": "FULANITO PEREZ\nSAMPLE SECOND INSURED"
+      },
+      {
+        "_id": "82CF1535-45D5-49B9-94A9-D84EF778340D",
+        "key": "insuredAddress",
+        "label": "Insured address",
+        "value": "000 Main St, City, ST 00000"
+      },
+      {
+        "_id": "1393FB9D-0FD7-41EE-85C1-DA8765E90614",
+        "key": "vehicles",
+        "label": "Vehicles",
+        "value": "2026 SAMPLE SUV\nVIN XXXXXXXXXXXXXXXXX"
+      },
+      {
+        "_id": "EE04B646-0DD7-4077-9B32-CB3528AD2BEE",
+        "key": "insuredDrivers",
+        "label": "Insured drivers",
+        "value": "Fulanito Perez"
+      },
+      {
+        "_id": "2C9FED68-7089-4E80-9B45-EB1D82F5A110",
+        "key": "excludedDrivers",
+        "label": "Excluded drivers",
+        "value": "None"
+      },
+      {
+        "_id": "A377CDA7-7243-4867-B706-D87DEC2AC4A8",
+        "key": "policyPeriod",
+        "label": "Policy period",
+        "value": "01/09/2026 – 01/09/2027"
+      },
+      {
+        "_id": "DD3F0C8E-2455-4E0A-B614-AD165124E553",
+        "key": "company",
+        "label": "Insurance company",
+        "value": "Company name\nNAIC # 00000\nCompany address"
+      },
+      {
+        "_id": "81F81985-AFC5-4A0E-AD2F-23E7088B7EDF",
+        "key": "agent",
+        "label": "Agent",
+        "value": "Agent name · 000-000-0000"
+      },
+      {
+        "_id": "15CDDA42-1B6E-4148-8825-60FF91C6D2B6",
+        "key": "accidentAssist",
+        "label": "24/7 AAA Accident Assist Hotline",
+        "value": "1-800-67-CLAIM (1-800-672-5246)"
+      },
+      {
+        "_id": "84D6E1CF-0B02-43CE-9249-DEF27D4EB4BE",
+        "key": "policyQuestions",
+        "label": "Policy questions or changes",
+        "value": "1-800-924-6141"
+      }
+    ]
+  },
   "generic": {
     "headerFields": [
       {
-        "_id": "EE57E0A0-3C5E-427E-A461-897FED0ABF34",
+        "_id": "F83123D3-92C3-4DF1-9700-455B53F98C33",
         "key": "expirationDate",
         "label": "Expires",
         "value": "01/09/2027",
@@ -18,27 +150,27 @@
     ],
     "primaryFields": [
       {
-        "_id": "EF1149B9-359D-4C29-B027-6445D4188265",
-        "key": "namedInsured",
+        "_id": "FF736874-1B0C-4B3B-9002-33D0DF9785B7",
+        "key": "stateNamedInsured",
         "label": "ILLINOIS INSURANCE CARD",
         "value": "FULANITO PEREZ"
       }
     ],
     "secondaryFields": [
       {
-        "_id": "5A1A3A58-A19D-42EE-8A83-7C872A270A96",
+        "_id": "606B5B1E-74F1-4A90-98F2-24CF0F6221F0",
         "key": "policyNumber",
         "label": "Policy #",
         "value": "MOA000XXXX"
       },
       {
-        "_id": "F7C8BF59-4AAA-4A41-85ED-06B9B41AF35E",
+        "_id": "9083F4B0-C30E-4F8E-98A3-5F06052597E1",
         "key": "effectiveDate",
         "label": "Effective",
         "value": "01/09/2026"
       },
       {
-        "_id": "169A66A0-A172-431B-989C-0FF0A8F228C8",
+        "_id": "ABE6923C-636A-4760-B2D0-3472B7975DF8",
         "key": "vin",
         "label": "2026 SAMPLE SUV",
         "value": "XXXXXXXXXXXXXXXXX",
@@ -47,13 +179,13 @@
     ],
     "auxiliaryFields": [
       {
-        "_id": "5DFC42CF-BEBD-4E6B-8005-32317C3E14AF",
+        "_id": "214093DB-9249-4F0F-8791-867CBF0853AF",
         "key": "insuranceCompany",
         "label": "Insurance Company",
         "value": "Automobile Club Inter-Insurance Exchange"
       },
       {
-        "_id": "CCCB0596-B4E0-4EE2-BF84-A0534DA89A42",
+        "_id": "E18D08B6-E5D2-4570-89F8-BF3D66293B88",
         "key": "naic",
         "label": "NAIC #",
         "value": "15512",
@@ -62,76 +194,71 @@
     ],
     "backFields": [
       {
-        "_id": "CF1E9C1E-05A9-4062-A449-994DDC4F6738",
+        "_id": "FDFF8608-34A1-47FC-B9BA-91EBC2C45674",
         "key": "disclaimer",
         "label": "Disclaimer",
-        "value": "EXAMINE POLICY EXCLUSIONS CAREFULLY. THIS FORM DOES NOT CONSTITUTE ANY PART OF YOUR INSURANCE POLICY.\nCoverage subject to policy terms and limits. The digital card may not be recognized in all states."
+        "value": "State disclaimer and required statements"
       },
       {
-        "_id": "DA3E9C84-7AC9-4436-AE74-C24C470AADC0",
+        "_id": "9CC30439-990C-4469-913F-2A11A130F7DF",
         "key": "namedInsureds",
         "label": "Named Insured(s)",
         "value": "FULANITO PEREZ\nSAMPLE SECOND INSURED"
       },
       {
-        "_id": "221455CA-6F74-48F9-9A44-9D3DBC2EC218",
+        "_id": "E0A7F1F1-A209-4ECD-8C88-4E0478475B63",
         "key": "insuredAddress",
         "label": "Insured address",
-        "value": "000 Main St, City, IL 00000"
+        "value": "000 Main St, City, ST 00000"
       },
       {
-        "_id": "B8EDAEB1-75CA-4364-957C-148A1020253B",
+        "_id": "491D4EBB-63AA-4A53-9822-DD569810BC01",
         "key": "vehicles",
-        "label": "Vehicle on this card",
+        "label": "Vehicles",
         "value": "2026 SAMPLE SUV\nVIN XXXXXXXXXXXXXXXXX"
       },
       {
-        "_id": "01FEFE82-643F-4E31-AD41-F7D739FF5F3F",
+        "_id": "80CF0F08-805A-4B2C-AC37-287DE02D71E3",
+        "key": "insuredDrivers",
+        "label": "Insured drivers",
+        "value": "Fulanito Perez"
+      },
+      {
+        "_id": "EBEC0AAB-7057-44A4-91CE-1BDACD95515C",
         "key": "excludedDrivers",
         "label": "Excluded drivers",
         "value": "None"
       },
       {
-        "_id": "E61A8AC4-8743-4281-93F4-4AE35AD18C0E",
+        "_id": "A98094AD-9E8E-4F97-85F4-9916FC97755A",
         "key": "policyPeriod",
         "label": "Policy period",
         "value": "01/09/2026 – 01/09/2027"
       },
       {
-        "_id": "636ECB0B-7A6F-4E6D-98A2-AF02C7FA6AF2",
+        "_id": "E33B7BB1-DB34-40F5-9CD1-EE94947CA5D7",
         "key": "company",
         "label": "Insurance company",
-        "value": "Automobile Club Inter-Insurance Exchange\nNAIC # 15512\n12901 North Forty Drive, St. Louis, MO 63141"
+        "value": "Company name\nNAIC # 00000\nCompany address"
       },
       {
-        "_id": "5FBF1E74-E2FA-4D34-9A1C-F8792D4022C3",
+        "_id": "ACBFBA06-E904-4DA5-8FAC-61A1CFF0C654",
         "key": "agent",
         "label": "Agent",
-        "value": "Sample Agent · 000-000-0000"
+        "value": "Agent name · 000-000-0000"
       },
       {
-        "_id": "A8F1F1EB-9F0B-4284-ACE7-9E6297A5DC88",
+        "_id": "13160DEF-52BD-4DD4-BDCF-470D1AE6C33F",
         "key": "accidentAssist",
         "label": "24/7 AAA Accident Assist Hotline",
-        "value": "1-866-222-2378"
+        "value": "1-800-67-CLAIM (1-800-672-5246)"
       },
       {
-        "_id": "4328B4CD-4744-42D2-A811-2A9837CD3087",
+        "_id": "D39500CA-F87E-4F2A-8E10-31273006381A",
         "key": "policyQuestions",
         "label": "Policy questions or changes",
         "value": "1-800-924-6141"
-      },
-      {
-        "_id": "2B01F93F-4DD3-4B1C-8FBD-AFC05CAB3294",
-        "key": "stateNote",
-        "label": "Template",
-        "value": "State-front layout for AL, IL, LA, KY, PA and WV. Every value this state requires on the front is on the front; one card per vehicle."
       }
     ]
-  },
-  "labelColor": "rgb(39, 41, 43)",
-  "organizationName": "AAA",
-  "passTypeIdentifier": "pass.com.example.aaa.insurance",
-  "serialNumber": "CAA000XXXX-ALT-AA",
-  "teamIdentifier": ""
+  }
 }

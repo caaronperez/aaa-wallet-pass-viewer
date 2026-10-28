@@ -1,4 +1,8 @@
 {
+  "appLaunchURL": "aceautoclub://wallet/benefits?source=wallet",
+  "associatedStoreIdentifiers": [
+    1094393125
+  ],
   "authenticationToken": "",
   "backgroundColor": "rgb(242,228,228)",
   "barcodes": [],
@@ -9,7 +13,7 @@
       "_id": "6D898A90-146D-4F88-82E6-12A07BE4AA17",
       "identifier": "memberBenefits",
       "type": "membershipBenefits",
-      "url": "aceautoclub-beta://wallet/benefits?source=wallet"
+      "url": "aceautoclub://wallet/benefits?source=wallet"
     },
     {
       "_id": "A5C9E2AB-4F31-4EE4-9A7F-5FCAE87EDE59",

@@ -1,4 +1,5 @@
 {
+  "appLaunchURL": "aceautoclub://wallet/benefits?source=wallet",
   "associatedStoreIdentifiers": [
     1094393125
   ],
@@ -20,7 +21,7 @@
       "_id": "B28682DD-2D79-49A2-85B0-0BC554E8D361",
       "identifier": "memberBenefits",
       "type": "membershipBenefits",
-      "url": "aceautoclub-beta://wallet/benefits?source=wallet"
+      "url": "aceautoclub://wallet/benefits?source=wallet"
     },
     {
       "_id": "416B1BAF-10E3-438F-A72C-383C6E03F523",

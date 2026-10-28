@@ -1,222 +1,226 @@
 {
-  "authenticationToken" : "",
-  "backgroundColor" : "rgb(255,255,255)",
-  "barcodes" : [
+  "appLaunchURL": "aceautoclub://wallet/benefits?source=wallet",
+  "associatedStoreIdentifiers": [
+    1094393125
+  ],
+  "authenticationToken": "",
+  "backgroundColor": "rgb(255,255,255)",
+  "barcodes": [
     {
-      "_id" : "E4FD1E6E-100F-4455-90D5-FEAA43177955",
-      "altText" : "000 000 XXXXXXXXX 0",
-      "format" : "PKBarcodeFormatPDF417",
-      "message" : "000 000 XXXXXXXXX 0",
-      "messageEncoding" : "iso-8859-1"
+      "_id": "E4FD1E6E-100F-4455-90D5-FEAA43177955",
+      "altText": "000 000 XXXXXXXXX 0",
+      "format": "PKBarcodeFormatPDF417",
+      "message": "000 000 XXXXXXXXX 0",
+      "messageEncoding": "iso-8859-1"
     }
   ],
-  "description" : "AAA Membership Card",
-  "featuredActions" : [
+  "description": "AAA Membership Card",
+  "featuredActions": [
     {
-      "_id" : "E14F5704-92F2-45FF-8B7C-D0BEA1A82A28",
-      "identifier" : "roadsideAssistance",
-      "type" : "call",
-      "url" : "tel:\/\/18004004222"
+      "_id": "53AC827B-8C0C-4BB8-B305-0E79930E1A89",
+      "identifier": "memberBenefits",
+      "type": "membershipBenefits",
+      "url": "aceautoclub://wallet/benefits?source=wallet"
     },
     {
-      "_id" : "A77FAAC7-B202-4652-8428-C93C90B625E7",
-      "identifier" : "nearestBranch",
-      "placeIdentifier" : "I71B28B9C6AC9C7EF",
-      "type" : "place"
+      "_id": "A77FAAC7-B202-4652-8428-C93C90B625E7",
+      "identifier": "nearestBranch",
+      "placeIdentifier": "I71B28B9C6AC9C7EF",
+      "type": "place"
     }
   ],
-  "foregroundColor" : "rgb(30,78,156)",
-  "formatVersion" : 1,
-  "generic" : {
-    "auxiliaryFields" : [
+  "foregroundColor": "rgb(30,78,156)",
+  "formatVersion": 1,
+  "generic": {
+    "auxiliaryFields": [
       {
-        "_id" : "3F3FEBCE-AACD-4D98-BA17-B2BF225A73A3",
-        "key" : "roadside",
-        "label" : "ROADSIDE ASSISTANCE",
-        "value" : "1-800-400-4222"
+        "_id": "3F3FEBCE-AACD-4D98-BA17-B2BF225A73A3",
+        "key": "roadside",
+        "label": "ROADSIDE ASSISTANCE",
+        "value": "1-800-400-4222"
       },
       {
-        "_id" : "69F65CD7-FCAA-42B3-9080-9C79E3D0DBBD",
-        "key" : "roadsideOutsideCA",
-        "label" : "OUTSIDE CA",
-        "textAlignment" : "PKTextAlignmentRight",
-        "value" : "1-800-222-4357"
+        "_id": "69F65CD7-FCAA-42B3-9080-9C79E3D0DBBD",
+        "key": "roadsideOutsideCA",
+        "label": "OUTSIDE CA",
+        "textAlignment": "PKTextAlignmentRight",
+        "value": "1-800-222-4357"
       }
     ],
-    "backFields" : [
+    "backFields": [
       {
-        "_id" : "16FC7DAB-10AF-4930-B9D8-1AF7B13A5896",
-        "attributedValue" : "Roadside Assistance\n<a href='tel:18004004222'>1-800-400-4222<\/a>",
-        "key" : "roadsideAssistance",
-        "label" : "Open Roadside",
-        "value" : "Roadside Assistance\n1-800-400-4222"
+        "_id": "16FC7DAB-10AF-4930-B9D8-1AF7B13A5896",
+        "attributedValue": "Roadside Assistance\n<a href='tel:18004004222'>1-800-400-4222</a>",
+        "key": "roadsideAssistance",
+        "label": "Open Roadside",
+        "value": "Roadside Assistance\n1-800-400-4222"
       },
       {
-        "_id" : "D785F2A7-BE99-43A2-9DBD-EA492AA885B0",
-        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/locations.html'>Nearest branch<\/a>",
-        "key" : "nearestBranch",
-        "label" : "Get Direction",
-        "value" : "Nearest branch"
+        "_id": "D785F2A7-BE99-43A2-9DBD-EA492AA885B0",
+        "attributedValue": "<a href='https://www.ace.aaa.com/locations.html'>Nearest branch</a>",
+        "key": "nearestBranch",
+        "label": "Get Direction",
+        "value": "Nearest branch"
       },
       {
-        "_id" : "867D4C2C-9D19-455D-B4F6-07269EB98407",
-        "key" : "services",
-        "label" : "Services",
-        "value" : "Insurance Sales & Service\nInsurance Claims\nMembership, Travel, Other Services\nHertz Rental Discounts"
+        "_id": "867D4C2C-9D19-455D-B4F6-07269EB98407",
+        "key": "services",
+        "label": "Services",
+        "value": "Insurance Sales & Service\nInsurance Claims\nMembership, Travel, Other Services\nHertz Rental Discounts"
       },
       {
-        "_id" : "B9C6FDB5-3975-4FF1-9065-E1888D04F947",
-        "attributedValue" : "Phone: <a href='tel:18004004222'>1-800-400-4222<\/a>\nPhone (Outside of CA): <a href='tel:18002224357'>1-800-222-4357<\/a>",
-        "key" : "roadside",
-        "label" : "Roadside Assistance",
-        "value" : "Phone: 1-800-400-4222\nPhone (Outside of CA): 1-800-222-4357"
+        "_id": "B9C6FDB5-3975-4FF1-9065-E1888D04F947",
+        "attributedValue": "Phone: <a href='tel:18004004222'>1-800-400-4222</a>\nPhone (Outside of CA): <a href='tel:18002224357'>1-800-222-4357</a>",
+        "key": "roadside",
+        "label": "Roadside Assistance",
+        "value": "Phone: 1-800-400-4222\nPhone (Outside of CA): 1-800-222-4357"
       },
       {
-        "_id" : "37611BEA-CFEF-46AB-B51D-22E981A6DDF0",
-        "attributedValue" : "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: <a href='tel:10000000000'>000-000-0000<\/a>\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday",
-        "key" : "branch",
-        "label" : "Your Local AAA Branch",
-        "value" : "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: 000-000-0000\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday"
+        "_id": "37611BEA-CFEF-46AB-B51D-22E981A6DDF0",
+        "attributedValue": "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: <a href='tel:10000000000'>000-000-0000</a>\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday",
+        "key": "branch",
+        "label": "Your Local AAA Branch",
+        "value": "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: 000-000-0000\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday"
       },
       {
-        "_id" : "4025175E-C99D-4AB3-B183-5C8CDE823479",
-        "key" : "rentalCodes",
-        "label" : "Car Rental Discounts Codes",
-        "value" : "Hertz CDP: 0000\nDollar CD: XX0000\nThrifty CD: 0000000000"
+        "_id": "4025175E-C99D-4AB3-B183-5C8CDE823479",
+        "key": "rentalCodes",
+        "label": "Car Rental Discounts Codes",
+        "value": "Hertz CDP: 0000\nDollar CD: XX0000\nThrifty CD: 0000000000"
       },
       {
-        "_id" : "134FCBF5-75F3-40F8-80A2-0B31F5F0AF68",
-        "key" : "membershipNumberBack",
-        "label" : "Membership Number",
-        "value" : "000 000 XXXXXXXXX 0"
+        "_id": "134FCBF5-75F3-40F8-80A2-0B31F5F0AF68",
+        "key": "membershipNumberBack",
+        "label": "Membership Number",
+        "value": "000 000 XXXXXXXXX 0"
       }
     ],
-    "headerFields" : [
+    "headerFields": [
       {
-        "_id" : "71E43CE2-B816-4ED2-B3F2-E1778B7B9531",
-        "key" : "loyalMember",
-        "label" : "LOYAL MEMBER",
-        "textAlignment" : "PKTextAlignmentRight",
-        "value" : "32 YEARS"
+        "_id": "71E43CE2-B816-4ED2-B3F2-E1778B7B9531",
+        "key": "loyalMember",
+        "label": "LOYAL MEMBER",
+        "textAlignment": "PKTextAlignmentRight",
+        "value": "32 YEARS"
       }
     ],
-    "primaryFields" : [
+    "primaryFields": [
       {
-        "_id" : "7A3B6A15-F0C5-49FB-AB83-4E133949047F",
-        "key" : "memberName",
-        "label" : "MEMBER NAME",
-        "value" : "FULANITO PEREZ"
+        "_id": "7A3B6A15-F0C5-49FB-AB83-4E133949047F",
+        "key": "memberName",
+        "label": "MEMBER NAME",
+        "value": "FULANITO PEREZ"
       }
     ],
-    "secondaryFields" : [
+    "secondaryFields": [
       {
-        "_id" : "E95BBABE-BC18-4893-833A-2E387565A8C9",
-        "key" : "membershipNumber",
-        "label" : "MEMBERSHIP NUMBER",
-        "value" : "000 000 XXXXXXXXX 0"
+        "_id": "E95BBABE-BC18-4893-833A-2E387565A8C9",
+        "key": "membershipNumber",
+        "label": "MEMBERSHIP NUMBER",
+        "value": "000 000 XXXXXXXXX 0"
       },
       {
-        "_id" : "198BDC72-9896-4667-80EF-F094347A49F0",
-        "key" : "plan",
-        "label" : "PLAN",
-        "textAlignment" : "PKTextAlignmentRight",
-        "value" : "PREMIER"
+        "_id": "198BDC72-9896-4667-80EF-F094347A49F0",
+        "key": "plan",
+        "label": "PLAN",
+        "textAlignment": "PKTextAlignmentRight",
+        "value": "PREMIER"
       }
     ]
   },
-  "labelColor" : "rgb(0,0,0)",
-  "organizationName" : "AAA",
-  "passTypeIdentifier" : "pass.com.example.aaa.membership",
-  "posterGeneric" : {
-    "auxiliaryFields" : [],
-    "backFields" : [
+  "labelColor": "rgb(0,0,0)",
+  "organizationName": "AAA",
+  "passTypeIdentifier": "pass.com.example.aaa.membership",
+  "posterGeneric": {
+    "auxiliaryFields": [],
+    "backFields": [
       {
-        "_id" : "16FC7DAB-10AF-4930-B9D8-1AF7B13A5896",
-        "attributedValue" : "Roadside Assistance\n<a href='tel:18004004222'>1-800-400-4222<\/a>",
-        "key" : "roadsideAssistance",
-        "label" : "Open Roadside",
-        "value" : "Roadside Assistance\n1-800-400-4222"
+        "_id": "16FC7DAB-10AF-4930-B9D8-1AF7B13A5896",
+        "attributedValue": "Roadside Assistance\n<a href='tel:18004004222'>1-800-400-4222</a>",
+        "key": "roadsideAssistance",
+        "label": "Open Roadside",
+        "value": "Roadside Assistance\n1-800-400-4222"
       },
       {
-        "_id" : "D785F2A7-BE99-43A2-9DBD-EA492AA885B0",
-        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/locations.html'>Nearest branch<\/a>",
-        "key" : "nearestBranch",
-        "label" : "Get Direction",
-        "value" : "Nearest branch"
+        "_id": "D785F2A7-BE99-43A2-9DBD-EA492AA885B0",
+        "attributedValue": "<a href='https://www.ace.aaa.com/locations.html'>Nearest branch</a>",
+        "key": "nearestBranch",
+        "label": "Get Direction",
+        "value": "Nearest branch"
       },
       {
-        "_id" : "867D4C2C-9D19-455D-B4F6-07269EB98407",
-        "key" : "services",
-        "label" : "Services",
-        "value" : "Insurance Sales & Service\nInsurance Claims\nMembership, Travel, Other Services\nHertz Rental Discounts"
+        "_id": "867D4C2C-9D19-455D-B4F6-07269EB98407",
+        "key": "services",
+        "label": "Services",
+        "value": "Insurance Sales & Service\nInsurance Claims\nMembership, Travel, Other Services\nHertz Rental Discounts"
       },
       {
-        "_id" : "B9C6FDB5-3975-4FF1-9065-E1888D04F947",
-        "attributedValue" : "Phone: <a href='tel:18004004222'>1-800-400-4222<\/a>\nPhone (Outside of CA): <a href='tel:18002224357'>1-800-222-4357<\/a>",
-        "key" : "roadside",
-        "label" : "Roadside Assistance",
-        "value" : "Phone: 1-800-400-4222\nPhone (Outside of CA): 1-800-222-4357"
+        "_id": "B9C6FDB5-3975-4FF1-9065-E1888D04F947",
+        "attributedValue": "Phone: <a href='tel:18004004222'>1-800-400-4222</a>\nPhone (Outside of CA): <a href='tel:18002224357'>1-800-222-4357</a>",
+        "key": "roadside",
+        "label": "Roadside Assistance",
+        "value": "Phone: 1-800-400-4222\nPhone (Outside of CA): 1-800-222-4357"
       },
       {
-        "_id" : "37611BEA-CFEF-46AB-B51D-22E981A6DDF0",
-        "attributedValue" : "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: <a href='tel:10000000000'>000-000-0000<\/a>\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday",
-        "key" : "branch",
-        "label" : "Your Local AAA Branch",
-        "value" : "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: 000-000-0000\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday"
+        "_id": "37611BEA-CFEF-46AB-B51D-22E981A6DDF0",
+        "attributedValue": "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: <a href='tel:10000000000'>000-000-0000</a>\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday",
+        "key": "branch",
+        "label": "Your Local AAA Branch",
+        "value": "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: 000-000-0000\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday"
       },
       {
-        "_id" : "4025175E-C99D-4AB3-B183-5C8CDE823479",
-        "key" : "rentalCodes",
-        "label" : "Car Rental Discounts Codes",
-        "value" : "Hertz CDP: 0000\nDollar CD: XX0000\nThrifty CD: 0000000000"
+        "_id": "4025175E-C99D-4AB3-B183-5C8CDE823479",
+        "key": "rentalCodes",
+        "label": "Car Rental Discounts Codes",
+        "value": "Hertz CDP: 0000\nDollar CD: XX0000\nThrifty CD: 0000000000"
       },
       {
-        "_id" : "134FCBF5-75F3-40F8-80A2-0B31F5F0AF68",
-        "key" : "membershipNumberBack",
-        "label" : "Membership Number",
-        "value" : "000 000 XXXXXXXXX 0"
+        "_id": "134FCBF5-75F3-40F8-80A2-0B31F5F0AF68",
+        "key": "membershipNumberBack",
+        "label": "Membership Number",
+        "value": "000 000 XXXXXXXXX 0"
       }
     ],
-    "footerFields" : [
+    "footerFields": [
       {
-        "_id" : "7DB5F491-84FF-469E-BF0F-99390D13D763",
-        "key" : "membershipNumber",
-        "label" : "MEMBERSHIP NUMBER",
-        "value" : "MEMBERSHIP NUMBER: 000 000 XXXXXXXXX 0"
+        "_id": "7DB5F491-84FF-469E-BF0F-99390D13D763",
+        "key": "membershipNumber",
+        "label": "MEMBERSHIP NUMBER",
+        "value": "MEMBERSHIP NUMBER: 000 000 XXXXXXXXX 0"
       }
     ],
-    "headerFields" : [
+    "headerFields": [
       {
-        "_id" : "5496F918-6491-4104-98DD-E3888E16FD76",
-        "key" : "cardTitle",
-        "label" : "MEMBERSHIP CARD",
-        "value" : "Premier"
+        "_id": "5496F918-6491-4104-98DD-E3888E16FD76",
+        "key": "cardTitle",
+        "label": "MEMBERSHIP CARD",
+        "value": "Premier"
       }
     ],
-    "primaryFields" : [
+    "primaryFields": [
       {
-        "_id" : "8DFC8A34-96A7-46FE-B2C5-7363792A4869",
-        "key" : "loyalMember",
-        "label" : "LOYAL MEMBER",
-        "value" : "32 YEARS"
+        "_id": "8DFC8A34-96A7-46FE-B2C5-7363792A4869",
+        "key": "loyalMember",
+        "label": "LOYAL MEMBER",
+        "value": "32 YEARS"
       },
       {
-        "_id" : "A6F0452F-0AB9-4B56-A18D-BF7B76DE9127",
-        "key" : "memberName",
-        "label" : "MEMBER NAME",
-        "value" : "FULANITO PEREZ"
+        "_id": "A6F0452F-0AB9-4B56-A18D-BF7B76DE9127",
+        "key": "memberName",
+        "label": "MEMBER NAME",
+        "value": "FULANITO PEREZ"
       },
       {
-        "_id" : "D5607AA2-2AC0-4C8F-940D-17E125D9883B",
-        "key" : "plan",
-        "label" : "PLAN",
-        "value" : "PREMIER"
+        "_id": "D5607AA2-2AC0-4C8F-940D-17E125D9883B",
+        "key": "plan",
+        "label": "PLAN",
+        "value": "PREMIER"
       }
     ],
-    "secondaryFields" : []
+    "secondaryFields": []
   },
-  "serialNumber" : "000000XXXXXXXXX0",
-  "suppressHeaderDarkening" : true,
-  "teamIdentifier" : "",
-  "useAutomaticColors" : true
+  "serialNumber": "000000XXXXXXXXX0",
+  "suppressHeaderDarkening": true,
+  "teamIdentifier": "",
+  "useAutomaticColors": true
 }
