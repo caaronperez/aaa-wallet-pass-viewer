@@ -693,9 +693,36 @@
             });
           }
 
+          function fillBenefitsTests() {
+            if (!payload.benefitsTests || !payload.benefitsTests.length) return;
+            rowsNode.appendChild(
+              el('div', { class: 'row' }, [
+                el('div', { class: 'top' }, [
+                  el('span', { class: 'state', text: 'Benefits button test' }),
+                  el('span', { class: 'small', text: 'California card, 3 link types' })
+                ]),
+                el('div', {
+                  class: 'small',
+                  text: 'Add each one and check which shows View Membership Benefits under the card.'
+                }),
+                el(
+                  'div',
+                  { class: 'actions' },
+                  payload.benefitsTests.map(function (test) {
+                    var button = walletButton(test.passId);
+                    button.textContent = test.label;
+                    button.title = test.url;
+                    return button;
+                  })
+                )
+              ])
+            );
+          }
+
           function fill() {
             rowsNode.textContent = '';
             if (card === 'membership') return fillMembership();
+            fillBenefitsTests();
             payload.states.forEach(function (info) {
               var row = payload.rows[fixture][info.state],
                 values = row.values;
