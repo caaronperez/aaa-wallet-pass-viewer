@@ -5,7 +5,7 @@
   var HASH = '93156e97dcb9a6d0d3f437a05ebdc0e94ad82d5c02dd5ef07157b0eee248ceed', SALT = 'aaa-wallet-viewer:', KEY = 'aaaViewerUnlocked';
   var root = document.documentElement;
   function ok(){ try { return localStorage.getItem(KEY) === HASH; } catch(e){ return false; } }
-  if(ok() && !window.gateAlwaysAsk) return;
+  if(ok()) return;
   root.style.visibility = 'hidden';
   function sha(t){ return crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)).then(function(b){ return Array.from(new Uint8Array(b)).map(function(x){ return x.toString(16).padStart(2, '0'); }).join(''); }); }
   function show(){
