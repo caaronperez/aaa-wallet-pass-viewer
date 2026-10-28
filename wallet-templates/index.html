@@ -652,17 +652,18 @@
                     el('span', { class: 'state', text: 'Club ' + row.club }),
                     el('span', { class: 'small', text: 'membership' })
                   ]),
-                  el('div', { text: values.memberName.value + ' · ' + values.plan.value }),
+                  el('div', { text: values.memberName.value + ' · ' + values.cardTitle.value }),
                   el('div', {
                     class: 'small',
-                    text: [values.loyalMember, values.roadside]
+                    text: [
+                      'Valid through ' + values.validThru.value,
+                      values.memberSince && values.memberSince.value,
+                      values.roadsidePhone.value
+                    ]
                       .filter(Boolean)
-                      .map(function (field) {
-                        return field.value;
-                      })
                       .join(' · ')
                   }),
-                  el('div', { class: 'small', text: values.membershipNumberFooter.value }),
+                  el('div', { class: 'small', text: 'Membership number ' + values.membershipNumber.value }),
                   issuesView(row.issues),
                   el('div', { class: 'actions' }, [
                     walletButton(row.passId),
