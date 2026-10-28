@@ -93,6 +93,20 @@
         "key": "membershipNumberBack",
         "label": "Membership Number",
         "value": "000 000 XXXXXXXXX 0"
+      },
+      {
+        "_id": "ED87F4A5-D3B7-40FB-A083-500DE7E50FBA",
+        "key": "memberBenefits",
+        "label": "Member benefits & discounts",
+        "value": "Explore all membership benefits\nShow this card at participating businesses",
+        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>"
+      },
+      {
+        "_id": "9C09C708-9068-4BC4-98D5-A69AACD457D1",
+        "key": "autoClubApp",
+        "label": "Auto Club app",
+        "value": "The fastest way to request Roadside Assistance",
+        "attributedValue": "<a href='https://apps.apple.com/app/id1094393125'>The fastest way to request Roadside Assistance</a>"
       }
     ],
     "headerFields": [
@@ -179,6 +193,20 @@
         "key": "membershipNumberBack",
         "label": "Membership Number",
         "value": "000 000 XXXXXXXXX 0"
+      },
+      {
+        "_id": "DE5ACFD3-8B84-420B-90D8-7E2862D31E50",
+        "key": "memberBenefits",
+        "label": "Member benefits & discounts",
+        "value": "Explore all membership benefits\nShow this card at participating businesses",
+        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>"
+      },
+      {
+        "_id": "FA69BD60-57DF-485C-81DC-33CC08B49B1F",
+        "key": "autoClubApp",
+        "label": "Auto Club app",
+        "value": "The fastest way to request Roadside Assistance",
+        "attributedValue": "<a href='https://apps.apple.com/app/id1094393125'>The fastest way to request Roadside Assistance</a>"
       }
     ],
     "footerFields": [

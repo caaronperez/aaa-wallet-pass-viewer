@@ -82,7 +82,7 @@
       },
       {
         "_id": "1FAB5755-4D26-4DC9-BACD-6B5023DEE556",
-        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>",
+        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>",
         "key": "memberBenefits",
         "label": "Member benefits & discounts",
         "value": "Explore all membership benefits\nShow this card at participating businesses"
@@ -160,6 +160,13 @@
         "key": "nearestBranch",
         "label": "Your AAA branch",
         "value": "Sample Branch · 000 Main St, City, CA 00000\nGet directions"
+      },
+      {
+        "_id": "F341B458-B1A6-4AD8-824C-A65325C593ED",
+        "key": "autoClubApp",
+        "label": "Auto Club app",
+        "value": "The fastest way to request Roadside Assistance",
+        "attributedValue": "<a href='https://apps.apple.com/app/id1094393125'>The fastest way to request Roadside Assistance</a>"
       }
     ]
   },
@@ -178,7 +185,7 @@
       },
       {
         "_id": "1FAB5755-4D26-4DC9-BACD-6B5023DEE556",
-        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>",
+        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>",
         "key": "memberBenefits",
         "label": "Member benefits & discounts",
         "value": "Explore all membership benefits\nShow this card at participating businesses"
@@ -256,6 +263,13 @@
         "key": "nearestBranch",
         "label": "Your AAA branch",
         "value": "Sample Branch · 000 Main St, City, CA 00000\nGet directions"
+      },
+      {
+        "_id": "CF93DC3F-0D39-4620-A0B4-D7FE08CE6480",
+        "key": "autoClubApp",
+        "label": "Auto Club app",
+        "value": "The fastest way to request Roadside Assistance",
+        "attributedValue": "<a href='https://apps.apple.com/app/id1094393125'>The fastest way to request Roadside Assistance</a>"
       }
     ],
     "footerFields": [

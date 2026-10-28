@@ -135,6 +135,20 @@
         "key": "policyQuestions",
         "label": "Policy questions or changes",
         "value": "1-800-924-6141"
+      },
+      {
+        "_id": "8AE7DAA6-65A1-42F5-B18C-882A9265FD20",
+        "key": "memberBenefits",
+        "label": "Member benefits & discounts",
+        "value": "Explore all membership benefits\nShow this card at participating businesses",
+        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>"
+      },
+      {
+        "_id": "E56D07CA-89D0-4164-B3B0-BB302E99856A",
+        "key": "autoClubApp",
+        "label": "Auto Club app",
+        "value": "The fastest way to request Roadside Assistance",
+        "attributedValue": "<a href='https://apps.apple.com/app/id1094393125'>The fastest way to request Roadside Assistance</a>"
       }
     ]
   },
@@ -258,6 +272,20 @@
         "key": "policyQuestions",
         "label": "Policy questions or changes",
         "value": "1-800-924-6141"
+      },
+      {
+        "_id": "E2E6CFBB-B227-44A5-BF57-F81A485495F5",
+        "key": "memberBenefits",
+        "label": "Member benefits & discounts",
+        "value": "Explore all membership benefits\nShow this card at participating businesses",
+        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>"
+      },
+      {
+        "_id": "ECF1EBEB-382A-4717-BF65-7E7DCBE9BCEF",
+        "key": "autoClubApp",
+        "label": "Auto Club app",
+        "value": "The fastest way to request Roadside Assistance",
+        "attributedValue": "<a href='https://apps.apple.com/app/id1094393125'>The fastest way to request Roadside Assistance</a>"
       }
     ]
   }

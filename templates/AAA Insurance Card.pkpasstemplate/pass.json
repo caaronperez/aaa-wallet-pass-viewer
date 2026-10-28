@@ -91,6 +91,20 @@
         "key": "disclaimer",
         "label": "Disclaimer",
         "value": "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle. Insurance information has already been submitted directly to the DMV electronically; submit this document to DMV only if specifically requested by DMV. The digital card may not be recognized in all states."
+      },
+      {
+        "_id": "5DBEDD05-C3B8-43BB-BBBB-D8750D89F602",
+        "key": "memberBenefits",
+        "label": "Member benefits & discounts",
+        "value": "Explore all membership benefits\nShow this card at participating businesses",
+        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>"
+      },
+      {
+        "_id": "71DA7C44-8A41-4E76-A224-5C7330C97236",
+        "key": "autoClubApp",
+        "label": "Auto Club app",
+        "value": "The fastest way to request Roadside Assistance",
+        "attributedValue": "<a href='https://apps.apple.com/app/id1094393125'>The fastest way to request Roadside Assistance</a>"
       }
     ],
     "headerFields": [
@@ -189,6 +203,20 @@
         "key": "disclaimer",
         "label": "Disclaimer",
         "value": "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle. Insurance information has already been submitted directly to the DMV electronically; submit this document to DMV only if specifically requested by DMV. The digital card may not be recognized in all states."
+      },
+      {
+        "_id": "D4DEDA3F-7BDC-45C9-9580-E1EF798080C0",
+        "key": "memberBenefits",
+        "label": "Member benefits & discounts",
+        "value": "Explore all membership benefits\nShow this card at participating businesses",
+        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>"
+      },
+      {
+        "_id": "91AA3ACE-E546-488A-8B2E-716A3F114509",
+        "key": "autoClubApp",
+        "label": "Auto Club app",
+        "value": "The fastest way to request Roadside Assistance",
+        "attributedValue": "<a href='https://apps.apple.com/app/id1094393125'>The fastest way to request Roadside Assistance</a>"
       }
     ],
     "footerFields": [
