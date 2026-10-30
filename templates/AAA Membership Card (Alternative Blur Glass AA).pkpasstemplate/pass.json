@@ -4,7 +4,6 @@
     1094393125
   ],
   "authenticationToken": "",
-  "backgroundColor": "rgb(242,228,228)",
   "barcodes": [
     {
       "_id": "E4FD1E6E-100F-4455-90D5-FEAA43177955",
@@ -30,115 +29,76 @@
       "type": "place"
     }
   ],
-  "foregroundColor": "rgb(25,40,66)",
   "formatVersion": 1,
   "generic": {
     "headerFields": [
       {
-        "_id": "205ED54E-39E3-5C1E-8D68-FC46EB41BF69",
-        "key": "cardTitle",
-        "label": "MEMBERSHIP CARD",
-        "value": "Premier",
+        "key": "expiration_date",
+        "label": "VALID THRU",
+        "value": "MAR 30, 2027",
         "textAlignment": "PKTextAlignmentRight"
       }
     ],
     "primaryFields": [
       {
-        "_id": "7219175B-8E18-5AB1-9E57-45A531415269",
-        "key": "memberName",
-        "label": "Member Name",
+        "key": "name",
+        "label": "NAME",
         "value": "FULANITO PEREZ"
       }
     ],
     "secondaryFields": [
       {
-        "_id": "4A47C8AE-24FD-5BD1-9414-9C05170D8DA6",
-        "key": "validThru",
-        "label": "Valid Through",
-        "value": "03/2027"
+        "key": "membership_number",
+        "label": "MEMBERSHIP NUMBER",
+        "value": "620 004 123456780 0"
       },
       {
-        "_id": "1F5E6637-9FFA-5866-B787-B551A092CD1F",
-        "key": "memberSince",
-        "label": "Member Since",
-        "value": "1994",
-        "textAlignment": "PKTextAlignmentRight"
+        "key": "membership_length",
+        "label": "LOYAL MEMBER",
+        "value": "5 Years"
       }
     ],
     "auxiliaryFields": [
       {
-        "_id": "6EF7DA84-35C8-577A-BF53-9D7842E39201",
-        "key": "roadsidePhone",
-        "label": "Roadside Assistance 24/7",
-        "value": "1-800-400-4222"
+        "key": "rso_number1",
+        "label": "ROADSIDE ASSISTANCE",
+        "value": "1.800.400.4222"
+      },
+      {
+        "key": "rso_number2",
+        "label": "(OUTSIDE CA)",
+        "value": "1.800.222.4357"
       }
     ],
     "backFields": [
       {
-        "_id": "3BC7022D-63A1-43D0-8DC4-007F33159329",
-        "attributedValue": "Call <a href='tel:18004004222'>1-800-400-4222</a>\nOutside CA: <a href='tel:18002224357'>1-800-222-4357</a>",
-        "key": "roadsideAssistance",
-        "label": "Roadside Assistance · 24/7",
-        "value": "Call 1-800-400-4222\nOutside CA: 1-800-222-4357"
+        "key": "services",
+        "label": "Services",
+        "value": "Services",
+        "attributedValue": "<a href=\"https://www.ace.aaa.com/roadside\">Roadside Assistance</a>"
       },
       {
-        "_id": "4AE323DC-42C1-458C-964C-18E764CBD102",
-        "attributedValue": "<a href='https://chat.ace.aaa.com/'>Tow · Battery · Tire · Lockout · Fuel delivery</a>",
-        "key": "roadsideOnline",
-        "label": "Request roadside help online",
-        "value": "Tow · Battery · Tire · Lockout · Fuel delivery"
+        "key": "aaa_branch",
+        "label": "Your local AAA branch",
+        "value": "Costa Mesa\n3333 Fairview Rd\nCosta Mesa, CA 92626"
       },
       {
-        "_id": "DB2FEDA0-8051-49FB-9B04-0BCF257ED43D",
-        "dataDetectorTypes": [],
-        "key": "membershipNumber",
-        "label": "Membership number",
-        "value": "000 000 XXXXXXXXX 0"
+        "key": "car_rental_codes",
+        "label": "Car Rental Discount Codes",
+        "value": "Hertz CDP: 004"
       },
       {
-        "_id": "88EFB40E-5EDB-4AC5-B4DF-1C7EF45069D0",
-        "key": "planSince",
-        "label": "Plan · member since",
-        "value": "Premier · 1994 (32 years)"
+        "key": "membership_number_back",
+        "label": "Membership Number",
+        "value": "620 004 123456780 0"
       },
       {
-        "_id": "2B51034D-9EFC-4482-A952-D60EE748F73E",
-        "attributedValue": "<a href='https://app.ace.aaa.com/membership/quick-self-service'>Renew · Add a family member · Upgrade</a>\n<a href='https://app.ace.aaa.com/membership/make-a-payment/'>Pay membership bill</a>",
-        "key": "manageMembership",
-        "label": "Manage membership",
-        "value": "Renew · Add a family member · Upgrade\nPay membership bill"
-      },
-      {
-        "_id": "C753539A-7AD7-4C4A-B625-6686D5C1F0CE",
-        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>",
-        "key": "memberBenefits",
-        "label": "Member benefits & discounts",
-        "value": "Explore all membership benefits\nShow this card at participating businesses"
-      },
-      {
-        "_id": "BE2501B8-01F7-4178-8567-4E80F216DAFB",
-        "dataDetectorTypes": [],
-        "key": "rentalCodes",
-        "label": "Car rental discount codes",
-        "value": "Hertz CDP: 0000\nDollar CD: XX0000\nThrifty CD: 0000000000"
-      },
-      {
-        "_id": "4A097C5D-0A31-451F-95AC-2AF0CDD4AA5D",
-        "attributedValue": "Sample Branch\n000 Main St, City, CA 00000\nPhone: <a href='tel:10000000000'>000-000-0000</a>\nMon–Sat 9:00 AM – 5:00 PM\n<a href='https://maps.apple.com/place?place-id=I71B28B9C6AC9C7EF'>Get directions</a> · <a href='https://www.ace.aaa.com/locations.html'>Find another branch</a>",
-        "key": "nearestBranch",
-        "label": "Your AAA branch",
-        "value": "Sample Branch\n000 Main St, City, CA 00000\nPhone: 000-000-0000\nMon–Sat 9:00 AM – 5:00 PM\nGet directions · Find another branch"
-      },
-      {
-        "_id": "A9165F0D-9954-4F34-9273-331776A719F2",
-        "attributedValue": "<a href='https://apps.apple.com/app/id1094393125'>The fastest way to request Roadside Assistance</a>",
-        "key": "autoClubApp",
-        "label": "Auto Club app",
-        "value": "The fastest way to request Roadside Assistance"
+        "key": "disclaimer",
+        "label": "Disclaimer",
+        "value": "Present this card at the time of service. Roadside Assistance is provided by independent service providers. All Club services are subject to change without notice. By acceptance of this card, member agrees to be bound by Club's Bylaws."
       }
     ]
   },
-  "labelColor": "rgb(39,41,43)",
   "locations": [
     {
       "latitude": 34.146313,
@@ -256,5 +216,8 @@
   "serialNumber": "000000XXXXXXXXX0-ALT-BLURGLASS-AA",
   "suppressHeaderDarkening": true,
   "teamIdentifier": "",
-  "useAutomaticColors": false
+  "useAutomaticColors": false,
+  "backgroundColor": "rgb(242,228,228)",
+  "foregroundColor": "rgb(25,40,66)",
+  "labelColor": "rgb(39,41,43)"
 }

@@ -4,7 +4,6 @@
     1094393125
   ],
   "authenticationToken": "",
-  "backgroundColor": "rgb(242,228,228)",
   "barcodes": [],
   "description": "AAA Insurance Card",
   "expirationDate": "2027-09-15T06:59:00Z",
@@ -22,155 +21,72 @@
       "type": "place"
     }
   ],
-  "foregroundColor": "rgb(50,74,114)",
   "formatVersion": 1,
   "generic": {
-    "headerFields": [
-      {
-        "_id": "B098BAB2-2239-526B-9E34-FCFCC817BDBB",
-        "key": "cardTitle",
-        "label": "CA Evidence of Liability",
-        "value": "Auto Insurance Card",
-        "textAlignment": "PKTextAlignmentRight"
-      }
-    ],
     "primaryFields": [
       {
-        "_id": "3CDCFF07-4E5F-5443-BD77-2C4A2B064154",
-        "key": "nameEnsured",
-        "label": "Name Insured",
-        "value": "FULANITO PEREZ"
+        "key": "header",
+        "label": "POLICY NUMBER",
+        "value": "CAA000XXXX"
+      },
+      {
+        "key": "effective",
+        "label": "07/01/2026 - 07/01/2027",
+        "value": ""
       }
     ],
     "secondaryFields": [
       {
-        "_id": "554FCDFC-7749-5C1D-A8FB-141A25CD73A4",
-        "key": "policyNumber",
-        "label": "Policy Number",
-        "value": "CAA000XXXX"
-      },
-      {
-        "_id": "CCF4DDA1-15F5-5C57-BD7F-46689760BD7A",
-        "key": "effectiveDate",
-        "label": "Effective",
-        "value": "09/14/26 – 09/14/27",
-        "textAlignment": "PKTextAlignmentRight"
+        "key": "named_insured",
+        "label": "NAMED INSURED",
+        "value": "Fulanito Perez"
       }
     ],
     "auxiliaryFields": [
       {
-        "_id": "CF5ED6AF-3F31-45F2-B01C-8C2D69987EA1",
-        "key": "insuranceCompany",
-        "label": "Insurance Company",
-        "value": "Interinsurance Exchange of the Automobile Club"
-      },
-      {
-        "_id": "0CC7B6A0-FE54-45DE-BCBB-FA83B9FC2F59",
-        "key": "naicNumber",
-        "label": "NAIC #",
-        "value": "00000",
-        "textAlignment": "PKTextAlignmentRight"
+        "key": "companytTitle",
+        "label": "INSURANCE COMPANY",
+        "value": "Interinsurance Exchange of the Automobile Club NAIC# 15598"
       }
     ],
     "backFields": [
       {
-        "_id": "367C603C-CFD8-4D71-AD74-66C15293AB28",
-        "attributedValue": "Call <a href='tel:18004004222'>1-800-400-4222</a>\nOutside CA: <a href='tel:18002224357'>1-800-222-4357</a>",
-        "key": "roadsideAssistance",
-        "label": "Roadside Assistance · 24/7",
-        "value": "Call 1-800-400-4222\nOutside CA: 1-800-222-4357"
+        "key": "Pull_To_Update",
+        "label": "                          Pull To Update",
+        "value": ""
       },
       {
-        "_id": "1FAB5755-4D26-4DC9-BACD-6B5023DEE556",
-        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>",
-        "key": "memberBenefits",
-        "label": "Member benefits & discounts",
-        "value": "Explore all membership benefits\nShow this card at participating businesses"
+        "key": "Claims_PMG_Number",
+        "label": "",
+        "value": "24/7 AAA Accident Assist Hotline\n1-800-67-CLAIM (1-800-672-5246)\n\nPolicy questions or changes\n1-800-924-6141"
       },
       {
-        "_id": "8AE732FB-6A51-496E-8B11-8AB7E1918B52",
-        "attributedValue": "1-800-67-CLAIM (<a href='tel:18006725246'>1-800-672-5246</a>)",
-        "key": "accidentAssist",
-        "label": "24/7 AAA Accident Assist Hotline",
-        "value": "1-800-67-CLAIM (1-800-672-5246)"
+        "key": "drivers",
+        "label": "Named Insured",
+        "value": "Fulanito Perez"
       },
       {
-        "_id": "B460C788-289C-42A7-9DB9-4C933535C5BD",
-        "attributedValue": "<a href='https://www.ace.aaa.com/insurance/claims.html'>File an auto, home or life claim</a>",
-        "key": "fileClaim",
-        "label": "File or track a claim",
-        "value": "File an auto, home or life claim"
-      },
-      {
-        "_id": "7B5A29C8-A125-41D0-AF5D-7199D494CCA6",
-        "dataDetectorTypes": [],
-        "key": "policyNumber",
-        "label": "Policy number",
-        "value": "CAA000XXXX"
-      },
-      {
-        "_id": "22DA21C8-C97F-470B-B52E-C52FE9DC6954",
-        "dataDetectorTypes": [],
-        "key": "policyPeriod",
-        "label": "Policy period",
-        "value": "09/14/26 – 09/14/27"
-      },
-      {
-        "_id": "7A06B1A5-6EC4-4CBF-8389-C5CE2E2E90C7",
-        "attributedValue": "<a href='tel:18009426141'>1-800-942-6141</a>\n<a href='https://app.ace.aaa.com/insurance/make-a-payment/'>Pay or manage your policy</a>",
-        "key": "policyQuestions",
-        "label": "Policy questions or changes",
-        "value": "1-800-942-6141\nPay or manage your policy"
-      },
-      {
-        "_id": "710A48C2-AC8E-4B90-886C-B8CBCC3911CC",
-        "attributedValue": "<a href='https://app.ace.aaa.com/insurance/anon/poi/view'>Get proof of insurance online</a>",
-        "key": "proofOfInsurance",
-        "label": "Proof of insurance",
-        "value": "Get proof of insurance online"
-      },
-      {
-        "_id": "CEC94431-2E1D-4033-8B2B-C5C203B41AA2",
-        "dataDetectorTypes": [],
-        "key": "vehicles",
+        "key": "backVehicles",
         "label": "Vehicles",
-        "value": "2026 SAMPLE SUV\nXXXXXXXXXXXXXXXXX"
+        "value": "2026 SAMPLE SUV\nVIN 1FMSAMPLE000000"
       },
       {
-        "_id": "433D933E-7B46-4956-9AAF-3496136E2740",
-        "key": "insuredDrivers",
+        "key": "backDrivers",
         "label": "Insured Drivers",
         "value": "Fulanito Perez"
       },
       {
-        "_id": "96498BF1-F25E-4E5D-9533-5AD29E4EC4E5",
-        "key": "company",
+        "key": "compName",
         "label": "Company Name",
-        "value": "Interinsurance Exchange of the Automobile Club NAIC# 000000\nP.O. Box 00000, City, CA 00000"
+        "value": "Interinsurance Exchange of the Automobile Club\nP.O. Box 25006, Santa Ana, CA 92799-5006"
       },
       {
-        "_id": "FAA513E5-6E6E-4259-9B35-5AFD71E9B7FE",
         "key": "disclaimer",
         "label": "Disclaimer",
-        "value": "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle. Insurance information has already been submitted directly to the DMV electronically; submit this document to DMV only if specifically requested by DMV. The digital card may not be recognized in all states."
-      },
-      {
-        "_id": "56B80619-5D2A-426F-8C9C-69526F485EDC",
-        "attributedValue": "Sample Branch · 000 Main St, City, CA 00000\n<a href='https://maps.apple.com/place?place-id=I71B28B9C6AC9C7EF'>Get directions</a>",
-        "key": "nearestBranch",
-        "label": "Your AAA branch",
-        "value": "Sample Branch · 000 Main St, City, CA 00000\nGet directions"
-      },
-      {
-        "_id": "D75D494D-0109-42DF-B4E8-0D7444AA9123",
-        "key": "autoClubApp",
-        "label": "Auto Club app",
-        "value": "The fastest way to request Roadside Assistance",
-        "attributedValue": "<a href='https://apps.apple.com/app/id1094393125'>The fastest way to request Roadside Assistance</a>"
+        "value": "Sample state disclaimer."
       }
     ]
   },
-  "labelColor": "rgb(39,41,43)",
   "organizationName": "AAA",
   "passTypeIdentifier": "pass.com.example.aaa.insurance",
   "posterGeneric": {
@@ -320,5 +236,7 @@
   "serialNumber": "CAA000XXXX-ALT",
   "suppressHeaderDarkening": true,
   "teamIdentifier": "",
-  "useAutomaticColors": false
+  "useAutomaticColors": false,
+  "foregroundColor": "rgb(16, 28, 48)",
+  "labelColor": "rgb(40, 52, 70)"
 }

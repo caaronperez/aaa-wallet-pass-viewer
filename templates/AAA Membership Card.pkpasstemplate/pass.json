@@ -4,7 +4,6 @@
     1094393125
   ],
   "authenticationToken": "",
-  "backgroundColor": "rgb(255,255,255)",
   "barcodes": [
     {
       "_id": "E4FD1E6E-100F-4455-90D5-FEAA43177955",
@@ -29,120 +28,76 @@
       "type": "place"
     }
   ],
-  "foregroundColor": "rgb(30,78,156)",
   "formatVersion": 1,
   "generic": {
-    "auxiliaryFields": [
-      {
-        "_id": "3F3FEBCE-AACD-4D98-BA17-B2BF225A73A3",
-        "key": "roadside",
-        "label": "ROADSIDE ASSISTANCE",
-        "value": "1-800-400-4222"
-      },
-      {
-        "_id": "69F65CD7-FCAA-42B3-9080-9C79E3D0DBBD",
-        "key": "roadsideOutsideCA",
-        "label": "OUTSIDE CA",
-        "textAlignment": "PKTextAlignmentRight",
-        "value": "1-800-222-4357"
-      }
-    ],
-    "backFields": [
-      {
-        "_id": "16FC7DAB-10AF-4930-B9D8-1AF7B13A5896",
-        "attributedValue": "Roadside Assistance\n<a href='tel:18004004222'>1-800-400-4222</a>",
-        "key": "roadsideAssistance",
-        "label": "Open Roadside",
-        "value": "Roadside Assistance\n1-800-400-4222"
-      },
-      {
-        "_id": "D785F2A7-BE99-43A2-9DBD-EA492AA885B0",
-        "attributedValue": "<a href='https://www.ace.aaa.com/locations.html'>Nearest branch</a>",
-        "key": "nearestBranch",
-        "label": "Get Direction",
-        "value": "Nearest branch"
-      },
-      {
-        "_id": "867D4C2C-9D19-455D-B4F6-07269EB98407",
-        "key": "services",
-        "label": "Services",
-        "value": "Insurance Sales & Service\nInsurance Claims\nMembership, Travel, Other Services\nHertz Rental Discounts"
-      },
-      {
-        "_id": "B9C6FDB5-3975-4FF1-9065-E1888D04F947",
-        "attributedValue": "Phone: <a href='tel:18004004222'>1-800-400-4222</a>\nPhone (Outside of CA): <a href='tel:18002224357'>1-800-222-4357</a>",
-        "key": "roadside",
-        "label": "Roadside Assistance",
-        "value": "Phone: 1-800-400-4222\nPhone (Outside of CA): 1-800-222-4357"
-      },
-      {
-        "_id": "37611BEA-CFEF-46AB-B51D-22E981A6DDF0",
-        "attributedValue": "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: <a href='tel:10000000000'>000-000-0000</a>\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday",
-        "key": "branch",
-        "label": "Your Local AAA Branch",
-        "value": "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: 000-000-0000\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday"
-      },
-      {
-        "_id": "4025175E-C99D-4AB3-B183-5C8CDE823479",
-        "key": "rentalCodes",
-        "label": "Car Rental Discounts Codes",
-        "value": "Hertz CDP: 0000\nDollar CD: XX0000\nThrifty CD: 0000000000"
-      },
-      {
-        "_id": "134FCBF5-75F3-40F8-80A2-0B31F5F0AF68",
-        "key": "membershipNumberBack",
-        "label": "Membership Number",
-        "value": "000 000 XXXXXXXXX 0"
-      },
-      {
-        "_id": "ED87F4A5-D3B7-40FB-A083-500DE7E50FBA",
-        "key": "memberBenefits",
-        "label": "Member benefits & discounts",
-        "value": "Explore all membership benefits\nShow this card at participating businesses",
-        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>"
-      },
-      {
-        "_id": "9C09C708-9068-4BC4-98D5-A69AACD457D1",
-        "key": "autoClubApp",
-        "label": "Auto Club app",
-        "value": "The fastest way to request Roadside Assistance",
-        "attributedValue": "<a href='https://apps.apple.com/app/id1094393125'>The fastest way to request Roadside Assistance</a>"
-      }
-    ],
     "headerFields": [
       {
-        "_id": "71E43CE2-B816-4ED2-B3F2-E1778B7B9531",
-        "key": "loyalMember",
-        "label": "LOYAL MEMBER",
-        "textAlignment": "PKTextAlignmentRight",
-        "value": "32 YEARS"
+        "key": "expiration_date",
+        "label": "VALID THRU",
+        "value": "MAR 30, 2027",
+        "textAlignment": "PKTextAlignmentRight"
       }
     ],
     "primaryFields": [
       {
-        "_id": "7A3B6A15-F0C5-49FB-AB83-4E133949047F",
-        "key": "memberName",
-        "label": "MEMBER NAME",
+        "key": "name",
+        "label": "NAME",
         "value": "FULANITO PEREZ"
       }
     ],
     "secondaryFields": [
       {
-        "_id": "E95BBABE-BC18-4893-833A-2E387565A8C9",
-        "key": "membershipNumber",
+        "key": "membership_number",
         "label": "MEMBERSHIP NUMBER",
-        "value": "000 000 XXXXXXXXX 0"
+        "value": "620 004 123456780 0"
       },
       {
-        "_id": "198BDC72-9896-4667-80EF-F094347A49F0",
-        "key": "plan",
-        "label": "PLAN",
-        "textAlignment": "PKTextAlignmentRight",
-        "value": "PREMIER"
+        "key": "membership_length",
+        "label": "LOYAL MEMBER",
+        "value": "5 Years"
+      }
+    ],
+    "auxiliaryFields": [
+      {
+        "key": "rso_number1",
+        "label": "ROADSIDE ASSISTANCE",
+        "value": "1.800.400.4222"
+      },
+      {
+        "key": "rso_number2",
+        "label": "(OUTSIDE CA)",
+        "value": "1.800.222.4357"
+      }
+    ],
+    "backFields": [
+      {
+        "key": "services",
+        "label": "Services",
+        "value": "Services",
+        "attributedValue": "<a href=\"https://www.ace.aaa.com/roadside\">Roadside Assistance</a>"
+      },
+      {
+        "key": "aaa_branch",
+        "label": "Your local AAA branch",
+        "value": "Costa Mesa\n3333 Fairview Rd\nCosta Mesa, CA 92626"
+      },
+      {
+        "key": "car_rental_codes",
+        "label": "Car Rental Discount Codes",
+        "value": "Hertz CDP: 004"
+      },
+      {
+        "key": "membership_number_back",
+        "label": "Membership Number",
+        "value": "620 004 123456780 0"
+      },
+      {
+        "key": "disclaimer",
+        "label": "Disclaimer",
+        "value": "Present this card at the time of service. Roadside Assistance is provided by independent service providers. All Club services are subject to change without notice. By acceptance of this card, member agrees to be bound by Club's Bylaws."
       }
     ]
   },
-  "labelColor": "rgb(0,0,0)",
   "organizationName": "AAA",
   "passTypeIdentifier": "pass.com.example.aaa.membership",
   "posterGeneric": {
@@ -250,5 +205,8 @@
   "serialNumber": "000000XXXXXXXXX0",
   "suppressHeaderDarkening": true,
   "teamIdentifier": "",
-  "useAutomaticColors": true
+  "useAutomaticColors": false,
+  "backgroundColor": "rgb(242,228,228)",
+  "foregroundColor": "rgb(25,40,66)",
+  "labelColor": "rgb(39,41,43)"
 }

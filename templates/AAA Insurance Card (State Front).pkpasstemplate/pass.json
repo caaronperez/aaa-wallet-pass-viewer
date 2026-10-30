@@ -4,7 +4,6 @@
     1094393125
   ],
   "authenticationToken": "",
-  "backgroundColor": "rgb(242,228,228)",
   "barcodes": [],
   "description": "AAA Auto Insurance Card",
   "expirationDate": "2027-09-15T06:59:00Z",
@@ -22,9 +21,7 @@
       "type": "place"
     }
   ],
-  "foregroundColor": "rgb(25,40,66)",
   "formatVersion": 1,
-  "labelColor": "rgb(39,41,43)",
   "organizationName": "AAA",
   "passTypeIdentifier": "pass.com.example.aaa.insurance",
   "serialNumber": "CAA000XXXX-ALT-AA",
@@ -153,140 +150,70 @@
     ]
   },
   "generic": {
-    "headerFields": [
-      {
-        "_id": "F83123D3-92C3-4DF1-9700-455B53F98C33",
-        "key": "expirationDate",
-        "label": "Expires",
-        "value": "01/09/2027",
-        "textAlignment": "PKTextAlignmentRight"
-      }
-    ],
     "primaryFields": [
       {
-        "_id": "FF736874-1B0C-4B3B-9002-33D0DF9785B7",
-        "key": "stateNamedInsured",
-        "label": "ILLINOIS INSURANCE CARD",
-        "value": "FULANITO PEREZ"
+        "key": "header",
+        "label": "POLICY NUMBER",
+        "value": "CAA000XXXX"
+      },
+      {
+        "key": "effective",
+        "label": "07/01/2026 - 07/01/2027",
+        "value": ""
       }
     ],
     "secondaryFields": [
       {
-        "_id": "606B5B1E-74F1-4A90-98F2-24CF0F6221F0",
-        "key": "policyNumber",
-        "label": "Policy #",
-        "value": "MOA000XXXX"
-      },
-      {
-        "_id": "9083F4B0-C30E-4F8E-98A3-5F06052597E1",
-        "key": "effectiveDate",
-        "label": "Effective",
-        "value": "01/09/2026"
-      },
-      {
-        "_id": "ABE6923C-636A-4760-B2D0-3472B7975DF8",
-        "key": "vin",
-        "label": "2026 SAMPLE SUV",
-        "value": "XXXXXXXXXXXXXXXXX",
-        "textAlignment": "PKTextAlignmentRight"
+        "key": "named_insured",
+        "label": "NAMED INSURED",
+        "value": "Fulanito Perez"
       }
     ],
     "auxiliaryFields": [
       {
-        "_id": "214093DB-9249-4F0F-8791-867CBF0853AF",
-        "key": "insuranceCompany",
-        "label": "Insurance Company",
-        "value": "Automobile Club Inter-Insurance Exchange"
-      },
-      {
-        "_id": "E18D08B6-E5D2-4570-89F8-BF3D66293B88",
-        "key": "naic",
-        "label": "NAIC #",
-        "value": "15512",
-        "textAlignment": "PKTextAlignmentRight"
+        "key": "companytTitle",
+        "label": "INSURANCE COMPANY",
+        "value": "Interinsurance Exchange of the Automobile Club NAIC# 15598"
       }
     ],
     "backFields": [
       {
-        "_id": "FDFF8608-34A1-47FC-B9BA-91EBC2C45674",
-        "key": "disclaimer",
-        "label": "Disclaimer",
-        "value": "State disclaimer and required statements"
+        "key": "Pull_To_Update",
+        "label": "                          Pull To Update",
+        "value": ""
       },
       {
-        "_id": "9CC30439-990C-4469-913F-2A11A130F7DF",
-        "key": "namedInsureds",
-        "label": "Named Insured(s)",
-        "value": "FULANITO PEREZ\nSAMPLE SECOND INSURED"
+        "key": "Claims_PMG_Number",
+        "label": "",
+        "value": "24/7 AAA Accident Assist Hotline\n1-800-67-CLAIM (1-800-672-5246)\n\nPolicy questions or changes\n1-800-924-6141"
       },
       {
-        "_id": "E0A7F1F1-A209-4ECD-8C88-4E0478475B63",
-        "key": "insuredAddress",
-        "label": "Insured address",
-        "value": "000 Main St, City, ST 00000"
-      },
-      {
-        "_id": "491D4EBB-63AA-4A53-9822-DD569810BC01",
-        "key": "vehicles",
-        "label": "Vehicles",
-        "value": "2026 SAMPLE SUV\nVIN XXXXXXXXXXXXXXXXX"
-      },
-      {
-        "_id": "80CF0F08-805A-4B2C-AC37-287DE02D71E3",
-        "key": "insuredDrivers",
-        "label": "Insured drivers",
+        "key": "drivers",
+        "label": "Named Insured",
         "value": "Fulanito Perez"
       },
       {
-        "_id": "EBEC0AAB-7057-44A4-91CE-1BDACD95515C",
-        "key": "excludedDrivers",
-        "label": "Excluded drivers",
-        "value": "None"
+        "key": "backVehicles",
+        "label": "Vehicles",
+        "value": "2026 SAMPLE SUV\nVIN 1FMSAMPLE000000"
       },
       {
-        "_id": "A98094AD-9E8E-4F97-85F4-9916FC97755A",
-        "key": "policyPeriod",
-        "label": "Policy period",
-        "value": "01/09/2026 – 01/09/2027"
+        "key": "backDrivers",
+        "label": "Insured Drivers",
+        "value": "Fulanito Perez"
       },
       {
-        "_id": "E33B7BB1-DB34-40F5-9CD1-EE94947CA5D7",
-        "key": "company",
-        "label": "Insurance company",
-        "value": "Company name\nNAIC # 00000\nCompany address"
+        "key": "compName",
+        "label": "Company Name",
+        "value": "Interinsurance Exchange of the Automobile Club\nP.O. Box 25006, Santa Ana, CA 92799-5006"
       },
       {
-        "_id": "ACBFBA06-E904-4DA5-8FAC-61A1CFF0C654",
-        "key": "agent",
-        "label": "Agent",
-        "value": "Agent name · 000-000-0000"
-      },
-      {
-        "_id": "13160DEF-52BD-4DD4-BDCF-470D1AE6C33F",
-        "key": "accidentAssist",
-        "label": "24/7 AAA Accident Assist Hotline",
-        "value": "1-800-67-CLAIM (1-800-672-5246)"
-      },
-      {
-        "_id": "D39500CA-F87E-4F2A-8E10-31273006381A",
-        "key": "policyQuestions",
-        "label": "Policy questions or changes",
-        "value": "1-800-924-6141"
-      },
-      {
-        "_id": "E2E6CFBB-B227-44A5-BF57-F81A485495F5",
-        "key": "memberBenefits",
-        "label": "Member benefits & discounts",
-        "value": "Explore all membership benefits\nShow this card at participating businesses",
-        "attributedValue": "<a href='https://www.ace.aaa.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.ace.aaa.com/discounts.html'>Show this card at participating businesses</a>"
-      },
-      {
-        "_id": "ECF1EBEB-382A-4717-BF65-7E7DCBE9BCEF",
-        "key": "autoClubApp",
-        "label": "Auto Club app",
-        "value": "The fastest way to request Roadside Assistance",
-        "attributedValue": "<a href='https://apps.apple.com/app/id1094393125'>The fastest way to request Roadside Assistance</a>"
+        "key": "disclaimer",
+        "label": "Disclaimer",
+        "value": "Sample state disclaimer."
       }
     ]
-  }
+  },
+  "foregroundColor": "rgb(16, 28, 48)",
+  "labelColor": "rgb(40, 52, 70)"
 }
