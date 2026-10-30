@@ -502,7 +502,10 @@
             },
             [
               el('option', { value: 'insurance', text: 'Insurance (by state)' }),
-              payload.membership ? el('option', { value: 'membership', text: 'Membership (by club)' }) : null
+              payload.membership ? el('option', { value: 'membership', text: 'Membership (by club)' }) : null,
+              payload.membershipBranch
+                ? el('option', { value: 'membershipBranch', text: 'Membership (MOB-24999 branch)' })
+                : null
             ]
           );
           var fixtureLabel = el('label', { text: 'Policy fixture', style: 'margin:0' });
@@ -620,6 +623,65 @@
             });
           }
 
+          function fillMembershipBranch() {
+            var info = payload.membershipBranch;
+            rowsNode.appendChild(
+              el('div', { class: 'row' }, [
+                el('div', { class: 'top' }, [
+                  el('span', { class: 'state', text: 'Built from ' + info.branch }),
+                  el('span', { class: 'small', text: 'commit ' + info.commit })
+                ]),
+                el('div', {
+                  class: 'small',
+                  text:
+                    'Exported ' +
+                    new Date(info.generatedAt).toLocaleString() +
+                    '. New front from the template, the production back of the card, no featured actions yet.'
+                })
+              ])
+            );
+            info.rows.forEach(function (row) {
+              var values = row.values;
+              var valuesView = el('pre', { hidden: '', text: JSON.stringify(values, null, 2) });
+              rowsNode.appendChild(
+                el('div', { class: 'row' + (row.issues.length ? ' bad' : '') }, [
+                  el('div', { class: 'top' }, [
+                    el('span', { class: 'state', text: 'Club ' + row.club }),
+                    el('span', { class: 'small', text: 'membership · branch' })
+                  ]),
+                  el('div', {
+                    text: [values.memberName, values.cardTitle]
+                      .map(function (field) {
+                        return field ? field.value : '';
+                      })
+                      .join(' · ')
+                  }),
+                  el('div', {
+                    class: 'small',
+                    text: [
+                      values.validThru && 'Valid Through ' + values.validThru.value,
+                      values.memberSince && values.memberSince.label + ' ' + values.memberSince.value
+                    ]
+                      .filter(Boolean)
+                      .join(' · ')
+                  }),
+                  issuesView(row.issues),
+                  el('div', { class: 'actions' }, [
+                    walletButton(row.passId),
+                    el('button', {
+                      class: 'secondary',
+                      text: 'Values',
+                      onclick: function () {
+                        valuesView.hidden = !valuesView.hidden;
+                      }
+                    })
+                  ]),
+                  valuesView
+                ])
+              );
+            });
+          }
+
           function fillBenefitsTests() {
             if (!payload.benefitsTests || !payload.benefitsTests.length) return;
             rowsNode.appendChild(
@@ -649,6 +711,7 @@
           function fill() {
             rowsNode.textContent = '';
             if (card === 'membership') return fillMembership();
+            if (card === 'membershipBranch') return fillMembershipBranch();
             fillBenefitsTests();
             payload.states.forEach(function (info) {
               var row = payload.rows[fixture][info.state],
