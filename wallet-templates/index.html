@@ -505,7 +505,8 @@
               payload.membership ? el('option', { value: 'membership', text: 'Membership (by club)' }) : null,
               payload.membershipBranch
                 ? el('option', { value: 'membershipBranch', text: 'Membership (MOB-24999 branch)' })
-                : null
+                : null,
+              payload.expired ? el('option', { value: 'expired', text: 'Expired passes' }) : null
             ]
           );
           var fixtureLabel = el('label', { text: 'Policy fixture', style: 'margin:0' });
@@ -682,6 +683,31 @@
             });
           }
 
+          function fillExpired() {
+            var info = payload.expired;
+            rowsNode.appendChild(
+              el('div', { class: 'row' }, [
+                el('div', { class: 'top' }, [
+                  el('span', { class: 'state', text: 'Built from ' + info.branch }),
+                  el('span', { class: 'small', text: 'commit ' + info.commit })
+                ]),
+                el('div', {
+                  class: 'small',
+                  text: 'Exported ' + new Date(info.generatedAt).toLocaleString() + '. Both cards are past their dates.'
+                })
+              ])
+            );
+            info.rows.forEach(function (row) {
+              rowsNode.appendChild(
+                el('div', { class: 'row' }, [
+                  el('div', { class: 'top' }, [el('span', { class: 'state', text: row.title })]),
+                  el('div', { class: 'small', text: row.detail }),
+                  el('div', { class: 'actions' }, [walletButton(row.passId)])
+                ])
+              );
+            });
+          }
+
           function fillBenefitsTests() {
             if (!payload.benefitsTests || !payload.benefitsTests.length) return;
             rowsNode.appendChild(
@@ -712,6 +738,7 @@
             rowsNode.textContent = '';
             if (card === 'membership') return fillMembership();
             if (card === 'membershipBranch') return fillMembershipBranch();
+            if (card === 'expired') return fillExpired();
             fillBenefitsTests();
             payload.states.forEach(function (info) {
               var row = payload.rows[fixture][info.state],
