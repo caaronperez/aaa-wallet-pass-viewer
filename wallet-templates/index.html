@@ -582,7 +582,25 @@
               : el('div', { class: 'fits', text: '✓ every value fits' });
           }
 
+          function fillDeployedTests() {
+            (payload.deployedTests || []).forEach(function (test) {
+              var button = walletButton(test.passId);
+              button.textContent = test.label;
+              rowsNode.appendChild(
+                el('div', { class: 'row' }, [
+                  el('div', { class: 'top' }, [
+                    el('span', { class: 'state', text: 'UAT deployed code' }),
+                    el('span', { class: 'small', text: 'membership · club 004' })
+                  ]),
+                  el('div', { class: 'small', text: test.note }),
+                  el('div', { class: 'actions' }, [button])
+                ])
+              );
+            });
+          }
+
           function fillMembership() {
+            fillDeployedTests();
             payload.membership.forEach(function (row) {
               var values = row.values;
               var valuesView = el('pre', { hidden: '', text: JSON.stringify(values, null, 2) });
