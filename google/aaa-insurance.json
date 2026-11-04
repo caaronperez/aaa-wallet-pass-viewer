@@ -151,7 +151,7 @@
         "body": {
           "defaultValue": {
             "language": "en-US",
-            "value": "Get help in the app: tow, battery, tire, lockout"
+            "value": "Get help online: tow, battery, tire, lockout"
           }
         },
         "uri": "https://www.ace.aaa.com/automotive/roadside-assistance.html",
