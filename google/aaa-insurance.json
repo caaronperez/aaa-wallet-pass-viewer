@@ -154,7 +154,7 @@
             "value": "Get help in the app: tow, battery, tire, lockout"
           }
         },
-        "uri": "https://www.ace.aaa.com/wallet/roadside?source=google-wallet",
+        "uri": "https://www.ace.aaa.com/automotive/roadside-assistance.html",
         "image": {
           "sourceUri": {
             "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-roadside.jpg"
