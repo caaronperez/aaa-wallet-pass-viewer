@@ -115,6 +115,50 @@
         color: var(--bad);
         font-size: 12.5px;
       }
+      .decisions table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 12px 0 20px;
+      }
+      .decisions th,
+      .decisions td {
+        padding: 10px 8px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+      .decisions th {
+        color: var(--muted);
+        font-size: 12.5px;
+      }
+      .decisions td:last-child {
+        white-space: nowrap;
+      }
+      .decisions td label {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        margin: 0 0 6px;
+        color: var(--text);
+        font-size: inherit;
+      }
+      .decisions td input {
+        width: auto;
+        margin: 0;
+      }
+      .decisions .nearby {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--text);
+      }
+      .decisions .saved {
+        margin: 10px 0 0;
+        min-height: 18px;
+        color: var(--ok);
+      }
+      .decisions .saved.failed {
+        color: var(--bad);
+      }
       header {
         position: sticky;
         top: 0;
@@ -485,6 +529,127 @@
             });
         }
 
+        function showDecisions(mainNode) {
+          var session = savedSession();
+          if (!session) return lock(EXPIRED_MESSAGE);
+          var view = el('main', { class: 'decisions' }, [el('p', { text: 'Loading…' })]);
+          function close() {
+            view.remove();
+            mainNode.hidden = false;
+          }
+          mainNode.hidden = true;
+          mainNode.parentNode.insertBefore(view, mainNode);
+          callAccess('/decisions', { token: session.token })
+            .then(function (response) {
+              if (response.data.error === 'expired') return lock(EXPIRED_MESSAGE);
+              if (!response.ok) throw new Error('failed');
+              fillDecisions(view, response.data, close);
+            })
+            .catch(function () {
+              view.textContent = '';
+              view.appendChild(el('p', { text: 'Could not load the list. Check your connection and try again.' }));
+              view.appendChild(el('button', { class: 'secondary', text: 'Back', onclick: close }));
+            });
+        }
+
+        function fillDecisions(view, data, close) {
+          var saved = data.saved || { answers: {}, nearbyText: '' };
+          function savedText(savedAt) {
+            return savedAt ? 'Saved ' + new Date(savedAt).toLocaleString() + '.' : '';
+          }
+          var status = el('p', { class: 'saved', role: 'status', text: savedText(saved.savedAt) });
+          var nearby = el('input', {
+            id: 'nearby-text',
+            type: 'text',
+            maxlength: '80',
+            placeholder: 'AAA branch nearby'
+          });
+          nearby.value = saved.nearbyText || '';
+          function choice(row, value, text) {
+            var input = el('input', { type: 'radio', name: row.id, value: value });
+            input.checked = saved.answers[row.id] === value;
+            return el('label', {}, [input, el('span', { text: text })]);
+          }
+          var submit = el('button', { type: 'submit', text: 'Submit' });
+          var form = el(
+            'form',
+            {
+              novalidate: 'novalidate',
+              onsubmit: function (event) {
+                event.preventDefault();
+                var answers = {};
+                data.rows.forEach(function (row) {
+                  var picked = form.querySelector('input[name="' + row.id + '"]:checked');
+                  if (picked) answers[row.id] = picked.value;
+                });
+                status.className = 'saved failed';
+                if (Object.keys(answers).length < data.rows.length) {
+                  status.textContent = 'Choose Error or Leave off on every row.';
+                  return;
+                }
+                var session = savedSession();
+                if (!session) return lock(EXPIRED_MESSAGE);
+                submit.disabled = true;
+                status.textContent = '';
+                callAccess('/decisions/save', { token: session.token, answers: answers, nearbyText: nearby.value })
+                  .then(function (response) {
+                    if (response.data.error === 'expired') return lock(EXPIRED_MESSAGE);
+                    if (!response.ok) throw new Error('failed');
+                    status.className = 'saved';
+                    status.textContent = savedText(response.data.saved.savedAt);
+                  })
+                  .catch(function () {
+                    status.textContent = 'Could not save. Check your connection and submit again.';
+                  })
+                  .finally(function () {
+                    submit.disabled = false;
+                  });
+              }
+            },
+            [
+              el('table', {}, [
+                el('thead', {}, [
+                  el('tr', {}, [
+                    el('th', { text: 'Value' }),
+                    el('th', { text: 'Where it shows' }),
+                    el('th', { text: 'If missing' })
+                  ])
+                ]),
+                el(
+                  'tbody',
+                  {},
+                  data.rows.map(function (row) {
+                    return el('tr', {}, [
+                      el('td', { text: row.value }),
+                      el('td', { text: row.where }),
+                      el('td', {}, [choice(row, 'error', 'Error'), choice(row, 'leaveOff', 'Leave off')])
+                    ]);
+                  })
+                )
+              ]),
+              el('label', {
+                class: 'nearby',
+                for: 'nearby-text',
+                text: 'Near a branch, show this text instead of "AAA branch nearby" (optional)'
+              }),
+              nearby,
+              el('div', { style: 'margin-top:16px' }, [submit]),
+              status
+            ]
+          );
+          view.textContent = '';
+          view.appendChild(
+            el('button', { class: 'secondary', text: 'Back', style: 'margin-bottom:12px', onclick: close })
+          );
+          view.appendChild(el('h2', { text: 'Missing values' }));
+          view.appendChild(
+            el('p', {
+              text: "If we can't find a value, choose Error (the member gets an error and no card) or Leave off (the member gets the card without it)."
+            })
+          );
+          view.appendChild(form);
+        }
+
         function render(payload) {
           root.textContent = '';
           var fixture = payload.fixtures[0];
@@ -533,6 +698,13 @@
               }),
               el('button', {
                 class: 'secondary',
+                text: 'Missing values',
+                onclick: function () {
+                  if (!mainNode.hidden) showDecisions(mainNode);
+                }
+              }),
+              el('button', {
+                class: 'secondary',
                 text: 'Lock now',
                 onclick: function () {
                   lock('Locked.');
@@ -540,8 +712,7 @@
               })
             ])
           );
-          root.appendChild(
-            el('main', {}, [
+          var mainNode = el('main', {}, [
               el('div', { class: 'toolbar' }, [
                 el('label', { text: 'Card', style: 'margin:0' }),
                 cardSelect,
@@ -555,8 +726,8 @@
                   '. "Add to Apple Wallet" installs the signed pass (open this page in Safari on your iPhone). California (insurance) and club 004 (membership) also let you pick the artwork and whether the header darkening is suppressed.'
               }),
               rowsNode
-            ])
-          );
+          ]);
+          root.appendChild(mainNode);
 
           function walletButton(id) {
             return id
