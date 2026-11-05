@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Missing Values</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font: 16px/1.4 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+      body {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 16px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+      }
+      th,
+      td {
+        padding: 10px 8px;
+        border-bottom: 1px solid #8888;
+        text-align: left;
+        vertical-align: top;
+      }
+      td:last-child {
+        white-space: nowrap;
+      }
+      td label {
+        display: block;
+        padding: 2px 0;
+      }
+      #nearby {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        font: inherit;
+      }
+      button {
+        margin-top: 16px;
+        padding: 10px 24px;
+        font: inherit;
+        font-weight: 600;
+      }
+      #status {
+        min-height: 22px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Missing values</h1>
+    <p>
+      If we can't find a value, choose Error (the member gets an error and no card) or Leave off (the member gets the
+      card without it).
+    </p>
+    <form id="form" hidden>
+      <table>
+        <thead>
+          <tr>
+            <th>Value</th>
+            <th>Where it shows</th>
+            <th>If missing</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <label for="nearby">Near a branch, show this text instead of "AAA branch nearby" (optional)</label>
+      <input id="nearby" type="text" maxlength="80" placeholder="AAA branch nearby" />
+      <button id="submit" type="submit">Submit</button>
+    </form>
+    <p id="status" role="status">Loading…</p>
+    <script>
+      var SERVICE = 'https://aaa-wallet-templates-access.caaronperez.workers.dev';
+      var form = document.getElementById('form');
+      var statusLine = document.getElementById('status');
+      var nearby = document.getElementById('nearby');
+      var submit = document.getElementById('submit');
+      var rows = [];
+
+      function call(path, body) {
+        return fetch(SERVICE + path, { method: 'POST', body: JSON.stringify(body) }).then(function (response) {
+          if (!response.ok) throw new Error('failed');
+          return response.json();
+        });
+      }
+
+      function cell(text) {
+        var td = document.createElement('td');
+        td.textContent = text;
+        return td;
+      }
+
+      function choice(row, value, text, saved) {
+        var label = document.createElement('label');
+        var input = document.createElement('input');
+        input.type = 'radio';
+        input.name = row.id;
+        input.value = value;
+        input.checked = saved === value;
+        label.append(input, ' ' + text);
+        return label;
+      }
+
+      function savedMessage(savedAt) {
+        return 'Saved ' + new Date(savedAt).toLocaleString() + '.';
+      }
+
+      call('/decisions', {})
+        .then(function (data) {
+          var saved = data.saved || { answers: {}, nearbyText: '' };
+          rows = data.rows;
+          rows.forEach(function (row) {
+            var tr = document.createElement('tr');
+            var choices = document.createElement('td');
+            choices.append(
+              choice(row, 'error', 'Error', saved.answers[row.id]),
+              choice(row, 'leaveOff', 'Leave off', saved.answers[row.id])
+            );
+            tr.append(cell(row.value), cell(row.where), choices);
+            document.getElementById('rows').append(tr);
+          });
+          nearby.value = saved.nearbyText;
+          form.hidden = false;
+          statusLine.textContent = saved.savedAt ? savedMessage(saved.savedAt) : '';
+        })
+        .catch(function () {
+          statusLine.textContent = 'Could not load the list. Reload the page to try again.';
+        });
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var answers = {};
+        rows.forEach(function (row) {
+          var picked = form.querySelector('input[name="' + row.id + '"]:checked');
+          if (picked) answers[row.id] = picked.value;
+        });
+        if (Object.keys(answers).length < rows.length) {
+          statusLine.textContent = 'Choose Error or Leave off on every row.';
+          return;
+        }
+        submit.disabled = true;
+        statusLine.textContent = 'Saving…';
+        call('/decisions/save', { answers: answers, nearbyText: nearby.value })
+          .then(function (data) {
+            statusLine.textContent = savedMessage(data.saved.savedAt);
+          })
+          .catch(function () {
+            statusLine.textContent = 'Could not save. Check your connection and submit again.';
+          })
+          .finally(function () {
+            submit.disabled = false;
+          });
+      });
+    </script>
+  </body>
+</html>
