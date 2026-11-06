@@ -1,0 +1,223 @@
+{
+  "appLaunchURL": "exampleapp://wallet/benefits?source=wallet",
+  "associatedStoreIdentifiers": [
+    0
+  ],
+  "authenticationToken": "",
+  "barcodes": [
+    {
+      "_id": "E4FD1E6E-100F-4455-90D5-FEAA43177955",
+      "altText": "000 000 000000000 0",
+      "format": "PKBarcodeFormatPDF417",
+      "message": "000 000 000000000 0",
+      "messageEncoding": "iso-8859-1"
+    }
+  ],
+  "description": "Membership Card",
+  "expirationDate": "2027-04-01T06:59:00Z",
+  "featuredActions": [
+    {
+      "_id": "B28682DD-2D79-49A2-85B0-0BC554E8D361",
+      "identifier": "memberBenefits",
+      "type": "membershipBenefits",
+      "url": "https://www.example.com/membership.html#membershipBenefits"
+    },
+    {
+      "_id": "416B1BAF-10E3-438F-A72C-383C6E03F523",
+      "identifier": "nearestBranch",
+      "placeIdentifier": "IXXXXXXXXXXXXXXXX",
+      "type": "place"
+    }
+  ],
+  "formatVersion": 1,
+  "generic": {
+    "headerFields": [
+      {
+        "key": "expiration_date",
+        "label": "VALID THRU",
+        "value": "MAR 30, 2027",
+        "textAlignment": "PKTextAlignmentRight"
+      }
+    ],
+    "primaryFields": [
+      {
+        "key": "name",
+        "label": "NAME",
+        "value": "FULANITO PEREZ"
+      }
+    ],
+    "secondaryFields": [
+      {
+        "key": "membership_number",
+        "label": "MEMBERSHIP NUMBER",
+        "value": "000 000 000000000 0"
+      },
+      {
+        "key": "membership_length",
+        "label": "LOYAL MEMBER",
+        "value": "5 Years"
+      }
+    ],
+    "auxiliaryFields": [
+      {
+        "key": "rso_number1",
+        "label": "ROADSIDE ASSISTANCE",
+        "value": "1.800.000.0000"
+      },
+      {
+        "key": "rso_number2",
+        "label": "(OUTSIDE CA)",
+        "value": "1.800.000.0000"
+      }
+    ],
+    "backFields": [
+      {
+        "key": "services",
+        "label": "Services",
+        "value": "Services",
+        "attributedValue": "<a href=\"https://www.example.com/roadside\">Roadside Assistance</a>"
+      },
+      {
+        "key": "local_branch",
+        "label": "Your local branch",
+        "value": "Sample Branch\n000 Main St\nCity, ST 00000"
+      },
+      {
+        "key": "car_rental_codes",
+        "label": "Car Rental Discount Codes",
+        "value": "Hertz CDP: 0000"
+      },
+      {
+        "key": "membership_number_back",
+        "label": "Membership Number",
+        "value": "000 000 000000000 0"
+      },
+      {
+        "key": "disclaimer",
+        "label": "Disclaimer",
+        "value": "Present this card at the time of service. Roadside Assistance is provided by independent service providers. All Club services are subject to change without notice. By acceptance of this card, member agrees to be bound by Club's Bylaws."
+      }
+    ]
+  },
+  "locations": [
+    {
+      "latitude": 0,
+      "longitude": 0,
+      "relevantText": "Branch nearby · show your card"
+    }
+  ],
+  "maxDistance": 500,
+  "organizationName": "Organization",
+  "passTypeIdentifier": "pass.com.example.membership",
+  "posterGeneric": {
+    "auxiliaryFields": [],
+    "backFields": [
+      {
+        "_id": "3BC7022D-63A1-43D0-8DC4-007F33159329",
+        "attributedValue": "Call <a href='tel:18000000000'>1-800-000-0000</a>\nOutside CA: <a href='tel:18000000000'>1-800-000-0000</a>",
+        "key": "roadsideAssistance",
+        "label": "Roadside Assistance · 24/7",
+        "value": "Call 1-800-000-0000\nOutside CA: 1-800-000-0000"
+      },
+      {
+        "_id": "4AE323DC-42C1-458C-964C-18E764CBD102",
+        "attributedValue": "<a href='https://www.example.com/automotive/roadside-assistance.html'>Tow · Battery · Tire · Lockout · Fuel delivery</a>",
+        "key": "roadsideOnline",
+        "label": "Request roadside help online",
+        "value": "Tow · Battery · Tire · Lockout · Fuel delivery"
+      },
+      {
+        "_id": "DB2FEDA0-8051-49FB-9B04-0BCF257ED43D",
+        "dataDetectorTypes": [],
+        "key": "membershipNumber",
+        "label": "Membership number",
+        "value": "000 000 000000000 0"
+      },
+      {
+        "_id": "88EFB40E-5EDB-4AC5-B4DF-1C7EF45069D0",
+        "key": "planSince",
+        "label": "Plan · member since",
+        "value": "Premier · 1994 (32 years)"
+      },
+      {
+        "_id": "2B51034D-9EFC-4482-A952-D60EE748F73E",
+        "attributedValue": "<a href='https://app.example.com/membership/quick-self-service'>Renew · Add a family member · Upgrade</a>\n<a href='https://app.example.com/membership/make-a-payment/'>Pay membership bill</a>",
+        "key": "manageMembership",
+        "label": "Manage membership",
+        "value": "Renew · Add a family member · Upgrade\nPay membership bill"
+      },
+      {
+        "_id": "C753539A-7AD7-4C4A-B625-6686D5C1F0CE",
+        "attributedValue": "<a href='https://www.example.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.example.com/discounts.html'>Show this card at participating businesses</a>",
+        "key": "memberBenefits",
+        "label": "Member benefits & discounts",
+        "value": "Explore all membership benefits\nShow this card at participating businesses"
+      },
+      {
+        "_id": "BE2501B8-01F7-4178-8567-4E80F216DAFB",
+        "dataDetectorTypes": [],
+        "key": "rentalCodes",
+        "label": "Car rental discount codes",
+        "value": "Hertz CDP: 0000\nDollar CD: XX0000\nThrifty CD: 0000000000"
+      },
+      {
+        "_id": "4A097C5D-0A31-451F-95AC-2AF0CDD4AA5D",
+        "attributedValue": "Sample Branch\n000 Main St, City, CA 00000\nPhone: <a href='tel:10000000000'>000-000-0000</a>\nMon–Sat 9:00 AM – 5:00 PM\n<a href='https://maps.apple.com/place?place-id=IXXXXXXXXXXXXXXXX'>Get directions</a> · <a href='https://www.example.com/locations.html'>Find another branch</a>",
+        "key": "nearestBranch",
+        "label": "Your branch",
+        "value": "Sample Branch\n000 Main St, City, CA 00000\nPhone: 000-000-0000\nMon–Sat 9:00 AM – 5:00 PM\nGet directions · Find another branch"
+      },
+      {
+        "_id": "A9165F0D-9954-4F34-9273-331776A719F2",
+        "attributedValue": "<a href='https://apps.apple.com/app/id0000000000'>The fastest way to request Roadside Assistance</a>",
+        "key": "memberApp",
+        "label": "Member app",
+        "value": "The fastest way to request Roadside Assistance"
+      }
+    ],
+    "footerFields": [
+      {
+        "_id": "9038262F-5EA5-56F8-A1EC-FEEDBE30F617",
+        "key": "roadsideFooter",
+        "label": "Roadside",
+        "value": "24/7 ROADSIDE: TAP MEMBERSHIP BENEFITS"
+      }
+    ],
+    "headerFields": [
+      {
+        "_id": "F4BF8486-01B1-4D95-8274-D9DC23F45446",
+        "key": "cardTitle",
+        "label": "MEMBERSHIP CARD",
+        "value": "Premier"
+      }
+    ],
+    "primaryFields": [
+      {
+        "_id": "ECFFE41F-7536-4B95-BA8C-5E799D971A02",
+        "key": "memberName",
+        "label": "Member Name",
+        "value": "FULANITO PEREZ"
+      },
+      {
+        "_id": "E68AFFEA-E72E-4298-B321-C1B23104E013",
+        "key": "validThru",
+        "label": "Valid Through",
+        "value": "03/2027"
+      },
+      {
+        "_id": "EED2AD41-C8FE-46F1-B2DA-E8D5F23CB292",
+        "key": "memberSince",
+        "label": "Member Since",
+        "value": "1994"
+      }
+    ],
+    "secondaryFields": []
+  },
+  "serialNumber": "0000000000000000-ALT-GLASS",
+  "suppressHeaderDarkening": true,
+  "teamIdentifier": "",
+  "useAutomaticColors": false,
+  "backgroundColor": "rgb(242,228,228)",
+  "foregroundColor": "rgb(25,40,66)",
+  "labelColor": "rgb(39,41,43)"
+}

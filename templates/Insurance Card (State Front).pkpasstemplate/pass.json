@@ -1,0 +1,219 @@
+{
+  "appLaunchURL": "exampleapp://wallet/benefits?source=wallet",
+  "associatedStoreIdentifiers": [
+    0
+  ],
+  "authenticationToken": "",
+  "barcodes": [],
+  "description": "Auto Insurance Card",
+  "expirationDate": "2027-09-15T06:59:00Z",
+  "featuredActions": [
+    {
+      "_id": "6D898A90-146D-4F88-82E6-12A07BE4AA17",
+      "identifier": "memberBenefits",
+      "type": "membershipBenefits",
+      "url": "https://www.example.com/membership.html#membershipBenefits"
+    },
+    {
+      "_id": "A5C9E2AB-4F31-4EE4-9A7F-5FCAE87EDE59",
+      "identifier": "nearestBranch",
+      "placeIdentifier": "IXXXXXXXXXXXXXXXX",
+      "type": "place"
+    }
+  ],
+  "formatVersion": 1,
+  "organizationName": "Organization",
+  "passTypeIdentifier": "pass.com.example.insurance",
+  "serialNumber": "0000000000-ALT-AA",
+  "suppressHeaderDarkening": true,
+  "teamIdentifier": "",
+  "useAutomaticColors": false,
+  "posterGeneric": {
+    "headerFields": [
+      {
+        "_id": "041A0AE6-820D-42F0-833D-91DAFBB356A2",
+        "key": "cardTitle",
+        "label": "IL INSURANCE CARD",
+        "value": "Auto Insurance Card"
+      }
+    ],
+    "primaryFields": [
+      {
+        "_id": "369E2568-23C2-4A28-96B8-6E833AECD401",
+        "key": "namedInsured",
+        "label": "Named Insured",
+        "value": "FULANITO PEREZ"
+      },
+      {
+        "_id": "5FB970D9-44B6-4DE2-BD94-105302DF768F",
+        "key": "policyNumber",
+        "label": "Policy Number",
+        "value": "0000000000"
+      },
+      {
+        "_id": "36008DE2-0CE8-4D68-95ED-6A0C69101720",
+        "key": "effective",
+        "label": "Effective",
+        "value": "01/09/26 – 01/09/27",
+        "textAlignment": "PKTextAlignmentRight"
+      }
+    ],
+    "footerFields": [
+      {
+        "_id": "1EF1701E-928B-4121-91EC-AA74C4EE5E9F",
+        "key": "insuranceCompanyFooter",
+        "label": "Insurance Company",
+        "value": "SAMPLE MUTUAL INSURANCE · NAIC # 00000"
+      }
+    ],
+    "backFields": [
+      {
+        "_id": "45129856-FAA5-4460-B53B-5D4859B2C9F7",
+        "key": "disclaimer",
+        "label": "Disclaimer",
+        "value": "State disclaimer and required statements"
+      },
+      {
+        "_id": "E82436E8-8E01-47FE-86F7-704DEEFC4F4D",
+        "key": "namedInsureds",
+        "label": "Named Insured(s)",
+        "value": "FULANITO PEREZ\nSAMPLE SECOND INSURED"
+      },
+      {
+        "_id": "82CF1535-45D5-49B9-94A9-D84EF778340D",
+        "key": "insuredAddress",
+        "label": "Insured address",
+        "value": "000 Main St, City, ST 00000"
+      },
+      {
+        "_id": "1393FB9D-0FD7-41EE-85C1-DA8765E90614",
+        "key": "vehicles",
+        "label": "Vehicles",
+        "value": "2026 SAMPLE SUV\nVIN XXXXXXXXXXXXXXXXX"
+      },
+      {
+        "_id": "EE04B646-0DD7-4077-9B32-CB3528AD2BEE",
+        "key": "insuredDrivers",
+        "label": "Insured drivers",
+        "value": "Fulanito Perez"
+      },
+      {
+        "_id": "2C9FED68-7089-4E80-9B45-EB1D82F5A110",
+        "key": "excludedDrivers",
+        "label": "Excluded drivers",
+        "value": "None"
+      },
+      {
+        "_id": "A377CDA7-7243-4867-B706-D87DEC2AC4A8",
+        "key": "policyPeriod",
+        "label": "Policy period",
+        "value": "01/09/2026 – 01/09/2027"
+      },
+      {
+        "_id": "DD3F0C8E-2455-4E0A-B614-AD165124E553",
+        "key": "company",
+        "label": "Insurance company",
+        "value": "Company name\nNAIC # 00000\nCompany address"
+      },
+      {
+        "_id": "81F81985-AFC5-4A0E-AD2F-23E7088B7EDF",
+        "key": "agent",
+        "label": "Agent",
+        "value": "Agent name · 000-000-0000"
+      },
+      {
+        "_id": "15CDDA42-1B6E-4148-8825-60FF91C6D2B6",
+        "key": "accidentAssist",
+        "label": "24/7 Accident Assist Hotline",
+        "value": "1-800-000-0000"
+      },
+      {
+        "_id": "84D6E1CF-0B02-43CE-9249-DEF27D4EB4BE",
+        "key": "policyQuestions",
+        "label": "Policy questions or changes",
+        "value": "1-800-000-0000"
+      },
+      {
+        "_id": "8AE7DAA6-65A1-42F5-B18C-882A9265FD20",
+        "key": "memberBenefits",
+        "label": "Member benefits & discounts",
+        "value": "Explore all membership benefits\nShow this card at participating businesses",
+        "attributedValue": "<a href='https://www.example.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.example.com/discounts.html'>Show this card at participating businesses</a>"
+      },
+      {
+        "_id": "E56D07CA-89D0-4164-B3B0-BB302E99856A",
+        "key": "memberApp",
+        "label": "Member app",
+        "value": "The fastest way to request Roadside Assistance",
+        "attributedValue": "<a href='https://apps.apple.com/app/id0000000000'>The fastest way to request Roadside Assistance</a>"
+      }
+    ]
+  },
+  "generic": {
+    "primaryFields": [
+      {
+        "key": "header",
+        "label": "POLICY NUMBER",
+        "value": "0000000000"
+      },
+      {
+        "key": "effective",
+        "label": "07/01/2026 - 07/01/2027",
+        "value": ""
+      }
+    ],
+    "secondaryFields": [
+      {
+        "key": "named_insured",
+        "label": "NAMED INSURED",
+        "value": "Fulanito Perez"
+      }
+    ],
+    "auxiliaryFields": [
+      {
+        "key": "companytTitle",
+        "label": "INSURANCE COMPANY",
+        "value": "Example Interinsurance Exchange of the Company NAIC# 00000"
+      }
+    ],
+    "backFields": [
+      {
+        "key": "Pull_To_Update",
+        "label": "                          Pull To Update",
+        "value": ""
+      },
+      {
+        "key": "Claims_PMG_Number",
+        "label": "",
+        "value": "24/7 Accident Assist Hotline\n1-800-000-0000\n\nPolicy questions or changes\n1-800-000-0000"
+      },
+      {
+        "key": "drivers",
+        "label": "Named Insured",
+        "value": "Fulanito Perez"
+      },
+      {
+        "key": "backVehicles",
+        "label": "Vehicles",
+        "value": "2026 SAMPLE SUV\nVIN XXXXXXXXXXXXXXXXX"
+      },
+      {
+        "key": "backDrivers",
+        "label": "Insured Drivers",
+        "value": "Fulanito Perez"
+      },
+      {
+        "key": "compName",
+        "label": "Company Name",
+        "value": "Example Interinsurance Exchange of the Company\nP.O. Box 00000, City, ST 00000"
+      },
+      {
+        "key": "disclaimer",
+        "label": "Disclaimer",
+        "value": "Sample state disclaimer."
+      }
+    ]
+  },
+  "foregroundColor": "rgb(16, 28, 48)",
+  "labelColor": "rgb(40, 52, 70)"
+}

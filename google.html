@@ -5,7 +5,7 @@
 <script src="gate.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AAA Google Wallet Viewer</title>
+<title>Google Wallet Viewer</title>
 <style>
 @font-face{font-family:Roboto;src:url(google/fonts/Roboto-Regular.ttf);font-weight:400}
 @font-face{font-family:Roboto;src:url(google/fonts/Roboto-Bold.ttf);font-weight:500 800}
@@ -373,10 +373,10 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
             <button type="button" class="gg-big" id="ggUpBig"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3m0 0L7 8m5-5l5 5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Upload your hero image</b><small>PNG or JPG · 1032 × 812 px · stays in your browser</small></span></button>
             <div class="gg-row"><span>Hero</span><div class="gg-seg" role="group" aria-label="Hero image"><button type="button" data-gh="none" class="on" aria-pressed="true">None</button><button type="button" data-gh="m" aria-pressed="false">Convertible</button><button type="button" data-gh="i" aria-pressed="false">Palms</button><button type="button" data-gh="up" aria-pressed="false">Upload…</button></div><input type="file" id="ggHeroFile" accept="image/*" hidden></div>
             <div class="gg-row"><span>Hero style</span><div class="gg-seg" role="group" aria-label="Hero style"><button type="button" data-gglass="off" class="on" aria-pressed="true">Plain</button><button type="button" data-gglass="on" aria-pressed="false">Baked glass edges</button></div></div>
-            <div class="gg-row"><span>Logo</span><div class="gg-seg" role="group" aria-label="Logo"><button type="button" data-gl="none" class="on" aria-pressed="true">None</button><button type="button" data-gl="aaa" aria-pressed="false">AAA</button><button type="button" data-gl="up" aria-pressed="false">Upload…</button></div><input type="file" id="ggLogoFile" accept="image/*" hidden></div>
+            <div class="gg-row"><span>Logo</span><div class="gg-seg" role="group" aria-label="Logo"><button type="button" data-gl="none" class="on" aria-pressed="true">None</button><button type="button" data-gl="sample" aria-pressed="false">Sample</button><button type="button" data-gl="up" aria-pressed="false">Upload…</button></div><input type="file" id="ggLogoFile" accept="image/*" hidden></div>
             <div class="gg-row"><span>Background</span><input type="color" id="ggBg" value="#f2e4e4" aria-label="hexBackgroundColor"><span id="ggAuto"></span></div>
             <div class="gg-row"><span>Barcode</span><div class="gg-seg" role="group" aria-label="Barcode"><button type="button" data-gbc="on" class="on" aria-pressed="true">With barcode</button><button type="button" data-gbc="off" aria-pressed="false">No barcode</button></div></div>
-            <div class="gg-row"><span>Card title</span><input type="text" id="ggTitle" value="AAA Membership Card" maxlength="80"><span class="cnt" data-max="30"></span></div>
+            <div class="gg-row"><span>Card title</span><input type="text" id="ggTitle" value="Membership Card" maxlength="80"><span class="cnt" data-max="30"></span></div>
             <div class="gg-row"><span>Header</span><input type="text" id="ggHeader" value="Fulanito Perez" maxlength="80"><span class="cnt" data-max="30"></span></div>
             <button type="button" class="gg-big chk" id="ggCheck"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span><b>Check contrast</b><small>Is the text readable on this background? (ADA AA)</small></span></button>
             <div class="gg-res" id="ggRes" hidden aria-live="polite"></div>
@@ -387,7 +387,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
               <div class="gp-t" id="gpT"></div>
               <div class="gp-s">Member</div>
               <div class="gp-h" id="gpH"></div>
-              <div class="gp-bcw"><div class="gp-bc"><span></span></div><div class="gp-alt">000 000 XXXXXXXXX 0</div></div>
+              <div class="gp-bcw"><div class="gp-bc"><span></span></div><div class="gp-alt">000 000 000000000 0</div></div>
               <div class="gp-rw"><div><i>Plan</i><b>Premier</b></div><div class="c"><i>Valid thru</i><b>03/27</b></div><div class="e"><i>Member since</i><b>1994</b></div></div>
             </div>
             <div class="gp-hero"><img id="ggHero" alt=""><div class="gp-glass" aria-hidden="true"></div><button type="button" class="gp-empty" id="ggEmpty"><span style="font-size:7cqw;line-height:1">＋</span>Upload hero image<small>1032 × 812 px</small></button></div>
@@ -451,7 +451,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
         <div class="panel">
           <h3>Google's "featured action": examples</h3>
           <p>Google has no feature literally called "featured actions". There are two real things:</p>
-          <p><b>1. App link button</b> (<code>appLinkData</code>): exactly <b>1 per pass</b>, label ≤ 30 chars, <b>no icon</b> (Google marks the logo, title and description as not supported). If an Android app is set it opens the app, otherwise the web link. That's what Badge's "1 Featured Action, ~30 chars, Android package wins" describes: it's Badge's name for this button. Ours is "Open Auto Club app".</p>
+          <p><b>1. App link button</b> (<code>appLinkData</code>): exactly <b>1 per pass</b>, label ≤ 30 chars, <b>no icon</b> (Google marks the logo, title and description as not supported). If an Android app is set it opens the app, otherwise the web link. That's what Badge's "1 Featured Action, ~30 chars, Android package wins" describes: it's Badge's name for this button. Ours is "Open the app".</p>
           <p><b>2. Value-added modules</b> (<code>valueAddedModuleData</code>): the ones with <b>your own text and image</b>. If the pass has <b>exactly one</b>, it shows on the front under the hero image. Add more and they all move to a list in the details (up to 15). These screenshots are from Google's docs:</p>
           <div class="shots">
             <figure><img src="google/img/docs/vam-single.png" alt="Google Wallet pass with one value-added module card under the hero image" loading="lazy"><figcaption>1 module: on the front, under the hero</figcaption></figure>
@@ -463,7 +463,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
             <figure><img src="google/img/docs/vam-image.png" alt="Module with the image highlighted" loading="lazy"><figcaption><b>image</b> (optional): your own picture, shown square (1:1, resized to fit). That's the "icon".</figcaption></figure>
           </div>
           <p><b>uri</b> (required) is where a tap goes: a web link or a deep link (our Roadside one is an App Link that opens the app’s chatbot; the phone number stays in the links list). <b>sortIndex</b> picks which comes first (lower wins), so with one slot on the front, it decides what members see. <b>viewConstraints.displayInterval</b> sets start/end dates, handy for "Renew now" only near expiry. Modules can live on the class (everyone) or the object (one member).</p>
-          <p>Use the switch above the card to see both setups with our AAA modules.</p>
+          <p>Use the switch above the card to see both setups with our modules.</p>
           <p class="note">Screenshots © Google, from the Google Wallet developer docs (CC BY 4.0).</p>
           <ul class="src">
             <li><a href="https://developers.google.com/wallet/generic/use-cases/value-added-opportunities" target="_blank" rel="noopener">Google: Value Added Opportunities (generic passes)</a>: the 1-on-front rule, 15 modules, limits</li>
@@ -495,9 +495,9 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
 }]</pre></details>
           <details><summary>How to add the app link button (JSON)</summary>
 <pre>"appLinkData": {
-  "androidAppLinkInfo": {"appTarget": {"targetUri": {"uri": "https://play.google.com/…", "description": "AAA app"}}},
-  "webAppLinkInfo":     {"appTarget": {"targetUri": {"uri": "https://www.ace.aaa.com/", "description": "Website"}}},
-  "displayText": {"defaultValue": {"language": "en-US", "value": "Open Auto Club app"}}
+  "androidAppLinkInfo": {"appTarget": {"targetUri": {"uri": "https://play.google.com/…", "description": "Member app"}}},
+  "webAppLinkInfo":     {"appTarget": {"targetUri": {"uri": "https://www.example.com/", "description": "Website"}}},
+  "displayText": {"defaultValue": {"language": "en-US", "value": "Open the app"}}
 }</pre>
           <p class="note">Google marks the per-link <code>title</code>, <code>description</code> and <code>appLogoImage</code> as not supported, and iOS app links aren't supported either.</p></details>
         </div>
@@ -507,7 +507,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
           <table class="cmp">
             <tr><th>Row</th><th>What it is</th><th>You control</th></tr>
             <tr><td>Module with a picture</td><td>Value-added module (<code>valueAddedModuleData</code>)</td><td>Title (60), line (50), picture, link. 1 shows here; 2+ get their own list.</td></tr>
-            <tr><td>Open Auto Club app</td><td>App link button (<code>appLinkData</code>), only 1 per pass</td><td>Label (30) and where it goes. No icon or subtitle: Wallet adds the phone icon.</td></tr>
+            <tr><td>Open the app</td><td>App link button (<code>appLinkData</code>), only 1 per pass</td><td>Label (30) and where it goes. No icon or subtitle: Wallet adds the phone icon.</td></tr>
             <tr><td>Renew… / Pay… / Find a branch</td><td>Links module (<code>linksModuleData.uris</code>)</td><td>Label and link only. Wallet picks the icon from the link type (phone for <code>tel:</code>, globe for web). 10 from the class + 10 from the object.</td></tr>
             <tr><td>Membership number, Roadside…</td><td>Text modules (<code>textModulesData</code>) not used in a card row</td><td>Label and value, plain text, no links.</td></tr>
             <tr><td>Pass settings</td><td>Wallet's own screen</td><td>Nothing.</td></tr>
@@ -533,7 +533,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
 "use strict";
 const $ = id => document.getElementById(id);
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const SOURCES = {membership: 'google/aaa-membership.json', insurance: 'google/aaa-insurance.json'};
+const SOURCES = {membership: 'google/membership.json', insurance: 'google/insurance.json'};
 const LIMITS = {vamHeader: 60, vamBody: 50, appText: 30, rowItems: 3, rowsRecommended: 2, vamObject: 10, links: 10, text: 10, messages: 10};
 let cur = {key: 'membership', data: null, name: ''};
 
@@ -622,7 +622,7 @@ function buildComps({obj, cls, vams, app, bg, fg, logo, hero, details}){
     const onObj = (obj.valueAddedModuleData || []).includes(v), h = tx(v.header), b = tx(v.body);
     add('vam:' + i, {group: 'Below the image', name: 'Module: ' + h,
       path: `${onObj ? 'object' : 'class'}.valueAddedModuleData[${(onObj ? obj.valueAddedModuleData : cls.valueAddedModuleData).indexOf(v)}]`, json: v, img: imgSrc(v.image?.sourceUri?.uri), href: safeHref(v.uri),
-      what: /\/wallet\/roadside/.test(v.uri || '') ? 'Roadside Assistance comes first (sortIndex 1), so it’s the one module on the front of the pass. Tapping it opens the AAA app straight into the chatbot’s Roadside help, so members don’t have to find it. The line under the title says what they can get (tow, battery, tire, lockout). Members without the app get the roadside web page; the phone number stays in the links below.' : 'A value-added module: your own title, line of text and picture, tap goes to any link. Exactly 1 module shows on the pass itself; 2 or more move to their own list screen.',
+      what: /\/wallet\/roadside/.test(v.uri || '') ? 'Roadside Assistance comes first (sortIndex 1), so it’s the one module on the front of the pass. Tapping it opens the Member app straight into the chatbot’s Roadside help, so members don’t have to find it. The line under the title says what they can get (tow, battery, tire, lockout). Members without the app get the roadside web page; the phone number stays in the links below.' : 'A value-added module: your own title, line of text and picture, tap goes to any link. Exactly 1 module shows on the pass itself; 2 or more move to their own list screen.',
       kv: [['Header', `${esc(h)} <em>(${h.length}/60)</em>`, true], ['Body', b ? `${esc(b)} <em>(${b.length}/50)</em>` : undefined, true], ['Opens', v.uri], ['sortIndex', v.sortIndex === undefined ? undefined : String(v.sortIndex)]],
       limits: LIM('Header ≤ 60 chars, body ≤ 50 (longer is cut). Image is shown square. Up to 15 modules (the API reference says 10 per object/class). Lowest sortIndex goes first.', h.length > 60 || b.length > 50)});
   });
@@ -789,7 +789,7 @@ function render(){
     return `<a class="vam${over ? ' trunc' : ''}" data-c="vam:${i}" ${href ? `href="${esc(href)}" target="_blank" rel="noopener"` : ''} title="${over ? 'Too long: Google truncates this' : esc(v.uri)}"><span><b>${esc(h.slice(0, LIMITS.vamHeader))}</b>${b ? `<small>${esc(b.slice(0, LIMITS.vamBody))}</small>` : ''}</span>${imgSrc(v.image?.sourceUri?.uri) ? `<img src="${esc(imgSrc(v.image.sourceUri.uri))}" alt="">` : ''}</a>`;
   };
   const shown = vamMode === 'one' ? vams.slice(0, 1) : vams;
-  const sectionTitle = `Recommendations from ${esc(cls?.issuerName || 'AAA')}`;
+  const sectionTitle = `Recommendations from ${esc(cls?.issuerName || 'Issuer')}`;
   const modules = shown.length ? `<h4 class="gh4">${sectionTitle}${shown.length > 1 ? ` <small>${shown.length} modules: a list (needs its own screen)</small>` : ''}</h4>${shown.map((v, i) => vamCard(v, i)).join('')}` : '';
   const actions = [
     app ? row('app', esc(tx(app.displayText) || 'Open app'), appHref, '', 'app') : '',

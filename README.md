@@ -1,13 +1,13 @@
-# AAA Wallet Pass Viewer
+# Wallet Pass Viewer
 
-Read-only browser viewer for the AAA `.pkpasstemplate` examples, laid out like Apple's Pass Designer: components on the left, iOS 27 and iOS 26 previews on the canvas.
+Read-only browser viewer for the `.pkpasstemplate` examples, laid out like Apple's Pass Designer: components on the left, iOS 27 and iOS 26 previews on the canvas.
 
 Live: https://caaronperez.github.io/aaa-wallet-pass-viewer/
 
 ## What it shows
 
 - **iOS 27** — the `posterGeneric` pass (artwork, primary logo, barcode, primary and footer fields) plus its Featured Action cards.
-- **iOS 26** — the `generic` fallback style stored in the same `pass.json`, matching the previous AAA card design.
+- **iOS 26** — the `generic` fallback style stored in the same `pass.json`, matching the previous card design.
 - **Details** — the back fields (Pass Details) for both styles. Use the Front/Details toggle or drag a card sideways.
 - **Every component is inspectable, never editable**: Identity & Signing, Style, Images, Barcode & NFC, Featured Actions, each field group and field, and the complete `pass.json` / `tooling.json`.
 - **Apple's limits beside each component**, e.g. Header Fields (max 1), Primary Fields (max 4), and Featured Actions 2/2. The "Show limits for pass style" menu checks the same fields against another style (Generic, Store Card, Coupon, Event Ticket, Boarding Pass) and shows in red what would no longer fit.
@@ -23,13 +23,15 @@ Open more templates, all in the browser (nothing is uploaded). Each one gets its
 
 ## Google Wallet
 
-`google.html` (Apple Wallet / Google Wallet switch in the title bar) shows the same two cards as Google Wallet Generic passes: `google/aaa-membership.json` and `google/aaa-insurance.json`, each `{genericClass, genericObject}` with mock data. It renders the Android card, value-added modules, app link, details and links, lists Google's limits, and compares Apple Featured Actions with Google's equivalents. Drop in your own pass JSON (or a JWT payload) to preview it. The issuer ID is a placeholder.
+`google.html` (Apple Wallet / Google Wallet switch in the title bar) shows the same two cards as Google Wallet Generic passes: `google/membership.json` and `google/insurance.json`, each `{genericClass, genericObject}` with mock data. It renders the Android card, value-added modules, app link, details and links, lists Google's limits, and compares Apple Featured Actions with Google's equivalents. Drop in your own pass JSON (or a JWT payload) to preview it. The issuer ID is a placeholder.
 
 ## Password
 
 Both pages ask for a password (`gate.js`). It keeps casual visitors out, but it isn't real security: the repo is public, and files like templates and images can still be opened by their direct URL. For real access control, host the site behind a login (for example a private host or Cloudflare Access).
 
 To change the password, run this and paste the result into `HASH` in `gate.js`. Everyone who unlocked before will be asked again.
+
+A wrong password plays the "magic word" animation ([nedry](https://github.com/MarkHjorth/nedry), loaded in a sandboxed frame). After 3 wrong tries the form locks for 24 hours. That limit is saved in the browser, so clearing site data resets it.
 
 ```bash
 printf '%s' 'aaa-wallet-viewer:NEWPASSWORD' | shasum -a 256
@@ -38,13 +40,13 @@ printf '%s' 'aaa-wallet-viewer:NEWPASSWORD' | shasum -a 256
 ## Next steps (TODO)
 
 - **Get Directions (place ID):** the place ID is written into the signed pass, so members and Wallet can't change it. Our pass server sets it per member (home branch or nearest to the address on file) and pushes updates through the Wallet web service (`webServiceURL`, APNs, new signed pass) when the branch changes. It can't follow the phone's location live; `locations` + `relevantText` only control Lock Screen relevance. Look up place IDs with the Apple Maps Server API or MapKit, store them per branch, and re-check them now and then. If a member has no branch, leave the action out.
-- **View Membership Benefits:** agreed plan: tapping opens the app on the Membership Benefits bottom sheet (Discounts filter/sort style, glass close), Roadside first, so the label matches; without the app the same link opens ace.aaa.com. Today the templates use the app's own deep link `aceautoclub-beta://wallet/benefits?source=wallet` (Member Beta; opens the app straight on the sheet, no browser, no sign-in; per-build schemes `aceautoclub`, `-uat1`, `-uat2`, `-beta`, `-acceptance`, `-dev`). The https universal link (`https://app.ace.aaa.com/wallet/benefits`) is wired in the app on `b/wallet-deeplink-benefits` and needs an `applinks` AASA entry from web. Needs: web hosts `apple-app-site-association` on an AAA domain for one path (e.g. `/wallet/benefits`); iOS adds `applinks:` + a deep-link route to the sheet (today's deep links only cover push: My Cards, Pay Bill); design finalizes the sheet; backend puts the link (with `?source=wallet`) in the pass. iOS 26 has no Featured Actions, so the cards show the Roadside number instead.
-- **Lock Screen suggestions near AAA places:** like a gym key, it's a Wallet pass feature: up to 10 `locations` (with `relevantText`, `maxDistance`), beacons or `relevantDates`; no app or location permission needed. The app already downloads the card from the backend (`PostMembershipPKPass`, `pass.com.aaa.membercard`, member ZIP), so it's backend work: product picks place types and messages, the pass service adds the nearest 10 to the member's ZIP and keeps them fresh with the Wallet web service. Limits: 10 places, Apple decides when to show it, short fixed message.
+- **View Membership Benefits:** agreed plan: tapping opens the app on the Membership Benefits bottom sheet (Discounts filter/sort style, glass close), Roadside first, so the label matches; without the app the same link opens example.com. Today the templates use the app's own deep link `exampleapp-beta://wallet/benefits?source=wallet` (Member Beta; opens the app straight on the sheet, no browser, no sign-in; per-build schemes `exampleapp`, `-uat1`, `-uat2`, `-beta`, `-acceptance`, `-dev`). The https universal link (`https://app.example.com/wallet/benefits`) is wired in the app on `b/wallet-deeplink-benefits` and needs an `applinks` AASA entry from web. Needs: web hosts `apple-app-site-association` on our domain for one path (e.g. `/wallet/benefits`); iOS adds `applinks:` + a deep-link route to the sheet (today's deep links only cover push: My Cards, Pay Bill); design finalizes the sheet; backend puts the link (with `?source=wallet`) in the pass. iOS 26 has no Featured Actions, so the cards show the Roadside number instead.
+- **Lock Screen suggestions near our places:** like a gym key, it's a Wallet pass feature: up to 10 `locations` (with `relevantText`, `maxDistance`), beacons or `relevantDates`; no app or location permission needed. The app already downloads the card from the backend (`PostMembershipPKPass`, `pass.com.example.membercard`, member ZIP), so it's backend work: product picks place types and messages, the pass service adds the nearest 10 to the member's ZIP and keeps them fresh with the Wallet web service. Limits: 10 places, Apple decides when to show it, short fixed message.
 
 ## Notes
 
 - This is a recreation for design review. Wallet and Pass Designer render the real pass, including fonts, truncation, barcode artwork, and Featured Action labels and symbols.
-- `place` Featured Actions need a real Apple Maps Place ID; with an invalid one the card does not render on a device. The templates use `I71B28B9C6AC9C7EF` (AAA Glendale, 1233 E Broadway), found with MapKit's `MKLocalSearch` and verified with `MKMapItemRequest`. Wallet still labels the card "Get Directions / Open in Maps"; the place name is not shown. Production passes should resolve each member's branch at pass-generation time.
+- `place` Featured Actions need a real Apple Maps Place ID; with an invalid one the card does not render on a device. The templates use the placeholder `IXXXXXXXXXXXXXXXX`, so put in a real ID (found with MapKit's `MKLocalSearch` and verified with `MKMapItemRequest`) before signing one for a device. Wallet still labels the card "Get Directions / Open in Maps"; the place name is not shown. Production passes should resolve each member's branch at pass-generation time.
 - The bundled files are design samples with personal-looking test values. Replace them before production use or broad distribution.
 
 Sources: [Creating a Poster Generic pass](https://developer.apple.com/documentation/walletpasses/creating-a-poster-generic-pass) · [Defining the metadata of your Wallet pass](https://developer.apple.com/documentation/walletpasses/defining-the-metadata-of-your-wallet-pass#Add-Featured-Actions) · [Creating a pass with Pass Designer](https://developer.apple.com/documentation/walletpasses/creating-a-pass-with-pass-designer)
