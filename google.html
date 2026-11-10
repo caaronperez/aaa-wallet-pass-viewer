@@ -388,10 +388,10 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
               <div class="gp-s">Member</div>
               <div class="gp-h" id="gpH"></div>
               <div class="gp-bcw"><div class="gp-bc"><span></span></div><div class="gp-alt">000 000 000000000 0</div></div>
-              <div class="gp-rw"><div><i>Plan</i><b>Premier</b></div><div class="c"><i>Valid thru</i><b>03/27</b></div><div class="e"><i>Member since</i><b>1994</b></div></div>
+              <div class="gp-rw"><div><i>Plan</i><b>Premier</b></div><div class="c"><i>Valid thru</i><b>03/27</b></div><div class="e"><i>Loyal Member</i><b>32 Years</b></div></div>
             </div>
             <div class="gp-hero"><img id="ggHero" alt=""><div class="gp-glass" aria-hidden="true"></div><button type="button" class="gp-empty" id="ggEmpty"><span style="font-size:7cqw;line-height:1">＋</span>Upload hero image<small>1032 × 812 px</small></button></div>
-            <div class="gp-low"><div class="gp-mod"><span><b>Roadside Assistance</b><small>Get help online: tow, battery, tire, lockout</small></span><img src="google/img/vam-roadside.jpg" alt=""></div></div>
+            <div class="gp-low"><div class="gp-mod"><span><b>Roadside Assistance</b><small>Get roadside service 24/7: tow, battery, and more</small></span><img src="google/img/vam-roadside.jpg" alt=""></div></div>
           </div>
         </div>
         <div>
@@ -487,7 +487,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
           <details><summary>How to add a value-added module (JSON)</summary>
 <pre>"valueAddedModuleData": [{
   "header": {"defaultValue": {"language": "en-US", "value": "Roadside Assistance"}},
-  "body":   {"defaultValue": {"language": "en-US", "value": "Get help online: tow, battery, tire, lockout"}},
+  "body":   {"defaultValue": {"language": "en-US", "value": "Get roadside service 24/7: tow, battery, and more"}},
   "image":  {"sourceUri": {"uri": "https://…/vam-roadside.jpg"}},
   "uri": "https://…per club, the same roadside link as today",
   "sortIndex": 1,
@@ -622,7 +622,7 @@ function buildComps({obj, cls, vams, app, bg, fg, logo, hero, details}){
     const onObj = (obj.valueAddedModuleData || []).includes(v), h = tx(v.header), b = tx(v.body);
     add('vam:' + i, {group: 'Below the image', name: 'Module: ' + h,
       path: `${onObj ? 'object' : 'class'}.valueAddedModuleData[${(onObj ? obj.valueAddedModuleData : cls.valueAddedModuleData).indexOf(v)}]`, json: v, img: imgSrc(v.image?.sourceUri?.uri), href: safeHref(v.uri),
-      what: /\/wallet\/roadside/.test(v.uri || '') ? 'Roadside Assistance comes first (sortIndex 1), so it’s the one module on the front of the pass. Tapping it opens the Member app straight into the chatbot’s Roadside help, so members don’t have to find it. The line under the title says what they can get (tow, battery, tire, lockout). Members without the app get the roadside web page; the phone number stays in the links below.' : 'A value-added module: your own title, line of text and picture, tap goes to any link. Exactly 1 module shows on the pass itself; 2 or more move to their own list screen.',
+      what: /\/wallet\/roadside/.test(v.uri || '') ? 'Roadside Assistance comes first (sortIndex 1), so it’s the one module on the front of the pass. Tapping it opens the Member app straight into the chatbot’s Roadside help, so members don’t have to find it. The line under the title says what they can get (tow, battery, and more). Members without the app get the roadside web page; the phone number stays in the links below.' : 'A value-added module: your own title, line of text and picture, tap goes to any link. Exactly 1 module shows on the pass itself; 2 or more move to their own list screen.',
       kv: [['Header', `${esc(h)} <em>(${h.length}/60)</em>`, true], ['Body', b ? `${esc(b)} <em>(${b.length}/50)</em>` : undefined, true], ['Opens', v.uri], ['sortIndex', v.sortIndex === undefined ? undefined : String(v.sortIndex)]],
       limits: LIM('Header ≤ 60 chars, body ≤ 50 (longer is cut). Image is shown square. Up to 15 modules (the API reference says 10 per object/class). Lowest sortIndex goes first.', h.length > 60 || b.length > 50)});
   });

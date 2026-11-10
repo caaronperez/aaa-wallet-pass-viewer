@@ -132,8 +132,8 @@
       },
       {
         "id": "memberSince",
-        "header": "Member since",
-        "body": "1994"
+        "header": "Loyal Member",
+        "body": "32 Years"
       },
       {
         "id": "membershipNumber",
@@ -167,7 +167,7 @@
         "body": {
           "defaultValue": {
             "language": "en-US",
-            "value": "Get help online: tow, battery, tire, lockout"
+            "value": "Get roadside service 24/7: tow, battery, and more"
           }
         },
         "uri": "https://www.example.com/automotive/roadside-assistance.html",
