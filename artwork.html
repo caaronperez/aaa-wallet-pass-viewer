@@ -139,7 +139,18 @@ fieldset{border:0;margin:0;padding:0}
 .gp-rw.two{grid-template-columns:1fr 1fr}
 .gp-mod{display:flex;align-items:center;gap:12px;border-radius:5cqw;padding:12px 12px 12px 16px;background:rgba(255,255,255,.45)}
 .gp-mod b{display:block;font-size:4.2cqw}.gp-mod small{display:block;font-size:3.5cqw;opacity:.85;margin-top:2px}
-.gp-mod img{margin-left:auto;width:16cqw;height:16cqw;border-radius:3cqw;object-fit:cover;flex:none}
+.gp-mod img,.gp-mod canvas{margin-left:auto;width:16cqw;height:16cqw;border-radius:3cqw;object-fit:cover;flex:none}
+.gp-mods{display:grid;gap:3px;border-radius:5cqw;overflow:hidden}.gp-mods .gp-mod{border-radius:0}
+.mods{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:6px}
+.mod{border:1px solid var(--line);border-radius:12px;padding:10px;display:grid;gap:8px;align-content:start}
+.mod canvas{width:100%;aspect-ratio:1;border-radius:10px;display:block;background:var(--win);touch-action:none;cursor:default}
+.mod.has-img canvas{cursor:grab}.mod.dragging canvas{cursor:grabbing}
+.mod b{font-size:13.5px}.mod small{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.mod code{font-size:11.5px;color:var(--muted)}
+.mod .tag{font-size:11.5px;font-weight:600;color:var(--muted)}.mod.has-img .tag{color:var(--ok)}
+.mod input[type=range]{width:100%}
+.mod .btns{display:flex;gap:6px;flex-wrap:wrap}.mod .btn{min-height:36px;padding:6px 12px;font-size:13px}
+.mod-zoom[hidden],.mod .btn[hidden],.mods[hidden]{display:none}
 legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 </style>
 </head>
@@ -223,8 +234,17 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
         <div class="row veil-amt" id="veilRow" hidden><label class="lbl" for="veilAmt">How much white</label><input type="range" id="veilAmt" min="5" max="95" value="50" step="1"><span class="val" id="veilVal">50%</span></div>
       </section>
 
+      <section class="step locked" id="s4">
+        <h2><span class="n">4</span>Android module images (optional)</h2>
+        <p id="modIntro">The Android pass lists these five modules under the hero. Upload a new photo only for the ones you want to change; the rest keep today’s image and aren’t added to the zip. Google shows them as small squares, so each one is saved at <b>660 × 660</b> with its exact file name. Drag a new photo to move it inside the square.</p>
+        <p class="info" id="modPoi" hidden>POI passes don’t have module images, so there’s nothing to upload here for insurance.</p>
+        <div class="mods" id="mods"></div>
+        <input type="file" id="modFile" accept="image/*" hidden>
+        <p class="info" id="modNote">Today every club’s pass uses the module images in club 004’s folder.</p>
+      </section>
+
       <section class="step locked" id="s5">
-        <h2><span class="n">4</span>Download the AEM folder</h2>
+        <h2><span class="n">5</span>Download the AEM folder</h2>
         <p>You get one .zip with the folder ready to upload to AEM, for <b id="zipFor">the card and club you picked</b>: the iPhone files in <b>ios/</b> (<b>artwork@2x.png</b> 716 × 896 and <b>artwork@3x.png</b> 1074 × 1344) and the Android files in <b>android/</b> (<b>Hero.png</b> 1032 × 812 and <b>Logo.png</b>), exactly as the previews show them.</p>
         <div class="note" id="dlReq" hidden>Before downloading, open the <b>Android pass</b> and adjust its photo (step 2).<br><button type="button" class="btn secondary goAndroid">Adjust the Android pass</button></div>
         <pre class="tree" id="tree" aria-label="Folder that will be in the zip"></pre>
@@ -251,7 +271,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
       fields: [['Member Name','FULANITO PEREZ'],['Valid Through','03/2027'],['Loyal Member','32 Years']],
       footer: '24/7 Roadside: tap Membership Benefits',
       g: {title: 'Membership Card', sub: 'Member', header: 'Fulanito Perez', alt: '000 000 000000000 0', row: [['Plan','Premier'],['Valid thru','03/27'],['Loyal Member','32 Years']],
-        module: ['Roadside Assistance', 'Get roadside service 24/7: tow, battery, and more'],
+        modules: true,
         actions: [['app','Open the app'],['phone','Call Roadside 24/7 · 1-800-000-0000'],['globe','Renew, add a family member or upgrade'],['globe','Pay membership bill'],['pin','Find a branch']],
         details: [['Membership number','000 000 000000000 0'],['Roadside Assistance · 24/7','1-800-000-0000 · Outside CA 1-800-000-0000'],['Car rental discount codes','Hertz CDP 0000 · Dollar XX0000 · Thrifty 0000000000'],['Your branch','Sample Branch · 000 Main St, City, CA 00000 · 000-000-0000']]}},
     insurance: {label: 'CA EVIDENCE OF LIABILITY', value: 'Auto Insurance Card', barcode: '', hasBarcode: false,
@@ -262,6 +282,15 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
         actions: [['app','Open the app'],['phone','Call Roadside 24/7 · 1-800-000-0000'],['globe','File or track a claim'],['globe','Pay or manage your policy'],['phone','Policy questions · 1-800-000-0000']],
         details: [['Insurance company','Example Interinsurance Exchange of the Company NAIC# 000000'],['Vehicle','2026 SAMPLE SUV · VIN XXXXXXXXXXXXXXXXX'],['Insured drivers','Fulanito Perez'],['Disclaimer','This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle.']]}}
   };
+  var MOD_SIZE = 660;
+  var MODULES = [
+    {file: 'module-roadside.jpeg', title: 'Roadside Assistance', body: 'Get help in the app: tow, battery, tire, lockout'},
+    {file: 'module-membership.jpeg', title: 'Member benefits & discounts', body: 'Save with your membership card'},
+    {file: 'module-branch.jpeg', title: 'Find your AAA branch', body: 'Directions, hours and services'},
+    {file: 'module-travel.jpeg', title: 'Travel with AAA', body: 'Hotels, rental cars and trip planning'},
+    {file: 'module-renew.png', title: 'Renew or upgrade', body: 'Manage your membership online'}
+  ];
+  MODULES.forEach(function(m){ m.def = new Image(); m.def.src = 'artwork-tool/modules/' + m.file; m.img = null; m.cx = 0.5; m.cy = 0.5; m.zoom = 1; });
   var $ = function(id){ return document.getElementById(id); };
   var card = $('card'), gp = $('gp');
   var views = {
@@ -270,6 +299,71 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
   };
   var state = {img: null, name: '', active: 'ios', androidChecked: false, logo: 'color', veil: false, veilAmt: 0.5};
   var zipLoading = false;
+
+  function drawModule(m, c){
+    var x = c.getContext('2d'), W = c.width, H = c.height;
+    x.clearRect(0, 0, W, H); x.imageSmoothingEnabled = true; x.imageSmoothingQuality = 'high';
+    var src = m.img || m.def;
+    if(!src.complete || !src.naturalWidth) return;
+    var s = Math.max(W / src.naturalWidth, H / src.naturalHeight) * (m.img ? m.zoom : 1);
+    var dw = src.naturalWidth * s, dh = src.naturalHeight * s;
+    var cx = m.img ? m.cx : 0.5, cy = m.img ? m.cy : 0.5;
+    x.drawImage(src, cx * W - dw / 2, cy * H - dh / 2, dw, dh);
+  }
+  function clampModule(m){
+    var src = m.img, s = Math.max(1 / src.naturalWidth, 1 / src.naturalHeight) * m.zoom;
+    var hw = src.naturalWidth * s / 2, hh = src.naturalHeight * s / 2;
+    m.cx = Math.max(1 - hw, Math.min(hw, m.cx)); m.cy = Math.max(1 - hh, Math.min(hh, m.cy));
+  }
+  function drawModules(){ MODULES.forEach(function(m){ if(m.editor) drawModule(m, m.editor); if(m.thumb) drawModule(m, m.thumb); }); }
+  MODULES.forEach(function(m){ m.def.onload = drawModules; });
+  var modTarget = null;
+  function buildModuleCards(){
+    var wrap = $('mods');
+    MODULES.forEach(function(m){
+      var card = document.createElement('div'); card.className = 'mod';
+      var c = document.createElement('canvas'); c.width = MOD_SIZE; c.height = MOD_SIZE; c.setAttribute('aria-label', m.title + ' module image');
+      var head = document.createElement('div');
+      var b = document.createElement('b'); b.textContent = m.title;
+      var code = document.createElement('code'); code.textContent = m.file;
+      var tag = document.createElement('div'); tag.className = 'tag'; tag.textContent = 'Today’s image';
+      head.appendChild(b); head.appendChild(document.createElement('br')); head.appendChild(code); head.appendChild(tag);
+      var zoom = document.createElement('input'); zoom.type = 'range'; zoom.min = 100; zoom.max = 300; zoom.value = 100; zoom.className = 'mod-zoom'; zoom.hidden = true; zoom.setAttribute('aria-label', 'Zoom ' + m.title);
+      var btns = document.createElement('div'); btns.className = 'btns';
+      var up = document.createElement('button'); up.type = 'button'; up.className = 'btn secondary'; up.textContent = 'Upload new';
+      var undo = document.createElement('button'); undo.type = 'button'; undo.className = 'btn secondary'; undo.textContent = 'Keep today’s'; undo.hidden = true;
+      btns.appendChild(up); btns.appendChild(undo);
+      card.appendChild(c); card.appendChild(head); card.appendChild(zoom); card.appendChild(btns); wrap.appendChild(card);
+      m.editor = c; m.card = card; m.tag = tag; m.zoomEl = zoom; m.undo = undo; m.up = up;
+      up.onclick = function(){ modTarget = m; $('modFile').click(); };
+      undo.onclick = function(){ m.img = null; refreshModule(m); updateZip(); };
+      zoom.oninput = function(){ m.zoom = this.value / 100; clampModule(m); drawModules(); };
+      var drag = null;
+      c.addEventListener('pointerdown', function(e){ if(!m.img || zipLoading) return; drag = {x: e.clientX, y: e.clientY, cx: m.cx, cy: m.cy}; try { c.setPointerCapture(e.pointerId); } catch(err){} card.classList.add('dragging'); });
+      c.addEventListener('pointermove', function(e){ if(!drag) return; m.cx = drag.cx + (e.clientX - drag.x) / c.clientWidth; m.cy = drag.cy + (e.clientY - drag.y) / c.clientHeight; clampModule(m); drawModules(); });
+      function end(){ drag = null; card.classList.remove('dragging'); }
+      c.addEventListener('pointerup', end); c.addEventListener('pointercancel', end);
+    });
+  }
+  function refreshModule(m){
+    var on = !!m.img;
+    m.card.classList.toggle('has-img', on); m.tag.textContent = on ? 'New image · added to the zip' : 'Today’s image';
+    m.zoomEl.hidden = !on; m.undo.hidden = !on; m.up.textContent = on ? 'Replace' : 'Upload new';
+    if(on){ m.cx = 0.5; m.cy = 0.5; m.zoom = 1; m.zoomEl.value = 100; }
+    drawModules();
+  }
+  $('modFile').onchange = function(e){
+    var f = e.target.files[0], m = modTarget; e.target.value = '';
+    if(!f || !m || !/^image\//.test(f.type)) return;
+    var img = new Image();
+    img.onload = function(){ m.img = img; refreshModule(m); updateZip(); };
+    img.src = URL.createObjectURL(f);
+  };
+  function moduleBlob(m){
+    var c = document.createElement('canvas'); c.width = MOD_SIZE; c.height = MOD_SIZE; drawModule(m, c);
+    var png = /\.png$/.test(m.file);
+    return new Promise(function(resolve, reject){ c.toBlob(function(b){ b ? resolve(b) : reject(new Error(m.file)); }, png ? 'image/png' : 'image/jpeg', png ? undefined : 0.9); });
+  }
 
   function layout(v, W, H){
     var img = state.img, s = Math.max(W / img.naturalWidth, H / img.naturalHeight) * v.zoom;
@@ -329,7 +423,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
   });
   document.querySelectorAll('[data-view]').forEach(function(b){ b.onclick = function(){ setActive(b.dataset.view); }; });
 
-  function unlock(){ ['s2','s3','s5'].forEach(function(id){ $(id).classList.remove('locked'); }); $('s1').classList.add('done'); }
+  function unlock(){ ['s2','s3','s4','s5'].forEach(function(id){ $(id).classList.remove('locked'); }); $('s1').classList.add('done'); }
 
   function loadFile(file){
     if(!file || !/^image\//.test(file.type)){ $('srcInfo').textContent = 'That file isn’t an image. Pick a PNG or JPG.'; return; }
@@ -466,10 +560,21 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
   function renderLow(g){
     var low = $('gLow'); low.innerHTML = '';
     low.appendChild(el('h4', 'gp-h4', 'Recommendations from AAA'));
-    var mod = el('div', 'gp-mod'), txt = el('span');
-    txt.appendChild(el('b', '', g.module[0])); txt.appendChild(el('small', '', g.module[1]));
-    var img = el('img'); img.src = 'google/img/vam-roadside.jpg'; img.alt = '';
-    mod.appendChild(txt); mod.appendChild(img); low.appendChild(mod);
+    if(g.modules){
+      var list = el('div', 'gp-mods');
+      MODULES.forEach(function(m){
+        var row = el('div', 'gp-mod'), txt = el('span');
+        txt.appendChild(el('b', '', m.title)); txt.appendChild(el('small', '', m.body));
+        var c = el('canvas'); c.width = 132; c.height = 132; m.thumb = c;
+        row.appendChild(txt); row.appendChild(c); list.appendChild(row);
+      });
+      low.appendChild(list); drawModules();
+    } else {
+      var mod = el('div', 'gp-mod'), txt2 = el('span');
+      txt2.appendChild(el('b', '', g.module[0])); txt2.appendChild(el('small', '', g.module[1]));
+      var img = el('img'); img.src = 'google/img/vam-roadside.jpg'; img.alt = '';
+      mod.appendChild(txt2); mod.appendChild(img); low.appendChild(mod);
+    }
     var acts = el('div', 'gp-group'); g.actions.forEach(function(a){ acts.appendChild(action(a[0], a[1])); }); low.appendChild(acts);
     var dets = el('div', 'gp-group');
     g.details.forEach(function(d){ var r = el('div', 'gp-det'); r.appendChild(el('small', '', d[0])); r.appendChild(el('b', '', d[1])); dets.appendChild(r); });
@@ -502,7 +607,10 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     var lines = [(club || '{club}') + '/', '└── ' + (type || '{card}') + '/', '    ├── ios/'];
     IOS_FILES.forEach(function(f, i){ lines.push('    │   ' + (i === IOS_FILES.length - 1 ? '└── ' : '├── ') + f); });
     lines.push('    └── android/');
-    ANDROID_FILES.forEach(function(f, i){ lines.push('        ' + (i === ANDROID_FILES.length - 1 ? '└── ' : '├── ') + f); });
+    var androidFiles = ANDROID_FILES.concat(type === 'insurance' ? [] : MODULES.filter(function(m){ return m.img; }).map(function(m){ return m.file; }));
+    androidFiles.forEach(function(f, i){ lines.push('        ' + (i === androidFiles.length - 1 ? '└── ' : '├── ') + f); });
+    var poi = type === 'insurance';
+    $('mods').hidden = poi; $('modIntro').hidden = poi; $('modNote').hidden = poi; $('modPoi').hidden = !poi;
     $('tree').textContent = lines.join('\n');
     $('dlZip').disabled = zipLoading || !(state.img && type && club && state.androidChecked);
     $('androidReq').hidden = state.androidChecked; $('androidOk').hidden = !state.androidChecked;
@@ -516,7 +624,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     var b = $('dlZip');
     b.classList.toggle('loading', on); b.setAttribute('aria-busy', String(on));
     if(on){ b.disabled = true; b.innerHTML = '<span class="spinner" aria-hidden="true"></span>Making the zip…'; $('zipStatus').textContent = 'Making the iPhone and Android files and the zip. This takes a few seconds.'; }
-    document.querySelectorAll('input[name=type],input[name=club],#file,#uploadBtn,#emptyBtn,#emptyBtnA,#veil,#veilAmt,#zoom,#resetBtn,[data-view],[data-logo]').forEach(function(el){ el.disabled = on; });
+    document.querySelectorAll('input[name=type],input[name=club],#file,#uploadBtn,#emptyBtn,#emptyBtnA,#veil,#veilAmt,#zoom,#resetBtn,[data-view],[data-logo],.mod button,.mod input').forEach(function(el){ el.disabled = on; });
     card.classList.toggle('busy', on); gp.classList.toggle('busy', on);
   }
 
@@ -526,20 +634,22 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     if(typeof JSZip === 'undefined' || typeof UPNG === 'undefined'){ $('zipStatus').textContent = 'A download tool didn’t load. Check your connection and reload the page.'; return; }
     setZipLoading(true); $('sizes').innerHTML = '';
     var ios = club + '/' + type + '/ios/', android = club + '/' + type + '/android/', zip = new JSZip();
-    Promise.all(IOS_BUNDLED.map(function(f){ return fetchBundled(logoPath(f)); }).concat([fetchBundled('android/Logo.png')])).then(function(bundled){
+    var newMods = type === 'insurance' ? [] : MODULES.filter(function(m){ return m.img; }), mods = [];
+    Promise.all(newMods.map(moduleBlob)).then(function(b){ mods = b; return Promise.all(IOS_BUNDLED.map(function(f){ return fetchBundled(logoPath(f)); }).concat([fetchBundled('android/Logo.png')])); }).then(function(bundled){
       var iosBundled = bundled.slice(0, IOS_BUNDLED.length), logo = bundled[IOS_BUNDLED.length];
       return new Promise(function(r){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ setTimeout(r, 0); }); }); }).then(function(){
         var extra = iosBundled.reduce(function(t, b){ return t + b.size; }, 0);
         var art = iosArtwork(MAX_CLUB - extra - 64 * 1024), iosBlobs = art.concat(iosBundled), hero = androidHero();
         IOS_FILES.forEach(function(f, i){ zip.file(ios + f, iosBlobs[i]); });
         zip.file(android + 'Hero.png', hero); zip.file(android + 'Logo.png', logo);
+        mods.forEach(function(b, i){ zip.file(android + newMods[i].file, b); });
         var iosTotal = iosBlobs.reduce(function(t, b){ return t + b.size; }, 0);
         showSizes([
           ['ios/artwork@2x.png', mb(art[0].size) + ' (limit 2 MB)', art[0].size <= MAX_IMAGE],
           ['ios/artwork@3x.png', mb(art[1].size) + ' (limit 2 MB)', art[1].size <= MAX_IMAGE],
           ['ios/ folder', mb(iosTotal) + ' (limit 3.5 MB)', iosTotal <= MAX_CLUB],
           ['android/Hero.png', mb(hero.size) + ' (limit 2 MB)', hero.size <= MAX_IMAGE]
-        ]);
+        ].concat(mods.map(function(b, i){ return ['android/' + newMods[i].file, mb(b.size) + ' (limit 2 MB)', b.size <= MAX_IMAGE]; })));
         return zip.generateAsync({type: 'blob'});
       });
     }).then(function(z){
@@ -550,7 +660,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
       .finally(function(){ setZipLoading(false); updateZip(); });
   };
 
-  setCardText('membership'); updateZip();
+  buildModuleCards(); setCardText('membership'); updateZip();
 })();
 </script>
 </body>
