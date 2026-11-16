@@ -90,7 +90,7 @@ input[type=range]{width:min(260px,100%);accent-color:var(--accent)}
 .switch input::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .15s}
 .switch input:checked{background:var(--ok)}
 .switch input:checked::after{transform:translateX(18px)}
-.veil-amt[hidden]{display:none}
+.veil-amt[hidden],.switch[hidden]{display:none}
 .info{font-size:13px;color:var(--muted);margin-top:8px}
 .choices{display:flex;flex-wrap:wrap;gap:8px}
 .type label,.club label{position:relative;cursor:pointer}
@@ -105,8 +105,11 @@ input[type=range]{width:min(260px,100%);accent-color:var(--accent)}
 fieldset{border:0;margin:0;padding:0}
 .ptabs{margin:0 0 12px}
 .pview[hidden]{display:none}
-.gp{position:relative;width:100%;max-width:340px;border-radius:30px;overflow:hidden;background:#f2e4e4;color:#202124;font-family:"Google Sans",Roboto,system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.35);container-type:inline-size;touch-action:none;user-select:none}
-.gp.has-art{cursor:grab}.gp.busy{cursor:progress}.gp.dragging{cursor:grabbing}.gp:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.gp.drop{outline:3px solid var(--accent);outline-offset:3px}
+.gp-frame{width:100%;max-width:340px;border-radius:30px;box-shadow:0 10px 30px rgba(0,0,0,.35);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+@media (min-width:821px){.gp-frame{max-height:calc(100vh - 150px)}}
+.gp{position:relative;width:100%;border-radius:30px;overflow:hidden;background:#f2e4e4;color:#202124;font-family:"Google Sans",Roboto,system-ui,sans-serif;container-type:inline-size;user-select:none}
+.gp-hero{touch-action:none}
+.gp.has-art .gp-hero{cursor:grab}.gp.busy .gp-hero{cursor:progress}.gp.dragging .gp-hero{cursor:grabbing}.gp:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.gp.drop{outline:3px solid var(--accent);outline-offset:3px}
 .gp-top{position:relative;z-index:1;background:#f2e4e4;border-radius:0 0 7cqw 7cqw;padding:16px 18px 18px;text-align:center}
 .gp-logo{width:22cqw;height:22cqw;border-radius:50%;margin:6px auto 8px;overflow:hidden;background:#fff}
 .gp-logo img{width:100%;height:100%;object-fit:cover;display:block}
@@ -125,7 +128,13 @@ fieldset{border:0;margin:0;padding:0}
 .gp-empty small{font-weight:400;font-size:3.2cqw;color:#3a5f8f}
 .gp.has-art .gp-empty{display:none}
 .gp-low{position:relative;z-index:1;background:#f2e4e4;border-radius:7cqw 7cqw 0 0;padding:16px 14px 18px}
-.gp-low[hidden]{display:none}
+.gp-h4{margin:0 1cqw 3cqw;font-size:4cqw;font-weight:500}
+.gp-group{border-radius:5.5cqw;overflow:hidden;display:grid;gap:3px;margin-top:4cqw}
+.gp-act{display:flex;align-items:center;gap:4.5cqw;background:rgba(255,255,255,.45);padding:4.6cqw 5cqw;font-size:4.1cqw;font-weight:600}
+.gp-act svg{width:6cqw;height:6cqw;flex:none}
+.gp-det{background:rgba(255,255,255,.45);padding:3.4cqw 5cqw}.gp-det small{display:block;font-size:3.5cqw;opacity:.8}.gp-det b{display:block;font-size:4.1cqw;font-weight:600;margin-top:.6cqw}
+.gp-fine{font-size:3.3cqw;opacity:.8;line-height:1.5;margin:4cqw 1cqw 0}
+.gp-rw.two{grid-template-columns:1fr 1fr}
 .gp-mod{display:flex;align-items:center;gap:12px;border-radius:5cqw;padding:12px 12px 12px 16px;background:rgba(255,255,255,.45)}
 .gp-mod b{display:block;font-size:4.2cqw}.gp-mod small{display:block;font-size:3.5cqw;opacity:.85;margin-top:2px}
 .gp-mod img{margin-left:auto;width:16cqw;height:16cqw;border-radius:3cqw;object-fit:cover;flex:none}
@@ -147,7 +156,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
       <div class="card guides" id="card" tabindex="0" role="img" aria-label="Preview of the iOS 27 card with your artwork. Arrow keys move the photo, plus and minus zoom.">
         <canvas id="preview" width="716" height="896"></canvas>
         <div class="over">
-          <img class="c-logo" src="artwork-tool/primaryLogo@3x.png" alt="">
+          <img class="c-logo" id="cLogo" src="artwork-tool/primaryLogo@3x.png" alt="">
           <div class="c-head"><i id="hLabel">MEMBERSHIP CARD</i><span id="hValue">Premier</span></div>
           <div class="c-bc" id="bcBox"><img src="artwork-tool/pdf417.png" alt=""><small id="bcText">000 000 000000000 0</small></div>
           <div class="c-foot"><div class="c-txt prim" id="prim"></div><div class="c-txt ft" id="foot"></div></div>
@@ -158,19 +167,21 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
       <p class="hint">Drag the photo with the hand to move it. The orange dashed line is where the frosted glass starts.</p>
       </div>
       <div class="pview" id="viewAndroid" hidden>
+        <div class="gp-frame" id="gpFrame">
         <div class="gp" id="gp" tabindex="0" role="img" aria-label="Preview of the Google Wallet 2026 pass with your hero image. Arrow keys move the photo, plus and minus zoom.">
           <div class="gp-top">
             <div class="gp-logo"><img src="artwork-tool/android/Logo.png" alt=""></div>
             <div class="gp-t" id="gT">Membership Card</div>
             <div class="gp-s" id="gS">Member</div>
-            <div class="gp-h" id="gH">Fulanito Perez</div>
+            <div class="gp-h" id="gH"></div>
             <div class="gp-bcw" id="gBc"><div class="gp-bc"><img src="artwork-tool/pdf417.png" alt=""></div><div class="gp-alt" id="gAlt">000 000 000000000 0</div></div>
             <div class="gp-rw" id="gRow"></div>
           </div>
           <div class="gp-hero" id="gpHero"><canvas id="previewA" width="1032" height="812"></canvas><button type="button" class="gp-empty" id="emptyBtnA"><span aria-hidden="true" style="font-size:7cqw;line-height:1">＋</span>Upload artwork<small>Any size · PNG or JPG</small></button></div>
-          <div class="gp-low" id="gLow"><div class="gp-mod"><span><b>Roadside Assistance</b><small>Get help in the app: tow, battery, tire, lockout</small></span><img src="google/img/vam-roadside.jpg" alt=""></div></div>
+          <div class="gp-low" id="gLow"></div>
         </div>
-        <p class="hint">Drag the photo with the hand to move it. This is the hero image band (1032 × 812) on the Google Wallet 2026 pass. The rounded edges above and below cover a little of the top and bottom.</p>
+        </div>
+        <p class="hint">Drag the photo with the hand to move it. This is the hero image band (1032 × 812) on the Google Wallet 2026 pass. The rounded edges above and below cover a little of the top and bottom. Scroll the pass to see the rest of it.</p>
       </div>
     </div>
 
@@ -193,8 +204,9 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
       </section>
 
       <section class="step locked" id="s3">
-        <h2><span class="n">3</span>White veil (optional, iPhone only)</h2>
-        <p>If the text at the bottom of the iPhone card is hard to read, turn on the white veil. It lightens only the bottom of the card behind the text. The Android pass doesn’t get a veil.</p>
+        <h2><span class="n">3</span>Logo and white veil (iPhone only)</h2>
+        <p>Pick the AAA logo that reads best at the top of the iPhone card. If the text at the bottom is hard to read, turn on the white veil. It lightens only the part below the orange glass line, behind the text; nothing above the line changes. The Android pass keeps its round colored logo and doesn’t get a veil.</p>
+        <div class="row" style="margin:0 0 14px"><span class="lbl">Logo</span><div class="seg" role="group" aria-label="Logo on the iPhone card"><button type="button" data-logo="color" class="on" aria-pressed="true">Colored</button><button type="button" data-logo="white" aria-pressed="false">White</button></div></div>
         <label class="switch"><input type="checkbox" id="veil" role="switch">Add a white veil at the bottom</label>
         <div class="row veil-amt" id="veilRow" hidden><label class="lbl" for="veilAmt">How much white</label><input type="range" id="veilAmt" min="5" max="95" value="50" step="1"><span class="val" id="veilVal">50%</span></div>
       </section>
@@ -221,7 +233,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 <script>
 (function(){
   var SIZES = {2: [716, 896], 3: [1074, 1344]}, HERO = [1032, 812];
-  var GLASS_TOP = 0.761, VEIL_FADE = 0.08;
+  var GLASS_TOP = 0.761;
   var MAX_IMAGE = 2 * 1024 * 1024, MAX_CLUB = 3.5 * 1024 * 1024, ZMIN = 1, ZMAX = 3;
   var CLUBS = ['001','004','018','036','065','215','240','252','258','260','601'];
   var IOS_BUNDLED = ['primaryLogo@2x.png','primaryLogo@3x.png','logo.png','icon@2x.png','icon@3x.png'];
@@ -230,11 +242,17 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     membership: {label: 'MEMBERSHIP CARD', value: 'Premier', barcode: '000 000 000000000 0', hasBarcode: true,
       fields: [['Member Name','FULANITO PEREZ'],['Valid Through','03/2027'],['Loyal Member','32 Years']],
       footer: '24/7 Roadside: tap Membership Benefits',
-      g: {title: 'Membership Card', sub: 'Member', alt: '000 000 000000000 0', row: [['Plan','Premier'],['Valid thru','03/27'],['Loyal Member','32 Years']], module: true}},
+      g: {title: 'Membership Card', sub: 'Member', header: 'Fulanito Perez', alt: '000 000 000000000 0', row: [['Plan','Premier'],['Valid thru','03/27'],['Loyal Member','32 Years']],
+        module: ['Roadside Assistance', 'Get roadside service 24/7: tow, battery, and more'],
+        actions: [['app','Open the app'],['phone','Call Roadside 24/7 · 1-800-000-0000'],['globe','Renew, add a family member or upgrade'],['globe','Pay membership bill'],['pin','Find a branch']],
+        details: [['Membership number','000 000 000000000 0'],['Roadside Assistance · 24/7','1-800-000-0000 · Outside CA 1-800-000-0000'],['Car rental discount codes','Hertz CDP 0000 · Dollar XX0000 · Thrifty 0000000000'],['Your branch','Sample Branch · 000 Main St, City, CA 00000 · 000-000-0000']]}},
     insurance: {label: 'CA EVIDENCE OF LIABILITY', value: 'Auto Insurance Card', barcode: '', hasBarcode: false,
       fields: [['Name Insured','FULANITO PEREZ'],['Policy Number','0000000000'],['Effective','09/14/26 – 09/14/27']],
       footer: 'Company: Sample Mutual Insurance',
-      g: {title: 'Auto Insurance Card', sub: 'Name Insured', alt: '0000000000', row: [['Policy','0000000000'],['Effective','09/14/26'],['Expires','09/14/27']], module: false}}
+      g: {title: 'Auto Insurance Card', sub: 'CA Evidence of Liability', header: '0000000000', alt: '', row: [['Name insured','Fulanito Perez'],['Effective','9/14/26 – 9/14/27']],
+        module: ['Roadside Assistance', 'Get help online: tow, battery, tire, lockout'],
+        actions: [['app','Open the app'],['phone','Call Roadside 24/7 · 1-800-000-0000'],['globe','File or track a claim'],['globe','Pay or manage your policy'],['phone','Policy questions · 1-800-000-0000']],
+        details: [['Insurance company','Example Interinsurance Exchange of the Company NAIC# 000000'],['Vehicle','2026 SAMPLE SUV · VIN XXXXXXXXXXXXXXXXX'],['Insured drivers','Fulanito Perez'],['Disclaimer','This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle.']]}}
   };
   var $ = function(id){ return document.getElementById(id); };
   var card = $('card'), gp = $('gp');
@@ -242,7 +260,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     ios: {el: card, canvas: $('preview'), cx: 0.5, cy: 0.5, zoom: 1, veil: true},
     android: {el: gp, canvas: $('previewA'), cx: 0.5, cy: 0.5, zoom: 1, veil: false}
   };
-  var state = {img: null, name: '', active: 'ios', veil: false, veilAmt: 0.5};
+  var state = {img: null, name: '', active: 'ios', logo: 'color', veil: false, veilAmt: 0.5};
   var zipLoading = false;
 
   function layout(v, W, H){
@@ -259,12 +277,8 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     c.imageSmoothingEnabled = true; c.imageSmoothingQuality = 'high';
     c.drawImage(state.img, l.x, l.y, l.dw, l.dh);
     if(v.veil && state.veil){
-      var top = H * (GLASS_TOP - VEIL_FADE), full = H * GLASS_TOP;
-      var g = c.createLinearGradient(0, top, 0, full);
-      g.addColorStop(0, 'rgba(255,255,255,0)');
-      g.addColorStop(1, 'rgba(255,255,255,' + state.veilAmt + ')');
-      c.fillStyle = g; c.fillRect(0, top, W, full - top);
-      c.fillStyle = 'rgba(255,255,255,' + state.veilAmt + ')'; c.fillRect(0, full, W, H - full);
+      var top = Math.floor(H * GLASS_TOP);
+      c.fillStyle = 'rgba(255,255,255,' + state.veilAmt + ')'; c.fillRect(0, top, W, H - top);
     }
   }
 
@@ -330,19 +344,19 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 
   function bindView(v){
     var area = v === views.ios ? card : $('gpHero'), drag = null;
-    v.el.addEventListener('pointerdown', function(e){
+    area.addEventListener('pointerdown', function(e){
       if(zipLoading || !state.img || e.target.closest('button')) return;
       drag = {x: e.clientX, y: e.clientY, cx: v.cx, cy: v.cy};
-      v.el.setPointerCapture(e.pointerId); v.el.classList.add('dragging');
+      area.setPointerCapture(e.pointerId); v.el.classList.add('dragging');
     });
-    v.el.addEventListener('pointermove', function(e){
+    area.addEventListener('pointermove', function(e){
       if(!drag) return;
       v.cx = drag.cx + (e.clientX - drag.x) / area.clientWidth;
       v.cy = drag.cy + (e.clientY - drag.y) / area.clientHeight;
       clampCenter(v); render();
     });
     function endDrag(){ drag = null; v.el.classList.remove('dragging'); }
-    v.el.addEventListener('pointerup', endDrag); v.el.addEventListener('pointercancel', endDrag);
+    area.addEventListener('pointerup', endDrag); area.addEventListener('pointercancel', endDrag);
     v.el.addEventListener('wheel', function(e){
       if(!state.img || !e.ctrlKey) return;
       e.preventDefault();
@@ -364,6 +378,15 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
   $('resetBtn').onclick = function(){ resetView(views[state.active]); };
   $('guides').onchange = function(){ card.classList.toggle('guides', this.checked); };
   $('veil').onchange = function(){ state.veil = this.checked; $('veilRow').hidden = !this.checked; if(this.checked) setActive('ios'); render(); };
+  document.querySelectorAll('[data-logo]').forEach(function(b){
+    b.onclick = function(){
+      state.logo = b.dataset.logo;
+      document.querySelectorAll('[data-logo]').forEach(function(o){ var on = o === b; o.classList.toggle('on', on); o.setAttribute('aria-pressed', String(on)); });
+      $('cLogo').src = 'artwork-tool/' + logoPath('primaryLogo@3x.png');
+      setActive('ios');
+    };
+  });
+  function logoPath(f){ return (state.logo === 'white' && /^primaryLogo/.test(f) ? 'white/' : '') + f; }
   $('veilAmt').oninput = function(){ state.veilAmt = this.value / 100; $('veilVal').textContent = this.value + '%'; render(); };
 
   function rgba(v, w, h){
@@ -412,6 +435,33 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     var b = document.createElement('b'); b.textContent = value;
     d.appendChild(i); d.appendChild(b); return d;
   }
+  var ICONS = {
+    app: '<rect x="6" y="2.5" width="12" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 18.5h4" stroke="currentColor" stroke-width="1.8"/>',
+    phone: '<path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    pin: '<path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+    globe: '<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+    gear: '<path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'
+  };
+  function el(tag, cls, text){ var e = document.createElement(tag); if(cls) e.className = cls; if(text != null) e.textContent = text; return e; }
+  function action(icon, text){
+    var row = el('div', 'gp-act');
+    row.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' + ICONS[icon] + '</svg>');
+    row.appendChild(el('span', '', text)); return row;
+  }
+  function renderLow(g){
+    var low = $('gLow'); low.innerHTML = '';
+    low.appendChild(el('h4', 'gp-h4', 'Recommendations from AAA'));
+    var mod = el('div', 'gp-mod'), txt = el('span');
+    txt.appendChild(el('b', '', g.module[0])); txt.appendChild(el('small', '', g.module[1]));
+    var img = el('img'); img.src = 'google/img/vam-roadside.jpg'; img.alt = '';
+    mod.appendChild(txt); mod.appendChild(img); low.appendChild(mod);
+    var acts = el('div', 'gp-group'); g.actions.forEach(function(a){ acts.appendChild(action(a[0], a[1])); }); low.appendChild(acts);
+    var dets = el('div', 'gp-group');
+    g.details.forEach(function(d){ var r = el('div', 'gp-det'); r.appendChild(el('small', '', d[0])); r.appendChild(el('b', '', d[1])); dets.appendChild(r); });
+    low.appendChild(dets);
+    var set = el('div', 'gp-group'); set.appendChild(action('gear', 'Pass settings')); low.appendChild(set);
+    low.appendChild(el('p', 'gp-fine', 'The pass provider or merchant is responsible for the info on this pass and may send you notifications. Contact them with any questions.'));
+  }
   function setCardText(type){
     var t = CARD_TEXT[type || 'membership'];
     $('hLabel').textContent = t.label; $('hValue').textContent = t.value; $('bcText').textContent = t.barcode;
@@ -422,9 +472,10 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     });
     $('foot').textContent = t.footer;
     $('gT').textContent = t.g.title; $('gS').textContent = t.g.sub; $('gAlt').textContent = t.g.alt;
-    $('gRow').innerHTML = '';
-    t.g.row.forEach(function(r, i){ $('gRow').appendChild(cell(['', 'c', 'e'][i], r[0], r[1])); });
-    $('gLow').hidden = !t.g.module;
+    $('gH').textContent = t.g.header;
+    $('gRow').innerHTML = ''; $('gRow').classList.toggle('two', t.g.row.length === 2);
+    t.g.row.forEach(function(r, i){ $('gRow').appendChild(cell(t.g.row.length === 2 ? ['', 'e'][i] : ['', 'c', 'e'][i], r[0], r[1])); });
+    renderLow(t.g);
     $('bcBox').hidden = !t.hasBarcode; $('gBc').hidden = !t.hasBarcode;
   }
   function updateZip(){
@@ -445,7 +496,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     var b = $('dlZip');
     b.classList.toggle('loading', on); b.setAttribute('aria-busy', String(on));
     if(on){ b.disabled = true; b.innerHTML = '<span class="spinner" aria-hidden="true"></span>Making the zip…'; $('zipStatus').textContent = 'Making the iPhone and Android files and the zip. This takes a few seconds.'; }
-    document.querySelectorAll('input[name=type],input[name=club],#file,#uploadBtn,#emptyBtn,#emptyBtnA,#veil,#veilAmt,#zoom,#resetBtn,[data-view]').forEach(function(el){ el.disabled = on; });
+    document.querySelectorAll('input[name=type],input[name=club],#file,#uploadBtn,#emptyBtn,#emptyBtnA,#veil,#veilAmt,#zoom,#resetBtn,[data-view],[data-logo]').forEach(function(el){ el.disabled = on; });
     card.classList.toggle('busy', on); gp.classList.toggle('busy', on);
   }
 
@@ -455,7 +506,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     if(typeof JSZip === 'undefined' || typeof UPNG === 'undefined'){ $('zipStatus').textContent = 'A download tool didn’t load. Check your connection and reload the page.'; return; }
     setZipLoading(true); $('sizes').innerHTML = '';
     var ios = club + '/' + type + '/ios/', android = club + '/' + type + '/android/', zip = new JSZip();
-    Promise.all(IOS_BUNDLED.map(fetchBundled).concat([fetchBundled('android/Logo.png')])).then(function(bundled){
+    Promise.all(IOS_BUNDLED.map(function(f){ return fetchBundled(logoPath(f)); }).concat([fetchBundled('android/Logo.png')])).then(function(bundled){
       var iosBundled = bundled.slice(0, IOS_BUNDLED.length), logo = bundled[IOS_BUNDLED.length];
       return new Promise(function(r){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ setTimeout(r, 0); }); }); }).then(function(){
         var extra = iosBundled.reduce(function(t, b){ return t + b.size; }, 0);
