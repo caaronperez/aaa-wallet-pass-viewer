@@ -187,9 +187,17 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 
     <div class="steps">
       <section class="step" id="s1">
-        <h2><span class="n">1</span>Upload your artwork</h2>
-        <p>Any size works. Pick a photo, or drop it on the card.</p>
-        <button type="button" class="btn" id="uploadBtn">Choose a photo…</button>
+        <h2><span class="n">1</span>Pick the card and club, then upload</h2>
+        <fieldset class="type"><legend>Which card is this for?</legend><div class="choices">
+          <label><input type="radio" name="type" value="membership"><span>Membership<small>Membership card</small></span></label>
+          <label><input type="radio" name="type" value="insurance"><span>POI<small>Proof of insurance card</small></span></label>
+        </div></fieldset>
+        <fieldset class="club" style="margin-top:14px"><legend>Club code</legend><div class="choices" id="clubs"></div></fieldset>
+        <fieldset style="margin-top:16px"><legend>Your artwork</legend>
+        <p class="info" id="pickHint" style="margin:0 0 10px">Pick the card and the club first.</p>
+        <button type="button" class="btn" id="uploadBtn" disabled>Choose a photo…</button>
+        <span class="info" style="margin-left:6px">Any size works. You can also drop it on the preview.</span>
+        </fieldset>
         <input type="file" id="file" accept="image/*" hidden>
         <div class="info" id="srcInfo" aria-live="polite"></div>
       </section>
@@ -213,12 +221,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 
       <section class="step locked" id="s5">
         <h2><span class="n">4</span>Download the AEM folder</h2>
-        <p>Pick the card and the club. You get one .zip with the folder ready to upload to AEM: the iPhone files in <b>ios/</b> (<b>artwork@2x.png</b> 716 × 896 and <b>artwork@3x.png</b> 1074 × 1344) and the Android files in <b>android/</b> (<b>Hero.png</b> 1032 × 812 and <b>Logo.png</b>), exactly as the previews show them.</p>
-        <fieldset class="type"><legend>Which card is this for?</legend><div class="choices">
-          <label><input type="radio" name="type" value="membership"><span>Membership<small>Membership card</small></span></label>
-          <label><input type="radio" name="type" value="insurance"><span>POI<small>Proof of insurance card</small></span></label>
-        </div></fieldset>
-        <fieldset class="club" style="margin-top:14px"><legend>Club code</legend><div class="choices" id="clubs"></div></fieldset>
+        <p>You get one .zip with the folder ready to upload to AEM, for <b id="zipFor">the card and club you picked</b>: the iPhone files in <b>ios/</b> (<b>artwork@2x.png</b> 716 × 896 and <b>artwork@3x.png</b> 1074 × 1344) and the Android files in <b>android/</b> (<b>Hero.png</b> 1032 × 812 and <b>Logo.png</b>), exactly as the previews show them.</p>
         <pre class="tree" id="tree" aria-label="Folder that will be in the zip"></pre>
         <div class="row"><button type="button" class="btn green" id="dlZip" disabled>Download .zip for AEM</button></div>
         <div class="status" id="zipStatus" aria-live="polite"></div>
@@ -336,11 +339,13 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     img.src = url;
   }
 
-  $('uploadBtn').onclick = $('emptyBtn').onclick = $('emptyBtnA').onclick = function(){ $('file').click(); };
+  function ready(){ return !!(picked('type') && picked('club')); }
+  function askPickFirst(){ $('pickHint').textContent = 'Pick the card and the club first, then upload the photo.'; $('pickHint').style.color = 'var(--warn)'; $('s1').scrollIntoView({behavior: 'smooth', block: 'center'}); }
+  $('uploadBtn').onclick = $('emptyBtn').onclick = $('emptyBtnA').onclick = function(){ if(!ready()){ askPickFirst(); return; } $('file').click(); };
   $('file').onchange = function(e){ loadFile(e.target.files[0]); e.target.value = ''; };
   ['dragenter','dragover'].forEach(function(t){ document.addEventListener(t, function(e){ e.preventDefault(); views[state.active].el.classList.add('drop'); }); });
   ['dragleave','drop'].forEach(function(t){ document.addEventListener(t, function(e){ e.preventDefault(); if(t === 'drop' || e.target === document.documentElement){ card.classList.remove('drop'); gp.classList.remove('drop'); } }); });
-  document.addEventListener('drop', function(e){ var f = e.dataTransfer && e.dataTransfer.files[0]; if(f && !zipLoading) loadFile(f); });
+  document.addEventListener('drop', function(e){ var f = e.dataTransfer && e.dataTransfer.files[0]; if(!f || zipLoading) return; if(!ready()){ askPickFirst(); return; } loadFile(f); });
 
   function bindView(v){
     var area = v === views.ios ? card : $('gpHero'), drag = null;
@@ -480,6 +485,9 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
   }
   function updateZip(){
     var type = picked('type'), club = picked('club');
+    $('uploadBtn').disabled = zipLoading || !(type && club);
+    $('pickHint').hidden = !!(type && club); $('pickHint').style.color = '';
+    $('zipFor').textContent = type && club ? (type === 'membership' ? 'Membership' : 'POI') + ', club ' + club : 'the card and club you picked';
     setCardText(type);
     var lines = [(club || '{club}') + '/', '└── ' + (type || '{card}') + '/', '    ├── ios/'];
     IOS_FILES.forEach(function(f, i){ lines.push('    │   ' + (i === IOS_FILES.length - 1 ? '└── ' : '├── ') + f); });
