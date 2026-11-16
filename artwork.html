@@ -101,7 +101,8 @@ input[type=range]{width:min(260px,100%);accent-color:var(--accent)}
 .type input:checked+span,.club input:checked+span{border-color:var(--accent);background:rgba(59,140,255,.16);box-shadow:inset 0 0 0 1px var(--accent)}
 .tree{margin:12px 0 0;padding:12px 14px;border-radius:10px;background:var(--win);border:1px solid var(--line);font:12.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre;overflow-x:auto;color:var(--text)}
 .note{margin:10px 0 0;padding:10px 12px;border-radius:10px;border:1px solid rgba(245,180,60,.5);background:rgba(245,180,60,.08);font-size:13px;line-height:1.5}
-.note .btn{margin-top:8px;min-height:36px;padding:6px 14px}.note[hidden],.ok-line[hidden]{display:none}
+.note .btn{margin-top:8px;min-height:36px;padding:6px 14px}.note[hidden],.ok-line[hidden],#dlReq div[hidden]{display:none}
+#dlReq div{margin-top:6px}
 .ok-line{margin:10px 0 0;font-size:13px;font-weight:600;color:var(--ok)}
 .status{min-height:20px;margin-top:8px;font-size:13px;color:var(--ok)}
 fieldset{border:0;margin:0;padding:0}
@@ -144,12 +145,12 @@ fieldset{border:0;margin:0;padding:0}
 .mods{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:6px}
 .mod{border:1px solid var(--line);border-radius:12px;padding:10px;display:grid;gap:8px;align-content:start}
 .mod canvas{width:100%;aspect-ratio:1;border-radius:10px;display:block;background:var(--win);touch-action:none;cursor:default}
-.mod.has-img canvas{cursor:grab}.mod.dragging canvas{cursor:grabbing}
+.mod canvas{cursor:grab}.mod.dragging canvas{cursor:grabbing}
 .mod b{font-size:13.5px}.mod small{display:block;font-size:12px;color:var(--muted);margin-top:2px}
 .mod code{font-size:11.5px;color:var(--muted)}
 .mod .tag{font-size:11.5px;font-weight:600;color:var(--muted)}.mod.has-img .tag{color:var(--ok)}
 .mod input[type=range]{width:100%}
-.mod .btns{display:flex;gap:6px;flex-wrap:wrap}.mod .btn{min-height:36px;padding:6px 12px;font-size:13px}
+.mod .tag{margin-top:2px}.mod .btns{display:flex;gap:6px;flex-wrap:wrap}.mod .btn{min-height:36px;padding:6px 12px;font-size:13px}
 .mod-zoom[hidden],.mod .btn[hidden],.mods[hidden]{display:none}
 legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 </style>
@@ -235,18 +236,23 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
       </section>
 
       <section class="step locked" id="s4">
-        <h2><span class="n">4</span>Android module images (optional)</h2>
-        <p id="modIntro">The Android pass lists these five modules under the hero. Upload a new photo only for the ones you want to change; the rest keep today’s image and aren’t added to the zip. Google shows them as small squares, so each one is saved at <b>660 × 660</b> with its exact file name. Drag a new photo to move it inside the square.</p>
+        <h2><span class="n">4</span>Android module images</h2>
+        <p id="modIntro">The Android pass lists these five modules under the hero. Each one starts with a default image; upload a new photo for any you want to change. Google shows them as small squares, so drag each photo to choose what stays in the square and zoom if needed. All five are saved at <b>660 × 660</b> with their exact file names.</p>
         <p class="info" id="modPoi" hidden>POI passes don’t have module images, so there’s nothing to upload here for insurance.</p>
         <div class="mods" id="mods"></div>
         <input type="file" id="modFile" accept="image/*" hidden>
+        <div class="note" id="modReq"><b>Required:</b> check the five images, then approve them. If you change one after approving, approve again.<br><button type="button" class="btn green" id="approveMods">Approve the module images</button></div>
+        <p class="ok-line" id="modsOk" hidden>✓ Module images approved</p>
         <p class="info" id="modNote">Today every club’s pass uses the module images in club 004’s folder.</p>
       </section>
 
       <section class="step locked" id="s5">
         <h2><span class="n">5</span>Download the AEM folder</h2>
         <p>You get one .zip with the folder ready to upload to AEM, for <b id="zipFor">the card and club you picked</b>: the iPhone files in <b>ios/</b> (<b>artwork@2x.png</b> 716 × 896 and <b>artwork@3x.png</b> 1074 × 1344) and the Android files in <b>android/</b> (<b>Hero.png</b> 1032 × 812 and <b>Logo.png</b>), exactly as the previews show them.</p>
-        <div class="note" id="dlReq" hidden>Before downloading, open the <b>Android pass</b> and adjust its photo (step 2).<br><button type="button" class="btn secondary goAndroid">Adjust the Android pass</button></div>
+        <div class="note" id="dlReq" hidden>Before downloading:
+          <div id="dlReqAndroid">• Open the <b>Android pass</b> and adjust its photo (step 2). <button type="button" class="btn secondary goAndroid">Adjust the Android pass</button></div>
+          <div id="dlReqMods">• Approve the <b>module images</b> (step 4). <button type="button" class="btn secondary" id="goMods">Go to the module images</button></div>
+        </div>
         <pre class="tree" id="tree" aria-label="Folder that will be in the zip"></pre>
         <div class="row"><button type="button" class="btn green" id="dlZip" disabled>Download .zip for AEM</button></div>
         <div class="status" id="zipStatus" aria-live="polite"></div>
@@ -284,20 +290,20 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
   };
   var MOD_SIZE = 660;
   var MODULES = [
-    {file: 'module-roadside.jpeg', title: 'Roadside Assistance', body: 'Get help in the app: tow, battery, tire, lockout'},
-    {file: 'module-membership.jpeg', title: 'Member benefits & discounts', body: 'Save with your membership card'},
-    {file: 'module-branch.jpeg', title: 'Find your AAA branch', body: 'Directions, hours and services'},
-    {file: 'module-travel.jpeg', title: 'Travel with AAA', body: 'Hotels, rental cars and trip planning'},
-    {file: 'module-renew.png', title: 'Renew or upgrade', body: 'Manage your membership online'}
+    {file: 'module-roadside.jpeg', def: 'roadside.jpg', title: 'Roadside Assistance', body: 'Get help in the app: tow, battery, tire, lockout'},
+    {file: 'module-membership.jpeg', def: 'benefits.jpg', title: 'Member benefits & discounts', body: 'Save with your membership card'},
+    {file: 'module-branch.jpeg', def: 'branch.jpg', title: 'Find your AAA branch', body: 'Directions, hours and services'},
+    {file: 'module-travel.jpeg', def: 'travel.jpg', title: 'Travel with AAA', body: 'Hotels, rental cars and trip planning'},
+    {file: 'module-renew.png', def: 'renew.jpg', title: 'Renew or upgrade', body: 'Manage your membership online'}
   ];
-  MODULES.forEach(function(m){ m.def = new Image(); m.def.src = 'artwork-tool/modules/' + m.file; m.img = null; m.cx = 0.5; m.cy = 0.5; m.zoom = 1; });
+  MODULES.forEach(function(m){ var d = new Image(); d.src = 'artwork-tool/modules/defaults/' + m.def; m.def = d; m.img = null; m.cx = 0.5; m.cy = 0.5; m.zoom = 1; });
   var $ = function(id){ return document.getElementById(id); };
   var card = $('card'), gp = $('gp');
   var views = {
     ios: {el: card, canvas: $('preview'), cx: 0.5, cy: 0.5, zoom: 1, veil: true},
     android: {el: gp, canvas: $('previewA'), cx: 0.5, cy: 0.5, zoom: 1, veil: false}
   };
-  var state = {img: null, name: '', active: 'ios', androidChecked: false, logo: 'color', veil: false, veilAmt: 0.5};
+  var state = {img: null, name: '', active: 'ios', androidChecked: false, modsApproved: false, logo: 'color', veil: false, veilAmt: 0.5};
   var zipLoading = false;
 
   function drawModule(m, c){
@@ -305,13 +311,13 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     x.clearRect(0, 0, W, H); x.imageSmoothingEnabled = true; x.imageSmoothingQuality = 'high';
     var src = m.img || m.def;
     if(!src.complete || !src.naturalWidth) return;
-    var s = Math.max(W / src.naturalWidth, H / src.naturalHeight) * (m.img ? m.zoom : 1);
+    var s = Math.max(W / src.naturalWidth, H / src.naturalHeight) * m.zoom;
     var dw = src.naturalWidth * s, dh = src.naturalHeight * s;
-    var cx = m.img ? m.cx : 0.5, cy = m.img ? m.cy : 0.5;
-    x.drawImage(src, cx * W - dw / 2, cy * H - dh / 2, dw, dh);
+    x.drawImage(src, m.cx * W - dw / 2, m.cy * H - dh / 2, dw, dh);
   }
   function clampModule(m){
-    var src = m.img, s = Math.max(1 / src.naturalWidth, 1 / src.naturalHeight) * m.zoom;
+    var src = m.img || m.def; if(!src.naturalWidth) return;
+    var s = Math.max(1 / src.naturalWidth, 1 / src.naturalHeight) * m.zoom;
     var hw = src.naturalWidth * s / 2, hh = src.naturalHeight * s / 2;
     m.cx = Math.max(1 - hw, Math.min(hw, m.cx)); m.cy = Math.max(1 - hh, Math.min(hh, m.cy));
   }
@@ -326,37 +332,40 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
       var head = document.createElement('div');
       var b = document.createElement('b'); b.textContent = m.title;
       var code = document.createElement('code'); code.textContent = m.file;
-      var tag = document.createElement('div'); tag.className = 'tag'; tag.textContent = 'Today’s image';
+      var tag = document.createElement('div'); tag.className = 'tag'; tag.textContent = 'Default image';
       head.appendChild(b); head.appendChild(document.createElement('br')); head.appendChild(code); head.appendChild(tag);
-      var zoom = document.createElement('input'); zoom.type = 'range'; zoom.min = 100; zoom.max = 300; zoom.value = 100; zoom.className = 'mod-zoom'; zoom.hidden = true; zoom.setAttribute('aria-label', 'Zoom ' + m.title);
+      var zoom = document.createElement('input'); zoom.type = 'range'; zoom.min = 100; zoom.max = 300; zoom.value = 100; zoom.className = 'mod-zoom'; zoom.setAttribute('aria-label', 'Zoom ' + m.title);
       var btns = document.createElement('div'); btns.className = 'btns';
       var up = document.createElement('button'); up.type = 'button'; up.className = 'btn secondary'; up.textContent = 'Upload new';
-      var undo = document.createElement('button'); undo.type = 'button'; undo.className = 'btn secondary'; undo.textContent = 'Keep today’s'; undo.hidden = true;
+      var undo = document.createElement('button'); undo.type = 'button'; undo.className = 'btn secondary'; undo.textContent = 'Use the default'; undo.hidden = true;
       btns.appendChild(up); btns.appendChild(undo);
       card.appendChild(c); card.appendChild(head); card.appendChild(zoom); card.appendChild(btns); wrap.appendChild(card);
       m.editor = c; m.card = card; m.tag = tag; m.zoomEl = zoom; m.undo = undo; m.up = up;
       up.onclick = function(){ modTarget = m; $('modFile').click(); };
-      undo.onclick = function(){ m.img = null; refreshModule(m); updateZip(); };
-      zoom.oninput = function(){ m.zoom = this.value / 100; clampModule(m); drawModules(); };
+      undo.onclick = function(){ m.img = null; refreshModule(m); moduleChanged(); };
+      zoom.oninput = function(){ m.zoom = this.value / 100; clampModule(m); drawModules(); moduleChanged(); };
       var drag = null;
-      c.addEventListener('pointerdown', function(e){ if(!m.img || zipLoading) return; drag = {x: e.clientX, y: e.clientY, cx: m.cx, cy: m.cy}; try { c.setPointerCapture(e.pointerId); } catch(err){} card.classList.add('dragging'); });
+      c.addEventListener('pointerdown', function(e){ if(zipLoading) return; drag = {x: e.clientX, y: e.clientY, cx: m.cx, cy: m.cy}; try { c.setPointerCapture(e.pointerId); } catch(err){} card.classList.add('dragging'); });
       c.addEventListener('pointermove', function(e){ if(!drag) return; m.cx = drag.cx + (e.clientX - drag.x) / c.clientWidth; m.cy = drag.cy + (e.clientY - drag.y) / c.clientHeight; clampModule(m); drawModules(); });
-      function end(){ drag = null; card.classList.remove('dragging'); }
+      function end(){ if(drag) moduleChanged(); drag = null; card.classList.remove('dragging'); }
       c.addEventListener('pointerup', end); c.addEventListener('pointercancel', end);
     });
   }
   function refreshModule(m){
     var on = !!m.img;
-    m.card.classList.toggle('has-img', on); m.tag.textContent = on ? 'New image · added to the zip' : 'Today’s image';
-    m.zoomEl.hidden = !on; m.undo.hidden = !on; m.up.textContent = on ? 'Replace' : 'Upload new';
-    if(on){ m.cx = 0.5; m.cy = 0.5; m.zoom = 1; m.zoomEl.value = 100; }
+    m.card.classList.toggle('has-img', on); m.tag.textContent = on ? 'Your image' : 'Default image';
+    m.undo.hidden = !on; m.up.textContent = on ? 'Replace' : 'Upload new';
+    m.cx = 0.5; m.cy = 0.5; m.zoom = 1; m.zoomEl.value = 100;
     drawModules();
   }
+  function moduleChanged(){ if(state.modsApproved){ state.modsApproved = false; } updateZip(); }
+  $('approveMods').onclick = function(){ state.modsApproved = true; updateZip(); };
+  $('goMods').onclick = function(){ $('s4').scrollIntoView({behavior: 'smooth', block: 'start'}); };
   $('modFile').onchange = function(e){
     var f = e.target.files[0], m = modTarget; e.target.value = '';
     if(!f || !m || !/^image\//.test(f.type)) return;
     var img = new Image();
-    img.onload = function(){ m.img = img; refreshModule(m); updateZip(); };
+    img.onload = function(){ m.img = img; refreshModule(m); moduleChanged(); };
     img.src = URL.createObjectURL(f);
   };
   function moduleBlob(m){
@@ -607,14 +616,17 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     var lines = [(club || '{club}') + '/', '└── ' + (type || '{card}') + '/', '    ├── ios/'];
     IOS_FILES.forEach(function(f, i){ lines.push('    │   ' + (i === IOS_FILES.length - 1 ? '└── ' : '├── ') + f); });
     lines.push('    └── android/');
-    var androidFiles = ANDROID_FILES.concat(type === 'insurance' ? [] : MODULES.filter(function(m){ return m.img; }).map(function(m){ return m.file; }));
+    var androidFiles = ANDROID_FILES.concat(type === 'insurance' ? [] : MODULES.map(function(m){ return m.file; }));
     androidFiles.forEach(function(f, i){ lines.push('        ' + (i === androidFiles.length - 1 ? '└── ' : '├── ') + f); });
     var poi = type === 'insurance';
     $('mods').hidden = poi; $('modIntro').hidden = poi; $('modNote').hidden = poi; $('modPoi').hidden = !poi;
     $('tree').textContent = lines.join('\n');
-    $('dlZip').disabled = zipLoading || !(state.img && type && club && state.androidChecked);
+    var modsOk = poi || state.modsApproved;
+    $('dlZip').disabled = zipLoading || !(state.img && type && club && state.androidChecked && modsOk);
     $('androidReq').hidden = state.androidChecked; $('androidOk').hidden = !state.androidChecked;
-    $('dlReq').hidden = !state.img || state.androidChecked;
+    $('modReq').hidden = poi || state.modsApproved; $('modsOk').hidden = poi || !state.modsApproved;
+    $('dlReqAndroid').hidden = state.androidChecked; $('dlReqMods').hidden = modsOk;
+    $('dlReq').hidden = !state.img || (state.androidChecked && modsOk);
     if(!zipLoading) $('dlZip').textContent = type && club ? 'Download ' + club + '-' + type + '.zip' : 'Download .zip for AEM';
   }
   document.querySelectorAll('input[name=type],input[name=club]').forEach(function(r){ r.onchange = updateZip; });
@@ -630,11 +642,11 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 
   $('dlZip').onclick = function(){
     var type = picked('type'), club = picked('club');
-    if(zipLoading || !state.img || !type || !club || !state.androidChecked) return;
+    if(zipLoading || !state.img || !type || !club || !state.androidChecked || (type !== 'insurance' && !state.modsApproved)) return;
     if(typeof JSZip === 'undefined' || typeof UPNG === 'undefined'){ $('zipStatus').textContent = 'A download tool didn’t load. Check your connection and reload the page.'; return; }
     setZipLoading(true); $('sizes').innerHTML = '';
     var ios = club + '/' + type + '/ios/', android = club + '/' + type + '/android/', zip = new JSZip();
-    var newMods = type === 'insurance' ? [] : MODULES.filter(function(m){ return m.img; }), mods = [];
+    var newMods = type === 'insurance' ? [] : MODULES, mods = [];
     Promise.all(newMods.map(moduleBlob)).then(function(b){ mods = b; return Promise.all(IOS_BUNDLED.map(function(f){ return fetchBundled(logoPath(f)); }).concat([fetchBundled('android/Logo.png')])); }).then(function(bundled){
       var iosBundled = bundled.slice(0, IOS_BUNDLED.length), logo = bundled[IOS_BUNDLED.length];
       return new Promise(function(r){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ setTimeout(r, 0); }); }); }).then(function(){
