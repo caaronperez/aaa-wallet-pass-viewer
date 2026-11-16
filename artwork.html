@@ -101,6 +101,8 @@ input[type=range]{width:min(260px,100%);accent-color:var(--accent)}
 .type input:checked+span,.club input:checked+span{border-color:var(--accent);background:rgba(59,140,255,.16);box-shadow:inset 0 0 0 1px var(--accent)}
 .tree{margin:12px 0 0;padding:12px 14px;border-radius:10px;background:var(--win);border:1px solid var(--line);font:12.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre;overflow-x:auto;color:var(--text)}
 .note{margin:10px 0 0;padding:10px 12px;border-radius:10px;border:1px solid rgba(245,180,60,.5);background:rgba(245,180,60,.08);font-size:13px;line-height:1.5}
+.note .btn{margin-top:8px;min-height:36px;padding:6px 14px}.note[hidden],.ok-line[hidden]{display:none}
+.ok-line{margin:10px 0 0;font-size:13px;font-weight:600;color:var(--ok)}
 .status{min-height:20px;margin-top:8px;font-size:13px;color:var(--ok)}
 fieldset{border:0;margin:0;padding:0}
 .ptabs{margin:0 0 12px}
@@ -205,6 +207,8 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
       <section class="step locked" id="s2">
         <h2><span class="n">2</span>Move and zoom the photo</h2>
         <p>Do this for the <b>iPhone card</b> and the <b>Android pass</b>: switch between them above the preview. Each one keeps its own position and zoom. Drag the photo to show the part you want, zoom in to show less of it. The photo always fills the whole space.</p>
+        <div class="note" id="androidReq"><b>Required:</b> adjust the <b>Android pass</b> too. Its photo is a wider band, so it may need a different position than the iPhone card.<br><button type="button" class="btn secondary goAndroid">Adjust the Android pass</button></div>
+        <p class="ok-line" id="androidOk" hidden>✓ Android pass checked</p>
         <div class="row"><span class="lbl">Move</span><span class="hand-tip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12m0-1V3.5a1.5 1.5 0 0 1 3 0V11m0-.5V5.5a1.5 1.5 0 0 1 3 0V13m0-4.5a1.5 1.5 0 0 1 3 0V15a7 7 0 0 1-7 7h-1.2a7 7 0 0 1-5.6-2.8L3.3 15.4a1.6 1.6 0 0 1 2.4-2.1L8 15.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Drag the photo on the preview</span></div>
         <div class="row"><label class="lbl" for="zoom">Zoom</label><input type="range" id="zoom" min="100" max="300" value="100" step="1"><span class="val" id="zoomVal">100%</span></div>
         <div class="row"><span class="lbl"></span><button type="button" class="btn secondary" id="resetBtn">Reset</button><label class="switch" id="guidesSw"><input type="checkbox" id="guides" role="switch" checked>Show the glass line</label></div>
@@ -222,6 +226,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
       <section class="step locked" id="s5">
         <h2><span class="n">4</span>Download the AEM folder</h2>
         <p>You get one .zip with the folder ready to upload to AEM, for <b id="zipFor">the card and club you picked</b>: the iPhone files in <b>ios/</b> (<b>artwork@2x.png</b> 716 × 896 and <b>artwork@3x.png</b> 1074 × 1344) and the Android files in <b>android/</b> (<b>Hero.png</b> 1032 × 812 and <b>Logo.png</b>), exactly as the previews show them.</p>
+        <div class="note" id="dlReq" hidden>Before downloading, open the <b>Android pass</b> and adjust its photo (step 2).<br><button type="button" class="btn secondary goAndroid">Adjust the Android pass</button></div>
         <pre class="tree" id="tree" aria-label="Folder that will be in the zip"></pre>
         <div class="row"><button type="button" class="btn green" id="dlZip" disabled>Download .zip for AEM</button></div>
         <div class="status" id="zipStatus" aria-live="polite"></div>
@@ -263,7 +268,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     ios: {el: card, canvas: $('preview'), cx: 0.5, cy: 0.5, zoom: 1, veil: true},
     android: {el: gp, canvas: $('previewA'), cx: 0.5, cy: 0.5, zoom: 1, veil: false}
   };
-  var state = {img: null, name: '', active: 'ios', logo: 'color', veil: false, veilAmt: 0.5};
+  var state = {img: null, name: '', active: 'ios', androidChecked: false, logo: 'color', veil: false, veilAmt: 0.5};
   var zipLoading = false;
 
   function layout(v, W, H){
@@ -316,8 +321,12 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     document.querySelectorAll('[data-view]').forEach(function(b){ var on = b.dataset.view === key; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); });
     $('viewIos').hidden = key !== 'ios'; $('viewAndroid').hidden = key !== 'android';
     $('guidesSw').hidden = key !== 'ios';
+    if(key === 'android' && state.img && !state.androidChecked){ state.androidChecked = true; updateZip(); }
     showZoom(); render();
   }
+  document.querySelectorAll('.goAndroid').forEach(function(b){
+    b.onclick = function(){ setActive('android'); $('gp').scrollIntoView({behavior: 'smooth', block: 'start'}); };
+  });
   document.querySelectorAll('[data-view]').forEach(function(b){ b.onclick = function(){ setActive(b.dataset.view); }; });
 
   function unlock(){ ['s2','s3','s5'].forEach(function(id){ $(id).classList.remove('locked'); }); $('s1').classList.add('done'); }
@@ -333,6 +342,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
       $('srcInfo').querySelector('b').textContent = file.name;
       $('sizes').innerHTML = '';
       card.classList.add('has-art'); gp.classList.add('has-art'); unlock();
+      state.androidChecked = state.active === 'android';
       resetView(views.android); resetView(views.ios); updateZip();
     };
     img.onerror = function(){ URL.revokeObjectURL(url); $('srcInfo').textContent = 'This browser can’t open that image. Save it as PNG or JPG and try again.'; };
@@ -494,7 +504,9 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     lines.push('    └── android/');
     ANDROID_FILES.forEach(function(f, i){ lines.push('        ' + (i === ANDROID_FILES.length - 1 ? '└── ' : '├── ') + f); });
     $('tree').textContent = lines.join('\n');
-    $('dlZip').disabled = zipLoading || !(state.img && type && club);
+    $('dlZip').disabled = zipLoading || !(state.img && type && club && state.androidChecked);
+    $('androidReq').hidden = state.androidChecked; $('androidOk').hidden = !state.androidChecked;
+    $('dlReq').hidden = !state.img || state.androidChecked;
     if(!zipLoading) $('dlZip').textContent = type && club ? 'Download ' + club + '-' + type + '.zip' : 'Download .zip for AEM';
   }
   document.querySelectorAll('input[name=type],input[name=club]').forEach(function(r){ r.onchange = updateZip; });
@@ -510,7 +522,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 
   $('dlZip').onclick = function(){
     var type = picked('type'), club = picked('club');
-    if(zipLoading || !state.img || !type || !club) return;
+    if(zipLoading || !state.img || !type || !club || !state.androidChecked) return;
     if(typeof JSZip === 'undefined' || typeof UPNG === 'undefined'){ $('zipStatus').textContent = 'A download tool didn’t load. Check your connection and reload the page.'; return; }
     setZipLoading(true); $('sizes').innerHTML = '';
     var ios = club + '/' + type + '/ios/', android = club + '/' + type + '/android/', zip = new JSZip();
