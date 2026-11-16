@@ -33,7 +33,7 @@ h1{font-size:22px;margin:0 0 4px}
 @media (max-width:820px){.stage{position:static}}
 .card{position:relative;width:100%;max-width:380px;aspect-ratio:358/448;border-radius:18px;overflow:hidden;background:repeating-conic-gradient(#e5e5ea 0 25%,#f2f2f7 0 50%) 0 0/18px 18px;box-shadow:0 10px 30px rgba(0,0,0,.35);container-type:inline-size;touch-action:none;user-select:none}
 .card canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.card.has-art{cursor:grab}.card.dragging{cursor:grabbing}.card:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.card.has-art{cursor:grab}.card.busy{cursor:progress}.card.dragging{cursor:grabbing}.card:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .hand-tip{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600}.hand-tip svg{width:26px;height:26px}
 .btn.sq{min-width:44px;padding:0;font-size:20px;line-height:1}
 .sizes{margin:8px 0 0;padding:0;list-style:none;font-size:13px}.sizes li{display:flex;gap:8px;align-items:center}.sizes .ok{color:var(--ok)}.sizes .bad{color:#ff5f57}
@@ -42,7 +42,8 @@ h1{font-size:22px;margin:0 0 4px}
 .c-head{position:absolute;right:3.35%;top:2.7%;text-align:right;color:var(--card-fg);font:3.4cqw ui-monospace,SFMono-Regular,Menlo,monospace}
 .c-head i{display:block;font:700 3cqw -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;font-style:normal;color:var(--card-label)}
 .c-bc{position:absolute;left:11.5%;width:77%;top:58%;height:20.3%;z-index:3;background:#fff;border-radius:2cqw;padding:2.5cqw 3cqw;display:flex;flex-direction:column;gap:1.2cqw}
-.c-bc span{flex:1;background:repeating-linear-gradient(90deg,#000 0 2px,#fff 2px 3px,#000 3px 4px,#fff 4px 7px,#000 7px 8px,#fff 8px 10px)}
+.c-bc img{flex:1;min-height:0;width:100%;object-fit:contain;image-rendering:pixelated}
+.c-bc[hidden],.gp-bcw[hidden]{display:none}
 .c-bc small{font:2.5cqw ui-monospace,Menlo,monospace;color:#000;text-align:center}
 .c-foot{position:absolute;left:0;right:0;top:76.1%;bottom:0;isolation:isolate}
 .c-foot::before{content:"";position:absolute;inset:0;z-index:-1;-webkit-backdrop-filter:blur(11cqw) saturate(1.45) brightness(.94);backdrop-filter:blur(11cqw) saturate(1.45) brightness(.94)}
@@ -71,6 +72,10 @@ h1{font-size:22px;margin:0 0 4px}
 .btn:disabled{opacity:.45;cursor:not-allowed;filter:none}
 .btn.secondary{background:var(--panel-2);color:var(--text)}
 .btn.green{background:var(--ok);color:#06290f}
+.btn.loading:disabled{opacity:.85;cursor:progress}
+.spinner{width:18px;height:18px;flex:none;border:2.5px solid rgba(6,41,15,.25);border-top-color:#06290f;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spinner{animation-duration:2.4s}}
 .btn:focus-visible,.seg button:focus-visible,.club input:focus-visible+span,.type input:focus-visible+span,.switch input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:10px}
 .row>.lbl{min-width:96px;font-size:13px;color:var(--muted)}
@@ -98,31 +103,75 @@ input[type=range]{width:min(260px,100%);accent-color:var(--accent)}
 .note{margin:10px 0 0;padding:10px 12px;border-radius:10px;border:1px solid rgba(245,180,60,.5);background:rgba(245,180,60,.08);font-size:13px;line-height:1.5}
 .status{min-height:20px;margin-top:8px;font-size:13px;color:var(--ok)}
 fieldset{border:0;margin:0;padding:0}
+.ptabs{margin:0 0 12px}
+.pview[hidden]{display:none}
+.gp{position:relative;width:100%;max-width:340px;border-radius:30px;overflow:hidden;background:#f2e4e4;color:#202124;font-family:"Google Sans",Roboto,system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.35);container-type:inline-size;touch-action:none;user-select:none}
+.gp.has-art{cursor:grab}.gp.busy{cursor:progress}.gp.dragging{cursor:grabbing}.gp:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.gp.drop{outline:3px solid var(--accent);outline-offset:3px}
+.gp-top{position:relative;z-index:1;background:#f2e4e4;border-radius:0 0 7cqw 7cqw;padding:16px 18px 18px;text-align:center}
+.gp-logo{width:22cqw;height:22cqw;border-radius:50%;margin:6px auto 8px;overflow:hidden;background:#fff}
+.gp-logo img{width:100%;height:100%;object-fit:cover;display:block}
+.gp-t{font-size:4.2cqw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gp-s{font-size:3.6cqw;opacity:.8;margin-top:6px}
+.gp-h{font-weight:700;font-size:9cqw;line-height:1.12;margin:2px 0 12px}
+.gp-bc{background:#fff;border-radius:5cqw;padding:4cqw;margin-bottom:4px}
+.gp-bc img{display:block;width:100%;height:15cqw;object-fit:contain;image-rendering:pixelated}
+.gp-alt{font-size:3.4cqw;font-weight:600;margin-top:6px}
+.gp-rw{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;padding-top:12px;text-align:left}
+.gp-rw i{display:block;font-style:normal;font-size:3.4cqw;opacity:.85}.gp-rw b{display:block;font-size:4.2cqw;margin-top:2px}
+.gp-rw .c{text-align:center}.gp-rw .e{text-align:right}
+.gp-hero{position:relative;aspect-ratio:1032/812;background:repeating-conic-gradient(#e5e5ea 0 25%,#f2f2f7 0 50%) 0 0/18px 18px;margin:-6cqw 0;z-index:0}
+.gp-hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.gp-empty{position:absolute;inset:16% 14%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1cqw;border:2px dashed #0a84ff;border-radius:4cqw;background:rgba(10,132,255,.12);color:#0a3d7a;font:600 4.4cqw -apple-system,BlinkMacSystemFont,sans-serif;cursor:pointer}
+.gp-empty small{font-weight:400;font-size:3.2cqw;color:#3a5f8f}
+.gp.has-art .gp-empty{display:none}
+.gp-low{position:relative;z-index:1;background:#f2e4e4;border-radius:7cqw 7cqw 0 0;padding:16px 14px 18px}
+.gp-low[hidden]{display:none}
+.gp-mod{display:flex;align-items:center;gap:12px;border-radius:5cqw;padding:12px 12px 12px 16px;background:rgba(255,255,255,.45)}
+.gp-mod b{display:block;font-size:4.2cqw}.gp-mod small{display:block;font-size:3.5cqw;opacity:.85;margin-top:2px}
+.gp-mod img{margin-left:auto;width:16cqw;height:16cqw;border-radius:3cqw;object-fit:cover;flex:none}
 legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 </style>
 </head>
 <body>
 <header class="titlebar">
-  <div class="doc"><b>Artwork Builder</b><small>Make the iOS 27 card artwork</small></div>
+  <div class="doc"><b>Artwork Builder</b><small>Make the iPhone and Android card artwork</small></div>
   <nav class="platform" aria-label="Wallet"><a href="./">Apple Wallet</a><a href="google.html">Google Wallet</a><a href="artwork.html" class="on" aria-current="page">Artwork Builder</a></nav>
 </header>
 <main>
   <h1>Make the card artwork</h1>
-  <p class="lead">Upload any photo, move it until the card looks right, then download the files. Everything stays in your browser; nothing is uploaded.</p>
+  <p class="lead">Upload any photo, move it until the iPhone card and the Android pass look right, then download the folder. Everything stays in your browser; nothing is uploaded.</p>
   <div class="layout">
     <div class="stage">
+      <div class="seg ptabs" role="group" aria-label="Which preview to adjust"><button type="button" data-view="ios" class="on" aria-pressed="true">iPhone card</button><button type="button" data-view="android" aria-pressed="false">Android pass</button></div>
+      <div class="pview" id="viewIos">
       <div class="card guides" id="card" tabindex="0" role="img" aria-label="Preview of the iOS 27 card with your artwork. Arrow keys move the photo, plus and minus zoom.">
         <canvas id="preview" width="716" height="896"></canvas>
         <div class="over">
           <img class="c-logo" src="artwork-tool/primaryLogo@3x.png" alt="">
           <div class="c-head"><i id="hLabel">MEMBERSHIP CARD</i><span id="hValue">Premier</span></div>
-          <div class="c-bc"><span></span><small id="bcText">000 000 000000000 0</small></div>
+          <div class="c-bc" id="bcBox"><img src="artwork-tool/pdf417.png" alt=""><small id="bcText">000 000 000000000 0</small></div>
           <div class="c-foot"><div class="c-txt prim" id="prim"></div><div class="c-txt ft" id="foot"></div></div>
           <div class="c-line" aria-hidden="true"></div>
         </div>
         <button type="button" class="c-empty" id="emptyBtn"><span aria-hidden="true" style="font-size:9cqw;line-height:1">＋</span>Upload artwork<br><small>Any size · PNG or JPG</small></button>
       </div>
-      <p class="hint" id="dragHint">Drag the photo with the hand to move it. The orange dashed line is where the frosted glass starts.</p>
+      <p class="hint">Drag the photo with the hand to move it. The orange dashed line is where the frosted glass starts.</p>
+      </div>
+      <div class="pview" id="viewAndroid" hidden>
+        <div class="gp" id="gp" tabindex="0" role="img" aria-label="Preview of the Google Wallet 2026 pass with your hero image. Arrow keys move the photo, plus and minus zoom.">
+          <div class="gp-top">
+            <div class="gp-logo"><img src="artwork-tool/android/Logo.png" alt=""></div>
+            <div class="gp-t" id="gT">Membership Card</div>
+            <div class="gp-s" id="gS">Member</div>
+            <div class="gp-h" id="gH">Fulanito Perez</div>
+            <div class="gp-bcw" id="gBc"><div class="gp-bc"><img src="artwork-tool/pdf417.png" alt=""></div><div class="gp-alt" id="gAlt">000 000 000000000 0</div></div>
+            <div class="gp-rw" id="gRow"></div>
+          </div>
+          <div class="gp-hero" id="gpHero"><canvas id="previewA" width="1032" height="812"></canvas><button type="button" class="gp-empty" id="emptyBtnA"><span aria-hidden="true" style="font-size:7cqw;line-height:1">＋</span>Upload artwork<small>Any size · PNG or JPG</small></button></div>
+          <div class="gp-low" id="gLow"><div class="gp-mod"><span><b>Roadside Assistance</b><small>Get help in the app: tow, battery, tire, lockout</small></span><img src="google/img/vam-roadside.jpg" alt=""></div></div>
+        </div>
+        <p class="hint">Drag the photo with the hand to move it. This is the hero image band (1032 × 812) on the Google Wallet 2026 pass. The rounded edges above and below cover a little of the top and bottom.</p>
+      </div>
     </div>
 
     <div class="steps">
@@ -136,23 +185,23 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 
       <section class="step locked" id="s2">
         <h2><span class="n">2</span>Move and zoom the photo</h2>
-        <p>Grab the photo with the hand and drag it to show the part you want. Zoom in to show less of it. The photo always fills the whole card. Keep the important part above the orange line.</p>
-        <div class="row"><span class="lbl">Move</span><span class="hand-tip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12m0-1V3.5a1.5 1.5 0 0 1 3 0V11m0-.5V5.5a1.5 1.5 0 0 1 3 0V13m0-4.5a1.5 1.5 0 0 1 3 0V15a7 7 0 0 1-7 7h-1.2a7 7 0 0 1-5.6-2.8L3.3 15.4a1.6 1.6 0 0 1 2.4-2.1L8 15.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Drag the photo on the card</span></div>
+        <p>Do this for the <b>iPhone card</b> and the <b>Android pass</b>: switch between them above the preview. Each one keeps its own position and zoom. Drag the photo to show the part you want, zoom in to show less of it. The photo always fills the whole space.</p>
+        <div class="row"><span class="lbl">Move</span><span class="hand-tip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12m0-1V3.5a1.5 1.5 0 0 1 3 0V11m0-.5V5.5a1.5 1.5 0 0 1 3 0V13m0-4.5a1.5 1.5 0 0 1 3 0V15a7 7 0 0 1-7 7h-1.2a7 7 0 0 1-5.6-2.8L3.3 15.4a1.6 1.6 0 0 1 2.4-2.1L8 15.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Drag the photo on the preview</span></div>
         <div class="row"><label class="lbl" for="zoom">Zoom</label><input type="range" id="zoom" min="100" max="300" value="100" step="1"><span class="val" id="zoomVal">100%</span></div>
-        <div class="row"><span class="lbl"></span><button type="button" class="btn secondary" id="resetBtn">Reset</button><label class="switch"><input type="checkbox" id="guides" role="switch" checked>Show the glass line</label></div>
-        <p class="info" style="margin:6px 0 0">On a trackpad you can also pinch on the card to zoom. With the keyboard: click the card, then use the arrow keys to move and + / − to zoom.</p>
+        <div class="row"><span class="lbl"></span><button type="button" class="btn secondary" id="resetBtn">Reset</button><label class="switch" id="guidesSw"><input type="checkbox" id="guides" role="switch" checked>Show the glass line</label></div>
+        <p class="info" style="margin:6px 0 0">On a trackpad you can also pinch on the preview to zoom. With the keyboard: click the preview, then use the arrow keys to move and + / − to zoom.</p>
       </section>
 
       <section class="step locked" id="s3">
-        <h2><span class="n">3</span>White veil (optional)</h2>
-        <p>If the text at the bottom is hard to read, turn on the white veil. It lightens only the bottom of the card behind the text.</p>
+        <h2><span class="n">3</span>White veil (optional, iPhone only)</h2>
+        <p>If the text at the bottom of the iPhone card is hard to read, turn on the white veil. It lightens only the bottom of the card behind the text. The Android pass doesn’t get a veil.</p>
         <label class="switch"><input type="checkbox" id="veil" role="switch">Add a white veil at the bottom</label>
         <div class="row veil-amt" id="veilRow" hidden><label class="lbl" for="veilAmt">How much white</label><input type="range" id="veilAmt" min="5" max="95" value="50" step="1"><span class="val" id="veilVal">50%</span></div>
       </section>
 
       <section class="step locked" id="s5">
         <h2><span class="n">4</span>Download the AEM folder</h2>
-        <p>Pick the card and the club. You get a .zip with the folder ready to upload to AEM, including <b>artwork@2x.png</b> (716 × 896) and <b>artwork@3x.png</b> (1074 × 1344) exactly as the card shows them.</p>
+        <p>Pick the card and the club. You get one .zip with the folder ready to upload to AEM: the iPhone files in <b>ios/</b> (<b>artwork@2x.png</b> 716 × 896 and <b>artwork@3x.png</b> 1074 × 1344) and the Android files in <b>android/</b> (<b>Hero.png</b> 1032 × 812 and <b>Logo.png</b>), exactly as the previews show them.</p>
         <fieldset class="type"><legend>Which card is this for?</legend><div class="choices">
           <label><input type="radio" name="type" value="membership"><span>Membership<small>Membership card</small></span></label>
           <label><input type="radio" name="type" value="insurance"><span>POI<small>Proof of insurance card</small></span></label>
@@ -171,36 +220,45 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 (function(){
-  var SIZES = {2: [716, 896], 3: [1074, 1344]};
+  var SIZES = {2: [716, 896], 3: [1074, 1344]}, HERO = [1032, 812];
   var GLASS_TOP = 0.761, VEIL_FADE = 0.08;
+  var MAX_IMAGE = 2 * 1024 * 1024, MAX_CLUB = 3.5 * 1024 * 1024, ZMIN = 1, ZMAX = 3;
   var CLUBS = ['001','004','018','036','065','215','240','252','258','260','601'];
-  var BUNDLED = ['primaryLogo@2x.png','primaryLogo@3x.png','logo.png','icon@2x.png','icon@3x.png'];
+  var IOS_BUNDLED = ['primaryLogo@2x.png','primaryLogo@3x.png','logo.png','icon@2x.png','icon@3x.png'];
+  var IOS_FILES = ['artwork@2x.png','artwork@3x.png'].concat(IOS_BUNDLED), ANDROID_FILES = ['Hero.png','Logo.png'];
   var CARD_TEXT = {
-    membership: {label: 'MEMBERSHIP CARD', value: 'Premier', barcode: '000 000 000000000 0',
-      fields: [['Member Name','FULANITO PEREZ'],['Valid Through','03/2027'],['Member Since','1994']],
-      footer: '24/7 Roadside: tap Membership Benefits'},
-    insurance: {label: 'CA EVIDENCE OF LIABILITY', value: 'Auto Insurance Card', barcode: '0000000000',
+    membership: {label: 'MEMBERSHIP CARD', value: 'Premier', barcode: '000 000 000000000 0', hasBarcode: true,
+      fields: [['Member Name','FULANITO PEREZ'],['Valid Through','03/2027'],['Loyal Member','32 Years']],
+      footer: '24/7 Roadside: tap Membership Benefits',
+      g: {title: 'Membership Card', sub: 'Member', alt: '000 000 000000000 0', row: [['Plan','Premier'],['Valid thru','03/27'],['Loyal Member','32 Years']], module: true}},
+    insurance: {label: 'CA EVIDENCE OF LIABILITY', value: 'Auto Insurance Card', barcode: '', hasBarcode: false,
       fields: [['Name Insured','FULANITO PEREZ'],['Policy Number','0000000000'],['Effective','09/14/26 – 09/14/27']],
-      footer: 'Company: Sample Mutual Insurance'}
+      footer: 'Company: Sample Mutual Insurance',
+      g: {title: 'Auto Insurance Card', sub: 'Name Insured', alt: '0000000000', row: [['Policy','0000000000'],['Effective','09/14/26'],['Expires','09/14/27']], module: false}}
   };
   var $ = function(id){ return document.getElementById(id); };
-  var card = $('card'), canvas = $('preview'), ctx = canvas.getContext('2d');
-  var MAX_IMAGE = 2 * 1024 * 1024, MAX_CLUB = 3.5 * 1024 * 1024, ZMIN = 1, ZMAX = 3;
-  var state = {img: null, name: '', cx: 0.5, cy: 0.5, zoom: 1, veil: false, veilAmt: 0.5};
+  var card = $('card'), gp = $('gp');
+  var views = {
+    ios: {el: card, canvas: $('preview'), cx: 0.5, cy: 0.5, zoom: 1, veil: true},
+    android: {el: gp, canvas: $('previewA'), cx: 0.5, cy: 0.5, zoom: 1, veil: false}
+  };
+  var state = {img: null, name: '', active: 'ios', veil: false, veilAmt: 0.5};
+  var zipLoading = false;
 
-  function layout(W, H){
-    var img = state.img, s = Math.max(W / img.naturalWidth, H / img.naturalHeight) * state.zoom;
+  function layout(v, W, H){
+    var img = state.img, s = Math.max(W / img.naturalWidth, H / img.naturalHeight) * v.zoom;
     var dw = img.naturalWidth * s, dh = img.naturalHeight * s;
-    return {dw: dw, dh: dh, x: state.cx * W - dw / 2, y: state.cy * H - dh / 2};
+    return {dw: dw, dh: dh, x: v.cx * W - dw / 2, y: v.cy * H - dh / 2};
   }
-  function draw(target, W, H){
+
+  function draw(v, target, W, H){
     var c = target.getContext('2d');
     c.clearRect(0, 0, W, H);
     if(!state.img) return;
-    var l = layout(W, H);
+    var l = layout(v, W, H);
     c.imageSmoothingEnabled = true; c.imageSmoothingQuality = 'high';
     c.drawImage(state.img, l.x, l.y, l.dw, l.dh);
-    if(state.veil){
+    if(v.veil && state.veil){
       var top = H * (GLASS_TOP - VEIL_FADE), full = H * GLASS_TOP;
       var g = c.createLinearGradient(0, top, 0, full);
       g.addColorStop(0, 'rgba(255,255,255,0)');
@@ -215,24 +273,35 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     if(pending) return; pending = true;
     requestAnimationFrame(function(){
       pending = false;
-      draw(canvas, canvas.width, canvas.height);
+      Object.keys(views).forEach(function(k){ var v = views[k]; draw(v, v.canvas, v.canvas.width, v.canvas.height); });
     });
   }
 
-  function clampCenter(){
-    var W = canvas.width, H = canvas.height, l = layout(W, H);
+  function clampCenter(v){
+    var W = v.canvas.width, H = v.canvas.height, l = layout(v, W, H);
     var hw = l.dw / 2 / W, hh = l.dh / 2 / H;
-    state.cx = Math.max(1 - hw, Math.min(hw, state.cx));
-    state.cy = Math.max(1 - hh, Math.min(hh, state.cy));
+    v.cx = Math.max(1 - hw, Math.min(hw, v.cx));
+    v.cy = Math.max(1 - hh, Math.min(hh, v.cy));
   }
-  function setZoom(z){
-    state.zoom = Math.max(ZMIN, Math.min(ZMAX, z));
-    var pct = Math.round(state.zoom * 100);
+  function showZoom(){
+    var pct = Math.round(views[state.active].zoom * 100);
     $('zoom').value = pct; $('zoomVal').textContent = pct + '%';
-    clampCenter(); render();
   }
-  function move(dx, dy){ state.cx += dx; state.cy += dy; clampCenter(); render(); }
-  function resetView(){ state.cx = 0.5; state.cy = 0.5; setZoom(1); }
+  function setZoom(v, z){
+    v.zoom = Math.max(ZMIN, Math.min(ZMAX, z));
+    clampCenter(v); showZoom(); render();
+  }
+  function move(v, dx, dy){ v.cx += dx; v.cy += dy; clampCenter(v); render(); }
+  function resetView(v){ v.cx = 0.5; v.cy = 0.5; setZoom(v, 1); }
+
+  function setActive(key){
+    state.active = key;
+    document.querySelectorAll('[data-view]').forEach(function(b){ var on = b.dataset.view === key; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); });
+    $('viewIos').hidden = key !== 'ios'; $('viewAndroid').hidden = key !== 'android';
+    $('guidesSw').hidden = key !== 'ios';
+    showZoom(); render();
+  }
+  document.querySelectorAll('[data-view]').forEach(function(b){ b.onclick = function(){ setActive(b.dataset.view); }; });
 
   function unlock(){ ['s2','s3','s5'].forEach(function(id){ $(id).classList.remove('locked'); }); $('s1').classList.add('done'); }
 
@@ -243,66 +312,77 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
       state.img = img; state.name = file.name;
       var w = img.naturalWidth, h = img.naturalHeight;
       var small = w < SIZES[3][0] || h < SIZES[3][1];
-      $('srcInfo').innerHTML = 'Loaded <b></b> · ' + w + ' × ' + h + ' px' + (small ? '<br>This photo is smaller than 1074 × 1344, so the @3x file may look a little soft.' : '');
+      $('srcInfo').innerHTML = 'Loaded <b></b> · ' + w + ' × ' + h + ' px' + (small ? '<br>This photo is smaller than 1074 × 1344, so the iPhone @3x file may look a little soft.' : '');
       $('srcInfo').querySelector('b').textContent = file.name;
       $('sizes').innerHTML = '';
-      card.classList.add('has-art'); unlock(); resetView(); updateZip();
+      card.classList.add('has-art'); gp.classList.add('has-art'); unlock();
+      resetView(views.android); resetView(views.ios); updateZip();
     };
     img.onerror = function(){ URL.revokeObjectURL(url); $('srcInfo').textContent = 'This browser can’t open that image. Save it as PNG or JPG and try again.'; };
     img.src = url;
   }
 
-  $('uploadBtn').onclick = $('emptyBtn').onclick = function(){ $('file').click(); };
+  $('uploadBtn').onclick = $('emptyBtn').onclick = $('emptyBtnA').onclick = function(){ $('file').click(); };
   $('file').onchange = function(e){ loadFile(e.target.files[0]); e.target.value = ''; };
-  ['dragenter','dragover'].forEach(function(t){ document.addEventListener(t, function(e){ e.preventDefault(); card.classList.add('drop'); }); });
-  ['dragleave','drop'].forEach(function(t){ document.addEventListener(t, function(e){ e.preventDefault(); if(t === 'drop' || e.target === document.documentElement) card.classList.remove('drop'); }); });
-  document.addEventListener('drop', function(e){ var f = e.dataTransfer && e.dataTransfer.files[0]; if(f) loadFile(f); });
+  ['dragenter','dragover'].forEach(function(t){ document.addEventListener(t, function(e){ e.preventDefault(); views[state.active].el.classList.add('drop'); }); });
+  ['dragleave','drop'].forEach(function(t){ document.addEventListener(t, function(e){ e.preventDefault(); if(t === 'drop' || e.target === document.documentElement){ card.classList.remove('drop'); gp.classList.remove('drop'); } }); });
+  document.addEventListener('drop', function(e){ var f = e.dataTransfer && e.dataTransfer.files[0]; if(f && !zipLoading) loadFile(f); });
 
-  var drag = null;
-  card.addEventListener('pointerdown', function(e){
-    if(!state.img || e.target.closest('button')) return;
-    drag = {x: e.clientX, y: e.clientY, cx: state.cx, cy: state.cy};
-    card.setPointerCapture(e.pointerId); card.classList.add('dragging');
-  });
-  card.addEventListener('pointermove', function(e){
-    if(!drag) return;
-    state.cx = drag.cx + (e.clientX - drag.x) / card.clientWidth;
-    state.cy = drag.cy + (e.clientY - drag.y) / card.clientHeight;
-    clampCenter(); render();
-  });
-  function endDrag(){ drag = null; card.classList.remove('dragging'); }
-  card.addEventListener('pointerup', endDrag); card.addEventListener('pointercancel', endDrag);
-  card.addEventListener('wheel', function(e){
-    if(!state.img || !e.ctrlKey) return;
-    e.preventDefault(); setZoom(state.zoom * Math.exp(-e.deltaY * 0.01));
-  }, {passive: false});
-  card.addEventListener('keydown', function(e){
-    if(!state.img) return;
-    var step = e.shiftKey ? 0.05 : 0.01, k = e.key;
-    if(k === 'ArrowLeft') move(-step, 0); else if(k === 'ArrowRight') move(step, 0);
-    else if(k === 'ArrowUp') move(0, -step); else if(k === 'ArrowDown') move(0, step);
-    else if(k === '+' || k === '=') setZoom(state.zoom + 0.05); else if(k === '-' || k === '_') setZoom(state.zoom - 0.05);
-    else return;
-    e.preventDefault();
-  });
+  function bindView(v){
+    var area = v === views.ios ? card : $('gpHero'), drag = null;
+    v.el.addEventListener('pointerdown', function(e){
+      if(zipLoading || !state.img || e.target.closest('button')) return;
+      drag = {x: e.clientX, y: e.clientY, cx: v.cx, cy: v.cy};
+      v.el.setPointerCapture(e.pointerId); v.el.classList.add('dragging');
+    });
+    v.el.addEventListener('pointermove', function(e){
+      if(!drag) return;
+      v.cx = drag.cx + (e.clientX - drag.x) / area.clientWidth;
+      v.cy = drag.cy + (e.clientY - drag.y) / area.clientHeight;
+      clampCenter(v); render();
+    });
+    function endDrag(){ drag = null; v.el.classList.remove('dragging'); }
+    v.el.addEventListener('pointerup', endDrag); v.el.addEventListener('pointercancel', endDrag);
+    v.el.addEventListener('wheel', function(e){
+      if(!state.img || !e.ctrlKey) return;
+      e.preventDefault();
+      if(!zipLoading) setZoom(v, v.zoom * Math.exp(-e.deltaY * 0.01));
+    }, {passive: false});
+    v.el.addEventListener('keydown', function(e){
+      if(zipLoading || !state.img) return;
+      var step = e.shiftKey ? 0.05 : 0.01, k = e.key;
+      if(k === 'ArrowLeft') move(v, -step, 0); else if(k === 'ArrowRight') move(v, step, 0);
+      else if(k === 'ArrowUp') move(v, 0, -step); else if(k === 'ArrowDown') move(v, 0, step);
+      else if(k === '+' || k === '=') setZoom(v, v.zoom + 0.05); else if(k === '-' || k === '_') setZoom(v, v.zoom - 0.05);
+      else return;
+      e.preventDefault();
+    });
+  }
+  bindView(views.ios); bindView(views.android);
 
-  $('zoom').oninput = function(){ setZoom(this.value / 100); };
-  $('resetBtn').onclick = resetView;
+  $('zoom').oninput = function(){ setZoom(views[state.active], this.value / 100); };
+  $('resetBtn').onclick = function(){ resetView(views[state.active]); };
   $('guides').onchange = function(){ card.classList.toggle('guides', this.checked); };
-  $('veil').onchange = function(){ state.veil = this.checked; $('veilRow').hidden = !this.checked; render(); };
+  $('veil').onchange = function(){ state.veil = this.checked; $('veilRow').hidden = !this.checked; if(this.checked) setActive('ios'); render(); };
   $('veilAmt').oninput = function(){ state.veilAmt = this.value / 100; $('veilVal').textContent = this.value + '%'; render(); };
 
-  function rgba(scale){
-    var size = SIZES[scale], c = document.createElement('canvas');
-    c.width = size[0]; c.height = size[1]; draw(c, size[0], size[1]);
-    return {w: size[0], h: size[1], data: c.getContext('2d').getImageData(0, 0, size[0], size[1]).data};
+  function rgba(v, w, h){
+    var c = document.createElement('canvas'); c.width = w; c.height = h; draw(v, c, w, h);
+    return {w: w, h: h, data: c.getContext('2d').getImageData(0, 0, w, h).data};
   }
   function encode(px, colors){ return new Blob([UPNG.encode([px.data.buffer], px.w, px.h, colors)], {type: 'image/png'}); }
-  function artworkBlobs(budget){
-    var p2 = rgba(2), p3 = rgba(3);
+  function iosArtwork(budget){
+    var p2 = rgba(views.ios, SIZES[2][0], SIZES[2][1]), p3 = rgba(views.ios, SIZES[3][0], SIZES[3][1]);
     var a2 = encode(p2, 0), a3 = encode(p3, 0);
     if(a3.size <= MAX_IMAGE && a2.size <= MAX_IMAGE && a2.size + a3.size <= budget) return [a2, a3];
     return [encode(p2, 256), encode(p3, 256)];
+  }
+  function androidHero(){
+    var px = rgba(views.android, HERO[0], HERO[1]), b = encode(px, 0);
+    return b.size <= MAX_IMAGE ? b : encode(px, 256);
+  }
+  function fetchBundled(path){
+    return fetch('artwork-tool/' + path, {cache: 'no-store'}).then(function(r){ if(!r.ok) throw new Error(path); return r.blob(); });
   }
   function save(blob, name){
     var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
@@ -326,48 +406,68 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     clubsEl.appendChild(l);
   });
   function picked(name){ var el = document.querySelector('input[name=' + name + ']:checked'); return el ? el.value : null; }
+  function cell(cls, label, value){
+    var d = document.createElement('div'); if(cls) d.className = cls;
+    var i = document.createElement('i'); i.textContent = label;
+    var b = document.createElement('b'); b.textContent = value;
+    d.appendChild(i); d.appendChild(b); return d;
+  }
   function setCardText(type){
     var t = CARD_TEXT[type || 'membership'];
     $('hLabel').textContent = t.label; $('hValue').textContent = t.value; $('bcText').textContent = t.barcode;
     $('prim').innerHTML = '';
     t.fields.forEach(function(f, i){
-      var d = document.createElement('div'); if(i === t.fields.length - 1) d.style.textAlign = 'right';
-      var lab = document.createElement('i'); lab.textContent = f[0];
-      var val = document.createElement('b'); val.textContent = f[1];
-      d.appendChild(lab); d.appendChild(val); $('prim').appendChild(d);
+      var d = cell('', f[0], f[1]); if(i === t.fields.length - 1) d.style.textAlign = 'right';
+      $('prim').appendChild(d);
     });
     $('foot').textContent = t.footer;
+    $('gT').textContent = t.g.title; $('gS').textContent = t.g.sub; $('gAlt').textContent = t.g.alt;
+    $('gRow').innerHTML = '';
+    t.g.row.forEach(function(r, i){ $('gRow').appendChild(cell(['', 'c', 'e'][i], r[0], r[1])); });
+    $('gLow').hidden = !t.g.module;
+    $('bcBox').hidden = !t.hasBarcode; $('gBc').hidden = !t.hasBarcode;
   }
-  function folderFiles(){ return ['artwork@2x.png','artwork@3x.png'].concat(BUNDLED); }
   function updateZip(){
     var type = picked('type'), club = picked('club');
     setCardText(type);
-    var files = folderFiles(), lines = [(club || '{club}') + '/', '└── ' + (type || '{card}') + '/', '    └── ios/'];
-    files.forEach(function(f, i){ lines.push('        ' + (i === files.length - 1 ? '└── ' : '├── ') + f); });
+    var lines = [(club || '{club}') + '/', '└── ' + (type || '{card}') + '/', '    ├── ios/'];
+    IOS_FILES.forEach(function(f, i){ lines.push('    │   ' + (i === IOS_FILES.length - 1 ? '└── ' : '├── ') + f); });
+    lines.push('    └── android/');
+    ANDROID_FILES.forEach(function(f, i){ lines.push('        ' + (i === ANDROID_FILES.length - 1 ? '└── ' : '├── ') + f); });
     $('tree').textContent = lines.join('\n');
-    $('dlZip').disabled = !(state.img && type && club);
-    $('dlZip').textContent = type && club ? 'Download ' + club + '-' + type + '.zip' : 'Download .zip for AEM';
+    $('dlZip').disabled = zipLoading || !(state.img && type && club);
+    if(!zipLoading) $('dlZip').textContent = type && club ? 'Download ' + club + '-' + type + '.zip' : 'Download .zip for AEM';
   }
   document.querySelectorAll('input[name=type],input[name=club]').forEach(function(r){ r.onchange = updateZip; });
 
+  function setZipLoading(on){
+    zipLoading = on;
+    var b = $('dlZip');
+    b.classList.toggle('loading', on); b.setAttribute('aria-busy', String(on));
+    if(on){ b.disabled = true; b.innerHTML = '<span class="spinner" aria-hidden="true"></span>Making the zip…'; $('zipStatus').textContent = 'Making the iPhone and Android files and the zip. This takes a few seconds.'; }
+    document.querySelectorAll('input[name=type],input[name=club],#file,#uploadBtn,#emptyBtn,#emptyBtnA,#veil,#veilAmt,#zoom,#resetBtn,[data-view]').forEach(function(el){ el.disabled = on; });
+    card.classList.toggle('busy', on); gp.classList.toggle('busy', on);
+  }
+
   $('dlZip').onclick = function(){
-    var type = picked('type'), club = picked('club'), btn = this;
-    if(!state.img || !type || !club) return;
+    var type = picked('type'), club = picked('club');
+    if(zipLoading || !state.img || !type || !club) return;
     if(typeof JSZip === 'undefined' || typeof UPNG === 'undefined'){ $('zipStatus').textContent = 'A download tool didn’t load. Check your connection and reload the page.'; return; }
-    btn.disabled = true; $('zipStatus').textContent = 'Making the zip…'; $('sizes').innerHTML = '';
-    var dir = club + '/' + type + '/ios/', zip = new JSZip();
-    Promise.all(BUNDLED.map(function(f){
-      return fetch('artwork-tool/' + encodeURIComponent(f), {cache: 'no-store'}).then(function(r){ if(!r.ok) throw new Error(f); return r.blob(); });
-    })).then(function(bundled){
-      return new Promise(function(r){ setTimeout(r, 30); }).then(function(){
-        var extra = bundled.reduce(function(t, b){ return t + b.size; }, 0);
-        var art = artworkBlobs(MAX_CLUB - extra - 64 * 1024), blobs = art.concat(bundled);
-        folderFiles().forEach(function(f, i){ zip.file(dir + f, blobs[i]); });
-        var total = blobs.reduce(function(t, b){ return t + b.size; }, 0);
+    setZipLoading(true); $('sizes').innerHTML = '';
+    var ios = club + '/' + type + '/ios/', android = club + '/' + type + '/android/', zip = new JSZip();
+    Promise.all(IOS_BUNDLED.map(fetchBundled).concat([fetchBundled('android/Logo.png')])).then(function(bundled){
+      var iosBundled = bundled.slice(0, IOS_BUNDLED.length), logo = bundled[IOS_BUNDLED.length];
+      return new Promise(function(r){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ setTimeout(r, 0); }); }); }).then(function(){
+        var extra = iosBundled.reduce(function(t, b){ return t + b.size; }, 0);
+        var art = iosArtwork(MAX_CLUB - extra - 64 * 1024), iosBlobs = art.concat(iosBundled), hero = androidHero();
+        IOS_FILES.forEach(function(f, i){ zip.file(ios + f, iosBlobs[i]); });
+        zip.file(android + 'Hero.png', hero); zip.file(android + 'Logo.png', logo);
+        var iosTotal = iosBlobs.reduce(function(t, b){ return t + b.size; }, 0);
         showSizes([
-          ['artwork@2x.png', mb(art[0].size) + ' (limit 2 MB)', art[0].size <= MAX_IMAGE],
-          ['artwork@3x.png', mb(art[1].size) + ' (limit 2 MB)', art[1].size <= MAX_IMAGE],
-          ['Whole folder', mb(total) + ' (limit 3.5 MB)', total <= MAX_CLUB]
+          ['ios/artwork@2x.png', mb(art[0].size) + ' (limit 2 MB)', art[0].size <= MAX_IMAGE],
+          ['ios/artwork@3x.png', mb(art[1].size) + ' (limit 2 MB)', art[1].size <= MAX_IMAGE],
+          ['ios/ folder', mb(iosTotal) + ' (limit 3.5 MB)', iosTotal <= MAX_CLUB],
+          ['android/Hero.png', mb(hero.size) + ' (limit 2 MB)', hero.size <= MAX_IMAGE]
         ]);
         return zip.generateAsync({type: 'blob'});
       });
@@ -376,7 +476,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
       $('zipStatus').textContent = 'Downloaded ' + club + '-' + type + '.zip.';
       $('s5').classList.add('done');
     }).catch(function(){ $('zipStatus').textContent = 'Something went wrong making the zip. Reload the page and try again.'; })
-      .finally(function(){ updateZip(); });
+      .finally(function(){ setZipLoading(false); updateZip(); });
   };
 
   setCardText('membership'); updateZip();
