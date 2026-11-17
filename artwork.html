@@ -151,7 +151,7 @@ fieldset{border:0;margin:0;padding:0}
 .mod .tag{font-size:11.5px;font-weight:600;color:var(--muted)}.mod.has-img .tag{color:var(--ok)}
 .mod input[type=range]{width:100%}
 .mod .tag{margin-top:2px}.mod .btns{display:flex;gap:6px;flex-wrap:wrap}.mod .btn{min-height:36px;padding:6px 12px;font-size:13px}
-.mod-zoom[hidden],.mod .btn[hidden],.mods[hidden]{display:none}
+.mod-zoom[hidden],.mod .btn[hidden],.mods[hidden],.mod[hidden]{display:none}
 legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 </style>
 </head>
@@ -237,13 +237,12 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 
       <section class="step locked" id="s4">
         <h2><span class="n">4</span>Android module images</h2>
-        <p id="modIntro">The Android pass lists these five modules under the hero. Each one starts with a default image; upload a new photo for any you want to change. Google shows them as small squares, so drag each photo to choose what stays in the square and zoom if needed. All five are saved at <b>660 × 660</b> with their exact file names.</p>
-        <p class="info" id="modPoi" hidden>POI passes don’t have module images, so there’s nothing to upload here for insurance.</p>
+        <p id="modIntro">The Android pass lists these <span class="modCount">five</span> modules under the hero. Each one starts with a default image; upload a new photo for any you want to change. Google shows them as small squares, so drag each photo to choose what stays in the square and zoom if needed. All <span class="modCount">five</span> are saved at <b>660 × 660</b> with their exact file names.</p>
         <div class="mods" id="mods"></div>
         <input type="file" id="modFile" accept="image/*" hidden>
-        <div class="note" id="modReq"><b>Required:</b> check the five images, then approve them. If you change one after approving, approve again.<br><button type="button" class="btn green" id="approveMods">Approve the module images</button></div>
+        <div class="note" id="modReq"><b>Required:</b> check the <span class="modCount">five</span> images, then approve them. If you change one after approving, approve again.<br><button type="button" class="btn green" id="approveMods">Approve the module images</button></div>
         <p class="ok-line" id="modsOk" hidden>✓ Module images approved</p>
-        <p class="info" id="modNote">Today every club’s pass uses the module images in club 004’s folder.</p>
+        <p class="info" id="modNote"></p>
       </section>
 
       <section class="step locked" id="s5">
@@ -284,26 +283,39 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
       fields: [['Name Insured','FULANITO PEREZ'],['Policy Number','0000000000'],['Effective','09/14/26 – 09/14/27']],
       footer: 'Company: Sample Mutual Insurance',
       g: {title: 'Auto Insurance Card', sub: 'CA Evidence of Liability', header: '0000000000', alt: '', row: [['Name insured','Fulanito Perez'],['Effective','9/14/26 – 9/14/27']],
-        module: ['Roadside Assistance', 'Get help online: tow, battery, tire, lockout'],
+        modules: true,
         actions: [['app','Open the app'],['phone','Call Roadside 24/7 · 1-800-000-0000'],['globe','File or track a claim'],['globe','Pay or manage your policy'],['phone','Policy questions · 1-800-000-0000']],
         details: [['Insurance company','Example Interinsurance Exchange of the Company NAIC# 000000'],['Vehicle','2026 SAMPLE SUV · VIN XXXXXXXXXXXXXXXXX'],['Insured drivers','Fulanito Perez'],['Disclaimer','This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle.']]}}
   };
   var MOD_SIZE = 660;
-  var MODULES = [
-    {file: 'module-roadside.jpeg', def: 'roadside.jpg', title: 'Roadside Assistance', body: 'Get help in the app: tow, battery, tire, lockout'},
-    {file: 'module-membership.jpeg', def: 'benefits.jpg', title: 'Member benefits & discounts', body: 'Save with your membership card'},
-    {file: 'module-branch.jpeg', def: 'branch.jpg', title: 'Find your AAA branch', body: 'Directions, hours and services'},
-    {file: 'module-travel.jpeg', def: 'travel.jpg', title: 'Travel with AAA', body: 'Hotels, rental cars and trip planning'},
-    {file: 'module-renew.png', def: 'renew.jpg', title: 'Renew or upgrade', body: 'Manage your membership online'}
-  ];
-  MODULES.forEach(function(m){ var d = new Image(); d.src = 'artwork-tool/modules/defaults/' + m.def; m.def = d; m.img = null; m.cx = 0.5; m.cy = 0.5; m.zoom = 1; });
+  var MODULE_SETS = {
+    membership: [
+      {file: 'module-roadside.jpeg', def: 'roadside.jpg', title: 'Roadside Assistance', body: 'Get help in the app: tow, battery, tire, lockout'},
+      {file: 'module-membership.jpeg', def: 'benefits.jpg', title: 'Member benefits & discounts', body: 'Save with your membership card'},
+      {file: 'module-branch.jpeg', def: 'branch.jpg', title: 'Find your AAA branch', body: 'Directions, hours and services'},
+      {file: 'module-travel.jpeg', def: 'travel.jpg', title: 'Travel with AAA', body: 'Hotels, rental cars and trip planning'},
+      {file: 'module-renew.png', def: 'renew.jpg', title: 'Renew or upgrade', body: 'Manage your membership online'}
+    ],
+    insurance: [
+      {file: 'module-roadside.jpeg', def: 'roadside.jpg', title: 'Roadside Assistance', body: 'Get help online: tow, battery, tire, lockout'},
+      {file: 'module-claim.jpeg', def: 'claim.jpg', title: 'Accident? File a claim', body: '24/7 Accident Assist · 1-800-000-0000'},
+      {file: 'module-proof.jpeg', def: 'proof.jpg', title: 'Proof of insurance', body: 'Get it online anytime'}
+    ]
+  };
+  var MOD_NOTES = {
+    membership: 'Today every club’s pass uses the module images in club 004’s folder.',
+    insurance: 'Today’s insurance Google pass doesn’t show modules yet. These files are ready for when it does.'
+  };
+  var COUNT_WORDS = {3: 'three', 5: 'five'};
+  var ALL_MODULES = MODULE_SETS.membership.concat(MODULE_SETS.insurance), MODULES = MODULE_SETS.membership;
+  ALL_MODULES.forEach(function(m){ var d = new Image(); d.src = 'artwork-tool/modules/defaults/' + m.def; m.def = d; m.img = null; m.cx = 0.5; m.cy = 0.5; m.zoom = 1; });
   var $ = function(id){ return document.getElementById(id); };
   var card = $('card'), gp = $('gp');
   var views = {
     ios: {el: card, canvas: $('preview'), cx: 0.5, cy: 0.5, zoom: 1, veil: true},
     android: {el: gp, canvas: $('previewA'), cx: 0.5, cy: 0.5, zoom: 1, veil: false}
   };
-  var state = {img: null, name: '', active: 'ios', androidChecked: false, modsApproved: false, logo: 'color', veil: false, veilAmt: 0.5};
+  var state = {img: null, name: '', active: 'ios', androidChecked: false, modsApproved: {membership: false, insurance: false}, logo: 'color', veil: false, veilAmt: 0.5};
   var zipLoading = false;
 
   function drawModule(m, c){
@@ -321,12 +333,12 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     var hw = src.naturalWidth * s / 2, hh = src.naturalHeight * s / 2;
     m.cx = Math.max(1 - hw, Math.min(hw, m.cx)); m.cy = Math.max(1 - hh, Math.min(hh, m.cy));
   }
-  function drawModules(){ MODULES.forEach(function(m){ if(m.editor) drawModule(m, m.editor); if(m.thumb) drawModule(m, m.thumb); }); }
-  MODULES.forEach(function(m){ m.def.onload = drawModules; });
+  function drawModules(){ ALL_MODULES.forEach(function(m){ if(m.editor) drawModule(m, m.editor); if(m.thumb) drawModule(m, m.thumb); }); }
+  ALL_MODULES.forEach(function(m){ m.def.onload = drawModules; });
   var modTarget = null;
   function buildModuleCards(){
     var wrap = $('mods');
-    MODULES.forEach(function(m){
+    ALL_MODULES.forEach(function(m){
       var card = document.createElement('div'); card.className = 'mod';
       var c = document.createElement('canvas'); c.width = MOD_SIZE; c.height = MOD_SIZE; c.setAttribute('aria-label', m.title + ' module image');
       var head = document.createElement('div');
@@ -358,8 +370,9 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     m.cx = 0.5; m.cy = 0.5; m.zoom = 1; m.zoomEl.value = 100;
     drawModules();
   }
-  function moduleChanged(){ if(state.modsApproved){ state.modsApproved = false; } updateZip(); }
-  $('approveMods').onclick = function(){ state.modsApproved = true; updateZip(); };
+  function moduleChanged(){ state.modsApproved[modType()] = false; updateZip(); }
+  function modType(){ return picked('type') === 'insurance' ? 'insurance' : 'membership'; }
+  $('approveMods').onclick = function(){ state.modsApproved[modType()] = true; updateZip(); };
   $('goMods').onclick = function(){ $('s4').scrollIntoView({behavior: 'smooth', block: 'start'}); };
   $('modFile').onchange = function(e){
     var f = e.target.files[0], m = modTarget; e.target.value = '';
@@ -569,21 +582,15 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
   function renderLow(g){
     var low = $('gLow'); low.innerHTML = '';
     low.appendChild(el('h4', 'gp-h4', 'Recommendations from AAA'));
-    if(g.modules){
-      var list = el('div', 'gp-mods');
-      MODULES.forEach(function(m){
-        var row = el('div', 'gp-mod'), txt = el('span');
-        txt.appendChild(el('b', '', m.title)); txt.appendChild(el('small', '', m.body));
-        var c = el('canvas'); c.width = 132; c.height = 132; m.thumb = c;
-        row.appendChild(txt); row.appendChild(c); list.appendChild(row);
-      });
-      low.appendChild(list); drawModules();
-    } else {
-      var mod = el('div', 'gp-mod'), txt2 = el('span');
-      txt2.appendChild(el('b', '', g.module[0])); txt2.appendChild(el('small', '', g.module[1]));
-      var img = el('img'); img.src = 'google/img/vam-roadside.jpg'; img.alt = '';
-      mod.appendChild(txt2); mod.appendChild(img); low.appendChild(mod);
-    }
+    var list = el('div', 'gp-mods');
+    ALL_MODULES.forEach(function(m){ m.thumb = null; });
+    MODULES.forEach(function(m){
+      var row = el('div', 'gp-mod'), txt = el('span');
+      txt.appendChild(el('b', '', m.title)); txt.appendChild(el('small', '', m.body));
+      var c = el('canvas'); c.width = 132; c.height = 132; m.thumb = c;
+      row.appendChild(txt); row.appendChild(c); list.appendChild(row);
+    });
+    low.appendChild(list); drawModules();
     var acts = el('div', 'gp-group'); g.actions.forEach(function(a){ acts.appendChild(action(a[0], a[1])); }); low.appendChild(acts);
     var dets = el('div', 'gp-group');
     g.details.forEach(function(d){ var r = el('div', 'gp-det'); r.appendChild(el('small', '', d[0])); r.appendChild(el('b', '', d[1])); dets.appendChild(r); });
@@ -593,6 +600,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
   }
   function setCardText(type){
     var t = CARD_TEXT[type || 'membership'];
+    MODULES = MODULE_SETS[type || 'membership'];
     $('hLabel').textContent = t.label; $('hValue').textContent = t.value; $('bcText').textContent = t.barcode;
     $('prim').innerHTML = '';
     t.fields.forEach(function(f, i){
@@ -616,15 +624,17 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     var lines = [(club || '{club}') + '/', '└── ' + (type || '{card}') + '/', '    ├── ios/'];
     IOS_FILES.forEach(function(f, i){ lines.push('    │   ' + (i === IOS_FILES.length - 1 ? '└── ' : '├── ') + f); });
     lines.push('    └── android/');
-    var androidFiles = ANDROID_FILES.concat(type === 'insurance' ? [] : MODULES.map(function(m){ return m.file; }));
+    var androidFiles = ANDROID_FILES.concat(MODULES.map(function(m){ return m.file; }));
     androidFiles.forEach(function(f, i){ lines.push('        ' + (i === androidFiles.length - 1 ? '└── ' : '├── ') + f); });
-    var poi = type === 'insurance';
-    $('mods').hidden = poi; $('modIntro').hidden = poi; $('modNote').hidden = poi; $('modPoi').hidden = !poi;
+    var mt = modType(), approved = state.modsApproved[mt];
+    ALL_MODULES.forEach(function(m){ if(m.card) m.card.hidden = MODULES.indexOf(m) < 0; });
+    document.querySelectorAll('.modCount').forEach(function(s){ s.textContent = COUNT_WORDS[MODULES.length]; });
+    $('modNote').textContent = MOD_NOTES[mt];
     $('tree').textContent = lines.join('\n');
-    var modsOk = poi || state.modsApproved;
+    var modsOk = approved;
     $('dlZip').disabled = zipLoading || !(state.img && type && club && state.androidChecked && modsOk);
     $('androidReq').hidden = state.androidChecked; $('androidOk').hidden = !state.androidChecked;
-    $('modReq').hidden = poi || state.modsApproved; $('modsOk').hidden = poi || !state.modsApproved;
+    $('modReq').hidden = approved; $('modsOk').hidden = !approved;
     $('dlReqAndroid').hidden = state.androidChecked; $('dlReqMods').hidden = modsOk;
     $('dlReq').hidden = !state.img || (state.androidChecked && modsOk);
     if(!zipLoading) $('dlZip').textContent = type && club ? 'Download ' + club + '-' + type + '.zip' : 'Download .zip for AEM';
@@ -642,11 +652,11 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 
   $('dlZip').onclick = function(){
     var type = picked('type'), club = picked('club');
-    if(zipLoading || !state.img || !type || !club || !state.androidChecked || (type !== 'insurance' && !state.modsApproved)) return;
+    if(zipLoading || !state.img || !type || !club || !state.androidChecked || !state.modsApproved[modType()]) return;
     if(typeof JSZip === 'undefined' || typeof UPNG === 'undefined'){ $('zipStatus').textContent = 'A download tool didn’t load. Check your connection and reload the page.'; return; }
     setZipLoading(true); $('sizes').innerHTML = '';
     var ios = club + '/' + type + '/ios/', android = club + '/' + type + '/android/', zip = new JSZip();
-    var newMods = type === 'insurance' ? [] : MODULES, mods = [];
+    var newMods = MODULE_SETS[type], mods = [];
     Promise.all(newMods.map(moduleBlob)).then(function(b){ mods = b; return Promise.all(IOS_BUNDLED.map(function(f){ return fetchBundled(logoPath(f)); }).concat([fetchBundled('android/Logo.png')])); }).then(function(bundled){
       var iosBundled = bundled.slice(0, IOS_BUNDLED.length), logo = bundled[IOS_BUNDLED.length];
       return new Promise(function(r){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ setTimeout(r, 0); }); }); }).then(function(){
