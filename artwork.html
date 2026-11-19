@@ -247,7 +247,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
 
       <section class="step locked" id="s5">
         <h2><span class="n">5</span>Download the AEM folder</h2>
-        <p>You get one .zip with the folder ready to upload to AEM, for <b id="zipFor">the card and club you picked</b>: the iPhone files in <b>ios/</b> (<b>artwork@2x.png</b> 716 × 896 and <b>artwork@3x.png</b> 1074 × 1344) and the Android files in <b>android/</b> (<b>Hero.png</b> 1032 × 812 and <b>Logo.png</b>), exactly as the previews show them.</p>
+        <p>You get one .zip with the folder ready to upload to AEM, for <b id="zipFor">the card and club you picked</b>: the iPhone files in <b>ios/</b> (<b>artwork@2x.png</b> 716 × 896 and <b>artwork@3x.png</b> 1074 × 1344) and the Android files in <b>android/</b> (<b>Hero.png</b> 1032 × 812 and <b>Logo.png</b>), exactly as the previews show them. Each image is made as small as possible while still looking the same, so it uploads and loads fast.</p>
         <div class="note" id="dlReq" hidden>Before downloading:
           <div id="dlReqAndroid">• Open the <b>Android pass</b> and adjust its photo (step 2). <button type="button" class="btn secondary goAndroid">Adjust the Android pass</button></div>
           <div id="dlReqMods">• Approve the <b>module images</b> (step 4). <button type="button" class="btn secondary" id="goMods">Go to the module images</button></div>
@@ -287,7 +287,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
         actions: [['app','Open the app'],['phone','Call Roadside 24/7 · 1-800-000-0000'],['globe','File or track a claim'],['globe','Pay or manage your policy'],['phone','Policy questions · 1-800-000-0000']],
         details: [['Insurance company','Example Interinsurance Exchange of the Company NAIC# 000000'],['Vehicle','2026 SAMPLE SUV · VIN XXXXXXXXXXXXXXXXX'],['Insured drivers','Fulanito Perez'],['Disclaimer','This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle.']]}}
   };
-  var MOD_SIZE = 660;
+  var MOD_SIZE = 660, JPEG_QUALITY = 0.8;
   var MODULE_SETS = {
     membership: [
       {file: 'module-roadside.jpeg', def: 'roadside.jpg', title: 'Roadside Assistance', body: 'Get help in the app: tow, battery, tire, lockout'},
@@ -383,8 +383,8 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
   };
   function moduleBlob(m){
     var c = document.createElement('canvas'); c.width = MOD_SIZE; c.height = MOD_SIZE; drawModule(m, c);
-    var png = /\.png$/.test(m.file);
-    return new Promise(function(resolve, reject){ c.toBlob(function(b){ b ? resolve(b) : reject(new Error(m.file)); }, png ? 'image/png' : 'image/jpeg', png ? undefined : 0.9); });
+    if(/\.png$/.test(m.file)) return Promise.resolve(smallPng({w: MOD_SIZE, h: MOD_SIZE, data: c.getContext('2d').getImageData(0, 0, MOD_SIZE, MOD_SIZE).data}));
+    return new Promise(function(resolve, reject){ c.toBlob(function(b){ b ? resolve(b) : reject(new Error(m.file)); }, 'image/jpeg', JPEG_QUALITY); });
   }
 
   function layout(v, W, H){
@@ -525,16 +525,48 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     return {w: w, h: h, data: c.getContext('2d').getImageData(0, 0, w, h).data};
   }
   function encode(px, colors){ return new Blob([UPNG.encode([px.data.buffer], px.w, px.h, colors)], {type: 'image/png'}); }
+  function ditheredPalette(px, colors, strength){
+    var w = px.w, h = px.h, src = px.data, n = w * h;
+    var q = new Uint8Array(UPNG.quantize([new Uint8Array(src).buffer], colors).bufs[0]), seen = {}, pal = [];
+    for(var i = 0; i < q.length; i += 4){ var key = (q[i] << 16) | (q[i + 1] << 8) | q[i + 2]; if(!seen[key]){ seen[key] = 1; pal.push([q[i], q[i + 1], q[i + 2]]); } }
+    var err = new Float32Array(n * 3), out = new Uint8ClampedArray(n * 4), near = new Map();
+    for(var p = 0; p < n; p++){ err[p * 3] = src[p * 4]; err[p * 3 + 1] = src[p * 4 + 1]; err[p * 3 + 2] = src[p * 4 + 2]; }
+    function spread(t, er, eg, eb, f){ err[t] += er * f; err[t + 1] += eg * f; err[t + 2] += eb * f; }
+    for(var y = 0; y < h; y++) for(var x = 0; x < w; x++){
+      var o = y * w + x, e = o * 3;
+      var r = Math.max(0, Math.min(255, err[e])), g = Math.max(0, Math.min(255, err[e + 1])), b = Math.max(0, Math.min(255, err[e + 2]));
+      var k = ((r >> 2) << 12) | ((g >> 2) << 6) | (b >> 2), best = near.get(k);
+      if(best === undefined){
+        var bd = Infinity;
+        for(var j = 0; j < pal.length; j++){ var c = pal[j], dd = (c[0] - r) * (c[0] - r) * 2 + (c[1] - g) * (c[1] - g) * 4 + (c[2] - b) * (c[2] - b) * 3; if(dd < bd){ bd = dd; best = j; } }
+        near.set(k, best);
+      }
+      var P = pal[best]; out[o * 4] = P[0]; out[o * 4 + 1] = P[1]; out[o * 4 + 2] = P[2]; out[o * 4 + 3] = 255;
+      var er = (r - P[0]) * strength, eg = (g - P[1]) * strength, eb = (b - P[2]) * strength;
+      if(x + 1 < w) spread(e + 3, er, eg, eb, 7 / 16);
+      if(y + 1 < h){
+        if(x > 0) spread(e + w * 3 - 3, er, eg, eb, 3 / 16);
+        spread(e + w * 3, er, eg, eb, 5 / 16);
+        if(x + 1 < w) spread(e + w * 3 + 3, er, eg, eb, 1 / 16);
+      }
+    }
+    return {w: w, h: h, data: out};
+  }
+  var PNG_LEVELS = [
+    function(px){ return encode(ditheredPalette(px, 256, 0.6), 0); },
+    function(px){ return encode(px, 256); }
+  ];
+  function smallPng(px){
+    for(var i = 0; i < PNG_LEVELS.length; i++){ var b = PNG_LEVELS[i](px); if(b.size <= MAX_IMAGE || i === PNG_LEVELS.length - 1) return b; }
+  }
   function iosArtwork(budget){
     var p2 = rgba(views.ios, SIZES[2][0], SIZES[2][1]), p3 = rgba(views.ios, SIZES[3][0], SIZES[3][1]);
-    var a2 = encode(p2, 0), a3 = encode(p3, 0);
-    if(a3.size <= MAX_IMAGE && a2.size <= MAX_IMAGE && a2.size + a3.size <= budget) return [a2, a3];
-    return [encode(p2, 256), encode(p3, 256)];
+    for(var i = 0; i < PNG_LEVELS.length; i++){
+      var a2 = PNG_LEVELS[i](p2), a3 = PNG_LEVELS[i](p3);
+      if((a3.size <= MAX_IMAGE && a2.size <= MAX_IMAGE && a2.size + a3.size <= budget) || i === PNG_LEVELS.length - 1) return [a2, a3];
+    }
   }
-  function androidHero(){
-    var px = rgba(views.android, HERO[0], HERO[1]), b = encode(px, 0);
-    return b.size <= MAX_IMAGE ? b : encode(px, 256);
-  }
+  function androidHero(){ return smallPng(rgba(views.android, HERO[0], HERO[1])); }
   function fetchBundled(path){
     return fetch('artwork-tool/' + path, {cache: 'no-store'}).then(function(r){ if(!r.ok) throw new Error(path); return r.blob(); });
   }
