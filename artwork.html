@@ -271,6 +271,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
   var CLUBS = ['001','004','018','036','065','215','240','252','258','260','601'];
   var IOS_BUNDLED = ['primaryLogo@2x.png','primaryLogo@3x.png','logo.png','icon@2x.png','icon@3x.png'];
   var IOS_FILES = ['artwork@2x.png','artwork@3x.png'].concat(IOS_BUNDLED), ANDROID_FILES = ['Hero.png','Logo.png'];
+  var AEM_FOLDERS = {membership: 'membership', insurance: 'poi'};
   var CARD_TEXT = {
     membership: {label: 'MEMBERSHIP CARD', value: 'Premier', barcode: '000 000 000000000 0', hasBarcode: true,
       fields: [['Member Name','FULANITO PEREZ'],['Valid Through','03/2027'],['Loyal Member','32 Years']],
@@ -653,7 +654,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     $('pickHint').hidden = !!(type && club); $('pickHint').style.color = '';
     $('zipFor').textContent = type && club ? (type === 'membership' ? 'Membership' : 'POI') + ', club ' + club : 'the card and club you picked';
     setCardText(type);
-    var lines = [(club || '{club}') + '/', '└── ' + (type || '{card}') + '/', '    ├── ios/'];
+    var lines = [(club || '{club}') + '/', '└── ' + (AEM_FOLDERS[type] || '{card}') + '/', '    ├── ios/'];
     IOS_FILES.forEach(function(f, i){ lines.push('    │   ' + (i === IOS_FILES.length - 1 ? '└── ' : '├── ') + f); });
     lines.push('    └── android/');
     var androidFiles = ANDROID_FILES.concat(MODULES.map(function(m){ return m.file; }));
@@ -669,7 +670,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     $('modReq').hidden = approved; $('modsOk').hidden = !approved;
     $('dlReqAndroid').hidden = state.androidChecked; $('dlReqMods').hidden = modsOk;
     $('dlReq').hidden = !state.img || (state.androidChecked && modsOk);
-    if(!zipLoading) $('dlZip').textContent = type && club ? 'Download ' + club + '-' + type + '.zip' : 'Download .zip for AEM';
+    if(!zipLoading) $('dlZip').textContent = type && club ? 'Download ' + club + '-' + AEM_FOLDERS[type] + '.zip' : 'Download .zip for AEM';
   }
   document.querySelectorAll('input[name=type],input[name=club]').forEach(function(r){ r.onchange = updateZip; });
 
@@ -687,7 +688,7 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
     if(zipLoading || !state.img || !type || !club || !state.androidChecked || !state.modsApproved[modType()]) return;
     if(typeof JSZip === 'undefined' || typeof UPNG === 'undefined'){ $('zipStatus').textContent = 'A download tool didn’t load. Check your connection and reload the page.'; return; }
     setZipLoading(true); $('sizes').innerHTML = '';
-    var ios = club + '/' + type + '/ios/', android = club + '/' + type + '/android/', zip = new JSZip();
+    var folder = AEM_FOLDERS[type], ios = club + '/' + folder + '/ios/', android = club + '/' + folder + '/android/', zip = new JSZip();
     var newMods = MODULE_SETS[type], mods = [];
     Promise.all(newMods.map(moduleBlob)).then(function(b){ mods = b; return Promise.all(IOS_BUNDLED.map(function(f){ return fetchBundled(logoPath(f)); }).concat([fetchBundled('android/Logo.png')])); }).then(function(bundled){
       var iosBundled = bundled.slice(0, IOS_BUNDLED.length), logo = bundled[IOS_BUNDLED.length];
@@ -707,8 +708,8 @@ legend{padding:0;font-size:13px;color:var(--muted);margin-bottom:8px}
         return zip.generateAsync({type: 'blob'});
       });
     }).then(function(z){
-      save(z, club + '-' + type + '.zip');
-      $('zipStatus').textContent = 'Downloaded ' + club + '-' + type + '.zip.';
+      save(z, club + '-' + AEM_FOLDERS[type] + '.zip');
+      $('zipStatus').textContent = 'Downloaded ' + club + '-' + AEM_FOLDERS[type] + '.zip.';
       $('s5').classList.add('done');
     }).catch(function(){ $('zipStatus').textContent = 'Something went wrong making the zip. Reload the page and try again.'; })
       .finally(function(){ setZipLoading(false); updateZip(); });
