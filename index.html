@@ -603,7 +603,7 @@ html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-t
         <p>Where everything sits on the card, and what changes with each setting. Try your own artwork, logo and text colors on the empty card. Uploads stay in your browser.</p>
         <p class="guide-fixed"><b>Fixed:</b> the logo, header, barcode, fields and footer can’t be moved or resized, and the <b>fonts can’t be changed</b>. Wallet sets them. <b>Yours to change:</b> the artwork and the colors. Lighten, veil or recompose the image to get better contrast.</p>
       </div>
-      <nav class="guide-jump" aria-label="On this page"><a class="pri" href="#picker">See the templates ↓</a><a href="#a11yTitle">Text contrast check ↓</a><a href="https://developer.apple.com/documentation/walletpasses/defining-the-metadata-of-your-wallet-pass#Add-Featured-Actions" target="_blank" rel="noopener">Apple’s docs ↗</a></nav>
+      <nav class="guide-jump" aria-label="On this page"><a class="pri" href="#picker">See the templates ↓</a><a href="https://developer.apple.com/documentation/walletpasses/defining-the-metadata-of-your-wallet-pass#Add-Featured-Actions" target="_blank" rel="noopener">Apple’s docs ↗</a></nav>
       <div class="guide-grid">
         <div>
           <div class="guide-ctl">
@@ -749,9 +749,8 @@ html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-t
         <summary><span class="fl-st"><h2>Examples</h2><small>Artwork, text colors and fonts that work on the card</small></span><span class="gt-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
         <p class="guide-key"><b>What matters most:</b> picking the <b>right artwork</b> and the <b>right text (font) color</b>. The bottom quarter of the art sits under the glass, so keep it calm and evenly light or dark, then pick text that contrasts with it.</p>
         <h3>Artwork</h3>
-        <p class="sub">Provided artwork vs. the AA version. Orange line = footer start. Click to open.</p>
-        <div class="gx-arts"><button type="button" class="gx-art" data-gx="membershipGlass"><span class="gx-img" style="background-image:url('templates/Membership%20Card%20%28Alternative%20Glass%29.pkpasstemplate/artwork@2x.png')"><i class="gx-line" aria-hidden="true"></i></span><span class="a11y-v bad">✕ Fails ADA</span><b>Membership · provided artwork</b><small>Red car behind the glass · text 1.0:1</small></button><button type="button" class="gx-art" data-gx="membershipBlurAA"><span class="gx-img" style="background-image:url('templates/Membership%20Card%20%28Alternative%20Blur%20Glass%20AA%29.pkpasstemplate/artwork@2x.png')"><i class="gx-line" aria-hidden="true"></i></span><span class="a11y-v ok">✓ Passes ADA</span><b>Membership · AA artwork</b><small>57% white veil · values <b>#192842</b> · labels <b>#27292B</b></small></button><button type="button" class="gx-art" data-gx="insuranceAlt"><span class="gx-img" style="background-image:url('templates/Insurance%20Card%20%28Alternative%29.pkpasstemplate/artwork@2x.png')"><i class="gx-line" aria-hidden="true"></i></span><span class="a11y-v bad">✕ Fails ADA</span><b>Insurance · provided artwork</b><small>Warm sunset behind the glass · text 2.0:1</small></button><button type="button" class="gx-art" data-gx="insuranceAltAA"><span class="gx-img" style="background-image:url('templates/Insurance%20Card%20%28Alternative%20AA%29.pkpasstemplate/artwork@2x.png')"><i class="gx-line" aria-hidden="true"></i></span><span class="a11y-v ok">✓ Passes ADA</span><b>Insurance · AA artwork</b><small>39% white veil · values <b>#192842</b> · labels <b>#27292B</b></small></button><button type="button" class="gx-art arch" data-gx="membership"><span class="gx-img" style="background-image:url('templates/Membership%20Card.pkpasstemplate/artwork@2x.png')"><i class="gx-line" aria-hidden="true"></i></span><span class="a11y-v mid">✎ Change colors</span><b>Archive · Membership original</b><small>Turn off automatic colors · <b>#192842</b> / <b>#27292B</b> + white veil or solid <b>#FAF8FA</b> footer</small></button><button type="button" class="gx-art arch" data-gx="insurance"><span class="gx-img" style="background-image:url('templates/Insurance%20Card.pkpasstemplate/artwork@2x.png')"><i class="gx-line" aria-hidden="true"></i></span><span class="a11y-v mid">✎ Change colors</span><b>Archive · Insurance original</b><small>Turn off automatic colors · white <b>#FFFFFF</b> text (6:1)</small></button><button type="button" class="gx-art arch" data-gx="membershipAlt"><span class="gx-img" style="background-image:url('templates/Membership%20Card%20%28Alternative%29.pkpasstemplate/artwork@2x.png')"><i class="gx-line" aria-hidden="true"></i></span><span class="a11y-v ok">✓ Footer passes</span><b>Archive · white footer</b><small>Photo fades into a solid footer</small></button><button type="button" class="gx-art arch" data-gx="membershipBlur"><span class="gx-img" style="background-image:url('templates/Membership%20Card%20%28Alternative%20Blur%20Glass%29.pkpasstemplate/artwork@2x.png')"><i class="gx-line" aria-hidden="true"></i></span><span class="a11y-v bad">✕ Fails ADA</span><b>Archive · blur glass 38%</b><small>Veil too light · text 2.4:1</small></button></div>
-        <button type="button" class="arch-link" data-arch aria-expanded="false">Archive · 4 earlier versions ▾</button>
+        <p class="sub">The artwork each card uses. Orange line = footer start. Click to open.</p>
+        <div class="gx-arts"><button type="button" class="gx-art" data-gx="insurance"><span class="gx-img" style="background-image:url('templates/Insurance%20Card.pkpasstemplate/artwork@2x.png')"><i class="gx-line" aria-hidden="true"></i></span><b>Insurance</b><small>Convertible on the coast</small></button><button type="button" class="gx-art" data-gx="membership"><span class="gx-img" style="background-image:url('templates/Membership%20Card.pkpasstemplate/artwork@2x.png')"><i class="gx-line" aria-hidden="true"></i></span><b>Membership</b><small>AAA roadside truck on the highway</small></button></div>
         <h3>Text colors</h3>
         <p class="sub">Contrast on each footer. Need 4.5:1.</p>
         <div class="a11y-scroll"><table class="gx-colors"><thead><tr><th>Color</th><th>Use</th><th>Solid white footer<br><span class="sub">#FAF8FA</span></th><th>Membership AA glass</th><th>Insurance AA glass</th></tr></thead><tbody><tr><td><span class="sw" style="background:#192842;color:#fff">Aa</span><code>#192842</code></td><td><b>Navy AA</b><br><span class="sub">Values, header value</span></td><td class="n"><span class="a11y-v ok">13.96:1</span></td><td class="n"><span class="a11y-v ok">6.52:1</span></td><td class="n"><span class="a11y-v ok">7.29:1</span></td></tr><tr><td><span class="sw" style="background:#27292B;color:#fff">Aa</span><code>#27292B</code></td><td><b>Grey/900</b><br><span class="sub">Labels</span></td><td class="n"><span class="a11y-v ok">13.82:1</span></td><td class="n"><span class="a11y-v ok">6.45:1</span></td><td class="n"><span class="a11y-v ok">7.22:1</span></td></tr><tr><td><span class="sw" style="background:#1C1C1E;color:#fff">Aa</span><code>#1C1C1E</code></td><td><b>Near-black</b><br><span class="sub">Values or labels</span></td><td class="n"><span class="a11y-v ok">16.10:1</span></td><td class="n"><span class="a11y-v ok">7.52:1</span></td><td class="n"><span class="a11y-v ok">8.41:1</span></td></tr><tr><td><span class="sw" style="background:#324A72;color:#fff">Aa</span><code>#324A72</code></td><td><b>Navy/700 (Figma)</b><br><span class="sub">Solid white footer only</span></td><td class="n"><span class="a11y-v ok">8.43:1</span></td><td class="n"><span class="a11y-v bad">3.93:1</span></td><td class="n"><span class="a11y-v bad">4.40:1</span></td></tr><tr><td><span class="sw" style="background:#1C4DA6;color:#fff">Aa</span><code>#1C4DA6</code></td><td><b>Link blue</b><br><span class="sub">Solid white footer only</span></td><td class="n"><span class="a11y-v ok">7.47:1</span></td><td class="n"><span class="a11y-v bad">3.49:1</span></td><td class="n"><span class="a11y-v bad">3.90:1</span></td></tr><tr><td><span class="sw" style="background:#0C72DF;color:#fff">Aa</span><code>#0C72DF</code></td><td><b>Primary blue</b><br><span class="sub">Not for text</span></td><td class="n"><span class="a11y-v bad">4.43:1</span></td><td class="n"><span class="a11y-v bad">2.07:1</span></td><td class="n"><span class="a11y-v bad">2.31:1</span></td></tr><tr><td><span class="sw" style="background:#FFFFFF;color:#000">Aa</span><code>#FFFFFF</code></td><td><b>White</b><br><span class="sub">Dark art only</span></td><td class="n"><span class="a11y-v bad">1.06:1</span></td><td class="n"><span class="a11y-v bad">2.26:1</span></td><td class="n"><span class="a11y-v bad">2.02:1</span></td></tr></tbody></table></div>
@@ -779,46 +778,17 @@ html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-t
     </div>
     <div id="chooser"></div>
     <div class="hero three">
-      <div class="picker" id="picker" role="tablist" aria-label="Template" style="--tabs:4">
-        <button role="tab" data-pass="membershipGlass" aria-selected="false">
-          <span class="thumb" style="background-image:url('templates/Membership%20Card%20(Alternative%20Glass).pkpasstemplate/artwork@2x.png')"></span>
-          <span class="pt"><b>Membership</b><small>Provided artwork</small></span>
-        </button>
-        <button role="tab" data-pass="membershipBlurAA" aria-selected="false">
-          <span class="thumb" style="background-image:url('templates/Membership%20Card%20%28Alternative%20Blur%20Glass%20AA%29.pkpasstemplate/artwork@2x.png')"></span>
-          <span class="pt"><b>Membership</b><small>AA contrast ✓</small></span>
-        </button>
-        <button role="tab" data-pass="insuranceAlt" aria-selected="false">
-          <span class="thumb" style="background-image:url('templates/Insurance%20Card%20(Alternative).pkpasstemplate/artwork@2x.png')"></span>
-          <span class="pt"><b>Insurance</b><small>Provided artwork</small></span>
-        </button>
-        <button role="tab" data-pass="insuranceAltAA" aria-selected="false">
-          <span class="thumb" style="background-image:url('templates/Insurance%20Card%20%28Alternative%20AA%29.pkpasstemplate/artwork@2x.png')"></span>
-          <span class="pt"><b>Insurance</b><small>AA contrast ✓</small></span>
-        </button>
-        <button role="tab" data-pass="insuranceStateFront" aria-selected="false">
-          <span class="thumb" style="background:#fff url('templates/Insurance%20Card%20%28State%20Front%29.pkpasstemplate/logo@2x.png') center 22%/74% no-repeat"></span>
-          <span class="pt"><b>Insurance</b><small>State front · AL IL LA KY PA WV</small></span>
-        </button>
-        <button role="tab" data-pass="membershipAlt" class="arch" aria-selected="false">
-          <span class="thumb" style="background-image:url('templates/Membership%20Card%20(Alternative).pkpasstemplate/artwork@2x.png')"></span>
-          <span class="pt"><b>Membership</b><small>Archive · white footer</small></span>
-        </button>
-        <button role="tab" data-pass="membershipBlur" class="arch" aria-selected="false">
-          <span class="thumb" style="background-image:url('templates/Membership%20Card%20(Alternative%20Blur%20Glass).pkpasstemplate/artwork@2x.png')"></span>
-          <span class="pt"><b>Membership</b><small>Archive · blur glass 38%</small></span>
-        </button>
-        <button role="tab" data-pass="membership" class="arch" aria-selected="false">
-          <span class="thumb" style="background-image:url('templates/Membership%20Card.pkpasstemplate/artwork@2x.png')"></span>
-          <span class="pt"><b>Membership</b><small>Archive · original</small></span>
-        </button>
-        <button role="tab" data-pass="insurance" class="arch" aria-selected="false">
+      <div class="picker" id="picker" role="tablist" aria-label="Template" style="--tabs:2">
+        <button role="tab" data-pass="insurance" aria-selected="false">
           <span class="thumb" style="background-image:url('templates/Insurance%20Card.pkpasstemplate/artwork@2x.png')"></span>
-          <span class="pt"><b>Insurance</b><small>Archive · original</small></span>
+          <span class="pt"><b>Insurance</b><small>Auto Insurance Card</small></span>
+        </button>
+        <button role="tab" data-pass="membership" aria-selected="false">
+          <span class="thumb" style="background-image:url('templates/Membership%20Card.pkpasstemplate/artwork@2x.png')"></span>
+          <span class="pt"><b>Membership</b><small>Membership Card</small></span>
         </button>
       </div>
-      <button type="button" class="arch-link" data-arch aria-expanded="false">Archive · 4 earlier versions ▾</button>
-      <button id="download" class="dl" type="button">
+            <button id="download" class="dl" type="button">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span><b>Download template</b><small id="dlName">.pkpasstemplate (zip)</small></span>
       </button>
@@ -848,31 +818,19 @@ html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-t
         <div class="flipper" data-flip="26"><div class="card3d" id="card26"><div class="face front" id="front26"></div><div class="face back details" id="back26"></div></div></div>
       </div>
     </div>
-    <section class="a11y" aria-labelledby="a11yTitle">
-      <h2 id="a11yTitle">Text contrast · ADA (WCAG 2.2 AA)</h2>
-      <p>Each card’s iOS 27 text checked against what sits behind it: the frosted glass footer, the solid footer, or the photo under the header. AA needs <b>4.5:1</b> for regular text. None of the Wallet poster text is large enough for the 3:1 large-text rule. Pick a card to see every line.</p>
-      <div class="a11y-cards" id="a11yCards" role="list"></div>
-      <div class="a11y-detail" id="a11yDetail" aria-live="polite"></div>
-      <ul class="a11y-notes">
-        <li><b>How it’s measured:</b> the glass is rebuilt from each template’s artwork the same way the viewer draws it (blur 34px, saturate 1.45, brightness .94), which matches Pass Designer to within about 10–20 RGB levels. Every pixel behind each line of text is checked, and “Lowest” is the worst spot.</li>
-        <li><b>Glass drift:</b> the lowest ratio again after shifting the glass 15 RGB levels toward the text color (less contrast), to cover the difference from Pass Designer and the device. A card only counts as safe when this column passes too.</li>
-        <li><b>Original cards</b> use automatic colors, so Wallet picks the text color from the art. The viewer approximates that pick, and the white and dark columns show both possible outcomes.</li>
-        <li>Not covered: iOS 26 cards (solid colors, no glass), the barcode panel (black on white), and Apple Watch. Confirm on a device with Xcode’s Accessibility Inspector before shipping.</li>
-      </ul>
-    </section>
     <section class="proposal" aria-labelledby="proposalTitle">
       <div class="proposal-h">
         <div><h2 id="proposalTitle">Design proposals <span class="credit">(the image boards and strings made by Claude, i just did the pass design and the web)</span></h2>
-        <p>Download-only design boards for both cards in the iOS 27 frosted-glass look: the photo runs the full card and Wallet blurs it into a glass footer behind the fields. Each board shows the card, the Lock Screen suggestion, Pass Details and the Membership Benefits page the button opens. The board and the ZIP keep the real logos and copy; Open in viewer shows the generic version on this page.</p></div>
+        <p>Download-only design boards for both cards in the iOS 27 frosted-glass look: the photo runs the full card and Wallet blurs it into a glass footer behind the fields. The fields, labels and back of each card match what the wallet Lambdas send today, shortened where needed so everything fits. Each board shows the card, the Lock Screen suggestion, Pass Details and the Membership Benefits page. On both cards the <b>View Membership Benefits</b> Featured Action opens <a href="https://approveaem.ace.aaa.com/membership/aaa-membership-benefits-wallet.html" target="_blank" rel="noopener"><code>https://approveaem.ace.aaa.com/membership/aaa-membership-benefits-wallet.html</code></a>.</p></div>
       </div>
       <div class="proposal-grid">
         <div class="proposal-row">
-          <b>Membership (alternative)</b>
-          <span class="fig-actions"><a class="primary" href="proposal/membership-proposal.png?v=20261105" download="membership-proposal.png">Download proposal (PNG)</a><a href="proposal/membership-template.zip?v=20261105" download="membership-template.zip">Download template (ZIP)</a><button type="button" data-tpl-open="Membership Card (Alternative Blur Glass).pkpasstemplate">Open in viewer</button></span>
+          <b>Insurance</b>
+          <span class="fig-actions"><a class="primary" href="proposal/insurance-proposal.png?v=20261124" download="insurance-proposal.png">Download proposal (PNG)</a><a href="proposal/insurance-template.zip?v=20261124" download="insurance-template.zip">Download template (ZIP)</a><button type="button" data-tpl-open="Insurance Card.pkpasstemplate">Open in viewer</button></span>
         </div>
         <div class="proposal-row">
-          <b>Insurance (alternative)</b>
-          <span class="fig-actions"><a class="primary" href="proposal/insurance-proposal.png?v=20261105" download="insurance-proposal.png">Download proposal (PNG)</a><a href="proposal/insurance-template.zip?v=20261105" download="insurance-template.zip">Download template (ZIP)</a><button type="button" data-tpl-open="Insurance Card (Alternative).pkpasstemplate">Open in viewer</button></span>
+          <b>Membership</b>
+          <span class="fig-actions"><a class="primary" href="proposal/membership-proposal.png?v=20261124" download="membership-proposal.png">Download proposal (PNG)</a><a href="proposal/membership-template.zip?v=20261124" download="membership-template.zip">Download template (ZIP)</a><button type="button" data-tpl-open="Membership Card.pkpasstemplate">Open in viewer</button></span>
         </div>
       </div>
     </section>
@@ -903,9 +861,7 @@ html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-t
         <div class="qa">
           <b>What it is</b><span>One of Apple's Featured Action types (<code>membershipBenefits</code>). Apple sets the label and icon; we only give it an <code>https</code> link. A pass can have 2 actions, and iOS 26 and older don't show them at all.</span>
           <b>The plan (agreed)</b><span>Tapping opens the member app on the <b>Membership Benefits</b> bottom sheet (same style as the Discounts filter and sort sheets, glass close button) with <b>Roadside Assistance first</b>, so the button's label matches what members see. Without the app, the same link opens the membership page on example.com.</span>
-          <b>Today, in this proposal</b><span>The button opens the benefits section of the membership page, <code>https://www.example.com/membership.html#membershipBenefits</code> (starts with 24-hour Roadside Assistance). It works for every member today, with or without the app. Every card also declares the app: <code>"associatedStoreIdentifiers": [
-    0
-  ]</code> (the member app, bundle <code>com.example.app</code>) and <code>"appLaunchURL": "exampleapp://wallet/benefits?source=wallet"</code>, so Wallet shows <b>Open</b> when the app is installed and the <b>App Store page</b> when it isn’t. Later, the button moves to the https app link (opens the app on the benefits sheet, or the web page without the app) once the web team adds <code>applinks</code> for <code>/wallet/benefits</code> to app.example.com (today it answers 403 and its <code>apple-app-site-association</code> only has <code>webcredentials</code>) and branch <code>b/wallet-deeplink-benefits</code> ships. A pass shows at most 2 Featured Actions, so the cards use <b>View Membership Benefits</b> and <b>Get Directions</b>; the Roadside number stays on the back.</span>
+          <b>Today, in this proposal</b><span>Both cards (Insurance and Membership) use the same Featured Action. Tapping <b>View Membership Benefits</b> opens <a href="https://approveaem.ace.aaa.com/membership/aaa-membership-benefits-wallet.html" target="_blank" rel="noopener"><code>https://approveaem.ace.aaa.com/membership/aaa-membership-benefits-wallet.html</code></a> in the browser, with 24-hour Roadside Assistance first. It works for every member today, with or without the app. Every card also declares the Auto Club app (<code>"associatedStoreIdentifiers": [1094393125]</code>), so Wallet shows <b>Open</b> when the app is installed and the <b>App Store page</b> when it isn’t. A pass shows at most 2 Featured Actions, so the cards use <b>View Membership Benefits</b> and <b>Get Directions</b> (nearest AAA branch); the phone numbers stay on the back.</span>
           <b>iOS 26 and older</b><span>No Featured Actions there, so the cards show the Roadside number (1-800-000-0000) on the front instead, and the back of the pass keeps tappable phone numbers and links.</span>
           <b>Can't change</b><span>The label (“View Membership Benefits”), the icon, the 2-action limit, and that front fields aren't tappable.</span>
         </div>
@@ -984,15 +940,8 @@ const INF = Infinity;
 /* Template images change often; skip the 10-minute browser cache so every visit shows the latest artwork. */
 const ASSET_V = '?v=' + Date.now();
 const DEFAULTS = {
-  membershipAlt: 'Membership Card (Alternative).pkpasstemplate',
-  membershipGlass: 'Membership Card (Alternative Glass).pkpasstemplate',
-  membershipBlur: 'Membership Card (Alternative Blur Glass).pkpasstemplate',
-  membershipBlurAA: 'Membership Card (Alternative Blur Glass AA).pkpasstemplate',
-  insuranceAltAA: 'Insurance Card (Alternative AA).pkpasstemplate',
-  insuranceStateFront: 'Insurance Card (State Front).pkpasstemplate',
-  insuranceAlt: 'Insurance Card (Alternative).pkpasstemplate',
-  membership: 'Membership Card.pkpasstemplate',
-  insurance: 'Insurance Card.pkpasstemplate'
+  insurance: 'Insurance Card.pkpasstemplate',
+  membership: 'Membership Card.pkpasstemplate'
 };
 
 /* ---------- Apple limits (Wallet docs, Pass Designer, HIG) ---------- */
@@ -1133,7 +1082,7 @@ const icon = (a, cls='dot') => `<span class="${cls}" style="background:${a.color
 /* ---------- State ---------- */
 let imports = [], importSeq = 0;
 const importById = key => imports.find(x => 'imp:' + x.id === key);
-let state = {key:'membership', pass:null, tooling:null, files:[], assets:{}, name:'', limitStyle:null, sel:null, actionPick:null, fallbackMode:null, styleHl:null};
+let state = {key:'insurance', pass:null, tooling:null, files:[], assets:{}, name:'', limitStyle:null, sel:null, actionPick:null, fallbackMode:null, styleHl:null};
 
 function styleKey(p){ return ['posterGeneric','boardingPass','coupon','eventTicket','storeCard','generic'].find(k => p && p[k]) || 'generic'; }
 function safeColor(c, fb){ return /^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(,\s*[\d.]+\s*)?\)$/.test(String(c||'').trim()) ? String(c).trim() : fb; }
@@ -1682,7 +1631,7 @@ document.addEventListener('click', e => { if(e.target.closest('[data-arch]')) se
   const pass = $('gdPass'), color = $('gdColor'), ratioEl = $('gdRatio'), fg = $('gdFg'), label = $('gdLabel'), logo = $('gdLogo'), auto = $('gdAuto');
   let manual = {fg: fg.value, label: label.value};
   const ART = {m:'guide/convertible.jpg', i:'guide/palms.jpg'};   /* the untouched Figma photos, no tints or veils */
-  const SAMPLE_LOGO = "templates/Membership%20Card%20%28Alternative%29.pkpasstemplate/primaryLogo@2x.png";
+  const SAMPLE_LOGO = "templates/Membership%20Card.pkpasstemplate/primaryLogo@2x.png";
   let artURL = null, upArt = null, upLogo = null, glassTone = null;
   const lin = c => { c /= 255; return c <= .04045 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4); };
   const rgbOf = h => { const n = parseInt(h.slice(1), 16); return [n >> 16, n >> 8 & 255, n & 255]; };
@@ -1788,12 +1737,13 @@ window.addEventListener('hashchange', openForHash); openForHash();
 
 /* ---------- Text contrast (WCAG 2.2 AA) ----------
    Measured offline by template-build/contrast/check_contrast.py from each template's artwork. */
-const ARCHIVED = ['membershipAlt', 'membershipBlur', 'membership', 'insurance'];
+const ARCHIVED = [];
 const A11Y = [{"key":"membershipGlass","name":["Membership","Provided artwork"],"glass":true,"auto":false,"fix":"Fails on the glass: the red car shows straight through it. White text still fails the footer line. Dark text passes once roughly 55\u201360% white veil sits under the glass (see Blur glass \u00b7 AA).","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[185,43,34],"min":1.41,"med":2.66,"worst":1.15,"w":4.19,"b":1.64},{"t":"Field values","on":"glass","c":[50,74,114],"bg":[197,47,36],"min":1.02,"med":1.75,"worst":1.0,"w":4.15,"b":1.95},{"t":"Footer line","on":"glass","c":[50,74,114],"bg":[218,54,39],"min":1.09,"med":2.08,"worst":1.0,"w":2.65,"b":2.09},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[195,191,219],"min":5.74,"med":8.54,"worst":5.74,"w":1.47,"b":6.69},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[195,191,219],"min":3.5,"med":5.21,"worst":3.5,"w":1.47,"b":6.69}]},{"key":"membershipBlurAA","name":["Membership","AA artwork"],"glass":true,"auto":false,"fix":"Passes AA everywhere, even with the glass 15 RGB levels darker. Same artwork and layout as Blur glass, with the white veil under the glass raised from 38% to 57% and values plus header in a deeper navy (#192842, Navy/700\u2019s hue). Labels stay Grey/900 #27292B.","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[216,154,151],"min":5.61,"med":6.44,"worst":4.66,"w":2.16,"b":6.54},{"t":"Field values","on":"glass","c":[25,40,66],"bg":[221,156,151],"min":5.98,"med":6.66,"worst":4.98,"w":1.95,"b":6.89},{"t":"Footer line","on":"glass","c":[25,40,66],"bg":[230,159,153],"min":6.15,"med":6.87,"worst":5.13,"w":1.61,"b":7.09},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[195,191,219],"min":5.74,"med":8.54,"worst":5.74,"w":1.47,"b":6.69},{"t":"Header value","on":"photo","c":[25,40,66],"bg":[195,191,219],"min":5.8,"med":8.63,"worst":5.8,"w":1.47,"b":6.69}]},{"key":"insuranceAlt","name":["Insurance","Provided artwork"],"glass":true,"auto":false,"fix":"Fails on the glass. The Insurance \u00b7 Alternative AA version fixes it with a 39% white veil under the glass and a deeper navy (#192842).","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[181,126,92],"min":2.89,"med":4.37,"worst":2.32,"w":2.39,"b":3.37},{"t":"Field values","on":"glass","c":[50,74,114],"bg":[188,136,105],"min":2.04,"med":2.95,"worst":1.65,"w":2.07,"b":3.91},{"t":"Footer line","on":"glass","c":[50,74,114],"bg":[207,173,155],"min":3.54,"med":4.24,"worst":2.95,"w":1.59,"b":6.77},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[199,194,224],"min":7.79,"med":8.47,"worst":7.79,"w":1.55,"b":9.07},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[199,194,224],"min":4.75,"med":5.17,"worst":4.75,"w":1.55,"b":9.07}]},{"key":"insuranceAltAA","name":["Insurance","AA artwork"],"glass":true,"auto":false,"fix":"Passes AA everywhere, even with the glass 15 RGB levels darker. Same artwork as Insurance \u00b7 Alternative, with a 39% white veil under the glass and values plus header in a deeper navy (#192842). Labels stay Grey/900 #27292B.","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[204,170,149],"min":5.57,"med":6.87,"worst":4.62,"w":1.78,"b":6.49},{"t":"Field values","on":"glass","c":[25,40,66],"bg":[208,176,157],"min":6.09,"med":7.35,"worst":5.08,"w":1.63,"b":7.03},{"t":"Footer line","on":"glass","c":[25,40,66],"bg":[220,199,188],"min":8.16,"med":9.04,"worst":6.93,"w":1.39,"b":9.41},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[199,194,224],"min":7.79,"med":8.47,"worst":7.79,"w":1.55,"b":9.07},{"t":"Header value","on":"photo","c":[25,40,66],"bg":[199,194,224],"min":7.87,"med":8.56,"worst":7.87,"w":1.55,"b":9.07}]},{"key":"membershipAlt","name":["Membership","Archive · white footer"],"glass":false,"auto":false,"fix":"The white footer passes easily. Only the header value (\u201cPremier\u201d, #324A72 over the tinted sky) is short at 3.5:1. Using the label color #27292B there gives 5.7:1.","rows":[{"t":"Field labels","on":"solid","c":[39,41,43],"bg":[250,248,250],"min":13.82,"med":13.82,"worst":12.09,"w":1.06,"b":16.1},{"t":"Field values","on":"solid","c":[50,74,114],"bg":[250,248,250],"min":8.43,"med":8.43,"worst":7.37,"w":1.06,"b":16.1},{"t":"Footer line","on":"solid","c":[50,74,114],"bg":[250,248,250],"min":8.43,"med":8.43,"worst":7.37,"w":1.06,"b":16.1},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[195,191,219],"min":5.74,"med":8.54,"worst":5.74,"w":1.47,"b":6.69},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[195,191,219],"min":3.5,"med":5.21,"worst":3.5,"w":1.47,"b":6.69}]},{"key":"membershipBlur","name":["Membership","Archive · blur glass 38%"],"glass":true,"auto":false,"fix":"Fails on the glass with the 38% veil. The Blur glass \u00b7 AA version fixes it with a 57% veil and a deeper navy (#192842) for the values and header.","rows":[{"t":"Field labels","on":"glass","c":[39,41,43],"bg":[205,117,111],"min":3.61,"med":4.63,"worst":2.92,"w":2.85,"b":4.2},{"t":"Field values","on":"glass","c":[50,74,114],"bg":[213,119,112],"min":2.41,"med":2.98,"worst":1.97,"w":2.56,"b":4.61},{"t":"Footer line","on":"glass","c":[50,74,114],"bg":[226,124,114],"min":2.51,"med":3.15,"worst":2.05,"w":1.89,"b":4.8},{"t":"Header label","on":"photo","c":[39,41,43],"bg":[195,191,219],"min":5.74,"med":8.54,"worst":5.74,"w":1.47,"b":6.69},{"t":"Header value","on":"photo","c":[50,74,114],"bg":[195,191,219],"min":3.5,"med":5.21,"worst":3.5,"w":1.47,"b":6.69}]},{"key":"membership","name":["Membership","Archive · original"],"glass":true,"auto":true,"fix":"Wallet picks the text colors here (useAutomaticColors), so the viewer approximates them. The glass is mid-tone, so neither white nor dark text passes the labels. A strong white veil under the glass plus dark text, or a solid footerBackgroundColor, fixes it. The header is white on bright sky (2.4:1). Dark text there gets 6.1:1.","rows":[{"t":"Field labels","on":"glass","c":[110,110,115],"bg":[121,110,113],"min":1.0,"med":1.41,"worst":1.0,"w":2.66,"b":1.63},{"t":"Field values","on":"glass","c":[28,28,30],"bg":[127,115,118],"min":1.91,"med":3.78,"worst":1.51,"w":2.88,"b":1.91},{"t":"Footer line","on":"glass","c":[28,28,30],"bg":[134,121,126],"min":3.37,"med":4.1,"worst":2.69,"w":3.69,"b":3.37},{"t":"Header label","on":"photo","c":[255,255,255],"bg":[69,165,250],"min":2.4,"med":2.61,"worst":2.4,"w":2.4,"b":6.05},{"t":"Header value","on":"photo","c":[255,255,255],"bg":[69,165,250],"min":2.4,"med":2.61,"worst":2.4,"w":2.4,"b":6.05}]},{"key":"insurance","name":["Insurance","Archive · original"],"glass":true,"auto":true,"fix":"Wallet picks the text colors here (useAutomaticColors). The glass is dark, so white text passes every line (6:1 or better), while the viewer\u2019s dark-text approximation fails. Set foregroundColor and labelColor to white so the result doesn\u2019t depend on Wallet\u2019s choice.","rows":[{"t":"Field labels","on":"glass","c":[110,110,115],"bg":[97,56,36],"min":1.29,"med":1.55,"worst":1.04,"w":6.53,"b":1.0},{"t":"Field values","on":"glass","c":[28,28,30],"bg":[102,59,36],"min":1.0,"med":2.21,"worst":1.0,"w":6.37,"b":1.0},{"t":"Footer line","on":"glass","c":[28,28,30],"bg":[119,67,39],"min":1.22,"med":2.29,"worst":1.02,"w":5.97,"b":1.22}]}];
 const a11yRowOk = r => r.min >= 4.5;
 const a11yVerdict = c => c.rows.every(a11yRowOk) ? ['ok','Passes AA'] : c.rows.some(r => r.on !== 'photo' && !a11yRowOk(r)) ? ['bad','Fails on the ' + (c.glass ? 'glass' : 'footer')] : ['mid','Footer passes · header fails'];
 const a11yRatio = v => `<span class="${v >= 4.5 ? '' : 'sub'}">${v.toFixed(2)}:1</span>`;
 function renderA11y(){
+  if(!$('a11yCards')) return;
   const sel = A11Y.find(c => c.key === state.key);
   $('a11yCards').innerHTML = A11Y.map(c => { const [cls, txt] = a11yVerdict(c);
     return `<button type="button" role="listitem" class="a11y-card${sel && sel.key === c.key ? ' on' : ''}${ARCHIVED.includes(c.key) ? ' arch' : ''}" data-a11y="${c.key}" aria-pressed="${!!sel && sel.key === c.key}"><b>${esc(c.name[0])}</b><small>${esc(c.name[1])}</small><span class="a11y-v ${cls}">${cls === 'ok' ? '✓' : '✕'} ${txt}</span></button>`; }).join('');
@@ -1808,7 +1758,7 @@ function renderA11y(){
       <td class="n">${a11yRatio(r.w)}</td><td class="n">${a11yRatio(r.b)}</td></tr>`).join('')}
     </tbody></table></div>`;
 }
-$('a11yCards').addEventListener('click', e => { const b = e.target.closest('[data-a11y]'); if(b) loadDefault(b.dataset.a11y); });
+$('a11yCards')?.addEventListener('click', e => { const b = e.target.closest('[data-a11y]'); if(b) loadDefault(b.dataset.a11y); });
 
 /* ---------- Template switching & import ---------- */
 $('picker').addEventListener('click', e => {
@@ -1859,7 +1809,7 @@ function closeImport(key){
   Object.values(entry.assets).forEach(u => URL.revokeObjectURL(u));
   imports = imports.filter(x => x !== entry);
   renderImportTabs();
-  if(state.key === key) loadDefault('membershipBlurAA');
+  if(state.key === key) loadDefault('insurance');
 }
 function renderImportTabs(){
   const picker = $('picker'); picker.querySelectorAll('[data-pass^="imp:"]').forEach(b => b.remove());
@@ -1947,7 +1897,7 @@ let simCards = [], simExpired = false, simFromExpired = false;
 async function simBuildStack(){
   // Originals open with just the two originals; proposals (or an import) open with the proposals plus any imported passes.
   const imported = imports.map(x => 'imp:' + x.id);
-  const keys = ['membership', 'insurance'].includes(state.key) ? ['membership', 'insurance'] : ['membershipGlass', 'membershipBlurAA', 'insuranceAlt', 'insuranceAltAA', 'insuranceStateFront'].concat(ARCHIVED.includes(state.key) && !['membership', 'insurance'].includes(state.key) ? [state.key] : []).concat(imported);
+  const keys = ['insurance', 'membership'].concat(imported);
   const sel = keys.includes(state.key) ? state.key : keys[0];
   const order = keys.filter(k => k !== sel).concat(sel);
   const ownPasses = await Promise.all(order.map(async k => ({key: k, ...simRender(await simEntry(k)), label: k.startsWith('imp:') ? importById(k).name.replace(/\.pkpasstemplate$/i, '') : ({membershipAlt:'Membership (Alternative)', membershipGlass:'Membership (Provided)', membershipBlur:'Membership (Blur Glass)', membershipBlurAA:'Membership (AA)', insuranceAlt:'Insurance (Provided)', insuranceStateFront:'Insurance (State front)', insuranceAltAA:'Insurance (AA)', membership:'Membership', insurance:'Insurance'})[k]})));
@@ -2090,7 +2040,7 @@ $('download').addEventListener('click', async () => {
   }catch(e){ showError('The download didn\'t work (' + e.message + ').'); }
   finally{ btn.disabled = false; label.textContent = was; }
 });
-loadDefault('membershipBlurAA');
+loadDefault('insurance');
 </script>
 <script>
 (function () {

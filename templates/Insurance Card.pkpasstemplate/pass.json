@@ -1,206 +1,293 @@
 {
-  "appLaunchURL": "exampleapp://wallet/benefits?source=wallet",
-  "associatedStoreIdentifiers": [
-    0
+  "associatedStoreIdentifiers" : [
+    1094393125
   ],
-  "authenticationToken": "",
-  "barcodes": [],
-  "description": "Insurance Card",
-  "expirationDate": "2027-09-15T06:59:00Z",
-  "featuredActions": [
+  "authenticationToken" : "",
+  "barcodes" : [
+
+  ],
+  "description" : "AAA Auto Insurance Card",
+  "expirationDate" : "2027-09-15T06:59:00Z",
+  "featuredActions" : [
     {
-      "_id": "9812F08B-AE9B-44CC-AF36-627358A8F95F",
-      "identifier": "memberBenefits",
-      "type": "membershipBenefits",
-      "url": "https://www.example.com/membership.html#membershipBenefits"
+      "_id" : "C96A66BD-C43E-4980-ACBE-1A5A0E1058CE",
+      "identifier" : "memberBenefits",
+      "type" : "membershipBenefits",
+      "url" : "https:\/\/approveaem.ace.aaa.com\/membership\/aaa-membership-benefits-wallet.html"
     },
     {
-      "_id": "1622C5A8-081B-4BBF-AD96-E5D97291D2C0",
-      "identifier": "nearestBranch",
-      "placeIdentifier": "IXXXXXXXXXXXXXXXX",
-      "type": "place"
+      "_id" : "5650B456-422B-40E4-8985-BBCB153A6EB7",
+      "identifier" : "nearestBranch",
+      "placeIdentifier" : "I71B28B9C6AC9C7EF",
+      "type" : "place"
     }
   ],
-  "formatVersion": 1,
-  "generic": {
-    "primaryFields": [
+  "foregroundColor" : "rgb(16,28,48)",
+  "formatVersion" : 1,
+  "generic" : {
+    "auxiliaryFields" : [
       {
-        "key": "header",
-        "label": "POLICY NUMBER",
-        "value": "0000000000"
-      },
-      {
-        "key": "effective",
-        "label": "07/01/2026 - 07/01/2027",
-        "value": ""
+        "_id" : "F12966F9-43C6-46CA-ACA8-8D342D7A5D9B",
+        "key" : "companytTitle",
+        "label" : "INSURANCE COMPANY",
+        "value" : "Interinsurance Exchange of the Automobile Club NAIC# 15598"
       }
     ],
-    "secondaryFields": [
+    "backFields" : [
       {
-        "key": "named_insured",
-        "label": "NAMED INSURED",
-        "value": "Fulanito Perez"
+        "_id" : "A93AF434-3F2A-407A-B486-7006F034650E",
+        "key" : "Pull_To_Update",
+        "label" : "                          Pull To Update",
+        "value" : ""
+      },
+      {
+        "_id" : "FA6ACFE0-E63E-4ECF-A7B6-4C0754A5F2FD",
+        "key" : "Claims_PMG_Number",
+        "label" : "",
+        "value" : "24\/7 AAA Accident Assist Hotline\n1-800-67-CLAIM (1-800-672-5246)\n\nPolicy questions or changes\n1-800-924-6141"
+      },
+      {
+        "_id" : "CD93F8E4-245C-4FAB-824C-6023C04B45A9",
+        "key" : "drivers",
+        "label" : "Named Insured",
+        "value" : "Fulanito Perez"
+      },
+      {
+        "_id" : "172E88BA-B5F2-4C56-A25E-CCBF12255FED",
+        "key" : "backVehicles",
+        "label" : "Vehicles",
+        "value" : "2026 SAMPLE SUV\nVIN 1FMSAMPLE000000"
+      },
+      {
+        "_id" : "96F527F5-4DD7-4D87-81F9-B2F5BCBCE2A9",
+        "key" : "backDrivers",
+        "label" : "Insured Drivers",
+        "value" : "Fulanito Perez"
+      },
+      {
+        "_id" : "557F34DA-A05F-4314-B90A-0A05E552002C",
+        "key" : "compName",
+        "label" : "Company Name",
+        "value" : "Interinsurance Exchange of the Automobile Club\nP.O. Box 25006, Santa Ana, CA 92799-5006"
+      },
+      {
+        "_id" : "5CBB0EDB-0528-4817-BA62-6025C6D86191",
+        "key" : "disclaimer",
+        "label" : "Disclaimer",
+        "value" : "Sample state disclaimer."
+      },
+      {
+        "_id" : "909DBDD8-3B42-4BB4-88D1-AC12A8586F3C",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/self-serve?area=mobileapp_digitalwallet'>Manage my Insurance<\/a>",
+        "key" : "manageInsurance",
+        "label" : "Manage my Insurance",
+        "value" : "Manage my Insurance"
+      },
+      {
+        "_id" : "211E570C-7800-4A39-BAA7-CE12CAD8F32C",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/insurance\/claims?area=mobileapp_digitalwallet'>File or View a Claim<\/a>",
+        "key" : "fileClaim",
+        "label" : "File or View a Claim",
+        "value" : "File or View a Claim"
+      },
+      {
+        "_id" : "6B49E194-E68A-4B83-A0DA-E1DFA255319E",
+        "attributedValue" : "<a href='https:\/\/chat.ace.aaa.com\/?area=mobileapp_roadsideassistance_start'>Roadside Assistance<\/a>",
+        "key" : "roadsideHelp",
+        "label" : "Roadside Assistance",
+        "value" : "Roadside Assistance"
+      },
+      {
+        "_id" : "DAF14D79-46E4-435F-B04C-DA400DA09E12",
+        "attributedValue" : "<a href='https:\/\/apps.apple.com\/app\/id1094393125'>The fastest way to request Roadside Assistance<\/a>",
+        "key" : "autoClubApp",
+        "label" : "Auto Club app",
+        "value" : "The fastest way to request Roadside Assistance"
       }
     ],
-    "auxiliaryFields": [
+    "primaryFields" : [
       {
-        "key": "companytTitle",
-        "label": "INSURANCE COMPANY",
-        "value": "Example Interinsurance Exchange of the Company NAIC# 00000"
+        "_id" : "CC5AAFB6-E382-42C9-8238-C30BEB4A9F9D",
+        "key" : "header",
+        "label" : "POLICY NUMBER",
+        "value" : "CAA000XXXX"
       }
     ],
-    "backFields": [
+    "secondaryFields" : [
       {
-        "key": "Pull_To_Update",
-        "label": "                          Pull To Update",
-        "value": ""
+        "_id" : "77C5BA7E-0A69-4439-8ADF-155FA05E3080",
+        "key" : "named_insured",
+        "label" : "NAMED INSURED",
+        "value" : "Fulanito Perez"
       },
       {
-        "key": "Claims_PMG_Number",
-        "label": "",
-        "value": "24/7 Accident Assist Hotline\n1-800-000-0000\n\nPolicy questions or changes\n1-800-000-0000"
-      },
-      {
-        "key": "drivers",
-        "label": "Named Insured",
-        "value": "Fulanito Perez"
-      },
-      {
-        "key": "backVehicles",
-        "label": "Vehicles",
-        "value": "2026 SAMPLE SUV\nVIN XXXXXXXXXXXXXXXXX"
-      },
-      {
-        "key": "backDrivers",
-        "label": "Insured Drivers",
-        "value": "Fulanito Perez"
-      },
-      {
-        "key": "compName",
-        "label": "Company Name",
-        "value": "Example Interinsurance Exchange of the Company\nP.O. Box 00000, City, ST 00000"
-      },
-      {
-        "key": "disclaimer",
-        "label": "Disclaimer",
-        "value": "Sample state disclaimer."
+        "_id" : "A87D151F-6FE1-4EF4-B6BC-67AE43581742",
+        "key" : "effective",
+        "label" : "EFFECTIVE DATE",
+        "textAlignment" : "PKTextAlignmentRight",
+        "value" : "07\/01\/2026 - 07\/01\/2027"
       }
     ]
   },
-  "organizationName": "Organization",
-  "passTypeIdentifier": "pass.com.example.insurance",
-  "posterGeneric": {
-    "auxiliaryFields": [],
-    "backFields": [
+  "labelColor" : "rgb(6,51,101)",
+  "organizationName" : "AAA",
+  "passTypeIdentifier" : "pass.com.example.aaa.insurance",
+  "posterGeneric" : {
+    "backFields" : [
       {
-        "_id": "8FA15D29-3CFC-4585-960B-8B5E9A6E7AC1",
-        "attributedValue": "Roadside Assistance\n<a href='tel:18000000000'>1-800-000-0000</a>",
-        "key": "roadsideAssistance",
-        "label": "Open Roadside",
-        "value": "Roadside Assistance\n1-800-000-0000"
+        "_id" : "C18D4342-8DFC-4458-88F5-74545E7E24D6",
+        "key" : "pullToUpdate",
+        "label" : "",
+        "value" : "Pull down to update your card"
       },
       {
-        "_id": "3DC8547B-7CD2-4AA8-9D7F-2662511AF5A1",
-        "attributedValue": "<a href='https://www.example.com/locations.html'>Nearest branch</a>",
-        "key": "nearestBranch",
-        "label": "Get Direction",
-        "value": "Nearest branch"
+        "_id" : "F109958A-BE68-4705-8316-520425F5F22A",
+        "changeMessage" : "%@",
+        "key" : "expiryNotice",
+        "label" : "",
+        "value" : ""
       },
       {
-        "_id": "1ECDC7CB-1A62-454F-A042-D42DF910A602",
-        "attributedValue": "<a href='tel:18000000000'>1-800-000-0000</a>",
-        "key": "hotline",
-        "label": "24/7 Accident Assist Hotline",
-        "value": "1-800-000-0000"
+        "_id" : "43A0D829-D4F0-4020-A0BC-C72D59460237",
+        "key" : "disclaimer",
+        "label" : "Disclaimer",
+        "value" : "State disclaimer and required statements"
       },
       {
-        "_id": "C044BFB3-E01F-43E8-9FD4-2214EE1B7559",
-        "attributedValue": "<a href='tel:18000000000'>1-800-000-0000</a>",
-        "key": "policyQuestions",
-        "label": "Policy questions or changes",
-        "value": "1-800-000-0000"
+        "_id" : "836C98A3-08CB-4132-8A13-188A63318FF1",
+        "key" : "namedInsureds",
+        "label" : "Named Insured(s)",
+        "value" : "FULANITO PEREZ\nSAMPLE SECOND INSURED"
       },
       {
-        "_id": "8B3952AC-7D57-4032-AFAF-CD6A77BF6DD9",
-        "key": "policyPeriod",
-        "label": "Policy Period",
-        "value": "9/14/26 – 9/14/27"
+        "_id" : "67145D7F-2461-4A09-B0B2-3CAF46A07C9B",
+        "key" : "insuredAddress",
+        "label" : "Insured address",
+        "value" : "000 Main St, City, ST 00000"
       },
       {
-        "_id": "A7BE29BC-ED9E-410A-BFE5-81C1BF5DD1C1",
-        "key": "vehicles",
-        "label": "Vehicles",
-        "value": "2026 SAMPLE SUV\nXXXXXXXXXXXXXXXXX"
+        "_id" : "AB48AF1C-B3BE-41FF-80F9-942E9887AA74",
+        "key" : "vehicles",
+        "label" : "Vehicles",
+        "value" : "2026 SAMPLE SUV\nVIN XXXXXXXXXXXXXXXXX"
       },
       {
-        "_id": "22E17A51-1446-402E-9451-870DB19006B2",
-        "key": "insuredDrivers",
-        "label": "Insured Drivers",
-        "value": "Fulanito Perez"
+        "_id" : "A805E5A6-3596-480F-A8B1-437C252B5424",
+        "key" : "insuredDrivers",
+        "label" : "Insured drivers",
+        "value" : "Fulanito Perez"
       },
       {
-        "_id": "4AE5F33F-1209-42B2-B622-1F6750D51541",
-        "key": "company",
-        "label": "Company Name",
-        "value": "Example Interinsurance Exchange of the Company NAIC# 000000\nP.O. Box 00000, City, CA 00000"
+        "_id" : "8F277EAC-76BA-4BEB-A7FA-057CB2F67481",
+        "key" : "excludedDrivers",
+        "label" : "Excluded drivers",
+        "value" : "None"
       },
       {
-        "_id": "05538C9F-C1D9-44E2-9A61-E1F9817D3571",
-        "key": "disclaimer",
-        "label": "Disclaimer",
-        "value": "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle. Insurance information has already been submitted directly to the DMV electronically; submit this document to DMV only if specifically requested by DMV. The digital card may not be recognized in all states."
+        "_id" : "839CE47E-E75F-4BB3-8994-5604ED1EDFB4",
+        "key" : "policyPeriod",
+        "label" : "Policy period",
+        "value" : "01\/09\/2026 – 01\/09\/2027"
       },
       {
-        "_id": "D4DEDA3F-7BDC-45C9-9580-E1EF798080C0",
-        "key": "memberBenefits",
-        "label": "Member benefits & discounts",
-        "value": "Explore all membership benefits\nShow this card at participating businesses",
-        "attributedValue": "<a href='https://www.example.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.example.com/discounts.html'>Show this card at participating businesses</a>"
+        "_id" : "3F57B349-FE65-4846-A81E-D743A5A2E62C",
+        "key" : "company",
+        "label" : "Insurance company",
+        "value" : "Company name\nNAIC # 00000\nCompany address"
       },
       {
-        "_id": "91AA3ACE-E546-488A-8B2E-716A3F114509",
-        "key": "memberApp",
-        "label": "Member app",
-        "value": "The fastest way to request Roadside Assistance",
-        "attributedValue": "<a href='https://apps.apple.com/app/id0000000000'>The fastest way to request Roadside Assistance</a>"
+        "_id" : "68E2E056-1149-408D-B43A-C45ADC789510",
+        "key" : "agent",
+        "label" : "Agent",
+        "value" : "Agent name · 000-000-0000"
+      },
+      {
+        "_id" : "BD063658-03E0-4BB6-B830-37CF3CC5DEBA",
+        "key" : "accidentAssist",
+        "label" : "24\/7 AAA Accident Assist Hotline",
+        "value" : "1-800-67-CLAIM (1-800-672-5246)"
+      },
+      {
+        "_id" : "AB45C38B-30C0-4E94-BB09-AB679DFC76D6",
+        "key" : "policyQuestions",
+        "label" : "Policy questions or changes",
+        "value" : "1-800-924-6141"
+      },
+      {
+        "_id" : "09F8D7B1-84CC-4C9E-BB42-AB71913D58DD",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/self-serve?area=mobileapp_digitalwallet'>Manage my Insurance<\/a>",
+        "key" : "manageInsurance",
+        "label" : "Manage my Insurance",
+        "value" : "Manage my Insurance"
+      },
+      {
+        "_id" : "1E4B9C33-033E-4B6D-AE67-D946DE3D0785",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/insurance\/claims?area=mobileapp_digitalwallet'>File or View a Claim<\/a>",
+        "key" : "fileClaim",
+        "label" : "File or View a Claim",
+        "value" : "File or View a Claim"
+      },
+      {
+        "_id" : "4C472C49-12D9-405C-93D1-F7F41C94FF7C",
+        "attributedValue" : "<a href='https:\/\/chat.ace.aaa.com\/?area=mobileapp_roadsideassistance_start'>Roadside Assistance<\/a>",
+        "key" : "roadsideHelp",
+        "label" : "Roadside Assistance",
+        "value" : "Roadside Assistance"
+      },
+      {
+        "_id" : "BF2B82B2-9B38-4542-A8A9-856B624D6B2F",
+        "attributedValue" : "<a href='https:\/\/apps.apple.com\/app\/id1094393125'>The fastest way to request Roadside Assistance<\/a>",
+        "key" : "autoClubApp",
+        "label" : "Auto Club app",
+        "value" : "The fastest way to request Roadside Assistance"
       }
     ],
-    "footerFields": [
+    "footerFields" : [
       {
-        "_id": "FC70D11F-E6A4-42A6-A418-A9896E41C20E",
-        "key": "insuranceCompany",
-        "label": "INSURANCE COMPANY",
-        "value": "COMPANY: SAMPLE MUTUAL INSURANCE"
+        "_id" : "D14F1F26-F028-4592-B9A4-319C9830ADD3",
+        "key" : "insuranceCompanyFooter",
+        "label" : "Insurance Company",
+        "value" : "INTERINSURANCE EXCHANGE · NAIC # 15598"
       }
     ],
-    "headerFields": [],
-    "primaryFields": [
+    "headerFields" : [
       {
-        "_id": "00E927DF-D3A4-4C96-83EF-1E8831A28CDF",
-        "key": "nameEnsured",
-        "label": "NAME INSURED",
-        "value": "FULANITO PEREZ"
-      },
-      {
-        "_id": "11524A02-3158-4073-924E-85EE2EAEA107",
-        "key": "policyNumber",
-        "label": "POLICY NUMBER",
-        "value": "0000000000"
-      },
-      {
-        "_id": "7A0CBC99-9C15-4356-923C-0FE48A63300C",
-        "key": "effectiveDate",
-        "label": "EFFECTIVE DATE",
-        "textAlignment": "PKTextAlignmentRight",
-        "value": "9/14/26 – 9/14/27"
+        "_id" : "A7C0E178-508B-46B1-B200-FE711C79064E",
+        "key" : "cardTitle",
+        "label" : "CA LIABILITY INSURANCE",
+        "value" : "Auto Insurance Card"
       }
     ],
-    "secondaryFields": []
+    "primaryFields" : [
+      {
+        "_id" : "DADB2AFA-D8CF-42E7-8E77-8C58493F3F1A",
+        "key" : "namedInsured",
+        "label" : "Named Insured",
+        "value" : "FULANITO PEREZ"
+      },
+      {
+        "_id" : "FE430419-76BA-42DB-83D5-B47C62194B96",
+        "key" : "policyNumber",
+        "label" : "Policy Number",
+        "value" : "CAA000XXXX"
+      },
+      {
+        "_id" : "43F63F20-BABA-403E-9028-FBD92C54F52D",
+        "key" : "posterEffective",
+        "label" : "Effective",
+        "value" : "07\/01\/26"
+      },
+      {
+        "_id" : "D2E49683-1142-4F6E-A639-016AFAD562BF",
+        "key" : "posterExpires",
+        "label" : "Expires",
+        "textAlignment" : "PKTextAlignmentRight",
+        "value" : "07\/01\/27"
+      }
+    ]
   },
-  "serialNumber": "0000000000",
-  "suppressHeaderDarkening": true,
-  "teamIdentifier": "",
-  "useAutomaticColors": false,
-  "foregroundColor": "rgb(16, 28, 48)",
-  "labelColor": "rgb(40, 52, 70)"
+  "serialNumber" : "CAA000XXXX-ALT-AA",
+  "suppressHeaderDarkening" : true,
+  "teamIdentifier" : "",
+  "useAutomaticColors" : false
 }

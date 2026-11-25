@@ -371,13 +371,13 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
         <div>
           <div class="gg-ctl">
             <button type="button" class="gg-big" id="ggUpBig"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3m0 0L7 8m5-5l5 5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Upload your hero image</b><small>PNG or JPG · 1032 × 812 px · stays in your browser</small></span></button>
-            <div class="gg-row"><span>Hero</span><div class="gg-seg" role="group" aria-label="Hero image"><button type="button" data-gh="none" class="on" aria-pressed="true">None</button><button type="button" data-gh="m" aria-pressed="false">Convertible</button><button type="button" data-gh="i" aria-pressed="false">Palms</button><button type="button" data-gh="up" aria-pressed="false">Upload…</button></div><input type="file" id="ggHeroFile" accept="image/*" hidden></div>
+            <div class="gg-row"><span>Hero</span><div class="gg-seg" role="group" aria-label="Hero image"><button type="button" data-gh="none" class="on" aria-pressed="true">None</button><button type="button" data-gh="i" aria-pressed="false">Convertible</button><button type="button" data-gh="m" aria-pressed="false">Roadside</button><button type="button" data-gh="up" aria-pressed="false">Upload…</button></div><input type="file" id="ggHeroFile" accept="image/*" hidden></div>
             <div class="gg-row"><span>Hero style</span><div class="gg-seg" role="group" aria-label="Hero style"><button type="button" data-gglass="off" class="on" aria-pressed="true">Plain</button><button type="button" data-gglass="on" aria-pressed="false">Baked glass edges</button></div></div>
             <div class="gg-row"><span>Logo</span><div class="gg-seg" role="group" aria-label="Logo"><button type="button" data-gl="none" class="on" aria-pressed="true">None</button><button type="button" data-gl="sample" aria-pressed="false">Sample</button><button type="button" data-gl="up" aria-pressed="false">Upload…</button></div><input type="file" id="ggLogoFile" accept="image/*" hidden></div>
             <div class="gg-row"><span>Background</span><input type="color" id="ggBg" value="#f2e4e4" aria-label="hexBackgroundColor"><span id="ggAuto"></span></div>
             <div class="gg-row"><span>Barcode</span><div class="gg-seg" role="group" aria-label="Barcode"><button type="button" data-gbc="on" class="on" aria-pressed="true">With barcode</button><button type="button" data-gbc="off" aria-pressed="false">No barcode</button></div></div>
-            <div class="gg-row"><span>Card title</span><input type="text" id="ggTitle" value="Membership Card" maxlength="80"><span class="cnt" data-max="30"></span></div>
-            <div class="gg-row"><span>Header</span><input type="text" id="ggHeader" value="Fulanito Perez" maxlength="80"><span class="cnt" data-max="30"></span></div>
+            <div class="gg-row"><span>Card title</span><input type="text" id="ggTitle" value="AAA Membership Card" maxlength="80"><span class="cnt" data-max="30"></span></div>
+            <div class="gg-row"><span>Header</span><input type="text" id="ggHeader" value="FULANITO PEREZ" maxlength="80"><span class="cnt" data-max="30"></span></div>
             <button type="button" class="gg-big chk" id="ggCheck"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span><b>Check contrast</b><small>Is the text readable on this background? (ADA AA)</small></span></button>
             <div class="gg-res" id="ggRes" hidden aria-live="polite"></div>
           </div>
@@ -387,11 +387,11 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
               <div class="gp-t" id="gpT"></div>
               <div class="gp-s">Member</div>
               <div class="gp-h" id="gpH"></div>
-              <div class="gp-bcw"><div class="gp-bc"><span></span></div><div class="gp-alt">000 000 000000000 0</div></div>
-              <div class="gp-rw"><div><i>Plan</i><b>Premier</b></div><div class="c"><i>Valid thru</i><b>03/27</b></div><div class="e"><i>Loyal Member</i><b>32 Years</b></div></div>
+              <div class="gp-bcw"><div class="gp-bc"><span></span></div><div class="gp-alt">000 000 XXXXXXXXX 0</div></div>
+              <div class="gp-rw"><div><i>Plan</i><b>Premier</b></div><div class="c"><i>Valid thru</i><b>03/2027</b></div><div class="e"><i>Member since</i><b>1994</b></div></div>
             </div>
             <div class="gp-hero"><img id="ggHero" alt=""><div class="gp-glass" aria-hidden="true"></div><button type="button" class="gp-empty" id="ggEmpty"><span style="font-size:7cqw;line-height:1">＋</span>Upload hero image<small>1032 × 812 px</small></button></div>
-            <div class="gp-low"><div class="gp-mod"><span><b>Roadside Assistance</b><small>Get roadside service 24/7: tow, battery, and more</small></span><img src="google/img/vam-roadside.jpg" alt=""></div></div>
+            <div class="gp-low"><div class="gp-mod"><span><b>Roadside Assistance</b><small>Get help in the app: tow, battery, tire, lockout</small></span><img src="google/img/vam-roadside.jpg" alt=""></div></div>
           </div>
         </div>
         <div>
@@ -425,9 +425,9 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
     </section>
     <div class="hero">
       <div class="picker cards" id="picker" role="tablist" aria-label="Pass">
-        <button role="tab" data-key="membership" class="on" aria-selected="true" aria-label="Membership pass"></button>
-        <button role="tab" data-key="insurance" aria-selected="false" aria-label="Insurance pass"></button>
-        <p class="cards-note">How the cards look in the Google Wallet list. Tap one to open it. Same artwork and colors as the Apple Wallet AA cards.</p>
+        <button role="tab" data-key="insurance" class="on" aria-selected="true" aria-label="Insurance pass"></button>
+        <button role="tab" data-key="membership" aria-selected="false" aria-label="Membership pass"></button>
+        <p class="cards-note">How the cards look in the Google Wallet list. Tap one to open it. Both use the fields our wallet Lambdas send, with sample member data: insurance is the current proof of insurance pass (white, no hero), membership is the 2026 design (dev and UAT).</p>
       </div>
       <button id="download" class="dl" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Download pass JSON</b><small id="dlName">class + object</small></span></button>
     </div>
@@ -462,7 +462,7 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
             <figure><img src="google/img/docs/vam-body.png" alt="Module with the body highlighted" loading="lazy"><figcaption><b>body</b> (optional): one line under it, 50 chars max</figcaption></figure>
             <figure><img src="google/img/docs/vam-image.png" alt="Module with the image highlighted" loading="lazy"><figcaption><b>image</b> (optional): your own picture, shown square (1:1, resized to fit). That's the "icon".</figcaption></figure>
           </div>
-          <p><b>uri</b> (required) is where a tap goes: a web link or a deep link (our Roadside one is an App Link that opens the app’s chatbot; the phone number stays in the links list). <b>sortIndex</b> picks which comes first (lower wins), so with one slot on the front, it decides what members see. <b>viewConstraints.displayInterval</b> sets start/end dates, handy for "Renew now" only near expiry. Modules can live on the class (everyone) or the object (one member).</p>
+          <p><b>uri</b> (required) is where a tap goes: a web link or a deep link (our Roadside one opens the roadside section of the membership page; the phone number stays in the links list). <b>sortIndex</b> picks which comes first (lower wins), so with one slot on the front, it decides what members see. <b>viewConstraints.displayInterval</b> sets start/end dates, handy for "Renew now" only near expiry. Modules can live on the class (everyone) or the object (one member).</p>
           <p>Use the switch above the card to see both setups with our modules.</p>
           <p class="note">Screenshots © Google, from the Google Wallet developer docs (CC BY 4.0).</p>
           <ul class="src">
@@ -487,19 +487,18 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
           <details><summary>How to add a value-added module (JSON)</summary>
 <pre>"valueAddedModuleData": [{
   "header": {"defaultValue": {"language": "en-US", "value": "Roadside Assistance"}},
-  "body":   {"defaultValue": {"language": "en-US", "value": "Get roadside service 24/7: tow, battery, and more"}},
-  "image":  {"sourceUri": {"uri": "https://…/vam-roadside.jpg"}},
-  "uri": "https://…per club, the same roadside link as today",
+  "body":   {"defaultValue": {"language": "en-US", "value": "Get help in the app: tow, battery, tire, lockout"}},
+  "image":  {"sourceUri": {"uri": "https://ace.aaa.com/content/dam/digital-wallet/004/membership/android/module-roadside.jpeg"}},
+  "uri": "https://www.ace.aaa.com/membership.html#roadsideAssistance",
   "sortIndex": 1,
   "viewConstraints": {"displayInterval": {"end": {"date": "2027-03-31T23:59:00-07:00"}}}
 }]</pre></details>
           <details><summary>How to add the app link button (JSON)</summary>
 <pre>"appLinkData": {
-  "androidAppLinkInfo": {"appTarget": {"targetUri": {"uri": "https://play.google.com/…", "description": "Member app"}}},
-  "webAppLinkInfo":     {"appTarget": {"targetUri": {"uri": "https://www.example.com/", "description": "Website"}}},
+  "webAppLinkInfo": {"appTarget": {"targetUri": {"uri": "https://www.ace.aaa.com/membership.html#membershipBenefits", "description": "Open the app"}}},
   "displayText": {"defaultValue": {"language": "en-US", "value": "Open the app"}}
 }</pre>
-          <p class="note">Google marks the per-link <code>title</code>, <code>description</code> and <code>appLogoImage</code> as not supported, and iOS app links aren't supported either.</p></details>
+          <p class="note">Our Lambda sends the web link only; an <code>androidAppLinkInfo</code> (Play Store app) would open the app instead. Google marks the per-link <code>title</code>, <code>description</code> and <code>appLogoImage</code> as not supported, and iOS app links aren't supported either.</p></details>
         </div>
         <div class="panel">
           <h3>Those tappable rows under the image</h3>
@@ -533,9 +532,9 @@ html[data-theme="light"] .picker button.on,html[data-theme="light"] .vmode butto
 "use strict";
 const $ = id => document.getElementById(id);
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const SOURCES = {membership: 'google/membership.json', insurance: 'google/insurance.json'};
+const SOURCES = {insurance: 'google/insurance.json', membership: 'google/membership.json'};
 const LIMITS = {vamHeader: 60, vamBody: 50, appText: 30, rowItems: 3, rowsRecommended: 2, vamObject: 10, links: 10, text: 10, messages: 10};
-let cur = {key: 'membership', data: null, name: ''};
+let cur = {key: 'insurance', data: null, name: ''};
 
 const tx = ls => ls?.defaultValue?.value ?? ls?.translatedValues?.[0]?.value ?? (typeof ls === 'string' ? ls : '');
 const safeColor = c => /^#[0-9a-f]{6}$/i.test(String(c || '')) ? c : '#1c4da6';
@@ -567,7 +566,7 @@ function rowsHTML(obj, cls){
   rowIds.clear();
   const rows = cls?.classTemplateInfo?.cardTemplateOverride?.cardRowTemplateInfos || [];
   return rows.map((r, ri) => {
-    if(r.oneItem) return `<div class="grw" data-c="row:${ri}" style="grid-template-columns:1fr">${itemHTML(r.oneItem.item, obj, cls, '')}</div>`;
+    if(r.oneItem){ const inner = itemHTML(r.oneItem.item, obj, cls, ''); return inner ? `<div class="grw" data-c="row:${ri}" style="grid-template-columns:1fr">${inner}</div>` : ''; }
     if(r.twoItems) return `<div class="grw" data-c="row:${ri}" style="grid-template-columns:1fr 1fr">${itemHTML(r.twoItems.startItem, obj, cls, '')}${itemHTML(r.twoItems.endItem, obj, cls, 'e')}</div>`;
     if(r.threeItems) return `<div class="grw" data-c="row:${ri}" style="grid-template-columns:1fr auto 1fr">${itemHTML(r.threeItems.startItem, obj, cls, '')}${itemHTML(r.threeItems.middleItem, obj, cls, 'c')}${itemHTML(r.threeItems.endItem, obj, cls, 'e')}</div>`;
     return '';
@@ -635,8 +634,8 @@ function buildComps({obj, cls, vams, app, bg, fg, logo, hero, details}){
     path: p, json: l, href: safeHref(l.uri), kv: [['Label', l.description], ['Opens', l.uri], ['Icon (this mock)', /^tel:/i.test(l.uri) ? 'phone (tel:)' : /^mailto:/i.test(l.uri) ? 'mail (mailto:)' : /^geo:/i.test(l.uri) ? 'map pin (geo:)' : 'globe (web link)']],
     limits: LIM('10 links from the class + 10 from the object. No custom icons or images.')}));
   const allTexts = [...(cls?.textModulesData || []).map((t, i) => ({t, p: `class.textModulesData[${i}]`})), ...(obj.textModulesData || []).map((t, i) => ({t, p: `object.textModulesData[${i}]`}))];
-  allTexts.forEach(({t, p}) => { if(!t.id) return; const onFront = !details.includes(t);
-    add('text:' + t.id, {group: onFront ? 'Top of the pass' : 'Below the image', name: (onFront ? 'Field: ' : 'Detail: ') + (t.header || t.id), what: onFront ? 'A text module shown in a card row (a row\'s fieldPath points at it).' : 'A text module that isn\'t in a card row, so Wallet lists it with the details below.',
+  allTexts.forEach(({t, p}) => { if(!t.id) return; const onFront = rowIds.has(t.id), inDetails = details.includes(t);
+    add('text:' + t.id, {group: onFront ? 'Top of the pass' : 'Below the image', name: (onFront ? 'Field: ' : inDetails ? 'Detail: ' : 'Not shown: ') + (t.header || t.id), what: onFront ? 'A text module shown in a card row (a row\'s fieldPath points at it).' : inDetails ? 'A text module that isn\'t in a card row, so Wallet lists it with the details below.' : 'Sent in the JSON, but neither a card row nor the class\'s detailsTemplateOverride names it, so Wallet doesn\'t show it.',
       path: p, json: t, kv: [['id', t.id], ['Label', t.header], ['Value', t.body]], limits: LIM('10 from the class + 10 from the object (the template guide says 20 each). Plain text, no links.')}); });
   add('settings', {nw: 'new', was: 'Didn\'t have its own screen. Now notifications, sharing, archive and remove live here.', group: 'Wallet (not editable)', name: 'Pass settings', what: 'Its own screen in the 2026 design: notifications, use across Google, sharing, archive and remove. Tap it on the pass to open it.', scope: 'Wallet', limits: LIM(WALLET)});
   add('fine', {group: 'Wallet (not editable)', name: 'Disclaimer', what: 'Standard note that you, not Google, are responsible for the pass.', scope: 'Wallet', limits: LIM(WALLET)});
@@ -796,7 +795,9 @@ function render(){
     ...links.map((l, i) => row(linkIcon(l.uri || ''), esc(l.description || l.uri), safeHref(l.uri), '', 'link:' + i))
   ].filter(Boolean).join('');
   const rowsMarkup = rowsHTML(obj, cls);
-  const details = texts.filter(t => !rowIds.has(t.id));
+  /* With detailsTemplateOverride, Wallet lists only the text modules it names (in its order); links stay in the links rows */
+  const detailInfos = cls?.classTemplateInfo?.detailsTemplateOverride?.detailsItemInfos;
+  const details = detailInfos ? detailInfos.map(d => resolve(d.item?.firstValue?.fields?.[0]?.fieldPath, obj, cls)).filter(t => t?.id && !rowIds.has(t.id)) : texts.filter(t => !rowIds.has(t.id));
   const screen = `
     <div class="gbarx" data-c="topbar">${ic('back')}<span class="sp"></span>${ic('star')}${ic('share')}</div>
     <div class="gup" data-c="colors">
@@ -913,7 +914,7 @@ addEventListener('dragover', e => { if(hasFiles(e)) e.preventDefault(); });
 addEventListener('dragleave', e => { if(hasFiles(e) && --depth <= 0){ depth = 0; $('dropzone').hidden = true; } });
 addEventListener('drop', e => { if(!hasFiles(e)) return; e.preventDefault(); depth = 0; $('dropzone').hidden = true; const f = e.dataTransfer.files[0]; if(f) importFile(f); });
 document.querySelectorAll('img[src^="google/img/"]').forEach(i => i.src = i.getAttribute('src') + ASSET_V);
-load('membership');
+load('insurance');
 renderCards();
 /* ---------- Design playground (top): empty pass to try hero, logo, color and text ---------- */
 (function(){

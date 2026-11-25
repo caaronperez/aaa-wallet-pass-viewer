@@ -1,21 +1,11 @@
 {
   "genericClass": {
-    "id": "3388000000000000000.auto_insurance",
     "classTemplateInfo": {
       "cardTemplateOverride": {
         "cardRowTemplateInfos": [
           {
-            "twoItems": {
-              "startItem": {
-                "firstValue": {
-                  "fields": [
-                    {
-                      "fieldPath": "object.textModulesData['nameEnsured']"
-                    }
-                  ]
-                }
-              },
-              "endItem": {
+            "oneItem": {
+              "item": {
                 "firstValue": {
                   "fields": [
                     {
@@ -25,226 +15,247 @@
                 }
               }
             }
+          },
+          {
+            "oneItem": {
+              "item": {
+                "firstValue": {
+                  "fields": [
+                    {
+                      "fieldPath": "object.textModulesData['named_insured']"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "oneItem": {
+              "item": {
+                "firstValue": {
+                  "fields": [
+                    {
+                      "fieldPath": "object.textModulesData['excluded_drivers']"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "oneItem": {
+              "item": {
+                "firstValue": {
+                  "fields": [
+                    {
+                      "fieldPath": "object.textModulesData['company_name']"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      "detailsTemplateOverride": {
+        "detailsItemInfos": [
+          {
+            "item": {
+              "firstValue": {
+                "fields": [
+                  {
+                    "fieldPath": "object.linksModuleData.uris['accident_hotline_phone']"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "item": {
+              "firstValue": {
+                "fields": [
+                  {
+                    "fieldPath": "object.linksModuleData.uris['policy_questions_phone']"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "item": {
+              "firstValue": {
+                "fields": [
+                  {
+                    "fieldPath": "object.textModulesData['vehicles0']"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "item": {
+              "firstValue": {
+                "fields": [
+                  {
+                    "fieldPath": "object.textModulesData['vehicles1']"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "item": {
+              "firstValue": {
+                "fields": [
+                  {
+                    "fieldPath": "object.textModulesData['vehicles2']"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "item": {
+              "firstValue": {
+                "fields": [
+                  {
+                    "fieldPath": "object.textModulesData['vehicles3']"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "item": {
+              "firstValue": {
+                "fields": [
+                  {
+                    "fieldPath": "object.textModulesData['vehicles4']"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "item": {
+              "firstValue": {
+                "fields": [
+                  {
+                    "fieldPath": "object.textModulesData['insured_drivers']"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "item": {
+              "firstValue": {
+                "fields": [
+                  {
+                    "fieldPath": "object.textModulesData['company_address']"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "item": {
+              "firstValue": {
+                "fields": [
+                  {
+                    "fieldPath": "object.textModulesData['disclaimer']"
+                  }
+                ]
+              }
+            }
           }
         ]
       }
     },
+    "id": "3388000000000000000.poi"
+  },
+  "genericObject": {
+    "id": "3388000000000000000.poi.0000000000.CAA000XXXX",
+    "classId": "3388000000000000000.poi",
+    "state": "ACTIVE",
+    "textModulesData": [
+      {
+        "header": "Named Insured",
+        "body": "FULANITO PEREZ",
+        "id": "named_insured"
+      },
+      {
+        "header": "Policy Number",
+        "body": "CAA000XXXX",
+        "id": "policy_number"
+      },
+      {
+        "header": "Effective",
+        "body": "09/14/2026 - 09/14/2027",
+        "id": "effective"
+      },
+      {
+        "header": "Insurance Company",
+        "body": "Interinsurance Exchange of the Automobile Club NAIC# 15598",
+        "id": "company_name"
+      },
+      {
+        "header": "Vehicles",
+        "body": "2026 TOY RAV4 LE SUV\r\nXXXXXXXXXXXXXXXXX",
+        "id": "vehicles"
+      },
+      {
+        "header": "Vehicles",
+        "body": "2026 TOY RAV4 LE SUV\r\nXXXXXXXXXXXXXXXXX",
+        "id": "vehicles0"
+      },
+      {
+        "header": "Insured Drivers",
+        "body": "FULANITO PEREZ",
+        "id": "insured_drivers"
+      },
+      {
+        "header": "Company name",
+        "body": "Interinsurance Exchange of the Automobile Club NAIC# 15598\r\nP.O. Box 25006, Santa Ana, CA 92799-5006",
+        "id": "company_address"
+      },
+      {
+        "header": "Disclaimer",
+        "body": "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code.  Evidence of financial responsibility shall at all times be carried in the vehicle.  Insurance information has already been submitted directly to the DMV electronically, submit this document to DMV only if specifically requested by DMV. The digital card may not be recognized in all states.",
+        "id": "disclaimer"
+      }
+    ],
     "linksModuleData": {
       "uris": [
         {
-          "uri": "tel:18000000000",
-          "description": "Call Roadside 24/7 · 1-800-000-0000",
-          "id": "callRoadside"
+          "uri": "tel:1-800-672-5246",
+          "description": "24/7 AAA Accident Assist Hotline",
+          "id": "accident_hotline_phone"
         },
         {
-          "uri": "https://www.example.com/insurance/claims.html",
-          "description": "File or track a claim",
-          "id": "claims"
-        },
-        {
-          "uri": "https://app.example.com/insurance/make-a-payment/",
-          "description": "Pay or manage your policy",
-          "id": "pay"
-        },
-        {
-          "uri": "tel:18000000000",
-          "description": "Policy questions · 1-800-000-0000",
-          "id": "questions"
+          "uri": "tel:1-800-924-6141",
+          "description": "Policy questions or changes",
+          "id": "policy_questions_phone"
         }
       ]
-    }
-  },
-  "genericObject": {
-    "id": "3388000000000000000.auto_insurance_0000000000",
-    "classId": "3388000000000000000.auto_insurance",
-    "state": "ACTIVE",
-    "genericType": "GENERIC_TYPE_UNSPECIFIED",
+    },
+    "genericType": "GENERIC_AUTO_INSURANCE",
     "cardTitle": {
       "defaultValue": {
         "language": "en-US",
-        "value": "Auto Insurance Card"
-      }
-    },
-    "subheader": {
-      "defaultValue": {
-        "language": "en-US",
-        "value": "CA Evidence of Liability"
+        "value": "California Evidence of Liability Insurance"
       }
     },
     "header": {
       "defaultValue": {
         "language": "en-US",
-        "value": "0000000000"
+        "value": "CAA000XXXX"
       }
     },
+    "hexBackgroundColor": "#ffffff",
     "logo": {
       "sourceUri": {
         "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/logo.png"
-      },
-      "contentDescription": {
-        "defaultValue": {
-          "language": "en-US",
-          "value": "Logo"
-        }
-      }
-    },
-    "heroImage": {
-      "sourceUri": {
-        "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/hero-insurance.jpg"
-      },
-      "contentDescription": {
-        "defaultValue": {
-          "language": "en-US",
-          "value": "Car driving along the California coast"
-        }
-      }
-    },
-    "hexBackgroundColor": "#F2E4E4",
-    "validTimeInterval": {
-      "start": {
-        "date": "2026-09-14T00:00:00-07:00"
-      },
-      "end": {
-        "date": "2027-09-14T23:59:00-07:00"
-      }
-    },
-    "textModulesData": [
-      {
-        "id": "nameEnsured",
-        "header": "Name insured",
-        "body": "Fulanito Perez"
-      },
-      {
-        "id": "effective",
-        "header": "Effective",
-        "body": "9/14/26 – 9/14/27"
-      },
-      {
-        "id": "company",
-        "header": "Insurance company",
-        "body": "Example Interinsurance Exchange of the Company NAIC# 000000"
-      },
-      {
-        "id": "vehicles",
-        "header": "Vehicle",
-        "body": "2026 SAMPLE SUV · VIN XXXXXXXXXXXXXXXXX"
-      },
-      {
-        "id": "drivers",
-        "header": "Insured drivers",
-        "body": "Fulanito Perez"
-      },
-      {
-        "id": "disclaimer",
-        "header": "Disclaimer",
-        "body": "This policy complies with Sections 16056 or 16500.5 of the California Vehicle Code. Evidence of financial responsibility shall at all times be carried in the vehicle."
-      }
-    ],
-    "valueAddedModuleData": [
-      {
-        "header": {
-          "defaultValue": {
-            "language": "en-US",
-            "value": "Roadside Assistance"
-          }
-        },
-        "body": {
-          "defaultValue": {
-            "language": "en-US",
-            "value": "Get help online: tow, battery, tire, lockout"
-          }
-        },
-        "uri": "https://www.example.com/automotive/roadside-assistance.html",
-        "image": {
-          "sourceUri": {
-            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-roadside.jpg"
-          },
-          "contentDescription": {
-            "defaultValue": {
-              "language": "en-US",
-              "value": "Roadside Assistance tow truck"
-            }
-          }
-        },
-        "sortIndex": 1
-      },
-      {
-        "header": {
-          "defaultValue": {
-            "language": "en-US",
-            "value": "Accident? File a claim"
-          }
-        },
-        "body": {
-          "defaultValue": {
-            "language": "en-US",
-            "value": "24/7 Accident Assist · 1-800-000-0000"
-          }
-        },
-        "uri": "tel:18000000000",
-        "image": {
-          "sourceUri": {
-            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-claim.jpg"
-          },
-          "contentDescription": {
-            "defaultValue": {
-              "language": "en-US",
-              "value": "Accident? File a claim"
-            }
-          }
-        },
-        "sortIndex": 2
-      },
-      {
-        "header": {
-          "defaultValue": {
-            "language": "en-US",
-            "value": "Proof of insurance"
-          }
-        },
-        "body": {
-          "defaultValue": {
-            "language": "en-US",
-            "value": "Get it online anytime"
-          }
-        },
-        "uri": "https://app.example.com/insurance/anon/poi/view",
-        "image": {
-          "sourceUri": {
-            "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-proof.jpg"
-          },
-          "contentDescription": {
-            "defaultValue": {
-              "language": "en-US",
-              "value": "Proof of insurance"
-            }
-          }
-        },
-        "sortIndex": 3
-      }
-    ],
-    "appLinkData": {
-      "androidAppLinkInfo": {
-        "appTarget": {
-          "targetUri": {
-            "uri": "https://play.google.com/store/apps/details?id=com.example.app",
-            "description": "Member app"
-          }
-        }
-      },
-      "webAppLinkInfo": {
-        "appTarget": {
-          "targetUri": {
-            "uri": "https://www.example.com/",
-            "description": "example.com"
-          }
-        }
-      },
-      "displayText": {
-        "defaultValue": {
-          "language": "en-US",
-          "value": "Open the app"
-        }
       }
     }
   }

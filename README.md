@@ -23,7 +23,7 @@ Open more templates, all in the browser (nothing is uploaded). Each one gets its
 
 ## Google Wallet
 
-`google.html` (Apple Wallet / Google Wallet switch in the title bar) shows the same two cards as Google Wallet Generic passes: `google/membership.json` and `google/insurance.json`, each `{genericClass, genericObject}` with mock data. It renders the Android card, value-added modules, app link, details and links, lists Google's limits, and compares Apple Featured Actions with Google's equivalents. Drop in your own pass JSON (or a JWT payload) to preview it. The issuer ID is a placeholder.
+`google.html` (Apple Wallet / Google Wallet switch in the title bar) shows two Google Wallet Generic passes, insurance first: `google/insurance.json` and `google/membership.json`, each `{genericClass, genericObject}`. Their fields are what the wallet Lambdas in `mobile_aws-apis` build, with sample member data: insurance follows `lambdas/insurance/common-insurance-wallet/src/GoogleWalletGenericPass.ts` (the current proof of insurance pass: white, no hero, no barcode), membership follows `lambdas/membership/common-membership-wallet/src/googleWallet2026Design.ts` (the 2026 design, used in dev and UAT). Images point at this site's `google/img/` copies instead of the AEM files the Lambdas use. It renders the Android card, value-added modules, app link, details and links, lists Google's limits, and compares Apple Featured Actions with Google's equivalents. Drop in your own pass JSON (or a JWT payload) to preview it. The issuer ID is a placeholder.
 
 ## Password
 

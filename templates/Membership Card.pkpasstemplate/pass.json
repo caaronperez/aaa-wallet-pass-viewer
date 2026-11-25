@@ -1,212 +1,259 @@
 {
-  "appLaunchURL": "exampleapp://wallet/benefits?source=wallet",
-  "associatedStoreIdentifiers": [
-    0
+  "associatedStoreIdentifiers" : [
+    1094393125
   ],
-  "authenticationToken": "",
-  "barcodes": [
+  "authenticationToken" : "",
+  "backgroundColor" : "rgb(242,228,228)",
+  "barcodes" : [
     {
-      "_id": "E4FD1E6E-100F-4455-90D5-FEAA43177955",
-      "altText": "000 000 000000000 0",
-      "format": "PKBarcodeFormatPDF417",
-      "message": "000 000 000000000 0",
-      "messageEncoding": "iso-8859-1"
+      "_id" : "E4FD1E6E-100F-4455-90D5-FEAA43177955",
+      "altText" : "000 000 XXXXXXXXX 0",
+      "format" : "PKBarcodeFormatPDF417",
+      "message" : "000 000 XXXXXXXXX 0",
+      "messageEncoding" : "iso-8859-1"
     }
   ],
-  "description": "Membership Card",
-  "featuredActions": [
+  "description" : "AAA Membership Card",
+  "featuredActions" : [
     {
-      "_id": "53AC827B-8C0C-4BB8-B305-0E79930E1A89",
-      "identifier": "memberBenefits",
-      "type": "membershipBenefits",
-      "url": "https://www.example.com/membership.html#membershipBenefits"
+      "_id" : "6EDAB50B-A629-45AF-9AFE-6DCE692FFF64",
+      "identifier" : "memberBenefits",
+      "type" : "membershipBenefits",
+      "url" : "https:\/\/approveaem.ace.aaa.com\/membership\/aaa-membership-benefits-wallet.html"
     },
     {
-      "_id": "A77FAAC7-B202-4652-8428-C93C90B625E7",
-      "identifier": "nearestBranch",
-      "placeIdentifier": "IXXXXXXXXXXXXXXXX",
-      "type": "place"
+      "_id" : "E0CCEFD3-3E52-47DA-BA53-6F1B03570249",
+      "identifier" : "nearestBranch",
+      "placeIdentifier" : "I71B28B9C6AC9C7EF",
+      "type" : "place"
     }
   ],
-  "formatVersion": 1,
-  "generic": {
-    "headerFields": [
+  "foregroundColor" : "rgb(25,40,66)",
+  "formatVersion" : 1,
+  "generic" : {
+    "auxiliaryFields" : [
       {
-        "key": "expiration_date",
-        "label": "VALID THRU",
-        "value": "MAR 30, 2027",
-        "textAlignment": "PKTextAlignmentRight"
+        "_id" : "9D1E5F3E-3E6D-4CF5-ABBD-C1C3F1EA4ADB",
+        "key" : "rso_number1",
+        "label" : "ROADSIDE ASSISTANCE",
+        "value" : "1.800.400.4222"
+      },
+      {
+        "_id" : "7FD93203-8B18-4382-82F1-152A231E4487",
+        "key" : "rso_number2",
+        "label" : "(OUTSIDE CA)",
+        "value" : "1.800.222.4357"
       }
     ],
-    "primaryFields": [
+    "backFields" : [
       {
-        "key": "name",
-        "label": "NAME",
-        "value": "FULANITO PEREZ"
+        "_id" : "27E820F7-CCE2-47C5-A40A-85121DBABE92",
+        "attributedValue" : "<a href=\"https:\/\/www.ace.aaa.com\/roadside\">Roadside Assistance<\/a>",
+        "key" : "services",
+        "label" : "Services",
+        "value" : "Services"
+      },
+      {
+        "_id" : "75D36CE8-D0CA-4D54-956D-0F61668F51F3",
+        "key" : "aaa_branch",
+        "label" : "Your local AAA branch",
+        "value" : "Costa Mesa\n3333 Fairview Rd\nCosta Mesa, CA 92626"
+      },
+      {
+        "_id" : "DBBCEA71-9F43-40C0-AD33-6BB1B32E636C",
+        "key" : "car_rental_codes",
+        "label" : "Car Rental Discount Codes",
+        "value" : "Hertz CDP: 004"
+      },
+      {
+        "_id" : "93B2CDE7-4675-45FA-AA0C-A2B99C637C03",
+        "key" : "membership_number_back",
+        "label" : "Membership Number",
+        "value" : "620 004 123456780 0"
+      },
+      {
+        "_id" : "D1B74FDB-AFD6-4482-8BE9-EAFD3825062E",
+        "key" : "disclaimer",
+        "label" : "Disclaimer",
+        "value" : "Present this card at the time of service. Roadside Assistance is provided by independent service providers. All Club services are subject to change without notice. By acceptance of this card, member agrees to be bound by Club's Bylaws."
+      },
+      {
+        "_id" : "C753539A-7AD7-4C4A-B625-6686D5C1F0CE",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/membership\/aaa-membership-benefits-wallet.html'>Explore all membership benefits<\/a>\n<a href='https:\/\/www.ace.aaa.com\/discounts.html'>Show this card at participating businesses<\/a>",
+        "key" : "memberBenefits",
+        "label" : "Member benefits & discounts",
+        "value" : "Explore all membership benefits\nShow this card at participating businesses"
+      },
+      {
+        "_id" : "A9165F0D-9954-4F34-9273-331776A719F2",
+        "attributedValue" : "<a href='https:\/\/apps.apple.com\/app\/id1094393125'>The fastest way to request Roadside Assistance<\/a>",
+        "key" : "autoClubApp",
+        "label" : "Auto Club app",
+        "value" : "The fastest way to request Roadside Assistance"
       }
     ],
-    "secondaryFields": [
+    "headerFields" : [
       {
-        "key": "membership_number",
-        "label": "MEMBERSHIP NUMBER",
-        "value": "000 000 000000000 0"
-      },
-      {
-        "key": "membership_length",
-        "label": "LOYAL MEMBER",
-        "value": "5 Years"
+        "_id" : "4CCDB908-E85C-487A-A880-F8FF586C5463",
+        "key" : "expiration_date",
+        "label" : "VALID THRU",
+        "textAlignment" : "PKTextAlignmentRight",
+        "value" : "MAR 30, 2027"
       }
     ],
-    "auxiliaryFields": [
+    "primaryFields" : [
       {
-        "key": "rso_number1",
-        "label": "ROADSIDE ASSISTANCE",
-        "value": "1.800.000.0000"
-      },
-      {
-        "key": "rso_number2",
-        "label": "(OUTSIDE CA)",
-        "value": "1.800.000.0000"
+        "_id" : "376DAE4F-CA39-4F33-A4AF-56ADBE31765A",
+        "key" : "name",
+        "label" : "NAME",
+        "value" : "FULANITO PEREZ"
       }
     ],
-    "backFields": [
+    "secondaryFields" : [
       {
-        "key": "services",
-        "label": "Services",
-        "value": "Services",
-        "attributedValue": "<a href=\"https://www.example.com/roadside\">Roadside Assistance</a>"
+        "_id" : "95FBC866-2F49-4460-929F-7756046CB292",
+        "key" : "membership_number",
+        "label" : "MEMBERSHIP NUMBER",
+        "value" : "620 004 123456780 0"
       },
       {
-        "key": "local_branch",
-        "label": "Your local branch",
-        "value": "Sample Branch\n000 Main St\nCity, ST 00000"
-      },
-      {
-        "key": "car_rental_codes",
-        "label": "Car Rental Discount Codes",
-        "value": "Hertz CDP: 0000"
-      },
-      {
-        "key": "membership_number_back",
-        "label": "Membership Number",
-        "value": "000 000 000000000 0"
-      },
-      {
-        "key": "disclaimer",
-        "label": "Disclaimer",
-        "value": "Present this card at the time of service. Roadside Assistance is provided by independent service providers. All Club services are subject to change without notice. By acceptance of this card, member agrees to be bound by Club's Bylaws."
+        "_id" : "E2F7EE1F-A0E3-4A62-82CF-8D0C6006F956",
+        "key" : "membership_length",
+        "label" : "LOYAL MEMBER",
+        "value" : "5 Years"
       }
     ]
   },
-  "organizationName": "Organization",
-  "passTypeIdentifier": "pass.com.example.membership",
-  "posterGeneric": {
-    "auxiliaryFields": [],
-    "backFields": [
+  "labelColor" : "rgb(6,51,101)",
+  "organizationName" : "AAA Auto Club",
+  "passTypeIdentifier" : "pass.com.example.aaa.membership",
+  "posterGeneric" : {
+    "auxiliaryFields" : [
+
+    ],
+    "backFields" : [
       {
-        "_id": "16FC7DAB-10AF-4930-B9D8-1AF7B13A5896",
-        "attributedValue": "Roadside Assistance\n<a href='tel:18000000000'>1-800-000-0000</a>",
-        "key": "roadsideAssistance",
-        "label": "Open Roadside",
-        "value": "Roadside Assistance\n1-800-000-0000"
+        "_id" : "3BC7022D-63A1-43D0-8DC4-007F33159329",
+        "attributedValue" : "Call <a href='tel:18004004222'>1-800-400-4222<\/a>\nOutside CA: <a href='tel:18002224357'>1-800-222-4357<\/a>",
+        "key" : "roadsideAssistance",
+        "label" : "Roadside Assistance · 24\/7",
+        "value" : "Call 1-800-400-4222\nOutside CA: 1-800-222-4357"
       },
       {
-        "_id": "D785F2A7-BE99-43A2-9DBD-EA492AA885B0",
-        "attributedValue": "<a href='https://www.example.com/locations.html'>Nearest branch</a>",
-        "key": "nearestBranch",
-        "label": "Get Direction",
-        "value": "Nearest branch"
+        "_id" : "4AE323DC-42C1-458C-964C-18E764CBD102",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/automotive\/roadside-assistance.html'>Tow · Battery · Tire · Lockout · Fuel delivery<\/a>",
+        "key" : "roadsideOnline",
+        "label" : "Request roadside help online",
+        "value" : "Tow · Battery · Tire · Lockout · Fuel delivery"
       },
       {
-        "_id": "867D4C2C-9D19-455D-B4F6-07269EB98407",
-        "key": "services",
-        "label": "Services",
-        "value": "Insurance Sales & Service\nInsurance Claims\nMembership, Travel, Other Services\nHertz Rental Discounts"
+        "_id" : "F200BA84-029B-4212-AD8E-8775517ED4E5",
+        "attributedValue" : "Insurance sales & service: <a href='tel:8774222100'>877-422-2100<\/a>\nInsurance claims: <a href='tel:8006725246'>800-672-5246<\/a>\nMembership, travel, other services: <a href='tel:8774282277'>877-428-2277<\/a>\nHertz® rental discounts: <a href='tel:8442255431'>844-225-5431<\/a>",
+        "key" : "servicePhones",
+        "label" : "AAA phone numbers",
+        "value" : "Insurance sales & service: 877-422-2100\nInsurance claims: 800-672-5246\nMembership, travel, other services: 877-428-2277\nHertz® rental discounts: 844-225-5431"
       },
       {
-        "_id": "B9C6FDB5-3975-4FF1-9065-E1888D04F947",
-        "attributedValue": "Phone: <a href='tel:18000000000'>1-800-000-0000</a>\nPhone (Outside of CA): <a href='tel:18000000000'>1-800-000-0000</a>",
-        "key": "roadside",
-        "label": "Roadside Assistance",
-        "value": "Phone: 1-800-000-0000\nPhone (Outside of CA): 1-800-000-0000"
+        "_id" : "DB2FEDA0-8051-49FB-9B04-0BCF257ED43D",
+        "dataDetectorTypes" : [
+
+        ],
+        "key" : "membershipNumber",
+        "label" : "Membership number",
+        "value" : "000 000 XXXXXXXXX 0"
       },
       {
-        "_id": "37611BEA-CFEF-46AB-B51D-22E981A6DDF0",
-        "attributedValue": "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: <a href='tel:10000000000'>000-000-0000</a>\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday",
-        "key": "branch",
-        "label": "Your Local Branch",
-        "value": "Sample Branch\n000 Main St\nCity, CA 00000\nPhone: 000-000-0000\nHours: 09:00 AM - 05:00 PM M-F\nHours: 09:00 AM - 05:00 PM Saturday"
+        "_id" : "88EFB40E-5EDB-4AC5-B4DF-1C7EF45069D0",
+        "key" : "planSince",
+        "label" : "Plan · member since",
+        "value" : "Premier · 1994 (32 years)"
       },
       {
-        "_id": "4025175E-C99D-4AB3-B183-5C8CDE823479",
-        "key": "rentalCodes",
-        "label": "Car Rental Discounts Codes",
-        "value": "Hertz CDP: 0000\nDollar CD: XX0000\nThrifty CD: 0000000000"
+        "_id" : "2B51034D-9EFC-4482-A952-D60EE748F73E",
+        "attributedValue" : "<a href='https:\/\/app.ace.aaa.com\/membership\/quick-self-service'>Renew · Add a family member · Upgrade<\/a>\n<a href='https:\/\/app.ace.aaa.com\/membership\/make-a-payment\/'>Pay membership bill<\/a>",
+        "key" : "manageMembership",
+        "label" : "Manage membership",
+        "value" : "Renew · Add a family member · Upgrade\nPay membership bill"
       },
       {
-        "_id": "134FCBF5-75F3-40F8-80A2-0B31F5F0AF68",
-        "key": "membershipNumberBack",
-        "label": "Membership Number",
-        "value": "000 000 000000000 0"
+        "_id" : "C753539A-7AD7-4C4A-B625-6686D5C1F0CE",
+        "attributedValue" : "<a href='https:\/\/www.ace.aaa.com\/membership\/aaa-membership-benefits-wallet.html'>Explore all membership benefits<\/a>\n<a href='https:\/\/www.ace.aaa.com\/discounts.html'>Show this card at participating businesses<\/a>",
+        "key" : "memberBenefits",
+        "label" : "Member benefits & discounts",
+        "value" : "Explore all membership benefits\nShow this card at participating businesses"
       },
       {
-        "_id": "DE5ACFD3-8B84-420B-90D8-7E2862D31E50",
-        "key": "memberBenefits",
-        "label": "Member benefits & discounts",
-        "value": "Explore all membership benefits\nShow this card at participating businesses",
-        "attributedValue": "<a href='https://www.example.com/membership.html#membershipBenefits'>Explore all membership benefits</a>\n<a href='https://www.example.com/discounts.html'>Show this card at participating businesses</a>"
+        "_id" : "BE2501B8-01F7-4178-8567-4E80F216DAFB",
+        "dataDetectorTypes" : [
+
+        ],
+        "key" : "rentalCodes",
+        "label" : "Car rental discount codes",
+        "value" : "Hertz CDP: 0000\nDollar CD: XX0000\nThrifty CD: 0000000000"
       },
       {
-        "_id": "FA69BD60-57DF-485C-81DC-33CC08B49B1F",
-        "key": "memberApp",
-        "label": "Member app",
-        "value": "The fastest way to request Roadside Assistance",
-        "attributedValue": "<a href='https://apps.apple.com/app/id0000000000'>The fastest way to request Roadside Assistance</a>"
+        "_id" : "4A097C5D-0A31-451F-95AC-2AF0CDD4AA5D",
+        "attributedValue" : "Sample Branch\n000 Main St, City, CA 00000\nPhone: <a href='tel:10000000000'>000-000-0000<\/a>\nMon–Sat 9:00 AM – 5:00 PM\n<a href='https:\/\/maps.apple.com\/place?place-id=I71B28B9C6AC9C7EF'>Get directions<\/a> · <a href='https:\/\/www.ace.aaa.com\/locations.html'>Find another branch<\/a>",
+        "key" : "nearestBranch",
+        "label" : "Your AAA branch",
+        "value" : "Sample Branch\n000 Main St, City, CA 00000\nPhone: 000-000-0000\nMon–Sat 9:00 AM – 5:00 PM\nGet directions · Find another branch"
+      },
+      {
+        "_id" : "A9165F0D-9954-4F34-9273-331776A719F2",
+        "attributedValue" : "<a href='https:\/\/apps.apple.com\/app\/id1094393125'>The fastest way to request Roadside Assistance<\/a>",
+        "key" : "autoClubApp",
+        "label" : "Auto Club app",
+        "value" : "The fastest way to request Roadside Assistance"
+      },
+      {
+        "_id" : "D4C923B1-07E3-4FF3-84D1-31766ED0CBE5",
+        "key" : "legalDisclaimer",
+        "label" : "Disclaimer",
+        "value" : "Present this card at the time of service. Roadside Assistance is provided by independent service providers. All Club services are subject to change without notice. By acceptance of this card, member agrees to be bound by Club's Bylaws."
       }
     ],
-    "footerFields": [
+    "footerFields" : [
       {
-        "_id": "7DB5F491-84FF-469E-BF0F-99390D13D763",
-        "key": "membershipNumber",
-        "label": "MEMBERSHIP NUMBER",
-        "value": "MEMBERSHIP NUMBER: 000 000 000000000 0"
+        "_id" : "9038262F-5EA5-56F8-A1EC-FEEDBE30F617",
+        "key" : "roadsideFooter",
+        "label" : "Roadside",
+        "value" : "24\/7 ROADSIDE: TAP MEMBERSHIP BENEFITS"
       }
     ],
-    "headerFields": [
+    "headerFields" : [
       {
-        "_id": "5496F918-6491-4104-98DD-E3888E16FD76",
-        "key": "cardTitle",
-        "label": "MEMBERSHIP CARD",
-        "value": "Premier"
+        "_id" : "F4BF8486-01B1-4D95-8274-D9DC23F45446",
+        "key" : "cardTitle",
+        "label" : "MEMBERSHIP CARD",
+        "value" : "Premier"
       }
     ],
-    "primaryFields": [
+    "primaryFields" : [
       {
-        "_id": "8DFC8A34-96A7-46FE-B2C5-7363792A4869",
-        "key": "loyalMember",
-        "label": "LOYAL MEMBER",
-        "value": "32 YEARS"
+        "_id" : "ECFFE41F-7536-4B95-BA8C-5E799D971A02",
+        "key" : "memberName",
+        "label" : "Member Name",
+        "value" : "FULANITO PEREZ"
       },
       {
-        "_id": "A6F0452F-0AB9-4B56-A18D-BF7B76DE9127",
-        "key": "memberName",
-        "label": "MEMBER NAME",
-        "value": "FULANITO PEREZ"
+        "_id" : "E68AFFEA-E72E-4298-B321-C1B23104E013",
+        "key" : "validThru",
+        "label" : "Valid Through",
+        "value" : "03\/2027"
       },
       {
-        "_id": "D5607AA2-2AC0-4C8F-940D-17E125D9883B",
-        "key": "plan",
-        "label": "PLAN",
-        "value": "PREMIER"
+        "_id" : "EED2AD41-C8FE-46F1-B2DA-E8D5F23CB292",
+        "key" : "memberSince",
+        "label" : "Member Since",
+        "value" : "1994"
       }
     ],
-    "secondaryFields": []
+    "secondaryFields" : [
+
+    ]
   },
-  "serialNumber": "0000000000000000",
-  "suppressHeaderDarkening": true,
-  "teamIdentifier": "",
-  "useAutomaticColors": false,
-  "backgroundColor": "rgb(242,228,228)",
-  "foregroundColor": "rgb(25,40,66)",
-  "labelColor": "rgb(39,41,43)"
+  "serialNumber" : "000000XXXXXXXXX0",
+  "suppressHeaderDarkening" : true,
+  "teamIdentifier" : "",
+  "useAutomaticColors" : false
 }

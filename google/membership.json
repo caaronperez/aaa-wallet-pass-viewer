@@ -1,6 +1,6 @@
 {
   "genericClass": {
-    "id": "3388000000000000000.membership",
+    "id": "3388000000000000000.membership_2026",
     "classTemplateInfo": {
       "cardTemplateOverride": {
         "cardRowTemplateInfos": [
@@ -36,42 +36,66 @@
             }
           }
         ]
+      },
+      "detailsTemplateOverride": {
+        "detailsItemInfos": [
+          {
+            "item": {
+              "firstValue": {
+                "fields": [
+                  {
+                    "fieldPath": "object.textModulesData['membershipNumber']"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "item": {
+              "firstValue": {
+                "fields": [
+                  {
+                    "fieldPath": "object.textModulesData['roadsidePhones']"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "item": {
+              "firstValue": {
+                "fields": [
+                  {
+                    "fieldPath": "object.textModulesData['rentalCodes']"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "item": {
+              "firstValue": {
+                "fields": [
+                  {
+                    "fieldPath": "object.textModulesData['branch']"
+                  }
+                ]
+              }
+            }
+          }
+        ]
       }
-    },
-    "linksModuleData": {
-      "uris": [
-        {
-          "uri": "tel:18000000000",
-          "description": "Call Roadside 24/7 · 1-800-000-0000",
-          "id": "callRoadside"
-        },
-        {
-          "uri": "https://app.example.com/membership/quick-self-service",
-          "description": "Renew, add a family member or upgrade",
-          "id": "manage"
-        },
-        {
-          "uri": "https://app.example.com/membership/make-a-payment/",
-          "description": "Pay membership bill",
-          "id": "pay"
-        },
-        {
-          "uri": "https://www.example.com/locations.html",
-          "description": "Find a branch",
-          "id": "branches"
-        }
-      ]
     }
   },
   "genericObject": {
-    "id": "3388000000000000000.membership_0000000000000000",
-    "classId": "3388000000000000000.membership",
+    "id": "3388000000000000000.membership.000000XXXXXXXXX0",
+    "classId": "3388000000000000000.membership_2026",
     "state": "ACTIVE",
     "genericType": "GENERIC_TYPE_UNSPECIFIED",
     "cardTitle": {
       "defaultValue": {
         "language": "en-US",
-        "value": "Membership Card"
+        "value": "AAA Membership Card"
       }
     },
     "subheader": {
@@ -83,7 +107,7 @@
     "header": {
       "defaultValue": {
         "language": "en-US",
-        "value": "Fulanito Perez"
+        "value": "FULANITO PEREZ"
       }
     },
     "logo": {
@@ -93,7 +117,7 @@
       "contentDescription": {
         "defaultValue": {
           "language": "en-US",
-          "value": "Logo"
+          "value": "AAA logo"
         }
       }
     },
@@ -104,20 +128,15 @@
       "contentDescription": {
         "defaultValue": {
           "language": "en-US",
-          "value": "Roadside technician helping a member"
+          "value": "AAA Membership Card"
         }
       }
     },
     "hexBackgroundColor": "#F2E4E4",
     "barcode": {
       "type": "PDF_417",
-      "value": "000 000 000000000 0",
-      "alternateText": "000 000 000000000 0"
-    },
-    "validTimeInterval": {
-      "end": {
-        "date": "2027-03-31T23:59:00-07:00"
-      }
+      "value": "000000XXXXXXXXX0",
+      "alternateText": "000 000 XXXXXXXXX 0"
     },
     "textModulesData": [
       {
@@ -128,34 +147,58 @@
       {
         "id": "validThru",
         "header": "Valid thru",
-        "body": "03/27"
+        "body": "03/2027"
       },
       {
         "id": "memberSince",
-        "header": "Loyal Member",
-        "body": "32 Years"
+        "header": "Member since",
+        "body": "1994"
       },
       {
         "id": "membershipNumber",
         "header": "Membership number",
-        "body": "000 000 000000000 0"
+        "body": "000 000 XXXXXXXXX 0"
       },
       {
         "id": "roadsidePhones",
         "header": "Roadside Assistance · 24/7",
-        "body": "1-800-000-0000 · Outside CA 1-800-000-0000"
+        "body": "1-800-400-4222 · Outside CA 1-800-222-4357"
       },
       {
         "id": "rentalCodes",
         "header": "Car rental discount codes",
-        "body": "Hertz CDP 0000 · Dollar XX0000 · Thrifty 0000000000"
+        "body": "Dollar CD: 3000004 · Hertz CDP: 004 · Thrifty CD: 3300004"
       },
       {
         "id": "branch",
-        "header": "Your branch",
-        "body": "Sample Branch · 000 Main St, City, CA 00000 · 000-000-0000"
+        "header": "Your AAA branch",
+        "body": "Costa Mesa Branch · 3080 Bristol St · Costa Mesa, CA 92626 · Phone: (714) 885-1100"
       }
     ],
+    "linksModuleData": {
+      "uris": [
+        {
+          "id": "callRoadside",
+          "description": "Call Roadside 24/7 · 1-800-400-4222",
+          "uri": "tel:1-800-400-4222"
+        },
+        {
+          "id": "manage",
+          "description": "Renew, add a family member or upgrade",
+          "uri": "https://app.ace.aaa.com/membership/quick-self-service"
+        },
+        {
+          "id": "pay",
+          "description": "Pay membership bill",
+          "uri": "https://app.ace.aaa.com/membership/make-a-payment/"
+        },
+        {
+          "id": "branches",
+          "description": "Find a branch",
+          "uri": "https://www.ace.aaa.com/locations.html"
+        }
+      ]
+    },
     "valueAddedModuleData": [
       {
         "header": {
@@ -167,10 +210,10 @@
         "body": {
           "defaultValue": {
             "language": "en-US",
-            "value": "Get roadside service 24/7: tow, battery, and more"
+            "value": "Get help in the app: tow, battery, tire, lockout"
           }
         },
-        "uri": "https://www.example.com/automotive/roadside-assistance.html",
+        "uri": "https://www.ace.aaa.com/membership.html#roadsideAssistance",
         "image": {
           "sourceUri": {
             "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-roadside.jpg"
@@ -178,7 +221,7 @@
           "contentDescription": {
             "defaultValue": {
               "language": "en-US",
-              "value": "Roadside Assistance tow truck"
+              "value": "Roadside Assistance"
             }
           }
         },
@@ -197,7 +240,7 @@
             "value": "Save with your membership card"
           }
         },
-        "uri": "https://www.example.com/membership.html",
+        "uri": "https://www.ace.aaa.com/membership.html#membershipBenefits",
         "image": {
           "sourceUri": {
             "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-benefits.jpg"
@@ -215,7 +258,7 @@
         "header": {
           "defaultValue": {
             "language": "en-US",
-            "value": "Find your branch"
+            "value": "Find your AAA branch"
           }
         },
         "body": {
@@ -224,7 +267,7 @@
             "value": "Directions, hours and services"
           }
         },
-        "uri": "https://www.example.com/locations.html",
+        "uri": "https://www.ace.aaa.com/locations.html",
         "image": {
           "sourceUri": {
             "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-branch.jpg"
@@ -232,7 +275,7 @@
           "contentDescription": {
             "defaultValue": {
               "language": "en-US",
-              "value": "City skyline at sunset"
+              "value": "Find your AAA branch"
             }
           }
         },
@@ -242,7 +285,7 @@
         "header": {
           "defaultValue": {
             "language": "en-US",
-            "value": "Travel with us"
+            "value": "Travel with AAA"
           }
         },
         "body": {
@@ -251,7 +294,7 @@
             "value": "Hotels, rental cars and trip planning"
           }
         },
-        "uri": "https://www.example.com/travel.html",
+        "uri": "https://www.ace.aaa.com/travel.html#travelDeals",
         "image": {
           "sourceUri": {
             "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-travel.jpg"
@@ -259,7 +302,7 @@
           "contentDescription": {
             "defaultValue": {
               "language": "en-US",
-              "value": "Coastal road by the ocean"
+              "value": "Travel with AAA"
             }
           }
         },
@@ -278,7 +321,7 @@
             "value": "Manage your membership online"
           }
         },
-        "uri": "https://app.example.com/membership/quick-self-service",
+        "uri": "https://app.ace.aaa.com/membership/quick-self-service",
         "image": {
           "sourceUri": {
             "uri": "https://caaronperez.github.io/aaa-wallet-pass-viewer/google/img/vam-renew.jpg"
@@ -294,19 +337,11 @@
       }
     ],
     "appLinkData": {
-      "androidAppLinkInfo": {
-        "appTarget": {
-          "targetUri": {
-            "uri": "https://play.google.com/store/apps/details?id=com.example.app",
-            "description": "Member app"
-          }
-        }
-      },
       "webAppLinkInfo": {
         "appTarget": {
           "targetUri": {
-            "uri": "https://www.example.com/",
-            "description": "example.com"
+            "uri": "https://www.ace.aaa.com/membership.html#membershipBenefits",
+            "description": "Open the app"
           }
         }
       },
