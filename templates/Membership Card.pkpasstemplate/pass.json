@@ -226,14 +226,14 @@
       {
         "_id": "ECFFE41F-7536-4B95-BA8C-5E799D971A02",
         "key": "memberName",
-        "label": "Name",
+        "label": "Member Name",
         "value": "FULANITO PEREZ"
       },
       {
         "_id": "E68AFFEA-E72E-4298-B321-C1B23104E013",
         "key": "validThru",
-        "label": "Valid Thru",
-        "value": "03/31/2027"
+        "label": "Valid Through",
+        "value": "03/2027"
       },
       {
         "_id": "EED2AD41-C8FE-46F1-B2DA-E8D5F23CB292",
