@@ -178,6 +178,7 @@ html[data-theme="light"] .acts .act.empty{background:transparent;border:1px dash
 .lim th,.lim td{border-bottom:1px solid var(--line);padding:5px 4px;text-align:left;vertical-align:top}
 .lim th{color:var(--muted);font-weight:500}
 .lim tr.cur td{color:#fff;background:#2f3a4c}
+.lim.chars{font-size:13px}.lim.chars td{color:var(--muted)}.lim.chars td:first-child,.lim.chars td:nth-child(2){color:inherit}
 .fieldcard{border:1px solid var(--line);border-radius:9px;padding:8px;margin:8px 0;background:#28292c}
 .fieldcard.over{border-color:#7a302b}
 .fieldcard h4{margin:0 0 6px;font-size:12px;display:flex;justify-content:space-between;gap:8px}
@@ -818,6 +819,19 @@ html[data-theme="light"] .own.apple{background:#d1d1d6;color:#3a3a3c}html[data-t
         <div class="flipper" data-flip="26"><div class="card3d" id="card26"><div class="face front" id="front26"></div><div class="face back details" id="back26"></div></div></div>
       </div>
     </div>
+    <section class="proposal" aria-labelledby="charsTitle">
+      <div class="proposal-h"><div><h2 id="charsTitle">How many characters fit</h2>
+        <p>Wallet on iOS 27 first shrinks a long value, then cuts it with "…" (for example <code>DANTRAYL GUERRABE…</code>). Pass Designer only shrinks the text, so its preview hides the cut. The iOS 27 card above cuts values at the same points as Wallet. Measured in Wallet on a 402 pt iPhone with the Lambda's labels; the font is monospaced, so any letters count the same, and smaller iPhones fit fewer.</p></div></div>
+      <table class="lim chars"><tr><th>Card</th><th>Field</th><th>Fits</th><th>What Wallet shows</th></tr>
+        <tr><td>Membership</td><td>Member Name</td><td>18</td><td>19 or more: the first 17, then "…"</td></tr>
+        <tr><td>Insurance</td><td>Named Insured</td><td>14</td><td>15 or more: the first 13, then "…"</td></tr>
+        <tr><td>Insurance</td><td>Policy Number</td><td>14</td><td>A 12-character number like CAA076058929 fits</td></tr>
+        <tr><td>Insurance</td><td>Labels in the 4-field row</td><td>—</td><td>Always "Named Ins…" and "Policy Nu…", even with a short name</td></tr>
+        <tr><td>Both</td><td>Header value (plan, card name)</td><td>22</td><td>Then "…"</td></tr>
+        <tr><td>Both</td><td>Header title</td><td>—</td><td>Proportional bold font, so it depends on the letters: CA LIABILITY INSURANCE fits</td></tr>
+        <tr><td>Both</td><td>Footer</td><td>42</td><td>Then "…"</td></tr>
+      </table>
+    </section>
     <section class="proposal" aria-labelledby="proposalTitle">
       <div class="proposal-h">
         <div><h2 id="proposalTitle">Design proposals <span class="credit">(the image boards and strings made by Claude, i just did the pass design and the web)</span></h2>
@@ -936,6 +950,13 @@ const fetchFresh = (url, opts = {}) => fetch(url, {cache: "no-cache", ...opts});
 const $ = id => document.getElementById(id);
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const INF = Infinity;
+/* Measured in iOS 27 Wallet on a 402 pt iPhone (2026-11-25): Wallet shrinks a long value, then cuts it with "…". Pass Designer only shrinks. */
+const WALLET_CHARS = {
+  value: {memberName:18, namedInsured:14, policyNumber:14},
+  label4: {namedInsured:10, policyNumber:10},
+  headerValue:22, footer:42
+};
+const wclip = (s, n) => { s = String(s ?? ''); return n && s.length > n ? s.slice(0, n - 1) + '…' : s; };
 
 /* Template images change often; skip the 10-minute browser cache so every visit shows the latest artwork. */
 const ASSET_V = '?v=' + Date.now();
@@ -960,9 +981,9 @@ const STYLES = {
     images: ['icon','logo','primaryLogo','artwork'],
     barcode: 'Square QR shown in the layout; any supported format allowed', actions: 'Up to 2',
     notes: {
-      headerFields: 'One header field (top-right, over the artwork). Poster artwork titles are often baked into the image instead.',
-      primaryFields: 'Apple allows up to four primary fields. Pass Designer lays every primary field out in a single row, so more than two truncate (e.g. "Membership Nu…"). Two fields stay readable.',
-      footerFields: 'Apple allows two footer fields. Pass Designer\'s preview shows only the first footer value, without its label, so combine values when both must be seen.',
+      headerFields: 'One header field (top-right, over the artwork). Poster artwork titles are often baked into the image instead. Wallet on iOS 27 fits 22 characters of the value, then cuts with "…". The title uses a proportional bold font: it fits about the width of CA LIABILITY INSURANCE.',
+      primaryFields: 'Apple allows up to four primary fields, all in one row. Wallet shrinks a long value and then cuts it with "…"; Pass Designer only shrinks, so its preview hides the cut. Measured on a 402 pt iPhone: Member Name fits 18 characters (with Valid Through and Loyal Member beside it); Named Insured and Policy Number fit 14 each, and with four fields their labels always show as "Named Ins…" and "Policy Nu…".',
+      footerFields: 'Apple allows two footer fields. Pass Designer\'s preview shows only the first footer value, without its label, so combine values when both must be seen. Wallet fits 42 characters, then cuts with "…".',
       secondaryFields: 'Not part of the poster layout. Designer keeps the key empty; use backFields or the generic fallback instead.',
       auxiliaryFields: 'Not part of the poster layout. Designer keeps the key empty; use backFields or the generic fallback instead.',
       backFields: 'Unlimited and can be long. Shown only in Pass Details, never on Apple Watch. Include contact info for the signing organization. attributedValue may contain <a href> links.'
@@ -1154,9 +1175,22 @@ function displayValue(f){
   }
 }
 const titleCase = s => String(s ?? '').toLowerCase().replace(/(^|[\s(\/-])(\S)/g, (m, a, b) => a + b.toUpperCase());
-function fld(f, g, i, extra='', poster=false){
+function fld(f, g, i, extra='', poster=false, lim={}){
   const right = f.textAlignment === 'PKTextAlignmentRight';
-  return `<div class="fld ${right?'r':''} ${extra}" data-f="${esc(g)}:${i}"><div class="l">${esc(poster ? titleCase(f.label) : f.label)}</div><div class="v">${esc(displayValue(f))}</div></div>`;
+  const label = poster ? titleCase(f.label) : f.label, value = displayValue(f);
+  return `<div class="fld ${right?'r':''} ${extra}" data-f="${esc(g)}:${i}"><div class="l"${lim.l && String(label).length > lim.l ? ` title="${esc(label)}"` : ''}>${esc(wclip(label, lim.l))}</div><div class="v"${lim.v && String(value).length > lim.v ? ` title="${esc(value)}"` : ''}>${esc(wclip(value, lim.v))}</div></div>`;
+}
+function posterCuts(dict){
+  const prim = dict.primaryFields||[], head = (dict.headerFields||[])[0], foot = (dict.footerFields||[])[0], cuts = [];
+  const add = (name, text, n) => { if(String(text ?? '').length > n) cuts.push(`${name} after ${n} characters`); };
+  prim.forEach(f => {
+    const name = titleCase(f.label || f.key);
+    if(WALLET_CHARS.value[f.key]) add(name, displayValue(f), WALLET_CHARS.value[f.key]);
+    if(prim.length === 4 && WALLET_CHARS.label4[f.key]) add('the label "' + name + '"', name, WALLET_CHARS.label4[f.key]);
+  });
+  if(head) add('the header value', head.value, WALLET_CHARS.headerValue);
+  if(foot) add('the footer', foot.value, WALLET_CHARS.footer);
+  return cuts;
 }
 function parseRGB(c){ const m = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/.exec(String(c || '')); return m ? [+m[1], +m[2], +m[3]] : null; }
 /* useAutomaticColors: Wallet derives text colors from the art; approximate with the footer color's lightness. */
@@ -1175,11 +1209,11 @@ function renderPoster(p, dict){
   return `<div class="face-in poster" style="${cssVars(p)}${auto};position:absolute;inset:0">
     ${art ? `<div class="art" style="background-image:url('${esc(art)}')"></div>` : '<div class="art" style="background:#5b6b82"></div>'}
     ${logo ? `<img class="plogo" src="${esc(logo)}" alt="Primary logo">` : ''}
-    ${head[0] ? `<div class="phead" data-f="headerFields:0"><small>${esc(head[0].label)}</small>${esc(head[0].value)}</div>` : ''}
+    ${head[0] ? `<div class="phead" data-f="headerFields:0"><small>${esc(head[0].label)}</small>${esc(wclip(head[0].value, WALLET_CHARS.headerValue))}</div>` : ''}
     ${bc ? `<div class="bcwrap"><div class="bcpanel">${barcodeSVG(bc, 190, 48)}<div class="bc-alt">${esc(bc.altText||'')}</div></div></div>` : ''}
     <div class="body${p.footerBackgroundColor ? '' : ' glassfoot'}${bc ? ' hasbc' : ''}">
-      ${prim.length ? `<div class="row n${prim.length}" style="grid-template-columns:repeat(${prim.length},auto);justify-content:space-between">${prim.map((f,i)=>fld(f,'primaryFields',i, prim.length>1 && i===prim.length-1 ? 'r' : i>0 ? 'c' : '', true)).join('')}</div>` : ''}
-      ${foot[0] ? `<div class="foot" data-f="footerFields:0">${esc(foot[0].value)}</div>` : ''}
+      ${prim.length ? `<div class="row n${prim.length}" style="grid-template-columns:repeat(${prim.length},auto);justify-content:space-between">${prim.map((f,i)=>fld(f,'primaryFields',i, prim.length>1 && i===prim.length-1 ? 'r' : i>0 ? 'c' : '', true, {v:WALLET_CHARS.value[f.key], l:prim.length === 4 ? WALLET_CHARS.label4[f.key] : 0})).join('')}</div>` : ''}
+      ${foot[0] ? `<div class="foot" data-f="footerFields:0">${esc(wclip(foot[0].value, WALLET_CHARS.footer))}</div>` : ''}
     </div></div>`;
 }
 /* Shrink a field row until no value is cut off, like Wallet scales text to fit. */
@@ -1274,7 +1308,9 @@ function render(){
   // iOS 27
   $('front27').innerHTML = sk === 'posterGeneric' ? renderPoster(p, dict) : renderGeneric(p, dict);
   $('back27').innerHTML = renderBack(p, dict);
-  $('note27').textContent = sk === 'posterGeneric' ? 'How it looks on iOS 27' : (STYLES[sk]?.name || sk) + ' card: same layout on every iOS';
+  const cuts = sk === 'posterGeneric' ? posterCuts(dict) : [];
+  $('note27').className = 'col-note' + (cuts.length ? ' warn' : '');
+  $('note27').textContent = sk === 'posterGeneric' ? 'How it looks on iOS 27' + (cuts.length ? ' · Wallet cuts ' + cuts.join(', ') : '') : (STYLES[sk]?.name || sk) + ' card: same layout on every iOS';
   const acts = p.featuredActions || [];
   $('acts27').innerHTML = actsHTML(p);
   renderA11y();
@@ -1499,6 +1535,7 @@ function openInspector(id, scroll){
   else if(id === 'fields'){
     title = 'Fields';
     body = sec('Counts vs ' + L.name, `<table class="lim"><tr><th>Group</th><th>In template</th><th>${esc(L.name)} limit</th></tr>${FIELD_GROUPS.map(g=>`<tr><td>${GROUP_NAMES[g]}</td><td>${(dict[g]||[]).length}</td><td>${maxText(L.max[g])}</td></tr>`).join('')}</table>`)
+      + sec('Characters before Wallet cuts', `<table class="lim"><tr><th>Field</th><th>Fits</th></tr>${[['Member Name (membership)','18'],['Named Insured (insurance)','14'],['Policy Number (insurance)','14'],['Header value','22'],['Footer','42']].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>` + note('Measured in iOS 27 Wallet on a 402 pt iPhone. The font is monospaced, so any letters count the same. Smaller iPhones fit fewer.'))
       + sec('Limitations', note('Text length decides how many fields actually fit; if text is too long Wallet truncates or drops it.') + note('Field <code>key</code> values must be unique within the pass.') + note('If a pass has more fields than the layout shows, the extras still appear in Pass Details.'));
   }
   else if(id.startsWith('group:') || id.startsWith('fgroup:')){
